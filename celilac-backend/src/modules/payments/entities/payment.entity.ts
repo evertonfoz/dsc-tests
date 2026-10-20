@@ -1,15 +1,15 @@
-// import { PaymentStatus } from "../../../common/enum/payment-status.enum.js";
+import { PaymentStatus } from '../../../common/enums/payment-status.enum.js';
 
-// export class Payment {
-//     private status: PaymentStatus;
-
-//     constructor(
-//         public readonly paymentId: string,
-//         public readonly orderId: string,
-//         status: PaymentStatus,
-//         public readonly createdAt: Date = new Date(),
-//         public readonly updatedAt: Date = new Date(),
-//         public readonly deletedAt: Date | null = null,
-//     ) {
-//         this.status = status ?? PaymentStatus.PENDING;
-//     }
+export class Payment {
+  constructor(
+    public paymentId: string,
+    public orderId: string,
+    public status: PaymentStatus,
+    public amount: number,
+    public paidAt: Date | null,
+    // Datas geradas pelo banco; o domínio apenas as lê.
+    public readonly createdAt: Date,
+    public readonly updatedAt: Date,
+    public readonly deletedAt: Date | null = null,
+  ) {}
+}

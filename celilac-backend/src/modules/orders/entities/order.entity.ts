@@ -1,27 +1,36 @@
-// import { OrderStatus } from "../../../common/enum/order-status.enum.js";
+import { PaymentStatus } from '../../../common/enums/payment-status.enum.js';
+import { OrderStatus } from '../../../common/enums/order-status.enum.js';
+import { OrderAlreadyConfirmedException } from '../../../common/exceptions/order-already-confirmed.exception.js';
 
-// export class Order {
-//     private status: OrderStatus;    
-    
-//     constructor(
-//         public readonly orderId: string,
-//         public readonly customerId: string,
-//         status : OrderStatus,
-//         public readonly createdAt: Date = new Date(),
-//         public readonly updatedAt: Date = new Date(),
-//         public readonly deletedAt: Date | null = null,
-//     ) {
-//         this.status = status?? OrderStatus.PENDING
-//     }
+export class Order {
+  private status: OrderStatus;
 
-//     public getStatus(): OrderStatus {
-//         return this.status;
-//     }
+  constructor(
+    public readonly orderId: string,
+    public readonly customerId: string,
+    status: OrderStatus,
+    // Datas geradas pelo banco; o domínio apenas as lê.
+    public readonly createdAt: Date,
+    public readonly updatedAt: Date,
+    public readonly deletedAt: Date | null = null,
+  ) {
+    this.status = status;
+  }
 
-//     public confirmOrder(): void {
-//         if (this.status === OrderStatus.CONFIRMED) {
-//             throw new Error('Order is already confirmed.');
-//         }
-//         this.status = OrderStatus.CONFIRMED;
-//     }
-// }
+  getStatus(): OrderStatus {
+    return this.status;
+  }
+
+  // A forma de representar a falha será tratada na Etapa 4
+  confirm(paymentStatus: PaymentStatus): void {
+    if (this.status === OrderStatus.CONFIRMED) {
+      throw new OrderAlreadyConfirmedException(this.orderId);
+    }
+    if (paymentStatus !== PaymentStatus.APPROVED) {
+      // pagamento não aprovado — operação inválida
+      // como comunicar isso? → Etapa 4
+      return;
+    }
+    this.status = OrderStatus.CONFIRMED;
+  }
+}

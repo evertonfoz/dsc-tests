@@ -1,8 +1,9 @@
-// import { OrderStatus } from "../../../common/enum/order-status.enum.js";
+import { OrderStatus } from
+   '../../../common/enums/order-status.enum.js';
 
-// export class ConfirmOrderResponseDto {
-//         public readonly orderId: string;
-//         public readonly status: OrderStatus ;
-//         public readonly updatedAt: Date;
-//         public readonly message: string;
-// }
+export class ConfirmOrderResponseDto {
+  orderId: string;
+  status: OrderStatus;
+  updatedAt: Date;
+  message: string;
+}

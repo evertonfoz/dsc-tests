@@ -1,6 +1,6 @@
 export class OrderNotFoundException extends Error {
-    constructor() {
-        super('Order not found.');
-        this.name = 'OrderNotFoundException';
-    }
+  constructor(orderId: string) {
+    super(`Order with id "${orderId}" was not found.`);
+    this.name = 'OrderNotFoundException';
+  }
 }
