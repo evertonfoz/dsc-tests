@@ -19,8 +19,8 @@ export class OrdersService {
   constructor(
     @Inject(ORDERS_REPOSITORY)
     private readonly ordersRepository: OrdersRepository,
-    @Inject(PAYMENTS_REPOSITORY)
-    private readonly paymentsRepository: PaymentsRepository,
+    // @Inject(PAYMENTS_REPOSITORY)
+    // private readonly paymentsRepository: PaymentsRepository,
   ) { }
 
   async confirmOrder(orderId: string): Promise<ConfirmOrderResponseDto> {
@@ -34,17 +34,17 @@ export class OrdersService {
       throw new OrderAlreadyConfirmedException(orderId);
     }
 
-    const payment = await this.paymentsRepository.findByOrderId(orderId);
+    // const payment = await this.paymentsRepository.findByOrderId(orderId);
 
-    if (!payment) {
-      throw new PaymentNotFoundException(orderId);
-    }
+    // if (!payment) {
+    //   throw new PaymentNotFoundException(orderId);
+    // }
 
-    if (payment.status !== PaymentStatus.APPROVED) {
-      throw new PaymentNotApprovedException(payment.status);
-    }
+    // if (payment.status !== PaymentStatus.APPROVED) {
+    //   throw new PaymentNotApprovedException(payment.status);
+    // }
 
-    order.confirm(payment.status);
+    // order.confirm(payment.status);
 
     const savedOrder = await this.ordersRepository.save(order);
 

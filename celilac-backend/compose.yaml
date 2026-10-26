@@ -1,0 +1,21 @@
+services:
+  postgres:
+    image: postgres:17
+    container_name: celilac-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: celilac_user
+      POSTGRES_PASSWORD: celilac_dev_password
+      POSTGRES_DB: celilac_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - celilac_postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U celilac_user -d celilac_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  celilac_postgres_data:
