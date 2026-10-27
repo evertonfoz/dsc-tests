@@ -1,0 +1,7 @@
+@baseUrl = http://localhost:3200
+
+### Confirmar pedido com ID inválido (não é UUID)
+POST {{baseUrl}}/orders/abc/confirm
+
+### Confirmar pedido com UUID válido
+POST {{baseUrl}}/orders/8dce1ea9-8fe6-458e-b58b-6865fa8bd96d/confirm

@@ -4,6 +4,8 @@ import { AppService } from './app.service.js';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { OrdersModule } from './modules/orders/orders.module.js';
+import { DomainHttpExceptionFilter } from './common/filters/domain-http-exception.filter.js';
+import { APP_FILTER} from '@nestjs/core';
 
 @Module({
   imports: [
@@ -28,6 +30,6 @@ import { OrdersModule } from './modules/orders/orders.module.js';
     OrdersModule
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, { provide: APP_FILTER, useClass: DomainHttpExceptionFilter }],
 })
 export class AppModule {}
