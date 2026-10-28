@@ -1,0 +1,24 @@
+@baseUrl = http://localhost:3200
+
+# Gerado por src/scripts/seed-test-scenarios.ts em 2026-10-16T22:03:52.132Z
+
+### Pedido existente com pagamento aprovado → esperado: 200 OK
+POST {{baseUrl}}/orders/b9150d70-5051-4938-ada5-ebe1353b70ec/confirm
+
+### Pedido inexistente → esperado: 404 OrderNotFoundException
+POST {{baseUrl}}/orders/f6712211-753f-4110-a8d3-36f58d68d56e/confirm
+
+### Pedido existente sem pagamento associado → esperado: 404 PaymentNotFoundException
+POST {{baseUrl}}/orders/9efe82b1-e972-45b9-9033-0961eddca8ff/confirm
+
+### Pedido com pagamento não aprovado (PENDING) → esperado: 422 PaymentNotApprovedException
+POST {{baseUrl}}/orders/b0f7fa67-1674-421c-9919-789dbb979773/confirm
+
+### Pedido com pagamento não aprovado (REJECTED) → esperado: 422 PaymentNotApprovedException
+POST {{baseUrl}}/orders/430f8f9d-432f-4f70-8a22-1ddc940f0ff7/confirm
+
+### Pedido já confirmado → esperado: 409 OrderAlreadyConfirmedException
+POST {{baseUrl}}/orders/7b36575f-d207-41fe-87a2-2c43c803cc01/confirm
+
+### Identificador malformado → esperado: 400 Bad Request (ParseUUIDPipe)
+POST {{baseUrl}}/orders/abc-123/confirm
