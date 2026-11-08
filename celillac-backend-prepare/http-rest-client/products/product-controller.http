@@ -1,0 +1,17 @@
+@baseUrl = http://localhost:3200
+
+### Cadastrar produto com dados válidos (CA01) → esperado: 201 Created
+POST {{baseUrl}}/products
+Content-Type: application/json
+
+{
+  "name": "Celular XYZ"
+}
+
+### Cadastrar produto com nome vazio (Validação da fronteira HTTP) → esperado: 400 Bad Request
+POST {{baseUrl}}/products
+Content-Type: application/json
+
+{
+  "name": ""
+}
