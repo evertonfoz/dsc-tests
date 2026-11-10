@@ -35,6 +35,26 @@ services:
       timeout: 5s
       retries: 10
 
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: celilac-api:dev
+    container_name: celilac-api
+    restart: unless-stopped
+    ports:
+      - "${PORT:-3200}:3200"
+    environment:
+      PORT: 3200
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_USERNAME: ${DB_USERNAME}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_NAME: ${DB_NAME}
+    depends_on:
+      postgres:
+        condition: service_healthy
+
 volumes:
   celilac_postgres_data:
   celilac_postgres_test_data:
