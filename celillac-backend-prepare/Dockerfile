@@ -31,3 +31,4 @@ COPY --from=build /app/dist ./dist
 EXPOSE 3200
 
 CMD ["node", "dist/main.js"]
+
