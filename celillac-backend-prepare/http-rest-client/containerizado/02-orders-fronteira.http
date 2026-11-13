@@ -1,0 +1,10 @@
+# Fronteira HTTP de pedidos que NÃO depende de dados semeados.
+# Os cenários com pedido existente (200, 409, 422) exigem seed e estão em ../orders/test-scenarios.http.
+
+@baseUrl = http://localhost:3200
+
+### Identificador malformado → esperado: 400 Bad Request (ParseUUIDPipe)
+POST {{baseUrl}}/orders/abc-123/confirm
+
+### UUID válido, pedido inexistente → esperado: 404 Not Found (OrderNotFoundException)
+POST {{baseUrl}}/orders/f6712211-753f-4110-a8d3-36f58d68d56e/confirm
