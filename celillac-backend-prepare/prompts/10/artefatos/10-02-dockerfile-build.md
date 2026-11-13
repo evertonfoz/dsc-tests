@@ -99,8 +99,9 @@ export default new DataSource({
 ### 3.3 Teste do `DataSource` Compilado (`dist/database/data-source.js`)
 - **Comando executado:**
   ```bash
-  pnpm exec typeorm migration:show -d dist/database/data-source.js
+  pnpm migration:show:prod
   ```
+  *(Equivalente ao comando executado originalmente, `pnpm exec typeorm migration:show -d dist/database/data-source.js`; o script `migration:show:prod` encapsula o mesmo DataSource.)*
 - **Saída real observada:**
   ```text
   [X] 2 CreateOrdersAndPayments1791738728692

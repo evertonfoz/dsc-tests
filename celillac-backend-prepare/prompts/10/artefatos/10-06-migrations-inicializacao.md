@@ -19,8 +19,9 @@ Seguindo a sequência obrigatória (**Banco disponível → Verificação do his
 
 - **Comando executado:**
   ```bash
-  docker compose run --rm api pnpm exec typeorm migration:show -d dist/database/data-source.js
+  docker compose run --rm api pnpm migration:show:prod
   ```
+  *(Equivalente ao comando executado originalmente, `pnpm exec typeorm migration:show -d dist/database/data-source.js`; o script `migration:show:prod` encapsula o mesmo DataSource.)*
 - **Saída real observada:**
   ```text
   [+] create 1/1
