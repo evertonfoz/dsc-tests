@@ -74,4 +74,25 @@ describe('ProductsController (HTTP)', () => {
       }),
     );
   });
+
+  it('should expose only public contract fields and filter simulated internal properties (POST /products -> 201)', async () => {
+    serviceMock.createProduct.mockResolvedValue({
+      productId: '550e8400-e29b-41d4-a716-446655440000',
+      name: 'Produto de exemplo',
+      internalNote: 'informacao-interna-ilustrativa',
+    });
+
+    const response = await request(app.getHttpServer())
+      .post('/products')
+      .send({ name: 'Produto de exemplo' })
+      .expect(201);
+
+    expect(serviceMock.createProduct).toHaveBeenCalledTimes(1);
+    expect(serviceMock.createProduct).toHaveBeenCalledWith('Produto de exemplo');
+    expect(response.body).not.toHaveProperty('internalNote');
+    expect(response.body).toEqual({
+      productId: '550e8400-e29b-41d4-a716-446655440000',
+      name: 'Produto de exemplo',
+    });
+  });
 });
