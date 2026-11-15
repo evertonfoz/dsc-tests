@@ -1,0 +1,42 @@
+@baseUrl = http://localhost:3200
+
+# UC12 — Cadastrar Produto (Fronteira HTTP — Material 07)
+
+### Cenário 1: Cadastro de produto com dados válidos (CA01) → esperado: 201 Created
+POST {{baseUrl}}/products
+Content-Type: application/json
+
+{
+  "name": "Celular XYZ"
+}
+
+### Cenário 2: Nome vazio rejeitado pelo ValidationPipe (@IsNotEmpty) → esperado: 400 Bad Request
+POST {{baseUrl}}/products
+Content-Type: application/json
+
+{
+  "name": ""
+}
+
+### Cenário 3: Campo obrigatório name ausente (@IsString / @IsNotEmpty) → esperado: 400 Bad Request
+POST {{baseUrl}}/products
+Content-Type: application/json
+
+{}
+
+### Cenário 4: Tipo inválido para name (não é string — @IsString) → esperado: 400 Bad Request
+POST {{baseUrl}}/products
+Content-Type: application/json
+
+{
+  "name": 12345
+}
+
+### Cenário 5: Propriedade extra descartada pelo ValidationPipe (whitelist: true) → esperado: 201 Created (apenas productId e name)
+POST {{baseUrl}}/products
+Content-Type: application/json
+
+{
+  "name": "Bolo Sem Glúten",
+  "extraField": "ignorado pelo whitelist"
+}

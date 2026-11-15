@@ -4,6 +4,7 @@ import { AppService } from './app.service.js';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { OrdersModule } from './modules/orders/orders.module.js';
+import { ProductsModule } from './modules/products/products.module.js';
 import { APP_FILTER } from '@nestjs/core';
 import { DomainHttpExceptionFilter } from './common/filters/domain-http-exception.filter.js';
 
@@ -13,6 +14,7 @@ import { DomainHttpExceptionFilter } from './common/filters/domain-http-exceptio
       isGlobal: true,
     }),
     OrdersModule,
+    ProductsModule,
     TypeOrmModule.forRootAsync({
       inject: [ConfigService],
       useFactory: (config: ConfigService) => ({
@@ -26,7 +28,6 @@ import { DomainHttpExceptionFilter } from './common/filters/domain-http-exceptio
         synchronize: false,
       }),
     }),
-    OrdersModule,
   ],
   controllers: [AppController],
   providers: [
