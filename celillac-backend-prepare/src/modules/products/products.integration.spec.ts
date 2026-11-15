@@ -3,6 +3,7 @@ import {
   ValidationPipe,
 } from '@nestjs/common';
 import { Test, type TestingModule } from '@nestjs/testing';
+import { getRepositoryToken } from '@nestjs/typeorm';
 import request from 'supertest';
 import { type App } from 'supertest/types.js';
 import {
@@ -13,6 +14,7 @@ import {
   it,
   vi,
 } from 'vitest';
+import { ProductOrmEntity } from '../../infrastructure/persistence/products/product.orm-entity.js';
 import { ProductsController } from './controllers/products.controller.js';
 import { Product } from './entities/product.entity.js';
 import { ProductsModule } from './products.module.js';
@@ -33,7 +35,12 @@ describe('POST /products — integração', () => {
   beforeAll(async () => {
     moduleRef = await Test.createTestingModule({
       imports: [ProductsModule],
-    }).compile();
+    })
+      .overrideProvider(getRepositoryToken(ProductOrmEntity))
+      .useValue({})
+      .overrideProvider(PRODUCTS_REPOSITORY)
+      .useClass(InMemoryProductsRepository)
+      .compile();
 
     productsController = moduleRef.get<ProductsController>(ProductsController);
     productsService = moduleRef.get<ProductsService>(ProductsService);
@@ -101,3 +108,4 @@ describe('POST /products — integração', () => {
     saveSpy.mockRestore();
   });
 });
+
