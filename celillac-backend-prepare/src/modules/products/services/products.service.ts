@@ -1,3 +1,4 @@
+import { randomUUID } from 'node:crypto';
 import { Inject, Injectable } from '@nestjs/common';
 import { Product } from '../entities/product.entity.js';
 import {
@@ -12,7 +13,8 @@ export class ProductsService {
     private readonly productsRepository: ProductsRepository,
   ) {}
 
-  async createProduct(_name: string): Promise<Product> {
-    throw new Error('Not implemented: createProduct');
+  async createProduct(name: string): Promise<Product> {
+    const product = new Product(randomUUID(), name);
+    return this.productsRepository.save(product);
   }
 }
