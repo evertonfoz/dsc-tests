@@ -1,0 +1,47 @@
+# UC12 — Cadastrar Produto, com a API e o PostgreSQL em contêineres.
+# O contrato real possui apenas `name`; `productId` é gerado pelo service.
+
+@baseUrl = http://localhost:3200
+
+### Cenário 1: cadastro válido (CA01) → esperado: 201 Created, com productId e name
+# @name criarProduto
+POST {{baseUrl}}/products
+Content-Type: application/json
+
+{
+  "name": "Produto via contêiner"
+}
+
+### Guarde o productId da resposta acima para a consulta SQL (ver README.md)
+@productId = {{criarProduto.response.body.productId}}
+
+### Cenário 2: nome vazio → esperado: 400 Bad Request (@IsNotEmpty)
+POST {{baseUrl}}/products
+Content-Type: application/json
+
+{
+  "name": ""
+}
+
+### Cenário 3: name ausente → esperado: 400 Bad Request
+POST {{baseUrl}}/products
+Content-Type: application/json
+
+{}
+
+### Cenário 4: name não é string → esperado: 400 Bad Request (@IsString)
+POST {{baseUrl}}/products
+Content-Type: application/json
+
+{
+  "name": 12345
+}
+
+### Cenário 5: propriedade extra → esperado: 201 Created, resposta apenas com productId e name (whitelist)
+POST {{baseUrl}}/products
+Content-Type: application/json
+
+{
+  "name": "Produto com campo extra",
+  "price": 10
+}

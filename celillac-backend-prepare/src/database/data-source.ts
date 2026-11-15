@@ -4,6 +4,8 @@ import { OrderEntity } from '../infrastructure/persistence/orders/order.orm-enti
 import { PaymentEntity } from '../infrastructure/persistence/payments/payment.orm-entity.js';
 import { ProductOrmEntity } from '../infrastructure/persistence/products/product.orm-entity.js';
 
+const isTsRuntime = import.meta.url.endsWith('.ts');
+
 export default new DataSource({
   type: 'postgres',
   host: process.env.DB_HOST,
@@ -12,6 +14,10 @@ export default new DataSource({
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME,
   entities: [OrderEntity, PaymentEntity, ProductOrmEntity],
-  migrations: ['src/database/migrations/*.ts'],
+  migrations: [
+    isTsRuntime
+      ? 'src/database/migrations/*.ts'
+      : 'dist/database/migrations/*.js',
+  ],
   synchronize: false,
 });

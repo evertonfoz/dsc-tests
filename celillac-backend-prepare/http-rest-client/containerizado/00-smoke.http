@@ -1,0 +1,10 @@
+# Smoke test — API containerizada (docker compose up -d --build api)
+# Pré-requisito: celilac-api Up e celilac-postgres healthy (docker compose ps)
+
+@baseUrl = http://localhost:3200
+
+### API respondendo na porta publicada → esperado: 200 OK, "Hello World!"
+GET {{baseUrl}}/
+
+### Rota inexistente → esperado: 404 Not Found
+GET {{baseUrl}}/rota-que-nao-existe

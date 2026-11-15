@@ -6,6 +6,7 @@
   "private": true,
   "license": "UNLICENSED",
   "type": "module",
+  "packageManager": "pnpm@12.8.1",
   "scripts": {
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
@@ -21,6 +22,8 @@
     "test:integration": "vitest run --config ./vitest.integration.config.ts",
     "test:e2e": "vitest run --config ./vitest.config.e2e.ts",
     "typeorm": "typeorm-ts-node-esm -d src/database/data-source.ts",
+    "migration:show:prod": "typeorm migration:show -d dist/database/data-source.js",
+    "migration:run:prod": "typeorm migration:run -d dist/database/data-source.js",
     "verify:persistence": "nest build && node dist/scripts/verify-persistence.js",
     "seed:scenarios": "nest build && node dist/scripts/seed-test-scenarios.js"
   },

@@ -94,7 +94,7 @@ describe('TypeOrmProductsRepository — persistência real no PostgreSQL', () =>
       );
     }
 
-    await dataSource.query('TRUNCATE TABLE "products"');
+    await dataSource.query('TRUNCATE TABLE "products"."products"');
   });
 
   afterAll(async () => {
@@ -116,7 +116,7 @@ describe('TypeOrmProductsRepository — persistência real no PostgreSQL', () =>
     expect(savedProduct.name).toBe('Farinha de Amêndoas Sem Glúten');
 
     const rows = await dataSource.query<ProductRow[]>(
-      'SELECT "productId", "name" FROM "products" WHERE "productId" = $1',
+      'SELECT "productId", "name" FROM "products"."products" WHERE "productId" = $1',
       [product.productId],
     );
 
