@@ -1,0 +1,87 @@
+# RED da C1 em 2026-11-20T19:05:36Z, base 6aad1c6e8ffab31443884cb85555fad1d8b5e778
+The plugin "vite-tsconfig-paths" is detected. Vite now supports tsconfig paths resolution natively via the resolve.tsconfigPaths option. You can remove the plugin and set resolve.tsconfigPaths: true in your Vite config instead.
+
+ RUN  v4.1.11 /Users/evertoncoimbradearaujo/Documents/GitHub/dsc-tests/celilac-backend
+
+[31m[Nest] 77011  - [39m11/20/2026, 4:05:37 PM [31m  ERROR[39m [38;5;3m[ExceptionsHandler] [39mInvalidProductNameException: Product name must not be empty.
+    at [90m/Users/evertoncoimbradearaujo/Documents/GitHub/dsc-tests/celilac-backend/[39msrc/modules/products/controllers/products.error-mapping.spec.ts:37:49
+    at [90mfile:///Users/evertoncoimbradearaujo/Documents/GitHub/dsc-tests/celilac-backend/[39mnode_modules/[4m.pnpm[24m/@vitest+runner@4.1.11/node_modules/[4m@vitest/runner[24m/dist/chunk-artifact.js:302:11
+    at [90mfile:///Users/evertoncoimbradearaujo/Documents/GitHub/dsc-tests/celilac-backend/[39mnode_modules/[4m.pnpm[24m/@vitest+runner@4.1.11/node_modules/[4m@vitest/runner[24m/dist/chunk-artifact.js:1903:26
+    at [90mfile:///Users/evertoncoimbradearaujo/Documents/GitHub/dsc-tests/celilac-backend/[39mnode_modules/[4m.pnpm[24m/@vitest+runner@4.1.11/node_modules/[4m@vitest/runner[24m/dist/chunk-artifact.js:2326:20
+    at new Promise (<anonymous>)
+    at runWithCancel [90m(file:///Users/evertoncoimbradearaujo/Documents/GitHub/dsc-tests/celilac-backend/[39mnode_modules/[4m.pnpm[24m/@vitest+runner@4.1.11/node_modules/[4m@vitest/runner[24m/dist/chunk-artifact.js:2323:10[90m)[39m
+    at [90mfile:///Users/evertoncoimbradearaujo/Documents/GitHub/dsc-tests/celilac-backend/[39mnode_modules/[4m.pnpm[24m/@vitest+runner@4.1.11/node_modules/[4m@vitest/runner[24m/dist/chunk-artifact.js:2305:20
+    at new Promise (<anonymous>)
+    at runWithTimeout [90m(file:///Users/evertoncoimbradearaujo/Documents/GitHub/dsc-tests/celilac-backend/[39mnode_modules/[4m.pnpm[24m/@vitest+runner@4.1.11/node_modules/[4m@vitest/runner[24m/dist/chunk-artifact.js:2272:10[90m)[39m
+    at [90mfile:///Users/evertoncoimbradearaujo/Documents/GitHub/dsc-tests/celilac-backend/[39mnode_modules/[4m.pnpm[24m/@vitest+runner@4.1.11/node_modules/[4m@vitest/runner[24m/dist/chunk-artifact.js:2956:64
+[31m[Nest] 77011  - [39m11/20/2026, 4:05:37 PM [31m  ERROR[39m [38;5;3m[ExceptionsHandler] [39mProductPersistenceFailedException: Product registration could not be completed.
+    at [90m/Users/evertoncoimbradearaujo/Documents/GitHub/dsc-tests/celilac-backend/[39msrc/modules/products/controllers/products.error-mapping.spec.ts:53:7
+    at [90mfile:///Users/evertoncoimbradearaujo/Documents/GitHub/dsc-tests/celilac-backend/[39mnode_modules/[4m.pnpm[24m/@vitest+runner@4.1.11/node_modules/[4m@vitest/runner[24m/dist/chunk-artifact.js:302:11
+[90m    ... 7 lines matching cause stack trace ...[39m
+    at [90mfile:///Users/evertoncoimbradearaujo/Documents/GitHub/dsc-tests/celilac-backend/[39mnode_modules/[4m.pnpm[24m/@vitest+runner@4.1.11/node_modules/[4m@vitest/runner[24m/dist/chunk-artifact.js:2956:64 {
+  [cause]: Error: connection refused at 10.0.0.5:5432 (relation "products" does not exist)
+      at [90m/Users/evertoncoimbradearaujo/Documents/GitHub/dsc-tests/celilac-backend/[39msrc/modules/products/controllers/products.error-mapping.spec.ts:54:9
+      at [90mfile:///Users/evertoncoimbradearaujo/Documents/GitHub/dsc-tests/celilac-backend/[39mnode_modules/[4m.pnpm[24m/@vitest+runner@4.1.11/node_modules/[4m@vitest/runner[24m/dist/chunk-artifact.js:302:11
+      at [90mfile:///Users/evertoncoimbradearaujo/Documents/GitHub/dsc-tests/celilac-backend/[39mnode_modules/[4m.pnpm[24m/@vitest+runner@4.1.11/node_modules/[4m@vitest/runner[24m/dist/chunk-artifact.js:1903:26
+      at [90mfile:///Users/evertoncoimbradearaujo/Documents/GitHub/dsc-tests/celilac-backend/[39mnode_modules/[4m.pnpm[24m/@vitest+runner@4.1.11/node_modules/[4m@vitest/runner[24m/dist/chunk-artifact.js:2326:20
+      at new Promise (<anonymous>)
+      at runWithCancel [90m(file:///Users/evertoncoimbradearaujo/Documents/GitHub/dsc-tests/celilac-backend/[39mnode_modules/[4m.pnpm[24m/@vitest+runner@4.1.11/node_modules/[4m@vitest/runner[24m/dist/chunk-artifact.js:2323:10[90m)[39m
+      at [90mfile:///Users/evertoncoimbradearaujo/Documents/GitHub/dsc-tests/celilac-backend/[39mnode_modules/[4m.pnpm[24m/@vitest+runner@4.1.11/node_modules/[4m@vitest/runner[24m/dist/chunk-artifact.js:2305:20
+      at new Promise (<anonymous>)
+      at runWithTimeout [90m(file:///Users/evertoncoimbradearaujo/Documents/GitHub/dsc-tests/celilac-backend/[39mnode_modules/[4m.pnpm[24m/@vitest+runner@4.1.11/node_modules/[4m@vitest/runner[24m/dist/chunk-artifact.js:2272:10[90m)[39m
+      at [90mfile:///Users/evertoncoimbradearaujo/Documents/GitHub/dsc-tests/celilac-backend/[39mnode_modules/[4m.pnpm[24m/@vitest+runner@4.1.11/node_modules/[4m@vitest/runner[24m/dist/chunk-artifact.js:2956:64
+}
+ × src/modules/products/controllers/products.error-mapping.spec.ts > ProductsController — mapeamento de erros do núcleo (HTTP) > should map InvalidProductNameException to 400 at the HTTP boundary 96ms
+   → expected 400 "Bad Request", got 500 "Internal Server Error"
+ × src/modules/products/controllers/products.error-mapping.spec.ts > ProductsController — mapeamento de erros do núcleo (HTTP) > should map ProductPersistenceFailedException to 500 without leaking internal details 6ms
+   → expected { statusCode: 500, …(1) } to deeply equal { statusCode: 500, …(2) }
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/modules/products/controllers/products.error-mapping.spec.ts > ProductsController — mapeamento de erros do núcleo (HTTP) > should map InvalidProductNameException to 400 at the HTTP boundary
+Error: expected 400 "Bad Request", got 500 "Internal Server Error"
+ ❯ src/modules/products/controllers/products.error-mapping.spec.ts:42:8
+     40|       .post('/products')
+     41|       .send({ name: 'Celular XYZ' })
+     42|       .expect(400);
+       |        ^
+     43|
+     44|     expect(response.body).toEqual({
+ ❯ Test._assertStatus node_modules/.pnpm/supertest@7.3.0_supports-color@7.2.0/node_modules/supertest/lib/test.js:376:14
+ ❯ node_modules/.pnpm/supertest@7.3.0_supports-color@7.2.0/node_modules/supertest/lib/test.js:432:13
+ ❯ Test._assertFunction node_modules/.pnpm/supertest@7.3.0_supports-color@7.2.0/node_modules/supertest/lib/test.js:409:13
+ ❯ Test.assert node_modules/.pnpm/supertest@7.3.0_supports-color@7.2.0/node_modules/supertest/lib/test.js:274:23
+ ❯ localAssert node_modules/.pnpm/supertest@7.3.0_supports-color@7.2.0/node_modules/supertest/lib/test.js:196:38
+ ❯ Server.<anonymous> node_modules/.pnpm/supertest@7.3.0_supports-color@7.2.0/node_modules/supertest/lib/test.js:203:13
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  src/modules/products/controllers/products.error-mapping.spec.ts > ProductsController — mapeamento de erros do núcleo (HTTP) > should map ProductPersistenceFailedException to 500 without leaking internal details
+AssertionError: expected { statusCode: 500, …(1) } to deeply equal { statusCode: 500, …(2) }
+
+- Expected
++ Received
+
+  {
+-   "error": "ProductPersistenceFailedException",
+-   "message": "Product registration could not be completed.",
++   "message": "Internal server error",
+    "statusCode": 500,
+  }
+
+ ❯ src/modules/products/controllers/products.error-mapping.spec.ts:63:27
+     61|       .expect(500);
+     62|
+     63|     expect(response.body).toEqual({
+       |                           ^
+     64|       statusCode: 500,
+     65|       message: 'Product registration could not be completed.',
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed (2)
+   Start at  16:05:37
+   Duration  598ms (transform 43ms, setup 0ms, import 401ms, tests 102ms, environment 0ms)
+
