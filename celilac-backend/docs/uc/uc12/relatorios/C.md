@@ -50,3 +50,6 @@ Expor na fronteira HTTP os erros do núcleo e provar a persistência real, um PR
 ## 7. Aprendizados
 - Um teste que passa de primeira só é útil depois de uma mutação que o derrube.
 - Evidência de "banco vazio" pode vir do CI, sem `DROP`.
+
+## 8. Reabertura (2026-11-20)
+A fase C foi reaberta para o C1b (#42): DTO rejeitando nome em branco e nome acima de 120 caracteres, e formato único do erro 400 (ADR-004 do projeto). Os gates de C1 e C2 continuam aprovados; entram dois gates novos, pendentes. Dependência: F05 e F06 integradas.

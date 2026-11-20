@@ -6,7 +6,7 @@ nome: Cadastrar Produto
 documento: ../../planejamento/uc12-cadastrar-produto/uc-12.md
 arquetipo: criar
 epic: { issue: 23, estado: open }   # reconciliação do piloto; a Epic #1 (laboratório) está fechada e permanece como histórico
-fase_atual: D
+fase_atual: B
 
 fases:
   A:
@@ -18,19 +18,20 @@ fases:
       - { item: "Fatias F03 e F04 com DoR avaliada e teste RED nomeado", resultado: aprovado, por: evertonfoz }
     evidencias: [evidencias/A/testes-do-uc12.txt, evidencias/A/publicacao.txt]
   B:
-    status: concluida
+    status: em_andamento           # reaberta em 2026-11-20 (ADR-004 do método): fatias F05 e F06
     relatorio: relatorios/B.md
     gate:
-      - { item: "Todas as fatias integradas na branch principal", resultado: aprovado, por: CI }
-      - { item: "CI verde na branch principal", resultado: aprovado, por: CI }
+      - { item: "Todas as fatias integradas na branch principal", resultado: pendente }
+      - { item: "CI verde na branch principal", resultado: pendente }
     evidencias: [evidencias/B/f03-green.txt, evidencias/B/f04-green.txt]
   C:
-    status: concluida
+    status: em_andamento           # reaberta em 2026-11-20: C1b (DTO e formato do 400)
     relatorio: relatorios/C.md
     gate:
       - { item: "C1 (fronteira HTTP) integrada, com o mapeamento dos erros do núcleo", resultado: aprovado, por: CI }
       - { item: "C2 (persistência real) integrada, com migration verificada em banco novo", resultado: aprovado, por: CI }
-      - { item: "CI verde na branch principal", resultado: aprovado, por: CI }
+      - { item: "C1b (DTO e formato único do 400) integrada", resultado: pendente }
+      - { item: "CI verde na branch principal", resultado: pendente }
     evidencias: [evidencias/C/c1-green.txt, evidencias/C/c2-fe01-caracterizacao.txt, evidencias/C/c2-migration-banco-vazio.txt]
   D:
     status: em_andamento
@@ -84,3 +85,23 @@ fatias:
     responsavel: evertonfoz
     revisor: evertonfoz
     evidencias: [evidencias/B/f04-red.txt, evidencias/B/f04-green.txt]
+  - id: F05
+    comportamento: "Nome em branco (só espaços) é rejeitado no núcleo, sem gravar"
+    criterios: [RN01, FA01]
+    issue: 40
+    branch: null
+    pr: null
+    status: planejada
+    responsavel: evertonfoz
+    revisor: evertonfoz
+    evidencias: []
+  - id: F06
+    comportamento: "Nome com mais de 120 caracteres é rejeitado no núcleo, sem gravar"
+    criterios: [RN01]
+    issue: 41
+    branch: null
+    pr: null
+    status: planejada
+    responsavel: evertonfoz
+    revisor: evertonfoz
+    evidencias: []
