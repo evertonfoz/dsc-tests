@@ -90,4 +90,4 @@ O agente **não** marca `aprovado` nem faz merge (regras 9 e 21).
 ## 10. Para o estudante
 - **O que esta fase ensina:** adaptadores (portas e adaptadores) e provas diferentes para fronteiras diferentes.
 - **Pergunte-se:** (1) o que prova que o dado foi *gravado*, e não só aceito? (2) o que acontece se eu rodar a migration num banco vazio? (3) a regra de negócio mudou de lugar?
-- **Documento didático relacionado:** `method/didatico/` (será o 05, ao fim da Etapa 5).
+- **Documento didático relacionado:** `method/didatico/05-as-seis-fases-e-seus-playbooks.md`.

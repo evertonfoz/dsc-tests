@@ -80,4 +80,4 @@ O agente **não** marca `aprovado` nem faz merge (regras 9 e 21).
 ## 10. Para o estudante
 - **O que esta fase ensina:** reprodutibilidade, a diferença entre "testei" e "qualquer pessoa consegue repetir".
 - **Pergunte-se:** (1) o que prova que o registro sobrevive à reinicialização da API? (2) outra pessoa, num clone limpo, obtém a mesma saída? (3) o que o script faria se a API devolvesse 500?
-- **Documento didático relacionado:** `method/didatico/` (será o 05, ao fim da Etapa 5).
+- **Documento didático relacionado:** `method/didatico/05-as-seis-fases-e-seus-playbooks.md`.

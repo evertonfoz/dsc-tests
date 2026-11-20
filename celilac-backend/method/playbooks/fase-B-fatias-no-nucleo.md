@@ -87,4 +87,4 @@ O agente **não** marca `aprovado` nem faz merge (regras 9 e 21).
 ## 10. Para o estudante
 - **O que esta fase ensina:** TDD com commits que contam a história (RED, GREEN, REFACTOR) e integração em pequenos passos.
 - **Pergunte-se:** (1) meu RED falhou pelo motivo certo? (2) o que escrevi no GREEN foi o mínimo? (3) o refactor mudou algum comportamento?
-- **Documento didático relacionado:** `method/didatico/` (será o 05, ao fim da Etapa 5).
+- **Documento didático relacionado:** `method/didatico/05-as-seis-fases-e-seus-playbooks.md`.

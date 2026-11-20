@@ -88,4 +88,4 @@ O agente **não** marca `aprovado` (regras 9 e 21).
 ## 10. Para o estudante
 - **O que esta fase ensina:** planejar por comportamento, medir cobertura com tabela e publicar de forma rastreável.
 - **Pergunte-se:** (1) algum item do UC ficou sem fatia nem decisão? (2) cada fatia tem um teste RED que eu consigo nomear agora? (3) o que no plano depende de uma decisão que não é minha?
-- **Documento didático relacionado:** `method/didatico/` (será o 05, ao fim da Etapa 5).
+- **Documento didático relacionado:** `method/didatico/05-as-seis-fases-e-seus-playbooks.md`.

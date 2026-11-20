@@ -81,4 +81,4 @@ O agente **não** marca `aprovado` nem faz merge (regras 9 e 21).
 ## 10. Para o estudante
 - **O que esta fase ensina:** contrato como compromisso com quem consome a API e como proteger o que é interno.
 - **Pergunte-se:** (1) que campo meu cliente jamais deve ver? Qual teste prova isso? (2) se eu renomear um campo, qual teste quebra? (3) o texto do contrato foi conferido contra a API em execução?
-- **Documento didático relacionado:** `method/didatico/` (será o 05, ao fim da Etapa 5).
+- **Documento didático relacionado:** `method/didatico/05-as-seis-fases-e-seus-playbooks.md`.
