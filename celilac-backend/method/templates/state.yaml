@@ -39,7 +39,7 @@ fases:
 fatias:
   - id: F01
     comportamento: "Descreva o comportamento (ex.: cadastro com dados válidos)"
-    criterios: [CA01]             # critérios de aceite do caso de uso que a fatia cobre
+    criterios: [CA01]             # itens do UC que a fatia cobre: CA, RN, RF, FA ou FE (ex.: CA01, RN02, FE01)
     issue: null
     branch: null
     pr: null
