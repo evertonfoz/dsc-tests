@@ -1,0 +1,12 @@
+# A7: MUTAÇÃO (barreira de nome em branco removida no DTO e no serviço) em 2026-11-20T19:59:49Z. Esperado: o teste falha
+     × should not store a product when the name is empty or blank (CA03) 18ms
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+Error: expected 400 "Bad Request", got 201 "Created"
+ Test Files  1 failed (1)
+      Tests  1 failed | 1 passed (2)
+# A7: MUTAÇÃO 2 (o serviço grava o nome em branco e depois rejeita com 400) em 2026-11-20T20:00:09Z. Esperado: a contagem de linhas derruba o teste
+     × should not store a product when the name is empty or blank (CA03) 26ms
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+AssertionError: expected 2 to be +0 // Object.is equality
+ Test Files  1 failed (1)
+      Tests  1 failed | 1 passed (2)

@@ -1,0 +1,3 @@
+# A7: teste verde após reverter as mutações em 2026-11-20T20:00:10Z
+ Test Files  1 passed (1)
+      Tests  2 passed (2)
