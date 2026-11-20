@@ -1,0 +1,24 @@
+# Migrations em banco VAZIO, extraído do log do CI (job 'Smoke do Docker Compose', passo 'Aplicar migrations')
+# Execução 44798605021 no commit 6aad1c6 (main). O volume do Postgres é criado do zero em cada execução do job.
+Smoke do Docker Compose (API + banco + run-checks)	Aplicar migrations	2026-11-20T19:04:29.8220400Z $ typeorm migration:run -d dist/database/data-source.js
+Smoke do Docker Compose (API + banco + run-checks)	Aplicar migrations	2026-11-20T19:04:30.1313391Z query: SELECT version()
+Smoke do Docker Compose (API + banco + run-checks)	Aplicar migrations	2026-11-20T19:04:30.1331133Z query: SELECT * FROM current_schema()
+Smoke do Docker Compose (API + banco + run-checks)	Aplicar migrations	2026-11-20T19:04:30.1450086Z query: CREATE EXTENSION IF NOT EXISTS "uuid-ossp"
+Smoke do Docker Compose (API + banco + run-checks)	Aplicar migrations	2026-11-20T19:04:30.1465658Z query: SELECT * FROM "information_schema"."tables" WHERE "table_schema" = $1 AND "table_name" = $2 --
+Smoke do Docker Compose (API + banco + run-checks)	Aplicar migrations	2026-11-20T19:04:30.1516889Z query: CREATE TABLE "migrations" ("id" SERIAL NOT NULL, "timestamp" bigint NOT NULL, "name" character
+Smoke do Docker Compose (API + banco + run-checks)	Aplicar migrations	2026-11-20T19:04:30.1573858Z query: SELECT * FROM "migrations" "migrations" ORDER BY "id" DESC
+Smoke do Docker Compose (API + banco + run-checks)	Aplicar migrations	2026-11-20T19:04:30.1586679Z 3 migrations are new migrations must be executed.
+Smoke do Docker Compose (API + banco + run-checks)	Aplicar migrations	2026-11-20T19:04:30.1587296Z query: START TRANSACTION
+Smoke do Docker Compose (API + banco + run-checks)	Aplicar migrations	2026-11-20T19:04:30.1589948Z query: CREATE EXTENSION IF NOT EXISTS "uuid-ossp"
+Smoke do Docker Compose (API + banco + run-checks)	Aplicar migrations	2026-11-20T19:04:30.1610878Z query: INSERT INTO "migrations"("timestamp", "name") VALUES ($1, $2) -- PARAMETERS: [1792519198707,"E
+Smoke do Docker Compose (API + banco + run-checks)	Aplicar migrations	2026-11-20T19:04:30.1617015Z Migration EnableUuidOssp1792519198707 has been executed successfully.
+Smoke do Docker Compose (API + banco + run-checks)	Aplicar migrations	2026-11-20T19:04:30.1618640Z query: CREATE SCHEMA IF NOT EXISTS "orders"
+Smoke do Docker Compose (API + banco + run-checks)	Aplicar migrations	2026-11-20T19:04:30.1624483Z query: CREATE TYPE "orders"."orders_status_enum" AS ENUM('PENDING', 'CONFIRMED', 'CANCELLED')
+Smoke do Docker Compose (API + banco + run-checks)	Aplicar migrations	2026-11-20T19:04:30.1632952Z query: CREATE TABLE "orders"."orders" ("orderId" uuid NOT NULL DEFAULT uuid_generate_v4(), "customerI
+Smoke do Docker Compose (API + banco + run-checks)	Aplicar migrations	2026-11-20T19:04:30.1644119Z query: INSERT INTO "migrations"("timestamp", "name") VALUES ($1, $2) -- PARAMETERS: [1792519198708,"C
+Smoke do Docker Compose (API + banco + run-checks)	Aplicar migrations	2026-11-20T19:04:30.1647709Z Migration CreateOrders1792519198708 has been executed successfully.
+Smoke do Docker Compose (API + banco + run-checks)	Aplicar migrations	2026-11-20T19:04:30.1649677Z query: CREATE SCHEMA IF NOT EXISTS products
+Smoke do Docker Compose (API + banco + run-checks)	Aplicar migrations	2026-11-20T19:04:30.1652774Z query: 
+Smoke do Docker Compose (API + banco + run-checks)	Aplicar migrations	2026-11-20T19:04:30.1663696Z query: INSERT INTO "migrations"("timestamp", "name") VALUES ($1, $2) -- PARAMETERS: [1794255600000,"C
+Smoke do Docker Compose (API + banco + run-checks)	Aplicar migrations	2026-11-20T19:04:30.1667105Z Migration CreateProductsTable1794255600000 has been executed successfully.
+Smoke do Docker Compose (API + banco + run-checks)	Aplicar migrations	2026-11-20T19:04:30.1668945Z query: COMMIT

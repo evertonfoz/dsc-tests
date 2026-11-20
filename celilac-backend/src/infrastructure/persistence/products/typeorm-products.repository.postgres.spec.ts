@@ -10,6 +10,7 @@ import {
 } from 'vitest';
 import { createTestDataSource } from '../../../database/test-data-source.js';
 import { Product } from '../../../modules/products/entities/product.entity.js';
+import { ProductsService } from '../../../modules/products/services/products.service.js';
 import { ProductOrmEntity } from './product.orm-entity.js';
 import { TypeOrmProductsRepository } from './typeorm-products.repository.js';
 
@@ -125,5 +126,22 @@ describe('TypeOrmProductsRepository — persistência real no PostgreSQL', () =>
       productId: product.productId,
       name: 'Farinha de Amêndoas Sem Glúten',
     });
+  });
+
+  it('should report an incomplete operation when the real database rejects the insert (FE01)', async () => {
+    const service = new ProductsService(repository);
+    const nameTooLongForColumn = 'x'.repeat(121);
+
+    const result = service.createProduct(nameTooLongForColumn);
+
+    await expect(result).rejects.toMatchObject({
+      name: 'ProductPersistenceFailedException',
+    });
+    await expect(result).rejects.not.toThrow(/value too long|varchar|character varying/i);
+
+    const rows = await dataSource.query<ProductRow[]>(
+      'SELECT "productId" FROM "products"."products"',
+    );
+    expect(rows).toHaveLength(0);
   });
 });
