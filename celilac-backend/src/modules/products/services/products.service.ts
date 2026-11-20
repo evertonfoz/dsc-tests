@@ -16,7 +16,7 @@ export class ProductsService {
   ) {}
 
   async createProduct(name: string): Promise<Product> {
-    if (name === '') {
+    if (name.trim() === '') {
       throw new InvalidProductNameException();
     }
 
