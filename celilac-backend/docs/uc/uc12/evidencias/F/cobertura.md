@@ -1,0 +1,20 @@
+# Cobertura real do UC12 (Fase F, 2026-11-20)
+
+Cada nome de teste foi conferido no código e **executado**; a saída está em `docs/uc/uc12/evidencias/F/testes.txt` (16 testes rápidos de `src/modules/products`, dos quais 2 são de **I**; 2 testes de persistência real em **P**; e o inventário do contrato; todos passando). Abreviações: **S** = `src/modules/products/services/products.service.spec.ts`; **H** = `src/modules/products/controllers/products.controller.spec.ts`; **M** = `src/modules/products/controllers/products.error-mapping.spec.ts`; **I** = `src/modules/products/products.integration.spec.ts` (aplicação completa, repositório **em memória**); **P** = `src/infrastructure/persistence/products/typeorm-products.repository.postgres.spec.ts` (PostgreSQL real); **R** = `http-rest-client/containerizado/run-checks.sh` (API e banco no Compose).
+
+| Item do UC | Teste que prova (nome exato do `it`) | Situação |
+|---|---|---|
+| Fluxo principal, CA01, RF01 | S: `should register and save a product when valid data is provided (CA01)`; H: `should create a product when valid data is provided (POST /products -> 201)`; I: `deve criar um produto com dados válidos` | Coberto |
+| RF03 (persistência) | P: `deve persistir um produto no PostgreSQL e confirmar o registro diretamente no banco`; R: seções 6 e 7 (leitura direta no banco e após reinício da API) | Coberto |
+| RF05 (resposta compatível) | H: `should create a product when valid data is provided (POST /products -> 201)`; M: `should map InvalidProductNameException to 400 at the HTTP boundary`, `should map ProductPersistenceFailedException to 500 without leaking internal details`; H: `should not expose internal properties from domain/service in the HTTP response` | Coberto |
+| CA02, FA01 | S: `should reject an empty product name in the service without saving (RN01)`; H: `should reject an empty product name at the HTTP boundary (POST /products -> 400)`; I: `deve rejeitar nome vazio na fronteira HTTP` | Coberto |
+| RN01 (nome válido) | S: `should reject a blank product name in the service without saving (RN01)`, `should reject a product name longer than 120 characters in the service without saving (RN01)`, `should accept a product name with exactly 120 characters (RN01)`; M: `should reject a blank name at the HTTP boundary without calling the service (400)`, `should reject a name longer than 120 characters at the HTTP boundary (400)`, `should accept a name with exactly 120 characters at the HTTP boundary (201)` | Coberto (os limites vêm da ADR-004 do projeto; o UC não os define) |
+| CA03, RN03, RF04 (inválido não é armazenado) | S: os três testes `… without saving (RN01)` (a gravação não é chamada); I: `deve rejeitar nome vazio na fronteira HTTP` (repositório em memória não chamado) | Coberto **com limite**: nenhum teste prova a ausência de linha no **banco real** após uma rejeição (ver achado A7) |
+| RN04 (persistir só após validar) | S: `should register and save a product when valid data is provided (CA01)` (grava) e os três `… without saving` (não grava) | Coberto |
+| FE01 (falha de persistência) | S: `should report an incomplete operation when persistence fails (FE01)`; P: `should report an incomplete operation when the real database rejects the insert (FE01)`; M: `should map ProductPersistenceFailedException to 500 without leaking internal details` | Coberto |
+| RF02 (validação das informações) | os testes de RN01 acima | **Parcial:** só o nome; o preço está adiado (ADR-002) |
+| RN02, FA02 (preço) | nenhum | **Não implementado (ADR-002)** |
+| CA04 (testes automatizados) | os 18 testes nomeados acima, mais o `run-checks.sh` no CI | Coberto por existência e execução; é um critério de processo, não de comportamento |
+
+## Itens `Aguardando decisão`
+Nenhum item do UC ficou sem teste e sem ADR. As decisões pendentes são sobre **achados** (ver `docs/uc/uc12/evidencias/F/auditoria.md`), não sobre cobertura.
