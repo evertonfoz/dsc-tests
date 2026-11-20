@@ -130,14 +130,15 @@ describe('TypeOrmProductsRepository — persistência real no PostgreSQL', () =>
 
   it('should report an incomplete operation when the real database rejects the insert (FE01)', async () => {
     const service = new ProductsService(repository);
-    const nameTooLongForColumn = 'x'.repeat(121);
+    // O PostgreSQL rejeita o caractere NUL em texto (22021): falha real de banco que o núcleo ainda não barra.
+    const nameRejectedByDatabase = 'Produto\u0000com NUL';
 
-    const result = service.createProduct(nameTooLongForColumn);
+    const result = service.createProduct(nameRejectedByDatabase);
 
     await expect(result).rejects.toMatchObject({
       name: 'ProductPersistenceFailedException',
     });
-    await expect(result).rejects.not.toThrow(/value too long|varchar|character varying/i);
+    await expect(result).rejects.not.toThrow(/invalid byte sequence|0x00|encoding|utf8/i);
 
     const rows = await dataSource.query<ProductRow[]>(
       'SELECT "productId" FROM "products"."products"',
