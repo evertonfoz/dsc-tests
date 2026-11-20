@@ -6,9 +6,9 @@
 ---
 
 ## 1. O problema
-Em novembro de 2026 o caso de uso **UC12 — Cadastrar Produto** do projeto CeliLac parecia concluído:
+Em novembro de 2026 o caso de uso (UC, do inglês *Use Case*) **UC12 — Cadastrar Produto** do projeto CeliLac parecia concluído:
 
-- a API respondia, o banco gravava, havia contêineres, testes e uma coleção de requisições;
+- a API (a interface pela qual outros programas usam o sistema) respondia, o banco gravava, havia contêineres, testes e uma coleção de requisições;
 - 13 materiais tinham sido executados em ordem;
 - a *Epic* (a issue principal do caso de uso) e todas as sub-issues estavam fechadas;
 - um relatório de consistência afirmava **100%** de cobertura de requisitos, regras e fluxos.
@@ -37,9 +37,9 @@ Ao executar o método sobre o UC12 (fases descritas no módulo 5 em diante), enc
 | O que o relatório ou o senso comum dizia | O que o repositório mostrava |
 |---|---|
 | "Regras de negócio 100% cobertas, incluindo preço positivo" | O código só tinha o campo `name`. **Não existia preço.** |
-| "Fluxos de exceção contemplados" | A falha de persistência (FE01) **não tinha teste**. |
-| "Critérios de aceite CA01 a CA05 cumpridos" | O documento do caso de uso só define **CA01 a CA04**. "CA05" era um rótulo usado em dois sentidos. |
-| "Nome vazio é rejeitado" | Só **na fronteira HTTP**; o serviço aceitava nome vazio. |
+| "Fluxos de exceção contemplados" | A falha de persistência (FE01: o **F**luxo de **E**xceção número 1 do caso de uso) **não tinha teste**. |
+| "Critérios de aceite (CA) CA01 a CA05 cumpridos" | O documento do caso de uso só define **CA01 a CA04**. "CA05" era um rótulo usado em dois sentidos. |
+| "Nome vazio é rejeitado" | Só **na fronteira HTTP** (o protocolo pelo qual um cliente fala com a API); o serviço aceitava nome vazio. |
 | "O contrato da API está estável" | Ao executar o app: nome só com espaços dava **201**; nome com 121 caracteres dava **500**; havia **dois formatos** de erro 400. |
 
 Fontes: `docs/planejamento/uc12-cadastrar-produto/01/01-12-relatorio-consistencia-cobertura.md`, `docs/uc/uc12/evidencias/D/contrato-atual.txt` e `docs/uc/uc12/evidencias/F/cobertura.md`.
@@ -49,7 +49,7 @@ Nenhuma dessas falhas era má-fé. Eram **afirmações sem prova**, e a prova nu
 ## 5. A ideia central do curso
 > Um caso de uso só está pronto quando **cada item** da sua especificação termina com **um teste que o prova** ou com **uma decisão registrada** de adiamento ou exclusão. Todo o resto é afirmação.
 
-O método ensinado aqui é uma forma de **chegar a isso de forma repetível**. Em uma frase: dividir o caso de uso em comportamentos pequenos (fatias), implementar cada um com teste, guardar as evidências, deixar um robô (o CI) conferir o que é objetivo e deixar uma pessoa decidir o que é julgamento.
+O método ensinado aqui é uma forma de **chegar a isso de forma repetível**. Em uma frase: dividir o caso de uso em comportamentos pequenos (fatias), implementar cada um com teste, guardar as evidências, deixar um robô (a integração contínua, CI, que roda testes a cada mudança no GitHub) conferir o que é objetivo e deixar uma pessoa decidir o que é julgamento.
 
 ## 6. Mapa do método em uma página
 O método tem **duas camadas** e **seis fases**. Você as estudará uma a uma; por ora, só reconheça os nomes.
@@ -68,7 +68,7 @@ O método tem **duas camadas** e **seis fases**. Você as estudará uma a uma; p
 | E — Verificação reprodutível | Outra pessoa consegue repetir a prova? |
 | F — Auditoria e encerramento | O que, de fato, ficou coberto? Quem decide o que sobrou? |
 
-Dois arquivos ligam tudo: o `state.yaml` (o estado de cada caso de uso) e o `AGENTS.md` (as regras que o assistente de IA deve seguir). Ambos são ensinados nos módulos 2 e 12.
+Dois arquivos ligam tudo: o `state.yaml` (o estado de cada caso de uso) e o `AGENTS.md` (as regras que o assistente de IA, inteligência artificial, deve seguir). Ambos são ensinados nos módulos 2 e 12.
 
 ## 7. Pratique no seu domínio
 1. **Escolha** o seu caso de uso, conforme os critérios do `README.md` (cria algo, tem regra, grava em banco).

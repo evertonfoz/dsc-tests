@@ -5,9 +5,9 @@
 ## Atividade da seção 2 (estado `b71f5e1`)
 | Afirmação | O que o aluno deve encontrar |
 |---|---|
-| Preço positivo (RN02) | Não existe: `Product` só tem `productId` e `name`; não há DTO nem teste de preço. Resposta correta: "não implementado". |
+| Preço positivo (RN02) | Não existe: `Product` só tem `productId` e `name`; não há DTO (*Data Transfer Object*) nem teste de preço. Resposta correta: "não implementado". |
 | Falha de persistência (FE01) | O serviço apenas chama `save` e não trata falha; há um único teste do serviço (caso feliz). Resposta correta: "sem teste". |
-| Nome obrigatório (RN01) | Existe só no DTO da fronteira HTTP; o serviço aceita nome vazio. Resposta correta: "coberta apenas na fronteira". |
+| Nome obrigatório (RN01) | Existe só no DTO da fronteira HTTP (o protocolo de entrada da API); o serviço aceita nome vazio. Resposta correta: "coberta apenas na fronteira". |
 
 ## Respostas esperadas
 - A tabela do aluno não deve repetir os 100%.
@@ -17,7 +17,7 @@
 ## Pontos para discussão em aula
 1. Por que a porcentagem de cobertura de linhas não responde à pergunta do módulo?
 2. Quem deve decidir a destinação de um item sem teste? (Resposta esperada: a pessoa responsável pelo caso de uso, não o assistente.)
-3. Em que situação "adiar com ADR" é melhor que "implementar"? (Quando a especificação não define a regra.)
+3. Em que situação "adiar com ADR" (*Architecture Decision Record*) é melhor que "implementar"? (Quando a especificação não define a regra.)
 
 ## Critérios de avaliação sugeridos (tarefa da seção 6)
 | Critério | Peso |

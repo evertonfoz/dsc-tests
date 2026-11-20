@@ -6,14 +6,14 @@
 ---
 
 ## 1. O problema
-O relatório de consistência do UC12 trazia esta tabela (resumida):
+O relatório de consistência do UC12 (o caso de uso, UC, de cadastrar produto) trazia esta tabela (resumida):
 
 | Elemento | Total | Cobertos | Cobertura |
 |---|---|---|---|
-| Requisitos funcionais (RF01 a RF05) | 5 | 5 | 100% |
-| Regras de negócio (RN01 a RN04) | 4 | 4 | 100% |
-| Fluxos (principal, FA01, FA02, FE01) | 4 | 4 | 100% |
-| Critérios de aceite (CA01 a CA04) | 4 | 4 | 100% |
+| Requisitos funcionais, RF (o que o sistema deve fazer; RF01 a RF05) | 5 | 5 | 100% |
+| Regras de negócio, RN (regras do domínio; RN01 a RN04) | 4 | 4 | 100% |
+| Fluxos (principal, FA01 e FA02, os fluxos alternativos, e FE01, o fluxo de exceção) | 4 | 4 | 100% |
+| Critérios de aceite, CA (condições para aceitar o caso de uso; CA01 a CA04) | 4 | 4 | 100% |
 
 Na coluna de avaliação, a regra de negócio era descrita como "nome obrigatório, **preço positivo**, integridade e atomicidade garantidas". Fonte: `docs/planejamento/uc12-cadastrar-produto/01/01-12-relatorio-consistencia-cobertura.md`.
 
@@ -47,7 +47,7 @@ Há três atalhos comuns. Todos falham:
 ## 4. O que você deveria ter encontrado
 No commit `b71f5e1`:
 - `Product` só tinha `productId` e `name`. **Não existia preço**, logo RN02 não podia estar coberta.
-- O serviço `createProduct` não validava nada: bastava criar o produto e gravar. A regra do nome vazio existia **só no DTO** da fronteira HTTP.
+- O serviço `createProduct` não validava nada: bastava criar o produto e gravar. A regra do nome vazio existia **só no DTO** (*Data Transfer Object*, a classe que descreve e valida os dados que chegam) da fronteira HTTP (a entrada pela qual o cliente fala com a API).
 - Havia **um** teste do serviço (o do caso feliz). Nenhum para falha de persistência.
 - O documento do caso de uso define CA01 a CA04, mas o roteiro final citava "CA05".
 
@@ -66,7 +66,7 @@ Um trecho real do resultado final do UC12 (`docs/uc/uc12/evidencias/F/cobertura.
 | RN01 (nome válido) | `should reject a blank product name in the service without saving (RN01)` e outros | Coberto |
 | FE01 (falha de persistência) | `should report an incomplete operation when persistence fails (FE01)` e outros dois | Coberto |
 | RF02 (validar informações) | os testes de RN01 | **Parcial:** só o nome |
-| RN02, FA02 (preço) | nenhum | **Não implementado**, decisão registrada na ADR-002 |
+| RN02, FA02 (preço) | nenhum | **Não implementado**, decisão registrada na ADR-002 (*Architecture Decision Record*, registro de decisão de arquitetura) |
 
 ### 5.1. As regras da tabela
 1. **Uma linha por item** da especificação (RF, RN, fluxos, critérios).
@@ -80,7 +80,7 @@ Ao escrever um relatório, marque a origem de cada afirmação:
 
 | Etiqueta | Significa |
 |---|---|
-| *Documentado* | está escrito em um documento (issue, PR, especificação) |
+| *Documentado* | está escrito em um documento (issue, PR — *pull request*, a proposta de mudança no GitHub —, especificação) |
 | *Confirmado no código* | você abriu o arquivo e viu |
 | *Executado* | você rodou o comando agora e tem a saída |
 | *Hipótese* | é uma suposição ainda sem prova |
@@ -108,7 +108,7 @@ Quando um item não será implementado, registre. A ADR-002 do UC12 tem esta for
 - **Chamar de "coberto" um teste que usa um repositório simulado quando o requisito fala do banco real.** No UC12, o teste chamado "de integração" usava um repositório em memória; só outro teste, contra o PostgreSQL, provava a persistência de verdade.
 - **Confundir porcentagem de linhas executadas com requisitos provados.**
 
-## 9. Como lidar com a IA neste módulo
+## 9. Como lidar com a IA (inteligência artificial) neste módulo
 Quando a IA disser "tudo coberto", **responda com uma tarefa**, não com um agradecimento:
 
 > Liste cada requisito do documento, o nome exato do teste que o prova, o arquivo onde ele está e o comando para rodá-lo. Marque como "sem prova" o que não tiver teste.
