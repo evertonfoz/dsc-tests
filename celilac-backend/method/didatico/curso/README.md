@@ -38,7 +38,7 @@ Cada módulo tem um arquivo de **gabarito para o professor**, à parte.
 | 9 | Alguém olhou o contrato real da API (*Application Programming Interface*, a interface pela qual outros programas usam o seu)? | `m09-contrato-real-da-api.md` |
 | 10 | E se uma fatia aparecer tarde demais? | `m10-fatia-descoberta-tarde.md` |
 | 11 | Outra pessoa consegue repetir sua verificação? | `m11-verificacao-repetivel.md` |
-| 12 | Quem aprova, e o que a IA pode fazer? | a escrever |
+| 12 | Quem aprova, e o que a IA pode fazer? | `m12-quem-aprova.md` |
 | Projeto | Conduza um caso de uso seu do início ao fim | a escrever |
 
 ## O projeto do curso
