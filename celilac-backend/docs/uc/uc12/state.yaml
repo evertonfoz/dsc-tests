@@ -33,7 +33,7 @@ fatias:
     status: integrada
     responsavel: evertonfoz
     revisor: evertonfoz
-    evidencias: [evidencias/A/testes-do-uc12.txt, evidencias/A/publicacao.txt]
+    evidencias: [evidencias/A/testes-do-uc12.txt]
   - id: F02
     comportamento: "Nome vazio é rejeitado na fronteira HTTP (400) e nada é gravado"
     criterios: [CA02, CA03]
@@ -43,7 +43,7 @@ fatias:
     status: integrada
     responsavel: evertonfoz
     revisor: evertonfoz
-    evidencias: [evidencias/A/testes-do-uc12.txt, evidencias/A/publicacao.txt]
+    evidencias: [evidencias/A/testes-do-uc12.txt]
   - id: F03
     comportamento: "O serviço rejeita nome vazio no núcleo, sem gravar nada, independentemente da fronteira HTTP"
     criterios: [RN01, FA01, CA02]
