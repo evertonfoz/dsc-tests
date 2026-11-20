@@ -127,11 +127,8 @@ jobs:
             sleep 2
           done
           echo "API não respondeu a tempo"; docker compose logs api; exit 1
-      - name: Preparar banco e aplicar migrations
-        run: |
-          # A migration CreateOrders usa uuid_generate_v4(), mas nenhuma migration cria a extensão.
-          docker compose exec -T postgres sh -c 'psql -U "$POSTGRES_USER" -d "$POSTGRES_DB" -c "CREATE EXTENSION IF NOT EXISTS \"uuid-ossp\""'
-          docker compose exec -T api pnpm migration:run:prod
+      - name: Aplicar migrations
+        run: docker compose exec -T api pnpm migration:run:prod
       - name: Verificação HTTP automatizada (run-checks)
         run: bash http-rest-client/containerizado/run-checks.sh --durability
       - name: Logs em caso de falha
