@@ -33,6 +33,9 @@ Monte, na Fase A, uma tabela com **todos** os itens do `uc.md` (RF, RN, fluxos, 
 
 Na **Fase F** repete-se a tabela com a coluna **"teste que prova"** (nome do `it`) ou "não implementado (ADR-NNN)". Nada é declarado "coberto" sem teste.
 
+## 4.1. Fatias descobertas depois
+Se a Fase D, E ou F revelar um comportamento sem fatia, ele **não** vira exceção: a Fase B é reaberta e a fatia segue o ciclo normal. Procedimento no `state.yaml` e no relatório: `method/decisoes/ADR-004-retorno-a-fase-anterior.md`.
+
 ## 5. Catálogo de fatias típicas — arquétipo `criar`
 | # | Fatia típica | Costuma cobrir |
 |---|---|---|

@@ -16,6 +16,9 @@ if out=$(node "$CHK" "$DIR/../../templates/state.yaml" 2>&1); then ok "templates
 # válido
 if out=$(node "$CHK" "$FX/valido.yaml" 2>&1); then ok "valido.yaml é aceito"; else fail "valido.yaml deveria ser aceito"; echo "$out"; fi
 
+# fase B reaberta com fase posterior em andamento (ADR-004 do método) é aceita
+if out=$(node "$CHK" "$FX/reaberta-valida.yaml" 2>&1); then ok "reaberta-valida.yaml é aceito (retorno a fase anterior)"; else fail "reaberta-valida.yaml deveria ser aceito"; echo "$out"; fi
+
 # inválidos: arquivo|trecho esperado
 casos=(
   "inv-arquetipo|arquetipo inválido"

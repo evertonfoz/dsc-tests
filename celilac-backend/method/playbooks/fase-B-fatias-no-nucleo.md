@@ -42,6 +42,8 @@ Ao fim de todas as fatias: **relatório da Fase B** (`relatorio-de-fase.md`) com
 
 > Pare e pergunte antes de qualquer ação destrutiva ou irreversível (regra 8), inclusive `push --force` e apagar branches.
 
+> **Reabertura:** fatias descobertas nas Fases D a F reabrem esta fase (ADR-004 do método). Acrescente ao relatório da B uma seção "Reabertura" com data, motivo e fatias.
+
 ## 5. Artefatos
 | Artefato | Local | Obrigatório |
 |---|---|---|

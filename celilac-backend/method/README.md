@@ -54,6 +54,9 @@ method/
 | 6 | Piloto: reconciliação do UC12 | Pendente |
 | 7 | Prompt orquestrador para os alunos (`orquestrador/prompt-do-estudante.md`) | Escrito; ainda não testado em um UC novo |
 
+## Decisões do método
+- ADR-001 organização em duas camadas · ADR-002 `state.yaml` por UC e validador · ADR-003 fatia e fases B/C · ADR-004 retorno a fase anterior (`decisoes/ADR-004-retorno-a-fase-anterior.md`)
+
 ## Pendências registradas para a Etapa 6 (piloto UC12)
 Decisões **do responsável pelo caso de uso**, a serem apresentadas com opções (o agente não decide):
 1. **RN02/FA02 (preço):** nova fatia ou ADR de adiado/fora de escopo.
