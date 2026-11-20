@@ -1,0 +1,42 @@
+# Fixture FICTÍCIA para testar o validador. Números e logins não são reais.
+uc: UC99
+nome: Exemplo Fictício
+arquetipo: criar
+epic: { issue: 1, estado: open }
+fase_atual: B
+fases:
+  A:
+    status: concluida
+    relatorio: relatorios/A.md
+    gate:
+      - { item: "Issues e Project criados", resultado: aprovado, por: aluno1 }
+  B:
+    status: em_andamento
+    relatorio: null
+    gate:
+      - { item: "Todas as fatias integradas", resultado: pendente }
+  C: { status: pendente }
+  D: { status: pendente }
+  E: { status: pendente }
+  F: { status: pendente }
+fatias:
+  - id: F01
+    comportamento: "Cadastro com dados válidos"
+    criterios: [CA01]
+    issue: 2
+    branch: feature/uc99-f01-cadastro-valido
+    pr: null
+    status: integrada
+    responsavel: aluno1
+    revisor: aluno2
+    evidencias: [evidencias/f01-red.txt, evidencias/f01-green.txt]
+  - id: F02
+    comportamento: "Rejeitar nome vazio"
+    criterios: [CA02, CA03]
+    issue: null
+    branch: null
+    pr: null
+    status: planejada
+    responsavel: aluno1
+    revisor: aluno2
+    evidencias: []
