@@ -1,4 +1,4 @@
-import { INestApplication, ValidationPipe } from '@nestjs/common';
+import { INestApplication } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import request from 'supertest';
 import { App } from 'supertest/types.js';
@@ -6,6 +6,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { Product } from '../entities/product.entity.js';
 import { ProductsService } from '../services/products.service.js';
 import { ProductsController } from './products.controller.js';
+import { createValidationPipe } from '../../../common/config/validation-pipe.js';
 
 describe('ProductsController (HTTP)', () => {
   let app: INestApplication<App>;
@@ -29,10 +30,7 @@ describe('ProductsController (HTTP)', () => {
 
     app = moduleFixture.createNestApplication();
     app.useGlobalPipes(
-      new ValidationPipe({
-        whitelist: true,
-        transform: true,
-      }),
+      createValidationPipe(),
     );
 
     await app.init();
