@@ -39,7 +39,7 @@ Cada módulo tem um arquivo de **gabarito para o professor**, à parte.
 | 10 | E se uma fatia aparecer tarde demais? | `m10-fatia-descoberta-tarde.md` |
 | 11 | Outra pessoa consegue repetir sua verificação? | `m11-verificacao-repetivel.md` |
 | 12 | Quem aprova, e o que a IA pode fazer? | `m12-quem-aprova.md` |
-| Projeto | Conduza um caso de uso seu do início ao fim | a escrever |
+| Projeto | Conduza um caso de uso seu do início ao fim | `projeto-final.md` |
 
 ## O projeto do curso
 Antes do módulo 1, escolha **um caso de uso do seu domínio** que:
