@@ -29,6 +29,8 @@ Todos os identificadores a seguir foram verificados diretamente no repositório 
 A resposta estrutura-se em **duas dimensões complementares**: a técnica/didática e a de governança no GitHub.
 
 ### 1.1. Dimensão Técnica e Didática (Materiais 01 a 12)
+> **Nota de reconciliação (2026-11-20):** a afirmação de "100% concluída" abaixo não considera RN02/FA02 (preço) nem FE01 (falha de persistência), que não têm implementação nem teste. Ver `docs/uc/uc12/relatorios/A.md` e `docs/adr/ADR-002-validacao-de-preco-adiada-uc12.md`.
+
 **Situação: 100% CONCLUÍDA E COMPROVADA.**  
 Todo o código, infraestrutura, persistência, contratos e testes automatizados estão implementados e validados por evidências no repositório:
 
@@ -38,7 +40,7 @@ Todo o código, infraestrutura, persistência, contratos e testes automatizados 
 | **CA02: Rejeição de nome obrigatório ausente/vazio** | **Concluído** | `ValidationPipe` e `CreateProductDto` com `@IsNotEmpty()`; testado em `products.controller.spec.ts` com `400 Bad Request`. |
 | **CA03: Não persistência de dados rejeitados** | **Concluído** | `products.integration.spec.ts` comprova `expect(saveSpy).not.toHaveBeenCalled()` para entradas inválidas. |
 | **CA04: Cobertura por testes automatizados** | **Concluído** | 6 testes rápidos aprovados em `src/modules/products/` (554ms) e 1 teste de integração real PostgreSQL aprovado em `typeorm-products.repository.postgres.spec.ts` (453ms). |
-| **CA05: Resposta compatível com o resultado (201 / 400)** | **Concluído** | `POST /products` retorna `201 Created` com `ProductResponseDto` (`{ productId, name }`); campos internos filtrados via `toProductResponse`. |
+| **RF05: Resposta compatível com o resultado (201 / 400)** *(era rotulado CA05; o `uc-12.md` define apenas CA01 a CA04)* | **Concluído** | `POST /products` retorna `201 Created` com `ProductResponseDto` (`{ productId, name }`); campos internos filtrados via `toProductResponse`. |
 | **Persistência Real PostgreSQL 17** | **Concluído** | Adaptador `TypeOrmProductsRepository`, migration `1794255600000-CreateProductsTable.ts`, dados confirmados na tabela `products.products`. |
 | **Infraestrutura Containerizada Docker Compose** | **Concluído** | Serviços `api` (porta 3200), `postgres` (porta 5432) e `postgres_test` (porta 5435) saudáveis e operacionais no `compose.yaml`. |
 | **Auditoria Arquitetural (Material 12)** | **Concluído** | Artefatos `12-01` a `12-09` gerados em `docs/planejamento/uc12-cadastrar-produto/12/`. Decisão formal: **Cenário B (Preservação Justificada)**. |
