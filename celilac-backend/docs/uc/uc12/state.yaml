@@ -58,10 +58,10 @@ fases:
       - { item: "Todo item do UC tem teste que o prova ou ADR", resultado: pendente }
       - { item: "Nenhuma afirmação de cobertura sem prova", resultado: pendente }
       - { item: "Arquitetura em conformidade, achados tratados", resultado: pendente }
-      - { item: "state.yaml, documentos e GitHub consistentes", resultado: pendente }
-      - { item: "CI verde na branch principal", resultado: pendente }
+      - { item: "state.yaml, documentos e GitHub consistentes", resultado: aprovado, por: CI }
+      - { item: "CI verde na branch principal", resultado: aprovado, por: CI }
       - { item: "Issues e Epic fechados", resultado: pendente }
-    evidencias: [evidencias/F/cobertura.md, evidencias/F/auditoria.md, evidencias/F/testes.txt]
+    evidencias: [evidencias/F/cobertura.md, evidencias/F/auditoria.md, evidencias/F/testes.txt, evidencias/F/a7-mutacao.txt]
 
 fatias:
   - id: F01
