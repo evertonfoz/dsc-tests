@@ -34,7 +34,7 @@ Cada módulo tem um arquivo de **gabarito para o professor**, à parte.
 | 5 | Onde mora a regra de negócio? | `m05-onde-mora-a-regra.md` |
 | 6 | O que o cliente vê quando o banco falha? | `m06-quando-o-banco-falha.md` |
 | 7 | Seu teste prova alguma coisa? | `m07-seu-teste-prova-algo.md` |
-| 8 | Como persistir de verdade? | a escrever |
+| 8 | Como persistir de verdade? | `m08-persistir-de-verdade.md` |
 | 9 | Alguém olhou o contrato real da API (*Application Programming Interface*, a interface pela qual outros programas usam o seu)? | a escrever |
 | 10 | E se uma fatia aparecer tarde demais? | a escrever |
 | 11 | Outra pessoa consegue repetir sua verificação? | a escrever |
@@ -73,9 +73,12 @@ O curso pressupõe que você usará um assistente de IA. As regras abaixo valem 
 | FE | Fluxo de Exceção | Caminho do caso de uso quando algo dá errado (FE01...) |
 | HTTP | *HyperText Transfer Protocol* | O protocolo pelo qual um cliente pede algo a uma API e recebe resposta |
 | IA | Inteligência Artificial | Aqui, os assistentes de código que você usará |
+| ORM | *Object-Relational Mapping* | Biblioteca que traduz objetos do código em linhas de tabelas do banco (aqui, o TypeORM) |
+| PK | *Primary Key*, chave primária | Coluna que identifica cada linha da tabela sem repetição |
 | PR | *Pull Request* | Proposta de mudança no GitHub, revisada antes de entrar na `main` |
 | RF | Requisito Funcional | O que o sistema deve fazer (RF01, RF02...) |
 | RN | Regra de Negócio | Regra do domínio que o sistema deve respeitar (RN01, RN02...) |
+| SQL | *Structured Query Language* | Linguagem de consulta e comando dos bancos relacionais |
 | TDD | *Test-Driven Development* | Escrever o teste antes do código |
 | UC | *Use Case*, caso de uso | Descrição de um comportamento do sistema do ponto de vista de quem o usa (UC12 é o décimo segundo do projeto CeliLac) |
 | YAML | formato de texto para dados estruturados | Formato do `state.yaml`: legível por pessoas e por programas |
