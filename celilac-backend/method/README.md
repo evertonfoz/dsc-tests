@@ -40,7 +40,8 @@ method/
 | 03 | `didatico/03-anatomia-de-um-playbook-e-fatias.md` | Playbooks, fatias e cobertura real |
 | 04 | `didatico/04-fundacao-do-projeto.md` | Fundação: ambiente, CI, isolamento e falhas conhecidas |
 | 05 | `didatico/05-as-seis-fases-e-seus-playbooks.md` | As fases A–F e seus playbooks |
-| 06+ | *(serão adicionados a cada etapa)* | |
+| 06 | `didatico/06-piloto-reconciliando-o-uc12.md` | O piloto do UC12: o que o método encontrou e onde foi corrigido |
+| 07+ | *(serão adicionados a cada etapa)* | |
 
 ## Estado de implementação do método
 
