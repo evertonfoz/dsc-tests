@@ -15,7 +15,7 @@ fases:
     gate:
       - { item: "Todo item do UC12 mapeado (fatia, ADR ou pergunta)", resultado: pendente }
       - { item: "Issue de reconciliação criada e conferida com este arquivo", resultado: pendente }
-      - { item: "Fatia F03 (FE01) com DoR avaliada e teste RED nomeado", resultado: pendente }
+      - { item: "Fatias F03 e F04 com DoR avaliada e teste RED nomeado", resultado: pendente }
     evidencias: [evidencias/A/testes-do-uc12.txt]
   B: { status: pendente, relatorio: null, gate: [], evidencias: [] }
   C: { status: pendente, relatorio: null, gate: [], evidencias: [] }
@@ -45,8 +45,18 @@ fatias:
     revisor: evertonfoz
     evidencias: [evidencias/A/testes-do-uc12.txt]
   - id: F03
+    comportamento: "O serviço rejeita nome vazio no núcleo, sem gravar nada, independentemente da fronteira HTTP"
+    criterios: [RN01, FA01, CA02]
+    issue: null
+    branch: null
+    pr: null
+    status: planejada
+    responsavel: evertonfoz
+    revisor: evertonfoz
+    evidencias: []
+  - id: F04
     comportamento: "Falha ao persistir o produto é informada como operação não concluída, sem vazar detalhes"
-    criterios: [FE01]               # FE01 é fluxo de exceção; o UC não define CA para ele (ver relatório A)
+    criterios: [FE01]               # FE01 é fluxo de exceção; o UC não define CA para ele
     issue: null
     branch: null
     pr: null
