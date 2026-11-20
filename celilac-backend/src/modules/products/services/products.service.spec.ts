@@ -63,4 +63,12 @@ describe('ProductsService', () => {
     });
     await expect(result).rejects.not.toThrow(/connection refused|10\.0\.0\.5|relation/);
   });
+
+  it('should reject a blank product name in the service without saving (RN01)', async () => {
+    await expect(service.createProduct('   ')).rejects.toMatchObject({
+      name: 'InvalidProductNameException',
+    });
+
+    expect(productsRepository.save).not.toHaveBeenCalled();
+  });
 });
