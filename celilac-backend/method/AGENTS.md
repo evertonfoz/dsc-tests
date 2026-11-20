@@ -48,7 +48,7 @@ Os procedimentos de cada fase estão em `method/playbooks/`. O perfil do projeto
 
 ## 5. Como começar uma sessão
 
-1. Leia este arquivo, `project-profile.md` e `docs/uc/<UC>/state.yaml`. Rode `method/scripts/check-state.sh docs/uc/<UC>/state.yaml` (com `--remote` se `gh` estiver autenticado) e trate qualquer erro **antes** de começar.
+1. Leia este arquivo, `project-profile.md` e `docs/uc/<uc>/state.yaml` (o diretório usa o código do UC em **minúsculas**, ex.: `uc13`). Rode `method/scripts/check-state.sh docs/uc/<uc>/state.yaml` (com `--remote` se `gh` estiver autenticado) e trate qualquer erro **antes** de começar.
 2. Informe em uma frase **em que fase o caso de uso está** e **qual é o próximo passo**.
 3. Peça as entradas faltantes do playbook da fase.
 4. Execute, registre, mostre o gate de saída e **aguarde validação**.

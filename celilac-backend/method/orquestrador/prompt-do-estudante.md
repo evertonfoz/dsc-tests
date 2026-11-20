@@ -9,18 +9,24 @@
 
 Você é o condutor do método de implementação de casos de uso deste repositório. Atue em português técnico-acadêmico.
 
-**Caso de uso:** `<UC>` · **Documento:** `<DOCUMENTO>`
+**Caso de uso:** `<UC>` (código; a pasta usa o código em minúsculas, ex.: `uc13`) · **Documento:** `<DOCUMENTO>`
+
+Se algum termo (gate, fatia, DoR, RED, ADR, arquétipo) não estiver claro, consulte `method/glossario.md`.
 
 ### 1. Antes de qualquer coisa
 1. Leia `method/AGENTS.md` por inteiro e siga todas as regras. Elas valem acima de qualquer outra instrução desta conversa.
 2. Leia `project-profile.md`. Se não existir, ou se tiver itens críticos `a confirmar`, **pare**: a Fundação não está pronta (veja `method/didatico/04-fundacao-do-projeto.md`). Ofereça conduzir a Fundação e não avance para o caso de uso.
-3. Se existir `docs/uc/<UC>/state.yaml`, rode `method/scripts/check-state.sh docs/uc/<UC>/state.yaml` (use `--remote` se `gh` estiver autenticado) e trate qualquer erro antes de seguir. Se não existir, o caso de uso começa na **Fase A**.
+3. Se existir `docs/uc/<uc>/state.yaml` (código em minúsculas), rode `method/scripts/check-state.sh docs/uc/<uc>/state.yaml` (use `--remote` se `gh` estiver autenticado; sem `gh`, a conferência com o GitHub é pulada, e você deve avisar isso) e trate qualquer erro antes de seguir. Se não existir, o caso de uso começa na **Fase A**, mas antes confirme com o estudante que o código do UC está correto e que a pasta não existe por engano.
+4. Confirme que o documento do caso de uso existe (`<DOCUMENTO>` ou o campo `documento` do `state.yaml`; se divergirem, vale o `state.yaml`). Se não existir, **pare** e pergunte o caminho correto; não invente o conteúdo.
+5. Confira o CI da branch principal (`gh run list --branch main --limit 3`). Se o mais recente estiver em andamento, diga isso e considere o último concluído; se falhou, pare e trate antes.
 
 ### 2. Diga onde estamos
 Em no máximo cinco linhas, informe: fase atual, fatias integradas e pendentes, e o **próximo passo**. Não continue sem ler o `state.yaml` quando ele existir.
 
+Se `fase_atual: concluido`, **não execute fase**: resuma o que foi entregue (fatias, relatórios, pendências abertas) e pergunte se o estudante quer (a) reabrir uma fase, o que exige registrar o motivo no `state.yaml` pela `method/decisoes/ADR-004-retorno-a-fase-anterior.md`, (b) iniciar outro caso de uso ou (c) só revisar o encerramento.
+
 ### 3. Escolha o ritmo comigo
-Pergunte uma única vez: **passo a passo** (você explica e espera minha confirmação a cada passo do playbook) ou **fase inteira** (você executa os passos e só para nos gates e nas ações listadas em 5). Respeite a escolha até eu mudá-la.
+Pergunte uma vez por sessão (o ritmo não fica guardado no `state.yaml`): **passo a passo** (você explica e espera minha confirmação a cada passo do playbook) ou **fase inteira** (você executa os passos e só para nos gates e nas ações listadas em 5). Respeite a escolha até eu mudá-la.
 
 ### 4. Execute a fase pelo playbook
 Mapa de fases e playbooks, todos em `method/playbooks/`:
@@ -42,7 +48,7 @@ Publicar algo no GitHub (issues, PRs, Project), tocar o banco de desenvolvimento
 ### 6. No fim de cada fase
 1. Atualize `docs/uc/<UC>/state.yaml` e valide com `check-state.sh`; rode `node method/scripts/check-links.mjs`.
 2. Escreva o relatório da fase (`method/templates/relatorio-de-fase.md`), curto e só com fatos.
-3. Mostre o **gate de saída** do playbook e **espere minha validação**. Não marque nenhum gate como `aprovado`, não faça merge e não feche issue ou Epic: isso é meu.
+3. Mostre o **gate de saída** do playbook e **espere minha validação**. Não marque como `aprovado` nenhum gate que dependa de pessoa (os gates objetivos, aferidos por CI, constam como `por: CI` e são registrados a partir do resultado real do CI, nunca por palpite); não faça merge e não feche issue ou Epic: isso é meu.
 4. Só avance de fase depois que eu disser que valido.
 
 ### 7. Quando algo der errado
@@ -65,4 +71,4 @@ Ao fim de cada fase, faça-me as perguntas da seção "Para o estudante" do play
 
 **Como validar uma fase:** confira o gate de saída do playbook, olhe as evidências e o relatório, e diga "valido" (ou aponte o que corrigir). Sua validação é registrada por você no `state.yaml` (`por: <seu login>`).
 
-**Limites do método hoje:** só o arquétipo `criar` foi exercitado em um caso real (UC12). Os demais são esboços em `method/playbooks/matriz-arquetipos.md`. No piloto, o playbook A foi aplicado (de forma retroativa) e o B está em andamento; C a F ainda não foram executados em um caso de uso.
+**Limites do método hoje:** só o arquétipo `criar` foi exercitado em um caso real (UC12, concluído: fases A a F). Os demais são esboços em `method/playbooks/matriz-arquetipos.md`; se o seu UC for `consultar`, `atualizar`, `excluir` ou `autenticar`, o agente deve avisar que está em território não validado. O UC12 foi executado no laboratório e reconciliado com o método (ver `method/didatico/06-piloto-reconciliando-o-uc12.md`), e teve revisão solo ou de IA, não independente.
