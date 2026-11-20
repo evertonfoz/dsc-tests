@@ -44,7 +44,7 @@ Em `docs/uc/uc12/evidencias/F/auditoria.md`. Núcleo sem dependência de infraes
 |---|---|---|---|
 | A2 | Compartilhar a configuração do `ValidationPipe`? | extrair para uma função | PR #51 (sem mudança de comportamento; 16 testes iguais antes e depois) |
 | A3 | Nome com caractere NUL | manter 500 (FE01 documentado); o UC não define restrição de caracteres | sem código |
-| A7 | Provar no banco real que a rejeição não grava | acrescentar teste | PR #52 (duas mutações em `evidencias/F/a7-mutacao.txt`) |
+| A7 | Provar no banco real que a rejeição não grava | acrescentar teste | PR #52 (duas mutações em `docs/uc/uc12/evidencias/F/a7-mutacao.txt`) |
 | #27 | Teste instável | deixar aberta (causa desconhecida, fora do UC12) | issue #27 aberta |
 
 ## 7. Encerramento
