@@ -16,7 +16,7 @@ Falhas conhecidas (5):
 
 ## Decisão
 1. O **CI exclui esses arquivos pela linha de comando do workflow** (`--exclude`), não pela configuração do Vitest. Quem executa `pnpm test` ou `pnpm test:e2e` localmente continua vendo as falhas do exercício.
-2. A lista de exclusões fica **em um único lugar** (variáveis `KNOWN_FAILURES_*` no workflow) e referencia esta ADR.
+2. A lista de exclusões fica **em um único lugar** (`scripts/known-failures.env`), lida pelo `scripts/verify.sh` e pelo workflow de CI, e referencia esta ADR.
 3. Quando o exercício for resolvido, as exclusões são **removidas** e esta ADR passa a "Substituída".
 4. Nenhuma outra falha pode ser excluída sem uma ADR própria.
 

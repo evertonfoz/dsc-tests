@@ -27,9 +27,6 @@ defaults:
 env:
   NODE_VERSION: '24.21.0'
   PNPM_VERSION: '12.8.1'
-  # Falhas conhecidas (exercício didático de `orders`). Ver docs/adr/ADR-001-falhas-conhecidas-exercicio-orders.md.
-  KNOWN_FAILURES_UNIT: '**/orders.services.spec.ts'
-  KNOWN_FAILURES_E2E: '**/confirm-order.e2e-spec.ts'
 
 jobs:
   quality:
@@ -48,22 +45,8 @@ jobs:
           cache-dependency-path: celilac-backend/pnpm-lock.yaml
       - name: Instalar dependências (lockfile congelado)
         run: pnpm install --frozen-lockfile
-      - name: Lint
-        run: pnpm lint
-      - name: Build
-        run: pnpm build
-      - name: Testes rápidos (sem as falhas conhecidas)
-        run: pnpm test --exclude "$KNOWN_FAILURES_UNIT"
-      - name: Testes dos validadores do método (estado e links)
-        run: bash method/scripts/testes/rodar-testes.sh
-      - name: Documentos — links e caminhos citados existem
-        run: node method/scripts/check-links.mjs
-      - name: Estado dos casos de uso (state.yaml)
-        run: |
-          shopt -s nullglob
-          arquivos=(docs/uc/*/state.yaml)
-          if [ ${#arquivos[@]} -eq 0 ]; then echo "Nenhum docs/uc/*/state.yaml encontrado: nada a validar."; fi
-          for f in "${arquivos[@]}"; do node method/scripts/check-state.mjs "$f"; done
+      - name: Verificação (a mesma de `scripts/verify.sh`: lint, build, testes rápidos, método, links, estado)
+        run: bash scripts/verify.sh
 
   integration:
     name: Integração e E2E (PostgreSQL de testes)
@@ -108,6 +91,8 @@ jobs:
           cache: pnpm
           cache-dependency-path: celilac-backend/pnpm-lock.yaml
       - run: pnpm install --frozen-lockfile
+      - name: Carregar falhas conhecidas (scripts/known-failures.env)
+        run: grep -E '^KNOWN_FAILURES_[A-Z0-9_]+=' scripts/known-failures.env >> "$GITHUB_ENV"
       - name: Integração (banco real)
         run: pnpm test:integration
       - name: E2E (banco de testes, sem as falhas conhecidas)
