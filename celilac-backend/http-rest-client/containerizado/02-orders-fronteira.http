@@ -1,0 +1,12 @@
+@baseUrl = http://localhost:3200
+
+# ==============================================================================
+# Recurso de Apoio: Orders — Verificação de Fronteira HTTP (Grupo A)
+# Não depende de dados existentes ou script de seed
+# ==============================================================================
+
+### Cenário 1: Confirmar pedido com identificador malformado → esperado: 400 Bad Request (ParseUUIDPipe)
+POST {{baseUrl}}/orders/id-invalido-nao-uuid/confirm
+
+### Cenário 2: Confirmar pedido com UUID sintaticamente válido mas inexistente → esperado: 404 Not Found (OrderNotFoundException)
+POST {{baseUrl}}/orders/00000000-0000-0000-0000-000000000000/confirm

@@ -1,0 +1,48 @@
+@baseUrl = http://localhost:3200
+
+# ==============================================================================
+# UC12 — Cadastrar Produto (Ambiente Containerizado)
+# ==============================================================================
+
+### Cenário 1: Cadastro válido com encadeamento de resposta → esperado: 201 Created
+# @name criarProduto
+POST {{baseUrl}}/products
+Content-Type: application/json
+
+{
+  "name": "Bolo de Milho Sem Glúten e Sem Lactose"
+}
+
+### Guarde o identificador da resposta acima para a consulta SQL direta no banco
+@produtoId = {{criarProduto.response.body.productId}}
+
+### Cenário 2: Validação de campo obrigatório vazio → esperado: 400 Bad Request (@IsNotEmpty)
+POST {{baseUrl}}/products
+Content-Type: application/json
+
+{
+  "name": ""
+}
+
+### Cenário 3: Validação de campo obrigatório ausente → esperado: 400 Bad Request (@IsNotEmpty)
+POST {{baseUrl}}/products
+Content-Type: application/json
+
+{}
+
+### Cenário 4: Validação de tipo inválido (numérico) → esperado: 400 Bad Request (@IsString)
+POST {{baseUrl}}/products
+Content-Type: application/json
+
+{
+  "name": 12345
+}
+
+### Cenário 5: Propriedade extra descartada pelo whitelist → esperado: 201 Created
+POST {{baseUrl}}/products
+Content-Type: application/json
+
+{
+  "name": "Torrada Tradicional Sem Glúten",
+  "campoInvalido": "deveSerDescartadoPeloValidationPipe"
+}

@@ -1,0 +1,48 @@
+# state.yaml — fonte da verdade do caso de uso. Copie para docs/uc/<uc>/state.yaml.
+# Subconjunto de YAML aceito pelo validador: mapas, listas, escalares, [a, b] e { k: v }.
+# Sem tabulações, sem blocos multilinha (| >), sem âncoras.
+# Valide com:  method/scripts/check-state.sh docs/uc/<uc>/state.yaml [--remote]
+# Caminhos de relatorio/evidencias são relativos a ESTE arquivo.
+
+uc: UC00                          # código do caso de uso
+nome: Nome do Caso de Uso
+arquetipo: criar                  # criar | consultar | atualizar | excluir | autenticar
+epic: { issue: null, estado: open }   # preencher issue (número) na Fase A; estado: open | closed
+fase_atual: A                     # A | B | C | D | E | F | concluido
+
+# Cada fase: status (pendente | em_andamento | concluida), relatorio, gate, evidencias.
+# resultado do gate: pendente | aprovado | reprovado.  "aprovado" exige "por": quem validou (pessoa ou CI).
+fases:
+  A:
+    status: em_andamento
+    relatorio: null               # ex.: relatorios/A.md
+    gate:
+      - { item: "Epic e Sub-Issues criadas e reconciliadas com este arquivo", resultado: pendente }
+      - { item: "GitHub Project configurado com os 5 estados", resultado: pendente }
+    evidencias: []
+  B:
+    status: pendente
+    relatorio: null
+    gate:
+      - { item: "Todas as fatias integradas na branch principal", resultado: pendente }
+      - { item: "CI verde na branch principal", resultado: pendente }
+    evidencias: []
+  C: { status: pendente, relatorio: null, gate: [], evidencias: [] }
+  D: { status: pendente, relatorio: null, gate: [], evidencias: [] }
+  E: { status: pendente, relatorio: null, gate: [], evidencias: [] }
+  F: { status: pendente, relatorio: null, gate: [], evidencias: [] }
+
+# Fatia = comportamento observável do UC, com regra, critério e teste RED nomeado (um PR; RED, GREEN, REFACTOR em commits).
+# status: planejada | em_andamento | em_revisao | integrada
+#   em_andamento exige issue e branch; em_revisao exige pr; integrada exige revisor e evidencias.
+fatias:
+  - id: F01
+    comportamento: "Descreva o comportamento (ex.: cadastro com dados válidos)"
+    criterios: [CA01]             # critérios de aceite do caso de uso que a fatia cobre
+    issue: null
+    branch: null
+    pr: null
+    status: planejada
+    responsavel: login-autor
+    revisor: login-revisor
+    evidencias: []
