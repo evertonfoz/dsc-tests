@@ -1,9 +1,10 @@
-import { INestApplication, ValidationPipe } from '@nestjs/common';
+import { INestApplication } from '@nestjs/common';
 import { Test } from '@nestjs/testing';
 import { getDataSourceToken } from '@nestjs/typeorm';
 import request from 'supertest';
 import { DataSource } from 'typeorm';
 import { AppModule } from '../../src/app.module.js';
+import { createValidationPipe } from '../../src/common/config/validation-pipe.js';
 
 // Achado A7 da Fase F (CA03, RN03, RF04): uma requisição rejeitada não deixa linha no banco REAL (somente o banco de TESTES; guardas do vitest.config.e2e.ts).
 describe('Rejeição não grava no banco (POST /products, banco real de testes)', () => {
@@ -14,7 +15,7 @@ describe('Rejeição não grava no banco (POST /products, banco real de testes)'
   beforeAll(async () => {
     const moduleFixture = await Test.createTestingModule({ imports: [AppModule] }).compile();
     app = moduleFixture.createNestApplication();
-    app.useGlobalPipes(new ValidationPipe({ whitelist: true, transform: true }));
+    app.useGlobalPipes(createValidationPipe());
     await app.init();
     dataSource = app.get<DataSource>(getDataSourceToken());
   });
