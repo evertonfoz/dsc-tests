@@ -54,8 +54,16 @@ jobs:
         run: pnpm build
       - name: Testes rápidos (sem as falhas conhecidas)
         run: pnpm test --exclude "$KNOWN_FAILURES_UNIT"
-      - name: Testes do validador do método
+      - name: Testes dos validadores do método (estado e links)
         run: bash method/scripts/testes/rodar-testes.sh
+      - name: Documentos — links e caminhos citados existem
+        run: node method/scripts/check-links.mjs
+      - name: Estado dos casos de uso (state.yaml)
+        run: |
+          shopt -s nullglob
+          arquivos=(docs/uc/*/state.yaml)
+          if [ ${#arquivos[@]} -eq 0 ]; then echo "Nenhum docs/uc/*/state.yaml encontrado: nada a validar."; fi
+          for f in "${arquivos[@]}"; do node method/scripts/check-state.mjs "$f"; done
 
   integration:
     name: Integração e E2E (PostgreSQL de testes)

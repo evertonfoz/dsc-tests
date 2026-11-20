@@ -35,5 +35,18 @@ for c in "${casos[@]}"; do
   else fail "$f (exit=$code, esperava trecho \"$msg\")"; echo "$out" | sed 's/^/      /'; fi
 done
 
+# ---- verificador de links (check-links) ----
+LNK="$DIR/../check-links.mjs"
+RAIZ="$DIR/../../.."
+LFX="$DIR/fixtures-links"
+if out=$(node "$LNK" --root "$RAIZ" "$LFX/ok.md" "$LFX/alvo.md" 2>&1); then ok "check-links aceita documento sem referências quebradas"; else fail "ok.md deveria passar"; echo "$out"; fi
+for caso in "quebrado-link.md|link inexistente: guia-que-nao-existe.md" "quebrado-caminho.md|caminho inexistente: prompts/uc-12.md" "quebrado-caminho.md|caminho inexistente: src/nao/existe.ts"; do
+  f="${caso%%|*}"; msg="${caso#*|}"
+  out=$(node "$LNK" --root "$RAIZ" "$LFX/$f" 2>&1); code=$?
+  if [[ $code -eq 1 && "$out" == *"$msg"* ]]; then ok "check-links rejeita $f: \"$msg\""; else fail "$f (exit=$code, esperava \"$msg\")"; echo "$out" | sed 's/^/      /'; fi
+done
+# escopo padrão do projeto deve estar limpo
+if out=$(cd "$RAIZ" && node method/scripts/check-links.mjs 2>&1); then ok "check-links: escopo padrão do projeto sem referências quebradas"; else fail "escopo padrão com referências quebradas"; echo "$out" | sed 's/^/      /'; fi
+
 echo
 if [[ $falhas -eq 0 ]]; then echo "Todos os testes do validador passaram."; else echo "$falhas teste(s) falharam."; exit 1; fi

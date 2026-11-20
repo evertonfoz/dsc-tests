@@ -13,7 +13,7 @@ method/
 ├── playbooks/             guia de fatias, matriz de arquétipos; playbooks das fases (Etapa 5)
 ├── templates/             project-profile, state.yaml, relatório de fase, ADR
 ├── perfis/                perfis de stack (celilac-nest)
-├── scripts/               check-state (validador) e seus testes
+├── scripts/               check-state e check-links (validadores) e seus testes
 └── exemplos/              exemplos reais (UC12/CeliLac)        (Etapa 6)
 ```
 
