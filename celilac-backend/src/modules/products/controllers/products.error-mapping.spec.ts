@@ -41,11 +41,50 @@ describe('ProductsController — mapeamento de erros do núcleo (HTTP)', () => {
       .send({ name: 'Celular XYZ' })
       .expect(400);
 
+    // Formato único dos erros 400 de produtos (ADR-004): o mesmo do ValidationPipe.
     expect(response.body).toEqual({
       statusCode: 400,
-      message: 'Product name must not be empty.',
-      error: 'InvalidProductNameException',
+      message: ['Product name must not be empty.'],
+      error: 'Bad Request',
     });
+  });
+
+  it('should reject a blank name at the HTTP boundary without calling the service (400)', async () => {
+    const response = await request(app.getHttpServer())
+      .post('/products')
+      .send({ name: '   ' })
+      .expect(400);
+
+    expect(serviceMock.createProduct).not.toHaveBeenCalled();
+    expect(response.body).toEqual(
+      expect.objectContaining({ statusCode: 400, error: 'Bad Request' }),
+    );
+  });
+
+  it('should reject a name longer than 120 characters at the HTTP boundary (400)', async () => {
+    const response = await request(app.getHttpServer())
+      .post('/products')
+      .send({ name: 'x'.repeat(121) })
+      .expect(400);
+
+    expect(serviceMock.createProduct).not.toHaveBeenCalled();
+    expect(response.body).toEqual(
+      expect.objectContaining({ statusCode: 400, error: 'Bad Request' }),
+    );
+  });
+
+  it('should accept a name with exactly 120 characters at the HTTP boundary (201)', async () => {
+    serviceMock.createProduct.mockResolvedValue({
+      productId: '550e8400-e29b-41d4-a716-446655440000',
+      name: 'x'.repeat(120),
+    });
+
+    await request(app.getHttpServer())
+      .post('/products')
+      .send({ name: 'x'.repeat(120) })
+      .expect(201);
+
+    expect(serviceMock.createProduct).toHaveBeenCalledTimes(1);
   });
 
   it('should map ProductPersistenceFailedException to 500 without leaking internal details', async () => {

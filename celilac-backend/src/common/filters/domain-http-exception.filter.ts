@@ -21,6 +21,9 @@ const DOMAIN_EXCEPTION_STATUS = new Map<DomainExceptionClass, HttpStatus>(
     ]
 );
 
+// Exceções de domínio respondidas no mesmo formato do ValidationPipe (ADR-004): message em lista e error "Bad Request".
+const VALIDATION_STYLE_EXCEPTIONS: DomainExceptionClass[] = [InvalidProductNameException];
+
 @Catch()
 export class DomainHttpExceptionFilter extends BaseExceptionFilter {
     catch(exception : unknown, host: ArgumentsHost) {
@@ -31,6 +34,15 @@ export class DomainHttpExceptionFilter extends BaseExceptionFilter {
 
         const error = exception as Error;
         const response = host.switchToHttp().getResponse<Response>();
+
+        if (VALIDATION_STYLE_EXCEPTIONS.some((ExceptionClass) => exception instanceof ExceptionClass)) {
+            response.status(status).json({
+                statusCode: status,
+                message: [error.message],
+                error: 'Bad Request'
+            });
+            return;
+        }
 
         response.status(status).json({
             statusCode: status,
