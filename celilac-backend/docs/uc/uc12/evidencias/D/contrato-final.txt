@@ -1,0 +1,14 @@
+# Inventário final do contrato real de POST /products em 2026-11-20T19:40:52Z, base e52d9548a01405cdc3f8592f77fadfadde9d4802 (após C1b, AppModule completo, banco de TESTES)
+nome válido                -> 201 {"productId":"<uuid>","name":"Celular XYZ"}
+nome vazio                 -> 400 {"message":["name should not be empty"],"error":"Bad Request","statusCode":400}
+nome ausente               -> 400 {"message":["name must be shorter than or equal to 120 characters","name should not be empty","name must be a string"],"error":"Bad Request","statusCode":400}
+nome null                  -> 400 {"message":["name must be shorter than or equal to 120 characters","name should not be empty","name must be a string"],"error":"Bad Request","statusCode":400}
+nome numérico              -> 400 {"message":["name must be shorter than or equal to 120 characters","name should not be empty","name must be a string"],"error":"Bad Request","statusCode":400}
+nome só com espaços        -> 400 {"message":["name should not be empty"],"error":"Bad Request","statusCode":400}
+nome com 120 caracteres    -> 201 {"productId":"<uuid>","name":"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"}
+nome com 121 caracteres    -> 400 {"message":["name must be shorter than or equal to 120 characters"],"error":"Bad Request","statusCode":400}
+campo extra (price)        -> 201 {"productId":"<uuid>","name":"Com preço"}
+JSON inválido              -> 400 {"message":"Expected property name or '}' in JSON at position 1 (line 1 column 2)","error":"Bad Request","statusCode":400}
+sem corpo                  -> 400 {"message":["name must be shorter than or equal to 120 characters","name should not be empty","name must be a string"],"error":"Bad Request","statusCode":400}
+GET /products              -> 404 {"message":"Cannot GET /products","error":"Not Found","statusCode":404}
+rota inexistente           -> 404 {"message":"Cannot POST /produtos","error":"Not Found","statusCode":404}

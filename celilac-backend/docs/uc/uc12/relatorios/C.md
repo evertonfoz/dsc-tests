@@ -53,3 +53,5 @@ Expor na fronteira HTTP os erros do núcleo e provar a persistência real, um PR
 
 ## 8. Reabertura (2026-11-20)
 A fase C foi reaberta para o C1b (#42): DTO rejeitando nome em branco e nome acima de 120 caracteres, e formato único do erro 400 (ADR-004 do projeto). Os gates de C1 e C2 continuam aprovados; entram dois gates novos, pendentes. Dependência: F05 e F06 integradas.
+
+**Fechamento (2026-11-20):** C1b integrada pelo PR #46 (RED, GREEN e REFACTOR em commits separados; evidências `c1b-red.txt`, `c1b-green.txt`, `c1b-refactor.txt`). CI verde na `main` no commit e52d954. Gates aprovados por CI.
