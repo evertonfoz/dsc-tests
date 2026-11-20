@@ -1,6 +1,6 @@
 # [<UC>][F<NN>] <Comportamento em uma frase>
 
-> Modelo do corpo de uma Sub-Issue de **fatia**. Uma fatia é um comportamento verificável do caso de uso.
+> Referência em texto do corpo de uma Sub-Issue de **fatia**. No GitHub, o formulário oficial é `.github/ISSUE_TEMPLATE/fatia.yml` (campos obrigatórios); se os dois divergirem, o formulário vence. Uma fatia é um comportamento verificável do caso de uso.
 > Não crie fatias "só de teste", "só de DTO" ou "só de controller".
 
 ## 1. Comportamento
