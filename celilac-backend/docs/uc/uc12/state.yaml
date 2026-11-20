@@ -6,18 +6,24 @@ nome: Cadastrar Produto
 documento: ../../planejamento/uc12-cadastrar-produto/uc-12.md
 arquetipo: criar
 epic: { issue: 23, estado: open }   # reconciliação do piloto; a Epic #1 (laboratório) está fechada e permanece como histórico
-fase_atual: A
+fase_atual: B
 
 fases:
   A:
-    status: em_andamento
+    status: concluida
     relatorio: relatorios/A.md
     gate:
-      - { item: "Todo item do UC12 mapeado (fatia, ADR ou pergunta)", resultado: pendente }
-      - { item: "Issue de reconciliação criada e conferida com este arquivo", resultado: pendente }
-      - { item: "Fatias F03 e F04 com DoR avaliada e teste RED nomeado", resultado: pendente }
+      - { item: "Todo item do UC12 mapeado (fatia, ADR ou pergunta)", resultado: aprovado, por: evertonfoz }
+      - { item: "Issue de reconciliação criada e conferida com este arquivo", resultado: aprovado, por: evertonfoz }
+      - { item: "Fatias F03 e F04 com DoR avaliada e teste RED nomeado", resultado: aprovado, por: evertonfoz }
     evidencias: [evidencias/A/testes-do-uc12.txt, evidencias/A/publicacao.txt]
-  B: { status: pendente, relatorio: null, gate: [], evidencias: [] }
+  B:
+    status: em_andamento
+    relatorio: null
+    gate:
+      - { item: "Todas as fatias integradas na branch principal", resultado: pendente }
+      - { item: "CI verde na branch principal", resultado: pendente }
+    evidencias: []
   C: { status: pendente, relatorio: null, gate: [], evidencias: [] }
   D: { status: pendente, relatorio: null, gate: [], evidencias: [] }
   E: { status: pendente, relatorio: null, gate: [], evidencias: [] }

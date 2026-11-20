@@ -65,13 +65,15 @@ O UC12 foi executado no laboratório (`celillac-backend-prepare`) sob o método 
 | DoR-04 Dependências | Atende | Atende (depende de F03) |
 | DoR-05 Informações disponíveis | Atende | Atende |
 | DoR-06 Responsável | Atende (evertonfoz) | Atende (evertonfoz) |
-| DoR-07 Revisão humana | **Pendente** | **Pendente** |
+| DoR-07 Revisão | Atende (revisão delegada, IA) | Atende (revisão delegada, IA) |
 
-Resultado: ambas ficam em `Backlog` até a revisão humana (DoR-07).
+DoR-07: o professor delegou a revisão das issues; ela foi feita por assistente de IA em 2026-11-20 e registrada como comentário em #24 e #25. **Não é revisão humana independente.** Observações incorporadas: exceções no padrão de `src/common/exceptions`, "vazio" = `''` (só espaços fora de escopo), mensagem sem vazar o erro original, mapeamento HTTP na C1. Com isso, F03 e F04 foram para `Ready`.
 
 ## 8. Gate de saída
 | Verificação | Como | Resultado | Validado por |
 |---|---|---|---|
-| Todo item do UC12 mapeado | tabela da seção 3 | pendente | — |
-| Issue de reconciliação criada e conferida | `check-state.sh --remote` | pendente | — |
-| F03 e F04 com DoR avaliada e RED nomeado | issues das fatias | pendente | — |
+| Todo item do UC12 mapeado | tabela da seção 3 | aprovado | evertonfoz |
+| Issue de reconciliação criada e conferida | `check-state.sh --remote` | aprovado | evertonfoz |
+| F03 e F04 com DoR avaliada e RED nomeado | issues das fatias | aprovado | evertonfoz |
+
+> Validação da fase A declarada pelo professor na sessão de 2026-11-20. O agente não aprovou nenhum gate.
