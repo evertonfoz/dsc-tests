@@ -42,7 +42,7 @@ Os procedimentos de cada fase estão em `method/playbooks/`. O perfil do projeto
 
 17. **Um relatório por fase**, no template `method/templates/relatorio-de-fase.md`, com no máximo ~2 páginas. Saídas brutas de comandos vão para `docs/uc/<UC>/evidencias/`, não para o relatório.
 18. **Decisões arquiteturais viram ADR** (`method/templates/adr.md`), uma por decisão.
-19. **Links e caminhos citados em documentos devem existir.** Verifique antes de entregar.
+19. **Links e caminhos citados em documentos devem existir.** Verifique antes de entregar com `node method/scripts/check-links.mjs` (o CI também roda). Para citar de propósito um caminho inexistente (como exemplo), termine a linha com `<!-- links:ignore -->`.
 20. **Linguagem:** português técnico-acadêmico. Termos consagrados em inglês (Draft PR, DoR, stacked PR, RED/GREEN) permanecem.
 21. **O agente não se autoavalia.** O relatório registra fatos e evidências. Veredictos de "aprovado/reprovado" são da pessoa responsável ou do CI.
 

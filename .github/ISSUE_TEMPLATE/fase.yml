@@ -1,0 +1,48 @@
+name: "Fase ou fundação do método"
+description: "Trabalho que não é uma fatia: fases A, C, D, E, F do ciclo do caso de uso, ou Camada 0 (Fundação)."
+title: "[UCxx][Fase X] "
+body:
+  - type: markdown
+    attributes:
+      value: "Toda fase com trabalho próprio tem issue (regra 13 do AGENTS.md). Uma issue fechada não é reutilizada para trabalho novo."
+  - type: dropdown
+    id: tipo
+    attributes:
+      label: "Tipo"
+      options:
+        - "Fase A - Planejar e publicar"
+        - "Fase C - Adaptadores (HTTP e persistência)"
+        - "Fase D - Contrato de resposta"
+        - "Fase E - Verificação reprodutível"
+        - "Fase F - Auditoria e encerramento"
+        - "Fundação (Camada 0)"
+    validations:
+      required: true
+  - type: input
+    id: uc
+    attributes:
+      label: "Caso de uso"
+      description: "Código e nome. Deixe em branco para trabalho de Fundação."
+    validations:
+      required: false
+  - type: textarea
+    id: objetivo
+    attributes:
+      label: "Objetivo"
+      description: "O que existe ao final que não existia antes."
+    validations:
+      required: true
+  - type: textarea
+    id: gate
+    attributes:
+      label: "Gate de saída"
+      description: "Itens verificáveis (comando, CI ou documento) e quem valida cada um. O agente não se aprova."
+      placeholder: "- pnpm test passa (CI)\n- state.yaml validado com check-state.sh (CI)"
+    validations:
+      required: true
+  - type: textarea
+    id: fora
+    attributes:
+      label: "Fora do escopo"
+    validations:
+      required: false

@@ -43,7 +43,7 @@ Os Materiais 11, 12 e 13 não têm issue própria. O PR #19 referencia issues de
 **Resposta do método:** toda fase com trabalho próprio tem issue; issue fechada não é reutilizada; fechar exige PR integrado e link da evidência.
 
 ### 3.4. Referências quebradas
-Vários artefatos citam `prompts/uc-12.md`. O arquivo está em outro lugar.
+Vários artefatos citam `prompts/uc-12.md`. O arquivo está em outro lugar. <!-- links:ignore -->
 **Lição:** caminho citado em documento é uma afirmação verificável.
 **Resposta do método:** regra 19 do `AGENTS.md` e, mais adiante, uma verificação automática de links.
 

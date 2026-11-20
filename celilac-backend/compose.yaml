@@ -4,15 +4,15 @@ services:
     container_name: celilac-postgres
     restart: unless-stopped
     environment:
-      POSTGRES_USER: celilac_user
-      POSTGRES_PASSWORD: celilac_dev_password
-      POSTGRES_DB: celilac_db
+      POSTGRES_USER: ${DB_USERNAME:-celilac_user}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:?Defina DB_PASSWORD no arquivo .env (veja .env.example)}
+      POSTGRES_DB: ${DB_NAME:-celilac_db}
     ports:
       - "5432:5432"
     volumes:
       - celilac_postgres_data:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U celilac_user -d celilac_db"]
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
       interval: 5s
       timeout: 5s
       retries: 10
@@ -31,7 +31,7 @@ services:
       DB_HOST: postgres
       DB_PORT: 5432
       DB_USERNAME: ${DB_USERNAME:-celilac_user}
-      DB_PASSWORD: ${DB_PASSWORD:-celilac_dev_password}
+      DB_PASSWORD: ${DB_PASSWORD:?Defina DB_PASSWORD no arquivo .env (veja .env.example)}
       DB_NAME: ${DB_NAME:-celilac_db}
     depends_on:
       postgres:
@@ -43,7 +43,7 @@ services:
     restart: unless-stopped
     environment:
       POSTGRES_USER: ${TEST_DB_USERNAME:-celilac_test}
-      POSTGRES_PASSWORD: ${TEST_DB_PASSWORD:-celilac_test_password}
+      POSTGRES_PASSWORD: ${TEST_DB_PASSWORD:?Defina TEST_DB_PASSWORD no arquivo .env (veja .env.example)}
       POSTGRES_DB: ${TEST_DB_NAME:-celilac_test}
     ports:
       - "${TEST_DB_PORT:-5435}:5432"
