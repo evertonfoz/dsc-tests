@@ -41,7 +41,16 @@ fases:
       - { item: "Divergências com o UC resolvidas ou com ADR", resultado: aprovado, por: CI }
       - { item: "CI verde na branch principal", resultado: aprovado, por: CI }
     evidencias: [evidencias/D/contrato-atual.txt, evidencias/D/contrato-final.txt]
-  E: { status: pendente, relatorio: null, gate: [], evidencias: [] }
+  E:
+    status: em_andamento
+    relatorio: relatorios/E.md
+    gate:
+      - { item: "Cada rota do contrato tem cenário na coleção", resultado: pendente }
+      - { item: "O script termina com 0 falhas em ambiente limpo", resultado: pendente }
+      - { item: "O mesmo script passa no CI (smoke)", resultado: pendente }
+      - { item: "Durabilidade provada", resultado: pendente }
+      - { item: "Nenhum segredo nos arquivos versionados", resultado: pendente }
+    evidencias: [evidencias/E/diagnostico.md, evidencias/E/run-checks.txt, evidencias/E/run-checks-controle-negativo.txt, evidencias/E/durabilidade.txt]
   F: { status: pendente, relatorio: null, gate: [], evidencias: [] }
 
 fatias:
