@@ -19,6 +19,7 @@ if out=$(node "$CHK" "$FX/valido.yaml" 2>&1); then ok "valido.yaml é aceito"; e
 # inválidos: arquivo|trecho esperado
 casos=(
   "inv-arquetipo|arquetipo inválido"
+  "inv-documento-inexistente|documento: arquivo não encontrado"
   "inv-pr-faltando|exige pr"
   "inv-issue-duplicada|já usada pela fatia"
   "inv-evidencia-inexistente|arquivo não encontrado"

@@ -163,6 +163,7 @@ export function validar(state, baseDir) {
   for (const k of ['uc', 'nome', 'arquetipo', 'epic', 'fase_atual', 'fases', 'fatias']) {
     if (!(k in state)) err(`campo obrigatório ausente: ${k}`);
   }
+  if ('documento' in state) arquivo(state.documento, 'documento');
   if (filled(state.arquetipo) && !ARQUETIPOS.includes(state.arquetipo)) err(`arquetipo inválido: "${state.arquetipo}" (válidos: ${ARQUETIPOS.join(', ')})`);
 
   if (isObj(state.epic)) {

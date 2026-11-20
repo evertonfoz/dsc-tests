@@ -9,6 +9,7 @@
 | Repositório | `evertonfoz/dsc-tests` (raiz do git: `dsc-tests/`). Projeto de referência: **esta pasta** (`celilac-backend`) |
 | Branch principal | `main` |
 | GitHub Project | #6 — "CeliLac — UC12 Cadastrar Produto" (usuário `evertonfoz`) |
+| Estados do GitHub Project | `Backlog`, `Ready`, `In Progress`, `In Review`, `Done` (campo `Status`) |
 | Perfil de stack base | `method/perfis/celilac-nest.md` |
 
 > **Papel das pastas (informado pelo professor em 2026-11-20; estado conferido no git):**

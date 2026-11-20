@@ -28,6 +28,7 @@ Os playbooks leem os dois. Assim, o procedimento de uma fase é o mesmo para qua
 ```yaml
 uc: UC12
 nome: Cadastrar Produto
+documento: ../../planejamento/uc12-cadastrar-produto/uc-12.md   # opcional; se informado, deve existir
 arquetipo: criar
 epic: { issue: 1, estado: open }
 fase_atual: B
