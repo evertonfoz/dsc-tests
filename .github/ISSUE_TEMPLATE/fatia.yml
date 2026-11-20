@@ -1,0 +1,80 @@
+name: "Fatia de caso de uso"
+description: "Um comportamento verificável de um caso de uso (método de entrega, fase B)."
+title: "[UCxx][Fxx] "
+labels: ["type:feature"]
+body:
+  - type: markdown
+    attributes:
+      value: "Uma **fatia** é um comportamento observável do caso de uso, com regra, critério de aceite e teste RED nomeado. Não crie fatias só de teste, só de DTO ou só de controller. Na fase B a fatia é entregue no núcleo (domínio e serviço); os adaptadores HTTP e de persistência entram na fase C."
+  - type: input
+    id: uc
+    attributes:
+      label: "Caso de uso"
+      description: "Código e nome."
+      placeholder: "UC12 - Cadastrar Produto"
+    validations:
+      required: true
+  - type: textarea
+    id: comportamento
+    attributes:
+      label: "Comportamento"
+      description: "Em termos observáveis: dado X, quando Y, então Z."
+    validations:
+      required: true
+  - type: textarea
+    id: origem
+    attributes:
+      label: "Origem no caso de uso"
+      description: "Fluxo, regras de negócio (RN), requisitos (RF) de onde o comportamento vem."
+      placeholder: "Fluxo: principal. RN: RN01. RF: RF02."
+    validations:
+      required: true
+  - type: textarea
+    id: criterios
+    attributes:
+      label: "Critérios de aceite cobertos (CA)"
+      description: "Todo critério de aceite do caso de uso precisa estar em alguma fatia, ou em uma decisão registrada (ADR)."
+      placeholder: "CA01"
+    validations:
+      required: true
+  - type: input
+    id: teste_red
+    attributes:
+      label: "Teste RED esperado"
+      description: "Texto exato do it(...) que vai falhar antes da implementação."
+      placeholder: "should reject an empty product name"
+    validations:
+      required: true
+  - type: textarea
+    id: escopo
+    attributes:
+      label: "Escopo: dentro e fora"
+      description: "O que esta fatia entrega e o que fica para outras fatias ou fases."
+    validations:
+      required: true
+  - type: textarea
+    id: dependencias
+    attributes:
+      label: "Dependências"
+      description: "Fatias que precisam estar integradas antes. Escreva 'nenhuma' se não houver."
+    validations:
+      required: false
+  - type: checkboxes
+    id: dor
+    attributes:
+      label: "Definition of Ready"
+      description: "A fatia só começa quando todos os itens são verdadeiros."
+      options:
+        - label: "Objetivo claro e escopo delimitado"
+          required: true
+        - label: "Critérios de aceite verificáveis e teste RED nomeado"
+          required: true
+        - label: "Dependências identificadas"
+          required: true
+        - label: "Responsável e revisor definidos (ou modo solo registrado no project-profile.md)"
+          required: true
+        - label: "Limite de trabalho em andamento (WIP) respeitado"
+          required: true
+  - type: markdown
+    attributes:
+      value: "**Entrega:** branch `feature/<uc>-<fatia>-<resumo>`; um PR; commits separados de RED, GREEN e REFACTOR com `(refs #N)`; evidências em `docs/uc/<uc>/evidencias/B/`; `state.yaml` atualizado e validado."
