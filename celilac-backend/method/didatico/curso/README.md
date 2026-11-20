@@ -31,7 +31,7 @@ Cada módulo tem um arquivo de **gabarito para o professor**, à parte.
 | 2 | Por que o plano e a realidade divergem? | `m02-estado-como-fonte.md` |
 | 3 | Por que a `main` ficou vermelha? | `m03-fatia-e-main-verde.md` |
 | 4 | Por que "na minha máquina funciona" não basta? | `m04-fundacao-ambiente-reprodutivel.md` |
-| 5 | Onde mora a regra de negócio? | a escrever |
+| 5 | Onde mora a regra de negócio? | `m05-onde-mora-a-regra.md` |
 | 6 | O que o cliente vê quando o banco falha? | a escrever |
 | 7 | Seu teste prova alguma coisa? | a escrever |
 | 8 | Como persistir de verdade? | a escrever |
