@@ -1,4 +1,4 @@
-import { INestApplication, ValidationPipe } from '@nestjs/common';
+import { INestApplication } from '@nestjs/common';
 import { APP_FILTER } from '@nestjs/core';
 import { Test, TestingModule } from '@nestjs/testing';
 import request from 'supertest';
@@ -9,6 +9,7 @@ import { ProductPersistenceFailedException } from '../../../common/exceptions/pr
 import { DomainHttpExceptionFilter } from '../../../common/filters/domain-http-exception.filter.js';
 import { ProductsService } from '../services/products.service.js';
 import { ProductsController } from './products.controller.js';
+import { createValidationPipe } from '../../../common/config/validation-pipe.js';
 
 describe('ProductsController — mapeamento de erros do núcleo (HTTP)', () => {
   let app: INestApplication<App>;
@@ -25,7 +26,7 @@ describe('ProductsController — mapeamento de erros do núcleo (HTTP)', () => {
     }).compile();
 
     app = moduleFixture.createNestApplication();
-    app.useGlobalPipes(new ValidationPipe({ whitelist: true, transform: true }));
+    app.useGlobalPipes(createValidationPipe());
     await app.init();
   });
 
