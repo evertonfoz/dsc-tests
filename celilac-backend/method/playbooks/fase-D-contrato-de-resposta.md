@@ -28,7 +28,7 @@ Fixar e provar **o que a API devolve**: formato, campos, códigos de status e me
 
 ## 4. Passos
 1. **Inventário do contrato atual** — para cada rota do UC, status e corpo reais, obtidos executando a API ou os testes (não por leitura de código apenas). — evidência: `docs/uc/<uc>/evidencias/D/contrato-atual.md`.
-2. **Comparar com o UC** e listar divergências (campo faltando, sobrando, status diferente). Cada divergência vira: correção, ou ADR de decisão (aceitar como está).
+2. **Comparar com o UC** e listar divergências (campo faltando, sobrando, status diferente). Cada divergência vira: correção, ou ADR de decisão (aceitar como está). Se a correção for um **comportamento novo**, ela é uma fatia: reabra a Fase B (ADR-004 do método) em vez de implementá-la aqui.
 3. **Definir o contrato** (DTO de resposta, formato de erro, status por situação) e escrevê-lo em um documento curto (`docs/uc/<uc>/contrato.md`). Apresentar e **aguardar aprovação** antes de alterar o código.
 4. **RED:** testes de contrato — formato do sucesso, formato de cada erro, campos que **não** aparecem. — evidência: `docs/uc/<uc>/evidencias/D/red.txt`.
 5. **GREEN:** DTO de resposta e mapeamento a partir da entidade; erros padronizados. Sem alterar regra de negócio. — evidência: `docs/uc/<uc>/evidencias/D/green.txt`.
