@@ -42,4 +42,12 @@ describe('ProductsService', () => {
       }),
     );
   });
+
+  it('should reject an empty product name in the service without saving (RN01)', async () => {
+    await expect(service.createProduct('')).rejects.toMatchObject({
+      name: 'InvalidProductNameException',
+    });
+
+    expect(productsRepository.save).not.toHaveBeenCalled();
+  });
 });
