@@ -4,6 +4,8 @@ import { OrderNotFoundException } from "../exceptions/order-not-found.exception.
 import { PaymentNotFoundException } from "../exceptions/payment-not-found.exception.js";
 import { PaymentNotApprovedException } from "../exceptions/payment-not-approved.exception.js";
 import { OrderAlreadyConfirmedException } from "../exceptions/order-already-confirmed.exception.js";
+import { InvalidProductNameException } from "../exceptions/invalid-product-name.exception.js";
+import { ProductPersistenceFailedException } from "../exceptions/product-persistence-failed.exception.js";
 import type { Response } from 'express';
 
 type DomainExceptionClass = new (...args: never[]) => Error;
@@ -14,6 +16,8 @@ const DOMAIN_EXCEPTION_STATUS = new Map<DomainExceptionClass, HttpStatus>(
         [PaymentNotFoundException, HttpStatus.NOT_FOUND],
         [OrderAlreadyConfirmedException, HttpStatus.CONFLICT],
         [PaymentNotApprovedException, HttpStatus.UNPROCESSABLE_ENTITY],
+        [InvalidProductNameException, HttpStatus.BAD_REQUEST],
+        [ProductPersistenceFailedException, HttpStatus.INTERNAL_SERVER_ERROR],
     ]
 );
 
