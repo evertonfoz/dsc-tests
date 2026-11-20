@@ -1,0 +1,40 @@
+@baseUrl = http://localhost:3200
+
+### Cadastrar produto com sucesso → esperado: 201 Created
+POST {{baseUrl}}/products
+Content-Type: application/json
+
+{
+  "name": "Pão de Forma Sem Glúten"
+}
+
+### Cadastrar produto com nome vazio → esperado: 400 Bad Request (@IsNotEmpty)
+POST {{baseUrl}}/products
+Content-Type: application/json
+
+{
+  "name": ""
+}
+
+### Cadastrar produto com corpo vazio / sem nome → esperado: 400 Bad Request (@IsNotEmpty)
+POST {{baseUrl}}/products
+Content-Type: application/json
+
+{}
+
+### Cadastrar produto com tipo de nome inválido → esperado: 400 Bad Request (@IsString)
+POST {{baseUrl}}/products
+Content-Type: application/json
+
+{
+  "name": 12345
+}
+
+### Cadastrar produto com propriedade extra (descarte por whitelist) → esperado: 201 Created
+POST {{baseUrl}}/products
+Content-Type: application/json
+
+{
+  "name": "Bolo de Cenoura Sem Glúten",
+  "propriedadeInvalida": "descartar"
+}

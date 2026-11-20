@@ -1,0 +1,23 @@
+@baseUrl = http://localhost:3200
+
+# ==============================================================================
+# Casos de Teste de Apoio — UC07 Confirmar Pedido
+# ==============================================================================
+
+# ------------------------------------------------------------------------------
+# Grupo A — Fronteira HTTP (Não depende de dados existentes / seed)
+# ------------------------------------------------------------------------------
+
+### Cenário 1 (Grupo A): Identificador malformado (não-UUID) → esperado: 400 Bad Request (ParseUUIDPipe)
+POST {{baseUrl}}/orders/pedido-invalido-123/confirm
+
+### Cenário 2 (Grupo A): Identificador UUID sintaticamente válido mas inexistente → esperado: 404 Not Found (OrderNotFoundException)
+POST {{baseUrl}}/orders/00000000-0000-0000-0000-000000000000/confirm
+
+# ------------------------------------------------------------------------------
+# Grupo B — Cenários dependentes de dados pré-existentes (Seed)
+# ------------------------------------------------------------------------------
+# Status no projeto CeliLac: Script de seed de cenários não implementado no repositório.
+# Situação: Não foi possível verificar em tempo de execução sem mecanismo determinístico de seed.
+# Conforme a Seção 8 do Material 13: Não inventar UUIDs fictícios.
+# Caso um script de seed seja adicionado futuramente, os IDs devem ser preenchidos a partir da saída real do script.

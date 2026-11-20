@@ -1,0 +1,7 @@
+@baseUrl = http://localhost:3200
+
+### Verificação de Sanidade (Smoke / Hello World) → esperado: 200 OK
+GET {{baseUrl}}/
+
+### Rota inexistente (Sanidade de erro 404) → esperado: 404 Not Found
+GET {{baseUrl}}/not-found-endpoint

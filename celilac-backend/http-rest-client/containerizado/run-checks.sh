@@ -1,0 +1,183 @@
+#!/usr/bin/env bash
+# Verificação automatizada do ambiente containerizado (API + banco em Docker Compose).
+# Uso:  ./http-rest-client/containerizado/run-checks.sh [--durability]
+#   --durability  reinicia SOMENTE a API e confere o registro no banco.
+# Não remove volumes, não usa `down -v` e só grava via POST no recurso do caso de uso.
+set -u
+BASE="${BASE_URL:-http://localhost:3200}"
+cd "$(dirname "$0")/../.." || exit 1
+
+DURABILITY=0
+if [ "${1:-}" = "--durability" ]; then
+  DURABILITY=1
+fi
+
+pass=0
+fail=0
+
+check() {
+  local desc="$1"
+  local expected="$2"
+  local actual="$3"
+
+  if [ "$expected" = "$actual" ]; then
+    echo "[OK]    $desc (esperado: '$expected', obtido: '$actual')"
+    pass=$((pass + 1))
+  else
+    echo "[FALHA] $desc (esperado: '$expected', obtido: '$actual')"
+    fail=$((fail + 1))
+  fi
+}
+
+status() {
+  curl -s -o /dev/null -w '%{http_code}' "$@"
+}
+
+sql() {
+  docker compose exec -T postgres sh -c 'psql -U "$POSTGRES_USER" -d "$POSTGRES_DB" -tA'
+}
+
+extract_json_field() {
+  local json="$1"
+  local field="$2"
+  if command -v jq >/dev/null 2>&1; then
+    echo "$json" | jq -r --arg f "$field" '.[$f] // empty'
+  elif command -v node >/dev/null 2>&1; then
+    node -e "try { const obj = JSON.parse(process.argv[1]); console.log(obj[process.argv[2]] ?? ''); } catch { console.log(''); }" "$json" "$field"
+  else
+    echo "$json" | sed -n "s/.*\"$field\":\"\([^\"]*\)\".*/\1/p"
+  fi
+}
+
+echo "================================================================================"
+echo "Iniciando verificações automatizadas da API CeliLac em $BASE"
+echo "================================================================================"
+
+# ------------------------------------------------------------------------------
+# 1. Serviços: API em Up e banco healthy
+# ------------------------------------------------------------------------------
+echo
+echo "--- 1. Serviços em Docker Compose ---"
+api_state=$(docker compose ps --format '{{.Service}} {{.State}}' | grep '^api' | awk '{print $2}' || true)
+check "Serviço API em execução ('running')" "running" "$api_state"
+
+db_health=$(docker compose ps --format '{{.Service}} {{.Health}}' | grep '^postgres ' | awk '{print $2}' || true)
+check "Serviço Postgres saudável ('healthy')" "healthy" "$db_health"
+
+# ------------------------------------------------------------------------------
+# 2. Smoke: GET / -> 200; rota inexistente -> 404
+# ------------------------------------------------------------------------------
+echo
+echo "--- 2. Smoke Tests HTTP ---"
+smoke_root=$(status "$BASE/")
+check "Smoke: GET / retorna 200" "200" "$smoke_root"
+
+smoke_not_found=$(status "$BASE/rota-inexistente-para-validacao-de-smoke")
+check "Smoke: GET rota inexistente retorna 404" "404" "$smoke_not_found"
+
+# ------------------------------------------------------------------------------
+# 3. Migrations (somente leitura): esperar 0 pendentes
+# ------------------------------------------------------------------------------
+echo
+echo "--- 3. Migrations no Banco de Desenvolvimento (Somente Leitura) ---"
+pending_migrations=$(docker compose exec -T api pnpm migration:show:prod 2>/dev/null | grep -E '^\[ \]' | wc -l | tr -d ' ' || echo "erro")
+check "Nenhuma migration pendente no banco de dados" "0" "$pending_migrations"
+
+# ------------------------------------------------------------------------------
+# 4. Caso de uso: POST /products (UC12)
+# ------------------------------------------------------------------------------
+echo
+echo "--- 4. Caso de Uso UC12 — Cadastrar Produto (POST /products) ---"
+code_empty_name=$(status -X POST "$BASE/products" -H "Content-Type: application/json" -d '{"name":""}')
+check "Validação: nome vazio retorna 400" "400" "$code_empty_name"
+
+code_missing_name=$(status -X POST "$BASE/products" -H "Content-Type: application/json" -d '{}')
+check "Validação: nome ausente retorna 400" "400" "$code_missing_name"
+
+code_invalid_type=$(status -X POST "$BASE/products" -H "Content-Type: application/json" -d '{"name":12345}')
+check "Validação: nome com tipo inválido retorna 400" "400" "$code_invalid_type"
+
+timestamp=$(date +%s)
+product_name="Pão Automatizado Run-Checks $timestamp"
+product_response=$(curl -s -X POST "$BASE/products" -H "Content-Type: application/json" -d "{\"name\":\"$product_name\"}")
+created_id=$(extract_json_field "$product_response" "productId")
+created_name=$(extract_json_field "$product_response" "name")
+
+if [ -n "$created_id" ]; then
+  check "Cadastro com sucesso retorna identificador UUID preenchido" "true" "true"
+else
+  check "Cadastro com sucesso retorna identificador UUID preenchido" "true" "false"
+fi
+check "Cadastro com sucesso retorna o nome enviado" "$product_name" "$created_name"
+
+# Descarte de propriedade extra (whitelist)
+extra_response=$(curl -s -X POST "$BASE/products" -H "Content-Type: application/json" -d "{\"name\":\"Produto Whitelist $timestamp\",\"campoExtra\":\"descartar\"}")
+extra_field=$(extract_json_field "$extra_response" "campoExtra")
+if [ -z "$extra_field" ]; then
+  check "Propriedade extra descartada pelo ValidationPipe (whitelist)" "descartado" "descartado"
+else
+  check "Propriedade extra descartada pelo ValidationPipe (whitelist)" "descartado" "presente"
+fi
+
+# ------------------------------------------------------------------------------
+# 5. Recursos de apoio sem seed: POST /orders/:id/confirm
+# ------------------------------------------------------------------------------
+echo
+echo "--- 5. Recurso de Apoio: Orders (Fronteira HTTP sem Seed) ---"
+code_order_invalid_id=$(status -X POST "$BASE/orders/abc/confirm")
+check "Confirmação de pedido com ID inválido retorna 400" "400" "$code_order_invalid_id"
+
+code_order_not_found=$(status -X POST "$BASE/orders/00000000-0000-0000-0000-000000000000/confirm")
+check "Confirmação de pedido com UUID inexistente retorna 404" "404" "$code_order_not_found"
+
+# ------------------------------------------------------------------------------
+# 6. Banco: o registro criado existe com os dados enviados
+# ------------------------------------------------------------------------------
+echo
+echo "--- 6. Verificação de Persistência Direta no PostgreSQL ---"
+if [ -z "$created_id" ]; then
+  check "Consulta SQL de persistência do produto criado" "id_valido" "id_vazio"
+else
+  db_record_name=$(echo "SELECT name FROM products.products WHERE \"productId\" = '$created_id';" | sql | tr -d '\r')
+  check "Registro do produto criado persistido no banco com nome correto" "$product_name" "$db_record_name"
+fi
+
+# ------------------------------------------------------------------------------
+# 7. Durabilidade (somente com --durability e se houver identificador)
+# ------------------------------------------------------------------------------
+if [ "$DURABILITY" -eq 1 ]; then
+  echo
+  echo "--- 7. Teste de Durabilidade: Reiniciar API e Revalidar Registro ---"
+  if [ -z "$created_id" ]; then
+    check "Execução de durabilidade requer identificador válido" "id_valido" "id_vazio"
+  else
+    echo "Reiniciando SOMENTE o contêiner da API (docker compose restart api)..."
+    docker compose restart api >/dev/null 2>&1
+
+    echo "Aguardando API retornar à disponibilidade (até 30 tentativas)..."
+    ready=0
+    for i in $(seq 1 30); do
+      curr_status=$(status "$BASE/" || true)
+      if [ "$curr_status" = "200" ]; then
+        ready=1
+        break
+      fi
+      sleep 1
+    done
+
+    check "API reiniciada e respondendo 200 em GET /" "1" "$ready"
+
+    db_durable_name=$(echo "SELECT name FROM products.products WHERE \"productId\" = '$created_id';" | sql | tr -d '\r')
+    check "Registro do produto permanece íntegro após restart da API" "$product_name" "$db_durable_name"
+  fi
+fi
+
+# ------------------------------------------------------------------------------
+# Encerramento
+# ------------------------------------------------------------------------------
+echo
+echo "================================================================================"
+echo "Resultado: $pass ok, $fail falha(s)"
+echo "================================================================================"
+
+[ "$fail" -eq 0 ]

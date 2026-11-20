@@ -1,0 +1,12 @@
+@baseUrl = http://localhost:3200
+
+# ==============================================================================
+# Verificação de Sanidade (Smoke Tests) no Ambiente Containerizado
+# Pré-requisito: API celilac-api Up e celilac-postgres Up (healthy)
+# ==============================================================================
+
+### Smoke 1: Rota raiz da API → esperado: 200 OK
+GET {{baseUrl}}/
+
+### Smoke 2: Rota inexistente para validar resposta padrão de 404 → esperado: 404 Not Found
+GET {{baseUrl}}/rota-inexistente-para-validacao-de-smoke
