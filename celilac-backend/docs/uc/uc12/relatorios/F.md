@@ -50,17 +50,17 @@ Em `docs/uc/uc12/evidencias/F/auditoria.md`. Núcleo sem dependência de infraes
 ## 7. Encerramento
 Feito pelo agente, com autorização do professor: PRs #50, #51 e #52 integrados; issue #41 fechada com link da evidência. CI verde na `main` em 4bbb03f; `check-state.sh --remote` sem erros.
 
-**Falta, e é ato humano:** (1) validar os gates "pessoa responsável" abaixo; (2) fechar o Epic #23 e passar `fase_atual: concluido` com Epic `closed` no `state.yaml`. O agente não executa esses dois passos.
+**Encerramento:** o professor validou a fase F e autorizou o fechamento do Epic #23 na sessão de 2026-11-20; PR #53 integrado. O agente registrou os gates e o estado final conforme essa declaração.
 
 ## 8. Gate de saída
 | Verificação | Como | Resultado | Validado por |
 |---|---|---|---|
-| Todo item do UC tem teste ou ADR | `cobertura.md` e `testes.txt` | pendente | pessoa responsável |
-| Nenhuma afirmação de cobertura sem prova | seções 3 e 5 | pendente | pessoa responsável |
-| Arquitetura em conformidade, achados tratados | `auditoria.md` (A2 e A7 tratados, A3 decidido, #27 aberta) | pendente | pessoa responsável |
+| Todo item do UC tem teste ou ADR | `cobertura.md` e `testes.txt` | aprovado | evertonfoz |
+| Nenhuma afirmação de cobertura sem prova | seções 3 e 5 | aprovado | evertonfoz |
+| Arquitetura em conformidade, achados tratados | `auditoria.md` (A2 e A7 tratados, A3 decidido, #27 aberta) | aprovado | evertonfoz |
 | `state.yaml`, documentos e GitHub consistentes | `check-state.sh --remote` e `check-links.mjs` | aprovado | CI |
 | CI verde na principal | workflow em 4bbb03f | aprovado | CI |
-| Issues e Epic fechados | GitHub (#41 fechada; Epic #23 aberto) | pendente | pessoa (ato humano) |
+| Issues e Epic fechados | GitHub (#41 e Epic #23 fechados) | aprovado | evertonfoz (ato humano) |
 
 ## 9. Aprendizados do piloto
 - Um relatório de consistência afirmava 100% sem prova; refazer a tabela com testes executados achou o preço, FE01 e um "CA05" inexistente.

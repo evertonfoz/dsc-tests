@@ -5,8 +5,8 @@ uc: UC12
 nome: Cadastrar Produto
 documento: ../../planejamento/uc12-cadastrar-produto/uc-12.md
 arquetipo: criar
-epic: { issue: 23, estado: open }   # reconciliação do piloto; a Epic #1 (laboratório) está fechada e permanece como histórico
-fase_atual: F
+epic: { issue: 23, estado: closed }   # reconciliação do piloto; a Epic #1 (laboratório) está fechada e permanece como histórico
+fase_atual: concluido
 
 fases:
   A:
@@ -52,15 +52,15 @@ fases:
       - { item: "Nenhum segredo nos arquivos versionados", resultado: aprovado, por: evertonfoz }
     evidencias: [evidencias/E/diagnostico.md, evidencias/E/run-checks.txt, evidencias/E/run-checks-controle-negativo.txt, evidencias/E/durabilidade.txt]
   F:
-    status: em_andamento
+    status: concluida
     relatorio: relatorios/F.md
     gate:
-      - { item: "Todo item do UC tem teste que o prova ou ADR", resultado: pendente }
-      - { item: "Nenhuma afirmação de cobertura sem prova", resultado: pendente }
-      - { item: "Arquitetura em conformidade, achados tratados", resultado: pendente }
+      - { item: "Todo item do UC tem teste que o prova ou ADR", resultado: aprovado, por: evertonfoz }
+      - { item: "Nenhuma afirmação de cobertura sem prova", resultado: aprovado, por: evertonfoz }
+      - { item: "Arquitetura em conformidade, achados tratados", resultado: aprovado, por: evertonfoz }
       - { item: "state.yaml, documentos e GitHub consistentes", resultado: aprovado, por: CI }
       - { item: "CI verde na branch principal", resultado: aprovado, por: CI }
-      - { item: "Issues e Epic fechados", resultado: pendente }
+      - { item: "Issues e Epic fechados", resultado: aprovado, por: evertonfoz }
     evidencias: [evidencias/F/cobertura.md, evidencias/F/auditoria.md, evidencias/F/testes.txt, evidencias/F/a7-mutacao.txt]
 
 fatias:
