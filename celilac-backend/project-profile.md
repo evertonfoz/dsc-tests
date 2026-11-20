@@ -14,7 +14,7 @@
 
 > **Papel das pastas (informado pelo professor em 2026-11-20; estado conferido no git):**
 > - `celillac-backend-prepare/` — **laboratório**: onde o professor executou os materiais para estudar o processo. Os PRs #12–#19 e as issues #1–#16 do GitHub vieram dessa execução; o código do UC12 está versionado lá.
-> - `celilac-backend/` — **projeto de referência** (esta pasta): onde o método é aplicado. Versiona documentos, prompts e o código base de `orders`. O módulo `products`, o `Dockerfile`, o `.dockerignore`, a coleção `.http` do UC12 e as alterações de `compose.yaml`, `package.json`, `main.ts`, `app.module.ts`, `data-source.ts` e `vitest.config.ts` existem **no disco, mas não commitados**.
+> - `celilac-backend/` — **projeto de referência** (esta pasta): onde o método é aplicado. Versiona documentos, prompts, o código de `orders` e o módulo `products` (UC12), com `Dockerfile`, `.dockerignore`, `compose.yaml` e a coleção `.http` do UC12.
 > - Consequência: o histórico de issues/PRs do GitHub descreve a execução do laboratório; o `state.yaml` do piloto (Etapa 6) precisa dizer isso explicitamente.
 
 ## 2. Stack e versões
