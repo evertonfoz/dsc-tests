@@ -22,14 +22,14 @@ Cada módulo tem um arquivo de **gabarito para o professor**, à parte.
 
 | Módulo | Pergunta que abre o módulo | Estado |
 |---|---|---|
-| Apoio A | O que há no GitHub além do básico (issues, PRs, Project, labels)? | a escrever |
-| Apoio B | O que é um teste automatizado e o que é TDD (*Test-Driven Development*, desenvolvimento guiado por testes)? | a escrever |
+| Apoio A | O que há no GitHub além do básico (issues, PRs — *pull requests* —, Project, labels)? | `apoio-a-github-alem-do-basico.md` |
+| Apoio B | O que é um teste automatizado e o que é TDD (*Test-Driven Development*, desenvolvimento guiado por testes)? | `apoio-b-testes-e-tdd.md` |
 | Apoio C | O que é integração contínua (CI) e por que ela existe? | a escrever |
 | Apoio D | Por que usar contêineres (Docker e Compose)? | a escrever |
 | **0** | O que significa um caso de uso estar "pronto"? | `m00-o-caso-pronto.md` |
 | **1** | "100% coberto": quem prova? | `m01-cobertura-real.md` |
-| 2 | Por que o plano e a realidade divergem? | a escrever |
-| 3 | Por que a `main` ficou vermelha? | a escrever |
+| 2 | Por que o plano e a realidade divergem? | `m02-estado-como-fonte.md` |
+| 3 | Por que a `main` ficou vermelha? | `m03-fatia-e-main-verde.md` |
 | 4 | Por que "na minha máquina funciona" não basta? | a escrever |
 | 5 | Onde mora a regra de negócio? | a escrever |
 | 6 | O que o cliente vê quando o banco falha? | a escrever |
@@ -66,7 +66,9 @@ O curso pressupõe que você usará um assistente de IA. As regras abaixo valem 
 | API | *Application Programming Interface* | A interface pela qual outros programas usam o seu sistema (aqui, os endereços HTTP) |
 | CA | Critério de Aceite | Condição que o caso de uso precisa cumprir para ser aceito (CA01, CA02...) |
 | CI | *Continuous Integration*, integração contínua | Um robô que roda testes e verificações a cada mudança enviada ao GitHub |
+| CLI | *Command-Line Interface*, interface de linha de comando | Programa usado pelo terminal, como o `gh` do GitHub |
 | DTO | *Data Transfer Object* | Classe que descreve e valida os dados que chegam pela API |
+| E2E | *End-to-End*, de ponta a ponta | Teste que usa o sistema como o usuário usaria, com banco real |
 | FA | Fluxo Alternativo | Caminho do caso de uso diferente do principal (FA01, FA02...) |
 | FE | Fluxo de Exceção | Caminho do caso de uso quando algo dá errado (FE01...) |
 | HTTP | *HyperText Transfer Protocol* | O protocolo pelo qual um cliente pede algo a uma API e recebe resposta |
@@ -76,6 +78,7 @@ O curso pressupõe que você usará um assistente de IA. As regras abaixo valem 
 | RN | Regra de Negócio | Regra do domínio que o sistema deve respeitar (RN01, RN02...) |
 | TDD | *Test-Driven Development* | Escrever o teste antes do código |
 | UC | *Use Case*, caso de uso | Descrição de um comportamento do sistema do ponto de vista de quem o usa (UC12 é o décimo segundo do projeto CeliLac) |
+| YAML | formato de texto para dados estruturados | Formato do `state.yaml`: legível por pessoas e por programas |
 
 ## Material de consulta
 - Visão geral do método: `method/README.md` e `method/glossario.md`.
