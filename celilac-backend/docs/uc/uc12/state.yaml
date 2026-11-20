@@ -6,7 +6,7 @@ nome: Cadastrar Produto
 documento: ../../planejamento/uc12-cadastrar-produto/uc-12.md
 arquetipo: criar
 epic: { issue: 23, estado: open }   # reconciliação do piloto; a Epic #1 (laboratório) está fechada e permanece como histórico
-fase_atual: B
+fase_atual: C
 
 fases:
   A:
@@ -18,13 +18,20 @@ fases:
       - { item: "Fatias F03 e F04 com DoR avaliada e teste RED nomeado", resultado: aprovado, por: evertonfoz }
     evidencias: [evidencias/A/testes-do-uc12.txt, evidencias/A/publicacao.txt]
   B:
+    status: concluida
+    relatorio: relatorios/B.md
+    gate:
+      - { item: "Todas as fatias integradas na branch principal", resultado: aprovado, por: CI }
+      - { item: "CI verde na branch principal", resultado: aprovado, por: CI }
+    evidencias: [evidencias/B/f03-green.txt, evidencias/B/f04-green.txt]
+  C:
     status: em_andamento
     relatorio: null
     gate:
-      - { item: "Todas as fatias integradas na branch principal", resultado: pendente }
+      - { item: "C1 (fronteira HTTP) integrada, com o mapeamento dos erros do núcleo", resultado: pendente }
+      - { item: "C2 (persistência real) integrada, com migration verificada em banco novo", resultado: pendente }
       - { item: "CI verde na branch principal", resultado: pendente }
     evidencias: []
-  C: { status: pendente, relatorio: null, gate: [], evidencias: [] }
   D: { status: pendente, relatorio: null, gate: [], evidencias: [] }
   E: { status: pendente, relatorio: null, gate: [], evidencias: [] }
   F: { status: pendente, relatorio: null, gate: [], evidencias: [] }
@@ -64,9 +71,9 @@ fatias:
     comportamento: "Falha ao persistir o produto é informada como operação não concluída, sem vazar detalhes"
     criterios: [FE01]               # FE01 é fluxo de exceção; o UC não define CA para ele
     issue: 25
-    branch: null
-    pr: null
-    status: planejada
+    branch: feature/uc12-f04-falha-de-persistencia
+    pr: 31
+    status: integrada
     responsavel: evertonfoz
     revisor: evertonfoz
-    evidencias: []
+    evidencias: [evidencias/B/f04-red.txt, evidencias/B/f04-green.txt]
