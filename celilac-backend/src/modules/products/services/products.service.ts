@@ -1,6 +1,7 @@
 import { randomUUID } from 'node:crypto';
 import { Inject, Injectable } from '@nestjs/common';
 import { InvalidProductNameException } from '../../../common/exceptions/invalid-product-name.exception.js';
+import { ProductPersistenceFailedException } from '../../../common/exceptions/product-persistence-failed.exception.js';
 import { Product } from '../entities/product.entity.js';
 import {
   PRODUCTS_REPOSITORY,
@@ -20,6 +21,10 @@ export class ProductsService {
     }
 
     const product = new Product(randomUUID(), name);
-    return this.productsRepository.save(product);
+    try {
+      return await this.productsRepository.save(product);
+    } catch (error) {
+      throw new ProductPersistenceFailedException(error);
+    }
   }
 }
