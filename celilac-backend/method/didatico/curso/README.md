@@ -25,12 +25,12 @@ Cada módulo tem um arquivo de **gabarito para o professor**, à parte.
 | Apoio A | O que há no GitHub além do básico (issues, PRs — *pull requests* —, Project, labels)? | `apoio-a-github-alem-do-basico.md` |
 | Apoio B | O que é um teste automatizado e o que é TDD (*Test-Driven Development*, desenvolvimento guiado por testes)? | `apoio-b-testes-e-tdd.md` |
 | Apoio C | O que é integração contínua (CI) e por que ela existe? | `apoio-c-integracao-continua.md` |
-| Apoio D | Por que usar contêineres (Docker e Compose)? | a escrever |
+| Apoio D | Por que usar contêineres (Docker e Compose)? | `apoio-d-conteineres-docker-e-compose.md` |
 | **0** | O que significa um caso de uso estar "pronto"? | `m00-o-caso-pronto.md` |
 | **1** | "100% coberto": quem prova? | `m01-cobertura-real.md` |
 | 2 | Por que o plano e a realidade divergem? | `m02-estado-como-fonte.md` |
 | 3 | Por que a `main` ficou vermelha? | `m03-fatia-e-main-verde.md` |
-| 4 | Por que "na minha máquina funciona" não basta? | a escrever |
+| 4 | Por que "na minha máquina funciona" não basta? | `m04-fundacao-ambiente-reprodutivel.md` |
 | 5 | Onde mora a regra de negócio? | a escrever |
 | 6 | O que o cliente vê quando o banco falha? | a escrever |
 | 7 | Seu teste prova alguma coisa? | a escrever |
