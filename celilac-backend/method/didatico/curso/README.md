@@ -24,7 +24,7 @@ Cada módulo tem um arquivo de **gabarito para o professor**, à parte.
 |---|---|---|
 | Apoio A | O que há no GitHub além do básico (issues, PRs — *pull requests* —, Project, labels)? | `apoio-a-github-alem-do-basico.md` |
 | Apoio B | O que é um teste automatizado e o que é TDD (*Test-Driven Development*, desenvolvimento guiado por testes)? | `apoio-b-testes-e-tdd.md` |
-| Apoio C | O que é integração contínua (CI) e por que ela existe? | a escrever |
+| Apoio C | O que é integração contínua (CI) e por que ela existe? | `apoio-c-integracao-continua.md` |
 | Apoio D | Por que usar contêineres (Docker e Compose)? | a escrever |
 | **0** | O que significa um caso de uso estar "pronto"? | `m00-o-caso-pronto.md` |
 | **1** | "100% coberto": quem prova? | `m01-cobertura-real.md` |
