@@ -46,3 +46,44 @@ Content-Type: application/json
   "name": "Torrada Tradicional Sem Glúten",
   "campoInvalido": "deveSerDescartadoPeloValidationPipe"
 }
+
+### Cenário 6: Nome só com espaços → esperado: 400 Bad Request ("name should not be empty")
+POST {{baseUrl}}/products
+Content-Type: application/json
+
+{
+  "name": "   "
+}
+
+### Cenário 7: Nome com 121 caracteres → esperado: 400 Bad Request ("name must be shorter than or equal to 120 characters")
+POST {{baseUrl}}/products
+Content-Type: application/json
+
+{
+  "name": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+}
+
+### Cenário 8: Nome com exatamente 120 caracteres → esperado: 201 Created
+POST {{baseUrl}}/products
+Content-Type: application/json
+
+{
+  "name": "yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy"
+}
+
+### Cenário 9: JSON inválido → esperado: 400 Bad Request (mensagem do parser)
+POST {{baseUrl}}/products
+Content-Type: application/json
+
+{bad
+
+### Cenário 10: Listar produtos (a rota não existe no UC12) → esperado: 404 Not Found
+GET {{baseUrl}}/products
+
+### Cenário 11: Rota digitada errada → esperado: 404 Not Found
+POST {{baseUrl}}/produtos
+Content-Type: application/json
+
+{
+  "name": "x"
+}

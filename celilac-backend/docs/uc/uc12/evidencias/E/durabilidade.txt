@@ -1,0 +1,10 @@
+# Durabilidade extraída de run-checks.txt (seções 6 e 7): só a API foi reiniciada; o banco não foi tocado
+--- 6. Verificação de Persistência Direta no PostgreSQL ---
+[OK]    Registro do produto criado persistido no banco com nome correto (esperado: 'Pão Automatizado Run-Checks 1795203997', obtido: 'Pão Automatizado Run-Checks 1795203997')
+
+--- 7. Teste de Durabilidade: Reiniciar API e Revalidar Registro ---
+Reiniciando SOMENTE o contêiner da API (docker compose restart api)...
+Aguardando API retornar à disponibilidade (até 30 tentativas)...
+[OK]    API reiniciada e respondendo 200 em GET / (esperado: '1', obtido: '1')
+[OK]    Registro do produto permanece íntegro após restart da API (esperado: 'Pão Automatizado Run-Checks 1795203997', obtido: 'Pão Automatizado Run-Checks 1795203997')
+

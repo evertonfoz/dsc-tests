@@ -1,0 +1,48 @@
+# run-checks.sh --durability em 2026-11-20T19:46:37Z, base f8e1f68 (API reconstruída, banco de desenvolvimento preservado)
+================================================================================
+Iniciando verificações automatizadas da API CeliLac em http://localhost:3200
+================================================================================
+
+--- 1. Serviços em Docker Compose ---
+[OK]    Serviço API em execução ('running') (esperado: 'running', obtido: 'running')
+[OK]    Serviço Postgres saudável ('healthy') (esperado: 'healthy', obtido: 'healthy')
+
+--- 2. Smoke Tests HTTP ---
+[OK]    Smoke: GET / retorna 200 (esperado: '200', obtido: '200')
+[OK]    Smoke: GET rota inexistente retorna 404 (esperado: '404', obtido: '404')
+
+--- 3. Migrations no Banco de Desenvolvimento (Somente Leitura) ---
+[OK]    Nenhuma migration pendente no banco de dados (esperado: '0', obtido: '0')
+
+--- 4. Caso de Uso UC12 — Cadastrar Produto (POST /products) ---
+[OK]    Validação: nome vazio retorna 400 (esperado: '400', obtido: '400')
+[OK]    Validação: nome ausente retorna 400 (esperado: '400', obtido: '400')
+[OK]    Validação: nome com tipo inválido retorna 400 (esperado: '400', obtido: '400')
+[OK]    Cadastro com sucesso retorna identificador UUID preenchido (esperado: 'true', obtido: 'true')
+[OK]    Cadastro com sucesso retorna o nome enviado (esperado: 'Pão Automatizado Run-Checks 1795203997', obtido: 'Pão Automatizado Run-Checks 1795203997')
+[OK]    Validação: nome só com espaços retorna 400 (esperado: '400', obtido: '400')
+[OK]    Validação: nome com 121 caracteres retorna 400 (esperado: '400', obtido: '400')
+[OK]    Validação: nome com exatamente 120 caracteres retorna 201 com identificador (esperado: 'true', obtido: 'true')
+[OK]    Contrato: JSON inválido retorna 400 (esperado: '400', obtido: '400')
+[OK]    Contrato: o 400 traz message (lista), error e statusCode (esperado: 'true', obtido: 'true')
+[OK]    Contrato: GET /products retorna 404 (esperado: '404', obtido: '404')
+[OK]    Contrato: POST em rota inexistente retorna 404 (esperado: '404', obtido: '404')
+[OK]    Propriedade extra descartada pelo ValidationPipe (whitelist) (esperado: 'descartado', obtido: 'descartado')
+
+--- 5. Recurso de Apoio: Orders (Fronteira HTTP sem Seed) ---
+[OK]    Confirmação de pedido com ID inválido retorna 400 (esperado: '400', obtido: '400')
+[OK]    Confirmação de pedido com UUID inexistente retorna 404 (esperado: '404', obtido: '404')
+
+--- 6. Verificação de Persistência Direta no PostgreSQL ---
+[OK]    Registro do produto criado persistido no banco com nome correto (esperado: 'Pão Automatizado Run-Checks 1795203997', obtido: 'Pão Automatizado Run-Checks 1795203997')
+
+--- 7. Teste de Durabilidade: Reiniciar API e Revalidar Registro ---
+Reiniciando SOMENTE o contêiner da API (docker compose restart api)...
+Aguardando API retornar à disponibilidade (até 30 tentativas)...
+[OK]    API reiniciada e respondendo 200 em GET / (esperado: '1', obtido: '1')
+[OK]    Registro do produto permanece íntegro após restart da API (esperado: 'Pão Automatizado Run-Checks 1795203997', obtido: 'Pão Automatizado Run-Checks 1795203997')
+
+================================================================================
+Resultado: 23 ok, 0 falha(s)
+================================================================================
+exit=0

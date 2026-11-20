@@ -88,6 +88,7 @@ check "Nenhuma migration pendente no banco de dados" "0" "$pending_migrations"
 # ------------------------------------------------------------------------------
 echo
 echo "--- 4. Caso de Uso UC12 — Cadastrar Produto (POST /products) ---"
+timestamp=$(date +%s)
 code_empty_name=$(status -X POST "$BASE/products" -H "Content-Type: application/json" -d '{"name":""}')
 check "Validação: nome vazio retorna 400" "400" "$code_empty_name"
 
@@ -97,7 +98,6 @@ check "Validação: nome ausente retorna 400" "400" "$code_missing_name"
 code_invalid_type=$(status -X POST "$BASE/products" -H "Content-Type: application/json" -d '{"name":12345}')
 check "Validação: nome com tipo inválido retorna 400" "400" "$code_invalid_type"
 
-timestamp=$(date +%s)
 product_name="Pão Automatizado Run-Checks $timestamp"
 product_response=$(curl -s -X POST "$BASE/products" -H "Content-Type: application/json" -d "{\"name\":\"$product_name\"}")
 created_id=$(extract_json_field "$product_response" "productId")
@@ -109,6 +109,36 @@ else
   check "Cadastro com sucesso retorna identificador UUID preenchido" "true" "false"
 fi
 check "Cadastro com sucesso retorna o nome enviado" "$product_name" "$created_name"
+
+code_blank_name=$(status -X POST "$BASE/products" -H "Content-Type: application/json" -d '{"name":"   "}')
+check "Validação: nome só com espaços retorna 400" "400" "$code_blank_name"
+
+long_name=$(printf 'x%.0s' $(seq 1 121))
+code_long_name=$(status -X POST "$BASE/products" -H "Content-Type: application/json" -d "{\"name\":\"$long_name\"}")
+check "Validação: nome com 121 caracteres retorna 400" "400" "$code_long_name"
+
+# Limite exato: 120 caracteres é aceito (nome único por execução, completado com 'y' até 120)
+limit_prefix="Limite $timestamp "
+limit_name="$limit_prefix$(printf 'y%.0s' $(seq 1 $((120 - ${#limit_prefix}))))"
+limit_response=$(curl -s -X POST "$BASE/products" -H "Content-Type: application/json" -d "{\"name\":\"$limit_name\"}")
+limit_id=$(extract_json_field "$limit_response" "productId")
+if [ -n "$limit_id" ]; then
+  check "Validação: nome com exatamente 120 caracteres retorna 201 com identificador" "true" "true"
+else
+  check "Validação: nome com exatamente 120 caracteres retorna 201 com identificador" "true" "false"
+fi
+
+code_bad_json=$(status -X POST "$BASE/products" -H "Content-Type: application/json" -d '{bad')
+check "Contrato: JSON inválido retorna 400" "400" "$code_bad_json"
+
+error_body=$(curl -s -X POST "$BASE/products" -H "Content-Type: application/json" -d '{"name":""}')
+check "Contrato: o 400 traz message (lista), error e statusCode" "true" "$(node -e "try{const b=JSON.parse(process.argv[1]);console.log(Array.isArray(b.message)&&b.error==='Bad Request'&&b.statusCode===400)}catch{console.log(false)}" "$error_body")"
+
+code_get_products=$(status "$BASE/products")
+check "Contrato: GET /products retorna 404" "404" "$code_get_products"
+
+code_wrong_route=$(status -X POST "$BASE/produtos" -H "Content-Type: application/json" -d '{"name":"x"}')
+check "Contrato: POST em rota inexistente retorna 404" "404" "$code_wrong_route"
 
 # Descarte de propriedade extra (whitelist)
 extra_response=$(curl -s -X POST "$BASE/products" -H "Content-Type: application/json" -d "{\"name\":\"Produto Whitelist $timestamp\",\"campoExtra\":\"descartar\"}")
