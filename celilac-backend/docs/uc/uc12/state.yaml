@@ -54,12 +54,12 @@ fatias:
     comportamento: "O serviço rejeita nome vazio no núcleo, sem gravar nada, independentemente da fronteira HTTP"
     criterios: [RN01, FA01, CA02]
     issue: 24
-    branch: null
-    pr: null
-    status: planejada
+    branch: feature/uc12-f03-nome-vazio-no-nucleo
+    pr: 26
+    status: integrada
     responsavel: evertonfoz
     revisor: evertonfoz
-    evidencias: []
+    evidencias: [evidencias/B/f03-red.txt, evidencias/B/f03-green.txt, evidencias/B/f03-instabilidade.txt]
   - id: F04
     comportamento: "Falha ao persistir o produto é informada como operação não concluída, sem vazar detalhes"
     criterios: [FE01]               # FE01 é fluxo de exceção; o UC não define CA para ele
