@@ -64,6 +64,11 @@ jobs:
 
 `--frozen-lockfile` manda instalar **exatamente** as versões do arquivo de bloqueio (`pnpm-lock.yaml`), para o robô e a sua máquina usarem as mesmas dependências.
 
+### 4.1.1. Onde fica a pasta `.github`
+A pasta `.github` fica **sempre na raiz do repositório Git**, ao lado de `src/`, e não dentro de uma subpasta. No CeliLac ela está em `dsc-tests/.github`, um nível acima da pasta `celilac-backend/` (por isso ela não aparece se você abrir só `celilac-backend` no editor).
+
+Esse repositório guarda **dois projetos lado a lado**, e é por isso que o fluxo real tem duas linhas que você **não** deve copiar sem pensar: `paths: 'celilac-backend/**'` (roda só quando esse projeto muda) e `working-directory: celilac-backend` (entra na pasta do projeto antes dos comandos). Se o seu repositório tem um projeto só, o fluxo roda na raiz e essas duas linhas não existem. O exemplo mínimo da seção 6 já está assim.
+
 ### 4.2. Por que três jobs
 O CeliLac tem três, e cada um responde a uma pergunta diferente:
 
