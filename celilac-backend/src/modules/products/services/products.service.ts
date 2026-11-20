@@ -1,5 +1,6 @@
 import { randomUUID } from 'node:crypto';
 import { Inject, Injectable } from '@nestjs/common';
+import { InvalidProductNameException } from '../../../common/exceptions/invalid-product-name.exception.js';
 import { Product } from '../entities/product.entity.js';
 import {
   PRODUCTS_REPOSITORY,
@@ -14,6 +15,10 @@ export class ProductsService {
   ) {}
 
   async createProduct(name: string): Promise<Product> {
+    if (name === '') {
+      throw new InvalidProductNameException();
+    }
+
     const product = new Product(randomUUID(), name);
     return this.productsRepository.save(product);
   }
