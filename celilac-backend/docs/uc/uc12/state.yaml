@@ -6,7 +6,7 @@ nome: Cadastrar Produto
 documento: ../../planejamento/uc12-cadastrar-produto/uc-12.md
 arquetipo: criar
 epic: { issue: 23, estado: open }   # reconciliação do piloto; a Epic #1 (laboratório) está fechada e permanece como histórico
-fase_atual: C
+fase_atual: D
 
 fases:
   A:
@@ -25,14 +25,21 @@ fases:
       - { item: "CI verde na branch principal", resultado: aprovado, por: CI }
     evidencias: [evidencias/B/f03-green.txt, evidencias/B/f04-green.txt]
   C:
+    status: concluida
+    relatorio: relatorios/C.md
+    gate:
+      - { item: "C1 (fronteira HTTP) integrada, com o mapeamento dos erros do núcleo", resultado: aprovado, por: CI }
+      - { item: "C2 (persistência real) integrada, com migration verificada em banco novo", resultado: aprovado, por: CI }
+      - { item: "CI verde na branch principal", resultado: aprovado, por: CI }
+    evidencias: [evidencias/C/c1-green.txt, evidencias/C/c2-fe01-caracterizacao.txt, evidencias/C/c2-migration-banco-vazio.txt]
+  D:
     status: em_andamento
     relatorio: null
     gate:
-      - { item: "C1 (fronteira HTTP) integrada, com o mapeamento dos erros do núcleo", resultado: pendente }
-      - { item: "C2 (persistência real) integrada, com migration verificada em banco novo", resultado: pendente }
+      - { item: "Cada rota do UC tem sucesso e erros documentados e testados", resultado: pendente }
+      - { item: "Divergências com o UC resolvidas ou com ADR", resultado: pendente }
       - { item: "CI verde na branch principal", resultado: pendente }
-    evidencias: []
-  D: { status: pendente, relatorio: null, gate: [], evidencias: [] }
+    evidencias: [evidencias/D/contrato-atual.txt]
   E: { status: pendente, relatorio: null, gate: [], evidencias: [] }
   F: { status: pendente, relatorio: null, gate: [], evidencias: [] }
 
