@@ -37,7 +37,8 @@ method/
 | 01 | `didatico/01-por-que-um-metodo-em-duas-camadas.md` | Diagnóstico do UC12 e as decisões de organização |
 | 02 | `didatico/02-estado-como-fonte-da-verdade.md` | `state.yaml`, perfil do projeto e validador |
 | 03 | `didatico/03-anatomia-de-um-playbook-e-fatias.md` | Playbooks, fatias e cobertura real |
-| 04+ | *(serão adicionados a cada etapa)* | |
+| 04 | `didatico/04-fundacao-do-projeto.md` | Fundação: ambiente, CI, isolamento e falhas conhecidas |
+| 05+ | *(serão adicionados a cada etapa)* | |
 
 ## Estado de implementação do método
 
@@ -46,7 +47,7 @@ method/
 | 1 | Estrutura-base, `AGENTS.md`, glossário, documento didático 01 | Concluída e aprovada |
 | 2 | Perfil do projeto, `state.yaml`, templates e validador | Concluída, aguardando validação |
 | 3 | Template de playbook, guia de fatias, matriz por arquétipo, template de issue de fatia | Concluída e aprovada |
-| 4 | Fundação (Docker, CI, `.http`, `run-checks`, senhas do Compose sem padrão, E2E contra banco de testes) | Pendente |
+| 4 | Fundação (Compose sem senhas padrão, E2E e integração contra banco de testes, migration `uuid-ossp`, CI, `verify.sh`, templates do GitHub, falhas conhecidas com ADR) | Concluída; PR #22 (Draft) aguardando revisão e merge humanos |
 | 5 | Playbooks das fases A–F | Pendente |
 | 6 | Piloto: reconciliação do UC12 | Pendente |
 | 7 | Prompt orquestrador para os alunos | Pendente |

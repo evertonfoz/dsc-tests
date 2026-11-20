@@ -35,12 +35,15 @@
 | Lint | `pnpm lint` |
 | Testes rápidos | `pnpm test` |
 | Integração (banco real) | `pnpm test:integration` |
-| E2E | `pnpm test:e2e` (suíte legada: ver Proteções) |
+| E2E (banco de testes) | `pnpm test:e2e` (as falhas conhecidas aparecem localmente: ver Proteções) |
 | Subir ambiente | `docker compose up -d --build` |
 | Parar (sem apagar dados) | `docker compose stop` |
 | Migrations | `pnpm migration:show:prod` / `pnpm migration:run:prod` |
 | Verificação HTTP | `http-rest-client/containerizado/run-checks.sh` |
 | Validar estado do UC | `method/scripts/check-state.sh docs/uc/<uc>/state.yaml` |
+| Validar links dos documentos | `node method/scripts/check-links.mjs` |
+| Verificação local rápida | `bash scripts/verify.sh` |
+| Verificação local completa (com banco de testes) | `bash scripts/verify.sh --completo` |
 
 ## 4. Infraestrutura
 | Serviço | Container | Porta host → container | Volume |
@@ -57,12 +60,15 @@ Schema/tabela do UC12: `products.products` (migration `1794255600000-CreateProdu
 ## 6. Proteções
 - Proibidos sem autorização explícita: `docker compose down -v`, `DROP`, `TRUNCATE`, `migration:revert`, `git push --force`, `git reset --hard`.
 - Testes de persistência real só contra `postgres_test` e com `TEST_DB_ALLOW_DESTRUCTIVE=true` (verificado em `typeorm-products.repository.postgres.spec.ts`).
-- `pnpm test:e2e` (*Confirmado no código*): sobe o `AppModule` completo e conecta ao banco de **desenvolvimento** (`DB_*`; não usa `TEST_DB_*`). `test/orders/confirm-order.e2e-spec.ts` grava pedidos e apaga apenas os registros que criou; `synchronize: false`. Exige o serviço `postgres` no ar e as migrations aplicadas. **Não é prova de isolamento** e não substitui `pnpm test:integration`. Correção prevista na Fundação (Etapa 4): E2E contra `postgres_test`.
-- `compose.yaml` contém senhas de desenvolvimento como valor padrão: melhoria prevista na Fundação (Etapa 4).
+- Isolamento (Fundação): `pnpm test:integration` e `pnpm test:e2e` usam `postgres_test` (`TEST_DB_*`), com as travas `TEST_DB_ALLOW_DESTRUCTIVE=true`, nome terminado em `_test` e usuário/porta distintos do desenvolvimento. Guarda permanente: `test/database-isolation.e2e-spec.ts`.
+- Senhas: `compose.yaml` exige as variáveis (`${VAR:?}`), sem valor padrão; `.env.example` traz só exemplos sem segredo.
+- Migration `EnableUuidOssp` (`1792519198707`) garante a extensão em bancos novos.
+- Falhas conhecidas (exercício didático de `orders`, ADR-001 em `docs/adr/`): 4 testes unitários em `orders.services.spec.ts` e 1 E2E em `confirm-order.e2e-spec.ts`. Lista única em `scripts/known-failures.env`; excluídas no CI e no `verify.sh`, e visíveis em `pnpm test` e `pnpm test:e2e` locais.
+- CI: `.github/workflows/celilac-backend-ci.yml` (qualidade, integração/E2E, smoke do Compose). Modelos de issue (`fatia.yml`, `fase.yml`) e de PR em `.github/` na raiz do git.
 
 ## 7. Convenções
 - Branch (a partir do UC13; **não renomear** os históricos do UC12, que usam `feature/uc12-NN-...`):
-  - fatia vertical: `feature/<uc>-<fatia>-<resumo>` (ex.: `feature/uc13-f01-consulta-por-id`);
+  - fatia (comportamento, ADR-003): `feature/<uc>-<fatia>-<resumo>` (ex.: `feature/uc13-f01-consulta-por-id`);
   - fase sem fatia (A, D, E, F): `docs/<uc>-fase-<letra>-<resumo>` ou `test/<uc>-fase-<letra>-<resumo>`;
   - fundação: `chore/<resumo>`.
 - Commit: `<tipo>(<escopo>): <resumo> (refs #N)` — como já praticado (`feat(products): … (refs #8, refs #10)`).
