@@ -1,0 +1,42 @@
+# RED da F06 em 2026-11-20T19:24:36Z, base a273ab6daded5f3a32c347fa3ba3c38aba7491e2
+The plugin "vite-tsconfig-paths" is detected. Vite now supports tsconfig paths resolution natively via the resolve.tsconfigPaths option. You can remove the plugin and set resolve.tsconfigPaths: true in your Vite config instead.
+
+ RUN  v4.1.11 /Users/evertoncoimbradearaujo/Documents/GitHub/dsc-tests/celilac-backend
+
+ ✓ src/modules/products/services/products.service.spec.ts > ProductsService > should register and save a product when valid data is provided (CA01) 90ms
+ ✓ src/modules/products/services/products.service.spec.ts > ProductsService > should reject an empty product name in the service without saving (RN01) 1ms
+ ✓ src/modules/products/services/products.service.spec.ts > ProductsService > should report an incomplete operation when persistence fails (FE01) 1ms
+ ✓ src/modules/products/services/products.service.spec.ts > ProductsService > should reject a blank product name in the service without saving (RN01) 1ms
+ × src/modules/products/services/products.service.spec.ts > ProductsService > should reject a product name longer than 120 characters in the service without saving (RN01) 2ms
+   → promise resolved "undefined" instead of rejecting
+ ✓ src/modules/products/services/products.service.spec.ts > ProductsService > should accept a product name with exactly 120 characters (RN01) 1ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/modules/products/services/products.service.spec.ts > ProductsService > should reject a product name longer than 120 characters in the service without saving (RN01)
+AssertionError: promise resolved "undefined" instead of rejecting
+
+- Expected:
+Error {
+  "message": "rejected promise",
+}
+
++ Received:
+undefined
+
+ ❯ src/modules/products/services/products.service.spec.ts:76:57
+     74|
+     75|   it('should reject a product name longer than 120 characters in the s…
+     76|     await expect(service.createProduct('x'.repeat(121))).rejects.toMat…
+       |                                                         ^
+     77|       name: 'InvalidProductNameException',
+     78|     });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 5 passed (6)
+   Start at  16:24:36
+   Duration  363ms (transform 21ms, setup 0ms, import 194ms, tests 96ms, environment 0ms)
+
