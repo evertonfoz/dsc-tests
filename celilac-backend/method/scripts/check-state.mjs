@@ -163,6 +163,7 @@ export function validar(state, baseDir) {
   for (const k of ['uc', 'nome', 'arquetipo', 'epic', 'fase_atual', 'fases', 'fatias']) {
     if (!(k in state)) err(`campo obrigatório ausente: ${k}`);
   }
+  if ('documento' in state) arquivo(state.documento, 'documento');
   if (filled(state.arquetipo) && !ARQUETIPOS.includes(state.arquetipo)) err(`arquetipo inválido: "${state.arquetipo}" (válidos: ${ARQUETIPOS.join(', ')})`);
 
   if (isObj(state.epic)) {
@@ -217,7 +218,10 @@ export function validar(state, baseDir) {
       if (!filled(s.id)) err(`${c}.id obrigatório`);
       else if (ids.has(s.id)) err(`${c}.id duplicado: ${s.id}`); else ids.add(s.id);
       if (!filled(s.comportamento)) err(`${c}.comportamento obrigatório`);
-      if (!Array.isArray(s.criterios) || s.criterios.length === 0) err(`${c}.criterios deve listar ao menos 1 critério de aceite`);
+      if (!Array.isArray(s.criterios) || s.criterios.length === 0) err(`${c}.criterios deve listar ao menos 1 item do caso de uso (CA, RN, RF, FA ou FE)`);
+      else for (const id of s.criterios) {
+        if (typeof id !== 'string' || !/^(CA|RN|RF|FA|FE)\d+$/.test(id)) err(`${c}.criterios: identificador inválido "${id}" (use CA01, RN02, RF03, FA01 ou FE01)`);
+      }
       if (!STATUS_FATIA.includes(s.status)) err(`${c}.status inválido: "${s.status}"`);
       if (!filled(s.responsavel)) err(`${c}.responsavel obrigatório`);
       if (s.issue !== null && s.issue !== undefined && !Number.isInteger(s.issue)) err(`${c}.issue deve ser número ou null`);

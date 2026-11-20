@@ -28,6 +28,7 @@ Os playbooks leem os dois. Assim, o procedimento de uma fase é o mesmo para qua
 ```yaml
 uc: UC12
 nome: Cadastrar Produto
+documento: ../../planejamento/uc12-cadastrar-produto/uc-12.md   # opcional; se informado, deve existir
 arquetipo: criar
 epic: { issue: 1, estado: open }
 fase_atual: B
@@ -69,7 +70,7 @@ Cada seta exige campos novos. Por exemplo, uma fatia `em_revisao` sem número de
 ## 5. O validador
 
 `method/scripts/check-state.sh docs/uc/<uc>/state.yaml` verifica, sem internet:
-- campos obrigatórios e valores permitidos (arquétipo, status, resultado do gate);
+- campos obrigatórios e valores permitidos (arquétipo, status, resultado do gate, identificadores de `criterios`: CA, RN, RF, FA ou FE seguidos de número);
 - coerência: não se está na fase C se a B não terminou; Epic fechada só com todas as fases concluídas;
 - unicidade: nenhuma issue ou PR atribuído a duas fatias;
 - existência de todos os arquivos de relatório e evidência citados;

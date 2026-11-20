@@ -10,9 +10,10 @@ method/
 ├── glossario.md           termos do método
 ├── didatico/              artefatos didáticos: o que foi feito, por quê, como replicar
 ├── decisoes/              ADRs do próprio método
-├── playbooks/             guia de fatias, matriz de arquétipos; playbooks das fases (Etapa 5)
+├── playbooks/             guia de fatias, matriz de arquétipos e playbooks das fases A–F
 ├── templates/             project-profile, state.yaml, relatório de fase, ADR
 ├── perfis/                perfis de stack (celilac-nest)
+├── orquestrador/          prompt do estudante para conduzir um UC fase a fase
 ├── scripts/               check-state e check-links (validadores) e seus testes
 └── exemplos/              exemplos reais (UC12/CeliLac)        (Etapa 6)
 ```
@@ -38,7 +39,8 @@ method/
 | 02 | `didatico/02-estado-como-fonte-da-verdade.md` | `state.yaml`, perfil do projeto e validador |
 | 03 | `didatico/03-anatomia-de-um-playbook-e-fatias.md` | Playbooks, fatias e cobertura real |
 | 04 | `didatico/04-fundacao-do-projeto.md` | Fundação: ambiente, CI, isolamento e falhas conhecidas |
-| 05+ | *(serão adicionados a cada etapa)* | |
+| 05 | `didatico/05-as-seis-fases-e-seus-playbooks.md` | As fases A–F e seus playbooks |
+| 06+ | *(serão adicionados a cada etapa)* | |
 
 ## Estado de implementação do método
 
@@ -48,9 +50,9 @@ method/
 | 2 | Perfil do projeto, `state.yaml`, templates e validador | Concluída, aguardando validação |
 | 3 | Template de playbook, guia de fatias, matriz por arquétipo, template de issue de fatia | Concluída e aprovada |
 | 4 | Fundação (Compose sem senhas padrão, E2E e integração contra banco de testes, migration `uuid-ossp`, CI, `verify.sh`, templates do GitHub, falhas conhecidas com ADR) | Concluída; PR #22 (Draft) aguardando revisão e merge humanos |
-| 5 | Playbooks das fases A–F | Pendente |
+| 5 | Playbooks das fases A–F e documento didático 05 | Concluída, aguardando validação (branch `chore/playbooks-fases`, sem PR) |
 | 6 | Piloto: reconciliação do UC12 | Pendente |
-| 7 | Prompt orquestrador para os alunos | Pendente |
+| 7 | Prompt orquestrador para os alunos (`orquestrador/prompt-do-estudante.md`) | Escrito; ainda não testado em um UC novo |
 
 ## Pendências registradas para a Etapa 6 (piloto UC12)
 Decisões **do responsável pelo caso de uso**, a serem apresentadas com opções (o agente não decide):

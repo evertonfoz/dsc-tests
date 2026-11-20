@@ -6,6 +6,7 @@
 
 uc: UC00                          # código do caso de uso
 nome: Nome do Caso de Uso
+documento: null                   # caminho (relativo a este arquivo) do documento do caso de uso; opcional, mas se informado deve existir
 arquetipo: criar                  # criar | consultar | atualizar | excluir | autenticar
 epic: { issue: null, estado: open }   # preencher issue (número) na Fase A; estado: open | closed
 fase_atual: A                     # A | B | C | D | E | F | concluido
@@ -38,7 +39,7 @@ fases:
 fatias:
   - id: F01
     comportamento: "Descreva o comportamento (ex.: cadastro com dados válidos)"
-    criterios: [CA01]             # critérios de aceite do caso de uso que a fatia cobre
+    criterios: [CA01]             # itens do UC que a fatia cobre: CA, RN, RF, FA ou FE (ex.: CA01, RN02, FE01)
     issue: null
     branch: null
     pr: null
