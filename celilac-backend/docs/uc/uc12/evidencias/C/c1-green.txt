@@ -1,0 +1,20 @@
+# GREEN da C1 em 2026-11-20T19:06:28Z (execução 1; instabilidade pré-existente: issue #27)
+The plugin "vite-tsconfig-paths" is detected. Vite now supports tsconfig paths resolution natively via the resolve.tsconfigPaths option. You can remove the plugin and set resolve.tsconfigPaths: true in your Vite config instead.
+
+ RUN  v4.1.11 /Users/evertoncoimbradearaujo/Documents/GitHub/dsc-tests/celilac-backend
+
+ ✓ src/modules/products/services/products.service.spec.ts > ProductsService > should register and save a product when valid data is provided (CA01) 71ms
+ ✓ src/modules/products/services/products.service.spec.ts > ProductsService > should reject an empty product name in the service without saving (RN01) 1ms
+ ✓ src/modules/products/services/products.service.spec.ts > ProductsService > should report an incomplete operation when persistence fails (FE01) 1ms
+ ✓ src/modules/products/controllers/products.error-mapping.spec.ts > ProductsController — mapeamento de erros do núcleo (HTTP) > should map InvalidProductNameException to 400 at the HTTP boundary 65ms
+ ✓ src/modules/products/controllers/products.error-mapping.spec.ts > ProductsController — mapeamento de erros do núcleo (HTTP) > should map ProductPersistenceFailedException to 500 without leaking internal details 4ms
+ ✓ src/modules/products/controllers/products.controller.spec.ts > ProductsController (HTTP) > should create a product when valid data is provided (POST /products -> 201) 65ms
+ ✓ src/modules/products/controllers/products.controller.spec.ts > ProductsController (HTTP) > should reject an empty product name at the HTTP boundary (POST /products -> 400) 4ms
+ ✓ src/modules/products/controllers/products.controller.spec.ts > ProductsController (HTTP) > should not expose internal properties from domain/service in the HTTP response 3ms
+ ✓ src/modules/products/products.integration.spec.ts > POST /products — integração > deve criar um produto com dados válidos 13ms
+ ✓ src/modules/products/products.integration.spec.ts > POST /products — integração > deve rejeitar nome vazio na fronteira HTTP 2ms
+
+ Test Files  4 passed (4)
+      Tests  10 passed (10)
+   Start at  16:06:28
+   Duration  575ms (transform 107ms, setup 0ms, import 1.33s, tests 268ms, environment 0ms)
