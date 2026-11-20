@@ -53,3 +53,8 @@ Entregar no núcleo as fatias que faltavam ao UC12 (F03 e F04), por TDD, um PR p
 ## 7. Aprendizados
 - O RED só vale se falha pelo motivo certo; o teste de F04 foi validado por mutação.
 - Uma instabilidade pré-existente apareceu só porque rodamos a suíte muitas vezes; registrá-la com número de ocorrências evitou culpar a fatia.
+
+## 8. Reabertura (2026-11-20)
+**Motivo:** o inventário da Fase D (`docs/uc/uc12/evidencias/D/contrato-atual.txt`) mostrou que nome só com espaços é aceito (201) e que nome com mais de 120 caracteres vira 500. Decisões do professor na ADR-004 do projeto (`docs/adr/ADR-004-contrato-de-erros-e-validacao-de-nome-uc12.md`).
+**Fatias novas:** F05 (nome em branco, #40) e F06 (nome acima de 120, #41), no núcleo. O trabalho de DTO e do formato do 400 é o C1b (#42), na fase C, também reaberta.
+**Procedimento:** ADR-004 do método (PR #39): `fase_atual` volta a B; as fases posteriores mantêm o status; a D permanece em andamento. Os gates desta fase voltam a `pendente` até F05 e F06 serem integradas.
