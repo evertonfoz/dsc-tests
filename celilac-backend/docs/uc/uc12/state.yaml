@@ -6,7 +6,7 @@ nome: Cadastrar Produto
 documento: ../../planejamento/uc12-cadastrar-produto/uc-12.md
 arquetipo: criar
 epic: { issue: 23, estado: open }   # reconciliação do piloto; a Epic #1 (laboratório) está fechada e permanece como histórico
-fase_atual: B
+fase_atual: E
 
 fases:
   A:
@@ -18,29 +18,29 @@ fases:
       - { item: "Fatias F03 e F04 com DoR avaliada e teste RED nomeado", resultado: aprovado, por: evertonfoz }
     evidencias: [evidencias/A/testes-do-uc12.txt, evidencias/A/publicacao.txt]
   B:
-    status: em_andamento           # reaberta em 2026-11-20 (ADR-004 do método): fatias F05 e F06
+    status: concluida              # reaberta em 2026-11-20 (ADR-004 do método) e fechada com F05 e F06 integradas
     relatorio: relatorios/B.md
     gate:
-      - { item: "Todas as fatias integradas na branch principal", resultado: pendente }
-      - { item: "CI verde na branch principal", resultado: pendente }
-    evidencias: [evidencias/B/f03-green.txt, evidencias/B/f04-green.txt]
+      - { item: "Todas as fatias integradas na branch principal", resultado: aprovado, por: CI }
+      - { item: "CI verde na branch principal", resultado: aprovado, por: CI }
+    evidencias: [evidencias/B/f03-green.txt, evidencias/B/f04-green.txt, evidencias/B/f05-green.txt, evidencias/B/f06-green.txt]
   C:
-    status: em_andamento           # reaberta em 2026-11-20: C1b (DTO e formato do 400)
+    status: concluida              # reaberta em 2026-11-20 para o C1b; fechada com o PR 46
     relatorio: relatorios/C.md
     gate:
       - { item: "C1 (fronteira HTTP) integrada, com o mapeamento dos erros do núcleo", resultado: aprovado, por: CI }
       - { item: "C2 (persistência real) integrada, com migration verificada em banco novo", resultado: aprovado, por: CI }
-      - { item: "C1b (DTO e formato único do 400) integrada", resultado: pendente }
-      - { item: "CI verde na branch principal", resultado: pendente }
-    evidencias: [evidencias/C/c1-green.txt, evidencias/C/c2-fe01-caracterizacao.txt, evidencias/C/c2-migration-banco-vazio.txt]
+      - { item: "C1b (DTO e formato único do 400) integrada", resultado: aprovado, por: CI }
+      - { item: "CI verde na branch principal", resultado: aprovado, por: CI }
+    evidencias: [evidencias/C/c1-green.txt, evidencias/C/c2-fe01-caracterizacao.txt, evidencias/C/c2-migration-banco-vazio.txt, evidencias/C/c1b-red.txt, evidencias/C/c1b-green.txt, evidencias/C/c1b-refactor.txt]
   D:
-    status: em_andamento
-    relatorio: null
+    status: concluida
+    relatorio: relatorios/D.md
     gate:
-      - { item: "Cada rota do UC tem sucesso e erros documentados e testados", resultado: pendente }
-      - { item: "Divergências com o UC resolvidas ou com ADR", resultado: pendente }
-      - { item: "CI verde na branch principal", resultado: pendente }
-    evidencias: [evidencias/D/contrato-atual.txt]
+      - { item: "Cada rota do UC tem sucesso e erros documentados e testados", resultado: aprovado, por: CI }
+      - { item: "Divergências com o UC resolvidas ou com ADR", resultado: aprovado, por: CI }
+      - { item: "CI verde na branch principal", resultado: aprovado, por: CI }
+    evidencias: [evidencias/D/contrato-atual.txt, evidencias/D/contrato-final.txt]
   E: { status: pendente, relatorio: null, gate: [], evidencias: [] }
   F: { status: pendente, relatorio: null, gate: [], evidencias: [] }
 
@@ -89,19 +89,19 @@ fatias:
     comportamento: "Nome em branco (só espaços) é rejeitado no núcleo, sem gravar"
     criterios: [RN01, FA01]
     issue: 40
-    branch: null
-    pr: null
-    status: planejada
+    branch: feature/uc12-f05-nome-em-branco-no-nucleo
+    pr: 44
+    status: integrada
     responsavel: evertonfoz
     revisor: evertonfoz
-    evidencias: []
+    evidencias: [evidencias/B/f05-red.txt, evidencias/B/f05-green.txt]
   - id: F06
     comportamento: "Nome com mais de 120 caracteres é rejeitado no núcleo, sem gravar"
     criterios: [RN01]
     issue: 41
-    branch: null
-    pr: null
-    status: planejada
+    branch: feature/uc12-f06-nome-longo-no-nucleo
+    pr: 45
+    status: integrada
     responsavel: evertonfoz
     revisor: evertonfoz
-    evidencias: []
+    evidencias: [evidencias/B/f06-red.txt, evidencias/B/f06-green.txt]
