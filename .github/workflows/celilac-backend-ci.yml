@@ -45,7 +45,7 @@ jobs:
           cache-dependency-path: celilac-backend/pnpm-lock.yaml
       - name: Instalar dependências (lockfile congelado)
         run: pnpm install --frozen-lockfile
-      - name: Verificação (a mesma de `scripts/verify.sh`: lint, build, testes rápidos, método, links, estado)
+      - name: Verificação (scripts/verify.sh - lint, build, testes rápidos, método, links, estado)
         run: bash scripts/verify.sh
 
   integration:
