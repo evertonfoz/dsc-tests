@@ -1,0 +1,139 @@
+# CI do projeto celilac-backend (Camada 0 — Fundação, issue #20).
+# O repositório git contém mais de um projeto; este workflow só roda para mudanças em celilac-backend/.
+name: celilac-backend CI
+
+on:
+  pull_request:
+    paths:
+      - 'celilac-backend/**'
+      - '.github/workflows/celilac-backend-ci.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'celilac-backend/**'
+      - '.github/workflows/celilac-backend-ci.yml'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: celilac-backend-ci-${{ github.ref }}
+  cancel-in-progress: true
+
+defaults:
+  run:
+    working-directory: celilac-backend
+
+env:
+  NODE_VERSION: '24.21.0'
+  PNPM_VERSION: '12.8.1'
+  # Falhas conhecidas (exercício didático de `orders`). Ver docs/adr/ADR-001-falhas-conhecidas-exercicio-orders.md.
+  KNOWN_FAILURES_UNIT: '**/orders.services.spec.ts'
+  KNOWN_FAILURES_E2E: '**/confirm-order.e2e-spec.ts'
+
+jobs:
+  quality:
+    name: Qualidade (lint, build, testes rápidos, método)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: ${{ env.PNPM_VERSION }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: pnpm
+          cache-dependency-path: celilac-backend/pnpm-lock.yaml
+      - name: Instalar dependências (lockfile congelado)
+        run: pnpm install --frozen-lockfile
+      - name: Lint
+        run: pnpm lint
+      - name: Build
+        run: pnpm build
+      - name: Testes rápidos (sem as falhas conhecidas)
+        run: pnpm test --exclude "$KNOWN_FAILURES_UNIT"
+      - name: Testes do validador do método
+        run: bash method/scripts/testes/rodar-testes.sh
+
+  integration:
+    name: Integração e E2E (PostgreSQL de testes)
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    services:
+      postgres_test:
+        image: postgres:17
+        env:
+          POSTGRES_USER: celilac_test
+          POSTGRES_DB: celilac_test
+          # Valor descartável: o banco existe só durante este job e não é acessível de fora.
+          POSTGRES_PASSWORD: ci-only-throwaway-password
+        ports:
+          - 5435:5432
+        options: >-
+          --health-cmd "pg_isready -U celilac_test -d celilac_test"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+    env:
+      # Valores de "desenvolvimento" só para as salvaguardas compararem; nada conecta a eles.
+      DB_HOST: localhost
+      DB_PORT: '5432'
+      DB_USERNAME: celilac_user
+      DB_PASSWORD: ci-unused
+      DB_NAME: celilac_db
+      TEST_DB_HOST: 127.0.0.1
+      TEST_DB_PORT: '5435'
+      TEST_DB_USERNAME: celilac_test
+      TEST_DB_PASSWORD: ci-only-throwaway-password
+      TEST_DB_NAME: celilac_test
+      TEST_DB_ALLOW_DESTRUCTIVE: 'true'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: ${{ env.PNPM_VERSION }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: pnpm
+          cache-dependency-path: celilac-backend/pnpm-lock.yaml
+      - run: pnpm install --frozen-lockfile
+      - name: Integração (banco real)
+        run: pnpm test:integration
+      - name: E2E (banco de testes, sem as falhas conhecidas)
+        run: pnpm test:e2e --exclude "$KNOWN_FAILURES_E2E"
+
+  compose-smoke:
+    name: Smoke do Docker Compose (API + banco + run-checks)
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Criar .env efêmero com senhas geradas
+        run: |
+          cp .env.example .env
+          echo "DB_PASSWORD=$(openssl rand -hex 16)" >> .env
+          echo "TEST_DB_PASSWORD=$(openssl rand -hex 16)" >> .env
+          # Remove as linhas de senha vazias do exemplo (as geradas acima prevalecem).
+          sed -i '/^DB_PASSWORD=$/d;/^TEST_DB_PASSWORD=$/d' .env
+      - name: Subir API e banco
+        run: docker compose up -d --build api postgres
+      - name: Aguardar a API responder
+        run: |
+          for i in $(seq 1 30); do
+            if curl -fsS http://localhost:3200/ >/dev/null; then echo "API no ar"; exit 0; fi
+            sleep 2
+          done
+          echo "API não respondeu a tempo"; docker compose logs api; exit 1
+      - name: Preparar banco e aplicar migrations
+        run: |
+          # A migration CreateOrders usa uuid_generate_v4(), mas nenhuma migration cria a extensão.
+          docker compose exec -T postgres sh -c 'psql -U "$POSTGRES_USER" -d "$POSTGRES_DB" -c "CREATE EXTENSION IF NOT EXISTS \"uuid-ossp\""'
+          docker compose exec -T api pnpm migration:run:prod
+      - name: Verificação HTTP automatizada (run-checks)
+        run: bash http-rest-client/containerizado/run-checks.sh --durability
+      - name: Logs em caso de falha
+        if: failure()
+        run: docker compose logs --no-color
