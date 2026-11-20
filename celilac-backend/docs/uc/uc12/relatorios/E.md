@@ -32,11 +32,13 @@ Fazer cada linha do `contrato.md` ter cenário na coleção `.http` e asserção
 ## 4. Gate de saída
 | Verificação | Como | Resultado | Validado por |
 |---|---|---|---|
-| Cada rota do contrato tem cenário na coleção | `contrato.md` × coleção | pendente | pessoa responsável |
-| O script termina com 0 falhas em ambiente limpo | evidência 3 | pendente | pessoa responsável |
-| O mesmo script passa no CI | job de smoke do PR | pendente | CI |
-| Durabilidade provada | evidência 4 | pendente | pessoa responsável |
-| Nenhum segredo nos arquivos versionados | revisão do diff | pendente | pessoa responsável |
+| Cada rota do contrato tem cenário na coleção | `contrato.md` × coleção | aprovado | evertonfoz |
+| O script termina com 0 falhas em ambiente limpo | evidência 3 | aprovado | evertonfoz |
+| O mesmo script passa no CI | job de smoke do PR | aprovado | CI |
+| Durabilidade provada | evidência 4 | aprovado | evertonfoz |
+| Nenhum segredo nos arquivos versionados | revisão do diff | aprovado | evertonfoz |
+
+> Validação da fase E declarada pelo professor na sessão de 2026-11-20 ("Sim, valido a E"). O smoke do CI passou no PR #49. O agente não aprovou nenhum gate.
 
 ## 5. Pendências e riscos
 - **"Ambiente limpo":** a execução foi na minha máquina, com o banco de desenvolvimento já existente e migrations sem pendências. Um clone limpo de verdade só é exercitado pelo job de smoke do CI (que sobe banco novo). Por isso o gate 2 não deve ser lido como prova de clone limpo sem o CI.

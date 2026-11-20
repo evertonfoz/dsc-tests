@@ -6,7 +6,7 @@ nome: Cadastrar Produto
 documento: ../../planejamento/uc12-cadastrar-produto/uc-12.md
 arquetipo: criar
 epic: { issue: 23, estado: open }   # reconciliação do piloto; a Epic #1 (laboratório) está fechada e permanece como histórico
-fase_atual: E
+fase_atual: F
 
 fases:
   A:
@@ -42,16 +42,26 @@ fases:
       - { item: "CI verde na branch principal", resultado: aprovado, por: CI }
     evidencias: [evidencias/D/contrato-atual.txt, evidencias/D/contrato-final.txt]
   E:
-    status: em_andamento
+    status: concluida
     relatorio: relatorios/E.md
     gate:
-      - { item: "Cada rota do contrato tem cenário na coleção", resultado: pendente }
-      - { item: "O script termina com 0 falhas em ambiente limpo", resultado: pendente }
-      - { item: "O mesmo script passa no CI (smoke)", resultado: pendente }
-      - { item: "Durabilidade provada", resultado: pendente }
-      - { item: "Nenhum segredo nos arquivos versionados", resultado: pendente }
+      - { item: "Cada rota do contrato tem cenário na coleção", resultado: aprovado, por: evertonfoz }
+      - { item: "O script termina com 0 falhas em ambiente limpo", resultado: aprovado, por: evertonfoz }
+      - { item: "O mesmo script passa no CI (smoke)", resultado: aprovado, por: CI }
+      - { item: "Durabilidade provada", resultado: aprovado, por: evertonfoz }
+      - { item: "Nenhum segredo nos arquivos versionados", resultado: aprovado, por: evertonfoz }
     evidencias: [evidencias/E/diagnostico.md, evidencias/E/run-checks.txt, evidencias/E/run-checks-controle-negativo.txt, evidencias/E/durabilidade.txt]
-  F: { status: pendente, relatorio: null, gate: [], evidencias: [] }
+  F:
+    status: em_andamento
+    relatorio: relatorios/F.md
+    gate:
+      - { item: "Todo item do UC tem teste que o prova ou ADR", resultado: pendente }
+      - { item: "Nenhuma afirmação de cobertura sem prova", resultado: pendente }
+      - { item: "Arquitetura em conformidade, achados tratados", resultado: pendente }
+      - { item: "state.yaml, documentos e GitHub consistentes", resultado: pendente }
+      - { item: "CI verde na branch principal", resultado: pendente }
+      - { item: "Issues e Epic fechados", resultado: pendente }
+    evidencias: [evidencias/F/cobertura.md, evidencias/F/auditoria.md, evidencias/F/testes.txt]
 
 fatias:
   - id: F01
