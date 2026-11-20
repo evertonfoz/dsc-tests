@@ -8,6 +8,8 @@ import {
   type ProductsRepository,
 } from '../repositories/products.repository.interface.js';
 
+const MAX_PRODUCT_NAME_LENGTH = 120;
+
 @Injectable()
 export class ProductsService {
   constructor(
@@ -16,7 +18,7 @@ export class ProductsService {
   ) {}
 
   async createProduct(name: string): Promise<Product> {
-    if (name.trim() === '') {
+    if (name.trim() === '' || name.length > MAX_PRODUCT_NAME_LENGTH) {
       throw new InvalidProductNameException();
     }
 

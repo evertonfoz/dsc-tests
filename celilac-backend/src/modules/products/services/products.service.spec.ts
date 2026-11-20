@@ -71,4 +71,20 @@ describe('ProductsService', () => {
 
     expect(productsRepository.save).not.toHaveBeenCalled();
   });
+
+  it('should reject a product name longer than 120 characters in the service without saving (RN01)', async () => {
+    await expect(service.createProduct('x'.repeat(121))).rejects.toMatchObject({
+      name: 'InvalidProductNameException',
+    });
+
+    expect(productsRepository.save).not.toHaveBeenCalled();
+  });
+
+  it('should accept a product name with exactly 120 characters (RN01)', async () => {
+    productsRepository.save.mockImplementation(async (product) => product);
+
+    const result = await service.createProduct('x'.repeat(120));
+
+    expect(result.name).toHaveLength(120);
+  });
 });
