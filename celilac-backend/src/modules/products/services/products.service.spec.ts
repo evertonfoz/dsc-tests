@@ -50,4 +50,17 @@ describe('ProductsService', () => {
 
     expect(productsRepository.save).not.toHaveBeenCalled();
   });
+
+  it('should report an incomplete operation when persistence fails (FE01)', async () => {
+    productsRepository.save.mockRejectedValue(
+      new Error('connection refused at 10.0.0.5:5432 (relation "products" does not exist)'),
+    );
+
+    const result = service.createProduct('Celular XYZ');
+
+    await expect(result).rejects.toMatchObject({
+      name: 'ProductPersistenceFailedException',
+    });
+    await expect(result).rejects.not.toThrow(/connection refused|10\.0\.0\.5|relation/);
+  });
 });

@@ -1,0 +1,40 @@
+# RED da F04 em 2026-11-20T18:57:14Z, base 55409b3414c53c2895c3d9fc93a6a1bd4177538a
+The plugin "vite-tsconfig-paths" is detected. Vite now supports tsconfig paths resolution natively via the resolve.tsconfigPaths option. You can remove the plugin and set resolve.tsconfigPaths: true in your Vite config instead.
+
+ RUN  v4.1.11 /Users/evertoncoimbradearaujo/Documents/GitHub/dsc-tests/celilac-backend
+
+ ✓ src/modules/products/services/products.service.spec.ts > ProductsService > should register and save a product when valid data is provided (CA01) 79ms
+ ✓ src/modules/products/services/products.service.spec.ts > ProductsService > should reject an empty product name in the service without saving (RN01) 1ms
+ × src/modules/products/services/products.service.spec.ts > ProductsService > should report an incomplete operation when persistence fails (FE01) 3ms
+   → expected Error: connection refused at 10.0.0.5:543… to match object { Object (name) }
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/modules/products/services/products.service.spec.ts > ProductsService > should report an incomplete operation when persistence fails (FE01)
+AssertionError: expected Error: connection refused at 10.0.0.5:543… to match object { Object (name) }
+
+- Expected
++ Received
+
+- {
+-   "name": "ProductPersistenceFailedException",
++ Error {
++   "message": "connection refused at 10.0.0.5:5432 (relation \"products\" does not exist)",
+  }
+
+ ❯ src/modules/products/services/products.service.spec.ts:61:25
+     59|     const result = service.createProduct('Celular XYZ');
+     60|
+     61|     await expect(result).rejects.toMatchObject({
+       |                         ^
+     62|       name: 'ProductPersistenceFailedException',
+     63|     });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 2 passed (3)
+   Start at  15:57:14
+   Duration  330ms (transform 21ms, setup 0ms, import 178ms, tests 84ms, environment 0ms)
+
