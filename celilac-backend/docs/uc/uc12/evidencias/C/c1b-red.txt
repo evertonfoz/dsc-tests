@@ -1,0 +1,120 @@
+# RED do C1b em 2026-11-20T19:33:16Z, base b7ba304f732d7f2d76b66ea817edbba8f0ff0840
+The plugin "vite-tsconfig-paths" is detected. Vite now supports tsconfig paths resolution natively via the resolve.tsconfigPaths option. You can remove the plugin and set resolve.tsconfigPaths: true in your Vite config instead.
+
+ RUN  v4.1.11 /Users/evertoncoimbradearaujo/Documents/GitHub/dsc-tests/celilac-backend
+
+ × src/modules/products/controllers/products.error-mapping.spec.ts > ProductsController — mapeamento de erros do núcleo (HTTP) > should map InvalidProductNameException to 400 at the HTTP boundary 80ms
+   → expected { statusCode: 400, …(2) } to deeply equal { statusCode: 400, …(2) }
+ × src/modules/products/controllers/products.error-mapping.spec.ts > ProductsController — mapeamento de erros do núcleo (HTTP) > should reject a blank name at the HTTP boundary without calling the service (400) 6ms
+   → expected "vi.fn()" to not be called at all, but actually been called 1 times
+
+Received:
+
+  1st vi.fn() call:
+
+    Array [
+      "   ",
+    ]
+
+
+Number of calls: 1
+
+ × src/modules/products/controllers/products.error-mapping.spec.ts > ProductsController — mapeamento de erros do núcleo (HTTP) > should reject a name longer than 120 characters at the HTTP boundary (400) 3ms
+   → expected "vi.fn()" to not be called at all, but actually been called 1 times
+
+Received:
+
+  1st vi.fn() call:
+
+    Array [
+      "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+    ]
+
+
+Number of calls: 1
+
+ ✓ src/modules/products/controllers/products.error-mapping.spec.ts > ProductsController — mapeamento de erros do núcleo (HTTP) > should accept a name with exactly 120 characters at the HTTP boundary (201) 3ms
+ ✓ src/modules/products/controllers/products.error-mapping.spec.ts > ProductsController — mapeamento de erros do núcleo (HTTP) > should map ProductPersistenceFailedException to 500 without leaking internal details 2ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 3 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/modules/products/controllers/products.error-mapping.spec.ts > ProductsController — mapeamento de erros do núcleo (HTTP) > should map InvalidProductNameException to 400 at the HTTP boundary
+AssertionError: expected { statusCode: 400, …(2) } to deeply equal { statusCode: 400, …(2) }
+
+- Expected
++ Received
+
+  {
+-   "error": "Bad Request",
+-   "message": [
+-     "Product name must not be empty.",
+-   ],
++   "error": "InvalidProductNameException",
++   "message": "Product name must not be empty.",
+    "statusCode": 400,
+  }
+
+ ❯ src/modules/products/controllers/products.error-mapping.spec.ts:45:27
+     43|
+     44|     // Formato único dos erros 400 de produtos (ADR-004): o mesmo do V…
+     45|     expect(response.body).toEqual({
+       |                           ^
+     46|       statusCode: 400,
+     47|       message: ['Product name must not be empty.'],
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/3]⎯
+
+ FAIL  src/modules/products/controllers/products.error-mapping.spec.ts > ProductsController — mapeamento de erros do núcleo (HTTP) > should reject a blank name at the HTTP boundary without calling the service (400)
+AssertionError: expected "vi.fn()" to not be called at all, but actually been called 1 times
+
+Received:
+
+  1st vi.fn() call:
+
+    Array [
+      "   ",
+    ]
+
+
+Number of calls: 1
+
+ ❯ src/modules/products/controllers/products.error-mapping.spec.ts:58:43
+     56|       .expect(400);
+     57|
+     58|     expect(serviceMock.createProduct).not.toHaveBeenCalled();
+       |                                           ^
+     59|     expect(response.body).toEqual(
+     60|       expect.objectContaining({ statusCode: 400, error: 'Bad Request' …
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/3]⎯
+
+ FAIL  src/modules/products/controllers/products.error-mapping.spec.ts > ProductsController — mapeamento de erros do núcleo (HTTP) > should reject a name longer than 120 characters at the HTTP boundary (400)
+AssertionError: expected "vi.fn()" to not be called at all, but actually been called 1 times
+
+Received:
+
+  1st vi.fn() call:
+
+    Array [
+      "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+    ]
+
+
+Number of calls: 1
+
+ ❯ src/modules/products/controllers/products.error-mapping.spec.ts:70:43
+     68|       .expect(400);
+     69|
+     70|     expect(serviceMock.createProduct).not.toHaveBeenCalled();
+       |                                           ^
+     71|     expect(response.body).toEqual(
+     72|       expect.objectContaining({ statusCode: 400, error: 'Bad Request' …
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/3]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  3 failed | 2 passed (5)
+   Start at  16:33:16
+   Duration  551ms (transform 37ms, setup 0ms, import 375ms, tests 94ms, environment 0ms)
+
