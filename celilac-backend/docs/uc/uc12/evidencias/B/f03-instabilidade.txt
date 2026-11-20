@@ -1,0 +1,6 @@
+# Achado durante a F03 (pré-existente, não causado por ela)
+Teste: ProductsController (HTTP) > should create a product ... (201)  e  should not expose internal properties ... (alternam)
+Sintoma: "expected 201 "Created", got 400 "Bad Request"" para corpo válido { name: 'Produto de exemplo' }
+Frequência observada: 2 de 9 execuções na branch da F03; 1 de 25 na main (origin/main, sem as mudanças da F03)
+Causa: não investigada. Hipótese: ValidationPipe com DTO sem metadados de validação aplicados em algumas execuções.
+Decisão: fora do escopo da F03; registrar issue própria. A F03 não altera controller, DTO nem pipe.
