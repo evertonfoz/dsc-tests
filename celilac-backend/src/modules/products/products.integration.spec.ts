@@ -1,7 +1,4 @@
-import {
-  type INestApplication,
-  ValidationPipe,
-} from '@nestjs/common';
+import { type INestApplication } from '@nestjs/common';
 import { Test, type TestingModule } from '@nestjs/testing';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import request from 'supertest';
@@ -24,6 +21,8 @@ import {
   type ProductsRepository,
 } from './repositories/products.repository.interface.js';
 import { ProductsService } from './services/products.service.js';
+import { createValidationPipe } from '../../common/config/validation-pipe.js';
+
 
 describe('POST /products — integração', () => {
   let app: INestApplication<App>;
@@ -49,10 +48,7 @@ describe('POST /products — integração', () => {
     app = moduleRef.createNestApplication();
 
     app.useGlobalPipes(
-      new ValidationPipe({
-        whitelist: true,
-        transform: true,
-      }),
+      createValidationPipe(),
     );
 
     await app.init();

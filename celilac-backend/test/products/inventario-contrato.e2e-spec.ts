@@ -1,10 +1,11 @@
 import { writeFileSync } from 'node:fs';
-import { INestApplication, ValidationPipe } from '@nestjs/common';
+import { INestApplication } from '@nestjs/common';
 import { Test } from '@nestjs/testing';
 import { getDataSourceToken } from '@nestjs/typeorm';
 import request from 'supertest';
 import { DataSource } from 'typeorm';
 import { AppModule } from '../../src/app.module.js';
+import { createValidationPipe } from '../../src/common/config/validation-pipe.js';
 
 // Inventário do contrato REAL de POST /products (Fase D, passo 1). Não afirma nada: só registra o que a API devolve.
 // Mesma configuração de pipe do src/main.ts. Banco: somente o de TESTES (guardas do vitest.config.e2e.ts).
@@ -16,7 +17,7 @@ describe('Inventário do contrato de POST /products', () => {
   beforeAll(async () => {
     const moduleFixture = await Test.createTestingModule({ imports: [AppModule] }).compile();
     app = moduleFixture.createNestApplication();
-    app.useGlobalPipes(new ValidationPipe({ whitelist: true, transform: true }));
+    app.useGlobalPipes(createValidationPipe());
     await app.init();
     dataSource = app.get<DataSource>(getDataSourceToken());
   });

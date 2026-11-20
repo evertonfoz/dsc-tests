@@ -1,0 +1,7 @@
+# Depois do REFACTOR A2 em 2026-11-20T19:58:18Z
+ Test Files  4 passed (4)
+      Tests  16 passed (16)
+[08] Integração (banco real de testes)                        OK    (1s)
+[09] E2E (banco de testes, sem as falhas conhecidas, ADR-001)   OK    (2s)
+----------------------------------------------------------------------
+RESULTADO: 9 passo(s), todos OK.
