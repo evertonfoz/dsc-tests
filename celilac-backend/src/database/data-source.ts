@@ -1,6 +1,9 @@
 import 'dotenv/config';
 import { DataSource } from 'typeorm';
 import { OrderEntity } from '../infrastructure/persistence/orders/order.orm-entity.js';
+import { ProductOrmEntity } from '../infrastructure/persistence/products/product.orm-entity.js';
+
+const isTsRuntime = import.meta.url.endsWith('.ts');
 
 export default new DataSource({
   type: 'postgres',
@@ -9,7 +12,11 @@ export default new DataSource({
   username: process.env.DB_USERNAME,
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME,
-  entities: [OrderEntity],
-  migrations: ['src/database/migrations/*.ts'],
+  entities: [OrderEntity, ProductOrmEntity],
+  migrations: [
+    isTsRuntime
+      ? 'src/database/migrations/*.ts'
+      : 'dist/database/migrations/*.js',
+  ],
   synchronize: false,
 });
