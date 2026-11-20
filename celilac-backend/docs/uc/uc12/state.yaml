@@ -5,7 +5,7 @@ uc: UC12
 nome: Cadastrar Produto
 documento: ../../planejamento/uc12-cadastrar-produto/uc-12.md
 arquetipo: criar
-epic: { issue: null, estado: open }   # a Epic #1 (laboratório) está fechada; a issue de reconciliação será criada após aprovação do plano
+epic: { issue: 23, estado: open }   # reconciliação do piloto; a Epic #1 (laboratório) está fechada e permanece como histórico
 fase_atual: A
 
 fases:
@@ -16,7 +16,7 @@ fases:
       - { item: "Todo item do UC12 mapeado (fatia, ADR ou pergunta)", resultado: pendente }
       - { item: "Issue de reconciliação criada e conferida com este arquivo", resultado: pendente }
       - { item: "Fatias F03 e F04 com DoR avaliada e teste RED nomeado", resultado: pendente }
-    evidencias: [evidencias/A/testes-do-uc12.txt]
+    evidencias: [evidencias/A/testes-do-uc12.txt, evidencias/A/publicacao.txt]
   B: { status: pendente, relatorio: null, gate: [], evidencias: [] }
   C: { status: pendente, relatorio: null, gate: [], evidencias: [] }
   D: { status: pendente, relatorio: null, gate: [], evidencias: [] }
@@ -33,7 +33,7 @@ fatias:
     status: integrada
     responsavel: evertonfoz
     revisor: evertonfoz
-    evidencias: [evidencias/A/testes-do-uc12.txt]
+    evidencias: [evidencias/A/testes-do-uc12.txt, evidencias/A/publicacao.txt]
   - id: F02
     comportamento: "Nome vazio é rejeitado na fronteira HTTP (400) e nada é gravado"
     criterios: [CA02, CA03]
@@ -43,11 +43,11 @@ fatias:
     status: integrada
     responsavel: evertonfoz
     revisor: evertonfoz
-    evidencias: [evidencias/A/testes-do-uc12.txt]
+    evidencias: [evidencias/A/testes-do-uc12.txt, evidencias/A/publicacao.txt]
   - id: F03
     comportamento: "O serviço rejeita nome vazio no núcleo, sem gravar nada, independentemente da fronteira HTTP"
     criterios: [RN01, FA01, CA02]
-    issue: null
+    issue: 24
     branch: null
     pr: null
     status: planejada
@@ -57,7 +57,7 @@ fatias:
   - id: F04
     comportamento: "Falha ao persistir o produto é informada como operação não concluída, sem vazar detalhes"
     criterios: [FE01]               # FE01 é fluxo de exceção; o UC não define CA para ele
-    issue: null
+    issue: 25
     branch: null
     pr: null
     status: planejada

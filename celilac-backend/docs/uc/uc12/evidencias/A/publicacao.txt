@@ -1,0 +1,8 @@
+# Publicação em 2026-11-20T17:22:08Z
+#25 [UC12][F04] Informar falha de persistência sem vazar detalhes (FE01)
+#24 [UC12][F03] Rejeitar nome vazio no núcleo (serviço)
+#23 [UC12][Fase A] Reconciliação do UC12 com o método
+
+#23 status=Backlog
+#24 status=Backlog
+#25 status=Backlog

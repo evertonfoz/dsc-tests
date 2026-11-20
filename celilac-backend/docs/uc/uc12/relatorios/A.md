@@ -8,7 +8,7 @@
 | Fase | A — Planejar e publicar (reconciliação) |
 | Período | 2026-11-20 |
 | Responsável | evertonfoz |
-| Issue(s) | a criar (ver seção 6); a Epic #1 do laboratório está fechada |
+| Issue(s) | #23 (reconciliação), #24 (F03), #25 (F04); a Epic #1 do laboratório está fechada |
 | Branch / PR | branch de piloto docs/uc12-piloto-reconciliacao (nome de branch) / ainda sem PR |
 
 ## 1. Objetivo da fase
@@ -45,7 +45,7 @@ O UC12 foi executado no laboratório (`celillac-backend-prepare`) sob o método 
 5. **CA05:** o rótulo aparece em dois sentidos (critério de processo da Epic, e "resposta 201/400" no `12-10`). O `12-10` foi corrigido para citar RF05; o `uc-12.md` fica com CA01 a CA04.
 
 ## 6. Pendências e riscos
-- **Publicação:** criar a issue de reconciliação e as issues de F03 e F04 exige aprovação do plano (playbook A, passo 6). Nada foi publicado.
+- **Publicação:** plano aprovado pelo professor em 2026-11-20; issues #23, #24 e #25 criadas e adicionadas ao Project #6 em `Backlog`. Criadas pelo `gh`, sem os formulários (ainda não estão na `main`).
 - **Revisão solo:** `revisor` e `responsavel` coincidem; é papel, não revisão independente.
 - **F02 só no HTTP:** a regra de nome vazio não existe no núcleo; tratada pela fatia F03.
 - **Achados sobre o método:** (a) `criterios` agora aceita CA, RN, RF, FA e FE (validador ajustado nesta rodada); (b) o relatório `01-12` e o `12-10` afirmavam cobertura sem prova.
