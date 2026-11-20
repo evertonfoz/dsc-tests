@@ -1,0 +1,32 @@
+# Executado em 2026-11-20T17:10:06Z no commit 8276addc9bbcff6a8c076a5582e192486fe71a88 (celilac-backend)
+# pnpm exec vitest run --reporter=verbose src/modules/products
+The plugin "vite-tsconfig-paths" is detected. Vite now supports tsconfig paths resolution natively via the resolve.tsconfigPaths option. You can remove the plugin and set resolve.tsconfigPaths: true in your Vite config instead.
+
+ RUN  v4.1.11 /Users/evertoncoimbradearaujo/Documents/GitHub/dsc-tests/celilac-backend
+
+ ✓ src/modules/products/services/products.service.spec.ts > ProductsService > should register and save a product when valid data is provided (CA01) 96ms
+ ✓ src/modules/products/controllers/products.controller.spec.ts > ProductsController (HTTP) > should create a product when valid data is provided (POST /products -> 201) 104ms
+ ✓ src/modules/products/controllers/products.controller.spec.ts > ProductsController (HTTP) > should reject an empty product name at the HTTP boundary (POST /products -> 400) 10ms
+ ✓ src/modules/products/controllers/products.controller.spec.ts > ProductsController (HTTP) > should not expose internal properties from domain/service in the HTTP response 5ms
+ ✓ src/modules/products/products.integration.spec.ts > POST /products — integração > deve criar um produto com dados válidos 17ms
+ ✓ src/modules/products/products.integration.spec.ts > POST /products — integração > deve rejeitar nome vazio na fronteira HTTP 3ms
+
+ Test Files  3 passed (3)
+      Tests  6 passed (6)
+   Start at  14:10:07
+   Duration  714ms (transform 99ms, setup 0ms, import 1.05s, tests 289ms, environment 0ms)
+
+
+# pnpm test:integration --reporter=verbose
+$ vitest run --config ./vitest.integration.config.ts --reporter=verbose
+The plugin "vite-tsconfig-paths" is detected. Vite now supports tsconfig paths resolution natively via the resolve.tsconfigPaths option. You can remove the plugin and set resolve.tsconfigPaths: true in your Vite config instead.
+
+ RUN  v4.1.11 /Users/evertoncoimbradearaujo/Documents/GitHub/dsc-tests/celilac-backend
+
+ ✓ src/infrastructure/persistence/products/typeorm-products.repository.postgres.spec.ts > TypeOrmProductsRepository — persistência real no PostgreSQL > deve persistir um produto no PostgreSQL e confirmar o registro diretamente no banco 30ms
+
+ Test Files  1 passed (1)
+      Tests  1 passed (1)
+   Start at  14:10:08
+   Duration  579ms (transform 61ms, setup 0ms, import 343ms, tests 118ms, environment 0ms)
+

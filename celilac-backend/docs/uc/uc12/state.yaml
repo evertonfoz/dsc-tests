@@ -1,0 +1,79 @@
+# Estado do UC12 reconciliado com o método (piloto, Etapa 6).
+# Proveniência: A–E foram executadas no laboratório (celillac-backend-prepare) sob o método antigo, por camada técnica.
+# Aqui as entregas são reorganizadas por comportamento; nenhum gate está aprovado: aguarda validação humana.
+uc: UC12
+nome: Cadastrar Produto
+documento: ../../planejamento/uc12-cadastrar-produto/uc-12.md
+arquetipo: criar
+epic: { issue: 23, estado: open }   # reconciliação do piloto; a Epic #1 (laboratório) está fechada e permanece como histórico
+fase_atual: C
+
+fases:
+  A:
+    status: concluida
+    relatorio: relatorios/A.md
+    gate:
+      - { item: "Todo item do UC12 mapeado (fatia, ADR ou pergunta)", resultado: aprovado, por: evertonfoz }
+      - { item: "Issue de reconciliação criada e conferida com este arquivo", resultado: aprovado, por: evertonfoz }
+      - { item: "Fatias F03 e F04 com DoR avaliada e teste RED nomeado", resultado: aprovado, por: evertonfoz }
+    evidencias: [evidencias/A/testes-do-uc12.txt, evidencias/A/publicacao.txt]
+  B:
+    status: concluida
+    relatorio: relatorios/B.md
+    gate:
+      - { item: "Todas as fatias integradas na branch principal", resultado: aprovado, por: CI }
+      - { item: "CI verde na branch principal", resultado: aprovado, por: CI }
+    evidencias: [evidencias/B/f03-green.txt, evidencias/B/f04-green.txt]
+  C:
+    status: em_andamento
+    relatorio: null
+    gate:
+      - { item: "C1 (fronteira HTTP) integrada, com o mapeamento dos erros do núcleo", resultado: pendente }
+      - { item: "C2 (persistência real) integrada, com migration verificada em banco novo", resultado: pendente }
+      - { item: "CI verde na branch principal", resultado: pendente }
+    evidencias: []
+  D: { status: pendente, relatorio: null, gate: [], evidencias: [] }
+  E: { status: pendente, relatorio: null, gate: [], evidencias: [] }
+  F: { status: pendente, relatorio: null, gate: [], evidencias: [] }
+
+fatias:
+  - id: F01
+    comportamento: "Cadastro com dados válidos devolve o produto criado"
+    criterios: [CA01]
+    issue: 8
+    branch: feature/uc12-05-products-service
+    pr: 13
+    status: integrada
+    responsavel: evertonfoz
+    revisor: evertonfoz
+    evidencias: [evidencias/A/testes-do-uc12.txt]
+  - id: F02
+    comportamento: "Nome vazio é rejeitado na fronteira HTTP (400) e nada é gravado"
+    criterios: [CA02, CA03]
+    issue: 9
+    branch: feature/uc12-06-products-http
+    pr: 14
+    status: integrada
+    responsavel: evertonfoz
+    revisor: evertonfoz
+    evidencias: [evidencias/A/testes-do-uc12.txt]
+  - id: F03
+    comportamento: "O serviço rejeita nome vazio no núcleo, sem gravar nada, independentemente da fronteira HTTP"
+    criterios: [RN01, FA01, CA02]
+    issue: 24
+    branch: feature/uc12-f03-nome-vazio-no-nucleo
+    pr: 26
+    status: integrada
+    responsavel: evertonfoz
+    revisor: evertonfoz
+    evidencias: [evidencias/B/f03-red.txt, evidencias/B/f03-green.txt, evidencias/B/f03-instabilidade.txt]
+  - id: F04
+    comportamento: "Falha ao persistir o produto é informada como operação não concluída, sem vazar detalhes"
+    criterios: [FE01]               # FE01 é fluxo de exceção; o UC não define CA para ele
+    issue: 25
+    branch: feature/uc12-f04-falha-de-persistencia
+    pr: 31
+    status: integrada
+    responsavel: evertonfoz
+    revisor: evertonfoz
+    evidencias: [evidencias/B/f04-red.txt, evidencias/B/f04-green.txt]
