@@ -66,7 +66,7 @@ e rode a verificação lá.
 ## 5. Erros reais e lições
 - **Lista duplicada.** A lista de falhas conhecidas estava copiada no fluxo de CI. Ao centralizar, um filtro `[A-Z]+` não reconheceu `KNOWN_FAILURES_E2E` (tem um dígito) e foi corrigido para `[A-Z0-9_]+`. Uma lista, um lugar.
 - **Falha não reproduzida não é falha resolvida.** Uma execução inicial dos testes de ponta a ponta mostrou 2 falhas; uma não foi capturada e não voltou em mais de 9 execuções. Ficou registrada como "não reproduzida".
-- **Proibições valem para quem executa.** Nada de `docker compose down -v`, `DROP`, `TRUNCATE` ou reverter migrations sem autorização, inclusive para o assistente de IA.
+- **Proibições valem para quem executa.** Nada de `docker compose down -v`, `DROP`, `TRUNCATE` ou reverter migrations sem autorização, inclusive para o assistente de IA (inteligência artificial).
 
 ## 6. Pratique no seu domínio
 Nesta ordem (a ordem importa):

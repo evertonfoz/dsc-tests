@@ -6,7 +6,7 @@
 ---
 
 ## 1. O problema
-Até o módulo 7, o cadastro de produto funcionava, mas **gravava em uma lista na memória** (o repositório em memória, `InMemoryProductsRepository`). Os testes passavam, a API respondia 201. Só que:
+Até o módulo 7, o cadastro de produto funcionava, mas **gravava em uma lista na memória** (o repositório em memória, `InMemoryProductsRepository`). Os testes passavam, a API (*Application Programming Interface*, a interface pela qual outros programas usam o sistema) respondia 201. Só que:
 
 - ao reiniciar o programa, **todos os produtos sumiam**;
 - nada garantia que o **banco de verdade** aceitaria o que o código mandava (tamanho do campo, campo obrigatório, tipo);

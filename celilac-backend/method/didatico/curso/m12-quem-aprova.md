@@ -1,6 +1,6 @@
 # Módulo 12 — Quem aprova, e o que a IA pode fazer?
 
-> **Pré-requisito:** módulos 2, 3, 7, 10 e 11. Duração sugerida: 2 aulas.
+> **Pré-requisito:** módulos 1, 2, 3, 7, 10 e 11. Duração sugerida: 2 aulas.
 > **Você vai:** separar, com regras escritas, o que a IA (inteligência artificial) **pode fazer**, o que **só uma pessoa decide** e o que **só o CI** (integração contínua, o robô que roda as verificações, apoio C) pode atestar, e fazer uma **auditoria** do que o caso de uso realmente entregou.
 
 ---
