@@ -1,6 +1,5 @@
 import { IsString, Matches, MaxLength } from 'class-validator';
-
-export const MAX_PRODUCT_NAME_LENGTH = 120;
+import { MAX_PRODUCT_NAME_LENGTH } from '../entities/product-name.rules.js';
 
 export class CreateProductDto {
   @IsString()
