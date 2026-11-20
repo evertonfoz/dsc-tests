@@ -36,7 +36,7 @@ Transformar o documento do caso de uso em um plano **publicado e rastreável**: 
 4. **Aplicar a DoR** a cada fatia: objetivo, escopo, critérios verificáveis, dependências, informações disponíveis, responsável e revisão concluída. A fatia vai a `Ready` somente se atender aos sete itens; sem revisão humana registrada, fica em `Backlog`. — evidência: tabela de DoR.
 5. **Criar `docs/uc/<uc>/state.yaml`** a partir do template (epic, fatias com `criterios`, gates da fase A). — verificar: `method/scripts/check-state.sh docs/uc/<uc>/state.yaml` sem erros.
 6. **Apresentar o plano e aguardar aprovação** antes de publicar qualquer coisa no GitHub. Publicar é ato externo e visível.
-7. **Publicar (após aprovação)** — inspecionar antes de criar (regra 5): rótulos → Epic → uma Sub-Issue por fatia (formulário `fatia.yml`) vinculada ao Epic → issue da própria fase quando houver trabalho (formulário `fase.yml`). Registrar os números **reais** retornados. — evidência: saída dos comandos em `evidencias/A/`.
+7. **Publicar (após aprovação)** — inspecionar antes de criar (regra 5): rótulos → Epic → uma Sub-Issue por fatia (formulário `fatia.yml`) vinculada ao Epic → issue da própria fase quando houver trabalho (formulário `fase.yml`). Registrar os números **reais** retornados. — evidência: saída dos comandos em `docs/uc/<uc>/evidencias/A/`.
 8. **Configurar o GitHub Project** com os cinco estados (`Backlog`, `Ready`, `In Progress`, `In Review`, `Done`), adicionar Epic e Sub-Issues e posicionar cada item (`Backlog` ou `Ready`, conforme a DoR). — evidência: listagem do Project.
 9. **Reconciliar:** atualizar o `state.yaml` com issues reais e rodar `check-state.sh --remote`. O `state.yaml` vence qualquer divergência (regra 15).
 10. **Relatório da fase** (`relatorio-de-fase.md`) e `check-links.mjs`. Mostrar o gate de saída e **aguardar validação**.
@@ -57,7 +57,7 @@ Transformar o documento do caso de uso em um plano **publicado e rastreável**: 
 | Todo item do UC mapeado (fatia, ADR ou pergunta) | tabela de cobertura no relatório | pessoa responsável |
 | Epic e Sub-Issues existem e conferem com o `state.yaml` | `check-state.sh --remote` | CI / pessoa |
 | Cada fatia tem teste RED nomeado e DoR avaliada | tabela de DoR | pessoa responsável |
-| Project com os cinco estados e itens posicionados | listagem em `evidencias/A/` | pessoa responsável |
+| Project com os cinco estados e itens posicionados | listagem em `docs/uc/<uc>/evidencias/A/` | pessoa responsável |
 | Links e caminhos dos documentos existem | `check-links.mjs` | CI |
 
 O agente **não** marca `aprovado` (regras 9 e 21).

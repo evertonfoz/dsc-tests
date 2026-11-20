@@ -29,11 +29,11 @@ Entregar **cada fatia** do caso de uso **no núcleo** (domínio + serviço de ap
 
 ## 4. Passos (repetir para **cada fatia**, uma por vez)
 1. **Branch** a partir da principal atualizada, com a convenção do perfil (`feature/<uc>-<fatia>-<resumo>`). `state.yaml`: fatia `em_andamento` (exige issue e branch).
-2. **RED** — escrever **apenas** o teste nomeado na issue. Executá-lo e confirmar que falha **pelo motivo esperado** (comportamento ausente), não por erro de compilação ou de configuração. — evidência: saída em `evidencias/B/<fatia>-red.txt`. Commit só do teste: `test(<escopo>): <comportamento> (refs #N)`.
+2. **RED** — escrever **apenas** o teste nomeado na issue. Executá-lo e confirmar que falha **pelo motivo esperado** (comportamento ausente), não por erro de compilação ou de configuração. — evidência: saída em `docs/uc/<uc>/evidencias/B/<fatia>-red.txt`. Commit só do teste: `test(<escopo>): <comportamento> (refs #N)`.
 3. **Draft PR** com a issue, o critério coberto e a evidência do RED. `state.yaml`: registrar `pr`.
-4. **GREEN** — o mínimo de código que faz o teste passar, no núcleo. Nada de HTTP, banco, DTO de resposta ou funcionalidade de outra fatia. — evidência: `evidencias/B/<fatia>-green.txt`. Commit: `feat(<escopo>): … (refs #N)`.
+4. **GREEN** — o mínimo de código que faz o teste passar, no núcleo. Nada de HTTP, banco, DTO de resposta ou funcionalidade de outra fatia. — evidência: `docs/uc/<uc>/evidencias/B/<fatia>-green.txt`. Commit: `feat(<escopo>): … (refs #N)`.
 5. **REFACTOR** (se houver necessidade) — melhorar nomes e estrutura **sem mudar comportamento**, com os testes verdes antes e depois. Commit separado: `refactor(<escopo>): … (refs #N)`. Se não houve, registre "sem refatoração".
-6. **Regressão** — rodar toda a suíte rápida e a verificação local do perfil; comparar com a linha de base (nenhum teste antes verde pode falhar). — evidência: `evidencias/B/<fatia>-suite.txt`.
+6. **Regressão** — rodar toda a suíte rápida e a verificação local do perfil; comparar com a linha de base (nenhum teste antes verde pode falhar). — evidência: `docs/uc/<uc>/evidencias/B/<fatia>-suite.txt`.
 7. **Marcar o PR como pronto**; `state.yaml`: `em_revisao`. Mostrar o diff, o RED/GREEN e a regressão e **aguardar a revisão humana**.
 8. **Integração (humana)** — a pessoa aprova e faz o merge. Só então: fatia `integrada` (exige `revisor` e `evidencias`), issue fechada **com PR integrado e link da evidência** (regra 14), `check-state.sh` sem erros.
 9. **Próxima fatia** parte da principal já atualizada (sem PR empilhado).
