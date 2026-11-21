@@ -61,6 +61,8 @@
 | 2026-11-21 | Autorizado abrir branch e PR da E5 (com o registro da E3). Merge **não** delegado nesta sessão. | Professor |
 | 2026-11-21 | **Delegação registrada:** o professor autorizou a IA a fazer o merge **só do PR #81** ("autorizo o merge do #81"), depois de três conferências mostrarem o PR ainda aberto. Condição mantida pela IA: CI verde. Não vale para outros PRs nem para a sessão seguinte. | Professor |
 | 2026-11-21 | P8: projeto próprio em `curso-app/`, na raiz do `dsc-tests`; criado só com README (sem código até a E9). | E0 |
+| 2026-11-21 | Aprovado o texto novo de `method/AGENTS.md`, linha 4: o arquivo fica em `method/` e não é copiado para a raiz; o orquestrador já aponta o caminho. | Professor, sessão do PR #82 |
+| 2026-11-21 | Autorizados branch e PR de `method/` portátil (E5, opção i). Merge **não** delegado. | Professor ([prompt-sessao-method-portatil.md](prompt-sessao-method-portatil.md)) |
 
 ## Requisitos acrescentados pelo professor
 | Data | Requisito | Etapas afetadas |
@@ -83,12 +85,13 @@
 - E4, seção 3.1: lista consolidada das variáveis do projeto (inclui `documento_uc`, `issue_principal` e `login`, usadas no `m02-pratica.md` e ausentes da E2, seção 7).
 
 - **Divergência (2026-11-21, apontada pelo professor):** a E3 não tinha documento em `etapas/`, embora o prompt peça um por etapa de E0 a E8. Corrigido com um **registro retroativo** da parte 1 ([E3](etapas/E3-atualizacao-do-conteudo.md)), sem decisão nova, a partir deste arquivo e dos PRs #73 a #76 conferidos com `gh pr view` e `gh pr checks`.
-- **Divergência encontrada na E5 (não corrigida):** `method/` copiado para um repositório novo, sem `didatico/curso/`, `didatico/curso-app/` e `exemplos/`, **falha** no `check-links` com 35 referências quebradas (executado numa pasta temporária). Referências a arquivos do CeliLac e a `method/exemplos/` nunca existirão no repositório do aluno. Correção aprovada (E5, seção 6, opção i): PR de conteúdo próprio, ainda não aberto.
-- **Divergência encontrada na E5 (não corrigida):** `method/AGENTS.md`, linha 4, manda copiar o arquivo para a raiz; o projeto de referência não tem `AGENTS.md` na raiz e o orquestrador lê `method/AGENTS.md`. Ajuste aprovado (E5, seção 6.1), no mesmo PR da opção (i).
+- **Divergência encontrada na E5 (correção em PR, [#82](https://github.com/evertonfoz/dsc-tests/pull/82), aguardando merge):** `method/` copiado para um repositório novo, sem `didatico/curso/`, `didatico/curso-app/` e `exemplos/`, **falha** no `check-links` com 35 referências quebradas (executado numa pasta temporária). Referências a arquivos do CeliLac e a `method/exemplos/` nunca existirão no repositório do aluno. O PR #82 marca as 20 linhas do G2; na simulação do kit restam só as 2 referências a `scripts/verify.sh` (criado no m04), e com ele o `check-links` sai com código 0.
+- **Divergência encontrada na E5 (correção em PR, [#82](https://github.com/evertonfoz/dsc-tests/pull/82), aguardando merge):** `method/AGENTS.md`, linha 4, manda copiar o arquivo para a raiz; o projeto de referência não tem `AGENTS.md` na raiz e o orquestrador lê `method/AGENTS.md`. Linha ajustada no PR #82, com texto aprovado pelo professor.
+- **Imprecisão encontrada na E5 (não corrigida; não invalida decisão):** a seção 6 fala em "a falha dessa única referência" a `scripts/verify.sh`; são **duas** (`method/orquestrador/prompt-do-estudante.md` e `method/perfis/celilac-nest.md`). E o "em 29 documento(s)" da mensagem do `check-links` é o total de documentos verificados, não o de documentos com falha. O `LEIA-ME.md` do kit deve falar em duas referências.
 - **Pendência da E5:** o exemplo de `ci.yml` do apoio C não tem `permissions: contents: read`, que o CI de referência tem (linha 16). Entra no arquivo de prática do apoio C.
 - **Pendência da E5:** `m02-pratica.md`, "Antes de começar", manda copiar `method/` do repositório do curso; passa a apontar para o kit (E3, parte 2).
 
-**Decisão para a próxima sessão:** seguir o protocolo, **uma etapa por vez**. A E5 foi validada; a próxima etapa é a **E6**. O PR de `method/` portátil (E5, opção i) está autorizado e pode ser feito antes ou depois da E6, por escolha do professor.
+**Decisão para a próxima sessão:** seguir o protocolo, **uma etapa por vez**. A E5 foi validada; a próxima etapa é a **E6**. O PR de `method/` portátil (E5, opção i) foi aberto ([#82](https://github.com/evertonfoz/dsc-tests/pull/82)) e aguarda merge do professor.
 
 ## Histórico de sessões
 | Data | Etapa | O que foi feito | PR ou documento |
@@ -113,3 +116,5 @@
 | 2026-11-21 | E3 | Registro retroativo da parte 1, depois de o professor notar a falta do documento | [E3](etapas/E3-atualizacao-do-conteudo.md) (sem PR) |
 | 2026-11-21 | E5 | Kit como ponto de partida (`.zip` com `repositorio/` e `para-voce/`), formas de entrega, permissões mínimas, limite do assistente de IA; simulação de `method/` portátil: `check-links` falha com 35 referências | [E5](etapas/E5-kit-e-github.md) (sem PR) |
 | 2026-11-21 | E5 | Professor aprovou todas as recomendações da E5 e o registro da E3; E5 encerrada | PR da E5 (ver git log) |
+| 2026-11-21 | E5 | PR #81 (E5 e registro da E3) integrado em 2026-11-21T12:36:56Z (conferido com `gh pr view 81`) | [#81](https://github.com/evertonfoz/dsc-tests/pull/81) |
+| 2026-11-21 | E5 (opção i) | `method/` portátil: 20 linhas do G2 marcadas com `<!-- links:ignore -->`, `AGENTS.md` linha 4 ajustada; falha reproduzida (35 referências) e critérios de aceite executados (2 restantes do G1; código 0 com `scripts/verify.sh`; código 0 no repositório). Nenhuma etapa invalidada. | [prompt-sessao-method-portatil.md](prompt-sessao-method-portatil.md); [#82](https://github.com/evertonfoz/dsc-tests/pull/82) (merge não delegado) |

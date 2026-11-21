@@ -12,7 +12,7 @@ O UC12 foi executado por 13 materiais lineares. A análise mostrou planejamento 
 2. **Fatias** (comportamentos) como Sub-Issues — termo refinado na ADR-003, que substitui "fatias verticais"; RED, GREEN e REFACTOR no mesmo PR; sem stacked PR por padrão.
 3. **`state.yaml` por UC** como fonte da verdade da rastreabilidade.
 4. **Um relatório curto por fase**; evidências brutas em `evidencias/`; veredicto humano ou do CI.
-5. **Playbooks curtos + `AGENTS.md` comum + perfil do projeto**; exemplos do CeliLac isolados em `method/exemplos/`.
+5. **Playbooks curtos + `AGENTS.md` comum + perfil do projeto**; exemplos do CeliLac isolados em `method/exemplos/`. <!-- links:ignore -->
 6. **Agnóstico de agente** (Markdown + `AGENTS.md`) e **agnóstico de stack**, com perfis por stack; `celilac-nest` será o primeiro.
 7. **Local:** pasta `method/` neste repositório. **Idioma:** português técnico-acadêmico.
 8. **Condução:** uma fase por vez, com perguntas prévias e validação humana a cada gate.

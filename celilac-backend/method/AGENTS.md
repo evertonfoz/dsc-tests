@@ -1,7 +1,7 @@
 # AGENTS.md — Regras Permanentes do Método
 
 > Este arquivo é lido por qualquer agente de IA (ou pessoa) que atue neste repositório.
-> Copie-o para a **raiz** do seu repositório. Ele vale para **todas** as fases e casos de uso.
+> Fica em `method/AGENTS.md` e **não** deve ser copiado para a raiz do repositório: duas cópias divergem com o tempo. O orquestrador (`method/orquestrador/prompt-do-estudante.md`) já manda ler este caminho. Vale para **todas** as fases e casos de uso.
 > Por que estas regras existem: ver `method/didatico/01-por-que-um-metodo-em-duas-camadas.md`.
 
 ## 1. Como o trabalho é organizado
@@ -22,7 +22,7 @@ Os procedimentos de cada fase estão em `method/playbooks/`. O perfil do projeto
 4. **Classifique toda afirmação relevante** com uma destas etiquetas:
    `Documentado` · `Confirmado no código` · `Executado nesta fase` · `Aguardando evidência` · `Pendente de correção`.
 5. **Inspecione antes de criar.** Verifique se o arquivo, a issue, a branch ou o serviço já existe. Se existir e estiver adequado, não recrie.
-6. **Não imponha nomes de exemplo.** Portas, nomes de container, tabelas, issues e branches vêm do projeto real (`project-profile.md`), nunca de exemplos em `method/exemplos/`.
+6. **Não imponha nomes de exemplo.** Portas, nomes de container, tabelas, issues e branches vêm do projeto real (`project-profile.md`), nunca de exemplos em `method/exemplos/` (do CeliLac, no repositório do curso). <!-- links:ignore -->
 7. **Não use decisões não documentadas como se fossem requisito.** Se o caso de uso não define algo, registre como *proposta técnica / hipótese* e peça confirmação.
 8. **Sem ações destrutivas ou irreversíveis sem autorização explícita e específica:** `docker compose down -v`, `DROP`, `TRUNCATE`, `migration:revert`, `git push --force`, `git reset --hard`, apagar branches, fechar issues/PRs, merge. Em dúvida, pare e pergunte.
 9. **Merge e fechamento de Epic são sempre humanos.** O agente prepara; a pessoa decide e executa (ou autoriza explicitamente cada comando).

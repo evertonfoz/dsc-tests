@@ -20,17 +20,17 @@ No UC12 original, Docker, banco de testes, CI e coleção HTTP nasceram dentro d
 ## 2. O que a Fundação do CeliLac entregou
 
 1. **Compose sem senhas padrão.** `compose.yaml` exige as variáveis (`${VAR:?mensagem}`); o `.env.example` traz só valores de exemplo sem segredo.
-2. **Isolamento dos testes que gravam dados.** Integração e E2E rodam contra `postgres_test`. Três travas: `TEST_DB_ALLOW_DESTRUCTIVE=true`, nome do banco terminado em `_test` e usuário/porta distintos dos de desenvolvimento. O teste `test/database-isolation.e2e-spec.ts` é a guarda permanente.
+2. **Isolamento dos testes que gravam dados.** Integração e E2E rodam contra `postgres_test`. Três travas: `TEST_DB_ALLOW_DESTRUCTIVE=true`, nome do banco terminado em `_test` e usuário/porta distintos dos de desenvolvimento. O teste `test/database-isolation.e2e-spec.ts` é a guarda permanente. <!-- links:ignore -->
 3. **Migration `EnableUuidOssp`.** Um banco novo não conseguia criar pedidos porque faltava a extensão `uuid-ossp`. Foi verificado em banco novo e em banco legado.
-4. **CI** (`.github/workflows/celilac-backend-ci.yml`) com três jobs: qualidade, integração/E2E com PostgreSQL de serviço, e *smoke* do Compose com senhas efêmeras.
+4. **CI** (`.github/workflows/celilac-backend-ci.yml`) com três jobs: qualidade, integração/E2E com PostgreSQL de serviço, e *smoke* do Compose com senhas efêmeras. <!-- links:ignore -->
 5. **Validadores de documentos:** `check-state` (estado) e `check-links` (links e caminhos citados existem, regra 19 do `AGENTS.md`).
 6. **Templates do GitHub:** formulários de issue de fatia e de fase, e modelo de PR.
-7. **`scripts/verify.sh`:** a mesma verificação do CI, rodável localmente (rápida, ou `--completo` com banco).
-8. **Falhas conhecidas com dono:** o exercício didático de `orders` tem 5 testes que falham de propósito. Em vez de ocultá-los, a ADR-001 do projeto registra a decisão e `scripts/known-failures.env` guarda a lista num único lugar, lido pelo CI e pelo `verify.sh`.
+7. **`scripts/verify.sh`:** a mesma verificação do CI, rodável localmente (rápida, ou `--completo` com banco). <!-- links:ignore -->
+8. **Falhas conhecidas com dono:** o exercício didático de `orders` tem 5 testes que falham de propósito. Em vez de ocultá-los, a ADR-001 do projeto registra a decisão e `scripts/known-failures.env` guarda a lista num único lugar, lido pelo CI e pelo `verify.sh`. <!-- links:ignore -->
 
 ## 3. Lições (com os erros que as originaram)
 
-- **Prove o que o ambiente limpo faz.** O CI falhou porque `method/exemplos/` era uma pasta vazia: o Git não versiona pasta vazia, e a máquina local escondia isso. Validamos agora também em cópia limpa (`git archive`). *Lição: "funciona na minha máquina" não é evidência.*
+- **Prove o que o ambiente limpo faz.** O CI falhou porque `method/exemplos/` era uma pasta vazia: o Git não versiona pasta vazia, e a máquina local escondia isso. Validamos agora também em cópia limpa (`git archive`). *Lição: "funciona na minha máquina" não é evidência.* <!-- links:ignore -->
 - **Uma lista, um lugar.** A lista de falhas conhecidas estava duplicada no workflow. Ao centralizar, apareceu um bug: o filtro `[A-Z]+` não casava `KNOWN_FAILURES_E2E` (tem dígito). Foi pego na simulação local, antes de ir ao CI. *Lição: simule o passo do CI antes do push.*
 - **Erro de sintaxe também é falha de CI.** Um `: ` dentro de um nome de passo sem aspas invalidou o workflow inteiro. *Lição: valide o YAML antes de enviar.*
 - **Falha não reproduzida não é falha resolvida.** Uma execução inicial do E2E mostrou 2 falhas; uma não foi capturada e não voltou em mais de 9 execuções. Ficou registrada como "não reproduzida", e não como "corrigida".
@@ -52,8 +52,8 @@ No UC12 original, Docker, banco de testes, CI e coleção HTTP nasceram dentro d
 
 ## 6. Referências
 - `project-profile.md` · `method/perfis/celilac-nest.md`
-- `docs/adr/ADR-001-falhas-conhecidas-exercicio-orders.md`
-- `scripts/verify.sh` · `scripts/known-failures.env`
-- `.github/workflows/celilac-backend-ci.yml`
+- `docs/adr/ADR-001-falhas-conhecidas-exercicio-orders.md` (CeliLac, no repositório do curso) <!-- links:ignore -->
+- `scripts/verify.sh` · `scripts/known-failures.env` (CeliLac, no repositório do curso) <!-- links:ignore -->
+- `.github/workflows/celilac-backend-ci.yml` (CeliLac, no repositório do curso) <!-- links:ignore -->
 
 Próximo documento: **05 — Playbooks das fases** (Etapa 5).

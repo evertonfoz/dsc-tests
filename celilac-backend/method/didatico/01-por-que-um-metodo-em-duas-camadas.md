@@ -59,7 +59,7 @@ Foram cerca de 100 arquivos e 720 KB de Markdown, com cabeçalhos e tabelas repe
 
 ### 3.7. Prompts grandes e presos ao exemplo
 Os prompts tinham 30 a 55 KB e traziam portas, nomes de container e números de issue do CeliLac. Mesmo com avisos de "não imponha", isso favorece que o exemplo vaze para o projeto do aluno. Também pediam colar "os oito Markdown anteriores" a cada etapa.
-**Resposta do método:** regras comuns no `AGENTS.md`, procedimentos curtos nos playbooks, nomes reais no `project-profile.md`, exemplos isolados em `method/exemplos/`, estado lido do `state.yaml`.
+**Resposta do método:** regras comuns no `AGENTS.md`, procedimentos curtos nos playbooks, nomes reais no `project-profile.md`, exemplos isolados em `method/exemplos/` (no repositório do curso), estado lido do `state.yaml`. <!-- links:ignore -->
 
 ## 4. A nova organização
 
