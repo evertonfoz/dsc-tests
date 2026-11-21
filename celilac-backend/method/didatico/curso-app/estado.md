@@ -70,6 +70,7 @@
 | 2026-11-21 | E6: links de evidência conferidos só pela forma; saídas de comandos coladas **não** são interpretadas; rótulos fixos da seção 9; lista do que a aplicação não prova exibida na tela. | E6, seções 5, 6, 8 e 9 |
 | 2026-11-21 | E6: registrar no método a convenção de cabeçalho das evidências (o que foi executado, data UTC, commit de base), na E3, parte 2. | E6, seção 9 |
 | 2026-11-21 | Autorizados branch e PR da E6 (com o registro do PR #82). Merge **não** delegado. | Professor |
+| 2026-11-21 | **Delegação registrada:** o professor autorizou a IA a fazer o merge **só do PR #83** ("autorizo o merge do #83 com CI verde"). Condição: CI verde no último commit do PR. Apagar a branch não foi autorizado. Não vale para outros PRs nem para a sessão seguinte. | Professor |
 
 ## Requisitos acrescentados pelo professor
 | Data | Requisito | Etapas afetadas |
