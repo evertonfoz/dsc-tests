@@ -84,7 +84,12 @@ a.externo::after { content: " ↗"; }
 .ficha dd { margin: 0; }
 .ficha ul, .em-linha { margin: 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: .25rem 1rem; }
 .nota { color: var(--texto-suave); font-size: .9375rem; }
-@media (max-width: 30rem) { .ficha { grid-template-columns: 1fr; } .ficha dd { margin-bottom: .5rem; } }
+@media (max-width: 30rem) {
+  .ficha { grid-template-columns: 1fr; }
+  .ficha dd { margin-bottom: .5rem; }
+  .mapa dl { grid-template-columns: 1fr; }
+  .mapa dd { margin-bottom: .35rem; }
+}
 
 /* Siglas: foco na primeira ocorrência por seção; mouse, foco e toque abrem a definição. */
 abbr.sigla { position: relative; border-bottom: 1px dotted currentColor; text-decoration: none; cursor: help; }
