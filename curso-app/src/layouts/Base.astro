@@ -1,0 +1,48 @@
+---
+import '../estilos/base.css';
+import { textos } from '../textos';
+import { lerOrigem } from '../conteudo/origem';
+
+interface Props {
+  titulo: string;
+}
+const { titulo } = Astro.props;
+// Variáveis de ambiente da construção (Node); sem depender de @types/node.
+const ambiente = (globalThis as { process?: { env: Record<string, string | undefined> } }).process?.env ?? {};
+const origem = lerOrigem(ambiente);
+---
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
+    <title>{titulo} · {textos.nomeDoSite}</title>
+  </head>
+  <body>
+    <a class="pular" href="#conteudo">{textos.pularParaConteudo}</a>
+    <header>
+      <p class="site">{textos.nomeDoSite}</p>
+      <nav aria-label={textos.navegacao}>
+        <ul>
+          <li><a href="/">{textos.linkIndice}</a></li>
+          <li><a href="/m00/">{textos.linkM00}</a></li>
+        </ul>
+      </nav>
+    </header>
+    <p class="aviso" role="note">{textos.avisoEmConstrucao}</p>
+    <main id="conteudo" tabindex="-1">
+      <slot />
+    </main>
+    <footer>
+      {origem ? (
+        <p data-origem-commit={origem.commit}>
+          <span title={origem.commit}>{textos.rodapeOrigem(origem.commitCurto, origem.dataExibida)}</span>
+        </p>
+      ) : (
+        <p>{textos.rodapeSemOrigem}</p>
+      )}
+      <p>{textos.rodapeNota}</p>
+    </footer>
+  </body>
+</html>

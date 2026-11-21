@@ -1,0 +1,16 @@
+---
+import { getEntry, render } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import { cursoValidado } from '../conteudo/carregar';
+
+// Valida o curso inteiro antes de gerar qualquer página.
+await cursoValidado();
+
+const readme = await getEntry('indice', 'README');
+if (!readme) throw new Error('README.md do curso não encontrado em celilac-backend/method/didatico/curso/');
+const { Content, headings } = await render(readme);
+const titulo = headings.find((h) => h.depth === 1)?.text ?? 'Índice do curso';
+---
+<Base titulo={titulo}>
+  <Content />
+</Base>
