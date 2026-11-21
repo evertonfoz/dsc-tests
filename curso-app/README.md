@@ -3,7 +3,7 @@
 Aplicação interativa que conduz o aluno pelo curso "Implementando um caso de uso com evidência" e o ajuda a produzir, no **seu** repositório, os mesmos artefatos e evidências do UC12 do CeliLac.
 
 ## Situação
-**M3 (progresso e gabaritos) em implementação.** A versão integrada atual permite leitura do curso e UC12; este marco acrescenta progresso pessoal no navegador, checklists declarados, tentativa antes do gabarito, gabaritos e a tela “Seus dados”.
+**M3 (progresso e gabaritos) integrado no PR #96.** A aplicação registra leituras, tentativas e checklists como declarações pessoais neste navegador; libera gabaritos após tentativa ou abertura antecipada; e oferece exportação, importação com backup, exclusão e pedido de persistência na tela “Seus dados”. O curso não avalia essas declarações.
 
 - Prompt e etapas do plano: `celilac-backend/method/didatico/curso-app/prompt-plano-da-aplicacao.md`
 - Estado do trabalho: `celilac-backend/method/didatico/curso-app/estado.md`
