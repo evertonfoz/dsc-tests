@@ -188,7 +188,7 @@ test('(3) as arestas do grafo correspondem ao front matter, incluindo as condici
 
 test('(7) mascotes são decorativos, respondem e não se repetem entre as páginas', async ({ page, request }) => {
   const usados: string[] = [];
-  for (const caminho of paginas) {
+  for (const caminho of paginas.filter((caminho) => !caminho.includes('-pratica/'))) {
     await page.goto(caminho);
     const imagem = page.locator('img.mascote');
     await expect(imagem, caminho).toHaveCount(1);
@@ -199,4 +199,9 @@ test('(7) mascotes são decorativos, respondem e não se repetem entre as págin
     usados.push(src!);
   }
   expect(new Set(usados).size).toBe(usados.length);
+
+  for (const caminho of paginas.filter((caminho) => caminho.includes('-pratica/'))) {
+    await page.goto(caminho);
+    await expect(page.locator('img.mascote'), caminho).toHaveCount(0);
+  }
 });
