@@ -98,7 +98,7 @@ function linhasDoTitulo(texto: string): string[] {
         const tituloCaixa = linhasDoTitulo(item.dados.titulo);
         const alturaDaCaixa = alturasCaixa.get(item.dados.id)!;
         return (
-          <a href={`/${item.dados.id}/`} tabindex="-1" data-no={item.dados.id}>
+          <a href={`/${item.dados.id}/`} tabindex="-1" data-no={item.dados.id} data-prerequisitos={item.dados.prerequisitos.join(',')} data-condicionais={(item.dados.prerequisitos_se_precisar ?? []).join(',')}>
             <title>{item.dados.titulo.replace(/`/g, '')}</title>
             <rect class="caixa" x={pos.x - 54} y={pos.y} width="108" height={alturaDaCaixa} rx="5" />
             <text class="rotulo" x={pos.x}>

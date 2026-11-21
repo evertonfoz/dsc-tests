@@ -56,6 +56,12 @@ header .site { margin: 0; font-weight: 600; }
 nav ul { list-style: none; display: flex; flex-wrap: wrap; gap: 1rem; margin: .5rem 0 0; padding: 0; }
 nav a { display: inline-block; min-height: 24px; min-width: 24px; }
 .aviso { background: var(--aviso-fundo); border: 1px solid var(--borda); padding: .5rem .75rem; border-radius: 4px; }
+button, input, textarea { font: inherit; }
+button { min-height: 2.75rem; padding: .4rem .75rem; color: var(--texto); background: var(--fundo); border: 1px solid var(--borda); border-radius: .25rem; cursor: pointer; }
+button:focus-visible, input:focus-visible, textarea:focus-visible { outline: 3px solid var(--foco); outline-offset: 2px; }
+textarea { display: block; width: 100%; max-width: 100%; margin: .35rem 0 .75rem; padding: .5rem; color: var(--texto); background: var(--fundo); border: 1px solid var(--borda); }
+[data-importar-arquivo] { display: block; max-width: 100%; margin: .5rem 0; }
+[hidden] { display: none !important; }
 main:focus { outline: none; }
 pre { overflow-x: auto; background: var(--codigo-fundo); padding: .75rem; border-radius: 4px; }
 code { font-size: .92em; }
@@ -118,6 +124,14 @@ abbr.sigla[data-fechado="true"]::after { display: none; }
 .mapa dl { display: grid; grid-template-columns: max-content 1fr; gap: 0 1rem; margin: .25rem 0 0; font-size: .9375rem; }
 .mapa dt { color: var(--texto-suave); }
 .mapa dd { margin: 0; }
+.declarado { color: var(--texto); }
+.com-pendencias .caixa { stroke-dasharray: 4 3; }
+.progresso, .tentativa { border: 1px solid var(--borda); padding: .75rem; margin: 1rem 0; border-radius: .25rem; }
+.progresso p, .tentativa p { margin-bottom: 0; }
+.tentativa label { display: block; font-weight: 600; }
+.tentativa button, .tentativa a { display: inline-block; margin: .3rem .5rem .3rem 0; }
+.checklist-estado { display: inline-block; margin-left: .35rem; }
+input[type="checkbox"] { width: 1.1rem; height: 1.1rem; vertical-align: middle; }
 
 /* Anterior e próximo. */
 .sequencia { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem; margin-top: 2rem; padding-top: 1rem; border-top: 1px solid var(--borda); }

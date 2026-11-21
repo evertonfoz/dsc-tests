@@ -14,6 +14,7 @@ const ambiente = (globalThis as { process?: { env: Record<string, string | undef
 const origem = lerOrigem(ambiente);
 const curso = await cursoValidado();
 const itens = await percurso();
+const idsConteudo = itens.map((e) => e.dados.id).join(',');
 const praticas = [...curso.values()].filter((e) => e.dados.tipo === 'pratica').sort((a, b) => a.id.localeCompare(b.id));
 const rotas = ['/', '/mapa/', ...itens.map((e) => `/${e.dados.id}/`), ...praticas.map((e) => `/${e.dados.id}/`)];
 const mascote = atribuirMascotes(rotas, arquivosDeMascotes, origem?.commit ?? 'a-confirmar').get(Astro.url.pathname);
@@ -26,7 +27,7 @@ const mascote = atribuirMascotes(rotas, arquivosDeMascotes, origem?.commit ?? 'a
     <meta name="color-scheme" content="light dark" />
     <title>{titulo} · {textos.nomeDoSite}</title>
   </head>
-  <body>
+  <body data-ids-conteudo={idsConteudo}>
     <a class="pular" href="#conteudo">{textos.pularParaConteudo}</a>
     <header>
       <p class="site">{textos.nomeDoSite}</p>
@@ -35,10 +36,13 @@ const mascote = atribuirMascotes(rotas, arquivosDeMascotes, origem?.commit ?? 'a
           <li><a href="/">{textos.linkIndice}</a></li>
           <li><a href="/mapa/">{textos.linkMapa}</a></li>
           <li><a href="/uc12/state/">{textos.linkUc12}</a></li>
+          <li><a href="/seus-dados/">{textos.linkSeusDados}</a></li>
         </ul>
       </nav>
     </header>
     <p class="aviso" role="note">{textos.avisoEmConstrucao}</p>
+    <p class="aviso" role="status" data-mensagem-progresso hidden></p>
+    <p class="nota" data-resumo-progresso-global></p>
     <main id="conteudo" tabindex="-1">
       <slot />
     </main>
@@ -58,4 +62,5 @@ const mascote = atribuirMascotes(rotas, arquivosDeMascotes, origem?.commit ?? 'a
 
 <script>
   import '../scripts/siglas';
+  import '../scripts/progresso';
 </script>
