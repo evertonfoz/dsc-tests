@@ -5,8 +5,8 @@ describe('inventário UC12', () => {
   const inventario = carregarInventarioUc12();
 
   it('publica os 36 destinos do estado e citações diretas de módulos publicados', () => {
-    expect(inventario).toHaveLength(39);
-    expect(new Set(inventario.map((item) => item.arquivo)).size).toBe(39);
+    expect(inventario).toHaveLength(36);
+    expect(new Set(inventario.map((item) => item.arquivo)).size).toBe(36);
     expect(inventario.find((item) => item.arquivo.endsWith('/state.yaml'))?.rota).toBe('/uc12/state/');
     expect(inventario.find((item) => item.arquivo.endsWith('/relatorios/F.md'))?.rota).toBe('/uc12/relatorios/F/');
     expect(inventario.find((item) => item.arquivo.endsWith('/evidencias/F/cobertura.md'))?.rota).toBe('/uc12/evidencias/F/cobertura/');

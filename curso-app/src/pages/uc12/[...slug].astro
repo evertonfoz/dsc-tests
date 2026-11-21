@@ -1,6 +1,8 @@
+---
 import { getCollection, render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
-import { carregarInventarioUc12, conteudoTextoUc12, modulosQueCitam, type PaginaDeCursoUc12 } from '../../conteudo/uc12';
+import { carregarInventarioUc12, conteudoTextoUc12, modulosQueCitam } from '../../conteudo/uc12';
+import type { PaginaDeCursoUc12 } from '../../conteudo/uc12';
 import { textos } from '../../textos';
 
 const inventario = carregarInventarioUc12();
@@ -8,7 +10,7 @@ const curso = await getCollection('curso');
 const paginasCurso = curso.map((pagina) => ({ dados: pagina.data as PaginaDeCursoUc12['dados'], body: pagina.body }));
 
 export function getStaticPaths() {
-  return inventario.map((item) => ({
+  return carregarInventarioUc12().map((item) => ({
     params: { slug: item.rota.replace(/^\/uc12\//, '').replace(/\/$/, '') },
     props: { arquivo: item.arquivo },
   }));

@@ -1,9 +1,8 @@
 import { existsSync, readFileSync, readdirSync, realpathSync, statSync } from 'node:fs';
 import { basename, dirname, extname, isAbsolute, join, posix, relative, resolve, sep } from 'node:path';
-import { fileURLToPath } from 'node:url';
 import { parse } from 'yaml';
 
-const RAIZ_REPO = resolve(fileURLToPath(new URL('../../..', import.meta.url)));
+const RAIZ_REPO = resolve(process.cwd(), '..');
 const RAIZ_CELILAC = resolve(RAIZ_REPO, 'celilac-backend');
 const RAIZ_DOCS = resolve(RAIZ_CELILAC, 'docs');
 const PASTA_UC12 = resolve(RAIZ_DOCS, 'uc/uc12');
