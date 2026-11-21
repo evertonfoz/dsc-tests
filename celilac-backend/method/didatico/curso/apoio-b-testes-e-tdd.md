@@ -46,7 +46,7 @@ TDD (*Test-Driven Development*, desenvolvimento guiado por testes) é um ciclo d
 
 Por que ver o teste **falhar** primeiro? Porque um teste que nunca falhou pode não estar provando nada. O vermelho prova que ele **consegue** acusar o erro, e que falha **pelo motivo certo**.
 
-## 5. Pratique (qualquer linguagem)
+## 5. Pratique no seu domínio (qualquer linguagem)
 1. Escolha uma regra simples do seu domínio (por exemplo, "o nome não pode ser vazio").
 2. **RED:** escreva o teste, rode-o e leia a mensagem de falha. Ela diz o que você esperava? Guarde a saída.
 3. **GREEN:** escreva o mínimo para passar. Rode e guarde a saída.
