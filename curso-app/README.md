@@ -3,7 +3,7 @@
 Aplicação interativa que conduz o aluno pelo curso "Implementando um caso de uso com evidência" e o ajuda a produzir, no **seu** repositório, os mesmos artefatos e evidências do UC12 do CeliLac.
 
 ## Situação
-**Marco M1a (leitura e navegação).** O curso inteiro pode ser lido: índice, mapa na ordem sugerida, os 13 módulos, os 4 apoios, o projeto final e a prática do módulo 2 (só leitura). Cada página traz uma ficha gerada do front matter (duração, o que pede antes, prática) e "anterior" e "próximo". Nomes de arquivo do curso citados no texto viram links; caminhos de arquivo do método e do código do CeliLac abrem no GitHub, no commit de origem. Gabaritos **não** são publicados (chegam com o registro de tentativas, no M3). Siglas, grafo e mascotes chegam no M1b.
+**M3 (progresso e gabaritos) em implementação.** A versão integrada atual permite leitura do curso e UC12; este marco acrescenta progresso pessoal no navegador, checklists declarados, tentativa antes do gabarito, gabaritos e a tela “Seus dados”.
 
 - Prompt e etapas do plano: `celilac-backend/method/didatico/curso-app/prompt-plano-da-aplicacao.md`
 - Estado do trabalho: `celilac-backend/method/didatico/curso-app/estado.md`
@@ -19,6 +19,7 @@ curso-app/scripts/executar.sh    # abre em http://127.0.0.1:4321
 
 - Use sempre esse endereço: o progresso (a partir do M3) fica guardado no navegador **por endereço**; outra porta é outro progresso.
 - O rodapé mostra o commit e a data do conteúdo. Se houver mudanças não commitadas, `construir.sh` avisa.
+- A primeira marcação de progresso mostra onde os dados ficam; a tela “Seus dados” permite exportar e apagar o registro.
 - A construção **falha** se o front matter de algum arquivo do curso não estiver conforme, se o título ou a linha "Pré-requisito" do corpo divergirem do front matter, ou (em `construir.sh`) se um commit citado no curso não existir no histórico.
 
 ## Como desenvolver

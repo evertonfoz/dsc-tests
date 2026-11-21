@@ -5,9 +5,10 @@ export const textos = {
   navegacao: 'Navegação principal',
   linkIndice: 'Índice do curso',
   linkMapa: 'Mapa dos módulos',
+  linkSeusDados: 'Seus dados',
   linkUc12: 'Caso real UC12',
   avisoEmConstrucao:
-    'Versão em construção: dá para ler o curso inteiro. Ainda não há registro de progresso, gabaritos, prática guiada com os dados do seu projeto nem o kit inicial; eles chegam nas próximas versões.',
+    'Versão em construção: o registro de progresso e a liberação de gabaritos são declarações pessoais guardadas neste navegador; a aplicação não avalia nem verifica o trabalho.',
   rodapeOrigem: (commitCurto: string, data: string) => `Conteúdo do commit ${commitCurto} (${data}).`,
   rodapeSemOrigem: 'Conteúdo de commit a confirmar (construção sem commit de origem informado).',
   rodapeNota: 'A aplicação não tem acesso à internet e não sabe se existe versão mais nova.',

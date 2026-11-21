@@ -21,6 +21,7 @@ const titulo = (id: string) => curso.get(id)?.dados.titulo ?? id;
     {itens.map((e) => (
       <li data-id={e.dados.id}>
         <a href={`/${e.dados.id}/`}><TextoComCodigo texto={e.dados.titulo} /></a>
+        <p class="nota" data-progresso-para={e.dados.id}>Ainda não declarado como lido</p>
         <dl>
           <dt>{textos.duracao}</dt>
           <dd>{e.dados.duracao} <span class="nota">({textos.duracaoNota})</span></dd>

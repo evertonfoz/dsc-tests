@@ -83,7 +83,7 @@ test('referências do GitHub abrem em nova guia e as internas permanecem na atua
   await expect(externo).toHaveAttribute('target', '_blank');
   await expect(externo).toHaveAttribute('rel', /noopener/);
   await expect(externo).toHaveAttribute('rel', /noreferrer/);
-  await expect(externo).toContainText('abre em nova guia no GitHub');
+  await expect(externo).toContainText('abre em nova guia no GitHub, fora desta aplicação');
   const hrefExterno = await externo.getAttribute('href');
   await context.route('https://github.com/**', (route) => route.fulfill({ status: 200, body: 'GitHub interceptado pelo teste' }));
   const popupPromise = page.waitForEvent('popup');

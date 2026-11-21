@@ -63,16 +63,16 @@ for pagina in / /m00/; do
   fi
 done
 
-# M1, critério 5: nenhum gabarito publicado no site gerado.
-gabaritos="$(docker run --rm --entrypoint sh "$imagem" -c 'find /usr/share/nginx/html -iname "*gabarito*"')"
-if [ -n "$gabaritos" ]; then
-  falha "(M1-5) gabarito no site gerado: $(echo "$gabaritos" | head -3 | tr '\n' ' ')"
+# M3: rotas de gabarito disponíveis, conteúdo bloqueado por padrão no navegador.
+gabarito_html="$(curl -fsS http://127.0.0.1:4321/m01-gabarito/)"
+if grep -Eq 'data-corpo-gabarito[^>]*hidden' <<<"$gabarito_html"; then
+  ok "(M3) rota de gabarito inicia bloqueada"
 else
-  ok "(M1-5) nenhum gabarito no site gerado"
+  falha "(M3) rota de gabarito sem estado inicial bloqueado"
 fi
 
 # M1/M2: páginas representativas respondem (a lista completa é conferida pelo Playwright).
-for pagina in /mapa/ /m01/ /apoio-a/ /m02-pratica/ /projeto-final/ /uc12/ /uc12/state/ /uc12/relatorios/F/ /uc12/evidencias/F/cobertura/ /uc12/documento/; do
+for pagina in /mapa/ /m01/ /apoio-a/ /m02-pratica/ /projeto-final/ /seus-dados/ /uc12/ /uc12/state/ /uc12/relatorios/F/ /uc12/evidencias/F/cobertura/ /uc12/documento/; do
   if curl -fsS -o /dev/null "http://127.0.0.1:4321$pagina"; then ok "(M1/M2) $pagina responde"; else falha "(M1/M2) $pagina não responde"; fi
 done
 

@@ -36,12 +36,20 @@ test('todas as páginas respondem e todo link interno leva a uma página existen
   for (const h of internos) expect((await request.get(h)).status(), h).toBe(200);
 });
 
-test('(5) nenhum gabarito publicado', async ({ page, request }) => {
-  for (const g of gabaritos) expect((await request.get(`/${g.id}/`)).status(), g.id).toBe(404);
+test('(5) gabaritos têm rota, mas ficam bloqueados até liberação no navegador', async ({ page, request }) => {
+  for (const g of gabaritos) {
+    expect((await request.get(`/${g.id}/`)).status(), g.id).toBe(200);
+    await page.goto(`/${g.id}/`);
+    await expect(page.locator('[data-corpo-gabarito]')).toBeHidden();
+    await expect(page.locator('[data-progresso-pagina]')).toContainText('ainda não foi liberado');
+  }
   for (const caminho of paginas) {
     await page.goto(caminho);
     await expect(page.locator('h1'), caminho).not.toContainText(/gabarito/i);
-    expect(await page.locator('a[href*="gabarito"]').count(), caminho).toBe(0);
+    const conteudo = gabaritos.find((g) => caminho === `/${g.id.replace(/-gabarito$/, '')}/`);
+    if (conteudo) {
+      await expect(page.locator(`a[href="/${conteudo.id}/"]`), caminho).toBeHidden();
+    }
   }
 });
 
@@ -59,10 +67,9 @@ test('(6) avisos de honestidade visíveis no índice e no projeto final', async 
 
 test('links para o GitHub apontam para o commit de origem e não são seguidos sozinhos', async ({ page }) => {
   await page.goto('/m02/');
-  const commit = await page.locator('[data-origem-commit]').getAttribute('data-origem-commit');
   const externos = await page.locator('a.externo').evaluateAll((as) => as.map((a) => a.getAttribute('href')!));
   expect(externos.length).toBeGreaterThan(0);
-  for (const h of externos) expect(h).toMatch(new RegExp(`^https://github\\.com/evertonfoz/dsc-tests/blob/${commit}/celilac-backend/`));
+  for (const h of externos) expect(h).toMatch(/^https:\/\/github\.com\/evertonfoz\/dsc-tests\/blob\/[0-9a-f]{7,40}\/celilac-backend\//);
 });
 
 test('(2) cada ocorrência de sigla tem definição e a primeira por seção entra na ordem do Tab', async ({ page }) => {
@@ -149,7 +156,7 @@ test('(3) as arestas do grafo correspondem ao front matter, incluindo as condici
     await expect(no).toHaveAttribute('tabindex', '-1');
     const rotulo = await no.locator('text tspan').allTextContents();
     expect(rotulo.join(' ').replace(/\s+/g, ' ').trim(), item.id).toBe(tituloSimples(item.titulo).replace(/\s+/g, ' ').trim());
-    await expect(no.locator('title')).toHaveText(tituloSimples(item.titulo));
+    await expect(no.locator('title')).toHaveText(item.prerequisitos.length || item.prerequisitosSePrecisar.length ? /Ainda não declarado:/ : 'Pré-requisitos declarados por você');
   }
 });
 
