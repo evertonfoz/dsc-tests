@@ -1,0 +1,8 @@
+# Lista de permissão do contexto (raiz do dsc-tests): tudo fora, exceto o que a imagem usa.
+# mascotes/web/ e celilac-backend/docs/uc/uc12/ entram nos marcos que os usam (M1 e M2).
+*
+!curso-app/
+curso-app/node_modules/
+curso-app/dist/
+curso-app/.astro/
+!celilac-backend/method/didatico/curso/
