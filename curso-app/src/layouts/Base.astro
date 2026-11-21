@@ -15,7 +15,7 @@ const origem = lerOrigem(ambiente);
 const curso = await cursoValidado();
 const itens = await percurso();
 const praticas = [...curso.values()].filter((e) => e.dados.tipo === 'pratica').sort((a, b) => a.id.localeCompare(b.id));
-const rotas = ['/', '/mapa/', ...itens.map((e) => `/${e.dados.id}/`), ...praticas.map((e) => `/${e.dados.id}/`)];
+const rotas = ['/', '/indice/', '/mapa/', ...itens.map((e) => `/${e.dados.id}/`), ...praticas.map((e) => `/${e.dados.id}/`)];
 const mascote = atribuirMascotes(rotas, arquivosDeMascotes, origem?.commit ?? 'a-confirmar').get(Astro.url.pathname);
 ---
 <!doctype html>

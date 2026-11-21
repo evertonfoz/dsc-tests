@@ -182,7 +182,7 @@ test('(3) as arestas do grafo correspondem ao front matter, incluindo as condici
     await expect(no).toHaveAttribute('tabindex', '-1');
     const rotulo = await no.locator('text tspan').allTextContents();
     expect(rotulo.join(' ').replace(/\s+/g, ' ').trim(), item.id).toBe(tituloSimples(item.titulo).replace(/\s+/g, ' ').trim());
-    await expect(no.locator('title')).toHaveText(item.prerequisitos.length || item.prerequisitosSePrecisar.length ? /Ainda não declarado:/ : 'Pré-requisitos declarados por você');
+    await expect(no.locator('title')).toHaveText(tituloSimples(item.titulo));
   }
 });
 
