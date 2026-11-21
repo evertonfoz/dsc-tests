@@ -14,6 +14,9 @@ if [ -n "$(git status --porcelain -- curso-app celilac-backend/method/didatico/c
   echo "Aviso: há mudanças não commitadas em curso-app/ ou no curso; o rodapé mostrará o commit ${commit:0:7}, que não as contém." >&2
 fi
 
+# Commits citados no curso têm de existir no histórico (E8, P7). Fica fora do Docker, que não recebe o .git.
+node curso-app/scripts/conferir-commits.mjs
+
 docker build -f curso-app/Dockerfile \
   --build-arg ORIGEM_COMMIT="$commit" \
   --build-arg ORIGEM_DATA="$data" \

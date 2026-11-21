@@ -63,6 +63,19 @@ for pagina in / /m00/; do
   fi
 done
 
+# M1, critério 5: nenhum gabarito publicado no site gerado.
+gabaritos="$(docker run --rm --entrypoint sh "$imagem" -c 'find /usr/share/nginx/html -iname "*gabarito*"')"
+if [ -n "$gabaritos" ]; then
+  falha "(M1-5) gabarito no site gerado: $(echo "$gabaritos" | head -3 | tr '\n' ' ')"
+else
+  ok "(M1-5) nenhum gabarito no site gerado"
+fi
+
+# M1: as páginas de leitura respondem (a lista completa é conferida pelo Playwright).
+for pagina in /mapa/ /m01/ /apoio-a/ /m02-pratica/ /projeto-final/; do
+  if curl -fsS -o /dev/null "http://127.0.0.1:4321$pagina"; then ok "(M1-1) $pagina responde"; else falha "(M1-1) $pagina não responde"; fi
+done
+
 # Redirecionamento relativo (porta interna 8080 não vaza) e política de segurança.
 local_redir="$(curl -sS -o /dev/null -w '%{redirect_url}' http://127.0.0.1:4321/m00)"
 case "$local_redir" in
