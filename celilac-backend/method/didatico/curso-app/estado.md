@@ -4,7 +4,7 @@
 
 | Campo | Valor |
 |---|---|
-| Etapa atual | **E9**, marco **M1**: plano aprovado; **M1a** integrado pelo PR [#88](https://github.com/evertonfoz/dsc-tests/pull/88); M1b implementado na branch `feat/curso-app-m1b`; PR em preparação |
+| Etapa atual | **E9**, marco **M1**: plano aprovado; **M1a** integrado pelo PR [#88](https://github.com/evertonfoz/dsc-tests/pull/88); M1b implementado na branch `feat/curso-app-m1b`; PR [#90](https://github.com/evertonfoz/dsc-tests/pull/90) aberto; CI em execução |
 | Última atualização | 2026-11-21 |
 | Responsável pelas decisões | o professor |
 
@@ -156,7 +156,7 @@
 
 - **PR #88 (M1a) integrado:** `gh pr view 88`: `MERGED` em 2026-11-21T15:14:25Z, commit de merge `26a88f5`, cabeça `3975d87`; `gh pr checks 88`: seis trabalhos com `pass` (execuções 44917372255 e 44917372199). No log do trabalho de imagem, 117 testes no navegador passaram e 21 foram pulados, cinco citações de commit foram encontradas, nenhum gabarito foi publicado e a construção negativa da linha "Pré-requisito" falhou como esperado.
 
-**PR #89 integrado:** cabeça `e7dc670`, merge `c920158`, seis checks verdes; integrado em 2026-11-21T15:19:26Z. A branch foi mantida. **M1b:** implementação concluída na branch `feat/curso-app-m1b`; revisão final e PR em preparação. O merge do M1b não foi delegado.
+**PR #89 integrado:** cabeça `e7dc670`, merge `c920158`, seis checks verdes; integrado em 2026-11-21T15:19:26Z. A branch foi mantida. **M1b:** implementação concluída na branch `feat/curso-app-m1b`; PR [#90](https://github.com/evertonfoz/dsc-tests/pull/90) aberto em `798534e`; CI em execução. O merge do M1b não foi delegado.
 
 ## Histórico de sessões
 | Data | Etapa | O que foi feito | PR ou documento |
@@ -203,4 +203,4 @@
 | 2026-11-21 | E9 (M1a) | CI do #88 verde (seis trabalhos); professor delegou o merge do #88 à sessão seguinte, no Codex; prompt dessa sessão escrito | [prompt-sessao-codex-m1b.md](prompt-sessao-codex-m1b.md), PR de documentação |
 | 2026-11-21 | E9 (M1a) | PR #88 integrado após conferência do CI verde no último commit; merge `26a88f5`, cabeça `3975d87`, seis trabalhos com `pass`. PR #89 aberto, com seis checks verdes; merge não delegado. | [#88](https://github.com/evertonfoz/dsc-tests/pull/88); [#89](https://github.com/evertonfoz/dsc-tests/pull/89) |
 
-| 2026-11-21 | E9 (M1b) | Implementados glossário interativo de siglas, mapa SVG acessível e mascotes com sorteio determinístico; sem alterações aos arquivos do curso ou dependências novas. `pnpm test` (50 testes), `pnpm check`, `pnpm build` (21 páginas), `pnpm audit --audit-level high`, construção Docker sem cache, testes da imagem, construção negativa, conferência de commits e Playwright contra a imagem (124 passaram, 22 ignorados). Avisos de siglas fora do quadro, incluindo `IP` em `m06-gabarito.md`, registrados acima. VoiceOver/leitor real e zoom de 200% não foram verificados manualmente. | branch `feat/curso-app-m1b`; PR em preparação (merge não delegado) |
+| 2026-11-21 | E9 (M1b) | Implementados glossário interativo de siglas, mapa SVG acessível e mascotes com sorteio determinístico; sem alterações aos arquivos do curso ou dependências novas. `pnpm test` (50 testes), `pnpm check`, `pnpm build` (21 páginas), `pnpm audit --audit-level high`, construção Docker sem cache, testes da imagem, construção negativa, conferência de commits e Playwright contra a imagem (124 passaram, 22 ignorados). Avisos de siglas fora do quadro, incluindo `IP` em `m06-gabarito.md`, registrados acima. VoiceOver/leitor real e zoom de 200% não foram verificados manualmente. | [#90](https://github.com/evertonfoz/dsc-tests/pull/90), cabeça `798534e` (merge não delegado) |
