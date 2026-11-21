@@ -4,7 +4,7 @@
 
 | Campo | Valor |
 |---|---|
-| Etapa atual | **E9**, marco **M0**: implementado; PR aberto, aguardando revisão e merge do professor |
+| Etapa atual | **E9**, marco **M1**: plano aprovado; **M1a** implementado, PR aberto, aguardando revisão e merge do professor; M1b a fazer |
 | Última atualização | 2026-11-21 |
 | Responsável pelas decisões | o professor |
 
@@ -20,7 +20,7 @@
 | E6 | Verificação de evidências e limites | concluída | [E6-verificacao-de-evidencias.md](etapas/E6-verificacao-de-evidencias.md) | professor (2026-11-21) |
 | E7 | Marcos, testes e critérios de aceite | concluída | [E7-marcos-testes-e-aceite.md](etapas/E7-marcos-testes-e-aceite.md) | professor (2026-11-21) |
 | E8 | Riscos e perguntas em aberto | concluída | [E8-riscos-e-perguntas-em-aberto.md](etapas/E8-riscos-e-perguntas-em-aberto.md) | professor (2026-11-21) |
-| E9 | Implementação por marcos | M0: implementado, PR aberto | [E9-M0-plano.md](etapas/E9-M0-plano.md) | plano: professor (2026-11-21) |
+| E9 | Implementação por marcos | M0: integrado (PR #87); M1a: PR aberto; M1b: a fazer | [E9-M0-plano.md](etapas/E9-M0-plano.md); [E9-M1-plano.md](etapas/E9-M1-plano.md) | M0: professor (2026-11-21); plano do M1: professor (2026-11-21) |
 
 ## Decisões
 | Data | Decisão | Origem |
@@ -95,6 +95,9 @@
 | 2026-11-21 | E9, M0: plano aprovado por inteiro ("aprovo tudo"): dependências e imagens base da seção 2; `check-links` no CI, não no `Dockerfile`; Playwright e axe-core a partir do M1; comparação com a linha "Pré-requisito" do corpo no plano do M1. | [Plano do M0](etapas/E9-M0-plano.md) |
 | 2026-11-21 | Autorizados instalar as dependências do M0, baixar as imagens base, e abrir branch e PR do M0. Merge **não** delegado. | Professor |
 | 2026-11-21 | **Delegação registrada:** o professor autorizou a IA a fazer o merge **só do PR #87** ("autorizo o merge do #87 com CI verde"). Condição: CI verde no último commit do PR. Apagar a branch não foi autorizado. Não vale para outros PRs nem para a sessão seguinte. | Professor |
+| 2026-11-21 | E9, M1: plano aprovado por inteiro ("aprovo tudo"): Playwright 1.65.0 e `@axe-core/playwright` 4.14.0 com `axe-core` fixado em 4.14.0, e Chromium do Playwright; siglas com definição em toda ocorrência e só a primeira de cada seção na ordem do Tab; caminhos de `method/` e do código do CeliLac como link para o GitHub no commit de origem; mascotes sorteados na construção com semente no commit; realce por Prism; regra da linha "Pré-requisito" que falha a construção; dois PRs (M1a e M1b). | [Plano do M1](etapas/E9-M1-plano.md) |
+| 2026-11-21 | Autorizados instalar as dependências do M1 e abrir branch e PR do **M1a**. Merge **não** delegado. | Professor |
+| 2026-11-21 | M1a: processador de Markdown **Sätteri** (padrão do Astro 7), declarando `@astrojs/markdown-satteri` 0.4.7, a mesma versão que o Astro já instala, em vez de instalar `@astrojs/markdown-remark` ou pós-processar o HTML sem parser. | Professor, na sessão do M1a ([plano do M1](etapas/E9-M1-plano.md), seção 14) |
 
 ## Requisitos acrescentados pelo professor
 | Data | Requisito | Etapas afetadas |
@@ -141,7 +144,16 @@
 - **Achado do plano do M0:** o `@astrojs/check` 0.9.12 aceita só `typescript` 5 ou 6; o plano fixa a 6.0.3.
 - **Achado da implementação do M0 (para o M1):** o realce de código do Astro (Shiki) usa atributos `style=""`, bloqueados pela política de segurança do servidor; no M0 o realce está desligado. Decidir no plano do M1 (realce por classes CSS ou sem realce). Registro completo no [plano do M0](etapas/E9-M0-plano.md), seção 10.
 
-**Decisão para a próxima sessão:** seguir o protocolo, **uma etapa por vez**. M0 implementado e em PR; depois do merge, registrar data e commit e começar o plano do **M1**.
+- **Divergência registrada no plano do M1 (2026-11-21):** este arquivo deixava "data e commit de merge a registrar" para o PR #87. Conferido com `gh pr view 87`: `MERGED` em 2026-11-21T14:40:30Z, commit de merge `f6205a2`, cabeça `967ba62`; `gh pr checks 87`: os seis trabalhos com `pass`. `git ls-remote`: a branch `feat/curso-app-m0` **não** foi apagada. <!-- links:ignore -->
+- **Achado do plano do M1 (não corrigido):** `method/didatico/curso/m01-cobertura-real.md`, linha 134, diz "Próximo: módulo 2"; pela `ordem` e pelo pré-requisito do m02 o próximo é o apoio A. Os outros 16 "Próximo:" batem com a `ordem`. A aplicação segue a `ordem`; proposta de texto para a E3, parte 2. A sequência "m00 → m01 → apoio A → m02" citada acima vale para a `ordem`, não para o texto do m01.
+- **Achado do plano do M1:** o quadro de siglas tem **21** siglas (a E2, seção 4, diz 22). Palavras em maiúsculas fora do quadro: `RED`, `GREEN`, `SUB` e `NUL` (contagem aproximada); no M1 geram só aviso de construção; incluí-las no quadro é decisão de conteúdo (E3, parte 2).
+- **Achado do plano do M1:** os commits citados no curso são `b71f5e1` e `8aeef61` (arquivos de leitura) e `5081158` (só gabaritos); os três existem (`git cat-file -t`). A E8, D6, fala em "2 commits"; são 3 contando os gabaritos.
+- **Achado do plano do M1:** o curso não tem links Markdown; as referências entre arquivos são nomes entre crases. A comparação da linha "Pré-requisito" com o front matter, simulada fora do repositório, deu 0 divergências nos 18 arquivos de leitura.
+
+- **Lacuna do M1a:** `e2e/` e `playwright.config.ts` ficam fora do `astro check` (sem `@types/node`); são executados a cada teste, mas não têm verificação de tipos.
+- **Para o M3:** as caixas das listas de verificação ficam ocultas do leitor de tela no M1 (desabilitadas, sem rótulo); viram controles com rótulo quando o aluno puder marcá-las.
+
+**Decisão para a próxima sessão:** seguir o protocolo, **uma etapa por vez**. **M1a** implementado e em PR (merge não delegado); depois do merge, registrar data e commit e implementar o **M1b** (siglas, grafo, mascotes), que já tem plano aprovado e branch e PR ainda não autorizados.
 
 ## Histórico de sessões
 | Data | Etapa | O que foi feito | PR ou documento |
@@ -182,4 +194,6 @@
 | 2026-11-21 | E8 | Professor delegou o merge só do PR #86, com CI verde; merge feito depois do CI verde no último commit do PR: integrado em 2026-11-21T14:20:54Z (commit de merge `7cb1515`), CI verde em `3cae453` (registro feito na sessão da E9, conferido com `gh pr view 86` e `gh pr checks 86`); branch mantida | [#86](https://github.com/evertonfoz/dsc-tests/pull/86) |
 | 2026-11-21 | E9 (M0) | Plano do M0: dependências com versões exatas consultadas (Astro 7.4.7, `@astrojs/check` 0.9.12, TypeScript 6.0.3, Vitest 5.1.0; imagens `node:24.21.0-alpine` e `nginx-unprivileged:1.31-alpine`), validação do front matter, imagem em dois estágios, comando único, CI, testes por critério. Nada instalado | [E9-M0-plano.md](etapas/E9-M0-plano.md) (sem PR) |
 | 2026-11-21 | E9 (M0) | Plano aprovado; dependências instaladas; esqueleto Astro, validador do front matter (19 testes), `Dockerfile` em dois estágios, scripts de construir, executar e testar, CI próprio. Critérios 1 a 4 executados localmente com sucesso; critério 5 no CI do PR | branch `feat/curso-app-m0`, PR do M0 (merge não delegado) |
-| 2026-11-21 | E9 (M0) | CI do PR #87 verde em `d101c6f` (seis trabalhos com `pass`, conferidos com `gh pr checks 87`; log do trabalho de imagem com os critérios 1 a 4 em `OK`); professor delegou o merge só do PR #87, com CI verde; merge feito depois do CI verde no último commit do PR (data e commit de merge a registrar na sessão seguinte) | [#87](https://github.com/evertonfoz/dsc-tests/pull/87) |
+| 2026-11-21 | E9 (M0) | CI do PR #87 verde em `d101c6f` (seis trabalhos com `pass`, conferidos com `gh pr checks 87`; log do trabalho de imagem com os critérios 1 a 4 em `OK`); professor delegou o merge só do PR #87, com CI verde; merge feito depois do CI verde no último commit do PR: integrado em 2026-11-21T14:40:30Z (commit de merge `f6205a2`), cabeça `967ba62` (registro feito na sessão do plano do M1, conferido com `gh pr view 87` e `gh pr checks 87`); branch mantida | [#87](https://github.com/evertonfoz/dsc-tests/pull/87) |
+| 2026-11-21 | E9 (M1) | Plano do M1: rotas, links entre arquivos (o curso não tem links Markdown), siglas com teclado e toque, grafo com lista equivalente, mascotes sorteados na construção, avisos de honestidade, comparação da linha "Pré-requisito" (simulada: 0 divergências), conferência de commits (3 citados, todos existem), Playwright 1.65.0 e axe-core 4.14.0 consultados. Nada instalado | [E9-M1-plano.md](etapas/E9-M1-plano.md) (sem PR) |
+| 2026-11-21 | E9 (M1a) | Plano do M1 aprovado; dependências instaladas; processador Sätteri decidido pelo professor; 21 páginas, ficha do front matter, links entre arquivos e para o GitHub, tabelas e código com rolagem acessível, Prism, mapa em lista, anterior e próximo, avisos de honestidade, comparação de título e linha "Pré-requisito", conferência de commits, Playwright e axe-core contra a imagem (117 testes passando), CI atualizado | branch `feat/curso-app-m1`, PR do M1a (merge não delegado) |
