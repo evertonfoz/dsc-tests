@@ -6,6 +6,7 @@ ordem: 15
 prerequisitos: [m01, m02, m03, m09]
 duracao: '1 a 2 aulas'
 gabarito: m10-gabarito
+pratica: m10-pratica
 ---
 
 # Módulo 10 — E se uma fatia aparecer tarde demais?
@@ -69,14 +70,8 @@ A ADR admite os custos:
 > A ADR não promete que o método é perfeito. Ela registra uma decisão **com** seus custos.
 
 ## 5. Pratique no seu domínio
-1. Releia suas respostas da seção 2 e compare com a seção 4. Onde divergiu? Você tinha uma razão melhor?
-2. Escolha um comportamento que **não** estava no seu plano (por exemplo, um limite de tamanho, uma duplicidade) e simule a descoberta tardia:
-   - escreva a nota de reabertura (data, motivo, evidência, fatias);
-   - atualize o `state.yaml`: `fase_atual`, status da fase, gate pendente, fatia nova `planejada`;
-   - rode o validador do estado e **guarde a saída**.
-3. Crie a issue da fatia e siga o ciclo normal (módulo 3): RED, GREEN, PR.
-4. Ao integrar, **feche** a reabertura: gates aprovados por quem de direito, relatório com a seção "Fechamento".
-5. Responda: quais fases foram **afetadas** e quais só mantiveram o histórico? Justifique.
+
+Faça a atividade passo a passo em [`m10-pratica.md`](./m10-pratica.md). Produza os artefatos no seu repositório e confira cada resultado no caminho e nos critérios indicados no arquivo de prática.
 
 ## 6. Como saber que funcionou
 - [ ] A fatia nova tem issue, RED e PR próprios; nada foi feito "por baixo" de outra fase.

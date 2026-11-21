@@ -6,6 +6,7 @@ ordem: 7
 prerequisitos: [apoio-a, apoio-b, m03]
 duracao: '2 aulas'
 gabarito: apoio-c-gabarito
+pratica: apoio-c-pratica
 ---
 
 # Apoio C — Integração contínua (CI): um robô que confere por você
@@ -106,27 +107,8 @@ gh run list --limit 5    # as últimas execuções
 ```
 
 ## 6. Pratique no seu domínio
-1. No seu projeto, crie a pasta `.github`, dentro dela a pasta `workflows` e nela o arquivo `ci.yml`. Escreva um fluxo mínimo (adapte à sua linguagem):
-```yaml
-name: CI
-on:
-  pull_request:
-  push:
-    branches: [main]
-jobs:
-  qualidade:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v7
-      - name: Instalar dependências
-        run: pnpm install --frozen-lockfile
-      - name: Testes
-        run: pnpm test
-```
-2. Faça um PR e veja o job ficar **verde**.
-3. **Quebre de propósito**: altere um teste para que falhe, envie e veja o job ficar **vermelho**. Leia o erro no GitHub.
-4. Conserte e confirme o verde.
-5. Acrescente um passo de lint e outro de build.
+
+Faça a atividade passo a passo em [`apoio-c-pratica.md`](./apoio-c-pratica.md). Produza os artefatos no seu repositório e confira cada resultado no caminho e nos critérios indicados no arquivo de prática.
 
 ## 7. Como saber que funcionou
 - [ ] O fluxo roda sozinho a cada PR.

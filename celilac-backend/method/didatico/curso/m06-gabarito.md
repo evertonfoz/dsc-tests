@@ -1,13 +1,13 @@
 ---
 id: m06-gabarito
 tipo: gabarito
-titulo: 'Gabarito do professor — Módulo 6'
+titulo: 'Gabarito para autoestudo — Módulo 6'
 gabarito_de: [m06]
 ---
 
-# Gabarito do professor — Módulo 6
+# Gabarito para autoestudo — Módulo 6
 
-> Uso exclusivo do professor.
+> Este gabarito é público. Tente primeiro a atividade no seu projeto e use as respostas para comparar o raciocínio. Isso é orientação de estudo, não bloqueio; resultados do CeliLac são referência documentada, não execução no seu projeto.
 
 ## Atividade da seção 2
 | Pergunta | Resposta esperada |
@@ -22,17 +22,17 @@ gabarito_de: [m06]
 - **Exercício 3:** 503 quando a falha é temporária (banco indisponível) e o cliente deve tentar de novo; o caso de uso precisaria definir retentativa e, possivelmente, o cabeçalho de espera.
 - **Exercício 4:** códigos HTTP pertencem à fronteira; uma tarefa agendada não tem "resposta HTTP". O núcleo lança a exceção de domínio e cada borda a traduz do seu jeito.
 
-## Achados reais para o professor
+## Achados registrados no material de referência
 1. A ADR-003 afirma registro da causa em log, e o código não o faz.
 2. A intermitência #27 apareceu também em `products.error-mapping.spec.ts` (registrado na issue).
 
-## Pontos para discussão
+## Raciocínio para conferir
 1. Segurança por obscuridade? (não: o objetivo é não ajudar um atacante, sem impedir a equipe de diagnosticar por canais internos)
 2. Onde termina a responsabilidade do núcleo e começa a da borda?
 3. Quem decide um código de resposta quando o caso de uso não o define?
 
-## Critérios de avaliação sugeridos
-| Critério | Peso |
+## Autoavaliação sugerida
+| Critério | Peso sugerido |
 |---|---|
 | Teste afirma a exceção e a ausência de detalhes | 25% |
 | Mapeamento exceção para status testado pela API | 20% |

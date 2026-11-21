@@ -135,7 +135,7 @@ O que dá confiança a cada um desses itens é a ferramenta no repositório (N2)
 
 E uma frase por tela de fase, conforme a regra 21 do `AGENTS.md` e o tom neutro do curso: "A aplicação confere a forma do que você informa. Quem prova é o seu repositório, e quem decide é você ou o CI."
 
-**Convenção de cabeçalho das evidências.** [Recomendação] Os passos de prática que pedem para guardar uma saída (m02 em diante) ensinam o cabeçalho que o UC12 usa: o que foi executado, data UTC e commit de base, obtido com `git rev-parse HEAD`. A aplicação **não** confere esse cabeçalho, porque recebe o arquivo só se o aluno colar. Registrar a convenção no método (por exemplo, no `AGENTS.md`, regra 17, ou no modelo de relatório) é mudança de conteúdo e decisão sua; entra na E3, parte 2, se aprovada.
+**Direção vigente para o cabeçalho das evidências (issue #99).** Use `method/templates/evidencia-de-comando.md` e guarde em `docs/uc/<uc>/evidencias/<fase>/`: comando executado, data/hora UTC, commit base obtido com `git rev-parse HEAD`, código de saída e saída real. O modelo não inventa execução e a aplicação não valida o conteúdo colado ou armazenado. O histórico do UC12 abaixo permanece como diagnóstico da convenção antiga, não como alegação de que todos os seus arquivos têm o cabeçalho completo.
 
 ## 10. Riscos
 | Risco | Efeito | Mitigação proposta |

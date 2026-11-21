@@ -1,16 +1,16 @@
 ---
 id: projeto-final-gabarito
 tipo: gabarito
-titulo: 'Gabarito do professor — Projeto final'
+titulo: 'Gabarito para autoestudo — Projeto final'
 gabarito_de: [projeto-final]
 ---
 
-# Gabarito do professor — Projeto final
+# Gabarito para autoestudo — Projeto final
 
-> Uso exclusivo do professor. **Proposta de critérios**: ainda não foi usada com turmas; ajuste pesos e prazos à sua disciplina.
+> Este gabarito é público. Tente primeiro a atividade no seu projeto e use esta proposta para autoavaliar o raciocínio. Os pesos são sugestivos e não foram testados com turmas; não representam nota oficial nem resultado observado.
 
 ## Rubrica sugerida (100 pontos, proposta)
-| Critério | Pontos | O que olhar |
+| Critério | Pontos sugeridos | O que conferir |
 |---|---|---|
 | Evidência real e etiquetas | 20 | saídas com data/commit, nada colado sem execução, `a confirmar` quando cabível |
 | Fatias e ciclo RED/GREEN | 15 | um comportamento por fatia, commits separados, PR por fatia |
@@ -21,7 +21,7 @@ gabarito_de: [projeto-final]
 | Pendências e honestidade | 10 | lista escrita, limites declarados, "o que não prova" |
 | Repetição por outra pessoa | 5 | verificação reproduzida pelo colega ou na apresentação |
 
-## Itens de conferência rápida
+## Autoavaliação rápida
 - `check-state` e `check-links` rodam sem erro no repositório do aluno.
 - O CI da principal está verde e roda o script de verificação.
 - Existe pelo menos um exemplo de erro da IA, **descrito com a evidência que o revelou**.
@@ -31,11 +31,11 @@ gabarito_de: [projeto-final]
 ## Pontos de atenção
 - Verificar o tipo de caso de uso: fora de "criar", os guias são esboços; avaliar com tolerância e registrar aprendizados.
 - O tempo de 4 a 6 semanas e a rubrica são estimativas do material.
-- Em dupla, exigir que revisor e autor de cada PR sejam pessoas diferentes.
-- Exigir Docker nas máquinas dos alunos (apoio D): confirmar antes do projeto, ou prever laboratório.
+- Em equipe, autor e revisor de cada PR devem ser pessoas diferentes.
+- Confira se há Docker disponível; se não, registre uma alternativa de laboratório ou banco local.
 - Pendências do próprio CeliLac, para você decidir antes da turma (não corrigidas): ADR-003 menciona log da causa e o código não registra log; o mutante `name.trim().length` sobrevive (regra de espaços nas pontas indefinida); a mensagem de `InvalidProductNameException` é imprecisa para nomes longos; NUL no nome devolve 500; teste instável #27 sem causa. Os módulos 5 a 7 usam esses pontos como exercício; se você os corrigir, atualize os módulos.
 
-## Sinais de alerta
-- Relatório perfeito, sem pendências, sem mutações.
-- Todas as saídas com horário idêntico ou formato diferente do ambiente do aluno.
-- Gates marcados `aprovado` sem `por:` coerente.
+## Reveja o trabalho se
+- O relatório não declara pendências nem mutações.
+- As saídas parecem ter horários fabricados ou não correspondem ao ambiente usado.
+- Gates aparecem como `aprovado` sem `por:` coerente.

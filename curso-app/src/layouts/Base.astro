@@ -3,7 +3,7 @@ import '../estilos/base.css';
 import { textos } from '../textos';
 import { lerOrigem } from '../conteudo/origem';
 import { atribuirMascotes, arquivosDeMascotes } from '../conteudo/mascotes';
-import { cursoValidado, percurso } from '../conteudo/carregar';
+import { percurso } from '../conteudo/carregar';
 
 interface Props {
   titulo: string;
@@ -12,10 +12,8 @@ const { titulo } = Astro.props;
 // Variáveis de ambiente da construção (Node); sem depender de @types/node.
 const ambiente = (globalThis as { process?: { env: Record<string, string | undefined> } }).process?.env ?? {};
 const origem = lerOrigem(ambiente);
-const curso = await cursoValidado();
 const itens = await percurso();
-const praticas = [...curso.values()].filter((e) => e.dados.tipo === 'pratica').sort((a, b) => a.id.localeCompare(b.id));
-const rotas = ['/', '/indice/', '/mapa/', ...itens.map((e) => `/${e.dados.id}/`), ...praticas.map((e) => `/${e.dados.id}/`)];
+const rotas = ['/', '/indice/', '/mapa/', ...itens.map((e) => `/${e.dados.id}/`)];
 const mascote = atribuirMascotes(rotas, arquivosDeMascotes, origem?.commit ?? 'a-confirmar').get(Astro.url.pathname);
 ---
 <!doctype html>

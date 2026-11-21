@@ -1,3 +1,5 @@
+> **Situação atual da parte 2:** o inventário antigo abaixo registrava trabalho futuro. A issue #99 cobre a revisão de práticas, gabaritos e modelos; confira a matriz atual em `auditoria-experiencia-e-artefatos.md` e os resultados/evidências desta revisão em `estado.md`. A tabela histórica permanece para rastreabilidade.
+
 # E3 — Atualização do repositório de conteúdo
 
 > Etapa E3 do plano da aplicação web do curso. Situação: **parte 1 concluída (PRs #73 a #76, integrados em 2026-11-21); parte 2 aguardando a aplicação em execução**.

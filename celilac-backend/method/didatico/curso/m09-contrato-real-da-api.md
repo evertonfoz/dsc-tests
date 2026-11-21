@@ -6,6 +6,7 @@ ordem: 14
 prerequisitos: [m03, m05, m06, m07, m08]
 duracao: '2 aulas'
 gabarito: m09-gabarito
+pratica: m09-pratica
 ---
 
 # Módulo 9 — Alguém olhou o contrato real da API?
@@ -93,12 +94,8 @@ Mesmo no fim, o contrato registra o que **não** foi resolvido:
 Um contrato honesto lista suas imperfeições.
 
 ## 6. Pratique no seu domínio
-1. Faça o inventário **executando** o seu caso de uso, com **todas** as situações da sua tabela da seção 2. Guarde a saída em arquivo, com data e commit no topo.
-2. Compare com o que você esperava. Para cada diferença, classifique: corrigir ou aceitar (e escreva a ADR curta de quem decidiu e por quê).
-3. Escreva o `contrato.md` do seu caso de uso, com a coluna "implementado ou a implementar".
-4. Para cada linha, escreva o teste que quebra se ela mudar, incluindo um que prove que **nada interno vaza**.
-5. Repita o inventário e guarde o resultado final.
-6. **Mutação** (módulo 7): mude o status de uma resposta de erro (por exemplo, 400 vira 422). Um teste deve falhar. Guarde a saída.
+
+Faça a atividade passo a passo em [`m09-pratica.md`](./m09-pratica.md). Produza os artefatos no seu repositório e confira cada resultado no caminho e nos critérios indicados no arquivo de prática.
 
 ## 7. Como saber que funcionou
 - [ ] Cada situação tem status e corpo **reais**, de uma execução, e não de leitura de código.

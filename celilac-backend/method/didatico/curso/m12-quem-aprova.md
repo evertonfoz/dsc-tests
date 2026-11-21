@@ -6,6 +6,7 @@ ordem: 17
 prerequisitos: [m01, m02, m03, m07, m10, m11]
 duracao: '2 aulas'
 gabarito: m12-gabarito
+pratica: m12-pratica
 ---
 
 # Módulo 12 — Quem aprova, e o que a IA pode fazer?
@@ -93,12 +94,8 @@ O arquivo `method/orquestrador/prompt-do-estudante.md` é um texto que você ent
 Um método não elimina o erro; ele torna o erro **visível a tempo**.
 
 ## 6. Pratique no seu domínio
-1. Releia suas respostas da seção 2 e compare com as regras da seção 4.1. Ajuste o que divergir e explique.
-2. Copie `method/templates/AGENTS-aluno.md` para `AGENTS.md` na raiz do seu repositório. Personalize as cinco regras para o uso da IA no seu caso de uso: o que ela pode fazer, o que só você decide e o que exige autorização específica. **Não copie `method/AGENTS.md` para a raiz**: esse arquivo contém regras do método e permanece em `method/`.
-3. Peça à IA que revise um PR seu e **registre** no PR que foi revisão por IA. Escolha **uma** afirmação dela, confira-a você e anote o resultado.
-4. Faça a **cobertura real** do seu caso de uso: liste cada requisito, regra, critério e fluxo, o **teste que o prova** (rodado) e a classificação (coberto, parcial, não implementado, aguardando decisão).
-5. Escreva as **pendências** do seu caso de uso, uma a uma, com etiqueta e destino.
-6. Peça a um colega que atue como **revisor independente** e registre o que ele achou que você não viu.
+
+Faça a atividade passo a passo em [`m12-pratica.md`](./m12-pratica.md). Produza os artefatos no seu repositório e confira cada resultado no caminho e nos critérios indicados no arquivo de prática.
 
 ## 7. Como saber que funcionou
 - [ ] Você tem regras escritas, e sabe dizer qual ação é de quem.

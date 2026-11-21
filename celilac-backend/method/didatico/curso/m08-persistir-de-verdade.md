@@ -6,6 +6,7 @@ ordem: 13
 prerequisitos: [m04, m05, m06, m07, apoio-d]
 duracao: '2 a 3 aulas'
 gabarito: m08-gabarito
+pratica: m08-pratica
 ---
 
 # Módulo 8 — Como persistir de verdade?
@@ -132,16 +133,8 @@ O limite de 120 caracteres aparece em **três lugares**:
 Se alguém mudar um e esquecer os outros, **nada falha de imediato**: o núcleo pode aceitar 150 e o banco recusar. Isso apareceu como achado na auditoria do piloto e **não foi corrigido**. Uma solução possível (que **não** está implementada) seria um teste que lê o tamanho real da coluna no banco e o compara com a constante.
 
 ## 8. Pratique no seu domínio
-1. Liste a(s) tabela(s) do seu caso de uso: colunas, tipos, o que é obrigatório, o que tem limite.
-2. Escreva a **migration** (`up` e `down`) e **leia-a em voz alta** comparando com a sua lista.
-3. Escreva a **entidade do ORM** e o **mapper**.
-4. Implemente o **adaptador** da interface do repositório que você criou no módulo 5. As regras de negócio **não** podem mudar.
-5. Escreva dois testes com banco real:
-   - persistir e **conferir por SQL**;
-   - uma falha real do banco (a do módulo 6), conferindo que o cliente continua sem ver o texto do banco.
-6. Garanta as **travas** da seção 6 antes de qualquer `TRUNCATE` ou apagamento.
-7. Mostre a prova do "banco vazio" **sem apagar o seu banco**: use o CI, ou um banco novo criado só para isso.
-8. **Mutação** (módulo 7): remova uma coluna do mapper (por exemplo, não grave o nome). O teste da etapa 5 precisa falhar. Guarde a saída.
+
+Faça a atividade passo a passo em [`m08-pratica.md`](./m08-pratica.md). Produza os artefatos no seu repositório e confira cada resultado no caminho e nos critérios indicados no arquivo de prática.
 
 ## 9. Como saber que funcionou
 - [ ] O produto gravado aparece em uma consulta SQL **independente** do repositório.
