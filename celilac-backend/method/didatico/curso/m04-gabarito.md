@@ -1,28 +1,28 @@
 ---
 id: m04-gabarito
 tipo: gabarito
-titulo: 'Gabarito do professor — Módulo 4 e Apoio D'
+titulo: 'Gabarito para autoestudo — Módulo 4 e Apoio D'
 gabarito_de: [m04, apoio-d]
 ---
 
-# Gabarito do professor — Módulo 4 e Apoio D
+# Gabarito para autoestudo — Módulo 4 e Apoio D
 
-> Uso exclusivo do professor.
+> Este gabarito é público. Tente primeiro a atividade no seu projeto e use as respostas para comparar o raciocínio. Isso é orientação de estudo, não bloqueio; resultados do CeliLac são referência documentada, não execução no seu projeto.
 
 ## Atividade da seção 2 (clone limpo)
 Respostas variam; esperam-se, entre outras: arquivo `.env` ausente, versão diferente do Node ou do banco, dados pré-existentes na máquina, porta ocupada, comandos que só existem no histórico do terminal do autor. Valorize a lista honesta mais do que o "rodou de primeira".
 
-## Pontos para discussão
+## Raciocínio para conferir
 1. Por que o ambiente limpo é o melhor juiz? (revela dependências ocultas)
 2. O que as três travas do banco de testes protegem, e quando uma sozinha não bastaria? (ex.: nome terminando em `_test` mas apontando para o servidor errado; a variável explícita e a porta distinta cobrem isso)
 3. Em que a Fundação difere de um "setup inicial"? (é versionada, verificada e reaproveitada por todos os casos de uso)
 4. Quando é legítimo excluir testes do CI? (somente com ADR, motivo e lista única)
 
 ## Verificação da prática
-O aluno mostra: (a) a saída do script de verificação; (b) a prova de que as travas abortam (saída do erro); (c) a execução em cópia limpa; (d) o link do PR de fundação com CI verde.
+Para conferir a prática, compare os artefatos e evidências do seu projeto: (a) a saída do script de verificação; (b) a prova de que as travas abortam (saída do erro); (c) a execução em cópia limpa; (d) o link do PR de fundação com CI verde.
 
-## Critérios de avaliação sugeridos
-| Critério | Peso |
+## Autoavaliação sugerida
+| Critério | Peso sugerido |
 |---|---|
 | Ordem de construção respeitada e PR só de fundação | 20% |
 | Travas do banco de testes com prova de recusa | 30% |

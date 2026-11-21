@@ -24,7 +24,7 @@ As aprovações históricas de E1/E4/E7 e M3 são mantidas para rastreabilidade,
 | E0 | Leitura e perguntas bloqueantes | respondida e registrada | [E0-leitura-e-perguntas-bloqueantes.md](etapas/E0-leitura-e-perguntas-bloqueantes.md) | professor (respostas de 2026-11-21) |
 | E1 | Plano de arquitetura | concluída | [E1-plano-de-arquitetura.md](etapas/E1-plano-de-arquitetura.md) | professor (2026-11-21) |
 | E2 | Pipeline de conteúdo e metadados | concluída (revisável ao ver a aplicação em execução) | [E2-pipeline-de-conteudo.md](etapas/E2-pipeline-de-conteudo.md) | professor (2026-11-21) |
-| E3 | Atualização do repositório de conteúdo (se necessária) | parte 1 concluída (PRs #73 a #76); parte 2 depois de ver a aplicação | [E3-atualizacao-do-conteudo.md](etapas/E3-atualizacao-do-conteudo.md) (registro retroativo, 2026-11-21); PRs [#73](https://github.com/evertonfoz/dsc-tests/pull/73), [#74](https://github.com/evertonfoz/dsc-tests/pull/74), [#75](https://github.com/evertonfoz/dsc-tests/pull/75), [#76](https://github.com/evertonfoz/dsc-tests/pull/76) | merge delegado à IA, com CI verde; registro retroativo aprovado pelo professor (2026-11-21) |
+| E3 | Atualização do repositório de conteúdo (se necessária) | parte 1 concluída (PRs #73 a #76); parte 2 da issue #99 implementada nesta branch, aguardando CI/PR | [E3-atualizacao-do-conteudo.md](etapas/E3-atualizacao-do-conteudo.md) (registro retroativo, 2026-11-21); PRs [#73](https://github.com/evertonfoz/dsc-tests/pull/73), [#74](https://github.com/evertonfoz/dsc-tests/pull/74), [#75](https://github.com/evertonfoz/dsc-tests/pull/75), [#76](https://github.com/evertonfoz/dsc-tests/pull/76) | merge delegado à IA, com CI verde; registro retroativo aprovado pelo professor (2026-11-21) |
 | E4 | Modelo de dados, papéis e privacidade | concluída | [E4-modelo-de-dados-e-privacidade.md](etapas/E4-modelo-de-dados-e-privacidade.md) | professor (2026-11-21) |
 | E5 | Kit do repositório do aluno e GitHub | concluída | [E5-kit-e-github.md](etapas/E5-kit-e-github.md) | professor (2026-11-21) |
 | E6 | Verificação de evidências e limites | concluída | [E6-verificacao-de-evidencias.md](etapas/E6-verificacao-de-evidencias.md) | professor (2026-11-21) |
@@ -32,9 +32,23 @@ As aprovações históricas de E1/E4/E7 e M3 são mantidas para rastreabilidade,
 | E8 | Riscos e perguntas em aberto | concluída | [E8-riscos-e-perguntas-em-aberto.md](etapas/E8-riscos-e-perguntas-em-aberto.md) | professor (2026-11-21) |
 | E9 | Implementação por marcos | M0–M3 integrados (PRs #87, #88, #90, #92, #94 e #96); revisão do fluxo sem registro integrada no PR #98 | planos em `etapas/E9-*.md` | M0: professor; M1–M3: decisões históricas; direção revista pelo professor em 2026-11-21 |
 
+## Revisão de conteúdo da issue #99 — execução de 2026-11-21
+
+**Base confirmada:** `origin/main` atualizado para `3e5650144f95453a5396b08d3c688d103632e3db` após o registro do PR #100, com a issue #99 aberta. O checkout original tinha alterações locais e foi preservado; esta revisão está na branch isolada `codex/issue-99-artefatos`.
+
+**Inventário confirmado no conteúdo da base:** 17 seções de prática (Apoios A–D e M00–M12), com apenas `m02-pratica.md` como arquivo próprio; logo, 16 arquivos faltavam. Há 14 gabaritos (M01–M12, Apoio C e projeto final), todos com linguagem originalmente voltada ao professor. O contrato real do UC12 já existe em `docs/uc/uc12/contrato.md`, mas não havia modelo reutilizável em `method/templates/`; também não havia modelo de evidência de comando.
+
+**Mudanças desta branch:** criados `method/templates/contrato-api.md` e `method/templates/evidencia-de-comando.md`; criados os 16 arquivos de prática faltantes e ligados aos módulos/apoios via metadados e seção de prática; os 14 gabaritos foram adaptados para autoestudo, preservando o conteúdo técnico e identificando evidências do CeliLac como referência; as instruções do kit confirmam que `method/AGENTS.md` permanece em `method/` e que o aluno copia/personaliza `method/templates/AGENTS-aluno.md` para a raiz somente no M12; E2/E3/E5/E6 e a matriz de auditoria foram reconciliadas sem apagar decisões históricas. Nenhum dado, formulário, progresso, gate ou armazenamento foi adicionado ao app.
+
+**Checks locais desta execução (worktree, conteúdo após as alterações):** `node method/scripts/check-links.mjs method docs/uc` passou: 111 documentos, 510 referências, nenhuma quebrada; `method/scripts/check-state.sh docs/uc/uc12/state.yaml` passou (estado válido local), com seis avisos de revisor igual ao responsável já existentes no UC12. No `curso-app/`: `pnpm check` passou (0 erros, 0 avisos e 0 dicas Astro); `pnpm test` passou (9 arquivos, 55 testes); `pnpm build` passou (89 páginas). `git diff --check` passou. A CI do PR ainda não foi executada; nenhuma conclusão sobre CI é registrada aqui.
+
+**Integração:** PR e CI ainda pendentes; a issue #99 permanece aberta até o aceite ser confirmado.
+
+
 ## Decisões
 | Data | Decisão | Origem |
 |---|---|---|
+| 2026-11-21 | **Autorização vigente:** a IA pode mesclar PRs deste projeto sem nova autorização somente se todos os checks obrigatórios estiverem verdes no último SHA; se algum estiver pendente ou vermelho, não mesclar. Branches não devem ser apagadas. | Professor, instrução desta execução |
 | 2026-11-21 | **Direção vigente:** não solicitar nem armazenar respostas, dados pessoais, tentativas, declarações de leitura ou progresso no app; atividades acontecem no ambiente do aluno. A tentativa antes do gabarito é uma instrução fora do app, não uma trava. A página inicial leva ao m00; sequência linear é primária; README/índice em página contextual interna com retorno nativo. | Professor, pedido desta sessão; issue [#98](https://github.com/evertonfoz/dsc-tests/issues/98) |
 | 2026-11-21 | Lacunas amplas de material (contrato de API, evidência de comando, práticas e gabaritos) seguem como revisão de conteúdo própria, issue [#99](https://github.com/evertonfoz/dsc-tests/issues/99). O template de `AGENTS.md` do aluno e sua instrução são tratados nesta revisão focada. | Auditoria baseada em conteúdo e templates do repositório |
 | 2026-11-21 | Os mascotes da pasta `mascotes/` (raiz do `dsc-tests`, fora deste projeto) podem ser usados na aplicação, em ordem aleatória e minimizando repetição. Qualquer outro conteúdo de fora de `celilac-backend/` exige pedido prévio. | Professor, na sessão de 2026-11-21 |

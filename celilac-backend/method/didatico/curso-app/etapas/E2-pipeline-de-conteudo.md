@@ -1,3 +1,5 @@
+> **Direção vigente após PR #98 (2026-11-21):** a aplicação não solicita nem registra respostas, tentativas, dados pessoais, leitura ou progresso. Gabaritos são públicos; tentar antes é recomendação pedagógica, sem gate. As propostas de fluxo e gabarito abaixo são decisões históricas da E2, mantidas para rastreabilidade quando divergirem desta direção.
+
 # E2 — Pipeline de conteúdo e metadados
 
 > **Direção revista (2026-11-21):** qualquer proposta anterior de enviar o Markdown do caso de uso ou preencher valores de domínio na aplicação está substituída. Esses arquivos e respostas permanecem no repositório do aluno; o app mostra instruções e modelos estáticos. Ver [estado.md](../estado.md) e issue [#98](https://github.com/evertonfoz/dsc-tests/issues/98).

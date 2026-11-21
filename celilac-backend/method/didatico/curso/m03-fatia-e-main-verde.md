@@ -6,6 +6,7 @@ ordem: 6
 prerequisitos: [apoio-a, apoio-b, m02]
 duracao: '2 aulas'
 gabarito: m03-gabarito
+pratica: m03-pratica
 ---
 
 # Módulo 3 — Por que a `main` ficou vermelha?
@@ -72,10 +73,8 @@ O ponto principal: o PR só é integrado com o CI **verde**. Nunca existe um ins
 No método, a fatia é entregue **no núcleo** (regra de negócio e serviço, com um repositório em memória). A fronteira HTTP (*HyperText Transfer Protocol*, o protocolo pelo qual o cliente fala com a API, *Application Programming Interface*, a interface pela qual outros programas usam o sistema) e o banco real entram depois, em PRs próprios (módulo 5 em diante). Isso mantém os PRs pequenos e a `main` verde.
 
 ## 6. Pratique no seu domínio
-1. Pegue as duas fatias do `state.yaml` do módulo 2. Para cada uma, escreva em uma frase **o comportamento observável** ("dado X, quando Y, então Z").
-2. Escreva o **nome do teste RED** de cada uma, no formato `should <fazer algo> when <condição> (<RN ou CA>)`.
-3. Implemente a primeira fatia em uma branch própria: **commit RED** (teste falhando, com a saída guardada), **commit GREEN**, e, se houver, **commit REFACTOR**.
-4. Abra **um PR** com `(refs #N)` e confira que **não** há outro PR esperando por este.
+
+Faça a atividade passo a passo em [`m03-pratica.md`](./m03-pratica.md). Produza os artefatos no seu repositório e confira cada resultado no caminho e nos critérios indicados no arquivo de prática.
 
 ## 7. Como saber que funcionou
 - [ ] Cada fatia descreve um comportamento, e não uma camada.

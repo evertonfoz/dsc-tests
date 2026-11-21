@@ -7,6 +7,7 @@ prerequisitos: [m00]
 prerequisitos_se_precisar: [apoio-b]
 duracao: '2 aulas'
 gabarito: m01-gabarito
+pratica: m01-pratica
 ---
 
 # Módulo 1 — "100% coberto": quem prova?
@@ -102,10 +103,8 @@ Só *Executado* prova comportamento.
 Quando um item não será implementado, registre. A ADR-002 do UC12 tem esta forma (resumida): **contexto** (o UC lista preço, mas diz que é ilustrativo e sem valores), **decisão** (preço fora do escopo; o item consta como "não implementado"), **condição para retomar** (quando a especificação definir o campo) e **consequências**. Veja `docs/adr/ADR-002-validacao-de-preco-adiada-uc12.md`.
 
 ## 6. Pratique no seu domínio
-1. **Liste** todos os itens do seu caso de uso (fluxos, regras, requisitos, critérios) com identificadores.
-2. **Monte** a tabela da seção 5 com as colunas *item*, *teste que prova*, *situação*. Neste ponto você ainda não tem testes: a maioria das linhas será **"Aguardando decisão"** ou "A implementar". Isso é o normal e é o ponto de partida.
-3. **Procure** um item que você suspeita estar vago. Escreva o que decidiria: implementar, adiar com ADR ou excluir com ADR.
-4. **Escreva uma ADR** curta (use `method/templates/adr.md`) para um item que você decidiu adiar.
+
+Faça a atividade passo a passo em [`m01-pratica.md`](./m01-pratica.md). Produza os artefatos no seu repositório e confira cada resultado no caminho e nos critérios indicados no arquivo de prática.
 
 ## 7. Como saber que funcionou
 - [ ] Cada item do meu caso de uso tem uma linha na tabela.

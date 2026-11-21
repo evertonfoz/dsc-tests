@@ -5,6 +5,7 @@ titulo: 'Apoio B — Testes automatizados e TDD'
 ordem: 5
 prerequisitos: []
 duracao: '1 aula'
+pratica: apoio-b-pratica
 ---
 
 # Apoio B — Testes automatizados e TDD
@@ -55,12 +56,9 @@ TDD (*Test-Driven Development*, desenvolvimento guiado por testes) é um ciclo d
 
 Por que ver o teste **falhar** primeiro? Porque um teste que nunca falhou pode não estar provando nada. O vermelho prova que ele **consegue** acusar o erro, e que falha **pelo motivo certo**.
 
-## 5. Pratique no seu domínio (qualquer linguagem)
-1. Escolha uma regra simples do seu domínio (por exemplo, "o nome não pode ser vazio").
-2. **RED:** escreva o teste, rode-o e leia a mensagem de falha. Ela diz o que você esperava? Guarde a saída.
-3. **GREEN:** escreva o mínimo para passar. Rode e guarde a saída.
-4. **REFACTOR:** melhore a legibilidade e rode de novo.
-5. Troque o `expect` por algo errado de propósito e veja o teste falhar de novo.
+## 5. Pratique no seu domínio
+
+Faça a atividade passo a passo em [`apoio-b-pratica.md`](./apoio-b-pratica.md). Produza os artefatos no seu repositório e confira cada resultado no caminho e nos critérios indicados no arquivo de prática.
 
 ## 6. Como saber que funcionou
 - [ ] Vi o teste falhar antes de implementar.
