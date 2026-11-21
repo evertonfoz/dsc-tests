@@ -4,7 +4,7 @@
 
 | Campo | Valor |
 |---|---|
-| Etapa atual | E3, parte 1 (em andamento) |
+| Etapa atual | E3, parte 1 concluída com o PR do piloto m02; próxima: E4 |
 | Última atualização | 2026-11-21 |
 | Responsável pelas decisões | o professor |
 
@@ -14,7 +14,7 @@
 | E0 | Leitura e perguntas bloqueantes | respondida e registrada | [E0-leitura-e-perguntas-bloqueantes.md](etapas/E0-leitura-e-perguntas-bloqueantes.md) | professor (respostas de 2026-11-21) |
 | E1 | Plano de arquitetura | concluída | [E1-plano-de-arquitetura.md](etapas/E1-plano-de-arquitetura.md) | professor (2026-11-21) |
 | E2 | Pipeline de conteúdo e metadados | concluída (revisável ao ver a aplicação em execução) | [E2-pipeline-de-conteudo.md](etapas/E2-pipeline-de-conteudo.md) | professor (2026-11-21) |
-| E3 | Atualização do repositório de conteúdo (se necessária) | parte 1 em andamento; parte 2 depois de ver a aplicação | | |
+| E3 | Atualização do repositório de conteúdo (se necessária) | parte 1 concluída (PRs #73 a #76); parte 2 depois de ver a aplicação | PRs [#73](https://github.com/evertonfoz/dsc-tests/pull/73), [#74](https://github.com/evertonfoz/dsc-tests/pull/74), [#75](https://github.com/evertonfoz/dsc-tests/pull/75), [#76](https://github.com/evertonfoz/dsc-tests/pull/76) | merge delegado à IA, com CI verde |
 | E4 | Modelo de dados, papéis e privacidade | pendente | | |
 | E5 | Kit do repositório do aluno e GitHub | pendente | | |
 | E6 | Verificação de evidências e limites | pendente | | |
@@ -59,6 +59,7 @@
 - **Inconsistência encontrada (não corrigida):** o m01 pede o apoio B "se você ainda não escreveu um teste com `it(...)`", mas a sequência "Próximo:" dos módulos só leva ao apoio B depois do m02 (m00 → m01 → apoio A → m02 → apoio B → m03). O front matter registra isso como pré-requisito condicional (`prerequisitos_se_precisar`), sem mudar o texto.
 - Front matter (E3, parte 1, PR 2): inserido em 32 arquivos (13 módulos, 4 apoios, projeto final, 14 gabaritos); o `README.md` do curso fica sem, por ser o índice. Campos além da E2, seção 3: `prerequisitos_se_precisar` (m01 e projeto final) e `gabarito_de` (gabaritos); `pratica` só entra quando o arquivo de prática existir. O apoio D aponta para `m04-gabarito`, porque é esse arquivo que o cobre.
 - Modelo de caso de uso (E3, parte 1, PR 3): `method/templates/caso-de-uso.md`, com a estrutura de `docs/planejamento/uc12-cadastrar-produto/uc-12.md` e os identificadores RF, RN, FA, FE e CA. Listado em `method/README.md`. **Ainda não é citado por nenhum módulo**: a referência no m00 (prática, passo 2) entra com o arquivo de prática do m00, na parte 2.
+- Prática piloto (E3, parte 1, PR 4): `method/didatico/curso/m02-pratica.md`, com 5 passos no formato da E2, seção 5.2. As saídas esperadas dos passos 3 e 4 foram obtidas executando `check-state.sh` sobre o modelo do passo 2 preenchido com valores de exemplo (OK com saída 0; 5 erros com saída 1). As mensagens do passo 5 (`--remote`) foram tiradas do código de `method/scripts/check-state.mjs`, **sem execução** contra um repositório. O m02 ganhou `pratica: m02-pratica` e uma linha apontando para o arquivo.
 - As referências de linha da E2, seção 9, valem para o commit `9e47c34`; o front matter desloca as linhas dos arquivos.
 - Aluno individual não tem revisão independente; o curso deve orientar a declarar isso, como fez o UC12.
 
@@ -75,3 +76,5 @@
 | 2026-11-21 | E1 | Simplificação confirmada; E1 encerrada; autorizado o workflow de CI; caso de uso do aluno via Markdown | [E1](etapas/E1-plano-de-arquitetura.md) (sem PR) |
 | 2026-11-21 | E2 | Pipeline, front matter, formato do passo de prática e prompts, envio do caso de uso, liberação dos gabaritos, lista de textos a revisar | [E2](etapas/E2-pipeline-de-conteudo.md) (sem PR) |
 | 2026-11-21 | E2 | Recomendações aceitas pelo professor, revisáveis ao ver a aplicação em execução | [E2](etapas/E2-pipeline-de-conteudo.md) (sem PR) |
+| 2026-11-21 | Plano | PR #72 (E0 a E2) integrado | [#72](https://github.com/evertonfoz/dsc-tests/pull/72) |
+| 2026-11-21 | E3 | Parte 1: título do apoio B (#73), front matter em 32 arquivos (#74), modelo de caso de uso (#75), prática piloto do m02 (#76) | PRs #73 a #76 |
