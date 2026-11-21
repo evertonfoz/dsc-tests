@@ -4,7 +4,7 @@
 
 | Campo | Valor |
 |---|---|
-| Etapa atual | E3, parte 1 concluída; **próxima sessão: E4** (marcada pelo professor para 2026-11-22) |
+| Etapa atual | E4 concluída; **próxima: E5** (kit do repositório do aluno e GitHub) |
 | Última atualização | 2026-11-21 |
 | Responsável pelas decisões | o professor |
 
@@ -15,7 +15,7 @@
 | E1 | Plano de arquitetura | concluída | [E1-plano-de-arquitetura.md](etapas/E1-plano-de-arquitetura.md) | professor (2026-11-21) |
 | E2 | Pipeline de conteúdo e metadados | concluída (revisável ao ver a aplicação em execução) | [E2-pipeline-de-conteudo.md](etapas/E2-pipeline-de-conteudo.md) | professor (2026-11-21) |
 | E3 | Atualização do repositório de conteúdo (se necessária) | parte 1 concluída (PRs #73 a #76); parte 2 depois de ver a aplicação | PRs [#73](https://github.com/evertonfoz/dsc-tests/pull/73), [#74](https://github.com/evertonfoz/dsc-tests/pull/74), [#75](https://github.com/evertonfoz/dsc-tests/pull/75), [#76](https://github.com/evertonfoz/dsc-tests/pull/76) | merge delegado à IA, com CI verde |
-| E4 | Modelo de dados, papéis e privacidade | pendente | | |
+| E4 | Modelo de dados, papéis e privacidade | concluída | [E4-modelo-de-dados-e-privacidade.md](etapas/E4-modelo-de-dados-e-privacidade.md) | professor (2026-11-21) |
 | E5 | Kit do repositório do aluno e GitHub | pendente | | |
 | E6 | Verificação de evidências e limites | pendente | | |
 | E7 | Marcos, testes e critérios de aceite | pendente | | |
@@ -45,6 +45,12 @@
 | 2026-11-21 | **Delegação registrada:** o professor autorizou a IA a abrir branches e PRs da E3, parte 1, e do plano, **e a fazer o merge** deles. Condição mantida pela IA: só integrar com o CI verde. Apagar branches não foi autorizado. | Professor |
 | 2026-11-21 | Versionar `mascotes/web/` (23 PNG de 512×512, 1,9 MB) para a imagem Docker poder ser construída pelo CI. Os originais de 1024×1024 em `mascotes/` continuam fora do git. | Professor |
 | 2026-11-21 | Caminho até a aplicação em execução: seguir o protocolo, etapa por etapa (opção a); a E4 começa em nova sessão. | Professor |
+| 2026-11-21 | E4: aprovado o modelo de dados por escopos (compartilháveis na equipe: `projeto` e `casoDeUso`; pessoais: `conteudos`, `passos`, `fases`, `preferencias`) e a lista de variáveis da seção 3.1. | E4, seção 3 |
+| 2026-11-21 | E4: `localStorage` em uma chave, com exportar "projeto" e "tudo", cópia automática antes de importar, validação e migração por versão de esquema. | E4, seções 4 e 5 |
+| 2026-11-21 | E4: gabarito liberado por tentativa não vazia ou abertura antecipada com aviso e registro; "A solução" não é escondida; m04 e apoio D liberam o gabarito comum com a tentativa de qualquer um; nota provisória "escrito originalmente para o professor" até a reescrita. | E4, seção 6 |
+| 2026-11-21 | E4: fases A a F só como declaração do aluno, "a confirmar" sem link; colar o `state.yaml` fica para a E6. | E4, seção 3.3 |
+| 2026-11-21 | E4: trocar "individual ou em dupla" por "individual ou em equipe" em `projeto-final.md`, na E3, parte 2. | E4, seção 8 |
+| 2026-11-21 | Autorizado abrir branch e PR da E4 ("tudo aprovado"). Merge **não** delegado nesta sessão. | Professor |
 | 2026-11-21 | P8: projeto próprio em `curso-app/`, na raiz do `dsc-tests`; criado só com README (sem código até a E9). | E0 |
 
 ## Requisitos acrescentados pelo professor
@@ -64,8 +70,10 @@
 - Prática piloto (E3, parte 1, PR 4): `method/didatico/curso/m02-pratica.md`, com 5 passos no formato da E2, seção 5.2. As saídas esperadas dos passos 3 e 4 foram obtidas executando `check-state.sh` sobre o modelo do passo 2 preenchido com valores de exemplo (OK com saída 0; 5 erros com saída 1). As mensagens do passo 5 (`--remote`) foram tiradas do código de `method/scripts/check-state.mjs`, **sem execução** contra um repositório. O m02 ganhou `pratica: m02-pratica` e uma linha apontando para o arquivo.
 - As referências de linha da E2, seção 9, valem para o commit `9e47c34`; o front matter desloca as linhas dos arquivos.
 - Aluno individual não tem revisão independente; o curso deve orientar a declarar isso, como fez o UC12.
+- **Divergência encontrada na E4 (não corrigida ainda):** `method/didatico/curso/projeto-final.md`, linha 14, diz "trabalho individual ou em dupla"; a decisão P6 diz equipes de 2 ou mais. Troca por "individual ou em equipe" **aprovada**, a aplicar na E3, parte 2.
+- E4, seção 3.1: lista consolidada das variáveis do projeto (inclui `documento_uc`, `issue_principal` e `login`, usadas no `m02-pratica.md` e ausentes da E2, seção 7).
 
-**Decisão para a próxima sessão:** seguir o protocolo, **uma etapa por vez** (E4, depois E5, até E8, cada uma com validação), e só então o marco 1 da E9. A sessão começa pela **E4**.
+**Decisão para a próxima sessão:** seguir o protocolo, **uma etapa por vez** (E4, depois E5, até E8, cada uma com validação), e só então o marco 1 da E9. A E4 foi validada; a próxima sessão começa pela **E5**.
 
 ## Histórico de sessões
 | Data | Etapa | O que foi feito | PR ou documento |
@@ -85,3 +93,5 @@
 | 2026-11-21 | — | `mascotes/web/` versionado; sessão encerrada; E4 marcada para 2026-11-22 | PR de mascotes (ver git log) |
 | 2026-11-21 | — | Escolhido seguir o protocolo etapa por etapa; próxima sessão começa pela E4 | este PR |
 | 2026-11-21 | — | Prompt atualizado: sessão na raiz do `dsc-tests`; item 8 (sem área do professor; gabaritos como etapa); E4 com papel único; merge só com delegação explícita registrada; decisões do `estado.md` prevalecem sobre o prompt | PR do prompt (ver git log) |
+| 2026-11-21 | E4 | Modelo de dados por escopos, papel único com modos individual e equipe, `localStorage` com exportar e importar, liberação dos gabaritos, privacidade; divergência "em dupla" registrada | [E4](etapas/E4-modelo-de-dados-e-privacidade.md) (sem PR) |
+| 2026-11-21 | E4 | Professor aprovou todas as recomendações da E4; E4 encerrada | [E4](etapas/E4-modelo-de-dados-e-privacidade.md), PR da E4 (ver git log) |
