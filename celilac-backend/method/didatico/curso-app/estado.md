@@ -4,7 +4,7 @@
 
 | Campo | Valor |
 |---|---|
-| Etapa atual | E7 concluída; **próxima: E8** (riscos e perguntas em aberto) |
+| Etapa atual | E8 concluída; **próxima: E9**, começando pelo plano do **M0** |
 | Última atualização | 2026-11-21 |
 | Responsável pelas decisões | o professor |
 
@@ -19,7 +19,7 @@
 | E5 | Kit do repositório do aluno e GitHub | concluída | [E5-kit-e-github.md](etapas/E5-kit-e-github.md) | professor (2026-11-21) |
 | E6 | Verificação de evidências e limites | concluída | [E6-verificacao-de-evidencias.md](etapas/E6-verificacao-de-evidencias.md) | professor (2026-11-21) |
 | E7 | Marcos, testes e critérios de aceite | concluída | [E7-marcos-testes-e-aceite.md](etapas/E7-marcos-testes-e-aceite.md) | professor (2026-11-21) |
-| E8 | Riscos e perguntas em aberto | pendente | | |
+| E8 | Riscos e perguntas em aberto | concluída | [E8-riscos-e-perguntas-em-aberto.md](etapas/E8-riscos-e-perguntas-em-aberto.md) | professor (2026-11-21) |
 | E9 | Implementação por marcos | não iniciada | | |
 
 ## Decisões
@@ -81,6 +81,17 @@
 | 2026-11-21 | **Delegação registrada:** o professor autorizou a IA a fazer o merge **só do PR #85** ("autorizo o merge do #85 com CI verde"). Condição: CI verde no último commit do PR. Apagar a branch não foi autorizado. Não vale para outros PRs nem para a sessão seguinte. | Professor |
 | 2026-11-21 | **Delegação registrada:** o professor autorizou a IA a fazer o merge **só do PR #83** ("autorizo o merge do #83 com CI verde"). Condição: CI verde no último commit do PR. Apagar a branch não foi autorizado. Não vale para outros PRs nem para a sessão seguinte. | Professor |
 
+| 2026-11-21 | E8, P1: itens de checklist identificados pela impressão digital do texto normalizado, não pela posição; ajusta o exemplo de formato da E4, seção 3.2 (não a estrutura por escopos). | E8, seção 2.2 (M3) |
+| 2026-11-21 | E8, P2: tela "Comparar meu kit", com o `manifesto.json` escolhido pelo aluno, conferido só pela forma. | E8, seção 2.3 (M7) |
+| 2026-11-21 | E8, P3: rodapé com commit e data; página "Sobre esta versão"; campo `substitui` no front matter só quando um `id` for renomeado; dado de `id` inexistente vai para `legado`. | E8, seção 2.3 (M0, M3) |
+| 2026-11-21 | E8, P4: progresso por contagens de rótulo, sem percentual único, sem medalhas; campo opcional "o que apareceu na saída?", não conferido; aviso de que o arquivo exportado não é evidência. | E8, seção 3.3 (M3) |
+| 2026-11-21 | E8, P5: licença do curso, do método, da aplicação e dos mascotes decidida pelo professor **antes** de publicar a imagem. | E8, R22 (antes do M7) |
+| 2026-11-21 | E8, P6: a construção falha se um prompt de prática trouxer comando destrutivo sem marcação de proibição; todo prompt termina com a regra de parar e perguntar. | E8, R10 (M4) |
+| 2026-11-21 | E8, P7: o CI da aplicação confere que os commits citados no curso existem; falha impede a imagem. | E8, D6 (M1) |
+| 2026-11-21 | E8, P8: construção local até o M6; publicação decidida no M7, depois da licença (P5) e da análise da LGPD, se for para a internet. | E8, seção 5 |
+| 2026-11-21 | E8: aprovados os critérios de aceite do M7 (seção 6) e as mitigações propostas R4, R14 e R19. | E8, seções 4 e 6 |
+| 2026-11-21 | Autorizados branch e PR da E8 (com o registro do PR #85). Merge **não** delegado. | Professor |
+
 ## Requisitos acrescentados pelo professor
 | Data | Requisito | Etapas afetadas |
 |---|---|---|
@@ -115,7 +126,13 @@
 - **Divergência registrada na E7 (2026-11-21):** este arquivo dizia que o PR #84 aguardava merge. Conferido com `gh pr view 84`: `MERGED` em 2026-11-21T13:14:25Z, commit de merge `538723c`, feito pela IA por delegação do professor só desse PR (tabela "Decisões"). `gh pr checks 84`: os quatro trabalhos com `pass` na execução 44907757434; `gh run view 44907757434`: `success` no commit `28423e5`, o último do PR. `git ls-remote`: a branch `refactor/check-state-nucleo` **não** foi apagada. <!-- links:ignore -->
 - **Limites declarados na E7 (seções 7 e 8.3):** enquanto a imagem não for publicada, o aluno precisa do `dsc-tests` para construí-la; e, com o endereço `127.0.0.1`, o uso no celular só se realiza na versão na internet.
 
-**Decisão para a próxima sessão:** seguir o protocolo, **uma etapa por vez**. A E7 foi validada; a próxima etapa é a **E8**.
+- **Divergência registrada na E8 (2026-11-21):** este arquivo deixava "data e commit de merge a registrar" para o PR #85. Conferido com `gh pr view 85`: `MERGED` em 2026-11-21T13:37:21Z, commit de merge `ebac83b`, cabeça `1e5973a`; `gh pr checks 85`: os quatro trabalhos com `pass` (execução 44909659167). `git ls-remote`: a branch `docs/curso-app-e7-marcos` **não** foi apagada. <!-- links:ignore -->
+- **Achado da E8 (não corrigido):** o exemplo de formato da E4, seção 3.2, chaveia os itens de checklist pela posição; inserir um item desloca as marcações sem aviso. Proposta na E8, seção 2.2 (pergunta P1).
+- **Achado da E8 (não corrigido):** o `dsc-tests` é público e não tem licença (`gh repo view`: `licenseInfo: null`; sem `LICENSE` na raiz, em `celilac-backend/` e em `mascotes/`). Decisão do professor antes de publicar a imagem (E8, P5).
+
+- **Impacto da E8 sobre etapas anteriores:** a P1 muda o exemplo de formato da E4, seção 3.2 (checklist), sem invalidar a E4; a P3 acrescenta a data ao rodapé do M0 e a P7 um critério ao M1 (E7, seção 4.1). Nenhuma etapa invalidada.
+
+**Decisão para a próxima sessão:** seguir o protocolo, **uma etapa por vez**. A E8 foi validada; começa a **E9** pelo plano do **M0**, que pede autorização para instalar dependências.
 
 ## Histórico de sessões
 | Data | Etapa | O que foi feito | PR ou documento |
@@ -150,4 +167,6 @@
 | 2026-11-21 | E6 (opção a) | PR #84 integrado em 2026-11-21T13:14:25Z (commit de merge `538723c`), pela IA, por delegação do professor só desse PR, com CI verde em `28423e5` (execução 44907757434, conferida com `gh pr checks 84` e `gh run view`); branch `refactor/check-state-nucleo` mantida (registro feito na sessão da E7) | [#84](https://github.com/evertonfoz/dsc-tests/pull/84) | <!-- links:ignore -->
 | 2026-11-21 | E7 | Tecnologia proposta; marcos M0 a M7 (M1 como mínimo útil) com critérios de aceite; estimativa de 13 a 24 sessões para a aplicação e 8 a 16 para a E3, parte 2; testes em sete camadas; acessibilidade WCAG 2.2 AA, idioma e celular | [E7](etapas/E7-marcos-testes-e-aceite.md) (sem PR) |
 | 2026-11-21 | E7 | Professor aprovou todas as recomendações; E7 encerrada; autorizados branch e PR da E7 | [#85](https://github.com/evertonfoz/dsc-tests/pull/85) |
-| 2026-11-21 | E7 | Professor delegou o merge só do PR #85, com CI verde; merge feito pela IA depois do CI verde no último commit do PR (data e commit de merge a registrar na sessão da E8, conferidos com `gh pr view 85`) | [#85](https://github.com/evertonfoz/dsc-tests/pull/85) |
+| 2026-11-21 | E7 | Professor delegou o merge só do PR #85, com CI verde; merge feito pela IA depois do CI verde no último commit do PR: integrado em 2026-11-21T13:37:21Z (commit de merge `ebac83b`), CI verde em `1e5973a` (registro feito na sessão da E8, conferido com `gh pr view 85` e `gh pr checks 85`); branch mantida | [#85](https://github.com/evertonfoz/dsc-tests/pull/85) |
+| 2026-11-21 | E8 | Sete formas de divergência de conteúdo (achado: checklist chaveado pela posição); "feito sem fazer" com seis mitigações; 22 outros riscos consolidados; perguntas P1 a P8; critérios do M7; achado do repositório público sem licença | [E8](etapas/E8-riscos-e-perguntas-em-aberto.md) (sem PR) |
+| 2026-11-21 | E8 | Professor aprovou todas as recomendações (P1 a P8, critérios do M7); E8 encerrada; autorizados branch e PR da E8 | PR da E8 (ver git log) |
