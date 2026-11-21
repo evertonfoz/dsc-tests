@@ -4,7 +4,7 @@
 
 | Campo | Valor |
 |---|---|
-| Etapa atual | E4 concluída; **próxima: E5** (kit do repositório do aluno e GitHub) |
+| Etapa atual | E5 concluída; **próxima: E6** (verificação de evidências e limites) |
 | Última atualização | 2026-11-21 |
 | Responsável pelas decisões | o professor |
 
@@ -14,9 +14,9 @@
 | E0 | Leitura e perguntas bloqueantes | respondida e registrada | [E0-leitura-e-perguntas-bloqueantes.md](etapas/E0-leitura-e-perguntas-bloqueantes.md) | professor (respostas de 2026-11-21) |
 | E1 | Plano de arquitetura | concluída | [E1-plano-de-arquitetura.md](etapas/E1-plano-de-arquitetura.md) | professor (2026-11-21) |
 | E2 | Pipeline de conteúdo e metadados | concluída (revisável ao ver a aplicação em execução) | [E2-pipeline-de-conteudo.md](etapas/E2-pipeline-de-conteudo.md) | professor (2026-11-21) |
-| E3 | Atualização do repositório de conteúdo (se necessária) | parte 1 concluída (PRs #73 a #76); parte 2 depois de ver a aplicação | PRs [#73](https://github.com/evertonfoz/dsc-tests/pull/73), [#74](https://github.com/evertonfoz/dsc-tests/pull/74), [#75](https://github.com/evertonfoz/dsc-tests/pull/75), [#76](https://github.com/evertonfoz/dsc-tests/pull/76) | merge delegado à IA, com CI verde |
+| E3 | Atualização do repositório de conteúdo (se necessária) | parte 1 concluída (PRs #73 a #76); parte 2 depois de ver a aplicação | [E3-atualizacao-do-conteudo.md](etapas/E3-atualizacao-do-conteudo.md) (registro retroativo, 2026-11-21); PRs [#73](https://github.com/evertonfoz/dsc-tests/pull/73), [#74](https://github.com/evertonfoz/dsc-tests/pull/74), [#75](https://github.com/evertonfoz/dsc-tests/pull/75), [#76](https://github.com/evertonfoz/dsc-tests/pull/76) | merge delegado à IA, com CI verde; registro retroativo aprovado pelo professor (2026-11-21) |
 | E4 | Modelo de dados, papéis e privacidade | concluída | [E4-modelo-de-dados-e-privacidade.md](etapas/E4-modelo-de-dados-e-privacidade.md) | professor (2026-11-21) |
-| E5 | Kit do repositório do aluno e GitHub | pendente | | |
+| E5 | Kit do repositório do aluno e GitHub | concluída | [E5-kit-e-github.md](etapas/E5-kit-e-github.md) | professor (2026-11-21) |
 | E6 | Verificação de evidências e limites | pendente | | |
 | E7 | Marcos, testes e critérios de aceite | pendente | | |
 | E8 | Riscos e perguntas em aberto | pendente | | |
@@ -51,6 +51,14 @@
 | 2026-11-21 | E4: fases A a F só como declaração do aluno, "a confirmar" sem link; colar o `state.yaml` fica para a E6. | E4, seção 3.3 |
 | 2026-11-21 | E4: trocar "individual ou em dupla" por "individual ou em equipe" em `projeto-final.md`, na E3, parte 2. | E4, seção 8 |
 | 2026-11-21 | Autorizado abrir branch e PR da E4 ("tudo aprovado"). Merge **não** delegado nesta sessão. | Professor |
+| 2026-11-21 | E3: registro retroativo da parte 1 aprovado. | E3 |
+| 2026-11-21 | E5: o kit é ponto de partida, não resultado: **sem** `state.yaml`, `ci.yml`, Compose, `Dockerfile` e `verify.sh` prontos (são prática do m02, apoio C, apoio D e m04). Diverge do texto do prompt ("state.yaml inicial"); vale esta decisão. | E5, seção 2 |
+| 2026-11-21 | E5: entrega em `.zip` com `repositorio/` e `para-voce/`, `LEIA-ME.md`, `manifesto.json` e prompt de aplicação que não sobrescreve; cópia arquivo a arquivo como alternativa na tela; repositório-modelo do GitHub registrado como possibilidade futura (publicação é decisão do professor). | E5, seção 3 |
+| 2026-11-21 | E5: conteúdo do kit conforme as seções 4.2 a 4.4 (inclui os documentos 01 a 06 de `method/didatico/`; exclui `didatico/curso/`, `didatico/curso-app/` e `exemplos/`). | E5, seção 4 |
+| 2026-11-21 | E5: tornar `method/` portátil (opção i), marcando com `<!-- links:ignore -->` e explicando as referências ao CeliLac e a `method/exemplos/`, em **PR de conteúdo próprio**, antes do marco que gera o kit. Branch e PR autorizados; merge **não** delegado. | E5, seção 6 |
+| 2026-11-21 | E5: `AGENTS.md` só em `method/`; ajustar a linha 4 no mesmo PR da opção (i). | E5, seção 6.1 |
+| 2026-11-21 | E5: proteção da `main` como passo opcional do m04, com o aviso de que as regras orientam o assistente mas não o travam. | E5, seção 7.3 |
+| 2026-11-21 | Autorizado abrir branch e PR da E5 (com o registro da E3). Merge **não** delegado nesta sessão. | Professor |
 | 2026-11-21 | P8: projeto próprio em `curso-app/`, na raiz do `dsc-tests`; criado só com README (sem código até a E9). | E0 |
 
 ## Requisitos acrescentados pelo professor
@@ -73,7 +81,13 @@
 - **Divergência encontrada na E4 (não corrigida ainda):** `method/didatico/curso/projeto-final.md`, linha 14, diz "trabalho individual ou em dupla"; a decisão P6 diz equipes de 2 ou mais. Troca por "individual ou em equipe" **aprovada**, a aplicar na E3, parte 2.
 - E4, seção 3.1: lista consolidada das variáveis do projeto (inclui `documento_uc`, `issue_principal` e `login`, usadas no `m02-pratica.md` e ausentes da E2, seção 7).
 
-**Decisão para a próxima sessão:** seguir o protocolo, **uma etapa por vez** (E4, depois E5, até E8, cada uma com validação), e só então o marco 1 da E9. A E4 foi validada; a próxima sessão começa pela **E5**.
+- **Divergência (2026-11-21, apontada pelo professor):** a E3 não tinha documento em `etapas/`, embora o prompt peça um por etapa de E0 a E8. Corrigido com um **registro retroativo** da parte 1 ([E3](etapas/E3-atualizacao-do-conteudo.md)), sem decisão nova, a partir deste arquivo e dos PRs #73 a #76 conferidos com `gh pr view` e `gh pr checks`.
+- **Divergência encontrada na E5 (não corrigida):** `method/` copiado para um repositório novo, sem `didatico/curso/`, `didatico/curso-app/` e `exemplos/`, **falha** no `check-links` com 35 referências quebradas (executado numa pasta temporária). Referências a arquivos do CeliLac e a `method/exemplos/` nunca existirão no repositório do aluno. Correção aprovada (E5, seção 6, opção i): PR de conteúdo próprio, ainda não aberto.
+- **Divergência encontrada na E5 (não corrigida):** `method/AGENTS.md`, linha 4, manda copiar o arquivo para a raiz; o projeto de referência não tem `AGENTS.md` na raiz e o orquestrador lê `method/AGENTS.md`. Ajuste aprovado (E5, seção 6.1), no mesmo PR da opção (i).
+- **Pendência da E5:** o exemplo de `ci.yml` do apoio C não tem `permissions: contents: read`, que o CI de referência tem (linha 16). Entra no arquivo de prática do apoio C.
+- **Pendência da E5:** `m02-pratica.md`, "Antes de começar", manda copiar `method/` do repositório do curso; passa a apontar para o kit (E3, parte 2).
+
+**Decisão para a próxima sessão:** seguir o protocolo, **uma etapa por vez**. A E5 foi validada; a próxima etapa é a **E6**. O PR de `method/` portátil (E5, opção i) está autorizado e pode ser feito antes ou depois da E6, por escolha do professor.
 
 ## Histórico de sessões
 | Data | Etapa | O que foi feito | PR ou documento |
@@ -95,3 +109,6 @@
 | 2026-11-21 | — | Prompt atualizado: sessão na raiz do `dsc-tests`; item 8 (sem área do professor; gabaritos como etapa); E4 com papel único; merge só com delegação explícita registrada; decisões do `estado.md` prevalecem sobre o prompt | PR do prompt (ver git log) |
 | 2026-11-21 | E4 | Modelo de dados por escopos, papel único com modos individual e equipe, `localStorage` com exportar e importar, liberação dos gabaritos, privacidade; divergência "em dupla" registrada | [E4](etapas/E4-modelo-de-dados-e-privacidade.md) (sem PR) |
 | 2026-11-21 | E4 | Professor aprovou todas as recomendações da E4; E4 encerrada | [E4](etapas/E4-modelo-de-dados-e-privacidade.md), PR da E4 (ver git log) |
+| 2026-11-21 | E3 | Registro retroativo da parte 1, depois de o professor notar a falta do documento | [E3](etapas/E3-atualizacao-do-conteudo.md) (sem PR) |
+| 2026-11-21 | E5 | Kit como ponto de partida (`.zip` com `repositorio/` e `para-voce/`), formas de entrega, permissões mínimas, limite do assistente de IA; simulação de `method/` portátil: `check-links` falha com 35 referências | [E5](etapas/E5-kit-e-github.md) (sem PR) |
+| 2026-11-21 | E5 | Professor aprovou todas as recomendações da E5 e o registro da E3; E5 encerrada | PR da E5 (ver git log) |
