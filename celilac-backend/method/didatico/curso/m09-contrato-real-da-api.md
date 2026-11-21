@@ -1,3 +1,13 @@
+---
+id: m09
+tipo: modulo
+titulo: 'Módulo 9 — Alguém olhou o contrato real da API?'
+ordem: 14
+prerequisitos: [m03, m05, m06, m07, m08]
+duracao: '2 aulas'
+gabarito: m09-gabarito
+---
+
 # Módulo 9 — Alguém olhou o contrato real da API?
 
 > **Pré-requisito:** módulos 3, 5, 6, 7 e 8. Duração sugerida: 2 aulas.

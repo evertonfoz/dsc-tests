@@ -1,3 +1,10 @@
+---
+id: m09-gabarito
+tipo: gabarito
+titulo: 'Gabarito do professor — Módulo 9'
+gabarito_de: [m09]
+---
+
 # Gabarito do professor — Módulo 9
 
 > Uso exclusivo do professor.

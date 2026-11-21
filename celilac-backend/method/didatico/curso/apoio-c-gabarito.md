@@ -1,3 +1,10 @@
+---
+id: apoio-c-gabarito
+tipo: gabarito
+titulo: 'Gabarito do professor — Apoio C'
+gabarito_de: [apoio-c]
+---
+
 # Gabarito do professor — Apoio C
 
 > Uso exclusivo do professor.

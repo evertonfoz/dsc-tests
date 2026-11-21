@@ -1,3 +1,10 @@
+---
+id: m03-gabarito
+tipo: gabarito
+titulo: 'Gabarito do professor — Módulo 3'
+gabarito_de: [m03]
+---
+
 # Gabarito do professor — Módulo 3
 
 > Uso exclusivo do professor.

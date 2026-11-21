@@ -1,3 +1,13 @@
+---
+id: m02
+tipo: modulo
+titulo: 'Módulo 2 — Por que o plano e a realidade divergem?'
+ordem: 4
+prerequisitos: [m01, apoio-a]
+duracao: '2 aulas'
+gabarito: m02-gabarito
+---
+
 # Módulo 2 — Por que o plano e a realidade divergem?
 
 > **Pré-requisito:** módulo 1 e o apoio A (`apoio-a-github-alem-do-basico.md`). Duração sugerida: 2 aulas.

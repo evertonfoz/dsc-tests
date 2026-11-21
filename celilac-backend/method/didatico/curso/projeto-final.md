@@ -1,3 +1,14 @@
+---
+id: projeto-final
+tipo: projeto
+titulo: 'Projeto final — Conduza um caso de uso seu, do início ao fim'
+ordem: 18
+prerequisitos: [m00, m01, m02, m03, m04, m05, m06, m07, m08, m09, m10, m11, m12]
+prerequisitos_se_precisar: [apoio-a, apoio-b, apoio-c, apoio-d]
+duracao: '4 a 6 semanas'
+gabarito: projeto-final-gabarito
+---
+
 # Projeto final — Conduza um caso de uso seu, do início ao fim
 
 > **Pré-requisito:** módulos 0 a 12 (e os apoios que você precisou). Duração sugerida: 4 a 6 semanas, em trabalho individual ou em dupla (estimativa do material, ainda não testada com turmas).

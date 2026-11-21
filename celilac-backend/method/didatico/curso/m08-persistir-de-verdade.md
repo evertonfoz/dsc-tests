@@ -1,3 +1,13 @@
+---
+id: m08
+tipo: modulo
+titulo: 'Módulo 8 — Como persistir de verdade?'
+ordem: 13
+prerequisitos: [m04, m05, m06, m07, apoio-d]
+duracao: '2 a 3 aulas'
+gabarito: m08-gabarito
+---
+
 # Módulo 8 — Como persistir de verdade?
 
 > **Pré-requisito:** módulos 4 a 7 e apoio D (contêineres). Duração sugerida: 2 a 3 aulas.

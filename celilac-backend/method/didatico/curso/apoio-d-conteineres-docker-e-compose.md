@@ -1,3 +1,13 @@
+---
+id: apoio-d
+tipo: apoio
+titulo: 'Apoio D — Contêineres: Docker e Compose'
+ordem: 8
+prerequisitos: [apoio-c]
+duracao: '2 aulas'
+gabarito: m04-gabarito
+---
+
 # Apoio D — Contêineres: Docker e Compose
 
 > **Para quem:** quem nunca usou contêineres. Duração sugerida: 2 aulas.

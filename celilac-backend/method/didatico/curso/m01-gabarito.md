@@ -1,3 +1,10 @@
+---
+id: m01-gabarito
+tipo: gabarito
+titulo: 'Gabarito do professor — Módulo 1'
+gabarito_de: [m01]
+---
+
 # Gabarito do professor — Módulo 1
 
 > Uso exclusivo do professor. Não distribua antes da atividade da seção 2.

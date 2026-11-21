@@ -1,3 +1,12 @@
+---
+id: m00
+tipo: modulo
+titulo: 'Módulo 0 — O que significa um caso de uso estar "pronto"?'
+ordem: 1
+prerequisitos: []
+duracao: '60 a 90 minutos'
+---
+
 # Módulo 0 — O que significa um caso de uso estar "pronto"?
 
 > **Antes de começar:** leia o `README.md` desta pasta. Duração sugerida: 60 a 90 minutos.

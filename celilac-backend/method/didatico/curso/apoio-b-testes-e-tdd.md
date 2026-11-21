@@ -1,3 +1,12 @@
+---
+id: apoio-b
+tipo: apoio
+titulo: 'Apoio B — Testes automatizados e TDD'
+ordem: 5
+prerequisitos: []
+duracao: '1 aula'
+---
+
 # Apoio B — Testes automatizados e TDD
 
 > **Para quem:** quem já escreveu código, mas conhece pouco de testes automatizados. Duração sugerida: 1 aula.

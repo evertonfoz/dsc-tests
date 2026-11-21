@@ -1,3 +1,13 @@
+---
+id: m11
+tipo: modulo
+titulo: 'Módulo 11 — Outra pessoa consegue repetir sua verificação?'
+ordem: 16
+prerequisitos: [m04, m07, m08, m09, apoio-c, apoio-d]
+duracao: '2 aulas'
+gabarito: m11-gabarito
+---
+
 # Módulo 11 — Outra pessoa consegue repetir sua verificação?
 
 > **Pré-requisito:** módulos 4, 7, 8 e 9, e apoios C e D. Duração sugerida: 2 aulas.
