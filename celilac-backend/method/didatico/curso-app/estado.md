@@ -71,6 +71,7 @@
 | 2026-11-21 | E6: registrar no método a convenção de cabeçalho das evidências (o que foi executado, data UTC, commit de base), na E3, parte 2. | E6, seção 9 |
 | 2026-11-21 | Autorizados branch e PR da E6 (com o registro do PR #82). Merge **não** delegado. | Professor |
 | 2026-11-21 | Autorizados branch e PR da opção (a) da E6 (núcleo do `check-state`). Merge **não** delegado. | Professor |
+| 2026-11-21 | **Delegação registrada:** o professor autorizou a IA a fazer o merge **só do PR #84** ("autorizo o merge do #84 com CI verde"). Condição: CI verde no último commit do PR. Apagar a branch não foi autorizado. Não vale para outros PRs nem para a sessão seguinte. | Professor |
 | 2026-11-21 | **Delegação registrada:** o professor autorizou a IA a fazer o merge **só do PR #83** ("autorizo o merge do #83 com CI verde"). Condição: CI verde no último commit do PR. Apagar a branch não foi autorizado. Não vale para outros PRs nem para a sessão seguinte. | Professor |
 
 ## Requisitos acrescentados pelo professor
