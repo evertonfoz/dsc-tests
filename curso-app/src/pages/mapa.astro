@@ -1,0 +1,45 @@
+---
+// Mapa na ordem de `ordem` (plano do M1, seção 6). No M1a, só a lista; o grafo entra no M1b
+// e esta lista continua sendo o equivalente acessível dele.
+import Base from '../layouts/Base.astro';
+import TextoComCodigo from '../componentes/TextoComCodigo.astro';
+import { cursoValidado, percurso } from '../conteudo/carregar';
+import { textos } from '../textos';
+
+const curso = await cursoValidado();
+const itens = await percurso();
+const titulo = (id: string) => curso.get(id)?.dados.titulo ?? id;
+---
+<Base titulo={textos.tituloMapa}>
+  <h1>{textos.tituloMapa}</h1>
+  <p>{textos.introducaoMapa}</p>
+  <ol class="mapa" data-mapa>
+    {itens.map((e) => (
+      <li data-id={e.dados.id}>
+        <a href={`/${e.dados.id}/`}><TextoComCodigo texto={e.dados.titulo} /></a>
+        <dl>
+          <dt>{textos.duracao}</dt>
+          <dd>{e.dados.duracao} <span class="nota">({textos.duracaoNota})</span></dd>
+          <dt>{textos.pede}</dt>
+          <dd>
+            {e.dados.prerequisitos.length === 0 ? textos.pedeNada : (
+              <ul class="em-linha">
+                {e.dados.prerequisitos.map((id) => <li><a href={`/${id}/`} data-pede={id}><TextoComCodigo texto={titulo(id)} /></a></li>)}
+              </ul>
+            )}
+          </dd>
+          {(e.dados.prerequisitos_se_precisar?.length ?? 0) > 0 && (
+            <>
+              <dt>{textos.sePrecisar}</dt>
+              <dd>
+                <ul class="em-linha">
+                  {e.dados.prerequisitos_se_precisar!.map((id) => <li><a href={`/${id}/`} data-se-precisar={id}><TextoComCodigo texto={titulo(id)} /></a></li>)}
+                </ul>
+              </dd>
+            </>
+          )}
+        </dl>
+      </li>
+    ))}
+  </ol>
+</Base>

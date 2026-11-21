@@ -1,7 +1,9 @@
 ---
 import { getEntry, render } from 'astro:content';
 import Base from '../layouts/Base.astro';
+import Avisos from '../componentes/Avisos.astro';
 import { cursoValidado } from '../conteudo/carregar';
+import { textos } from '../textos';
 
 // Valida o curso inteiro antes de gerar qualquer página.
 await cursoValidado();
@@ -12,5 +14,7 @@ const { Content, headings } = await render(readme);
 const titulo = headings.find((h) => h.depth === 1)?.text ?? 'Índice do curso';
 ---
 <Base titulo={titulo}>
+  <Avisos />
+  <p><a href="/mapa/">{textos.linkMapa}</a></p>
   <Content />
 </Base>

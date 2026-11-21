@@ -1,0 +1,11 @@
+---
+// Avisos de honestidade (plano do M1, seção 8; critério 6). Sem título de seção, para não
+// quebrar a ordem dos títulos da página.
+import { textos } from '../textos';
+---
+<div class="avisos" role="note" data-avisos-de-honestidade>
+  <p><strong>{textos.tituloAvisos}</strong></p>
+  <ul>
+    {textos.avisosDeHonestidade.map((aviso) => <li>{aviso}</li>)}
+  </ul>
+</div>
