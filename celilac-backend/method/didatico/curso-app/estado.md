@@ -91,6 +91,7 @@
 | 2026-11-21 | E8, P8: construção local até o M6; publicação decidida no M7, depois da licença (P5) e da análise da LGPD, se for para a internet. | E8, seção 5 |
 | 2026-11-21 | E8: aprovados os critérios de aceite do M7 (seção 6) e as mitigações propostas R4, R14 e R19. | E8, seções 4 e 6 |
 | 2026-11-21 | Autorizados branch e PR da E8 (com o registro do PR #85). Merge **não** delegado. | Professor |
+| 2026-11-21 | **Delegação registrada:** o professor autorizou a IA a fazer o merge **só do PR #86** ("autorizo o merge do #86 com CI verde"). Condição: CI verde no último commit do PR. Apagar a branch não foi autorizado. Não vale para outros PRs nem para a sessão seguinte. | Professor |
 
 ## Requisitos acrescentados pelo professor
 | Data | Requisito | Etapas afetadas |
@@ -169,4 +170,5 @@
 | 2026-11-21 | E7 | Professor aprovou todas as recomendações; E7 encerrada; autorizados branch e PR da E7 | [#85](https://github.com/evertonfoz/dsc-tests/pull/85) |
 | 2026-11-21 | E7 | Professor delegou o merge só do PR #85, com CI verde; merge feito pela IA depois do CI verde no último commit do PR: integrado em 2026-11-21T13:37:21Z (commit de merge `ebac83b`), CI verde em `1e5973a` (registro feito na sessão da E8, conferido com `gh pr view 85` e `gh pr checks 85`); branch mantida | [#85](https://github.com/evertonfoz/dsc-tests/pull/85) |
 | 2026-11-21 | E8 | Sete formas de divergência de conteúdo (achado: checklist chaveado pela posição); "feito sem fazer" com seis mitigações; 22 outros riscos consolidados; perguntas P1 a P8; critérios do M7; achado do repositório público sem licença | [E8](etapas/E8-riscos-e-perguntas-em-aberto.md) (sem PR) |
-| 2026-11-21 | E8 | Professor aprovou todas as recomendações (P1 a P8, critérios do M7); E8 encerrada; autorizados branch e PR da E8 | PR da E8 (ver git log) |
+| 2026-11-21 | E8 | Professor aprovou todas as recomendações (P1 a P8, critérios do M7); E8 encerrada; autorizados branch e PR da E8 | [#86](https://github.com/evertonfoz/dsc-tests/pull/86) |
+| 2026-11-21 | E8 | Professor delegou o merge só do PR #86, com CI verde; merge feito pela IA depois do CI verde no último commit do PR (data e commit de merge a registrar na sessão seguinte, conferidos com `gh pr view 86`) | [#86](https://github.com/evertonfoz/dsc-tests/pull/86) |
