@@ -11,7 +11,7 @@ method/
 ├── didatico/              artefatos didáticos: o que foi feito, por quê, como replicar
 ├── decisoes/              ADRs do próprio método
 ├── playbooks/             guia de fatias, matriz de arquétipos e playbooks das fases A–F
-├── templates/             project-profile, state.yaml, relatório de fase, ADR
+├── templates/             project-profile, state.yaml, relatório de fase, ADR, documento do caso de uso
 ├── perfis/                perfis de stack (celilac-nest)
 ├── orquestrador/          prompt do estudante para conduzir um UC fase a fase
 ├── scripts/               check-state e check-links (validadores) e seus testes
