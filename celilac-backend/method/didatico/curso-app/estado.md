@@ -4,7 +4,7 @@
 
 | Campo | Valor |
 |---|---|
-| Etapa atual | E5 concluída; **próxima: E6** (verificação de evidências e limites) |
+| Etapa atual | E6 concluída; **próxima: E7** (marcos, testes e critérios de aceite) |
 | Última atualização | 2026-11-21 |
 | Responsável pelas decisões | o professor |
 
@@ -17,7 +17,7 @@
 | E3 | Atualização do repositório de conteúdo (se necessária) | parte 1 concluída (PRs #73 a #76); parte 2 depois de ver a aplicação | [E3-atualizacao-do-conteudo.md](etapas/E3-atualizacao-do-conteudo.md) (registro retroativo, 2026-11-21); PRs [#73](https://github.com/evertonfoz/dsc-tests/pull/73), [#74](https://github.com/evertonfoz/dsc-tests/pull/74), [#75](https://github.com/evertonfoz/dsc-tests/pull/75), [#76](https://github.com/evertonfoz/dsc-tests/pull/76) | merge delegado à IA, com CI verde; registro retroativo aprovado pelo professor (2026-11-21) |
 | E4 | Modelo de dados, papéis e privacidade | concluída | [E4-modelo-de-dados-e-privacidade.md](etapas/E4-modelo-de-dados-e-privacidade.md) | professor (2026-11-21) |
 | E5 | Kit do repositório do aluno e GitHub | concluída | [E5-kit-e-github.md](etapas/E5-kit-e-github.md) | professor (2026-11-21) |
-| E6 | Verificação de evidências e limites | pendente | | |
+| E6 | Verificação de evidências e limites | concluída | [E6-verificacao-de-evidencias.md](etapas/E6-verificacao-de-evidencias.md) | professor (2026-11-21) |
 | E7 | Marcos, testes e critérios de aceite | pendente | | |
 | E8 | Riscos e perguntas em aberto | pendente | | |
 | E9 | Implementação por marcos | não iniciada | | |
@@ -63,6 +63,14 @@
 | 2026-11-21 | P8: projeto próprio em `curso-app/`, na raiz do `dsc-tests`; criado só com README (sem código até a E9). | E0 |
 | 2026-11-21 | Aprovado o texto novo de `method/AGENTS.md`, linha 4: o arquivo fica em `method/` e não é copiado para a raiz; o orquestrador já aponta o caminho. | Professor, sessão do PR #82 |
 | 2026-11-21 | Autorizados branch e PR de `method/` portátil (E5, opção i). Merge **não** delegado. | Professor ([prompt-sessao-method-portatil.md](prompt-sessao-method-portatil.md)) |
+| 2026-11-21 | **Delegação registrada (retroativa):** o professor delegou o merge **só do PR #82**, com CI verde no commit `1db869b`. Não vale para outros PRs nem para a sessão seguinte. A branch `docs/method-portatil` **não** foi apagada (apagar não foi autorizado). | Professor, informado no prompt da sessão da E6 | <!-- links:ignore -->
+| 2026-11-21 | E6: quatro níveis de verificação (declaração, forma, ferramenta, julgamento); a aplicação só executa o nível de forma (N1). Vale a E1 sobre o item 7 do prompt: a aplicação não abre links nem consulta o GitHub. | E6, seções 2 e 3 |
+| 2026-11-21 | E6: `state.yaml` colado como fonte opcional das fases, com as regras de estrutura do validador e os caminhos citados como "a confirmar no seu repositório"; aviso se for o do UC12; último texto colado guardado no escopo `fases`. | E6, seção 4 |
+| 2026-11-21 | E6: reaproveitar o validador pela **opção (a)**: separar `parseYaml` e `validar` de `check-state.mjs` num núcleo sem dependências de Node, em PR de método próprio, antes do marco que exibir as fases. Branch e PR desse PR de método **ainda não autorizados**. | E6, seção 4.3 |
+| 2026-11-21 | E6: links de evidência conferidos só pela forma; saídas de comandos coladas **não** são interpretadas; rótulos fixos da seção 9; lista do que a aplicação não prova exibida na tela. | E6, seções 5, 6, 8 e 9 |
+| 2026-11-21 | E6: registrar no método a convenção de cabeçalho das evidências (o que foi executado, data UTC, commit de base), na E3, parte 2. | E6, seção 9 |
+| 2026-11-21 | Autorizados branch e PR da E6 (com o registro do PR #82). Merge **não** delegado. | Professor |
+| 2026-11-21 | **Delegação registrada:** o professor autorizou a IA a fazer o merge **só do PR #83** ("autorizo o merge do #83 com CI verde"). Condição: CI verde no último commit do PR. Apagar a branch não foi autorizado. Não vale para outros PRs nem para a sessão seguinte. | Professor |
 
 ## Requisitos acrescentados pelo professor
 | Data | Requisito | Etapas afetadas |
@@ -85,13 +93,18 @@
 - E4, seção 3.1: lista consolidada das variáveis do projeto (inclui `documento_uc`, `issue_principal` e `login`, usadas no `m02-pratica.md` e ausentes da E2, seção 7).
 
 - **Divergência (2026-11-21, apontada pelo professor):** a E3 não tinha documento em `etapas/`, embora o prompt peça um por etapa de E0 a E8. Corrigido com um **registro retroativo** da parte 1 ([E3](etapas/E3-atualizacao-do-conteudo.md)), sem decisão nova, a partir deste arquivo e dos PRs #73 a #76 conferidos com `gh pr view` e `gh pr checks`.
-- **Divergência encontrada na E5 (correção em PR, [#82](https://github.com/evertonfoz/dsc-tests/pull/82), aguardando merge):** `method/` copiado para um repositório novo, sem `didatico/curso/`, `didatico/curso-app/` e `exemplos/`, **falha** no `check-links` com 35 referências quebradas (executado numa pasta temporária). Referências a arquivos do CeliLac e a `method/exemplos/` nunca existirão no repositório do aluno. O PR #82 marca as 20 linhas do G2; na simulação do kit restam só as 2 referências a `scripts/verify.sh` (criado no m04), e com ele o `check-links` sai com código 0.
-- **Divergência encontrada na E5 (correção em PR, [#82](https://github.com/evertonfoz/dsc-tests/pull/82), aguardando merge):** `method/AGENTS.md`, linha 4, manda copiar o arquivo para a raiz; o projeto de referência não tem `AGENTS.md` na raiz e o orquestrador lê `method/AGENTS.md`. Linha ajustada no PR #82, com texto aprovado pelo professor.
+- **Divergência encontrada na E5 (corrigida no PR [#82](https://github.com/evertonfoz/dsc-tests/pull/82), integrado):** `method/` copiado para um repositório novo, sem `didatico/curso/`, `didatico/curso-app/` e `exemplos/`, **falha** no `check-links` com 35 referências quebradas (executado numa pasta temporária). Referências a arquivos do CeliLac e a `method/exemplos/` nunca existirão no repositório do aluno. O PR #82 marca as 20 linhas do G2; na simulação do kit restam só as 2 referências a `scripts/verify.sh` (criado no m04), e com ele o `check-links` sai com código 0.
+- **Divergência encontrada na E5 (corrigida no PR [#82](https://github.com/evertonfoz/dsc-tests/pull/82), integrado):** `method/AGENTS.md`, linha 4, manda copiar o arquivo para a raiz; o projeto de referência não tem `AGENTS.md` na raiz e o orquestrador lê `method/AGENTS.md`. Linha ajustada no PR #82, com texto aprovado pelo professor.
 - **Imprecisão encontrada na E5 (não corrigida; não invalida decisão):** a seção 6 fala em "a falha dessa única referência" a `scripts/verify.sh`; são **duas** (`method/orquestrador/prompt-do-estudante.md` e `method/perfis/celilac-nest.md`). E o "em 29 documento(s)" da mensagem do `check-links` é o total de documentos verificados, não o de documentos com falha. O `LEIA-ME.md` do kit deve falar em duas referências.
 - **Pendência da E5:** o exemplo de `ci.yml` do apoio C não tem `permissions: contents: read`, que o CI de referência tem (linha 16). Entra no arquivo de prática do apoio C.
 - **Pendência da E5:** `m02-pratica.md`, "Antes de começar", manda copiar `method/` do repositório do curso; passa a apontar para o kit (E3, parte 2).
+- **Divergência registrada na E6 (2026-11-21):** este arquivo dizia que o PR #82 aguardava merge. Conferido com `gh pr view 82`: `MERGED` em 2026-11-21T12:54:51Z, commit de merge `e5f3a75`, cabeça `1db869b`, integrado pela conta `evertonfoz`; `gh pr checks 82`: os quatro trabalhos com `pass`. A delegação foi informada pelo professor no prompt da sessão e está registrada nas decisões.
+- **Divergência registrada na E6:** o prompt (seção 2, item 7) cita como conferência automática "link de PR ou de execução do CI, leitura somente do estado do repositório". Pelas decisões da E1, a aplicação não lê o repositório nem chama o GitHub; vale a E1. Tratamento na E6, seção 2.
+- **Pendência da E6 (aprovada, PR não autorizado ainda):** separar `parseYaml` e `validar` de `method/scripts/check-state.mjs` num núcleo sem dependências de Node (E6, seção 4.3, opção a). PR de método; afeta o kit da E5 só por trazer um arquivo a mais. Precisa entrar antes do marco que exibir as fases (E7).
+- **Achado da E6 (não corrigido):** as evidências `.txt` do UC12 seguem uma convenção de cabeçalho não escrita no método e aplicada de forma desigual (31 arquivos; 28 com data, 13 com commit de base). Registro da convenção no método aprovado, a fazer na E3, parte 2.
+- **Impacto da E6 sobre a E4:** o escopo `fases` ganha um campo para o último `state.yaml` colado e a data. Não muda a estrutura aprovada na E4.
 
-**Decisão para a próxima sessão:** seguir o protocolo, **uma etapa por vez**. A E5 foi validada; a próxima etapa é a **E6**. O PR de `method/` portátil (E5, opção i) foi aberto ([#82](https://github.com/evertonfoz/dsc-tests/pull/82)) e aguarda merge do professor.
+**Decisão para a próxima sessão:** seguir o protocolo, **uma etapa por vez**. A E6 foi validada; a próxima etapa é a **E7**.
 
 ## Histórico de sessões
 | Data | Etapa | O que foi feito | PR ou documento |
@@ -118,3 +131,6 @@
 | 2026-11-21 | E5 | Professor aprovou todas as recomendações da E5 e o registro da E3; E5 encerrada | PR da E5 (ver git log) |
 | 2026-11-21 | E5 | PR #81 (E5 e registro da E3) integrado em 2026-11-21T12:36:56Z (conferido com `gh pr view 81`) | [#81](https://github.com/evertonfoz/dsc-tests/pull/81) |
 | 2026-11-21 | E5 (opção i) | `method/` portátil: 20 linhas do G2 marcadas com `<!-- links:ignore -->`, `AGENTS.md` linha 4 ajustada; falha reproduzida (35 referências) e critérios de aceite executados (2 restantes do G1; código 0 com `scripts/verify.sh`; código 0 no repositório). Nenhuma etapa invalidada. | [prompt-sessao-method-portatil.md](prompt-sessao-method-portatil.md); [#82](https://github.com/evertonfoz/dsc-tests/pull/82) (merge não delegado) |
+| 2026-11-21 | E5 (opção i) | PR #82 integrado em 2026-11-21T12:54:51Z (commit `e5f3a75`), por delegação do professor só desse PR, com CI verde em `1db869b`; branch `docs/method-portatil` mantida (registro feito na sessão da E6) | [#82](https://github.com/evertonfoz/dsc-tests/pull/82) | <!-- links:ignore -->
+| 2026-11-21 | E6 | Quatro níveis de verificação (a aplicação só confere a forma); `state.yaml` colado com o núcleo do validador; links só por forma; saídas coladas não interpretadas; lista do que a aplicação não prova. Executados: `check-state` no UC12 (saída 0) e isolado (40 erros, todos de arquivo; saída 1) | [E6](etapas/E6-verificacao-de-evidencias.md) (sem PR) |
+| 2026-11-21 | E6 | Professor aprovou todas as recomendações, com a opção (a) da seção 4.3; E6 encerrada; autorizados branch e PR da E6 | PR da E6 (ver git log) |
