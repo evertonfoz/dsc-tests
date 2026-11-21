@@ -76,7 +76,7 @@ O CeliLac tem três, e cada um responde a uma pergunta diferente:
 |---|---|---|
 | Qualidade | O código está correto e consistente? | lint (análise estática que aponta erros e inconsistências de estilo), build (compilação), testes rápidos, verificação do `state.yaml` e dos links dos documentos |
 | Integração e E2E | Funciona com o banco real? | um PostgreSQL descartável, criado só para o job, e os testes de integração e E2E (*end-to-end*, de ponta a ponta) |
-| Smoke do Compose | O sistema sobe em contêineres e responde? | sobe a API e o banco com Docker (apoio D) e roda o script de verificação HTTP |
+| Smoke do Compose | O sistema sobe em contêineres e responde? | sobe a API (*Application Programming Interface*, a interface pela qual outros programas usam o sistema) e o banco com Docker (apoio D) e roda o script de verificação HTTP (*HyperText Transfer Protocol*, o protocolo da web) |
 
 *Smoke* (fumaça) é um teste rápido que só confirma que "liga e responde".
 

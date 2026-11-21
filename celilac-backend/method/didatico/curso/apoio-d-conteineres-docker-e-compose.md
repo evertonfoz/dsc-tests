@@ -59,7 +59,7 @@ services:
 | `${DB_USERNAME:-celilac_user}` | usa a variável `DB_USERNAME`; se não existir, usa `celilac_user` |
 | `${DB_PASSWORD:?mensagem}` | usa `DB_PASSWORD` e **recusa subir** se ela não existir |
 
-Na aplicação, `depends_on` com `condition: service_healthy` faz a API esperar o banco ficar saudável.
+Na aplicação, `depends_on` com `condition: service_healthy` faz a API (*Application Programming Interface*, a interface pela qual outros programas usam o sistema) esperar o banco ficar saudável.
 
 ### 4.3. O arquivo `.env`
 As variáveis ficam em um arquivo `.env`, **ignorado pelo Git**, e o repositório traz só um `.env.example` com valores de exemplo, sem segredo. A senha **não tem valor padrão** no `compose.yaml`: quem esquecer de defini-la recebe a mensagem de erro, em vez de subir um banco com a senha `postgres` conhecida por todos.

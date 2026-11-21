@@ -31,7 +31,7 @@ it('should reject an empty product name in the service without saving (RN01)', a
 |---|---|---|---|
 | **Unitário** | uma peça isolada | muito rápido | o serviço, com o repositório substituído por um falso |
 | **De integração** | peças trabalhando juntas | rápido a médio | a aplicação completa, com repositório em memória |
-| **De ponta a ponta** (E2E, *end-to-end*) | o sistema como o usuário o usaria | mais lento | a API com o banco de dados real de testes |
+| **De ponta a ponta** (E2E, *end-to-end*) | o sistema como o usuário o usaria | mais lento | a API (*Application Programming Interface*, a interface pela qual outros programas usam o sistema) com o banco de dados real de testes |
 
 > Cuidado com o nome: um arquivo chamado "integração" pode, na prática, usar um repositório em memória. O que importa é **o que o teste usa**, não o nome do arquivo.
 

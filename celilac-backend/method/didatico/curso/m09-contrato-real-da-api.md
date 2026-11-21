@@ -1,6 +1,7 @@
 # Módulo 9 — Alguém olhou o contrato real da API?
 
-> **Pré-requisito:** módulos 5, 6 e 8. Duração sugerida: 2 aulas.
+> **Pré-requisito:** módulos 3, 5, 6, 7 e 8. Duração sugerida: 2 aulas.
+> **Sigla:** API (*Application Programming Interface*) é a interface pela qual outros programas usam o seu sistema.
 > **Você vai:** descobrir o que a sua API **de fato responde** (e não o que você acha que responde), decidir o que fazer com cada diferença e fixar o resultado em um documento e em testes.
 
 ---
@@ -39,7 +40,7 @@ Guarde. Mais adiante você confronta com a realidade.
 | "Está no documento do caso de uso" | o documento diz o que **deveria** ser; a API pode fazer outra coisa |
 | "Li o código e vi o `if`" | a resposta final passa por validação, filtros e configuração do framework; o código que você leu não é o único a decidir |
 | "Os testes passam" | eles testam o que alguém **pensou** em testar |
-| "Pergunto à IA o que a API devolve" | a IA responde com o que **parece provável**, e não com o que a execução produz |
+| "Pergunto à IA (inteligência artificial) o que a API devolve" | a IA responde com o que **parece provável**, e não com o que a execução produz |
 
 ## 4. A solução: inventariar, decidir, fixar
 

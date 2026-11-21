@@ -16,7 +16,7 @@ Toda sigla é explicada **na primeira vez em que aparece em cada módulo**, e to
 6. **Como saber que funcionou** (verificação).
 7. **Armadilhas comuns** e **como lidar com a IA** (inteligência artificial, como os assistentes de código) neste ponto.
 
-Cada módulo tem um arquivo de **gabarito para o professor**, à parte.
+Os módulos 1 a 12, o apoio C e o projeto final têm um arquivo de **gabarito para o professor**, à parte. O módulo 0 e os apoios A, B e D não têm gabarito.
 
 ## Mapa dos módulos
 

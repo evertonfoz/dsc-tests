@@ -1,6 +1,6 @@
 # Módulo 10 — E se uma fatia aparecer tarde demais?
 
-> **Pré-requisito:** módulos 2, 3 e 9. Duração sugerida: 1 a 2 aulas.
+> **Pré-requisito:** módulos 1, 2, 3 e 9. Duração sugerida: 1 a 2 aulas.
 > **Você vai:** aprender o que fazer quando, no meio do caminho, descobre-se um comportamento que ninguém planejou, **sem** esconder o desvio nem fingir que o plano estava certo.
 
 ---
@@ -30,7 +30,7 @@ Guarde as respostas.
 | "Faço dentro da fase D, é rapidinho" | mistura planejamento de comportamento com contrato e esconde uma fatia que talvez nem tenha teste escrito antes (RED) |
 | "Edito o `state.yaml` para a B nunca ter sido fechada" | apaga o histórico do que foi aprovado e quando |
 | "Impeço novas descobertas depois da B" | contraria a lição do módulo 1: a cobertura real só aparece quando se verifica |
-| "Deixo a IA decidir o que fazer" | decidir reabrir uma fase é decisão de uma pessoa |
+| "Deixo a IA (inteligência artificial) decidir o que fazer" | decidir reabrir uma fase é decisão de uma pessoa |
 
 ## 4. A solução: a ADR-004 do método
 Foi escrita uma ADR (*Architecture Decision Record*, documento curto que guarda **uma** decisão: contexto, decisão e consequências) em `method/decisoes/ADR-004-retorno-a-fase-anterior.md`. Em resumo:
@@ -48,8 +48,8 @@ Uma sequência real do UC12:
 1. O inventário (módulo 9) achou as divergências.
 2. O professor decidiu o contrato.
 3. Um commit "reabrir B e C" atualizou `state.yaml` e os relatórios (`8aeef61`).
-4. F05 foi integrada no PR #44 e F06 no PR #45; o trabalho de DTO e filtro (C1b) no PR #46.
-5. O relatório da fase B registra: *"Reabertura (2026-11-20)... Fechamento: F05 (PR #44) e F06 (PR #45) integradas; CI verde na `main`."* As fases B, C e D voltaram a `concluida`.
+4. F05 foi integrada no PR #44 e F06 no PR #45; o trabalho de DTO (*Data Transfer Object*, a classe que descreve e valida os dados que chegam pela API) e filtro (C1b) no PR #46.
+5. O relatório da fase B registra: *"Reabertura (2026-11-20)... Fechamento: F05 (PR #44) e F06 (PR #45) integradas; CI (integração contínua, o robô que roda as verificações) verde na `main`."* As fases B, C e D voltaram a `concluida`.
 
 ### 4.2. O preço
 A ADR admite os custos:
