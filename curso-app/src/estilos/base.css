@@ -52,7 +52,12 @@ a { color: var(--link); }
 .pular { position: absolute; left: -999px; }
 .pular:focus { position: static; display: inline-block; margin-top: .5rem; }
 header { border-bottom: 1px solid var(--borda); padding: .75rem 0; }
+header.cabecalho-site { display: grid; grid-template-columns: minmax(0, 1fr) 6rem; grid-template-rows: auto 1fr; align-items: center; gap: .15rem 1rem; }
 header .site { margin: 0; font-weight: 600; }
+header.cabecalho-site .site { grid-column: 1; }
+header.cabecalho-site nav { grid-column: 1; }
+header.cabecalho-site nav ul { gap: .35rem .75rem; }
+header.cabecalho-site nav button { min-height: 2rem; padding: .15rem .35rem; }
 nav ul { list-style: none; display: flex; flex-wrap: wrap; gap: 1rem; margin: .5rem 0 0; padding: 0; }
 nav a { display: inline-block; min-height: 24px; min-width: 24px; }
 .aviso { background: var(--aviso-fundo); border: 1px solid var(--borda); padding: .5rem .75rem; border-radius: 4px; }
@@ -90,6 +95,12 @@ a.externo::after { content: " ↗"; }
 .ficha ul, .em-linha { margin: 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: .25rem 1rem; }
 .nota { color: var(--texto-suave); font-size: .9375rem; }
 @media (max-width: 30rem) {
+  header.cabecalho-site { grid-template-columns: minmax(0, 1fr) 4rem; gap: .15rem .35rem; }
+  .mascote { width: 4rem; height: 4rem; }
+  header.cabecalho-site nav ul { gap: .25rem .5rem; }
+  header.cabecalho-site nav button { font-size: .9rem; }
+  .drawer { width: 100vw; padding: .75rem; }
+  .drawer-cabecalho { margin: -.75rem -.75rem .75rem; padding: .6rem .75rem; }
   .ficha { grid-template-columns: 1fr; }
   .ficha dd { margin-bottom: .5rem; }
   .mapa > li dl { grid-template-columns: 1fr; }
@@ -116,7 +127,18 @@ abbr.sigla[data-fechado="true"]::after { display: none; }
 .grafo .caixa { fill: var(--fundo); stroke: var(--borda); stroke-width: 1.5; }
 .grafo .rotulo { fill: var(--texto); font: 10px system-ui, sans-serif; text-anchor: middle; }
 .legenda-grafo { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; padding: .5rem; border-top: 1px solid var(--borda); font-size: .9rem; }
-.mascote { display: block; width: 8rem; height: 8rem; object-fit: contain; margin: 2rem auto 0; }
+.mascote { display: block; grid-column: 2; grid-row: 1 / span 2; align-self: start; justify-self: end; width: 6rem; height: 6rem; object-fit: contain; margin: 0; }
+
+/* Os painéis usam dialog modal nativo para foco, Escape e retorno ao acionador. */
+.drawer { position: fixed; inset: 0 0 0 auto; width: min(34rem, 100vw); height: 100dvh; max-height: none; margin: 0; padding: 1rem; border: 0; border-left: 1px solid var(--borda); background: var(--fundo); color: var(--texto); box-shadow: -8px 0 28px #0003; overflow: auto; }
+.drawer::backdrop { background: #0008; }
+.drawer-cabecalho { position: sticky; top: -1rem; z-index: 1; display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin: -1rem -1rem 1rem; padding: .75rem 1rem; border-bottom: 1px solid var(--borda); background: var(--fundo); }
+.drawer-cabecalho h2 { margin: 0; font-size: 1.25rem; }
+.drawer-sequencia { padding-left: 1.5rem; }
+.drawer-sequencia li { margin: .65rem 0; }
+.drawer-conteudo { max-width: 70ch; }
+.drawer-conteudo > h1:first-child { display: none; }
+.drawer table { width: 100%; }
 
 /* Mapa em lista. */
 .mapa > li { margin: 0 0 1rem; }

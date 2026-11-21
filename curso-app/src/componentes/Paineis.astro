@@ -1,0 +1,66 @@
+---
+import { getEntry, render } from 'astro:content';
+import { percurso } from '../conteudo/carregar';
+import { lerQuadroDeSiglas } from '../conteudo/siglas';
+
+const itens = await percurso();
+const indice = await getEntry('indice', 'README');
+if (!indice) throw new Error('README.md do curso não encontrado');
+const { Content } = await render(indice);
+const siglas = lerQuadroDeSiglas(indice.body ?? '');
+---
+<dialog class="drawer" id="drawer-sequencia" aria-labelledby="titulo-drawer-sequencia" data-drawer="sequencia">
+  <div class="drawer-cabecalho">
+    <h2 id="titulo-drawer-sequencia" tabindex="-1">Sequência do curso</h2>
+    <button type="button" data-fechar-drawer aria-label="Fechar sequência do curso">Fechar</button>
+  </div>
+  <ol class="drawer-sequencia">
+    {itens.map((item) => <li><a href={`/${item.dados.id}/`}>{item.dados.titulo}</a></li>)}
+  </ol>
+</dialog>
+
+<dialog class="drawer" id="drawer-indice" aria-labelledby="titulo-drawer-indice" data-drawer="indice">
+  <div class="drawer-cabecalho">
+    <h2 id="titulo-drawer-indice" tabindex="-1">Índice completo do curso</h2>
+    <button type="button" data-fechar-drawer aria-label="Fechar índice completo">Fechar</button>
+  </div>
+  <div class="drawer-conteudo"><Content /></div>
+</dialog>
+
+<dialog class="drawer" id="drawer-siglas" aria-labelledby="titulo-drawer-siglas" data-drawer="siglas">
+  <div class="drawer-cabecalho">
+    <h2 id="titulo-drawer-siglas" tabindex="-1">Siglas do curso</h2>
+    <button type="button" data-fechar-drawer aria-label="Fechar siglas do curso">Fechar</button>
+  </div>
+  <div class="tabela" role="region" aria-label="Siglas e significados" tabindex="0">
+    <table>
+      <thead><tr><th scope="col">Sigla</th><th scope="col">Significado</th></tr></thead>
+      <tbody>{[...siglas].map(([sigla, definicao]) => <tr><th scope="row">{sigla}</th><td>{definicao}</td></tr>)}</tbody>
+    </table>
+  </div>
+</dialog>
+
+<script>
+  document.addEventListener('click', (evento) => {
+    const alvo = evento.target;
+    if (!(alvo instanceof Element)) return;
+    const abrir = alvo.closest<HTMLElement>('[data-abrir-drawer], [data-abre-drawer]');
+    const chave = abrir?.dataset.abrirDrawer ?? abrir?.dataset.abreDrawer;
+    if (abrir && chave) {
+      const dialogo = document.querySelector<HTMLDialogElement>(`dialog[data-drawer="${CSS.escape(chave)}"]`);
+      if (dialogo) {
+        evento.preventDefault();
+        dialogo.showModal();
+        dialogo.querySelector<HTMLElement>('h2')?.focus();
+      }
+      return;
+    }
+    const fechar = alvo.closest<HTMLElement>('[data-fechar-drawer]');
+    if (fechar) fechar.closest('dialog')?.close();
+  });
+  document.querySelectorAll<HTMLDialogElement>('dialog[data-drawer]').forEach((dialogo) => {
+    dialogo.addEventListener('click', (evento) => {
+      if (evento.target === dialogo) dialogo.close();
+    });
+  });
+</script>

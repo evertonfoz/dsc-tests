@@ -48,3 +48,29 @@ export function resolverReferencia(texto: string, ctx: ContextoDeReferencias): A
     href: `https://github.com/${ctx.repositorio}/blob/${ctx.commit}/${ctx.pastaDoProjeto}/${caminho}${ancora}`,
   };
 }
+
+/** Resolve links Markdown relativos ao arquivo atual, mantendo referências fora do curso intactas. */
+export function resolverReferenciaMarkdown(href: string, arquivoAtual: string, ctx: ContextoDeReferencias): Alvo | null {
+  if (!href || /^(?:[a-z][a-z0-9+.-]*:|\/|#|\?)/i.test(href)) return null;
+  const [caminhoComQuery = '', fragmento = ''] = href.split('#', 2);
+  const caminho = caminhoComQuery.split('?', 1)[0] ?? '';
+  if (!/\.md$/i.test(caminho)) return null;
+
+  const diretorio = ['method', 'didatico', 'curso', ...arquivoAtual.split('/').slice(0, -1).filter(Boolean)];
+  for (const parte of caminho.split('/')) {
+    if (!parte || parte === '.') continue;
+    if (parte === '..') {
+      if (diretorio.length === 0) return null;
+      diretorio.pop();
+    } else {
+      diretorio.push(decodeURIComponent(parte));
+    }
+  }
+  const nome = diretorio.join('/');
+  const raizCurso = 'method/didatico/curso/';
+  const alvo = nome.startsWith(raizCurso)
+    ? resolverReferencia(nome.slice(raizCurso.length), ctx)
+    : resolverReferencia(nome, ctx);
+  if (!alvo) return null;
+  return { ...alvo, href: `${alvo.href}${fragmento ? `#${fragmento}` : ''}` };
+}

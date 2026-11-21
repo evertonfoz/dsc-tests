@@ -46,7 +46,7 @@ const conteudoAssociado = d.tipo === 'gabarito' ? curso.get(d.gabarito_de[0] ?? 
     </>
   ) : (
     <>
-      <Ficha entrada={entrada} curso={curso} />
+      {d.tipo !== 'modulo' && <Ficha entrada={entrada} curso={curso} />}
       {d.tipo === 'projeto' && <Avisos />}
       {d.tipo === 'pratica' && <p class="aviso" role="note">{textos.notaDaPratica}</p>}
       <Content />
