@@ -1,6 +1,6 @@
 // Critérios 1, 5 e 6 do M1 e a navegação (plano do M1, seção 11).
 import { expect, test } from '@playwright/test';
-import { gabaritos, paginas, paginasGabaritos, paginasUc12, percurso, siglas, tituloSimples } from './curso';
+import { arquivos, gabaritos, paginas, paginasGabaritos, paginasUc12, percurso, siglas, tituloSimples } from './curso';
 
 test('(1) o mapa lista os arquivos de leitura na ordem de `ordem`', async ({ page }) => {
   await page.goto('/mapa/');
@@ -16,8 +16,8 @@ test('(1) seguindo "próximo" a partir do m00 passa pelos arquivos na ordem, com
     const id = new URL(page.url()).pathname.replaceAll('/', '');
     visitados.push(id);
     const esperado = percurso.find((a) => a.id === id)!;
-    await expect(page.locator('h1')).toHaveCount(1);
-    await expect(page.locator('h1')).toHaveText(tituloSimples(esperado.titulo));
+    await expect(page.locator('main h1')).toHaveCount(1);
+    await expect(page.locator('main h1')).toHaveText(tituloSimples(esperado.titulo));
     const proximo = page.locator('nav.sequencia a[rel="next"]');
     if ((await proximo.count()) === 0) break;
     await proximo.click();
@@ -30,8 +30,11 @@ test('todas as páginas respondem e todo link interno leva a uma página existen
   for (const caminho of paginas) {
     const resposta = await page.goto(caminho);
     expect(resposta?.status(), caminho).toBe(200);
-    const hrefs = await page.locator('a[href^="/"]').evaluateAll((as) => as.map((a) => a.getAttribute('href')!));
-    for (const h of hrefs) internos.add(h.split('#')[0]!);
+    const todosOsHrefs = await page.locator('a[href]').evaluateAll((as) => as.map((a) => a.getAttribute('href')!));
+    for (const href of todosOsHrefs) {
+      expect(href, `referência Markdown não convertida em ${caminho}`).not.toMatch(/^\.\.?\/.*\.md(?:#.*)?$/);
+      if (href.startsWith('/')) internos.add(href.split('#')[0]!);
+    }
   }
   for (const h of internos) expect((await request.get(h)).status(), h).toBe(200);
 });
@@ -46,7 +49,64 @@ test('o percurso começa com apresentação, sequência linear e retorno claro a
   await expect(page.locator('.mapa-grafo')).toBeVisible();
   await expect(page.locator('.mapa-grafo svg')).toBeHidden();
   await page.getByRole('link', { name: tituloSimples(percurso[0]!.titulo) }).last().click();
-  await expect(page.locator('h1')).toHaveText(tituloSimples(percurso[0]!.titulo));
+  await expect(page.locator('main h1')).toHaveText(tituloSimples(percurso[0]!.titulo));
+});
+
+test('painéis de navegação abrem por teclado, fecham com Escape e preservam as rotas', async ({ page }) => {
+  await page.goto('/');
+  for (const [chave, nome] of [['sequencia', 'Sequência do curso'], ['indice', 'Índice completo do curso'], ['siglas', 'Siglas do curso']]) {
+    const acionador = page.locator(`[data-abrir-drawer="${chave}"]`).first();
+    await acionador.focus();
+    await page.keyboard.press('Enter');
+    const painel = page.locator(`dialog[data-drawer="${chave}"]`);
+    await expect(painel).toBeVisible();
+    await expect(painel).toHaveAttribute('open', '');
+    await expect(painel.locator('h2').first()).toBeFocused();
+    await expect(painel).toHaveAccessibleName(nome);
+    await page.keyboard.press('Escape');
+    await expect(painel).toBeHidden();
+    await expect(acionador).toBeFocused();
+  }
+  await page.locator('[data-abrir-drawer="sequencia"]').first().click();
+  await page.getByRole('link', { name: tituloSimples(percurso[0]!.titulo) }).click();
+  await expect(page).toHaveURL(/\/m00\/$/);
+  expect((await page.request.get('/mapa/')).status()).toBe(200);
+  expect((await page.request.get('/indice/')).status()).toBe(200);
+});
+
+test('README do Módulo 0 abre a sequência, módulos não exibem ficha e mascote fica no topo direito', async ({ page }) => {
+  await page.goto('/m00/');
+  const readme = page.locator('a[data-abre-drawer="sequencia"]', { hasText: 'README.md' });
+  await expect(readme).toHaveCount(1);
+  await readme.click();
+  await expect(page.locator('dialog[data-drawer="sequencia"]')).toBeVisible();
+
+  for (const item of arquivos.filter((arquivo) => arquivo.tipo === 'modulo')) {
+    await page.goto(`/${item.id}/`);
+    await expect(page.locator('.ficha'), item.id).toHaveCount(0);
+    await expect(page.getByText('As atividades são feitas no seu caderno, editor, terminal, repositório ou GitHub. Este site não coleta respostas nem registra progresso.', { exact: true })).toHaveCount(0);
+    const header = await page.locator('header').boundingBox();
+    const mascot = await page.locator('img.mascote').boundingBox();
+    const brand = await page.locator('header .site').boundingBox();
+    const navigation = await page.locator('header nav').boundingBox();
+    expect(header && mascot).toBeTruthy();
+    expect(mascot!.x).toBeGreaterThan(header!.x + header!.width / 2);
+    expect(mascot!.y).toBeLessThanOrEqual(header!.y + 14);
+    expect(mascot!.y + mascot!.height).toBeLessThanOrEqual(header!.y + header!.height);
+    for (const outro of [brand, navigation]) {
+      expect(outro).toBeTruthy();
+      const sobrepoe = mascot!.x < outro!.x + outro!.width && mascot!.x + mascot!.width > outro!.x
+        && mascot!.y < outro!.y + outro!.height && mascot!.y + mascot!.height > outro!.y;
+      expect(sobrepoe, `${item.id}: mascote sobrepõe cabeçalho`).toBe(false);
+    }
+  }
+});
+
+test('a prática M00 e suas referências equivalentes usam a rota publicada', async ({ page }) => {
+  await page.goto('/m00/');
+  const href = await page.locator('a.ref', { hasText: 'm00-pratica.md' }).getAttribute('href');
+  expect(href).toBe('/m00-pratica/');
+  expect((await page.request.get(href!)).status()).toBe(200);
 });
 
 test('gabaritos usam divulgação nativa e páginas não registram respostas ou progresso', async ({ page, request }) => {
@@ -62,7 +122,7 @@ test('gabaritos usam divulgação nativa e páginas não registram respostas ou 
   }
   for (const caminho of paginas) {
     await page.goto(caminho);
-    await expect(page.locator('h1'), caminho).not.toContainText(/gabarito/i);
+    await expect(page.locator('main h1'), caminho).not.toContainText(/gabarito/i);
     const conteudo = gabaritos.find((g) => caminho === `/${g.id.replace(/-gabarito$/, '')}/`);
     if (conteudo) {
       await expect(page.locator(`a[href="/${conteudo.id}/"]`), caminho).toContainText('depois de tentar');
@@ -105,7 +165,7 @@ test('(2) cada ocorrência de sigla tem definição e a primeira por seção ent
     const ordemTab = await page.evaluate(() => {
       const vistos = new Set<string>();
       const problemas: string[] = [];
-      for (const el of document.querySelectorAll('h2, abbr.sigla')) {
+      for (const el of document.querySelectorAll('main h2, main abbr.sigla')) {
         if (el.tagName === 'H2') { vistos.clear(); continue; }
         const item = el as HTMLElement;
         const sigla = item.dataset.sigla!;
@@ -116,7 +176,7 @@ test('(2) cada ocorrência de sigla tem definição e a primeira por seção ent
       return problemas;
     });
     expect(ordemTab, caminho).toEqual([]);
-    const marcadas = await page.locator('abbr.sigla').evaluateAll((itens) => itens.map((el) => ({
+    const marcadas = await page.locator('main abbr.sigla').evaluateAll((itens) => itens.map((el) => ({
       sigla: el.getAttribute('data-sigla')!,
       texto: el.textContent!,
       aria: el.getAttribute('aria-label')!,
@@ -135,7 +195,7 @@ test('(2) cada ocorrência de sigla tem definição e a primeira por seção ent
 
   for (const [sigla, caminho] of paginasPorSigla) {
     await page.goto(caminho);
-    const alvo = page.locator(`abbr.sigla[data-sigla="${sigla}"][tabindex="0"]`).first();
+    const alvo = page.locator(`main abbr.sigla[data-sigla="${sigla}"][tabindex="0"]`).first();
     await expect(alvo).toHaveCount(1);
     let focou = false;
     for (let i = 0; i < 180; i++) {
@@ -153,11 +213,11 @@ test('(2) cada ocorrência de sigla tem definição e a primeira por seção ent
 test('(2) tocar numa sigla abre a definição e tocar fora fecha', async ({ page }, info) => {
   test.skip(info.project.name !== 'celular', 'abre e fecha por toque no projeto celular');
   await page.goto('/m00/');
-  const alvo = page.locator('abbr.sigla[data-sigla="IA"]').first();
+  const alvo = page.locator('main abbr.sigla[data-sigla="IA"]').first();
   await expect(alvo).toHaveCount(1);
   await alvo.tap();
   await expect(alvo).toHaveAttribute('data-aberta', 'true');
-  await page.locator('h1').tap();
+  await page.locator('main h1').tap();
   await expect(alvo).not.toHaveAttribute('data-aberta', 'true');
 });
 

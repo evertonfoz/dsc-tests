@@ -1,6 +1,6 @@
 // Referências entre arquivos e mapa de páginas (plano do M1, seção 4.1).
 import { describe, expect, it } from 'vitest';
-import { resolverReferencia, type ContextoDeReferencias } from '../src/conteudo/referencias';
+import { resolverReferencia, resolverReferenciaMarkdown, type ContextoDeReferencias } from '../src/conteudo/referencias';
 import { paginasDoCurso } from '../src/conteudo/paginas';
 
 const fm = (id: string, tipo: string) => `---\nid: ${id}\ntipo: ${tipo}\ntitulo: 'X'\n---\n# X\n`;
@@ -26,6 +26,18 @@ describe('resolverReferencia', () => {
   it('arquivo do curso com página vira link interno', () => {
     expect(resolverReferencia('m02-pratica.md', ctx)).toEqual({ tipo: 'interno', href: '/m02-pratica/' });
     expect(resolverReferencia('README.md', ctx)).toEqual({ tipo: 'interno', href: '/' });
+  });
+
+  it('normaliza links Markdown equivalentes em caminhos internos publicados', () => {
+    for (const href of ['m02-pratica.md', './m02-pratica.md', './m02-pratica.md#entregas']) {
+      expect(resolverReferenciaMarkdown(href, 'm02-estado-como-fonte.md', ctx), href).toEqual({
+        tipo: 'interno', href: href.endsWith('#entregas') ? '/m02-pratica/#entregas' : '/m02-pratica/',
+      });
+    }
+    expect(resolverReferenciaMarkdown('../../../segredo.md', 'm02-estado-como-fonte.md', ctx)).toBeNull();
+    expect(resolverReferenciaMarkdown('../../templates/state.yaml.md', 'm02-estado-como-fonte.md', ctx)).toEqual({
+      tipo: 'github', href: 'https://github.com/dono/repo/blob/f6205a2/projeto/method/templates/state.yaml.md',
+    });
   });
 
   it('gabarito fica como texto', () => {

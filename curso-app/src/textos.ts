@@ -7,7 +7,6 @@ export const textos = {
   linkIndice: 'Índice completo do curso',
   linkMapa: 'Mapa dos módulos',
   linkUc12: 'Caso real UC12',
-  avisoEmConstrucao: 'As atividades são feitas no seu caderno, editor, terminal, repositório ou GitHub. Este site não coleta respostas nem registra progresso.',
   rodapeOrigem: (commitCurto: string, data: string) => `Conteúdo do commit ${commitCurto} (${data}).`,
   rodapeSemOrigem: 'Conteúdo de commit a confirmar (construção sem commit de origem informado).',
   rodapeNota: 'A aplicação não tem acesso à internet e não sabe se existe versão mais nova.',

@@ -3,7 +3,7 @@
 // 1. trecho de código que nomeia um arquivo vira link, mantendo a aparência de código;
 // 2. cada tabela fica num contêiner com rolagem própria, focável e com rótulo;
 // 3. o h1 do corpo sai (a página o gera do front matter, com a ficha logo abaixo); o README o mantém.
-import { resolverReferencia, type ContextoDeReferencias } from './referencias';
+import { resolverReferencia, resolverReferenciaMarkdown, type ContextoDeReferencias } from './referencias';
 import { siglasNoTexto, siglasSemDefinicao } from './siglas';
 
 // Tipos mínimos da árvore HTML (hast) e do contexto do visitante, para não depender dos tipos internos do Sätteri.
@@ -31,6 +31,29 @@ function dentroDe(no: No, tags: string[], ctx: ContextoDoVisitante): boolean {
   return false;
 }
 
+/** Converte destinos Markdown antes da geração do HAST, preservando referências equivalentes. */
+function converterLinkMarkdownPai(no: No, ctx: ContextoDoVisitante, arquivo: string, ref: ContextoDeReferencias): boolean {
+  for (let pai = ctx.parent(no); pai; pai = ctx.parent(pai)) {
+    if (pai.type !== 'element' || (pai as Elemento).tagName !== 'a') continue;
+    const link = pai as Elemento;
+    const href = link.properties.href;
+    if (typeof href !== 'string') return true;
+    const alvo = resolverReferenciaMarkdown(href, arquivo, ref);
+    if (!alvo) return true;
+    const classes = [...(Array.isArray(link.properties.className) ? link.properties.className as string[] : []), 'ref'];
+    ctx.setProperty(link, 'href', alvo.href);
+    ctx.setProperty(link, 'className', alvo.tipo === 'github' ? [...classes, 'externo'] : classes);
+    if (alvo.tipo === 'github') {
+      ctx.setProperty(link, 'target', '_blank');
+      ctx.setProperty(link, 'rel', ['noopener', 'noreferrer']);
+    } else if (alvo.href === '/') {
+      ctx.setProperty(link, 'dataAbreDrawer', 'sequencia');
+    }
+    return true;
+  }
+  return false;
+}
+
 /** Fábrica chamada uma vez por documento (o contador de tabelas e o h1 são por arquivo). */
 export function pluginDeConversao(ref: ContextoDeReferencias, textos: TextosDaConversao) {
   return (documento: { fileURL: URL | undefined }) => {
@@ -39,6 +62,7 @@ export function pluginDeConversao(ref: ContextoDeReferencias, textos: TextosDaCo
     const primeiraParada = new WeakMap<Texto, Set<number>>();
     let siglasPrecomputadas = false;
     const arquivo = documento.fileURL?.pathname.split('/').at(-1) ?? 'arquivo desconhecido';
+    const caminhoFonte = arquivo;
     const eLeiaMe = arquivo === 'README.md';
 
     function textoPlano(no: No): string {
@@ -109,6 +133,7 @@ export function pluginDeConversao(ref: ContextoDeReferencias, textos: TextosDaCo
     }
 
     function transformarTexto(no: Texto, ctx: ContextoDoVisitante) {
+      if (converterLinkMarkdownPai(no, ctx, caminhoFonte, ref)) return;
       if (dentroDe(no, ['code', 'pre', 'a', 'h1', 'h2', 'h3', 'h4', 'script', 'style'], ctx)) return;
       // O quadro do README é a própria fonte das definições e não deve receber marcação nem avisos.
       if (eLeiaMe && dentroDe(no, ['table'], ctx)) return;
@@ -143,13 +168,14 @@ export function pluginDeConversao(ref: ContextoDeReferencias, textos: TextosDaCo
         filter: ['code', 'table', 'h1', 'h2', 'h3', 'h4', 'pre', 'input', 'p', 'li', 'td', 'th', 'blockquote'],
         visit(no: Elemento, ctx: ContextoDoVisitante) {
           precomputarSiglas(no, ctx);
+          if (no.tagName === 'code' && converterLinkMarkdownPai(no, ctx, caminhoFonte, ref)) return;
           if (no.tagName === 'h2') {
             return;
           }
           if (['p', 'li', 'td', 'th', 'blockquote'].includes(no.tagName)) {
             const percorrer = (atual: No) => {
               if (atual.type === 'text') transformarTexto(atual as Texto, ctx);
-              else if (atual.type === 'element' && !['code', 'pre', 'a', 'h1', 'h2', 'h3', 'h4'].includes((atual as Elemento).tagName)) {
+              else if (atual.type === 'element' && !['code', 'pre', 'h1', 'h2', 'h3', 'h4'].includes((atual as Elemento).tagName)) {
                 for (const filho of [...(atual as Elemento).children]) percorrer(filho);
               }
             };
@@ -191,7 +217,7 @@ export function pluginDeConversao(ref: ContextoDeReferencias, textos: TextosDaCo
           if (!alvo) return;
           const codigo: Elemento = { type: 'element', tagName: 'code', properties: { ...no.properties }, children: [{ type: 'text', value: (unico as Texto).value }] };
           if (alvo.tipo === 'interno') {
-            ctx.replaceNode(no, { type: 'element', tagName: 'a', properties: { href: alvo.href, className: ['ref'] }, children: [codigo] });
+            ctx.replaceNode(no, { type: 'element', tagName: 'a', properties: { href: alvo.href, className: ['ref'], ...(alvo.href === '/' ? { dataAbreDrawer: 'sequencia' } : {}) }, children: [codigo] });
           } else {
             ctx.replaceNode(no, {
               type: 'element',
