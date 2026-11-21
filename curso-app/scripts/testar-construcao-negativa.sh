@@ -14,8 +14,10 @@ caso() {
   local tmp
   tmp="$(mktemp -d)"
   mkdir -p "$tmp/celilac-backend/method/didatico"
+  mkdir -p "$tmp/mascotes"
   rsync -a --exclude node_modules --exclude dist --exclude .astro --exclude test-results "$raiz/curso-app" "$tmp/"
   cp -R "$raiz/celilac-backend/method/didatico/curso" "$tmp/celilac-backend/method/didatico/"
+  cp -R "$raiz/mascotes/web" "$tmp/mascotes/"
   local alvo="$tmp/celilac-backend/method/didatico/curso/$arquivo"
   awk "$programa" "$alvo" >"$alvo.novo"
   if cmp -s "$alvo" "$alvo.novo"; then

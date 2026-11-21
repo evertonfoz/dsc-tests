@@ -5,6 +5,7 @@ import Base from '../layouts/Base.astro';
 import TextoComCodigo from '../componentes/TextoComCodigo.astro';
 import { cursoValidado, percurso } from '../conteudo/carregar';
 import { textos } from '../textos';
+import Grafo from '../componentes/Grafo.astro';
 
 const curso = await cursoValidado();
 const itens = await percurso();
@@ -13,6 +14,9 @@ const titulo = (id: string) => curso.get(id)?.dados.titulo ?? id;
 <Base titulo={textos.tituloMapa}>
   <h1>{textos.tituloMapa}</h1>
   <p>{textos.introducaoMapa}</p>
+  <p class="visualmente-oculto">{textos.descricaoGrafo}</p>
+  <Grafo itens={itens} titulo={textos.tituloGrafo} legendaObrigatorio={textos.legendaObrigatorio} legendaCondicional={textos.legendaCondicional} />
+  <h2 class="visualmente-oculto">{textos.tituloListaMapa}</h2>
   <ol class="mapa" data-mapa>
     {itens.map((e) => (
       <li data-id={e.dados.id}>

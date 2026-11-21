@@ -1,0 +1,116 @@
+---
+import type { EntradaDePercurso } from '../conteudo/carregar';
+
+interface Props {
+  itens: EntradaDePercurso[];
+  titulo: string;
+  legendaObrigatorio: string;
+  legendaCondicional: string;
+}
+
+const { itens, titulo, legendaObrigatorio, legendaCondicional } = Astro.props;
+const porId = new Map(itens.map((e) => [e.dados.id, e]));
+const profundidades = new Map<string, number>();
+function profundidade(id: string): number {
+  const guardado = profundidades.get(id);
+  if (guardado !== undefined) return guardado;
+  const entrada = porId.get(id);
+  if (!entrada) return 0;
+  const deps = [...entrada.dados.prerequisitos, ...(entrada.dados.prerequisitos_se_precisar ?? [])];
+  const nivel = deps.length ? Math.max(...deps.map((d) => profundidade(d) + 1)) : 0;
+  profundidades.set(id, nivel);
+  return nivel;
+}
+
+const niveis = new Map<number, EntradaDePercurso[]>();
+for (const item of itens) {
+  const n = profundidade(item.dados.id);
+  const lista = niveis.get(n) ?? [];
+  lista.push(item);
+  niveis.set(n, lista);
+}
+const maxNivel = Math.max(...niveis.keys());
+const largura = 360;
+const alturaCaixaBase = 54;
+const distanciaEntreNiveis = 26;
+const topo = 16;
+const alturasCaixa = new Map<string, number>();
+const yPorNivel = new Map<number, number>();
+let yAtual = topo;
+for (let nivel = 0; nivel <= maxNivel; nivel++) {
+  yPorNivel.set(nivel, yAtual);
+  const alturaNivel = Math.max(alturaCaixaBase, ...(niveis.get(nivel) ?? []).map((item) => linhasDoTitulo(item.dados.titulo).length * 13 + 12));
+  for (const item of niveis.get(nivel) ?? []) alturasCaixa.set(item.dados.id, Math.max(alturaCaixaBase, linhasDoTitulo(item.dados.titulo).length * 13 + 12));
+  yAtual += alturaNivel + distanciaEntreNiveis;
+}
+const altura = yAtual - distanciaEntreNiveis + topo;
+const posicoes = new Map<string, { x: number; y: number }>();
+for (const [nivel, grupo] of niveis) {
+  grupo.forEach((item, i) => posicoes.set(item.dados.id, {
+    x: (largura * (i + 1)) / (grupo.length + 1),
+    y: yPorNivel.get(nivel)!,
+  }));
+}
+
+function linhasDoTitulo(texto: string): string[] {
+  const palavras = texto.replace(/`/g, '').split(/\s+/);
+  const linhas: string[] = [];
+  let atual = '';
+  for (const palavra of palavras) {
+    if (atual && `${atual} ${palavra}`.length > 15) {
+      linhas.push(atual);
+      atual = palavra;
+    } else atual = atual ? `${atual} ${palavra}` : palavra;
+  }
+  if (atual) linhas.push(atual);
+  return linhas;
+}
+---
+<section aria-labelledby="titulo-grafo">
+  <h2 id="titulo-grafo">{titulo}</h2>
+  <p class="visualmente-oculto">{legendaObrigatorio} {legendaCondicional}</p>
+  <div class="grafo">
+    <svg viewBox={`0 0 ${largura} ${altura}`} role="img" aria-hidden="true" focusable="false" data-grafo>
+      <defs>
+        <marker id="seta" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto">
+          <path d="M0,0 L7,3.5 L0,7 z" fill="currentColor" />
+        </marker>
+      </defs>
+      {itens.flatMap((item) => {
+        const destino = posicoes.get(item.dados.id)!;
+        const arestas = [
+          ...item.dados.prerequisitos.map((id) => ({ id, tipo: 'obrigatoria' })),
+          ...(item.dados.prerequisitos_se_precisar ?? []).map((id) => ({ id, tipo: 'condicional' })),
+        ];
+        return arestas.map(({ id, tipo }) => {
+          const origem = posicoes.get(id);
+          if (!origem) return null;
+          const x1 = origem.x;
+          const y1 = origem.y + alturasCaixa.get(id)!;
+          const x2 = destino.x;
+          const y2 = destino.y;
+          const meio = (y1 + y2) / 2;
+          return <path class:list={['aresta', { condicional: tipo === 'condicional' }]} data-aresta={tipo} data-de={id} data-para={item.dados.id} d={`M ${x1} ${y1} C ${x1} ${meio}, ${x2} ${meio}, ${x2} ${y2}`} />;
+        });
+      })}
+      {itens.map((item) => {
+        const pos = posicoes.get(item.dados.id)!;
+        const tituloCaixa = linhasDoTitulo(item.dados.titulo);
+        const alturaDaCaixa = alturasCaixa.get(item.dados.id)!;
+        return (
+          <a href={`/${item.dados.id}/`} tabindex="-1" data-no={item.dados.id}>
+            <title>{item.dados.titulo.replace(/`/g, '')}</title>
+            <rect class="caixa" x={pos.x - 54} y={pos.y} width="108" height={alturaDaCaixa} rx="5" />
+            <text class="rotulo" x={pos.x}>
+              {tituloCaixa.map((linha, i) => <tspan x={pos.x} y={pos.y + alturaDaCaixa / 2 - ((tituloCaixa.length - 1) * 13) / 2 + 4 + i * 13}>{linha}</tspan>)}
+            </text>
+          </a>
+        );
+      })}
+    </svg>
+    <div class="legenda-grafo">
+      <span>{legendaObrigatorio}</span>
+      <span>{legendaCondicional}</span>
+    </div>
+  </div>
+</section>
