@@ -1,3 +1,10 @@
+---
+id: m08-gabarito
+tipo: gabarito
+titulo: 'Gabarito do professor — Módulo 8'
+gabarito_de: [m08]
+---
+
 # Gabarito do professor — Módulo 8
 
 > Uso exclusivo do professor.

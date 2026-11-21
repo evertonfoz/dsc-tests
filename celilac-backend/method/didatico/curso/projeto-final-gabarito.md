@@ -1,3 +1,10 @@
+---
+id: projeto-final-gabarito
+tipo: gabarito
+titulo: 'Gabarito do professor — Projeto final'
+gabarito_de: [projeto-final]
+---
+
 # Gabarito do professor — Projeto final
 
 > Uso exclusivo do professor. **Proposta de critérios**: ainda não foi usada com turmas; ajuste pesos e prazos à sua disciplina.

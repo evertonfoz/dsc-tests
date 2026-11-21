@@ -1,3 +1,10 @@
+---
+id: m04-gabarito
+tipo: gabarito
+titulo: 'Gabarito do professor — Módulo 4 e Apoio D'
+gabarito_de: [m04, apoio-d]
+---
+
 # Gabarito do professor — Módulo 4 e Apoio D
 
 > Uso exclusivo do professor.

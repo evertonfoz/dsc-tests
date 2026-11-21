@@ -1,3 +1,13 @@
+---
+id: m03
+tipo: modulo
+titulo: 'Módulo 3 — Por que a `main` ficou vermelha?'
+ordem: 6
+prerequisitos: [apoio-a, apoio-b, m02]
+duracao: '2 aulas'
+gabarito: m03-gabarito
+---
+
 # Módulo 3 — Por que a `main` ficou vermelha?
 
 > **Pré-requisito:** apoios A e B, e o módulo 2. Duração sugerida: 2 aulas.

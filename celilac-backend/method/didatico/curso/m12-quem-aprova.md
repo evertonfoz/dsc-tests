@@ -1,3 +1,13 @@
+---
+id: m12
+tipo: modulo
+titulo: 'Módulo 12 — Quem aprova, e o que a IA pode fazer?'
+ordem: 17
+prerequisitos: [m01, m02, m03, m07, m10, m11]
+duracao: '2 aulas'
+gabarito: m12-gabarito
+---
+
 # Módulo 12 — Quem aprova, e o que a IA pode fazer?
 
 > **Pré-requisito:** módulos 1, 2, 3, 7, 10 e 11. Duração sugerida: 2 aulas.

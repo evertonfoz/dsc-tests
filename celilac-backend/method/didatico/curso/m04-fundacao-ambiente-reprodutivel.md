@@ -1,3 +1,13 @@
+---
+id: m04
+tipo: modulo
+titulo: 'Módulo 4 — Por que "na minha máquina funciona" não basta?'
+ordem: 9
+prerequisitos: [apoio-c, apoio-d, m03]
+duracao: '2 aulas'
+gabarito: m04-gabarito
+---
+
 # Módulo 4 — Por que "na minha máquina funciona" não basta?
 
 > **Pré-requisito:** apoios C e D e o módulo 3. Duração sugerida: 2 aulas.

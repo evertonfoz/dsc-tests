@@ -1,3 +1,13 @@
+---
+id: m06
+tipo: modulo
+titulo: 'Módulo 6 — O que o cliente vê quando o banco falha?'
+ordem: 11
+prerequisitos: [m05, apoio-b]
+duracao: '2 aulas'
+gabarito: m06-gabarito
+---
+
 # Módulo 6 — O que o cliente vê quando o banco falha?
 
 > **Pré-requisito:** módulo 5 e apoio B. Duração sugerida: 2 aulas.

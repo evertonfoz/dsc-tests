@@ -1,3 +1,13 @@
+---
+id: apoio-c
+tipo: apoio
+titulo: 'Apoio C — Integração contínua (CI): um robô que confere por você'
+ordem: 7
+prerequisitos: [apoio-a, apoio-b, m03]
+duracao: '2 aulas'
+gabarito: apoio-c-gabarito
+---
+
 # Apoio C — Integração contínua (CI): um robô que confere por você
 
 > **Para quem:** quem nunca configurou verificações automáticas no GitHub. Duração sugerida: 2 aulas.

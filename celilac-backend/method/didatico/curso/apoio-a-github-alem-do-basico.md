@@ -1,3 +1,12 @@
+---
+id: apoio-a
+tipo: apoio
+titulo: 'Apoio A — GitHub além do básico'
+ordem: 3
+prerequisitos: []
+duracao: '1 aula'
+---
+
 # Apoio A — GitHub além do básico
 
 > **Para quem:** quem usa Git e GitHub para guardar código, mas ainda não usa issues, pull requests em rascunho e quadros de acompanhamento. Duração sugerida: 1 aula.

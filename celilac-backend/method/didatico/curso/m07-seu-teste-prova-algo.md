@@ -1,3 +1,13 @@
+---
+id: m07
+tipo: modulo
+titulo: 'Módulo 7 — Seu teste prova alguma coisa?'
+ordem: 12
+prerequisitos: [m05, m06, apoio-b]
+duracao: '2 aulas'
+gabarito: m07-gabarito
+---
+
 # Módulo 7 — Seu teste prova alguma coisa?
 
 > **Pré-requisito:** módulos 5 e 6 e apoio B. Duração sugerida: 2 aulas.

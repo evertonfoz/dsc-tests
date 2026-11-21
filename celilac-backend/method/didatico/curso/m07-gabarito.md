@@ -1,3 +1,10 @@
+---
+id: m07-gabarito
+tipo: gabarito
+titulo: 'Gabarito do professor — Módulo 7'
+gabarito_de: [m07]
+---
+
 # Gabarito do professor — Módulo 7
 
 > Uso exclusivo do professor.

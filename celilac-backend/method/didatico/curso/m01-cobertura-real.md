@@ -1,3 +1,14 @@
+---
+id: m01
+tipo: modulo
+titulo: 'Módulo 1 — "100% coberto": quem prova?'
+ordem: 2
+prerequisitos: [m00]
+prerequisitos_se_precisar: [apoio-b]
+duracao: '2 aulas'
+gabarito: m01-gabarito
+---
+
 # Módulo 1 — "100% coberto": quem prova?
 
 > **Pré-requisito:** módulo 0 e o apoio B (testes automatizados), se você ainda não escreveu um teste com `it(...)`. Duração sugerida: 2 aulas.

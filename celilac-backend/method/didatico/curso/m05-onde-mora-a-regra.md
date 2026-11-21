@@ -1,3 +1,13 @@
+---
+id: m05
+tipo: modulo
+titulo: 'Módulo 5 — Onde mora a regra de negócio?'
+ordem: 10
+prerequisitos: [m03, apoio-b]
+duracao: '2 aulas'
+gabarito: m05-gabarito
+---
+
 # Módulo 5 — Onde mora a regra de negócio?
 
 > **Pré-requisito:** módulo 3 e apoio B. Duração sugerida: 2 aulas.

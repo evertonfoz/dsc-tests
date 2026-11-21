@@ -1,3 +1,13 @@
+---
+id: m10
+tipo: modulo
+titulo: 'Módulo 10 — E se uma fatia aparecer tarde demais?'
+ordem: 15
+prerequisitos: [m01, m02, m03, m09]
+duracao: '1 a 2 aulas'
+gabarito: m10-gabarito
+---
+
 # Módulo 10 — E se uma fatia aparecer tarde demais?
 
 > **Pré-requisito:** módulos 1, 2, 3 e 9. Duração sugerida: 1 a 2 aulas.
