@@ -87,8 +87,8 @@ a.externo::after { content: " ↗"; }
 @media (max-width: 30rem) {
   .ficha { grid-template-columns: 1fr; }
   .ficha dd { margin-bottom: .5rem; }
-  .mapa dl { grid-template-columns: 1fr; }
-  .mapa dd { margin-bottom: .35rem; }
+  .mapa > li dl { grid-template-columns: 1fr; }
+  .mapa > li dd { margin-bottom: .35rem; }
 }
 
 /* Siglas: foco na primeira ocorrência por seção; mouse, foco e toque abrem a definição. */

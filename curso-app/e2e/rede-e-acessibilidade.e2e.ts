@@ -29,6 +29,10 @@ for (const caminho of paginasPublicadas) {
   test(`celular: ${caminho} não rola na horizontal a 320 pixels`, async ({ page }, info) => {
     test.skip(info.project.name !== 'celular', 'só na largura de celular');
     await page.goto(caminho);
+    if (caminho === '/mapa/') {
+      const colunas = await page.locator('.mapa dl').first().evaluate((el) => getComputedStyle(el).gridTemplateColumns.split(' ').length);
+      expect(colunas, 'os rótulos do mapa ficam empilhados em tela estreita').toBe(1);
+    }
     // Compara com a largura configurada, não com innerWidth: no celular, conteúdo largo demais faz o
     // navegador alargar a janela de layout, e innerWidth cresce junto (o teste passaria sem dever).
     const largura = page.viewportSize()!.width;
