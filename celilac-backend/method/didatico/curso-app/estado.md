@@ -78,6 +78,7 @@
 | 2026-11-21 | E7: meta de acessibilidade WCAG 2.2 AA; só português do Brasil; celular a partir de 320 pixels, com o limite declarado de que, com `127.0.0.1`, o uso real no celular depende da versão na internet. | E7, seção 8 |
 | 2026-11-21 | E7: construir a imagem localmente até o M6; decidir a publicação no M7, depois da E8. | E7, seção 7 |
 | 2026-11-21 | Autorizados branch e PR da E7 (com o registro do PR #84). Merge **não** delegado. | Professor |
+| 2026-11-21 | **Delegação registrada:** o professor autorizou a IA a fazer o merge **só do PR #85** ("autorizo o merge do #85 com CI verde"). Condição: CI verde no último commit do PR. Apagar a branch não foi autorizado. Não vale para outros PRs nem para a sessão seguinte. | Professor |
 | 2026-11-21 | **Delegação registrada:** o professor autorizou a IA a fazer o merge **só do PR #83** ("autorizo o merge do #83 com CI verde"). Condição: CI verde no último commit do PR. Apagar a branch não foi autorizado. Não vale para outros PRs nem para a sessão seguinte. | Professor |
 
 ## Requisitos acrescentados pelo professor
@@ -148,4 +149,5 @@
 | 2026-11-21 | E6 (opção a) | Núcleo do `check-state` sem módulos do Node; `check-state.mjs` com a mesma interface; saídas idênticas em 16 casos; `rodar-testes.sh` com 23 testes passando; `verify.sh` com 6 passos OK | [#84](https://github.com/evertonfoz/dsc-tests/pull/84) |
 | 2026-11-21 | E6 (opção a) | PR #84 integrado em 2026-11-21T13:14:25Z (commit de merge `538723c`), pela IA, por delegação do professor só desse PR, com CI verde em `28423e5` (execução 44907757434, conferida com `gh pr checks 84` e `gh run view`); branch `refactor/check-state-nucleo` mantida (registro feito na sessão da E7) | [#84](https://github.com/evertonfoz/dsc-tests/pull/84) | <!-- links:ignore -->
 | 2026-11-21 | E7 | Tecnologia proposta; marcos M0 a M7 (M1 como mínimo útil) com critérios de aceite; estimativa de 13 a 24 sessões para a aplicação e 8 a 16 para a E3, parte 2; testes em sete camadas; acessibilidade WCAG 2.2 AA, idioma e celular | [E7](etapas/E7-marcos-testes-e-aceite.md) (sem PR) |
-| 2026-11-21 | E7 | Professor aprovou todas as recomendações; E7 encerrada; autorizados branch e PR da E7 (merge não delegado) | PR da E7 (ver git log) |
+| 2026-11-21 | E7 | Professor aprovou todas as recomendações; E7 encerrada; autorizados branch e PR da E7 | [#85](https://github.com/evertonfoz/dsc-tests/pull/85) |
+| 2026-11-21 | E7 | Professor delegou o merge só do PR #85, com CI verde; merge feito pela IA depois do CI verde no último commit do PR (data e commit de merge a registrar na sessão da E8, conferidos com `gh pr view 85`) | [#85](https://github.com/evertonfoz/dsc-tests/pull/85) |
