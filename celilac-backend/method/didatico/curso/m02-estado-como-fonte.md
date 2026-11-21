@@ -6,6 +6,7 @@ ordem: 4
 prerequisitos: [m01, apoio-a]
 duracao: '2 aulas'
 gabarito: m02-gabarito
+pratica: m02-pratica
 ---
 
 # Módulo 2 — Por que o plano e a realidade divergem?
@@ -89,6 +90,8 @@ Com `--remote`, consulta o GitHub (somente leitura): a issue principal está abe
 > Ele já provou utilidade: avisou, durante o piloto, que uma fatia constava como integrada com a issue ainda aberta. A decisão de fechá-la ficou com uma pessoa.
 
 ## 6. Pratique no seu domínio
+> O passo a passo completo, com o conteúdo para copiar, a saída esperada e um prompt para cada passo, está em `m02-pratica.md`.
+
 1. Copie o modelo `method/templates/state.yaml` para `docs/uc/<seu-uc>/state.yaml` (código do caso de uso em **minúsculas**, por exemplo `uc01`).
 2. Preencha: nome, arquétipo (`criar`), a issue principal do módulo anterior, e **duas fatias** com `status: planejada`.
 3. Rode `method/scripts/check-state.sh` e leia **cada mensagem** que ele imprimir.
