@@ -1,0 +1,40 @@
+---
+// Uma página por módulo, apoio, projeto final e prática (plano do M1, seção 3).
+// Gabaritos não viram página antes do M3.
+import { render } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import Titulo from '../componentes/Titulo.astro';
+import Ficha from '../componentes/Ficha.astro';
+import Avisos from '../componentes/Avisos.astro';
+import Sequencia from '../componentes/Sequencia.astro';
+import { cursoValidado, percurso, type EntradaDoCurso } from '../conteudo/carregar';
+import { tituloSimples } from '../conteudo/titulo';
+import { textos } from '../textos';
+
+export async function getStaticPaths() {
+  const curso = await cursoValidado();
+  return [...curso.values()]
+    .filter((e) => e.dados.tipo !== 'gabarito')
+    .map((e) => ({ params: { id: e.dados.id } }));
+}
+
+const curso = await cursoValidado();
+const entrada = curso.get(Astro.params.id!) as EntradaDoCurso;
+const d = entrada.dados;
+const { Content } = await render(entrada);
+
+const sequencia = await percurso();
+const posicao = sequencia.findIndex((e) => e.dados.id === d.id);
+const anterior = posicao > 0 ? sequencia[posicao - 1] : undefined;
+const proximo = posicao >= 0 ? sequencia[posicao + 1] : undefined;
+const modulo = d.tipo === 'pratica' ? curso.get(d.pratica_de) : undefined;
+---
+<Base titulo={tituloSimples(d.titulo)}>
+  <Titulo titulo={d.titulo} />
+  <Ficha entrada={entrada} curso={curso} />
+  {d.tipo === 'projeto' && <Avisos />}
+  {d.tipo === 'pratica' && <p class="aviso" role="note">{textos.notaDaPratica}</p>}
+  <Content />
+  {modulo && <p><a href={`/${modulo.dados.id}/`}>{textos.voltarAoModulo(tituloSimples(modulo.dados.titulo))}</a></p>}
+  {posicao >= 0 && <Sequencia anterior={anterior} proximo={proximo} />}
+</Base>

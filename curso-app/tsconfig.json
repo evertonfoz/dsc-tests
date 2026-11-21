@@ -1,5 +1,7 @@
 {
   "extends": "astro/tsconfigs/strict",
   "include": [".astro/types.d.ts", "**/*"],
-  "exclude": ["dist", "node_modules"]
+  // e2e/ e playwright.config.ts usam módulos do Node (fs, url, process) e @types/node não está
+  // instalado (plano do M0, seção 10); o Playwright os transpila e executa a cada teste.
+  "exclude": ["dist", "node_modules", "e2e", "playwright.config.ts", "test-results"]
 }

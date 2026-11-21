@@ -10,7 +10,7 @@ ENV ASTRO_TELEMETRY_DISABLED=1 \
     CI=true
 RUN npm install --global pnpm@12.8.1
 WORKDIR /repo/curso-app
-COPY curso-app/package.json curso-app/pnpm-lock.yaml ./
+COPY curso-app/package.json curso-app/pnpm-lock.yaml curso-app/pnpm-workspace.yaml ./
 RUN pnpm install --frozen-lockfile
 COPY celilac-backend/method/didatico/curso/ /repo/celilac-backend/method/didatico/curso/
 COPY curso-app/ ./

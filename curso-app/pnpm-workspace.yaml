@@ -1,0 +1,4 @@
+# axe-core fixado em 4.14.0: o ~4.14.0 de @axe-core/playwright resolveria para a 4.14.1,
+# publicada há menos de 14 dias (plano do M1, seção 2; R19 da E8).
+overrides:
+  axe-core: 4.14.0

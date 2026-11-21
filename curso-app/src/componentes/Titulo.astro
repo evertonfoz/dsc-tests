@@ -1,0 +1,9 @@
+---
+// Título de nível 1 a partir do front matter.
+import TextoComCodigo from './TextoComCodigo.astro';
+
+interface Props {
+  titulo: string;
+}
+---
+<h1><TextoComCodigo texto={Astro.props.titulo} /></h1>

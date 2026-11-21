@@ -1,37 +1,53 @@
 #!/usr/bin/env bash
-# Critério 1 do M0: front matter inválido impede a imagem.
-# Copia o contexto para uma pasta temporária, quebra UM front matter na CÓPIA
+# Conteúdo inválido impede a imagem (M0, critério 1; M1, linha "Pré-requisito").
+# Para cada caso: copia o contexto para uma pasta temporária, quebra UM arquivo na CÓPIA
 # (o repositório não é alterado) e confere que o docker build falha com a mensagem esperada.
 # Uso: curso-app/scripts/testar-construcao-negativa.sh
 set -euo pipefail
 
 raiz="$(git -C "$(dirname "$0")" rev-parse --show-toplevel)"
-tmp="$(mktemp -d)"
-trap 'rm -rf "$tmp"' EXIT
+falhas=0
 
-mkdir -p "$tmp/celilac-backend/method/didatico"
-rsync -a --exclude node_modules --exclude dist --exclude .astro "$raiz/curso-app" "$tmp/"
-cp -R "$raiz/celilac-backend/method/didatico/curso" "$tmp/celilac-backend/method/didatico/"
+# caso <descrição> <arquivo do curso> <programa awk que altera a cópia> <mensagem esperada>
+caso() {
+  local descricao="$1" arquivo="$2" programa="$3" esperado="$4"
+  local tmp
+  tmp="$(mktemp -d)"
+  mkdir -p "$tmp/celilac-backend/method/didatico"
+  rsync -a --exclude node_modules --exclude dist --exclude .astro --exclude test-results "$raiz/curso-app" "$tmp/"
+  cp -R "$raiz/celilac-backend/method/didatico/curso" "$tmp/celilac-backend/method/didatico/"
+  local alvo="$tmp/celilac-backend/method/didatico/curso/$arquivo"
+  awk "$programa" "$alvo" >"$alvo.novo"
+  if cmp -s "$alvo" "$alvo.novo"; then
+    echo "FALHA $descricao: não consegui alterar a cópia de $arquivo"; falhas=$((falhas + 1)); rm -rf "$tmp"; return
+  fi
+  mv "$alvo.novo" "$alvo"
 
-alvo="$tmp/celilac-backend/method/didatico/curso/m05-onde-mora-a-regra.md"
-# Troca o primeiro pré-requisito por um id que não existe.
-awk '!feito && /^prerequisitos: \[/ { sub(/\[[a-z0-9-]+/, "[m99"); feito = 1 } { print }' "$alvo" >"$alvo.novo"
-mv "$alvo.novo" "$alvo"
-grep -q '^prerequisitos: \[m99' "$alvo" || { echo "FALHA: não consegui quebrar o front matter da cópia"; exit 1; }
+  local saida="$tmp/saida.txt"
+  if docker build -f "$tmp/curso-app/Dockerfile" --progress=plain --no-cache \
+       --build-arg ORIGEM_COMMIT=0000000 --build-arg ORIGEM_DATA=2026-01-01T00:00:00Z \
+       -t curso-app:negativo "$tmp" >"$saida" 2>&1; then
+    echo "FALHA $descricao: a imagem foi gerada com conteúdo inválido"
+    docker image rm curso-app:negativo >/dev/null 2>&1 || true
+    falhas=$((falhas + 1))
+  elif grep -qF "$esperado" "$saida"; then
+    echo "OK    $descricao: a construção falhou com: $esperado"
+  else
+    echo "FALHA $descricao: a construção falhou, mas sem a mensagem esperada. Últimas linhas:"
+    tail -30 "$saida"
+    falhas=$((falhas + 1))
+  fi
+  rm -rf "$tmp"
+}
 
-saida="$tmp/saida.txt"
-if docker build -f "$tmp/curso-app/Dockerfile" --progress=plain --no-cache \
-     --build-arg ORIGEM_COMMIT=0000000 --build-arg ORIGEM_DATA=2026-01-01T00:00:00Z \
-     -t curso-app:negativo "$tmp" >"$saida" 2>&1; then
-  echo "FALHA (1): a imagem foi gerada com front matter inválido"
-  docker image rm curso-app:negativo >/dev/null 2>&1 || true
-  exit 1
-fi
-esperado='conteúdo inválido: m05-onde-mora-a-regra.md: prerequisitos: "m99" não existe'
-if grep -qF "$esperado" "$saida"; then
-  echo "OK    (1) a construção falhou com: $esperado"
-else
-  echo "FALHA (1): a construção falhou, mas sem a mensagem esperada. Últimas linhas:"
-  tail -30 "$saida"
-  exit 1
-fi
+# M0, critério 1: o primeiro pré-requisito do m05 vira um id que não existe.
+caso "(M0-1) pré-requisito inexistente" m05-onde-mora-a-regra.md \
+  '!feito && /^prerequisitos: \[/ { sub(/\[[a-z0-9-]+/, "[m99"); feito = 1 } { print }' \
+  'conteúdo inválido: m05-onde-mora-a-regra.md: prerequisitos: "m99" não existe'
+
+# M1: a linha "Pré-requisito" do corpo do m05 passa a citar o módulo 4 em vez do 3.
+caso "(M1) linha Pré-requisito divergente" m05-onde-mora-a-regra.md \
+  '!feito && /^> \*\*Pré-requisito:\*\* módulo 3/ { sub(/módulo 3/, "módulo 4"); feito = 1 } { print }' \
+  'conteúdo inválido: m05-onde-mora-a-regra.md: linha "Pré-requisito": não cita "m03", que está em prerequisitos'
+
+if [ "$falhas" -gt 0 ]; then echo "$falhas caso(s) com falha."; exit 1; fi

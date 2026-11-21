@@ -1,0 +1,10 @@
+---
+// Texto de título em que os trechos entre crases são exibidos como código.
+import { partesDoTitulo } from '../conteudo/titulo';
+
+interface Props {
+  texto: string;
+}
+const partes = partesDoTitulo(Astro.props.texto);
+---
+{partes.map((p) => (p.codigo ? <code>{p.texto}</code> : p.texto))}

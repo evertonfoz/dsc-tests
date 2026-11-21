@@ -1,0 +1,24 @@
+---
+// "Anterior" e "próximo" pela `ordem` do front matter (plano do M1, seção 3).
+import { textos } from '../textos';
+import TextoComCodigo from './TextoComCodigo.astro';
+import type { EntradaDePercurso } from '../conteudo/carregar';
+
+interface Props {
+  anterior?: EntradaDePercurso | undefined;
+  proximo?: EntradaDePercurso | undefined;
+}
+const { anterior, proximo } = Astro.props;
+---
+<nav class="sequencia" aria-label={textos.sequencia}>
+  {anterior && (
+    <a rel="prev" href={`/${anterior.dados.id}/`}>
+      <span class="rotulo">{textos.anterior}</span> <TextoComCodigo texto={anterior.dados.titulo} />
+    </a>
+  )}
+  {proximo && (
+    <a rel="next" href={`/${proximo.dados.id}/`}>
+      <span class="rotulo">{textos.proximo}</span> <TextoComCodigo texto={proximo.dados.titulo} />
+    </a>
+  )}
+</nav>
