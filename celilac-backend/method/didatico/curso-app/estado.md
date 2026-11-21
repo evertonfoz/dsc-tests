@@ -59,6 +59,7 @@
 | 2026-11-21 | E5: `AGENTS.md` só em `method/`; ajustar a linha 4 no mesmo PR da opção (i). | E5, seção 6.1 |
 | 2026-11-21 | E5: proteção da `main` como passo opcional do m04, com o aviso de que as regras orientam o assistente mas não o travam. | E5, seção 7.3 |
 | 2026-11-21 | Autorizado abrir branch e PR da E5 (com o registro da E3). Merge **não** delegado nesta sessão. | Professor |
+| 2026-11-21 | **Delegação registrada:** o professor autorizou a IA a fazer o merge **só do PR #81** ("autorizo o merge do #81"), depois de três conferências mostrarem o PR ainda aberto. Condição mantida pela IA: CI verde. Não vale para outros PRs nem para a sessão seguinte. | Professor |
 | 2026-11-21 | P8: projeto próprio em `curso-app/`, na raiz do `dsc-tests`; criado só com README (sem código até a E9). | E0 |
 
 ## Requisitos acrescentados pelo professor
