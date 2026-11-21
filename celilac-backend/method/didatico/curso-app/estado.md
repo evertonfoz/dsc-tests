@@ -4,7 +4,7 @@
 
 | Campo | Valor |
 |---|---|
-| Etapa atual | E6 concluída; **próxima: E7** (marcos, testes e critérios de aceite) |
+| Etapa atual | E7 concluída; **próxima: E8** (riscos e perguntas em aberto) |
 | Última atualização | 2026-11-21 |
 | Responsável pelas decisões | o professor |
 
@@ -18,7 +18,7 @@
 | E4 | Modelo de dados, papéis e privacidade | concluída | [E4-modelo-de-dados-e-privacidade.md](etapas/E4-modelo-de-dados-e-privacidade.md) | professor (2026-11-21) |
 | E5 | Kit do repositório do aluno e GitHub | concluída | [E5-kit-e-github.md](etapas/E5-kit-e-github.md) | professor (2026-11-21) |
 | E6 | Verificação de evidências e limites | concluída | [E6-verificacao-de-evidencias.md](etapas/E6-verificacao-de-evidencias.md) | professor (2026-11-21) |
-| E7 | Marcos, testes e critérios de aceite | pendente | | |
+| E7 | Marcos, testes e critérios de aceite | concluída | [E7-marcos-testes-e-aceite.md](etapas/E7-marcos-testes-e-aceite.md) | professor (2026-11-21) |
 | E8 | Riscos e perguntas em aberto | pendente | | |
 | E9 | Implementação por marcos | não iniciada | | |
 
@@ -72,6 +72,13 @@
 | 2026-11-21 | Autorizados branch e PR da E6 (com o registro do PR #82). Merge **não** delegado. | Professor |
 | 2026-11-21 | Autorizados branch e PR da opção (a) da E6 (núcleo do `check-state`). Merge **não** delegado. | Professor |
 | 2026-11-21 | **Delegação registrada:** o professor autorizou a IA a fazer o merge **só do PR #84** ("autorizo o merge do #84 com CI verde"). Condição: CI verde no último commit do PR. Apagar a branch não foi autorizado. Não vale para outros PRs nem para a sessão seguinte. | Professor |
+| 2026-11-21 | E7: marcos M0 a M7 na ordem e no escopo da seção 4, com o **M1 como mínimo útil** e ponto para ver a aplicação em execução e liberar a E3, parte 2; critérios de aceite da seção 4.1. | E7, seção 4 |
+| 2026-11-21 | E7: tecnologia aprovada: Astro, servidor web estático sem privilégios na imagem, `fflate` para o `.zip`, Vitest, Playwright e axe-core; Node 24.21.0 e pnpm 12.8.1 na construção. A instalação das dependências será pedida no plano do M0. | E7, seção 2 |
+| 2026-11-21 | E7: estimativa de 13 a 24 sessões para a aplicação e 8 a 16 para a E3, parte 2, com as premissas da seção 5; estratégia de testes da seção 6, com CI próprio da aplicação que não publica imagem. | E7, seções 5 e 6 |
+| 2026-11-21 | E7: meta de acessibilidade WCAG 2.2 AA; só português do Brasil; celular a partir de 320 pixels, com o limite declarado de que, com `127.0.0.1`, o uso real no celular depende da versão na internet. | E7, seção 8 |
+| 2026-11-21 | E7: construir a imagem localmente até o M6; decidir a publicação no M7, depois da E8. | E7, seção 7 |
+| 2026-11-21 | Autorizados branch e PR da E7 (com o registro do PR #84). Merge **não** delegado. | Professor |
+| 2026-11-21 | **Delegação registrada:** o professor autorizou a IA a fazer o merge **só do PR #85** ("autorizo o merge do #85 com CI verde"). Condição: CI verde no último commit do PR. Apagar a branch não foi autorizado. Não vale para outros PRs nem para a sessão seguinte. | Professor |
 | 2026-11-21 | **Delegação registrada:** o professor autorizou a IA a fazer o merge **só do PR #83** ("autorizo o merge do #83 com CI verde"). Condição: CI verde no último commit do PR. Apagar a branch não foi autorizado. Não vale para outros PRs nem para a sessão seguinte. | Professor |
 
 ## Requisitos acrescentados pelo professor
@@ -102,11 +109,13 @@
 - **Pendência da E5:** `m02-pratica.md`, "Antes de começar", manda copiar `method/` do repositório do curso; passa a apontar para o kit (E3, parte 2).
 - **Divergência registrada na E6 (2026-11-21):** este arquivo dizia que o PR #82 aguardava merge. Conferido com `gh pr view 82`: `MERGED` em 2026-11-21T12:54:51Z, commit de merge `e5f3a75`, cabeça `1db869b`, integrado pela conta `evertonfoz`; `gh pr checks 82`: os quatro trabalhos com `pass`. A delegação foi informada pelo professor no prompt da sessão e está registrada nas decisões.
 - **Divergência registrada na E6:** o prompt (seção 2, item 7) cita como conferência automática "link de PR ou de execução do CI, leitura somente do estado do repositório". Pelas decisões da E1, a aplicação não lê o repositório nem chama o GitHub; vale a E1. Tratamento na E6, seção 2.
-- **Pendência da E6 (em PR, [#84](https://github.com/evertonfoz/dsc-tests/pull/84), aguardando merge):** núcleo `method/scripts/check-state-core.mjs`, sem módulos do Node (E6, seção 4.3, opção a). Saídas do validador idênticas antes e depois em 16 casos; 4 testes novos. Afeta o kit da E5 só por trazer um arquivo a mais. Nenhuma etapa invalidada. **As referências de linha a `check-state.mjs` na E5 e na E6 valem para o commit `1ddbb5a`**, anterior à separação.
+- **Pendência da E6 (resolvida no PR [#84](https://github.com/evertonfoz/dsc-tests/pull/84), integrado em 2026-11-21T13:14:25Z, commit de merge `538723c`):** núcleo `method/scripts/check-state-core.mjs`, sem módulos do Node (E6, seção 4.3, opção a). Saídas do validador idênticas antes e depois em 16 casos; 4 testes novos. Afeta o kit da E5 só por trazer um arquivo a mais. Nenhuma etapa invalidada. **As referências de linha a `check-state.mjs` na E5 e na E6 valem para o commit `1ddbb5a`**, anterior à separação.
 - **Achado da E6 (não corrigido):** as evidências `.txt` do UC12 seguem uma convenção de cabeçalho não escrita no método e aplicada de forma desigual (31 arquivos; 28 com data, 13 com commit de base). Registro da convenção no método aprovado, a fazer na E3, parte 2.
 - **Impacto da E6 sobre a E4:** o escopo `fases` ganha um campo para o último `state.yaml` colado e a data. Não muda a estrutura aprovada na E4.
+- **Divergência registrada na E7 (2026-11-21):** este arquivo dizia que o PR #84 aguardava merge. Conferido com `gh pr view 84`: `MERGED` em 2026-11-21T13:14:25Z, commit de merge `538723c`, feito pela IA por delegação do professor só desse PR (tabela "Decisões"). `gh pr checks 84`: os quatro trabalhos com `pass` na execução 44907757434; `gh run view 44907757434`: `success` no commit `28423e5`, o último do PR. `git ls-remote`: a branch `refactor/check-state-nucleo` **não** foi apagada. <!-- links:ignore -->
+- **Limites declarados na E7 (seções 7 e 8.3):** enquanto a imagem não for publicada, o aluno precisa do `dsc-tests` para construí-la; e, com o endereço `127.0.0.1`, o uso no celular só se realiza na versão na internet.
 
-**Decisão para a próxima sessão:** seguir o protocolo, **uma etapa por vez**. A E6 foi validada; a próxima etapa é a **E7**.
+**Decisão para a próxima sessão:** seguir o protocolo, **uma etapa por vez**. A E7 foi validada; a próxima etapa é a **E8**.
 
 ## Histórico de sessões
 | Data | Etapa | O que foi feito | PR ou documento |
@@ -137,4 +146,8 @@
 | 2026-11-21 | E6 | Quatro níveis de verificação (a aplicação só confere a forma); `state.yaml` colado com o núcleo do validador; links só por forma; saídas coladas não interpretadas; lista do que a aplicação não prova. Executados: `check-state` no UC12 (saída 0) e isolado (40 erros, todos de arquivo; saída 1) | [E6](etapas/E6-verificacao-de-evidencias.md) (sem PR) |
 | 2026-11-21 | E6 | Professor aprovou todas as recomendações, com a opção (a) da seção 4.3; E6 encerrada; autorizados branch e PR da E6 | PR da E6 (ver git log) |
 | 2026-11-21 | E6 | PR #83 integrado em 2026-11-21T13:07:07Z (commit de merge `1ddbb5a`), por delegação do professor só desse PR, com CI verde em `2581c97` (conferido com `gh pr checks 83`); branch mantida | [#83](https://github.com/evertonfoz/dsc-tests/pull/83) |
-| 2026-11-21 | E6 (opção a) | Núcleo do `check-state` sem módulos do Node; `check-state.mjs` com a mesma interface; saídas idênticas em 16 casos; `rodar-testes.sh` com 23 testes passando; `verify.sh` com 6 passos OK | [#84](https://github.com/evertonfoz/dsc-tests/pull/84) (merge não delegado) |
+| 2026-11-21 | E6 (opção a) | Núcleo do `check-state` sem módulos do Node; `check-state.mjs` com a mesma interface; saídas idênticas em 16 casos; `rodar-testes.sh` com 23 testes passando; `verify.sh` com 6 passos OK | [#84](https://github.com/evertonfoz/dsc-tests/pull/84) |
+| 2026-11-21 | E6 (opção a) | PR #84 integrado em 2026-11-21T13:14:25Z (commit de merge `538723c`), pela IA, por delegação do professor só desse PR, com CI verde em `28423e5` (execução 44907757434, conferida com `gh pr checks 84` e `gh run view`); branch `refactor/check-state-nucleo` mantida (registro feito na sessão da E7) | [#84](https://github.com/evertonfoz/dsc-tests/pull/84) | <!-- links:ignore -->
+| 2026-11-21 | E7 | Tecnologia proposta; marcos M0 a M7 (M1 como mínimo útil) com critérios de aceite; estimativa de 13 a 24 sessões para a aplicação e 8 a 16 para a E3, parte 2; testes em sete camadas; acessibilidade WCAG 2.2 AA, idioma e celular | [E7](etapas/E7-marcos-testes-e-aceite.md) (sem PR) |
+| 2026-11-21 | E7 | Professor aprovou todas as recomendações; E7 encerrada; autorizados branch e PR da E7 | [#85](https://github.com/evertonfoz/dsc-tests/pull/85) |
+| 2026-11-21 | E7 | Professor delegou o merge só do PR #85, com CI verde; merge feito pela IA depois do CI verde no último commit do PR (data e commit de merge a registrar na sessão da E8, conferidos com `gh pr view 85`) | [#85](https://github.com/evertonfoz/dsc-tests/pull/85) |
