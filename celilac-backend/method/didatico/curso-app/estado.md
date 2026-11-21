@@ -44,6 +44,7 @@
 | 2026-11-21 | E3 dividida em duas partes. **Parte 1 (agora):** PR de títulos de seção, PR de front matter, PR do modelo `caso-de-uso.md` e PR do módulo piloto m02 com arquivo de prática. **Parte 2 (depois de ver a aplicação em execução):** demais arquivos de prática, reescrita dos gabaritos e textos da seção 9 da E2. | Professor |
 | 2026-11-21 | **Delegação registrada:** o professor autorizou a IA a abrir branches e PRs da E3, parte 1, e do plano, **e a fazer o merge** deles. Condição mantida pela IA: só integrar com o CI verde. Apagar branches não foi autorizado. | Professor |
 | 2026-11-21 | Versionar `mascotes/web/` (23 PNG de 512×512, 1,9 MB) para a imagem Docker poder ser construída pelo CI. Os originais de 1024×1024 em `mascotes/` continuam fora do git. | Professor |
+| 2026-11-21 | Caminho até a aplicação em execução: seguir o protocolo, etapa por etapa (opção a); a E4 começa em nova sessão. | Professor |
 | 2026-11-21 | P8: projeto próprio em `curso-app/`, na raiz do `dsc-tests`; criado só com README (sem código até a E9). | E0 |
 
 ## Requisitos acrescentados pelo professor
@@ -64,7 +65,7 @@
 - As referências de linha da E2, seção 9, valem para o commit `9e47c34`; o front matter desloca as linhas dos arquivos.
 - Aluno individual não tem revisão independente; o curso deve orientar a declarar isso, como fez o UC12.
 
-**Pergunta em aberto para a próxima sessão:** como chegar à aplicação em execução. (a) Seguir o protocolo, E4 a E8 uma por vez; (b) **condensar E4 a E8 num documento só**, com uma validação, e então o marco 1 da E9 (recomendação da IA); (c) protótipo descartável antes da E9, que exige exceção autorizada pelo professor. O professor disse que fará a E4 amanhã; a escolha entre (a) e (b) ainda não foi feita.
+**Decisão para a próxima sessão:** seguir o protocolo, **uma etapa por vez** (E4, depois E5, até E8, cada uma com validação), e só então o marco 1 da E9. A sessão começa pela **E4**.
 
 ## Histórico de sessões
 | Data | Etapa | O que foi feito | PR ou documento |
@@ -82,3 +83,4 @@
 | 2026-11-21 | Plano | PR #72 (E0 a E2) integrado | [#72](https://github.com/evertonfoz/dsc-tests/pull/72) |
 | 2026-11-21 | E3 | Parte 1: título do apoio B (#73), front matter em 32 arquivos (#74), modelo de caso de uso (#75), prática piloto do m02 (#76) | PRs #73 a #76 |
 | 2026-11-21 | — | `mascotes/web/` versionado; sessão encerrada; E4 marcada para 2026-11-22 | PR de mascotes (ver git log) |
+| 2026-11-21 | — | Escolhido seguir o protocolo etapa por etapa; próxima sessão começa pela E4 | este PR |
