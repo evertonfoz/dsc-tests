@@ -4,7 +4,7 @@
 
 | Campo | Valor |
 |---|---|
-| Etapa atual | **E9**, marco **M1**: plano aprovado; **M1a** integrado pelo PR [#88](https://github.com/evertonfoz/dsc-tests/pull/88); M1b implementado na branch `feat/curso-app-m1b`; PR [#90](https://github.com/evertonfoz/dsc-tests/pull/90) aberto; CI em execução |
+| Etapa atual | **E9**, marco **M1**: plano aprovado; **M1a** integrado pelo PR [#88](https://github.com/evertonfoz/dsc-tests/pull/88); M1b implementado na branch `feat/curso-app-m1b`; PR [#90](https://github.com/evertonfoz/dsc-tests/pull/90) aberto; CI verde no commit `a288c18` (seis checks) |
 | Última atualização | 2026-11-21 |
 | Responsável pelas decisões | o professor |
 
@@ -156,7 +156,7 @@
 
 - **PR #88 (M1a) integrado:** `gh pr view 88`: `MERGED` em 2026-11-21T15:14:25Z, commit de merge `26a88f5`, cabeça `3975d87`; `gh pr checks 88`: seis trabalhos com `pass` (execuções 44917372255 e 44917372199). No log do trabalho de imagem, 117 testes no navegador passaram e 21 foram pulados, cinco citações de commit foram encontradas, nenhum gabarito foi publicado e a construção negativa da linha "Pré-requisito" falhou como esperado.
 
-**PR #89 integrado:** cabeça `e7dc670`, merge `c920158`, seis checks verdes; integrado em 2026-11-21T15:19:26Z. A branch foi mantida. **M1b:** implementação concluída na branch `feat/curso-app-m1b`; PR [#90](https://github.com/evertonfoz/dsc-tests/pull/90) aberto em `798534e`; CI em execução. O merge do M1b não foi delegado.
+**PR #89 integrado:** cabeça `e7dc670`, merge `c920158`, seis checks verdes; integrado em 2026-11-21T15:19:26Z. A branch foi mantida. **M1b:** implementação concluída na branch `feat/curso-app-m1b`; PR [#90](https://github.com/evertonfoz/dsc-tests/pull/90) aberto em `798534e`; CI verde no commit `a288c18` (seis checks: integração e E2E PostgreSQL, qualidade geral, smoke Docker Compose, qualidade do curso, imagem e GitGuardian). A atualização documental posterior não altera o código. O merge do M1b não foi delegado.
 
 ## Histórico de sessões
 | Data | Etapa | O que foi feito | PR ou documento |
