@@ -24,7 +24,7 @@ As aprovações históricas de E1/E4/E7 e M3 são mantidas para rastreabilidade,
 | E0 | Leitura e perguntas bloqueantes | respondida e registrada | [E0-leitura-e-perguntas-bloqueantes.md](etapas/E0-leitura-e-perguntas-bloqueantes.md) | professor (respostas de 2026-11-21) |
 | E1 | Plano de arquitetura | concluída | [E1-plano-de-arquitetura.md](etapas/E1-plano-de-arquitetura.md) | professor (2026-11-21) |
 | E2 | Pipeline de conteúdo e metadados | concluída (revisável ao ver a aplicação em execução) | [E2-pipeline-de-conteudo.md](etapas/E2-pipeline-de-conteudo.md) | professor (2026-11-21) |
-| E3 | Atualização do repositório de conteúdo (se necessária) | parte 1 concluída (PRs #73 a #76); parte 2 da issue #99 implementada nesta branch, aguardando CI/PR | [E3-atualizacao-do-conteudo.md](etapas/E3-atualizacao-do-conteudo.md) (registro retroativo, 2026-11-21); PRs [#73](https://github.com/evertonfoz/dsc-tests/pull/73), [#74](https://github.com/evertonfoz/dsc-tests/pull/74), [#75](https://github.com/evertonfoz/dsc-tests/pull/75), [#76](https://github.com/evertonfoz/dsc-tests/pull/76) | merge delegado à IA, com CI verde; registro retroativo aprovado pelo professor (2026-11-21) |
+| E3 | Atualização do repositório de conteúdo (se necessária) | parte 1 concluída (PRs #73 a #76); parte 2 da issue #99 em revisão no PR [#101](https://github.com/evertonfoz/dsc-tests/pull/101) | [E3-atualizacao-do-conteudo.md](etapas/E3-atualizacao-do-conteudo.md) (registro retroativo, 2026-11-21); PRs [#73](https://github.com/evertonfoz/dsc-tests/pull/73), [#74](https://github.com/evertonfoz/dsc-tests/pull/74), [#75](https://github.com/evertonfoz/dsc-tests/pull/75), [#76](https://github.com/evertonfoz/dsc-tests/pull/76) | merge delegado à IA, com CI verde; registro retroativo aprovado pelo professor (2026-11-21) |
 | E4 | Modelo de dados, papéis e privacidade | concluída | [E4-modelo-de-dados-e-privacidade.md](etapas/E4-modelo-de-dados-e-privacidade.md) | professor (2026-11-21) |
 | E5 | Kit do repositório do aluno e GitHub | concluída | [E5-kit-e-github.md](etapas/E5-kit-e-github.md) | professor (2026-11-21) |
 | E6 | Verificação de evidências e limites | concluída | [E6-verificacao-de-evidencias.md](etapas/E6-verificacao-de-evidencias.md) | professor (2026-11-21) |
@@ -42,7 +42,7 @@ As aprovações históricas de E1/E4/E7 e M3 são mantidas para rastreabilidade,
 
 **Checks locais desta execução (worktree, conteúdo após as alterações):** `node method/scripts/check-links.mjs method docs/uc` passou: 111 documentos, 510 referências, nenhuma quebrada; `method/scripts/check-state.sh docs/uc/uc12/state.yaml` passou (estado válido local), com seis avisos de revisor igual ao responsável já existentes no UC12. No `curso-app/`: `pnpm check` passou (0 erros, 0 avisos e 0 dicas Astro); `pnpm test` passou (9 arquivos, 55 testes); `pnpm build` passou (89 páginas). `git diff --check` passou. A CI do PR ainda não foi executada; nenhuma conclusão sobre CI é registrada aqui.
 
-**Integração:** PR e CI ainda pendentes; a issue #99 permanece aberta até o aceite ser confirmado.
+**Integração:** PR [#101](https://github.com/evertonfoz/dsc-tests/pull/101) aberto em `e0a7dfdbde5358c806e19e62e1a74c87971ed843`; a CI foi disparada e está pendente nesta atualização. A issue #99 permanece aberta até a integração e o aceite completo.
 
 
 ## Decisões
