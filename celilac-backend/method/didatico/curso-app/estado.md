@@ -84,3 +84,4 @@
 | 2026-11-21 | E3 | Parte 1: título do apoio B (#73), front matter em 32 arquivos (#74), modelo de caso de uso (#75), prática piloto do m02 (#76) | PRs #73 a #76 |
 | 2026-11-21 | — | `mascotes/web/` versionado; sessão encerrada; E4 marcada para 2026-11-22 | PR de mascotes (ver git log) |
 | 2026-11-21 | — | Escolhido seguir o protocolo etapa por etapa; próxima sessão começa pela E4 | este PR |
+| 2026-11-21 | — | Prompt atualizado: sessão na raiz do `dsc-tests`; item 8 (sem área do professor; gabaritos como etapa); E4 com papel único; merge só com delegação explícita registrada; decisões do `estado.md` prevalecem sobre o prompt | PR do prompt (ver git log) |
