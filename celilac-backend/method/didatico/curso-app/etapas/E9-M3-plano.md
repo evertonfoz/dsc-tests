@@ -1,5 +1,7 @@
 # E9 — Plano do marco M3 (progresso e gabaritos)
 
+> **Nota de vigência (2026-11-21):** este plano registra o desenho histórico implementado pelo PR #96. A direção vigente do professor substitui o registro de respostas/progresso e a liberação de gabaritos por tentativa. Ver [estado.md](../estado.md), [auditoria da experiência](../auditoria-experiencia-e-artefatos.md) e issue [#98](https://github.com/evertonfoz/dsc-tests/issues/98). O arquivo é preservado como evidência do que foi aprovado e integrado naquela etapa.
+
 > Plano de implementação do marco M3 da E9. O escopo funcional já foi aprovado na E7 e nas decisões da E4/E8; este documento detalha a execução, os testes e os limites técnicos, sem alterar conteúdo-fonte do curso.
 >
 > Convenção: **[Confirmado no repositório]** leitura desta cópia; **[Confirmado no GitHub]** consulta feita nesta sessão; **[Decisão aprovada]** consta de E4, E7 ou E8; **[Implementado]** só será usado depois da alteração correspondente e da validação.

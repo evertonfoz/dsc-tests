@@ -161,10 +161,10 @@ export function pluginDeConversao(ref: ContextoDeReferencias, textos: TextosDaCo
             ctx.setProperty(no, 'tabIndex', 0);
             return;
           }
-          // 5. caixas das listas de verificação: no M1 são só leitura (desabilitadas, sem rótulo próprio);
-          //    o texto do item já diz o que conferir. Viram controles com rótulo no M3.
+          // 5. A caixa Markdown é só sintaxe de checklist; o curso não registra marcações pessoais.
+          //    Mantém-se o texto do critério como item comum da lista.
           if (no.tagName === 'input') {
-            if (no.properties.type === 'checkbox') ctx.setProperty(no, 'ariaHidden', 'true');
+            if (no.properties.type === 'checkbox') ctx.removeNode(no);
             return;
           }
           if (no.tagName === 'h1') {

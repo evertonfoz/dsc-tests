@@ -63,16 +63,21 @@ for pagina in / /m00/; do
   fi
 done
 
-# M3: rotas de gabarito disponíveis, conteúdo bloqueado por padrão no navegador.
+# Os gabaritos estão disponíveis em divulgação nativa e não dependem de dados do aluno.
 gabarito_html="$(curl -fsS http://127.0.0.1:4321/m01-gabarito/)"
-if grep -Eq 'data-corpo-gabarito[^>]*hidden' <<<"$gabarito_html"; then
-  ok "(M3) rota de gabarito inicia bloqueada"
+if grep -q '<details class="gabarito"' <<<"$gabarito_html" && grep -q 'faça primeiro a atividade' <<<"$gabarito_html"; then
+  ok "rota do gabarito com divulgação e instrução de tentativa"
 else
-  falha "(M3) rota de gabarito sem estado inicial bloqueado"
+  falha "rota do gabarito sem divulgação acessível"
+fi
+if ! curl -fsS http://127.0.0.1:4321/ | grep -q 'seus-dados'; then
+  ok "página inicial sem tela de dados do aluno"
+else
+  falha "página inicial ainda referencia tela de dados"
 fi
 
 # M1/M2: páginas representativas respondem (a lista completa é conferida pelo Playwright).
-for pagina in /mapa/ /m01/ /apoio-a/ /m02-pratica/ /projeto-final/ /seus-dados/ /uc12/ /uc12/state/ /uc12/relatorios/F/ /uc12/evidencias/F/cobertura/ /uc12/documento/; do
+for pagina in /indice/ /mapa/ /m01/ /apoio-a/ /m02-pratica/ /projeto-final/ /uc12/ /uc12/state/ /uc12/relatorios/F/ /uc12/evidencias/F/cobertura/ /uc12/documento/; do
   if curl -fsS -o /dev/null "http://127.0.0.1:4321$pagina"; then ok "(M1/M2) $pagina responde"; else falha "(M1/M2) $pagina não responde"; fi
 done
 

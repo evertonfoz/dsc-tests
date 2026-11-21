@@ -181,3 +181,19 @@ A E1, seção 6.3, deixou em aberto: o aluno **constrói** a imagem a partir do 
 3. A **meta de acessibilidade** WCAG 2.2 AA (seção 8.1) e o limite declarado para o celular (seção 8.3).
 4. **Distribuição:** construir localmente até o M6 e decidir a publicação no M7 (seção 7).
 5. Autorizar **branch e PR da E7**, que leva este documento, o registro do PR #84 no `estado.md` e a remoção do parágrafo pendente do prompt. O merge não está delegado, salvo decisão sua.
+
+## 12. Revisão da política do aluno (2026-11-21)
+
+O professor determinou que a aplicação é um guia, sem coleta de dados pessoais ou conteúdo de respostas e sem registro de leitura, tentativas ou progresso. Esta direção substitui as propostas anteriores de E1/E4 e os critérios dependentes delas. M0–M3 continuam sendo histórico válido da implementação; a experiência que segue não depende de M3 para guardar dados.
+
+| Marco afetado | Critério substitutivo |
+|---|---|
+| M3 — gabaritos e curso sem estado pessoal | Gabaritos em páginas públicas, com `<details>/<summary>` nativo e convite para tentar primeiro no editor, caderno ou repositório. Sem campos, declaração, verificação ou gate de tentativa. O teste deve confirmar divulgação por teclado e nenhum acesso a `localStorage`. |
+| M4 — práticas guiadas | Instruções estáticas por passo: destino no repositório do aluno, ação no editor/terminal/GitHub, saída ou artefato esperado e critério verificável. Não enviar caso de uso, preencher campos, interpolar dados pessoais nem guardar progresso. Botões de copiar podem copiar texto estático do curso. |
+| M5 — kit inicial | `.zip` estático construído dos modelos do repositório, sem personalização baseada em respostas do aluno. O estudante baixa e personaliza os arquivos no próprio repositório; os artefatos ensinados continuam sendo construídos nas etapas indicadas. |
+| M6 — fases e evidências | Guia e comandos para o estudante executar `check-state` no próprio repositório e interpretar a saída. Não colar nem enviar `state.yaml`, links, relatório ou evidências para a aplicação; não afirmar que a aplicação verificou o trabalho. |
+| M7 — acabamento | Verificar fluxo completo sem dados de navegador, navegação por teclado e celular, honestidade sobre gabaritos públicos, limites e ferramentas locais. |
+
+O índice do README é uma página interna contextual, não uma incorporação de conteúdo externo: URL própria, navegação comum, retorno explícito e histórico nativo. Não há requisito para iframe ou painel de leitura estreito.
+
+As especificações detalhadas de dados de E4 e os critérios antigos de E7 são preservados como documentação histórica. O [estado vigente](../estado.md) aponta as decisões atuais e a [auditoria da experiência e dos artefatos](../auditoria-experiencia-e-artefatos.md) registra os fatos e lacunas.

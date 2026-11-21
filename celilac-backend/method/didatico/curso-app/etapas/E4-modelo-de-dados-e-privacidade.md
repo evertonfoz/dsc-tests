@@ -1,5 +1,7 @@
 # E4 — Modelo de dados, papel e privacidade
 
+> **Direção revista (2026-11-21):** as decisões históricas desta etapa sobre dados pessoais no navegador, registro de tentativas e exportação/importação foram substituídas pelo pedido atual do professor. A aplicação do curso não coleta nem persiste dados do aluno; consulte [estado.md](../estado.md) e issue [#98](https://github.com/evertonfoz/dsc-tests/issues/98). Esta etapa permanece como registro da decisão anterior, não como política de implementação vigente.
+
 > Etapa E4 do plano da aplicação web do curso. Data: 2026-11-21. Situação: **validada pelo professor em 2026-11-21** (todas as recomendações aprovadas).
 > Convenção: **[Fato]** lido no repositório (com caminho); **[Recomendação]** proposta minha; **[Suposição]** a confirmar.
 > Nenhum arquivo do curso foi alterado nesta etapa.

@@ -3,12 +3,11 @@ export const textos = {
   nomeDoSite: 'Curso: implementando um caso de uso com evidência',
   pularParaConteudo: 'Pular para o conteúdo',
   navegacao: 'Navegação principal',
-  linkIndice: 'Índice do curso',
+  linkInicio: 'Apresentação',
+  linkIndice: 'Índice completo do curso',
   linkMapa: 'Mapa dos módulos',
-  linkSeusDados: 'Seus dados',
   linkUc12: 'Caso real UC12',
-  avisoEmConstrucao:
-    'Versão em construção: o registro de progresso e a liberação de gabaritos são declarações pessoais guardadas neste navegador; a aplicação não avalia nem verifica o trabalho.',
+  avisoEmConstrucao: 'As atividades são feitas no seu caderno, editor, terminal, repositório ou GitHub. Este site não coleta respostas nem registra progresso.',
   rodapeOrigem: (commitCurto: string, data: string) => `Conteúdo do commit ${commitCurto} (${data}).`,
   rodapeSemOrigem: 'Conteúdo de commit a confirmar (construção sem commit de origem informado).',
   rodapeNota: 'A aplicação não tem acesso à internet e não sabe se existe versão mais nova.',
@@ -32,8 +31,7 @@ export const textos = {
   pratica: 'Prática deste módulo',
 
   // Prática (só leitura no M1).
-  notaDaPratica:
-    'Nesta versão, a prática é só para leitura. Os campos para suas respostas, os dados do seu projeto no lugar de {{variavel}} e o botão de copiar chegam numa próxima versão.',
+  notaDaPratica: 'Faça esta atividade no local indicado pelo enunciado — por exemplo, no seu caderno, editor, terminal, repositório ou GitHub. Este site apenas apresenta o guia e não guarda respostas.',
   voltarAoModulo: (titulo: string) => `Voltar a: ${titulo}`,
 
   // Navegação no fim da página.
@@ -50,6 +48,7 @@ export const textos = {
   legendaCondicional: 'Linha tracejada: conteúdo para estudar se precisar.',
   descricaoGrafo: 'Desenho dos pré-requisitos. A lista completa abaixo também funciona com teclado e leitor de tela.',
   tituloListaMapa: 'Lista detalhada dos módulos e pré-requisitos',
+  verDiagrama: 'Ver diagrama complementar de pré-requisitos',
 
   // Conversão do conteúdo.
   rotuloDaTabela: (n: number) => `Tabela ${n} (role para os lados se não couber)`,

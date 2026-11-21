@@ -1,6 +1,6 @@
 // Critérios 1, 5 e 6 do M1 e a navegação (plano do M1, seção 11).
 import { expect, test } from '@playwright/test';
-import { gabaritos, paginas, percurso, siglas, tituloSimples } from './curso';
+import { gabaritos, paginas, paginasGabaritos, paginasUc12, percurso, siglas, tituloSimples } from './curso';
 
 test('(1) o mapa lista os arquivos de leitura na ordem de `ordem`', async ({ page }) => {
   await page.goto('/mapa/');
@@ -36,20 +36,46 @@ test('todas as páginas respondem e todo link interno leva a uma página existen
   for (const h of internos) expect((await request.get(h)).status(), h).toBe(200);
 });
 
-test('(5) gabaritos têm rota, mas ficam bloqueados até liberação no navegador', async ({ page, request }) => {
+test('o percurso começa com apresentação, sequência linear e retorno claro ao módulo', async ({ page }) => {
+  await page.goto('/');
+  await expect(page.getByRole('link', { name: 'Começar pelo módulo 0' })).toHaveAttribute('href', '/m00/');
+  await page.getByRole('link', { name: 'Começar pelo módulo 0' }).click();
+  await expect(page.getByRole('navigation', { name: 'Caminho de navegação' })).toContainText('Mapa dos módulos');
+  await page.getByRole('link', { name: 'Mapa dos módulos' }).first().click();
+  await expect(page.locator('[data-mapa] > li')).toHaveCount(percurso.length);
+  await expect(page.locator('.mapa-grafo')).toBeVisible();
+  await expect(page.locator('.mapa-grafo svg')).toBeHidden();
+  await page.getByRole('link', { name: tituloSimples(percurso[0]!.titulo) }).last().click();
+  await expect(page.locator('h1')).toHaveText(tituloSimples(percurso[0]!.titulo));
+});
+
+test('gabaritos usam divulgação nativa e páginas não registram respostas ou progresso', async ({ page, request }) => {
   for (const g of gabaritos) {
     expect((await request.get(`/${g.id}/`)).status(), g.id).toBe(200);
     await page.goto(`/${g.id}/`);
-    await expect(page.locator('[data-corpo-gabarito]')).toBeHidden();
-    await expect(page.locator('[data-progresso-pagina]')).toContainText('ainda não foi liberado');
+    const disclosure = page.locator('details.gabarito');
+    await expect(disclosure).toBeVisible();
+    await expect(disclosure.locator('> summary')).toContainText('faça primeiro a atividade');
+    await expect(disclosure.locator('article, p, table').first()).toBeHidden();
+    await disclosure.locator('> summary').click();
+    await expect(disclosure.locator('article, p, table').first()).toBeVisible();
   }
   for (const caminho of paginas) {
     await page.goto(caminho);
     await expect(page.locator('h1'), caminho).not.toContainText(/gabarito/i);
     const conteudo = gabaritos.find((g) => caminho === `/${g.id.replace(/-gabarito$/, '')}/`);
     if (conteudo) {
-      await expect(page.locator(`a[href="/${conteudo.id}/"]`), caminho).toBeHidden();
+      await expect(page.locator(`a[href="/${conteudo.id}/"]`), caminho).toContainText('depois de tentar');
     }
+  }
+  await page.goto('/m00/');
+  expect(await page.evaluate(() => localStorage.length)).toBe(0);
+  await expect(page.locator('form, textarea, input, [contenteditable="true"]')).toHaveCount(0);
+  await expect(page.locator('a[href="/seus-dados/"]')).toHaveCount(0);
+  for (const caminho of [...paginas, ...paginasGabaritos, ...paginasUc12]) {
+    await page.goto(caminho);
+    await expect(page.locator('form, textarea, input, [contenteditable="true"]'), caminho).toHaveCount(0);
+    expect(await page.evaluate(() => localStorage.length), caminho).toBe(0);
   }
 });
 
