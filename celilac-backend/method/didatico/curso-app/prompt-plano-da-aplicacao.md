@@ -7,6 +7,8 @@
 
 ## Prompt (copie daqui)
 
+> **Direção vigente do professor (2026-11-21):** a aplicação web é um guia de leitura e ação no ambiente do aluno. Não peça nem guarde respostas, dados pessoais, tentativas, declarações de leitura ou progresso. Atividades são feitas no caderno, editor, terminal, repositório e GitHub do aluno. Gabaritos podem ser exibidos sem submissão; convide a tentar primeiro fora do app e diga com clareza que não há barreira de acesso. A apresentação inicia pelo módulo 0; use uma sequência linear como mapa principal, com diagrama apenas complementar. Prefira uma página interna contextual para documentos do curso, com URL, breadcrumb, retorno por link e histórico nativo; não use iframe se prejudicar leitura. Estas instruções substituem decisões anteriores de E1/E4/E7 sobre registro local e tentativas. A matriz atual está em `auditoria-experiencia-e-artefatos.md`; a revisão funcional está ligada à issue #98.
+
 > Sessão aberta na raiz do repositório `dsc-tests`. Os caminhos deste prompt são relativos a `celilac-backend/`; `curso-app/` (código da aplicação) e `mascotes/` ficam na raiz.
 
 Você é um arquiteto de software sênior e designer instrucional. Vamos construir, **por etapas documentadas e em várias sessões**, uma aplicação web interativa para um curso universitário. Atue em português do Brasil, técnico-acadêmico.

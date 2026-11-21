@@ -59,9 +59,9 @@ export const siglas = (() => {
 })();
 
 /** Todas as páginas que a aplicação deve gerar no M1. */
-export const paginas = ['/', '/mapa/', ...percurso.map((a) => `/${a.id}/`), ...praticas.map((a) => `/${a.id}/`)];
+export const paginas = ['/', '/indice/', '/mapa/', ...percurso.map((a) => `/${a.id}/`), ...praticas.map((a) => `/${a.id}/`)];
 export const paginasUc12 = ['/uc12/', ...carregarInventarioUc12().map((item) => item.rota)];
 export const paginasGabaritos = gabaritos.map((a) => `/${a.id}/`);
-export const paginasPublicadas = [...paginas, ...paginasGabaritos, '/seus-dados/', ...paginasUc12];
+export const paginasPublicadas = [...paginas, ...paginasGabaritos, ...paginasUc12];
 
 export const tituloSimples = (t: string) => t.replace(/`/g, '');

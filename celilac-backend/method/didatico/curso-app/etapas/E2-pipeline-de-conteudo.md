@@ -1,5 +1,7 @@
 # E2 — Pipeline de conteúdo e metadados
 
+> **Direção revista (2026-11-21):** qualquer proposta anterior de enviar o Markdown do caso de uso ou preencher valores de domínio na aplicação está substituída. Esses arquivos e respostas permanecem no repositório do aluno; o app mostra instruções e modelos estáticos. Ver [estado.md](../estado.md) e issue [#98](https://github.com/evertonfoz/dsc-tests/issues/98).
+
 > Etapa E2 do plano da aplicação web do curso. Data: 2026-11-21. Situação: **aguardando validação do professor**.
 > Convenção: **[Fato]** lido no repositório (com caminho); **[Recomendação]** proposta minha; **[Suposição]** a confirmar.
 > Nenhum arquivo do curso foi alterado nesta etapa. O que precisa mudar está listado na seção 9, para a E3.

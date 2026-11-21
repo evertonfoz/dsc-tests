@@ -1,5 +1,7 @@
 # E8 — Riscos e perguntas em aberto
 
+> **Direção revista (2026-11-21):** a mitigação anterior de aluno marcar tarefas sem fazê-las por meio de progresso local não será implementada. O aplicativo não registra marcações; a atividade e suas evidências vivem no repositório do aluno. Veja [estado.md](../estado.md) e issue [#98](https://github.com/evertonfoz/dsc-tests/issues/98).
+
 > Etapa E8 do plano da aplicação web do curso. Data: 2026-11-21. Situação: **validada pelo professor em 2026-11-21** (todas as recomendações aprovadas, P1 a P8 e critérios do M7).
 > Convenção: **[Fato]** lido no repositório (com caminho) ou executado nesta sessão; **[Recomendação]** proposta minha; **[Suposição]** a confirmar.
 > Nenhum arquivo do curso nem do método foi alterado nesta etapa. Nenhuma dependência foi instalada.

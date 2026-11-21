@@ -1,5 +1,7 @@
 # E5 — Kit do repositório do aluno e integração com o GitHub
 
+> **Direção revista (2026-11-21):** o kit não pode depender de dados digitados ou enviados pelo aluno na aplicação. As rotas futuras de prática e download devem usar modelos estáticos; a personalização acontece depois, no repositório do aluno. A distinção entre `method/AGENTS.md` e o `AGENTS.md` próprio do aluno é detalhada abaixo.
+
 > Etapa E5 do plano da aplicação web do curso. Data: 2026-11-21. Situação: **validada pelo professor em 2026-11-21** (todas as recomendações aprovadas, incluindo a opção (i) da seção 6).
 > Convenção: **[Fato]** lido no repositório (com caminho) ou executado nesta sessão; **[Recomendação]** proposta minha; **[Suposição]** a confirmar.
 > Nenhum arquivo do curso nem do método foi alterado nesta etapa. A simulação da seção 6 foi feita numa cópia, fora do repositório.
@@ -76,6 +78,7 @@ A separação entre `repositorio/` e `para-voce/` evita que rascunhos e prompts 
 | `method/scripts/` (validadores e testes) | idem | Não | m02, passo 3 |
 | `method/didatico/01` a `06` | idem | Não; ver seção 6 | leitura de apoio | <!-- links:ignore -->
 | `project-profile.md` | `method/templates/project-profile.md` | **Sim**: seção 1 com `{{repositorio}}` e perfil `celilac-nest`; seção 2 com os nomes da stack do perfil e origem "perfil `celilac-nest`, confirmar no seu `package.json`"; seção 8 com `{{login}}` e `{{logins_equipe}}`; todo o resto `a confirmar` | m04, passo 2 (o aluno confirma e completa) |
+| `method/templates/AGENTS-aluno.md` | `celilac-backend/method/templates/AGENTS-aluno.md` | Não: é modelo para copiar e personalizar; não substituir `method/AGENTS.md` | m12, prática |
 | `.github/ISSUE_TEMPLATE/fatia.yml`, `fase.yml` | `.github/ISSUE_TEMPLATE/` (raiz do `dsc-tests`) | **Sim**: o exemplo "UC12 - Cadastrar Produto" do `fatia.yml` (linha 14) vira `{{uc}} - {{uc_nome}}` | Fase A |
 | `.github/pull_request_template.md` | `.github/` (raiz do `dsc-tests`) | Não | apoio A, passo 3 |
 | `docs/adr/README.md` | novo, uma frase | — | primeira ADR | <!-- links:ignore -->
@@ -148,7 +151,7 @@ As 35 referências caem em três grupos:
 **[Recomendação] (i)**, num PR pequeno, antes do marco da aplicação que gera o kit. O grupo "criado mais tarde" não precisa de marcação: o kit cria `.github/ISSUE_TEMPLATE/` e `docs/adr/`, e `scripts/verify.sh` aparece no m04. Até lá, a falha dessa única referência é esperada e o `LEIA-ME.md` avisa.
 
 ### 6.1. Outras divergências (não corrigidas)
-- **`AGENTS.md` na raiz ou em `method/`:** [Fato] a linha 4 de `method/AGENTS.md` diz "Copie-o para a **raiz** do seu repositório", mas o projeto de referência não tem `AGENTS.md` na raiz (`celilac-backend/AGENTS.md` não existe), e o orquestrador manda ler `method/AGENTS.md`. **[Recomendação]** O kit não cria cópia na raiz (duas cópias divergem com o tempo) e a frase da linha 4 é ajustada no mesmo PR da opção (i). Alguns assistentes de IA procuram `AGENTS.md` na raiz; o prompt do orquestrador já aponta o caminho, o que resolve isso. Decisão sua. <!-- links:ignore -->
+- **Dois arquivos com papéis distintos:** `method/AGENTS.md` contém as regras permanentes do método e permanece em `method/`; não se copia para a raiz. O aluno cria um `AGENTS.md` próprio na raiz a partir de `method/templates/AGENTS-aluno.md`, como instruído em M12. O modelo é incluído porque `templates/` já faz parte do kit. As regras locais do estudante são personalizadas para o projeto e não são uma segunda cópia das regras do método.
 - **`m02-pratica.md`**, "Antes de começar": "copie a pasta `method/` do repositório do curso" passa a ser "aplique o kit inicial (aplicação do curso) ou copie `method/` sem `didatico/curso/`, `didatico/curso-app/` e `exemplos/`". Entra na E3, parte 2.
 
 ## 7. Integração com o GitHub e permissões mínimas

@@ -1,6 +1,5 @@
 ---
-// Uma página por módulo, apoio, projeto final e prática (plano do M1, seção 3).
-// Gabaritos não viram página antes do M3.
+// Uma página por módulo, apoio, projeto final, prática e gabarito.
 import { render } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import Titulo from '../componentes/Titulo.astro';
@@ -27,34 +26,33 @@ const posicao = sequencia.findIndex((e) => e.dados.id === d.id);
 const anterior = posicao > 0 ? sequencia[posicao - 1] : undefined;
 const proximo = posicao >= 0 ? sequencia[posicao + 1] : undefined;
 const modulo = d.tipo === 'pratica' ? curso.get(d.pratica_de) : undefined;
-const idsAssociados = d.tipo === 'gabarito' ? d.gabarito_de : [];
 const entradaGabarito = d.tipo === 'modulo' || d.tipo === 'apoio' || d.tipo === 'projeto' ? curso.get(d.gabarito ?? '') : undefined;
-const associadosDoLink = entradaGabarito?.dados.tipo === 'gabarito' ? entradaGabarito.dados.gabarito_de.join(',') : '';
-const notaGabarito = 'Este texto foi escrito originalmente para o professor e será adaptado para autoestudo. A aplicação não avalia sua tentativa.';
+const conteudoAssociado = d.tipo === 'gabarito' ? curso.get(d.gabarito_de[0] ?? '') : undefined;
 ---
 <Base titulo={tituloSimples(d.titulo)}>
-  <div data-conteudo-id={d.id} data-gabarito={d.tipo === 'modulo' || d.tipo === 'apoio' || d.tipo === 'projeto' ? d.gabarito : undefined} data-gabarito-associados={associadosDoLink}>
+  <nav aria-label="Caminho de navegação" class="breadcrumb">
+    <a href="/">Apresentação</a> · <a href="/mapa/">Mapa dos módulos</a> · <span aria-current="page">{tituloSimples(d.titulo)}</span>
+  </nav>
   <Titulo titulo={d.titulo} />
   {d.tipo === 'gabarito' ? (
     <>
-      <section data-progresso-pagina data-tipo="gabarito" data-ids-associados={idsAssociados.join(',')} data-gabarito-pagina={d.id}>
-        <p class="aviso" role="note">{notaGabarito}</p>
-      </section>
-      <section data-corpo-gabarito hidden>
+      <p class="aviso" role="note">Este arquivo foi escrito originalmente como gabarito do professor. Considere esse contexto ao consultar a resposta.</p>
+      <details class="gabarito">
+        <summary>Mostrar o gabarito. Se quiser preservar a tentativa, faça primeiro a atividade no local indicado no módulo.</summary>
         <Ficha entrada={entrada} curso={curso} />
         <Content />
-      </section>
+      </details>
+      {conteudoAssociado && <p><a href={`/${conteudoAssociado.dados.id}/`}>Voltar ao conteúdo associado</a></p>}
     </>
   ) : (
     <>
       <Ficha entrada={entrada} curso={curso} />
       {d.tipo === 'projeto' && <Avisos />}
       {d.tipo === 'pratica' && <p class="aviso" role="note">{textos.notaDaPratica}</p>}
-      <section data-progresso-pagina data-tipo={d.tipo}></section>
       <Content />
+      {entradaGabarito?.dados.tipo === 'gabarito' && <p><a href={`/${entradaGabarito.dados.id}/`}>Ir ao gabarito, depois de tentar no local indicado</a></p>}
       {modulo && <p><a href={`/${modulo.dados.id}/`}>{textos.voltarAoModulo(tituloSimples(modulo.dados.titulo))}</a></p>}
       {posicao >= 0 && <Sequencia anterior={anterior} proximo={proximo} />}
     </>
   )}
-  </div>
 </Base>

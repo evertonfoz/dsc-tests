@@ -4,9 +4,19 @@
 
 | Campo | Valor |
 |---|---|
-| Etapa atual | **E9, M3 integrado** pelo PR [#96](https://github.com/evertonfoz/dsc-tests/pull/96), SHA `3157a7cf3f8484bfad1752d9adb8c5bcbbdd0f2a`; issue [#95](https://github.com/evertonfoz/dsc-tests/issues/95) fechada. A branch `codex/curso-app-m3` foi mantida. |
+| Etapa atual | **E9, revisão da experiência sem registros pessoais**, issue [#98](https://github.com/evertonfoz/dsc-tests/issues/98) aberta; trabalho em branch isolada sobre o `main` confirmado no SHA `546addd0d39f3315067a2fd32f79ff8b230dea24`. M3 (#96) permanece como histórico integrado, mas sua política de armazenamento foi substituída pela direção atual do professor. |
 | Última atualização | 2026-11-21 |
 | Responsável pelas decisões | o professor |
+
+## Direção vigente e divergências
+
+Em 2026-11-21, o professor determinou que o curso web deve orientar sem recolher respostas, dados pessoais, tentativas ou progresso. O aluno faz as atividades e mantém os artefatos no próprio caderno, editor, terminal, repositório e GitHub. Esta direção substitui as decisões de E1/E4/E7 sobre `localStorage`, exportação/importação, registro de tentativas/leitura e gates pessoais na interface. Não é necessário registrar progresso para consultar um gabarito.
+
+Gabaritos podem permanecer como páginas públicas com divulgação nativa e convite a tentar a atividade primeiro no local indicado. Como o site é estático, isso não é barreira de acesso. A aplicação continua sem ler o repositório do aluno.
+
+O README completo do curso fica numa rota interna (`/indice/`); a apresentação em `/` oferece objetivo, público e início no módulo 0. A sequência linear é a visão principal do mapa e o SVG é complementar. O retorno ocorre por links HTML, breadcrumb, mapa, anterior/próximo e histórico do navegador; o conteúdo não é colocado em iframe/painel lateral.
+
+As aprovações históricas de E1/E4/E7 e M3 são mantidas para rastreabilidade, mas não regem o fluxo atual quando contradizem esta decisão. A matriz e os achados confirmados ficam em [auditoria-experiencia-e-artefatos.md](auditoria-experiencia-e-artefatos.md). A issue [#99](https://github.com/evertonfoz/dsc-tests/issues/99) acompanha lacunas de conteúdo que precisam de revisão própria.
 
 ## Etapas
 | Etapa | Assunto | Situação | Documento | Validada por |
@@ -18,13 +28,15 @@
 | E4 | Modelo de dados, papéis e privacidade | concluída | [E4-modelo-de-dados-e-privacidade.md](etapas/E4-modelo-de-dados-e-privacidade.md) | professor (2026-11-21) |
 | E5 | Kit do repositório do aluno e GitHub | concluída | [E5-kit-e-github.md](etapas/E5-kit-e-github.md) | professor (2026-11-21) |
 | E6 | Verificação de evidências e limites | concluída | [E6-verificacao-de-evidencias.md](etapas/E6-verificacao-de-evidencias.md) | professor (2026-11-21) |
-| E7 | Marcos, testes e critérios de aceite | concluída | [E7-marcos-testes-e-aceite.md](etapas/E7-marcos-testes-e-aceite.md) | professor (2026-11-21) |
+| E7 | Marcos, testes e critérios de aceite | aprovações históricas concluídas; política de armazenamento e gates pessoais substituída pela direção vigente; M4–M6 aguardam revisão | [E7-marcos-testes-e-aceite.md](etapas/E7-marcos-testes-e-aceite.md) | professor (2026-11-21; direção revista nesta sessão) |
 | E8 | Riscos e perguntas em aberto | concluída | [E8-riscos-e-perguntas-em-aberto.md](etapas/E8-riscos-e-perguntas-em-aberto.md) | professor (2026-11-21) |
-| E9 | Implementação por marcos | M0, M1a, M1b, M2 e M3 integrados (PRs #87, #88, #90, #92, #94 e #96) | [E9-M0-plano.md](etapas/E9-M0-plano.md); [E9-M1-plano.md](etapas/E9-M1-plano.md); [E9-M2-plano.md](etapas/E9-M2-plano.md); [E9-M3-plano.md](etapas/E9-M3-plano.md) | M0: professor; planos M1 a M3: escopo E7/E4/E8 validado pelo professor (2026-11-21) |
+| E9 | Implementação por marcos | M0–M3 integrados (PRs #87, #88, #90, #92, #94 e #96); revisão do fluxo sem registro em andamento pela issue #98 | planos em `etapas/E9-*.md` | M0: professor; M1–M3: decisões históricas; direção revista pelo professor em 2026-11-21 |
 
 ## Decisões
 | Data | Decisão | Origem |
 |---|---|---|
+| 2026-11-21 | **Direção vigente:** não solicitar nem armazenar respostas, dados pessoais, tentativas, declarações de leitura ou progresso no app; atividades acontecem no ambiente do aluno. A tentativa antes do gabarito é uma instrução fora do app, não uma trava. A página inicial leva ao m00; sequência linear é primária; README/índice em página contextual interna com retorno nativo. | Professor, pedido desta sessão; issue [#98](https://github.com/evertonfoz/dsc-tests/issues/98) |
+| 2026-11-21 | Lacunas amplas de material (contrato de API, evidência de comando, práticas e gabaritos) seguem como revisão de conteúdo própria, issue [#99](https://github.com/evertonfoz/dsc-tests/issues/99). O template de `AGENTS.md` do aluno e sua instrução são tratados nesta revisão focada. | Auditoria baseada em conteúdo e templates do repositório |
 | 2026-11-21 | Os mascotes da pasta `mascotes/` (raiz do `dsc-tests`, fora deste projeto) podem ser usados na aplicação, em ordem aleatória e minimizando repetição. Qualquer outro conteúdo de fora de `celilac-backend/` exige pedido prévio. | Professor, na sessão de 2026-11-21 |
 | 2026-11-21 | P2: a aplicação roda localmente, a princípio. | E0 |
 | 2026-11-21 | P3: sem login, acesso aberto. | E0 |
