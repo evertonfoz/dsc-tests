@@ -2,7 +2,7 @@
 
 > Modelo de playbook. Um playbook é curto (alvo: 3 a 6 KB), descreve **uma** fase e não contém dados de nenhum projeto específico.
 > Nomes, portas, comandos e números vêm de `project-profile.md` e de `docs/uc/<uc>/state.yaml`.
-> Exemplos reais ficam em `method/exemplos/`, nunca aqui.
+> Exemplos reais (do CeliLac, no repositório do curso) ficam em `method/exemplos/`, nunca aqui. <!-- links:ignore -->
 
 | Campo | Valor |
 |---|---|

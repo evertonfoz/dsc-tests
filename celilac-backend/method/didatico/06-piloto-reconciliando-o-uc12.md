@@ -7,7 +7,7 @@
 ---
 
 ## 1. O que foi o piloto
-O UC12 já tinha sido executado no laboratório, organizado **por camada técnica** (serviço, HTTP, testes, banco). O piloto o **reconciliou** com o método: itens do UC mapeados a fatias, decisões registradas, evidências refeitas. Nada foi apagado; o que existia foi reorganizado e conferido. Tudo o que segue está no repositório: `docs/uc/uc12/state.yaml`, relatórios `A` a `F`, evidências e ADRs.
+O UC12 já tinha sido executado no laboratório, organizado **por camada técnica** (serviço, HTTP, testes, banco). O piloto o **reconciliou** com o método: itens do UC mapeados a fatias, decisões registradas, evidências refeitas. Nada foi apagado; o que existia foi reorganizado e conferido. Tudo o que segue está no repositório do curso: `docs/uc/uc12/state.yaml`, relatórios `A` a `F`, evidências e ADRs. <!-- links:ignore -->
 
 | Fase | Entrega principal | Pull requests |
 |---|---|---|
@@ -48,7 +48,7 @@ Gates **objetivos** (CI verde, `check-state --remote`) são aprovados por `CI`. 
 ## 6. O ciclo de uma fatia, em exemplo
 F06, "nome com mais de 120 caracteres é rejeitado no núcleo":
 1. Issue com teste RED nomeado.
-2. Commit **RED**: o teste falha pelo motivo certo (`docs/uc/uc12/evidencias/B/f06-red.txt`).
+2. Commit **RED**: o teste falha pelo motivo certo (`docs/uc/uc12/evidencias/B/f06-red.txt`). <!-- links:ignore -->
 3. Commit **GREEN**: o mínimo para passar (`f06-green.txt`).
 4. PR único, CI verde, integração.
 
@@ -69,8 +69,8 @@ O C1b repetiu o ciclo na fronteira HTTP e acrescentou um **REFACTOR** em commit 
 5. Qual gate do seu projeto deveria ser de `CI` e qual deveria ser de uma pessoa? Justifique.
 
 ## 9. Referências
-- `docs/uc/uc12/state.yaml` · `docs/uc/uc12/relatorios/` · `docs/uc/uc12/evidencias/F/cobertura.md` · `docs/uc/uc12/evidencias/F/auditoria.md`
-- `docs/adr/ADR-002-validacao-de-preco-adiada-uc12.md` · `docs/adr/ADR-004-contrato-de-erros-e-validacao-de-nome-uc12.md`
+- `docs/uc/uc12/state.yaml` · `docs/uc/uc12/relatorios/` · `docs/uc/uc12/evidencias/F/cobertura.md` · `docs/uc/uc12/evidencias/F/auditoria.md` (UC12 do CeliLac, no repositório do curso) <!-- links:ignore -->
+- `docs/adr/ADR-002-validacao-de-preco-adiada-uc12.md` · `docs/adr/ADR-004-contrato-de-erros-e-validacao-de-nome-uc12.md` (UC12 do CeliLac, no repositório do curso) <!-- links:ignore -->
 - `method/decisoes/ADR-004-retorno-a-fase-anterior.md`
 
 Próximo documento: **07 — Conduzindo o seu caso de uso** (orquestrador do estudante).

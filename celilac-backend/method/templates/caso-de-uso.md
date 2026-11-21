@@ -1,7 +1,7 @@
 # Modelo — documento do caso de uso
 
 > Copie para o seu repositório (por exemplo, `docs/planejamento/<uc>-<nome-curto>/<uc>.md`) e preencha. O caminho vai no campo `documento` do `state.yaml`.
-> Exemplo preenchido: `docs/planejamento/uc12-cadastrar-produto/uc-12.md` (UC12 do CeliLac).
+> Exemplo preenchido: `docs/planejamento/uc12-cadastrar-produto/uc-12.md` (UC12 do CeliLac, no repositório do curso). <!-- links:ignore -->
 > **Mantenha os identificadores no formato mostrado** (`RF01`, `RN01`, `FA01`, `FE01`, `CA01`): os playbooks, o `state.yaml` e a aplicação do curso os usam para ligar cada item ao teste que o prova.
 > Onde não souber, escreva `a confirmar`. Não invente regra: uma regra que ninguém definiu é uma **pendência**, não um requisito.
 
