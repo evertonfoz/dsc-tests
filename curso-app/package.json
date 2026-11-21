@@ -1,0 +1,25 @@
+{
+  "name": "curso-app",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Aplicação web do curso 'Implementando um caso de uso com evidência' (site estático gerado dos Markdown de celilac-backend/method/didatico/curso/).",
+  "type": "module",
+  "packageManager": "pnpm@12.8.1",
+  "engines": {
+    "node": "24.21.0"
+  },
+  "scripts": {
+    "dev": "astro dev --host 127.0.0.1 --port 4321",
+    "build": "astro build",
+    "check": "astro check",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "astro": "7.4.7"
+  },
+  "devDependencies": {
+    "@astrojs/check": "0.9.12",
+    "typescript": "6.0.3",
+    "vitest": "5.1.0"
+  }
+}

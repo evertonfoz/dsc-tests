@@ -1,0 +1,56 @@
+/* Estilos de base: tema claro e escuro pela preferência do sistema, foco visível,
+   largura mínima de 320 px sem rolagem horizontal (E7, seção 8). */
+:root {
+  --fundo: #ffffff;
+  --texto: #1b1b1f;
+  --texto-suave: #4a4a55;
+  --link: #0b57d0;
+  --borda: #c9c9d3;
+  --aviso-fundo: #fff6d6;
+  --codigo-fundo: #f3f3f6;
+  --foco: #b3261e;
+  color-scheme: light dark;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --fundo: #141418;
+    --texto: #e8e8ee;
+    --texto-suave: #b4b4c0;
+    --link: #8ab4f8;
+    --borda: #3a3a44;
+    --aviso-fundo: #3a3214;
+    --codigo-fundo: #22222a;
+    --foco: #f2b8b5;
+  }
+}
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0 auto;
+  max-width: 46rem;
+  padding: 0 1rem 2rem;
+  background: var(--fundo);
+  color: var(--texto);
+  font: 1.0625rem/1.6 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  overflow-wrap: break-word;
+}
+a { color: var(--link); }
+:focus-visible { outline: 3px solid var(--foco); outline-offset: 2px; }
+.pular { position: absolute; left: -999px; }
+.pular:focus { position: static; display: inline-block; margin-top: .5rem; }
+header { border-bottom: 1px solid var(--borda); padding: .75rem 0; }
+header .site { margin: 0; font-weight: 600; }
+nav ul { list-style: none; display: flex; flex-wrap: wrap; gap: 1rem; margin: .5rem 0 0; padding: 0; }
+nav a { display: inline-block; min-height: 24px; min-width: 24px; }
+.aviso { background: var(--aviso-fundo); border: 1px solid var(--borda); padding: .5rem .75rem; border-radius: 4px; }
+main:focus { outline: none; }
+pre { overflow-x: auto; background: var(--codigo-fundo); padding: .75rem; border-radius: 4px; }
+code { font-size: .92em; }
+table { display: block; overflow-x: auto; border-collapse: collapse; }
+th, td { border: 1px solid var(--borda); padding: .25rem .5rem; text-align: left; vertical-align: top; }
+blockquote { margin: 1rem 0; padding: 0 1rem; border-left: 4px solid var(--borda); color: var(--texto-suave); }
+img { max-width: 100%; height: auto; }
+footer { border-top: 1px solid var(--borda); margin-top: 2rem; color: var(--texto-suave); font-size: .9375rem; }
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+}

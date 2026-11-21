@@ -1,0 +1,13 @@
+---
+import { render } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import { cursoValidado } from '../conteudo/carregar';
+
+const curso = await cursoValidado();
+const m00 = curso.get('m00');
+if (!m00) throw new Error('Módulo m00 não encontrado no curso');
+const { Content } = await render(m00);
+---
+<Base titulo={m00.dados.titulo}>
+  <Content />
+</Base>

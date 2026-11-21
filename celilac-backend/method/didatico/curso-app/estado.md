@@ -4,7 +4,7 @@
 
 | Campo | Valor |
 |---|---|
-| Etapa atual | E8 concluída; **próxima: E9**, começando pelo plano do **M0** |
+| Etapa atual | **E9**, marco **M0**: implementado; PR aberto, aguardando revisão e merge do professor |
 | Última atualização | 2026-11-21 |
 | Responsável pelas decisões | o professor |
 
@@ -20,7 +20,7 @@
 | E6 | Verificação de evidências e limites | concluída | [E6-verificacao-de-evidencias.md](etapas/E6-verificacao-de-evidencias.md) | professor (2026-11-21) |
 | E7 | Marcos, testes e critérios de aceite | concluída | [E7-marcos-testes-e-aceite.md](etapas/E7-marcos-testes-e-aceite.md) | professor (2026-11-21) |
 | E8 | Riscos e perguntas em aberto | concluída | [E8-riscos-e-perguntas-em-aberto.md](etapas/E8-riscos-e-perguntas-em-aberto.md) | professor (2026-11-21) |
-| E9 | Implementação por marcos | não iniciada | | |
+| E9 | Implementação por marcos | M0: implementado, PR aberto | [E9-M0-plano.md](etapas/E9-M0-plano.md) | plano: professor (2026-11-21) |
 
 ## Decisões
 | Data | Decisão | Origem |
@@ -92,6 +92,9 @@
 | 2026-11-21 | E8: aprovados os critérios de aceite do M7 (seção 6) e as mitigações propostas R4, R14 e R19. | E8, seções 4 e 6 |
 | 2026-11-21 | Autorizados branch e PR da E8 (com o registro do PR #85). Merge **não** delegado. | Professor |
 | 2026-11-21 | **Delegação registrada:** o professor autorizou a IA a fazer o merge **só do PR #86** ("autorizo o merge do #86 com CI verde"). Condição: CI verde no último commit do PR. Apagar a branch não foi autorizado. Não vale para outros PRs nem para a sessão seguinte. | Professor |
+| 2026-11-21 | E9, M0: plano aprovado por inteiro ("aprovo tudo"): dependências e imagens base da seção 2; `check-links` no CI, não no `Dockerfile`; Playwright e axe-core a partir do M1; comparação com a linha "Pré-requisito" do corpo no plano do M1. | [Plano do M0](etapas/E9-M0-plano.md) |
+| 2026-11-21 | Autorizados instalar as dependências do M0, baixar as imagens base, e abrir branch e PR do M0. Merge **não** delegado. | Professor |
+| 2026-11-21 | **Delegação registrada:** o professor autorizou a IA a fazer o merge **só do PR #87** ("autorizo o merge do #87 com CI verde"). Condição: CI verde no último commit do PR. Apagar a branch não foi autorizado. Não vale para outros PRs nem para a sessão seguinte. | Professor |
 
 ## Requisitos acrescentados pelo professor
 | Data | Requisito | Etapas afetadas |
@@ -133,7 +136,12 @@
 
 - **Impacto da E8 sobre etapas anteriores:** a P1 muda o exemplo de formato da E4, seção 3.2 (checklist), sem invalidar a E4; a P3 acrescenta a data ao rodapé do M0 e a P7 um critério ao M1 (E7, seção 4.1). Nenhuma etapa invalidada.
 
-**Decisão para a próxima sessão:** seguir o protocolo, **uma etapa por vez**. A E8 foi validada; começa a **E9** pelo plano do **M0**, que pede autorização para instalar dependências.
+- **Divergência registrada na E9 (2026-11-21):** este arquivo deixava "data e commit de merge a registrar" para o PR #86. Conferido com `gh pr view 86`: `MERGED` em 2026-11-21T14:20:54Z, commit de merge `7cb1515`, cabeça `3cae453`; `gh pr checks 86`: os quatro trabalhos com `pass` (execução 44913241318). `git ls-remote`: a branch `docs/curso-app-e8-riscos` **não** foi apagada. <!-- links:ignore -->
+- **Proposta do plano do M0 (aprovada em 2026-11-21):** `check-links` no CI da aplicação, e não dentro do `Dockerfile` como diz a E7, seção 6 (motivo no [plano do M0](etapas/E9-M0-plano.md), seção 6); Playwright e axe-core só a partir do M1; comparação do front matter com a linha "Pré-requisito" do corpo (E2, seção 3) adiada para o plano do M1.
+- **Achado do plano do M0:** o `@astrojs/check` 0.9.12 aceita só `typescript` 5 ou 6; o plano fixa a 6.0.3.
+- **Achado da implementação do M0 (para o M1):** o realce de código do Astro (Shiki) usa atributos `style=""`, bloqueados pela política de segurança do servidor; no M0 o realce está desligado. Decidir no plano do M1 (realce por classes CSS ou sem realce). Registro completo no [plano do M0](etapas/E9-M0-plano.md), seção 10.
+
+**Decisão para a próxima sessão:** seguir o protocolo, **uma etapa por vez**. M0 implementado e em PR; depois do merge, registrar data e commit e começar o plano do **M1**.
 
 ## Histórico de sessões
 | Data | Etapa | O que foi feito | PR ou documento |
@@ -171,4 +179,7 @@
 | 2026-11-21 | E7 | Professor delegou o merge só do PR #85, com CI verde; merge feito pela IA depois do CI verde no último commit do PR: integrado em 2026-11-21T13:37:21Z (commit de merge `ebac83b`), CI verde em `1e5973a` (registro feito na sessão da E8, conferido com `gh pr view 85` e `gh pr checks 85`); branch mantida | [#85](https://github.com/evertonfoz/dsc-tests/pull/85) |
 | 2026-11-21 | E8 | Sete formas de divergência de conteúdo (achado: checklist chaveado pela posição); "feito sem fazer" com seis mitigações; 22 outros riscos consolidados; perguntas P1 a P8; critérios do M7; achado do repositório público sem licença | [E8](etapas/E8-riscos-e-perguntas-em-aberto.md) (sem PR) |
 | 2026-11-21 | E8 | Professor aprovou todas as recomendações (P1 a P8, critérios do M7); E8 encerrada; autorizados branch e PR da E8 | [#86](https://github.com/evertonfoz/dsc-tests/pull/86) |
-| 2026-11-21 | E8 | Professor delegou o merge só do PR #86, com CI verde; merge feito pela IA depois do CI verde no último commit do PR (data e commit de merge a registrar na sessão seguinte, conferidos com `gh pr view 86`) | [#86](https://github.com/evertonfoz/dsc-tests/pull/86) |
+| 2026-11-21 | E8 | Professor delegou o merge só do PR #86, com CI verde; merge feito depois do CI verde no último commit do PR: integrado em 2026-11-21T14:20:54Z (commit de merge `7cb1515`), CI verde em `3cae453` (registro feito na sessão da E9, conferido com `gh pr view 86` e `gh pr checks 86`); branch mantida | [#86](https://github.com/evertonfoz/dsc-tests/pull/86) |
+| 2026-11-21 | E9 (M0) | Plano do M0: dependências com versões exatas consultadas (Astro 7.4.7, `@astrojs/check` 0.9.12, TypeScript 6.0.3, Vitest 5.1.0; imagens `node:24.21.0-alpine` e `nginx-unprivileged:1.31-alpine`), validação do front matter, imagem em dois estágios, comando único, CI, testes por critério. Nada instalado | [E9-M0-plano.md](etapas/E9-M0-plano.md) (sem PR) |
+| 2026-11-21 | E9 (M0) | Plano aprovado; dependências instaladas; esqueleto Astro, validador do front matter (19 testes), `Dockerfile` em dois estágios, scripts de construir, executar e testar, CI próprio. Critérios 1 a 4 executados localmente com sucesso; critério 5 no CI do PR | branch `feat/curso-app-m0`, PR do M0 (merge não delegado) |
+| 2026-11-21 | E9 (M0) | CI do PR #87 verde em `d101c6f` (seis trabalhos com `pass`, conferidos com `gh pr checks 87`; log do trabalho de imagem com os critérios 1 a 4 em `OK`); professor delegou o merge só do PR #87, com CI verde; merge feito depois do CI verde no último commit do PR (data e commit de merge a registrar na sessão seguinte) | [#87](https://github.com/evertonfoz/dsc-tests/pull/87) |

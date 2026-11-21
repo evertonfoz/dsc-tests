@@ -1,0 +1,80 @@
+# CI da aplicação do curso (curso-app/), plano do M0, seção 6.
+# Constrói e testa a imagem; NÃO publica nada (sem login em registro, sem push).
+name: curso-app CI
+
+on:
+  pull_request:
+    paths:
+      - 'curso-app/**'
+      - 'celilac-backend/method/**'
+      - 'celilac-backend/docs/uc/uc12/**'
+      - 'mascotes/web/**'
+      - '.github/workflows/curso-app-ci.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'curso-app/**'
+      - 'celilac-backend/method/**'
+      - 'celilac-backend/docs/uc/uc12/**'
+      - 'mascotes/web/**'
+      - '.github/workflows/curso-app-ci.yml'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: curso-app-ci-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  NODE_VERSION: '24.21.0'
+  PNPM_VERSION: '12.8.1'
+  ASTRO_TELEMETRY_DISABLED: '1'
+
+jobs:
+  quality:
+    name: Qualidade (tipos, testes, construção, links, auditoria)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    defaults:
+      run:
+        working-directory: curso-app
+    steps:
+      - uses: actions/checkout@v7
+      - uses: pnpm/action-setup@v6.1.1
+        with:
+          version: ${{ env.PNPM_VERSION }}
+      - uses: actions/setup-node@v7
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: pnpm
+          cache-dependency-path: curso-app/pnpm-lock.yaml
+      - name: Instalar dependências (lockfile congelado)
+        run: pnpm install --frozen-lockfile
+      - name: Verificação de tipos
+        run: pnpm check
+      - name: Testes de unidade
+        run: pnpm test
+      - name: Construção do site (valida o front matter do curso)
+        run: |
+          export ORIGEM_COMMIT="$(git rev-parse HEAD)"
+          export ORIGEM_DATA="$(git show -s --format=%cI HEAD)"
+          pnpm build
+      - name: Links e caminhos citados no método e no UC12
+        working-directory: celilac-backend
+        run: node method/scripts/check-links.mjs method docs/uc
+      - name: Auditoria de dependências (falha só em severidade alta ou crítica)
+        run: pnpm audit --audit-level high
+
+  image:
+    name: Imagem (construção, fumaça, construção negativa)
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7
+      - name: Construir a imagem com o commit do PR
+        run: curso-app/scripts/construir.sh
+      - name: Testes da imagem (critérios 2, 3 e 4)
+        run: curso-app/scripts/testar-imagem.sh "$(git rev-parse HEAD)"
+      - name: Construção negativa (critério 1)
+        run: curso-app/scripts/testar-construcao-negativa.sh
