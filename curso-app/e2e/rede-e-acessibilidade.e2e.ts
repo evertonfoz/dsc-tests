@@ -1,9 +1,9 @@
 // Critérios 4 e 7 do M1 e a largura de celular (plano do M1, seção 11).
 import AxeBuilder from '@axe-core/playwright';
 import { expect, test } from '@playwright/test';
-import { paginas } from './curso';
+import { paginasPublicadas } from './curso';
 
-for (const caminho of paginas) {
+for (const caminho of paginasPublicadas) {
   test(`(4) ${caminho}: nenhuma requisição a outro endereço e nenhuma violação da política de segurança`, async ({ page, baseURL }) => {
     const origem = new URL(baseURL!).origin;
     const fora: string[] = [];
