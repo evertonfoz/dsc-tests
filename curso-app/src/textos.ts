@@ -5,6 +5,7 @@ export const textos = {
   navegacao: 'Navegação principal',
   linkIndice: 'Índice do curso',
   linkMapa: 'Mapa dos módulos',
+  linkUc12: 'Caso real UC12',
   avisoEmConstrucao:
     'Versão em construção: dá para ler o curso inteiro. Ainda não há registro de progresso, gabaritos, prática guiada com os dados do seu projeto nem o kit inicial; eles chegam nas próximas versões.',
   rodapeOrigem: (commitCurto: string, data: string) => `Conteúdo do commit ${commitCurto} (${data}).`,
@@ -52,4 +53,20 @@ export const textos = {
   // Conversão do conteúdo.
   rotuloDaTabela: (n: number) => `Tabela ${n} (role para os lados se não couber)`,
   abreNoGithub: 'abre no GitHub, fora desta aplicação',
+
+  // UC12 navegável (M2, E7).
+  uc12Titulo: 'UC12 — Cadastrar Produto',
+  uc12Resumo: 'Registro do caso de uso de referência do curso. Os relatórios preservam o momento de cada fase; o estado atual está no arquivo',
+  uc12Documentos: 'Documentos principais',
+  uc12RelatoriosEvidencias: 'Relatórios e evidências por fase',
+  uc12DocumentosNav: 'Documentos do UC12',
+  uc12Navegacao: 'Navegação do UC12',
+  uc12ModulosH: 'Módulos relacionados',
+  uc12Home: 'UC12 — Cadastrar Produto',
+  uc12Estado: 'Estado atual',
+  uc12ArquivosDoEstado: 'Arquivos citados no estado do UC12',
+  uc12ArquivosTitulo: 'Arquivos deste estado',
+  uc12ModulosRelacionados: 'Módulos que citam este arquivo',
+  uc12Arquivo: 'Arquivo',
+  uc12Fase: 'Fase',
 } as const;

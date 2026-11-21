@@ -1,0 +1,37 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import { carregarInventarioUc12 } from '../../conteudo/uc12';
+import { textos } from '../../textos';
+
+const inventario = carregarInventarioUc12();
+const titulo = textos.uc12Titulo;
+const porFase = [...new Set(inventario.filter((item) => item.fase).map((item) => item.fase!))];
+const referencias = await getCollection('curso');
+const modulos = referencias.filter((pagina) => ['modulo', 'apoio', 'projeto'].includes(pagina.data.tipo));
+---
+<Base titulo={titulo}>
+  <h1>{titulo}</h1>
+  <p>{textos.uc12Resumo} <a href="/uc12/state/">state.yaml</a>.</p>
+  <nav aria-label={textos.uc12DocumentosNav}>
+    <h2>{textos.uc12Documentos}</h2>
+    <ul>
+      {inventario.filter((item) => ['estado', 'contrato', 'documento'].includes(item.categoria)).map((item) => <li><a href={item.rota}>{item.titulo}</a></li>)}
+    </ul>
+    <h2>{textos.uc12RelatoriosEvidencias}</h2>
+    {porFase.map((fase) => (
+      <section>
+        <h3>{textos.uc12Fase} {fase}</h3>
+        <ul>
+          {inventario.filter((item) => item.fase === fase).map((item) => <li><a href={item.rota}>{item.titulo}</a></li>)}
+        </ul>
+      </section>
+    ))}
+  </nav>
+  <section>
+    <h2>{textos.uc12ModulosH}</h2>
+    <ul>
+      {modulos.filter((pagina) => (pagina.body ?? '').includes('docs/uc/uc12/')).map((pagina) => <li><a href={`/${pagina.data.id}/`}>{pagina.data.titulo}</a></li>)}
+    </ul>
+  </section>
+</Base>

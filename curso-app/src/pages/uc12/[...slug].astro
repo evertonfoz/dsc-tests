@@ -1,0 +1,51 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import { carregarInventarioUc12, conteudoTextoUc12, modulosQueCitam } from '../../conteudo/uc12';
+import type { PaginaDeCursoUc12 } from '../../conteudo/uc12';
+import { textos } from '../../textos';
+
+const inventario = carregarInventarioUc12();
+const curso = await getCollection('curso');
+const paginasCurso = curso.map((pagina) => ({ dados: pagina.data as PaginaDeCursoUc12['dados'], body: pagina.body }));
+
+export function getStaticPaths() {
+  return carregarInventarioUc12().map((item) => ({
+    params: { slug: item.rota.replace(/^\/uc12\//, '').replace(/\/$/, '') },
+    props: { arquivo: item.arquivo },
+  }));
+}
+
+const { arquivo } = Astro.props as { arquivo: string };
+const item = inventario.find((entrada) => entrada.arquivo === arquivo);
+if (!item) throw new Error(`rota UC12 sem item do inventário: ${arquivo}`);
+const markdown = item.idMarkdown
+  ? await getCollection('uc12').then((itens) => itens.find((entrada) => entrada.id === item.idMarkdown))
+  : undefined;
+if (item.formato === 'markdown' && !markdown) throw new Error(`Markdown do inventário não carregado: ${item.arquivo}`);
+const { Content } = markdown ? await render(markdown) : { Content: undefined };
+const textoFonte = item.formato === 'yaml' || item.formato === 'texto' ? conteudoTextoUc12(item.arquivo) : undefined;
+const relacionados = modulosQueCitam(item.arquivo, paginasCurso, inventario);
+---
+<Base titulo={item.titulo}>
+  <nav aria-label={textos.uc12Navegacao}>
+    <a href="/uc12/">{textos.uc12Home}</a> · <a href="/uc12/state/">{textos.uc12Estado}</a>
+  </nav>
+  <h1>{item.titulo}</h1>
+  <p class="origem">{textos.uc12Arquivo}: <code>{item.arquivo}</code>{item.fase && ` · ${textos.uc12Fase} ${item.fase}`}</p>
+  {textoFonte !== undefined ? (
+    <pre class="fonte" tabindex="0" aria-label={`Conteúdo de ${item.arquivo}`}><code>{textoFonte}</code></pre>
+  ) : Content ? <Content /> : null}
+  {item.categoria === 'estado' && (
+    <nav class="indice-uc12" aria-label={textos.uc12ArquivosDoEstado}>
+      <h2>{textos.uc12ArquivosTitulo}</h2>
+      <ul>{inventario.filter((entrada) => entrada.arquivo !== item.arquivo).map((entrada) => <li><a href={entrada.rota}>{entrada.titulo}</a></li>)}</ul>
+    </nav>
+  )}
+  {relacionados.length > 0 && (
+    <nav aria-label={textos.uc12ModulosRelacionados}>
+      <h2>{textos.uc12ModulosRelacionados}</h2>
+      <ul>{relacionados.map((pagina) => <li><a href={pagina.rota}>{pagina.titulo}</a></li>)}</ul>
+    </nav>
+  )}
+</Base>

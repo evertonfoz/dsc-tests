@@ -4,6 +4,8 @@
 export interface ContextoDeReferencias {
   /** Nome de arquivo do curso → rota da página (só arquivos que viram página, mais README.md → "/"). */
   paginas: ReadonlyMap<string, string>;
+  /** Arquivo-fonte citado no material → rota interna do UC12 (M2). */
+  uc12Paginas?: ReadonlyMap<string, string>;
   /** Commit de origem; sem ele, nenhum link para o GitHub é gerado. */
   commit?: string | undefined;
   /** "dono/repositório" no GitHub. */
@@ -16,7 +18,7 @@ export type Alvo = { tipo: 'interno'; href: string } | { tipo: 'github'; href: s
 
 /** Raízes do projeto de referência cujos arquivos viram link para o GitHub (decisão 3 do plano do M1). */
 const RAIZES_GITHUB = /^(method|docs|src|test)\//;
-/** O UC12 ganha páginas próprias no M2; até lá, texto. */
+/** Referências UC12 sem página (por exemplo, artefatos do laboratório) não viram link para GitHub. */
 const UC12 = /^docs\/uc\/uc12\//;
 /** Comando, modelo ou expressão: nunca é caminho. */
 const NAO_E_CAMINHO = /[\s<>{}*$|;&=()]/;
@@ -27,6 +29,13 @@ export function resolverReferencia(texto: string, ctx: ContextoDeReferencias): A
 
   const pagina = ctx.paginas.get(t);
   if (pagina) return { tipo: 'interno', href: pagina };
+
+  const paginaUc12 = ctx.uc12Paginas?.get(t);
+  if (paginaUc12) return { tipo: 'interno', href: paginaUc12 };
+
+  // O conteúdo UC12 só pode ligar para rotas do inventário. Nunca deixar um caminho não mapeado
+  // cair no link externo do GitHub ou concatenar texto do Markdown diretamente a uma URL.
+  if (UC12.test(t)) return null;
 
   if (!ctx.commit || !RAIZES_GITHUB.test(t) || UC12.test(t)) return null;
   const linhas = t.match(/:(\d+)(?:-(\d+))?$/);

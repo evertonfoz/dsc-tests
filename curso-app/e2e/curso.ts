@@ -1,6 +1,7 @@
 // O que os testes esperam, lido direto dos Markdown do curso (fonte única), sem passar pela aplicação.
 import { readFileSync, readdirSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
+import { carregarInventarioUc12 } from '../src/conteudo/uc12';
 
 const pasta = fileURLToPath(new URL('../../celilac-backend/method/didatico/curso/', import.meta.url));
 
@@ -59,5 +60,7 @@ export const siglas = (() => {
 
 /** Todas as páginas que a aplicação deve gerar no M1. */
 export const paginas = ['/', '/mapa/', ...percurso.map((a) => `/${a.id}/`), ...praticas.map((a) => `/${a.id}/`)];
+export const paginasUc12 = ['/uc12/', ...carregarInventarioUc12().map((item) => item.rota)];
+export const paginasPublicadas = [...paginas, ...paginasUc12];
 
 export const tituloSimples = (t: string) => t.replace(/`/g, '');

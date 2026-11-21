@@ -4,7 +4,7 @@
 
 | Campo | Valor |
 |---|---|
-| Etapa atual | **E9**, marco **M1**: plano aprovado; **M1a** integrado pelo PR [#88](https://github.com/evertonfoz/dsc-tests/pull/88); M1b implementado na branch `feat/curso-app-m1b`; PR [#90](https://github.com/evertonfoz/dsc-tests/pull/90) aberto; CI verde no commit `a288c18` (seis checks) |
+| Etapa atual | **E9**, marco **M2**: validação local concluída; PR [#92](https://github.com/evertonfoz/dsc-tests/pull/92) aberto, CI remoto pendente; branch `codex/curso-app-m2` mantida; merge não autorizado |
 | Última atualização | 2026-11-21 |
 | Responsável pelas decisões | o professor |
 
@@ -20,7 +20,7 @@
 | E6 | Verificação de evidências e limites | concluída | [E6-verificacao-de-evidencias.md](etapas/E6-verificacao-de-evidencias.md) | professor (2026-11-21) |
 | E7 | Marcos, testes e critérios de aceite | concluída | [E7-marcos-testes-e-aceite.md](etapas/E7-marcos-testes-e-aceite.md) | professor (2026-11-21) |
 | E8 | Riscos e perguntas em aberto | concluída | [E8-riscos-e-perguntas-em-aberto.md](etapas/E8-riscos-e-perguntas-em-aberto.md) | professor (2026-11-21) |
-| E9 | Implementação por marcos | M0 e M1a integrados (PRs #87 e #88); M1b: implementação concluída, PR em preparação | [E9-M0-plano.md](etapas/E9-M0-plano.md); [E9-M1-plano.md](etapas/E9-M1-plano.md) | M0: professor (2026-11-21); plano do M1: professor (2026-11-21) |
+| E9 | Implementação por marcos | M0, M1a e M1b integrados (PRs #87, #88 e #90); M2 em revisão no PR #92 | [E9-M0-plano.md](etapas/E9-M0-plano.md); [E9-M1-plano.md](etapas/E9-M1-plano.md); [E9-M2-plano.md](etapas/E9-M2-plano.md) | M0: professor (2026-11-21); planos do M1 e M2: professor (2026-11-21) |
 
 ## Decisões
 | Data | Decisão | Origem |
@@ -204,3 +204,6 @@
 | 2026-11-21 | E9 (M1a) | PR #88 integrado após conferência do CI verde no último commit; merge `26a88f5`, cabeça `3975d87`, seis trabalhos com `pass`. PR #89 aberto, com seis checks verdes; merge não delegado. | [#88](https://github.com/evertonfoz/dsc-tests/pull/88); [#89](https://github.com/evertonfoz/dsc-tests/pull/89) |
 
 | 2026-11-21 | E9 (M1b) | Implementados glossário interativo de siglas, mapa SVG acessível e mascotes com sorteio determinístico; sem alterações aos arquivos do curso ou dependências novas. `pnpm test` (50 testes), `pnpm check`, `pnpm build` (21 páginas), `pnpm audit --audit-level high`, construção Docker sem cache, testes da imagem, construção negativa, conferência de commits e Playwright contra a imagem (124 passaram, 22 ignorados). Avisos de siglas fora do quadro, incluindo `IP` em `m06-gabarito.md`, registrados acima. VoiceOver/leitor real e zoom de 200% não foram verificados manualmente. | [#90](https://github.com/evertonfoz/dsc-tests/pull/90), cabeça `798534e` (merge não delegado) |
+
+| 2026-11-21 | E9 (M1b) | PR #90 integrado no commit `9c71fcba21e009f8bc10d6879b75f421cce6d1e6`; seis checks verdes no commit `721b5bcd5427aee8a24a00fcaeeaad2a68423ec6`; branch `feat/curso-app-m1b` mantida. | [#90](https://github.com/evertonfoz/dsc-tests/pull/90) |
+| 2026-11-21 | E9 (M2) | Implementadas as páginas dos 36 destinos do `state.yaml`, referências curso↔UC12 e controles de caminhos/texto. Validação local executada: `pnpm install --frozen-lockfile`, `pnpm check` (0 erros/avisos), `pnpm test` (55), `pnpm build` (58 páginas), imagem, construção negativa, Playwright/axe-core (315 passaram, 59 ignorados pela matriz), conferência de commits, links (90 documentos/415 referências) e auditoria sem vulnerabilidades altas/críticas. Foi necessário corrigir as páginas Astro, a resolução da raiz no build e declarar `@types/node`; o teste do inventário foi ajustado de 39 para 36 destinos existentes. PR #92 aberto; checks remotos pendentes. Demonstração UC12 passou no navegador; VoiceOver e zoom manual não executados. | Branch `codex/curso-app-m2`, commits `a20b5e0` e `ee02023`; [#92](https://github.com/evertonfoz/dsc-tests/pull/92), issue [#91](https://github.com/evertonfoz/dsc-tests/issues/91) |

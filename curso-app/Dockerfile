@@ -14,6 +14,7 @@ COPY curso-app/package.json curso-app/pnpm-lock.yaml curso-app/pnpm-workspace.ya
 RUN pnpm install --frozen-lockfile
 COPY celilac-backend/method/didatico/curso/ /repo/celilac-backend/method/didatico/curso/
 COPY mascotes/web/ /repo/curso-app/public/mascotes/
+COPY celilac-backend/docs/ /repo/celilac-backend/docs/
 COPY curso-app/ ./
 
 # Commit e data de origem do conteúdo: obrigatórios; o rodapé nunca fica sem origem.

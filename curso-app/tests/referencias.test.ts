@@ -43,8 +43,10 @@ describe('resolverReferencia', () => {
     expect(resolverReferencia('src/app.module.ts:10-20', ctx)?.href).toBe('https://github.com/dono/repo/blob/f6205a2/projeto/src/app.module.ts#L10-L20');
   });
 
-  it('UC12 fica como texto até o M2', () => {
-    expect(resolverReferencia('docs/uc/uc12/state.yaml', ctx)).toBeNull();
+  it('UC12 vira link interno só quando o arquivo pertence ao inventário', () => {
+    const comUc12 = { ...ctx, uc12Paginas: new Map([['docs/uc/uc12/state.yaml', '/uc12/state/']]) };
+    expect(resolverReferencia('docs/uc/uc12/state.yaml', comUc12)).toEqual({ tipo: 'interno', href: '/uc12/state/' });
+    expect(resolverReferencia('docs/uc/uc12/segredo.txt', comUc12)).toBeNull();
   });
 
   it('diretório, nome solto, modelo e comando ficam como texto', () => {
