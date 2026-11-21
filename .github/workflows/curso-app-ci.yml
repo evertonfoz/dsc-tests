@@ -1,4 +1,4 @@
-# CI da aplicação do curso (curso-app/), plano do M0, seção 6.
+# CI da aplicação do curso (curso-app/), planos do M0 (seção 6) e do M1 (seção 10).
 # Constrói e testa a imagem; NÃO publica nada (sem login em registro, sem push).
 name: curso-app CI
 
@@ -41,6 +41,9 @@ jobs:
         working-directory: curso-app
     steps:
       - uses: actions/checkout@v7
+        with:
+          # Histórico inteiro: a conferência dos commits citados no curso precisa dele (E8, P7).
+          fetch-depth: 0
       - uses: pnpm/action-setup@v6.1.1
         with:
           version: ${{ env.PNPM_VERSION }}
@@ -60,6 +63,11 @@ jobs:
           export ORIGEM_COMMIT="$(git rev-parse HEAD)"
           export ORIGEM_DATA="$(git show -s --format=%cI HEAD)"
           pnpm build
+      - name: Commits citados no curso existem (E8, P7)
+        working-directory: .
+        run: |
+          node curso-app/scripts/conferir-commits.mjs
+          curso-app/scripts/testar-conferir-commits.sh
       - name: Links e caminhos citados no método e no UC12
         working-directory: celilac-backend
         run: node method/scripts/check-links.mjs method docs/uc
@@ -69,12 +77,29 @@ jobs:
   image:
     name: Imagem (construção, fumaça, construção negativa)
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 25
     steps:
       - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - uses: pnpm/action-setup@v6.1.1
+        with:
+          version: ${{ env.PNPM_VERSION }}
+      - uses: actions/setup-node@v7
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: pnpm
+          cache-dependency-path: curso-app/pnpm-lock.yaml
       - name: Construir a imagem com o commit do PR
         run: curso-app/scripts/construir.sh
       - name: Testes da imagem (critérios 2, 3 e 4)
         run: curso-app/scripts/testar-imagem.sh "$(git rev-parse HEAD)"
-      - name: Construção negativa (critério 1)
+      - name: Construção negativa (M0, critério 1; M1, linha "Pré-requisito")
         run: curso-app/scripts/testar-construcao-negativa.sh
+      - name: Instalar dependências e o Chromium do Playwright
+        working-directory: curso-app
+        run: |
+          pnpm install --frozen-lockfile
+          pnpm exec playwright install --with-deps chromium
+      - name: Testes no navegador contra a imagem (M1, critérios 1, 4, 5, 6 e 7)
+        run: curso-app/scripts/testar-navegador.sh
