@@ -3,18 +3,46 @@
 Aplicação interativa que conduz o aluno pelo curso "Implementando um caso de uso com evidência" e o ajuda a produzir, no **seu** repositório, os mesmos artefatos e evidências do UC12 do CeliLac.
 
 ## Situação
-**Em planejamento.** Ainda não há código: a implementação só começa na etapa E9, depois que o plano (etapas E0 a E8) for validado pelo professor.
+**Marco M0 (esqueleto e esteira).** Há só duas páginas: o índice do curso e o módulo 0. Os links para outros arquivos do curso ainda não funcionam na aplicação (chegam no M1).
 
 - Prompt e etapas do plano: `celilac-backend/method/didatico/curso-app/prompt-plano-da-aplicacao.md`
 - Estado do trabalho: `celilac-backend/method/didatico/curso-app/estado.md`
-- Documentos de cada etapa: `celilac-backend/method/didatico/curso-app/etapas/`
+- Plano deste marco: `celilac-backend/method/didatico/curso-app/etapas/E9-M0-plano.md`
+
+## Como construir e executar
+Requisitos: Docker e o repositório `dsc-tests` clonado (enquanto a imagem não for publicada).
+
+```bash
+curso-app/scripts/construir.sh   # constrói a imagem curso-app:local com o commit atual
+curso-app/scripts/executar.sh    # abre em http://127.0.0.1:4321
+```
+
+- Use sempre esse endereço: o progresso (a partir do M3) fica guardado no navegador **por endereço**; outra porta é outro progresso.
+- O rodapé mostra o commit e a data do conteúdo. Se houver mudanças não commitadas, `construir.sh` avisa.
+- A construção **falha** se o front matter de algum arquivo do curso não estiver conforme, com a mensagem do arquivo e do campo.
+
+## Como desenvolver
+Node 24.21.0 e pnpm 12.8.1.
+
+```bash
+cd curso-app
+pnpm install --frozen-lockfile
+pnpm dev     # servidor de desenvolvimento em http://127.0.0.1:4321 (rodapé "a confirmar")
+pnpm test    # testes de unidade (Vitest)
+pnpm check   # verificação de tipos
+```
+
+Testes da imagem (os mesmos do CI, `.github/workflows/curso-app-ci.yml`):
+
+```bash
+curso-app/scripts/testar-imagem.sh "$(git rev-parse HEAD)"
+curso-app/scripts/testar-construcao-negativa.sh
+```
 
 ## Decisões já tomadas
 - Projeto próprio, nesta pasta, na raiz do repositório `dsc-tests`.
 - Execução **local**, na máquina de quem usa, a partir de uma **imagem Docker** (publicação na internet prevista para o futuro).
-- O conteúdo é embutido na imagem quando ela é construída, e a aplicação mostra o commit de origem.
-- A aplicação **nunca lê** o repositório do aluno. O kit inicial é entregue como `.zip`, e o progresso fica no navegador.
-- Sem login: acesso aberto.
-- Curso **autônomo**: sem área do professor; o aluno registra o progresso só para si.
-- As atividades acontecem no repositório do aluno; os gabaritos são exibidos como uma etapa do curso.
-- Conteúdo lido dos Markdown de `celilac-backend/` (fonte única) e mascotes de `mascotes/`.
+- Site estático gerado com Astro na construção da imagem e servido por nginx sem privilégios; a imagem final não tem Node.
+- A aplicação não acessa a internet nem **lê** o repositório do aluno. O kit inicial será entregue como `.zip`, e o progresso fica no navegador.
+- Sem login: acesso aberto. Curso **autônomo**: sem área do professor.
+- Conteúdo lido dos Markdown de `celilac-backend/method/didatico/curso/` (fonte única) e mascotes de `mascotes/web/`.
