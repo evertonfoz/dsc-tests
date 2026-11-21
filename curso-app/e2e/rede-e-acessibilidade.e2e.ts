@@ -29,6 +29,10 @@ for (const caminho of paginasPublicadas) {
   test(`celular: ${caminho} não rola na horizontal a 320 pixels`, async ({ page }, info) => {
     test.skip(info.project.name !== 'celular', 'só na largura de celular');
     await page.goto(caminho);
+    if (caminho === '/mapa/') {
+      const colunas = await page.locator('.mapa dl').first().evaluate((el) => getComputedStyle(el).gridTemplateColumns.split(' ').length);
+      expect(colunas, 'os rótulos do mapa ficam empilhados em tela estreita').toBe(1);
+    }
     // Compara com a largura configurada, não com innerWidth: no celular, conteúdo largo demais faz o
     // navegador alargar a janela de layout, e innerWidth cresce junto (o teste passaria sem dever).
     const largura = page.viewportSize()!.width;
@@ -37,3 +41,61 @@ for (const caminho of paginasPublicadas) {
     expect(medidas.conteudo).toBeLessThanOrEqual(largura);
   });
 }
+
+test('a área de conteúdo ocupa 90% da viewport sem rolagem horizontal', async ({ page }) => {
+  for (const largura of [320, 768, 1280, 1920]) {
+    await page.setViewportSize({ width: largura, height: 900 });
+    await page.goto('/uc12/state/');
+    const medidas = await page.evaluate(() => {
+      const corpo = document.body.getBoundingClientRect();
+      return {
+        viewport: document.documentElement.clientWidth,
+        pagina: document.documentElement.scrollWidth,
+        larguraCorpo: corpo.width,
+      };
+    });
+    expect(medidas.larguraCorpo, `${largura}px`).toBeCloseTo(largura * 0.9, 0);
+    expect(medidas.pagina, `${largura}px`).toBeLessThanOrEqual(medidas.viewport);
+  }
+});
+
+test('tabelas e código extensos rolam dentro do próprio bloco a 320 px', async ({ page }) => {
+  await page.setViewportSize({ width: 320, height: 800 });
+  for (const [caminho, seletor] of [['/m02-pratica/', '.tabela'], ['/uc12/state/', 'pre']]) {
+    await page.goto(caminho);
+    const bloco = page.locator(seletor).first();
+    await expect(bloco, `${caminho} ${seletor}`).toBeVisible();
+    const medidas = await bloco.evaluate((el) => ({
+      overflowX: getComputedStyle(el).overflowX,
+      larguraVisivel: el.clientWidth,
+      larguraDoConteudo: el.scrollWidth,
+    }));
+    expect(medidas.overflowX).toBe('auto');
+    expect(medidas.larguraDoConteudo).toBeGreaterThan(medidas.larguraVisivel);
+  }
+  const pagina = await page.evaluate(() => document.documentElement.scrollWidth);
+  expect(pagina).toBeLessThanOrEqual(320);
+});
+
+test('referências do GitHub abrem em nova guia e as internas permanecem na atual', async ({ page, context }) => {
+  await page.goto('/m02/');
+  const externo = page.locator('a.externo').first();
+  await expect(externo).toHaveAttribute('target', '_blank');
+  await expect(externo).toHaveAttribute('rel', /noopener/);
+  await expect(externo).toHaveAttribute('rel', /noreferrer/);
+  await expect(externo).toContainText('abre em nova guia no GitHub');
+  const hrefExterno = await externo.getAttribute('href');
+  await context.route('https://github.com/**', (route) => route.fulfill({ status: 200, body: 'GitHub interceptado pelo teste' }));
+  const popupPromise = page.waitForEvent('popup');
+  await externo.click();
+  const popup = await popupPromise;
+  await expect(popup).toHaveURL(hrefExterno!);
+  await expect(page).toHaveURL(/\/m02\/$/);
+
+  const interno = page.locator('a.ref[href^="/"]').first();
+  const hrefInterno = await interno.getAttribute('href');
+  const guiasAntes = context.pages().length;
+  await interno.click();
+  await expect(page).toHaveURL(new RegExp(`${hrefInterno!.replaceAll('/', '\\/')}$`));
+  expect(context.pages()).toHaveLength(guiasAntes);
+});

@@ -196,7 +196,7 @@ export function pluginDeConversao(ref: ContextoDeReferencias, textos: TextosDaCo
             ctx.replaceNode(no, {
               type: 'element',
               tagName: 'a',
-              properties: { href: alvo.href, className: ['ref', 'externo'], rel: ['noopener', 'noreferrer'] },
+              properties: { href: alvo.href, target: '_blank', className: ['ref', 'externo'], rel: ['noopener', 'noreferrer'] },
               children: [
                 codigo,
                 { type: 'element', tagName: 'span', properties: { className: ['visualmente-oculto'] }, children: [{ type: 'text', value: ` (${textos.abreNoGithub})` }] },

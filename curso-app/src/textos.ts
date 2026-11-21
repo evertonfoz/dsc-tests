@@ -52,7 +52,7 @@ export const textos = {
 
   // Conversão do conteúdo.
   rotuloDaTabela: (n: number) => `Tabela ${n} (role para os lados se não couber)`,
-  abreNoGithub: 'abre no GitHub, fora desta aplicação',
+  abreNoGithub: 'abre em nova guia no GitHub, fora desta aplicação',
 
   // UC12 navegável (M2, E7).
   uc12Titulo: 'UC12 — Cadastrar Produto',
