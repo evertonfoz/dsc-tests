@@ -70,6 +70,8 @@
 | 2026-11-21 | E6: links de evidência conferidos só pela forma; saídas de comandos coladas **não** são interpretadas; rótulos fixos da seção 9; lista do que a aplicação não prova exibida na tela. | E6, seções 5, 6, 8 e 9 |
 | 2026-11-21 | E6: registrar no método a convenção de cabeçalho das evidências (o que foi executado, data UTC, commit de base), na E3, parte 2. | E6, seção 9 |
 | 2026-11-21 | Autorizados branch e PR da E6 (com o registro do PR #82). Merge **não** delegado. | Professor |
+| 2026-11-21 | Autorizados branch e PR da opção (a) da E6 (núcleo do `check-state`). Merge **não** delegado. | Professor |
+| 2026-11-21 | **Delegação registrada:** o professor autorizou a IA a fazer o merge **só do PR #84** ("autorizo o merge do #84 com CI verde"). Condição: CI verde no último commit do PR. Apagar a branch não foi autorizado. Não vale para outros PRs nem para a sessão seguinte. | Professor |
 | 2026-11-21 | **Delegação registrada:** o professor autorizou a IA a fazer o merge **só do PR #83** ("autorizo o merge do #83 com CI verde"). Condição: CI verde no último commit do PR. Apagar a branch não foi autorizado. Não vale para outros PRs nem para a sessão seguinte. | Professor |
 
 ## Requisitos acrescentados pelo professor
@@ -100,7 +102,7 @@
 - **Pendência da E5:** `m02-pratica.md`, "Antes de começar", manda copiar `method/` do repositório do curso; passa a apontar para o kit (E3, parte 2).
 - **Divergência registrada na E6 (2026-11-21):** este arquivo dizia que o PR #82 aguardava merge. Conferido com `gh pr view 82`: `MERGED` em 2026-11-21T12:54:51Z, commit de merge `e5f3a75`, cabeça `1db869b`, integrado pela conta `evertonfoz`; `gh pr checks 82`: os quatro trabalhos com `pass`. A delegação foi informada pelo professor no prompt da sessão e está registrada nas decisões.
 - **Divergência registrada na E6:** o prompt (seção 2, item 7) cita como conferência automática "link de PR ou de execução do CI, leitura somente do estado do repositório". Pelas decisões da E1, a aplicação não lê o repositório nem chama o GitHub; vale a E1. Tratamento na E6, seção 2.
-- **Pendência da E6 (aprovada, PR não autorizado ainda):** separar `parseYaml` e `validar` de `method/scripts/check-state.mjs` num núcleo sem dependências de Node (E6, seção 4.3, opção a). PR de método; afeta o kit da E5 só por trazer um arquivo a mais. Precisa entrar antes do marco que exibir as fases (E7).
+- **Pendência da E6 (em PR, [#84](https://github.com/evertonfoz/dsc-tests/pull/84), aguardando merge):** núcleo `method/scripts/check-state-core.mjs`, sem módulos do Node (E6, seção 4.3, opção a). Saídas do validador idênticas antes e depois em 16 casos; 4 testes novos. Afeta o kit da E5 só por trazer um arquivo a mais. Nenhuma etapa invalidada. **As referências de linha a `check-state.mjs` na E5 e na E6 valem para o commit `1ddbb5a`**, anterior à separação.
 - **Achado da E6 (não corrigido):** as evidências `.txt` do UC12 seguem uma convenção de cabeçalho não escrita no método e aplicada de forma desigual (31 arquivos; 28 com data, 13 com commit de base). Registro da convenção no método aprovado, a fazer na E3, parte 2.
 - **Impacto da E6 sobre a E4:** o escopo `fases` ganha um campo para o último `state.yaml` colado e a data. Não muda a estrutura aprovada na E4.
 
@@ -134,3 +136,5 @@
 | 2026-11-21 | E5 (opção i) | PR #82 integrado em 2026-11-21T12:54:51Z (commit `e5f3a75`), por delegação do professor só desse PR, com CI verde em `1db869b`; branch `docs/method-portatil` mantida (registro feito na sessão da E6) | [#82](https://github.com/evertonfoz/dsc-tests/pull/82) | <!-- links:ignore -->
 | 2026-11-21 | E6 | Quatro níveis de verificação (a aplicação só confere a forma); `state.yaml` colado com o núcleo do validador; links só por forma; saídas coladas não interpretadas; lista do que a aplicação não prova. Executados: `check-state` no UC12 (saída 0) e isolado (40 erros, todos de arquivo; saída 1) | [E6](etapas/E6-verificacao-de-evidencias.md) (sem PR) |
 | 2026-11-21 | E6 | Professor aprovou todas as recomendações, com a opção (a) da seção 4.3; E6 encerrada; autorizados branch e PR da E6 | PR da E6 (ver git log) |
+| 2026-11-21 | E6 | PR #83 integrado em 2026-11-21T13:07:07Z (commit de merge `1ddbb5a`), por delegação do professor só desse PR, com CI verde em `2581c97` (conferido com `gh pr checks 83`); branch mantida | [#83](https://github.com/evertonfoz/dsc-tests/pull/83) |
+| 2026-11-21 | E6 (opção a) | Núcleo do `check-state` sem módulos do Node; `check-state.mjs` com a mesma interface; saídas idênticas em 16 casos; `rodar-testes.sh` com 23 testes passando; `verify.sh` com 6 passos OK | [#84](https://github.com/evertonfoz/dsc-tests/pull/84) (merge não delegado) |

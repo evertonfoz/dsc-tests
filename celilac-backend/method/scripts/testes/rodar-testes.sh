@@ -40,6 +40,32 @@ for c in "${casos[@]}"; do
   else fail "$f (exit=$code, esperava trecho \"$msg\")"; echo "$out" | sed 's/^/      /'; fi
 done
 
+# ---- núcleo do validador (check-state-core), usado também fora do Node ----
+CORE="$DIR/../check-state-core.mjs"
+if grep -qE "from ['\"]node:|require\(" "$CORE"; then fail "check-state-core.mjs não deve importar módulos do Node"; else ok "check-state-core.mjs sem módulos do Node"; fi
+# sem `existe`: estrutura validada, arquivos não conferidos e listados como caminhos
+if out=$(node --input-type=module -e "
+  import { readFileSync } from 'node:fs';
+  import { parseYaml, validar } from '$CORE';
+  const r = validar(parseYaml(readFileSync('$FX/inv-evidencia-inexistente.yaml', 'utf8')));
+  if (r.erros.length !== 0) { console.log(r.erros.join('\n')); process.exit(1); }
+  if (!r.caminhos.some((c) => c.caminho.includes('nao-existe') || c.caminho.includes('inexistente'))) { console.log(JSON.stringify(r.caminhos)); process.exit(1); }
+" 2>&1); then ok "núcleo sem \"existe\": não confere arquivos e lista os caminhos"; else fail "núcleo sem \"existe\""; echo "$out" | sed 's/^/      /'; fi
+# com `existe` que responde não: mesmo erro do terminal
+if out=$(node --input-type=module -e "
+  import { readFileSync } from 'node:fs';
+  import { parseYaml, validar } from '$CORE';
+  const r = validar(parseYaml(readFileSync('$FX/valido.yaml', 'utf8')), { existe: () => false });
+  if (!r.erros.some((e) => e.includes('arquivo não encontrado'))) process.exit(1);
+" 2>&1); then ok "núcleo com \"existe\" falso: acusa arquivo não encontrado"; else fail "núcleo com \"existe\" falso"; echo "$out" | sed 's/^/      /'; fi
+# erro de estrutura continua sendo detectado sem `existe`
+if out=$(node --input-type=module -e "
+  import { readFileSync } from 'node:fs';
+  import { parseYaml, validar } from '$CORE';
+  const r = validar(parseYaml(readFileSync('$FX/inv-arquetipo.yaml', 'utf8')));
+  if (!r.erros.some((e) => e.includes('arquetipo inválido'))) process.exit(1);
+" 2>&1); then ok "núcleo sem \"existe\": continua rejeitando estrutura inválida"; else fail "núcleo sem \"existe\" deveria rejeitar inv-arquetipo"; echo "$out" | sed 's/^/      /'; fi
+
 # ---- verificador de links (check-links) ----
 LNK="$DIR/../check-links.mjs"
 RAIZ="$DIR/../../.."

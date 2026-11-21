@@ -101,7 +101,7 @@ Se uma só pessoa é autora e revisora, o validador **avisa** (não reprova) que
 
 ## 9. Referências
 - `method/templates/state.yaml` · `method/templates/project-profile.md` · `method/templates/relatorio-de-fase.md` · `method/templates/adr.md`
-- `method/scripts/check-state.mjs` · `method/scripts/testes/`
+- `method/scripts/check-state.mjs` (linha de comando, disco e GitHub) · `method/scripts/check-state-core.mjs` (leitor de YAML e regras, sem módulos do Node) · `method/scripts/testes/`
 - `method/perfis/celilac-nest.md`
 
 Próximo documento: **03 — Anatomia de um playbook** (Etapa 3).
