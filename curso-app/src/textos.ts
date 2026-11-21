@@ -43,6 +43,11 @@ export const textos = {
   tituloMapa: 'Mapa dos módulos',
   introducaoMapa:
     'Os módulos e apoios na ordem sugerida. "Pede antes" lista o que convém ter estudado; "se precisar" é o que vale estudar só se faltar a base.',
+  tituloGrafo: 'Grafo de pré-requisitos',
+  legendaObrigatorio: 'Linha contínua: pré-requisito recomendado.',
+  legendaCondicional: 'Linha tracejada: conteúdo para estudar se precisar.',
+  descricaoGrafo: 'Desenho dos pré-requisitos. A lista completa abaixo também funciona com teclado e leitor de tela.',
+  tituloListaMapa: 'Lista detalhada dos módulos e pré-requisitos',
 
   // Conversão do conteúdo.
   rotuloDaTabela: (n: number) => `Tabela ${n} (role para os lados se não couber)`,

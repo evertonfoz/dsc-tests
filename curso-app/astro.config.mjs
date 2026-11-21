@@ -5,6 +5,7 @@ import { fileURLToPath } from 'node:url';
 import { paginasDoCurso } from './src/conteudo/paginas.ts';
 import { satteri } from '@astrojs/markdown-satteri';
 import { pluginDeConversao } from './src/conteudo/conversao.ts';
+import { lerQuadroDeSiglas } from './src/conteudo/siglas.ts';
 import { textos } from './src/textos.ts';
 
 const pastaDoCurso = fileURLToPath(new URL('../celilac-backend/method/didatico/curso/', import.meta.url));
@@ -13,6 +14,7 @@ const paginas = paginasDoCurso(
     .filter((nome) => nome.endsWith('.md'))
     .map((nome) => ({ nome, texto: readFileSync(pastaDoCurso + nome, 'utf8') })),
 );
+const siglas = lerQuadroDeSiglas(readFileSync(pastaDoCurso + 'README.md', 'utf8'));
 const commit = process.env.ORIGEM_COMMIT?.trim();
 
 export default defineConfig({
@@ -39,7 +41,7 @@ export default defineConfig({
             repositorio: 'evertonfoz/dsc-tests',
             pastaDoProjeto: 'celilac-backend',
           },
-          { rotuloDaTabela: textos.rotuloDaTabela, abreNoGithub: textos.abreNoGithub },
+          { rotuloDaTabela: textos.rotuloDaTabela, abreNoGithub: textos.abreNoGithub, siglas },
         ),
       ],
     }),

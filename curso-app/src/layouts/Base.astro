@@ -2,6 +2,8 @@
 import '../estilos/base.css';
 import { textos } from '../textos';
 import { lerOrigem } from '../conteudo/origem';
+import { atribuirMascotes, arquivosDeMascotes } from '../conteudo/mascotes';
+import { cursoValidado, percurso } from '../conteudo/carregar';
 
 interface Props {
   titulo: string;
@@ -10,6 +12,11 @@ const { titulo } = Astro.props;
 // Variáveis de ambiente da construção (Node); sem depender de @types/node.
 const ambiente = (globalThis as { process?: { env: Record<string, string | undefined> } }).process?.env ?? {};
 const origem = lerOrigem(ambiente);
+const curso = await cursoValidado();
+const itens = await percurso();
+const praticas = [...curso.values()].filter((e) => e.dados.tipo === 'pratica').sort((a, b) => a.id.localeCompare(b.id));
+const rotas = ['/', '/mapa/', ...itens.map((e) => `/${e.dados.id}/`), ...praticas.map((e) => `/${e.dados.id}/`)];
+const mascote = atribuirMascotes(rotas, arquivosDeMascotes, origem?.commit ?? 'a-confirmar').get(Astro.url.pathname);
 ---
 <!doctype html>
 <html lang="pt-BR">
@@ -34,6 +41,7 @@ const origem = lerOrigem(ambiente);
     <main id="conteudo" tabindex="-1">
       <slot />
     </main>
+    {mascote && <img class="mascote" src={`/mascotes/${mascote}`} alt="" width="128" height="128" loading="lazy" />}
     <footer>
       {origem ? (
         <p data-origem-commit={origem.commit}>
@@ -46,3 +54,7 @@ const origem = lerOrigem(ambiente);
     </footer>
   </body>
 </html>
+
+<script>
+  import '../scripts/siglas';
+</script>

@@ -8,3 +8,6 @@ curso-app/.astro/
 curso-app/test-results/
 curso-app/playwright-report/
 !celilac-backend/method/didatico/curso/
+!mascotes/
+!mascotes/web/
+!mascotes/web/*.png

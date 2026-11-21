@@ -4,7 +4,7 @@
 
 | Campo | Valor |
 |---|---|
-| Etapa atual | **E9**, marco **M1**: plano aprovado; **M1a** integrado pelo PR [#88](https://github.com/evertonfoz/dsc-tests/pull/88); M1b planejado, aguardando autorização para criar branch e PR |
+| Etapa atual | **E9**, marco **M1**: plano aprovado; **M1a** integrado pelo PR [#88](https://github.com/evertonfoz/dsc-tests/pull/88); M1b implementado na branch `feat/curso-app-m1b`; PR [#90](https://github.com/evertonfoz/dsc-tests/pull/90) aberto; CI verde no commit `a288c18` (seis checks) |
 | Última atualização | 2026-11-21 |
 | Responsável pelas decisões | o professor |
 
@@ -20,7 +20,7 @@
 | E6 | Verificação de evidências e limites | concluída | [E6-verificacao-de-evidencias.md](etapas/E6-verificacao-de-evidencias.md) | professor (2026-11-21) |
 | E7 | Marcos, testes e critérios de aceite | concluída | [E7-marcos-testes-e-aceite.md](etapas/E7-marcos-testes-e-aceite.md) | professor (2026-11-21) |
 | E8 | Riscos e perguntas em aberto | concluída | [E8-riscos-e-perguntas-em-aberto.md](etapas/E8-riscos-e-perguntas-em-aberto.md) | professor (2026-11-21) |
-| E9 | Implementação por marcos | M0 e M1a integrados (PRs #87 e #88); M1b: aguardando autorização para criar branch e PR | [E9-M0-plano.md](etapas/E9-M0-plano.md); [E9-M1-plano.md](etapas/E9-M1-plano.md) | M0: professor (2026-11-21); plano do M1: professor (2026-11-21) |
+| E9 | Implementação por marcos | M0 e M1a integrados (PRs #87 e #88); M1b: implementação concluída, PR em preparação | [E9-M0-plano.md](etapas/E9-M0-plano.md); [E9-M1-plano.md](etapas/E9-M1-plano.md) | M0: professor (2026-11-21); plano do M1: professor (2026-11-21) |
 
 ## Decisões
 | Data | Decisão | Origem |
@@ -147,7 +147,7 @@
 
 - **Divergência registrada no plano do M1 (2026-11-21):** este arquivo deixava "data e commit de merge a registrar" para o PR #87. Conferido com `gh pr view 87`: `MERGED` em 2026-11-21T14:40:30Z, commit de merge `f6205a2`, cabeça `967ba62`; `gh pr checks 87`: os seis trabalhos com `pass`. `git ls-remote`: a branch `feat/curso-app-m0` **não** foi apagada. <!-- links:ignore -->
 - **Achado do plano do M1 (não corrigido):** `method/didatico/curso/m01-cobertura-real.md`, linha 134, diz "Próximo: módulo 2"; pela `ordem` e pelo pré-requisito do m02 o próximo é o apoio A. Os outros 16 "Próximo:" batem com a `ordem`. A aplicação segue a `ordem`; proposta de texto para a E3, parte 2. A sequência "m00 → m01 → apoio A → m02" citada acima vale para a `ordem`, não para o texto do m01.
-- **Achado do plano do M1:** o quadro de siglas tem **21** siglas (a E2, seção 4, diz 22). Palavras em maiúsculas fora do quadro: `RED`, `GREEN`, `SUB` e `NUL` (contagem aproximada); no M1 geram só aviso de construção; incluí-las no quadro é decisão de conteúdo (E3, parte 2).
+- **Achado do plano do M1:** o quadro de siglas tem **21** siglas (a E2, seção 4, diz 22). Palavras em maiúsculas fora do quadro incluem `RED`, `GREEN`, `SUB` e `NUL`; no M1b geram só aviso de construção. A varredura também encontrou `IP` em `m06-gabarito.md` (“endereço IP do servidor”). Incluir ou excluir essas formas do quadro é decisão de conteúdo para E3, parte 2; os arquivos do curso não foram alterados nesta implementação.
 - **Achado do plano do M1:** os commits citados no curso são `b71f5e1` e `8aeef61` (arquivos de leitura) e `5081158` (só gabaritos); os três existem (`git cat-file -t`). A E8, D6, fala em "2 commits"; são 3 contando os gabaritos.
 - **Achado do plano do M1:** o curso não tem links Markdown; as referências entre arquivos são nomes entre crases. A comparação da linha "Pré-requisito" com o front matter, simulada fora do repositório, deu 0 divergências nos 18 arquivos de leitura.
 
@@ -156,7 +156,7 @@
 
 - **PR #88 (M1a) integrado:** `gh pr view 88`: `MERGED` em 2026-11-21T15:14:25Z, commit de merge `26a88f5`, cabeça `3975d87`; `gh pr checks 88`: seis trabalhos com `pass` (execuções 44917372255 e 44917372199). No log do trabalho de imagem, 117 testes no navegador passaram e 21 foram pulados, cinco citações de commit foram encontradas, nenhum gabarito foi publicado e a construção negativa da linha "Pré-requisito" falhou como esperado.
 
-**Próximo passo:** o PR [#89](https://github.com/evertonfoz/dsc-tests/pull/89) contém o prompt e este registro; está aberto, com seis checks verdes, e seu merge não foi delegado. O professor precisa decidir sobre o #89. Depois, o **M1b** (siglas, grafo e mascotes) pode começar; o plano está aprovado, mas a criação da branch e do PR ainda requer autorização.
+**PR #89 integrado:** cabeça `e7dc670`, merge `c920158`, seis checks verdes; integrado em 2026-11-21T15:19:26Z. A branch foi mantida. **M1b:** implementação concluída na branch `feat/curso-app-m1b`; PR [#90](https://github.com/evertonfoz/dsc-tests/pull/90) aberto em `798534e`; CI verde no commit `a288c18` (seis checks: integração e E2E PostgreSQL, qualidade geral, smoke Docker Compose, qualidade do curso, imagem e GitGuardian). A atualização documental posterior não altera o código. O merge do M1b não foi delegado.
 
 ## Histórico de sessões
 | Data | Etapa | O que foi feito | PR ou documento |
@@ -202,3 +202,5 @@
 | 2026-11-21 | E9 (M1a) | Plano do M1 aprovado; dependências instaladas; processador Sätteri decidido pelo professor; 21 páginas, ficha do front matter, links entre arquivos e para o GitHub, tabelas e código com rolagem acessível, Prism, mapa em lista, anterior e próximo, avisos de honestidade, comparação de título e linha "Pré-requisito", conferência de commits, Playwright e axe-core contra a imagem (117 testes passando), CI atualizado | [#88](https://github.com/evertonfoz/dsc-tests/pull/88) |
 | 2026-11-21 | E9 (M1a) | CI do #88 verde (seis trabalhos); professor delegou o merge do #88 à sessão seguinte, no Codex; prompt dessa sessão escrito | [prompt-sessao-codex-m1b.md](prompt-sessao-codex-m1b.md), PR de documentação |
 | 2026-11-21 | E9 (M1a) | PR #88 integrado após conferência do CI verde no último commit; merge `26a88f5`, cabeça `3975d87`, seis trabalhos com `pass`. PR #89 aberto, com seis checks verdes; merge não delegado. | [#88](https://github.com/evertonfoz/dsc-tests/pull/88); [#89](https://github.com/evertonfoz/dsc-tests/pull/89) |
+
+| 2026-11-21 | E9 (M1b) | Implementados glossário interativo de siglas, mapa SVG acessível e mascotes com sorteio determinístico; sem alterações aos arquivos do curso ou dependências novas. `pnpm test` (50 testes), `pnpm check`, `pnpm build` (21 páginas), `pnpm audit --audit-level high`, construção Docker sem cache, testes da imagem, construção negativa, conferência de commits e Playwright contra a imagem (124 passaram, 22 ignorados). Avisos de siglas fora do quadro, incluindo `IP` em `m06-gabarito.md`, registrados acima. VoiceOver/leitor real e zoom de 200% não foram verificados manualmente. | [#90](https://github.com/evertonfoz/dsc-tests/pull/90), cabeça `798534e` (merge não delegado) |

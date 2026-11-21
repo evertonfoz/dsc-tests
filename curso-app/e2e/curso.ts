@@ -38,6 +38,25 @@ export const percurso = arquivos.filter((a) => a.ordem !== undefined).sort((a, b
 export const gabaritos = arquivos.filter((a) => a.tipo === 'gabarito');
 export const praticas = arquivos.filter((a) => a.tipo === 'pratica');
 
+const readme = readFileSync(pasta + 'README.md', 'utf8');
+const inicioSiglas = readme.split(/\r?\n/).findIndex((linha) => /^##\s+Siglas usadas no curso\s*$/.test(linha.trim()));
+export const siglas = (() => {
+  if (inicioSiglas < 0) throw new Error('quadro de siglas ausente no README do curso');
+  const linhas = readme.split(/\r?\n/).slice(inicioSiglas + 1);
+  const inicioTabela = linhas.findIndex((linha) => linha.trim().startsWith('|'));
+  const resultado = new Map<string, string>();
+  for (const linha of linhas.slice(inicioTabela)) {
+    if (!linha.trim().startsWith('|')) break;
+    const colunas = linha.split('|').slice(1, -1).map((s) => s.trim());
+    if (colunas.length < 3 || /^-+$/.test(colunas[0]!.replace(/\s/g, ''))) continue;
+    const sigla = colunas[0]!.replace(/`|\*|_/g, '');
+    const definicao = colunas[1]!.replace(/`|\*|_/g, '').trim();
+    if (sigla === 'Sigla' && definicao === 'Significado') continue;
+    resultado.set(sigla, definicao);
+  }
+  return resultado;
+})();
+
 /** Todas as páginas que a aplicação deve gerar no M1. */
 export const paginas = ['/', '/mapa/', ...percurso.map((a) => `/${a.id}/`), ...praticas.map((a) => `/${a.id}/`)];
 

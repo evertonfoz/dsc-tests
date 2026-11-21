@@ -1,6 +1,6 @@
 // Critérios 1, 5 e 6 do M1 e a navegação (plano do M1, seção 11).
 import { expect, test } from '@playwright/test';
-import { gabaritos, paginas, percurso, tituloSimples } from './curso';
+import { gabaritos, paginas, percurso, siglas, tituloSimples } from './curso';
 
 test('(1) o mapa lista os arquivos de leitura na ordem de `ordem`', async ({ page }) => {
   await page.goto('/mapa/');
@@ -63,4 +63,107 @@ test('links para o GitHub apontam para o commit de origem e não são seguidos s
   const externos = await page.locator('a.externo').evaluateAll((as) => as.map((a) => a.getAttribute('href')!));
   expect(externos.length).toBeGreaterThan(0);
   for (const h of externos) expect(h).toMatch(new RegExp(`^https://github\\.com/evertonfoz/dsc-tests/blob/${commit}/celilac-backend/`));
+});
+
+test('(2) cada ocorrência de sigla tem definição e a primeira por seção entra na ordem do Tab', async ({ page }) => {
+  const paginasPorSigla = new Map<string, string>();
+  for (const caminho of paginas) {
+    await page.goto(caminho);
+    const ordemTab = await page.evaluate(() => {
+      const vistos = new Set<string>();
+      const problemas: string[] = [];
+      for (const el of document.querySelectorAll('h2, abbr.sigla')) {
+        if (el.tagName === 'H2') { vistos.clear(); continue; }
+        const item = el as HTMLElement;
+        const sigla = item.dataset.sigla!;
+        const esperado = vistos.has(sigla) ? '-1' : '0';
+        if (item.getAttribute('tabindex') !== esperado) problemas.push(`${sigla}: esperado ${esperado}, recebeu ${item.getAttribute('tabindex')}`);
+        vistos.add(sigla);
+      }
+      return problemas;
+    });
+    expect(ordemTab, caminho).toEqual([]);
+    const marcadas = await page.locator('abbr.sigla').evaluateAll((itens) => itens.map((el) => ({
+      sigla: el.getAttribute('data-sigla')!,
+      texto: el.textContent!,
+      aria: el.getAttribute('aria-label')!,
+      definicao: el.getAttribute('data-definicao')!,
+      tabindex: el.getAttribute('tabindex'),
+    })));
+    for (const item of marcadas) {
+      expect(siglas.get(item.sigla), item.sigla).toBe(item.definicao);
+      expect(item.aria).toBe(`${item.texto}: ${item.definicao}`);
+      if (!paginasPorSigla.has(item.sigla)) paginasPorSigla.set(item.sigla, caminho);
+      // As demais ocorrências da sigla na seção não criam paradas extras de teclado.
+      expect(['0', '-1']).toContain(item.tabindex);
+    }
+  }
+  expect([...paginasPorSigla.keys()].sort()).toEqual([...siglas.keys()].sort());
+
+  for (const [sigla, caminho] of paginasPorSigla) {
+    await page.goto(caminho);
+    const alvo = page.locator(`abbr.sigla[data-sigla="${sigla}"][tabindex="0"]`).first();
+    await expect(alvo).toHaveCount(1);
+    let focou = false;
+    for (let i = 0; i < 180; i++) {
+      await page.keyboard.press('Tab');
+      if (await alvo.evaluate((el) => el === document.activeElement)) { focou = true; break; }
+    }
+    expect(focou, `${sigla} recebeu foco pela navegação de Tab`).toBe(true);
+    await expect(alvo).toBeFocused();
+    await page.keyboard.press('Escape');
+    const display = await alvo.evaluate((el) => getComputedStyle(el, '::after').display);
+    expect(display).toBe('none');
+  }
+});
+
+test('(2) tocar numa sigla abre a definição e tocar fora fecha', async ({ page }, info) => {
+  test.skip(info.project.name !== 'celular', 'abre e fecha por toque no projeto celular');
+  await page.goto('/m00/');
+  const alvo = page.locator('abbr.sigla[data-sigla="IA"]').first();
+  await expect(alvo).toHaveCount(1);
+  await alvo.tap();
+  await expect(alvo).toHaveAttribute('data-aberta', 'true');
+  await page.locator('h1').tap();
+  await expect(alvo).not.toHaveAttribute('data-aberta', 'true');
+});
+
+test('(3) as arestas do grafo correspondem ao front matter, incluindo as condicionais', async ({ page }) => {
+  await page.goto('/mapa/');
+  const arestas = await page.locator('svg[data-grafo] [data-aresta]').evaluateAll((itens) => itens.map((el) => ({
+    tipo: el.getAttribute('data-aresta'),
+    de: el.getAttribute('data-de'),
+    para: el.getAttribute('data-para'),
+  })).sort((a, b) => `${a.para}:${a.tipo}:${a.de}`.localeCompare(`${b.para}:${b.tipo}:${b.de}`)));
+  const esperado = percurso.flatMap((item) => [
+    ...item.prerequisitos.map((de) => ({ tipo: 'obrigatoria', de, para: item.id })),
+    ...item.prerequisitosSePrecisar.map((de) => ({ tipo: 'condicional', de, para: item.id })),
+  ]).sort((a, b) => `${a.para}:${a.tipo}:${a.de}`.localeCompare(`${b.para}:${b.tipo}:${b.de}`));
+  expect(arestas).toEqual(esperado);
+  await expect(page.locator('.legenda-grafo')).toContainText('Linha contínua');
+  await expect(page.locator('.legenda-grafo')).toContainText('Linha tracejada');
+  await expect(page.locator('svg[data-grafo]')).toHaveAttribute('aria-hidden', 'true');
+  await expect(page.locator('svg[data-grafo] a[data-no]')).toHaveCount(percurso.length);
+  for (const item of percurso) {
+    const no = page.locator(`svg[data-grafo] a[data-no="${item.id}"]`);
+    await expect(no).toHaveAttribute('tabindex', '-1');
+    const rotulo = await no.locator('text tspan').allTextContents();
+    expect(rotulo.join(' ').replace(/\s+/g, ' ').trim(), item.id).toBe(tituloSimples(item.titulo).replace(/\s+/g, ' ').trim());
+    await expect(no.locator('title')).toHaveText(tituloSimples(item.titulo));
+  }
+});
+
+test('(7) mascotes são decorativos, respondem e não se repetem entre as páginas', async ({ page, request }) => {
+  const usados: string[] = [];
+  for (const caminho of paginas) {
+    await page.goto(caminho);
+    const imagem = page.locator('img.mascote');
+    await expect(imagem, caminho).toHaveCount(1);
+    await expect(imagem).toHaveAttribute('alt', '');
+    const src = await imagem.getAttribute('src');
+    expect(src).toMatch(/^\/mascotes\/mascote_\d{3}\.png$/);
+    expect((await request.get(src!)).status(), src!).toBe(200);
+    usados.push(src!);
+  }
+  expect(new Set(usados).size).toBe(usados.length);
 });
