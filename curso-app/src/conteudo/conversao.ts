@@ -31,6 +31,11 @@ function dentroDe(no: No, tags: string[], ctx: ContextoDoVisitante): boolean {
   return false;
 }
 
+function hrefDeOnboarding(href: string): string | undefined {
+  if (href === '/') return '/indice/';
+  return /\/[^/]*-pratica\/(?:#.*)?$/.test(href) ? href : undefined;
+}
+
 /** Converte destinos Markdown antes da geração do HAST, preservando referências equivalentes. */
 function converterLinkMarkdownPai(no: No, ctx: ContextoDoVisitante, arquivo: string, ref: ContextoDeReferencias): boolean {
   for (let pai = ctx.parent(no); pai; pai = ctx.parent(pai)) {
@@ -40,14 +45,15 @@ function converterLinkMarkdownPai(no: No, ctx: ContextoDoVisitante, arquivo: str
     if (typeof href !== 'string') return true;
     const alvo = resolverReferenciaMarkdown(href, arquivo, ref);
     if (!alvo) return true;
+    const hrefOnboarding = alvo.tipo === 'interno' ? hrefDeOnboarding(alvo.href) : undefined;
+    const hrefFinal = hrefOnboarding ?? alvo.href;
     const classes = [...(Array.isArray(link.properties.className) ? link.properties.className as string[] : []), 'ref'];
-    ctx.setProperty(link, 'href', alvo.href);
+    ctx.setProperty(link, 'href', hrefFinal);
     ctx.setProperty(link, 'className', alvo.tipo === 'github' ? [...classes, 'externo'] : classes);
+    if (hrefOnboarding) ctx.setProperty(link, 'dataOnboardingHref', hrefOnboarding);
     if (alvo.tipo === 'github') {
       ctx.setProperty(link, 'target', '_blank');
       ctx.setProperty(link, 'rel', ['noopener', 'noreferrer']);
-    } else if (alvo.href === '/') {
-      ctx.setProperty(link, 'dataAbreDrawer', 'sequencia');
     }
     return true;
   }
@@ -217,7 +223,12 @@ export function pluginDeConversao(ref: ContextoDeReferencias, textos: TextosDaCo
           if (!alvo) return;
           const codigo: Elemento = { type: 'element', tagName: 'code', properties: { ...no.properties }, children: [{ type: 'text', value: (unico as Texto).value }] };
           if (alvo.tipo === 'interno') {
-            ctx.replaceNode(no, { type: 'element', tagName: 'a', properties: { href: alvo.href, className: ['ref'], ...(alvo.href === '/' ? { dataAbreDrawer: 'sequencia' } : {}) }, children: [codigo] });
+            const hrefOnboarding = hrefDeOnboarding(alvo.href);
+            ctx.replaceNode(no, {
+              type: 'element', tagName: 'a',
+              properties: { href: hrefOnboarding ?? alvo.href, className: ['ref'], ...(hrefOnboarding ? { dataOnboardingHref: hrefOnboarding } : {}) },
+              children: [codigo],
+            });
           } else {
             ctx.replaceNode(no, {
               type: 'element',

@@ -4,7 +4,7 @@ export const textos = {
   pularParaConteudo: 'Pular para o conteúdo',
   navegacao: 'Navegação principal',
   linkInicio: 'Apresentação',
-  linkIndice: 'Índice completo do curso',
+  linkIndice: 'Orientações Gerais',
   linkMapa: 'Mapa dos módulos',
   linkUc12: 'Caso real UC12',
   rodapeOrigem: (commitCurto: string, data: string) => `Conteúdo do commit ${commitCurto} (${data}).`,
