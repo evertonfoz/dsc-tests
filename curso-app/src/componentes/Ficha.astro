@@ -40,7 +40,7 @@ const pratica = percurso?.pratica ? alvo(percurso.pratica) : null;
   {pratica && (
     <>
       <dt>{textos.pratica}</dt>
-      <dd><a href={pratica.href}><TextoComCodigo texto={pratica.titulo} /></a></dd>
+      <dd><a href={pratica.href} data-onboarding-href={pratica.href}><TextoComCodigo texto={pratica.titulo} /></a></dd>
     </>
   )}
 </dl>

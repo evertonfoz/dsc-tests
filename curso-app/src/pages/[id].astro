@@ -30,9 +30,11 @@ const entradaGabarito = d.tipo === 'modulo' || d.tipo === 'apoio' || d.tipo === 
 const conteudoAssociado = d.tipo === 'gabarito' ? curso.get(d.gabarito_de[0] ?? '') : undefined;
 ---
 <Base titulo={tituloSimples(d.titulo)}>
-  <nav aria-label="Caminho de navegação" class="breadcrumb">
-    <a href="/">Apresentação</a> · <a href="/mapa/">Mapa dos módulos</a> · <span aria-current="page">{tituloSimples(d.titulo)}</span>
-  </nav>
+  {d.tipo !== 'modulo' && (
+    <nav aria-label="Caminho de navegação" class="breadcrumb">
+      <a href="/">Apresentação</a> · <a href="/mapa/">Mapa dos módulos</a> · <span aria-current="page">{tituloSimples(d.titulo)}</span>
+    </nav>
+  )}
   <Titulo titulo={d.titulo} />
   {d.tipo === 'gabarito' ? (
     <>

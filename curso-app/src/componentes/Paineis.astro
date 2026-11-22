@@ -40,10 +40,180 @@ const siglas = lerQuadroDeSiglas(indice.body ?? '');
   </div>
 </dialog>
 
+<dialog class="drawer drawer-onboarding" id="drawer-onboarding" aria-labelledby="titulo-drawer-onboarding" data-drawer="onboarding">
+  <div class="drawer-cabecalho">
+    <h2 id="titulo-drawer-onboarding" tabindex="-1">Onboarding</h2>
+    <div class="drawer-acoes">
+      <button type="button" data-voltar-onboarding aria-label="Fechar onboarding atual ou voltar ao conteúdo anterior">Voltar</button>
+      <button type="button" data-alternar-largura aria-pressed="false" aria-label="Ampliar onboarding até 80% da largura">
+        <svg aria-hidden="true" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M8 3H3v5M16 3h5v5M3 16v5h5M21 16v5h-5M3 8l6-6M21 8l-6-6M3 16l6 6m12-6-6 6" />
+        </svg>
+      </button>
+      <button type="button" data-fechar-drawer aria-label="Fechar onboarding">Fechar</button>
+    </div>
+  </div>
+  <div class="drawer-conteudo onboarding-conteudo" id="conteudo-onboarding" aria-live="polite" aria-busy="false"></div>
+</dialog>
+
 <script>
+  const onboarding = document.querySelector<HTMLDialogElement>('#drawer-onboarding');
+  const conteudoOnboarding = document.querySelector<HTMLElement>('#conteudo-onboarding');
+  const tituloOnboarding = document.querySelector<HTMLElement>('#titulo-drawer-onboarding');
+  const botaoLargura = document.querySelector<HTMLButtonElement>('[data-alternar-largura]');
+  const chaveLargura = 'curso-app:onboarding:largura-ampliada';
+  const pilhaOnboarding: Array<{ href: string; scrollTop: number }> = [];
+  let geracaoDeCarregamento = 0;
+  let origemOnboarding: string | undefined;
+
+  function preferenciaAmpliada() {
+    try { return localStorage.getItem(chaveLargura) === 'true'; }
+    catch { return false; }
+  }
+
+  function aplicarLargura(ampliada: boolean) {
+    if (!onboarding || !botaoLargura) return;
+    onboarding.classList.toggle('drawer-ampliado', ampliada);
+    botaoLargura.setAttribute('aria-pressed', String(ampliada));
+    botaoLargura.setAttribute('aria-label', ampliada ? 'Reduzir largura do onboarding' : 'Ampliar onboarding até 80% da largura');
+  }
+
+  aplicarLargura(preferenciaAmpliada());
+  botaoLargura?.addEventListener('click', () => {
+    const ampliada = botaoLargura.getAttribute('aria-pressed') !== 'true';
+    aplicarLargura(ampliada);
+    try { localStorage.setItem(chaveLargura, String(ampliada)); } catch { /* Preferência local é opcional. */ }
+  });
+
+  function limparPilhaOnboarding() {
+    pilhaOnboarding.length = 0;
+    origemOnboarding = undefined;
+    geracaoDeCarregamento += 1;
+  }
+
+  function fecharOuVoltarOnboarding() {
+    if (!onboarding || !onboarding.open) return;
+    if (pilhaOnboarding.length > 1) {
+      pilhaOnboarding.pop();
+      void renderizarOnboarding();
+    } else {
+      limparPilhaOnboarding();
+      onboarding.close();
+    }
+  }
+
+  async function renderizarOnboarding() {
+    if (!onboarding || !conteudoOnboarding || !tituloOnboarding) return;
+    if (!onboarding.open) onboarding.showModal();
+    const entrada = pilhaOnboarding.at(-1);
+    if (!entrada) return;
+    const destino = new URL(entrada.href, location.href);
+    const geracao = ++geracaoDeCarregamento;
+    conteudoOnboarding.setAttribute('aria-busy', 'true');
+    conteudoOnboarding.replaceChildren(Object.assign(document.createElement('p'), { textContent: 'Carregando conteúdo…' }));
+    tituloOnboarding.focus();
+    if (destino.origin !== location.origin) {
+      const aviso = document.createElement('p');
+      aviso.textContent = 'Este material está fora do curso e não pode ser exibido dentro do onboarding.';
+      const endereco = document.createElement('p');
+      endereco.append('Destino: ', document.createTextNode(destino.href));
+      conteudoOnboarding.replaceChildren(aviso, endereco);
+      conteudoOnboarding.setAttribute('aria-busy', 'false');
+      return;
+    }
+    try {
+      const resposta = await fetch(`${destino.pathname}${destino.search}`, { headers: { Accept: 'text/html' } });
+      if (!resposta.ok) throw new Error(`HTTP ${resposta.status}`);
+      const pagina = new DOMParser().parseFromString(await resposta.text(), 'text/html');
+      const principal = pagina.querySelector<HTMLElement>('main#conteudo');
+      if (!principal) throw new Error('O conteúdo da página não foi encontrado.');
+      principal.querySelectorAll<HTMLAnchorElement>('a[href]').forEach((link) => {
+        link.href = new URL(link.getAttribute('href')!, resposta.url).href;
+      });
+      if (geracao !== geracaoDeCarregamento) return;
+      const nos = [...principal.childNodes].map((no) => document.importNode(no, true));
+      conteudoOnboarding.replaceChildren(...nos);
+      if (destino.hash) {
+        const id = decodeURIComponent(destino.hash.slice(1));
+        requestAnimationFrame(() => {
+          const alvo = document.getElementById(id);
+          if (alvo && conteudoOnboarding.contains(alvo)) alvo.scrollIntoView();
+        });
+      } else {
+        conteudoOnboarding.scrollTop = entrada.scrollTop;
+      }
+    } catch {
+      if (geracao !== geracaoDeCarregamento) return;
+      conteudoOnboarding.replaceChildren(Object.assign(document.createElement('p'), { textContent: 'Não foi possível abrir este conteúdo no onboarding.' }));
+    } finally {
+      if (geracao === geracaoDeCarregamento) conteudoOnboarding.setAttribute('aria-busy', 'false');
+    }
+  }
+
+  function hrefDaPagina(url: URL) {
+    return `${url.origin}${url.pathname}${url.search}${url.hash}`;
+  }
+
+  function navegarNoOnboarding(destino: URL) {
+    if (!onboarding || !conteudoOnboarding) return;
+    if (!onboarding.open) {
+      origemOnboarding = location.href;
+      onboarding.showModal();
+    }
+    const atual = pilhaOnboarding.at(-1);
+    if (atual) atual.scrollTop = conteudoOnboarding.scrollTop;
+    const chaveDestino = `${destino.origin}${destino.pathname}${destino.search}`;
+    if (atual && origemOnboarding) {
+      const origem = new URL(origemOnboarding);
+      if (`${origem.origin}${origem.pathname}${origem.search}` === chaveDestino) {
+        limparPilhaOnboarding();
+        onboarding.close();
+        return;
+      }
+    }
+    if (atual) {
+      const chaveAtual = `${new URL(atual.href).origin}${new URL(atual.href).pathname}${new URL(atual.href).search}`;
+      if (chaveAtual === chaveDestino) {
+        atual.href = hrefDaPagina(destino);
+        if (destino.hash) {
+          const id = decodeURIComponent(destino.hash.slice(1));
+          const alvo = document.getElementById(id);
+          if (alvo && conteudoOnboarding.contains(alvo)) alvo.scrollIntoView();
+        }
+        return;
+      }
+    }
+    for (let indice = pilhaOnboarding.length - 1; indice >= 0; indice -= 1) {
+      const entrada = new URL(pilhaOnboarding[indice]!.href);
+      if (`${entrada.origin}${entrada.pathname}${entrada.search}` === chaveDestino) {
+        pilhaOnboarding.splice(indice + 1);
+        void renderizarOnboarding();
+        return;
+      }
+    }
+    pilhaOnboarding.push({ href: hrefDaPagina(destino), scrollTop: 0 });
+    void renderizarOnboarding();
+  }
+
+  function linkDeRetorno(link: HTMLAnchorElement) {
+    const texto = `${link.textContent ?? ''} ${link.getAttribute('aria-label') ?? ''} ${link.title}`.trim();
+    return link.relList.contains('prev') || /^(?:←\s*)?(?:voltar|retornar|return|back)\b/i.test(texto);
+  }
+
   document.addEventListener('click', (evento) => {
     const alvo = evento.target;
     if (!(alvo instanceof Element)) return;
+    const link = alvo.closest<HTMLAnchorElement>('a[href]');
+    if (link) {
+      const dentroDoOnboarding = Boolean(link.closest('#conteudo-onboarding'));
+      const pertenceAoUc12 = location.pathname.startsWith('/uc12/') && Boolean(link.closest('main'));
+      if (dentroDoOnboarding || link.dataset.onboardingHref || pertenceAoUc12) {
+        evento.preventDefault();
+        if (dentroDoOnboarding && linkDeRetorno(link)) fecharOuVoltarOnboarding();
+        else navegarNoOnboarding(new URL(link.dataset.onboardingHref ?? link.href, location.href));
+        return;
+      }
+    }
     const abrir = alvo.closest<HTMLElement>('[data-abrir-drawer], [data-abre-drawer]');
     const chave = abrir?.dataset.abrirDrawer ?? abrir?.dataset.abreDrawer;
     if (abrir && chave) {
@@ -57,7 +227,10 @@ const siglas = lerQuadroDeSiglas(indice.body ?? '');
     }
     const fechar = alvo.closest<HTMLElement>('[data-fechar-drawer]');
     if (fechar) fechar.closest('dialog')?.close();
+    const voltar = alvo.closest<HTMLElement>('[data-voltar-onboarding]');
+    if (voltar) fecharOuVoltarOnboarding();
   });
+  onboarding?.addEventListener('close', limparPilhaOnboarding);
   document.querySelectorAll<HTMLDialogElement>('dialog[data-drawer]').forEach((dialogo) => {
     dialogo.addEventListener('click', (evento) => {
       if (evento.target === dialogo) dialogo.close();

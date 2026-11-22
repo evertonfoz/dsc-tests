@@ -43,8 +43,8 @@ test('o percurso começa com apresentação, sequência linear e retorno claro a
   await page.goto('/');
   await expect(page.getByRole('link', { name: 'Começar pelo módulo 0' })).toHaveAttribute('href', '/m00/');
   await page.getByRole('link', { name: 'Começar pelo módulo 0' }).click();
-  await expect(page.getByRole('navigation', { name: 'Caminho de navegação' })).toContainText('Mapa dos módulos');
-  await page.getByRole('link', { name: 'Mapa dos módulos' }).first().click();
+  await expect(page.getByRole('navigation', { name: 'Caminho de navegação' })).toHaveCount(0);
+  await page.goto('/mapa/');
   await expect(page.locator('[data-mapa] > li')).toHaveCount(percurso.length);
   await expect(page.locator('.mapa-grafo')).toBeVisible();
   await expect(page.locator('.mapa-grafo svg')).toBeHidden();
@@ -74,15 +74,17 @@ test('painéis de navegação abrem por teclado, fecham com Escape e preservam a
   expect((await page.request.get('/indice/')).status()).toBe(200);
 });
 
-test('README do Módulo 0 abre a sequência, módulos não exibem ficha e mascote fica no topo direito', async ({ page }) => {
+test('README do Módulo 0 abre o onboarding, módulos não exibem ficha e mascote fica no topo direito', async ({ page }) => {
   await page.goto('/m00/');
-  const readme = page.locator('a[data-abre-drawer="sequencia"]', { hasText: 'README.md' });
+  const readme = page.locator('a[data-onboarding-href="/indice/"]', { hasText: 'README.md' });
   await expect(readme).toHaveCount(1);
   await readme.click();
-  await expect(page.locator('dialog[data-drawer="sequencia"]')).toBeVisible();
+  await expect(page.locator('dialog[data-drawer="onboarding"]')).toBeVisible();
+  await expect(page.locator('#conteudo-onboarding')).toContainText('Como cada módulo é organizado');
 
   for (const item of arquivos.filter((arquivo) => arquivo.tipo === 'modulo')) {
     await page.goto(`/${item.id}/`);
+    await expect(page.getByRole('navigation', { name: 'Caminho de navegação' }), item.id).toHaveCount(0);
     await expect(page.locator('.ficha'), item.id).toHaveCount(0);
     await expect(page.getByText('As atividades são feitas no seu caderno, editor, terminal, repositório ou GitHub. Este site não coleta respostas nem registra progresso.', { exact: true })).toHaveCount(0);
     const header = await page.locator('header').boundingBox();
