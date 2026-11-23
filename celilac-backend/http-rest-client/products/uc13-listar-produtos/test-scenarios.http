@@ -1,50 +1,6 @@
 @baseUrl = http://localhost:3200
 
 # ==============================================================================
-# Casos de Teste do UC12 — Cadastrar Produto
-# ==============================================================================
-
-### Cenário 1: Cadastro válido (critério de aceite principal) → esperado: 201 Created
-POST {{baseUrl}}/products
-Content-Type: application/json
-
-{
-  "name": "Biscoito de Polvilho Sem Glúten"
-}
-
-### Cenário 2: Validação de campo obrigatório vazio → esperado: 400 Bad Request (@IsNotEmpty)
-POST {{baseUrl}}/products
-Content-Type: application/json
-
-{
-  "name": ""
-}
-
-### Cenário 3: Validação de campo obrigatório ausente → esperado: 400 Bad Request (@IsNotEmpty)
-POST {{baseUrl}}/products
-Content-Type: application/json
-
-{}
-
-### Cenário 4: Validação de tipo de dado inválido (numérico) → esperado: 400 Bad Request (@IsString)
-POST {{baseUrl}}/products
-Content-Type: application/json
-
-{
-  "name": 99999
-}
-
-### Cenário 5: Propriedade extra enviada (descarte via whitelist) → esperado: 201 Created
-POST {{baseUrl}}/products
-Content-Type: application/json
-
-{
-  "name": "Massa para Panqueca Sem Lactose",
-  "categoria": "massas",
-  "codigoInterno": "IGNORAR_CAMPO"
-}
-
-# ==============================================================================
 # Casos de Teste do UC13 — Listar Produtos
 # GET /products: só produtos ativos (deletedAt nulo), ordenados por nome e productId,
 # paginados (padrão 20, limit até 100). Item = { productId, name }.

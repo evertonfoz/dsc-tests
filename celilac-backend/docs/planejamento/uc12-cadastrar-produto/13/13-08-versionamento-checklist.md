@@ -20,8 +20,8 @@ find http-rest-client -type f | sort
 ```
 Arquivos confirmados:
 1. `http-rest-client/tests/hello-world.http`
-2. `http-rest-client/products/products-controller.http`
-3. `http-rest-client/products/test-scenarios.http`
+2. `http-rest-client/products/uc12-cadastrar-produto/products-controller.http`
+3. `http-rest-client/products/uc12-cadastrar-produto/test-scenarios.http`
 4. `http-rest-client/orders/orders-controller.http`
 5. `http-rest-client/orders/test-scenarios.http`
 6. `http-rest-client/containerizado/README.md`
@@ -97,7 +97,7 @@ docker compose up -d --build api
 
 ### 4.1. Arquivos no Repositório
 - [x] **`tests/hello-world.http` criado.** — **Confirmado** (Rotas `GET /` e `GET /not-found-endpoint`).
-- [x] **`.http` do caso de uso (controller e cenários) criados.** — **Confirmado** (`products/products-controller.http` e `products/test-scenarios.http`).
+- [x] **`.http` do caso de uso (controller e cenários) criados.** — **Confirmado** (`products/uc12-cadastrar-produto/products-controller.http` e `products/uc12-cadastrar-produto/test-scenarios.http`).
 - [x] **`.http` de apoio criados (ou Não aplicável).** — **Confirmado** (`orders/orders-controller.http` e `orders/test-scenarios.http`).
 - [x] **`containerizado/README.md`, `00-smoke.http`, `01-...http`, `02-...http` criados.** — **Confirmado** (Estrutura e documentação completa presente em `http-rest-client/containerizado/`).
 - [x] **`containerizado/run-checks.sh` criado e executável.** — **Confirmado** (Permissões `-rwxr-xr-x` / modo Git `100755`).

@@ -38,21 +38,3 @@ Content-Type: application/json
   "name": "Bolo de Cenoura Sem Glúten",
   "propriedadeInvalida": "descartar"
 }
-
-### Listar produtos (UC13), padrão → esperado: 200 OK { items, page: 1, limit: 20, total }
-GET {{baseUrl}}/products
-
-### Listar produtos com página e limite → esperado: 200 OK (page=2, limit=5)
-GET {{baseUrl}}/products?page=2&limit=5
-
-### Listar produtos com página além do fim → esperado: 200 OK com items vazio
-GET {{baseUrl}}/products?page=100000
-
-### Listar produtos com page=0 → esperado: 400 Bad Request
-GET {{baseUrl}}/products?page=0
-
-### Listar produtos com limit acima do teto (101) → esperado: 400 Bad Request
-GET {{baseUrl}}/products?limit=101
-
-### Listar produtos com limit não numérico → esperado: 400 Bad Request
-GET {{baseUrl}}/products?limit=abc
