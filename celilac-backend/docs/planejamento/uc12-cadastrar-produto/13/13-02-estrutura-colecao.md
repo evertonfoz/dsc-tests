@@ -22,6 +22,7 @@ http-rest-client/
     ├── 00-smoke.http
     ├── 01-products-cadastrar-produto.http
     ├── 02-orders-fronteira.http
+    ├── 03-products-listar-produtos.http
     └── run-checks.sh
 ```
 
@@ -39,6 +40,7 @@ http-rest-client/
 | `orders/test-scenarios.http` | Cenários do recurso de apoio | Separação entre Grupo A (fronteira HTTP sem dados) e Grupo B (dependentes de seed). |
 | `containerizado/00-smoke.http` | Sanidade no contêiner | Verificação de disponibilidade da API após subida da stack Docker Compose. |
 | `containerizado/01-products-cadastrar-produto.http` | Caso de uso principal no contêiner | Execução do UC12 com encadeamento de resposta (`# @name` e variável `@produtoId`) para consulta SQL direta. |
+| `containerizado/03-products-listar-produtos.http` | Listagem do UC13 no contêiner | `GET /products` com paginação e parâmetros inválidos (200, 400, 404); somente leitura. |
 | `containerizado/02-orders-fronteira.http` | Fronteira de apoio no contêiner | Validação de pipe (`ParseUUIDPipe`) e exceção de domínio (`OrderNotFoundException`). |
 | `containerizado/README.md` | Documentação operacional | Manual com pré-requisitos, regras de segurança, comandos SQL de auditoria e escopo de execução. |
 | `containerizado/run-checks.sh` | Verificação automatizada | Script bash com asserções, contadores `pass`/`fail`, teste de durabilidade e código de saída semântico. |

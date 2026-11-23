@@ -18,6 +18,8 @@ docker compose up -d --build api
 docker compose ps
 ```
 
+As checagens do UC13 leem a coluna `deletedAt`: a migration `AddDeletedAtToProducts` precisa estar aplicada no banco de desenvolvimento antes de rodar o `run-checks.sh` (o script só lê e não aplica migrations; ver `pnpm migration:show:prod`).
+
 ---
 
 ## 3. Conteúdo da Pasta
@@ -26,6 +28,7 @@ docker compose ps
 |---|---|
 | `00-smoke.http` | Testes de sanidade da API (`GET /` retornando 200 e rota inexistente retornando 404). |
 | `01-products-cadastrar-produto.http` | Cenários do caso de uso principal `UC12 — Cadastrar Produto`, com encadeamento de identificador via `# @name`. |
+| `03-products-listar-produtos.http` | Cenários do caso de uso `UC13 — Listar Produtos` (`GET /products`): listagem padrão, `page` e `limit`, página além do fim, parâmetros inválidos (`400`) e rota inexistente (`404`). Somente leitura. |
 | `02-orders-fronteira.http` | Cenários de fronteira HTTP do recurso de apoio `orders` sem dependência de dados (Grupo A). |
 | `run-checks.sh` | Script bash automatizado com asserções, contadores `pass`/`fail` e código de saída semântico. |
 | `README.md` | Este guia de referência operacional e segurança. |
@@ -58,9 +61,10 @@ BASE_URL="http://localhost:3200" ./http-rest-client/containerizado/run-checks.sh
 2. **Smoke:** `GET /` devolve `200` e `GET /not-found-route` devolve `404`.
 3. **Migrações:** Execução de `typeorm migration:show` esperando `0` migrações pendentes (somente leitura).
 4. **Contrato do Caso de Uso (`POST /products`):** Rejeição com `400` para nome vazio, ausente e tipo inválido; sucesso com `201` retornando `productId` e `name`; e descarte de campos extras (`whitelist`).
-5. **Recurso de Apoio (`POST /orders/:id/confirm`):** Rejeição com `400` para ID malformado e `404` para UUID inexistente.
-6. **Persistência no PostgreSQL:** Confere via `psql` no contêiner se o produto cadastrado foi gravado na tabela `products.products`.
-7. **Durabilidade (flag `--durability`):** Reinicia **apenas** o contêiner da API (`docker compose restart api`), aguarda a reconexão (health check em polling de até 30s) e comprova que o registro continua intacto no banco de dados.
+5. **Contrato do UC13 (`GET /products`):** `200` com `items`, `page`, `limit` e `total`; itens só com `productId` e `name`; limite padrão `20`; `400` para `limit=101`, `page=0` e `limit` não numérico; e `total` igual à contagem de produtos ativos (`deletedAt IS NULL`) no banco.
+6. **Recurso de Apoio (`POST /orders/:id/confirm`):** Rejeição com `400` para ID malformado e `404` para UUID inexistente.
+7. **Persistência no PostgreSQL:** Confere via `psql` no contêiner se o produto cadastrado foi gravado na tabela `products.products`.
+8. **Durabilidade (flag `--durability`):** Reinicia **apenas** o contêiner da API (`docker compose restart api`), aguarda a reconexão (health check em polling de até 30s) e comprova que o registro continua intacto no banco de dados.
 
 ### Código de Saída
 * `0`: Todas as asserções foram aprovadas (`0 falha(s)`).

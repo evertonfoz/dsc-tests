@@ -38,6 +38,18 @@ Antes de agir, **leia** estes materiais. Eles definem o padrão de processo; os 
 | `prompts/13` | Coleção REST Client (`.http`) e verificação automatizada (`run-checks.sh`) com **Esperado × Obtido**. |
 | `docs/uc/`, `docs/adr/`, `project-profile.md`, `method/` (se existirem) | Estado real dos UCs existentes, decisões já tomadas (ADRs) e playbooks por fase. |
 
+### 2.1. Localizar as fontes no workspace em execução
+
+A tabela acima descreve o workspace de origem deste prompt (o projeto CeliLac). Os caminhos são **referências**, não suposições: o workspace em execução pode ter outra estrutura. Logo **depois** de receber as quatro respostas de 3.0 e **antes** de 3.1 (a primeira resposta continua sendo só as quatro perguntas, ver seção 6), verifique onde cada fonte está:
+
+1. Para cada linha da tabela, procure no workspace atual, em modo somente leitura (`ls`, busca por nome), aceitando variações de nome: os Materiais `prompts/01` a `prompts/13` podem ter sufixo (ex.: `01-planejamento-....md`, `10A-....md`) e as pastas `docs/`, `method/` e o `project-profile.md` podem estar em outro nível. Nada é criado nem alterado.
+2. Monte uma tabela curta: **fonte esperada · encontrada? · caminho real**.
+3. Se todas foram encontradas, siga e use os **caminhos reais** encontrados, não os da tabela.
+4. Se faltar alguma fonte (principalmente o modelo de especificação e os Materiais), **pare e pergunte em uma única mensagem**: liste o que foi achado e o que não foi, e peça ao estudante que informe o caminho de cada fonte ausente ou diga que ela não existe. Se não existir, ofereça as saídas: usar só o `REF` informado em 3.0, usar o modelo de 13 seções descrito neste prompt, ou receber o documento anexado. **Não reconstrua o conteúdo de uma fonte ausente de memória.**
+5. As fontes marcadas "(se existirem)" (`docs/uc/`, `docs/adr/`, `project-profile.md`, `method/`) não bloqueiam a execução quando faltam. Registre como **Observação** que ADRs, estado dos UCs e playbooks não puderam ser verificados e pergunte, na mesma mensagem do passo 4, se existe um equivalente em outro caminho.
+6. Se o estudante informar um caminho fora do workspace aberto, avise e peça confirmação antes de ler.
+7. Grave o mapa **fonte → caminho real** em `00-uc-referencia.md` (pasta `ARTEFATOS`) e use-o em todo o restante da execução.
+
 ### Regras herdadas que continuam valendo
 
 1. Não invente requisitos, regras, endpoints, números de Issue/PR, portas, scripts, commits nem resultados de execução. Tudo que não estiver confirmado é **proposta** ou **pergunta**.
@@ -227,8 +239,33 @@ Adapte ao que o UC aprovado exigir; não crie unidade sem justificativa nele:
 | 4 | Implementação TypeORM do Repository + mapper de persistência | Infraestrutura | Migration **apenas** se o esquema mudar (ex.: índice de ordenação). |
 | 5 | Endpoint `GET /<recurso>` (rota a **confirmar** no UC), DTO de resposta com exatamente os `CAMPOS`, validação de query (se houver paginação/filtro) | HTTP | Reutilizar DTO/mapper de resposta existentes quando coincidirem com os `CAMPOS`; se não coincidirem, criar DTO próprio da listagem. |
 | 6 | Testes: unitários (Service), controller, integração (sem mocks de Service/Repository), contrato HTTP | Testes | Cobrir cada CA e cada FA/FE. |
-| 7 | Coleção `.http` e `run-checks.sh` | Verificação | Esperado × Obtido, ambiente containerizado. |
+| 7 | Cenários `.http` (desenvolvimento e contêiner) e checagens no `run-checks.sh` | Verificação | Esperado × Obtido, ambiente containerizado. **Organização obrigatória em pastas por caso de uso**: ver 4.2.1. |
 | 8 | Documentação técnica/ADR para decisões novas (paginação, ordenação, formato) | Documentação | Só se houver decisão real. |
+
+#### 4.2.1. Cenários `.http`: o que criar e como organizar
+
+Os cenários `.http` fazem parte da entrega (unidade 7) e seguem a coleção do Material 13. Antes de criar, **leia** `http-rest-client/` e o `README.md` de `containerizado/`; reproduza a convenção que já existe, sem inventar outra.
+
+```text
+http-rest-client/
+├── <recurso>/                              (ex.: products)
+│   ├── uc<NN>-<operacao>-<entidade>/       (ex.: uc13-listar-produtos)
+│   │   ├── <recurso>-controller.http       requisições do ciclo de implementação
+│   │   └── test-scenarios.http             matriz de cenários, um por CA/FA/FE
+│   └── uc<MM>-.../                         UCs anteriores, cada um na sua subpasta
+└── containerizado/
+    ├── NN-<recurso>-<operacao>.http        ex.: 03-products-listar-produtos.http (somente leitura)
+    ├── README.md                           atualizar a tabela de arquivos e a lista do que o script confere
+    └── run-checks.sh                       acrescentar as checagens do UC (Esperado × Obtido)
+```
+
+Regras:
+
+1. **Uma subpasta por caso de uso** dentro da pasta do recurso. Se os arquivos do UC anterior estiverem soltos em `<recurso>/`, mova-os com `git mv` para a subpasta do seu UC, **sem alterar o conteúdo**, e atualize todos os documentos que citam os caminhos antigos (`grep -rn "<recurso>/<arquivo>"`). **Pergunte antes de mover.**
+2. Cada cenário traz, no título, o resultado esperado (`→ esperado: 200 OK ...`) e o CA/FA/FE que cobre. Cubra, no mínimo: listagem padrão, parâmetros de paginação, página além do fim (lista vazia), cada parâmetro inválido (`400`) e rota inexistente (`404`).
+3. Os arquivos `.http` não fazem asserções; a prova automatizada fica no `run-checks.sh`. Atualize ali qualquer checagem que fixe o **contrato anterior** (ex.: `GET /<recurso>` → `404`) e acrescente as do UC.
+4. Confira os status esperados **sem gravar dados**: use só `GET` contra a API local; cenários com `POST` não se executam sem autorização (regra 6).
+5. Atualize o `README.md` de `containerizado/` e a documentação que desenha a árvore da coleção (ex.: `docs/planejamento/<uc de referência>/.../estrutura-colecao`), para os arquivos novos não ficarem fora dos índices.
 
 ### 4.3. Ciclo por unidade (igual aos Materiais 04–06)
 
@@ -251,18 +288,32 @@ Documente e teste, comparando **Esperado × Obtido**, no mínimo:
 - Parâmetros de consulta inválidos (se houver paginação/filtro): `400` via `ValidationPipe`.
 - Vazamento de campos internos: a resposta contém **apenas** os `CAMPOS` definidos; o que não foi aprovado não aparece.
 - Rota inexistente continua `404`.
+- **Contrato anterior substituído:** se a rota da listagem já era testada como `404` (em testes ou no `run-checks.sh`), esses testes mudam de propósito e cada mudança deve citar o CA que a autoriza.
 
 ### 4.5. Verificação e evidências
 
 Execute e registre a saída real de: `pnpm build`, `pnpm lint`, `pnpm test`, `pnpm test:integration` (banco de testes), `pnpm test:e2e` (se aplicável) e, no ambiente containerizado, o `run-checks.sh` com os novos cenários. Falhas já conhecidas e documentadas devem ser identificadas como tal; falhas novas são **Problema**.
 
+**Atenção ao `run-checks.sh`:** ele roda contra a API do contêiner e o banco de **desenvolvimento**, grava produtos via `POST` (como no UC12) e, se o UC mudar o esquema, exige a migration já aplicada nesse banco. Isso afeta o ambiente do estudante: **peça autorização expressa** antes de reconstruir a API, aplicar a migration no banco de desenvolvimento ou executar o script. Sem autorização, registre como "Aguardando evidência" e deixe o CI (smoke do Compose) provar.
+
 Confirme também a pureza arquitetural (Material 12): entidade sem imports externos, Service sem TypeORM/DTO HTTP, Controller sem TypeORM, contrato do Repository sem tipos ORM.
 
 ### 4.6. Encerramento
 
-1. Atualize `docs/uc/<uc>/state.yaml` (se existir) e rode `method/scripts/check-state.sh` e `node method/scripts/check-links.mjs`.
+1. **Verificação de consistência**, conforme o que existe no workspace (mapa de fontes da seção 2.1):
+   - **Com `method/` e `docs/uc/<uc>/state.yaml`:** atualize o `state.yaml` e rode `method/scripts/check-state.sh` (com `--remote` se o `gh` estiver autenticado) e `node method/scripts/check-links.mjs`.
+   - **Sem a pasta `method/`** (ou sem esses scripts): **não** crie nem invente `state.yaml`, scripts ou validadores, e não pare por causa disso. Registre como **Observação** que os validadores do método não estão disponíveis e faça a conferência manual, somente leitura, anotando o resultado real de cada item:
+     1. todo arquivo e caminho citado nos artefatos existe (`ls` em cada caminho);
+     2. todo número de Issue e PR citado existe (`gh issue view <n>` e `gh pr view <n>`, se o `gh` estiver autenticado; senão marque **Aguardando evidência**);
+     3. cada CA da especificação aparece na tabela de cobertura com o teste que o prova, ou como pendente;
+     4. os nomes de testes citados existem nos arquivos de teste (`grep`).
+   - **Com `method/` mas sem `state.yaml`:** pergunte ao estudante se quer criar o estado do UC a partir do template do método; sem resposta afirmativa, siga a conferência manual acima.
 2. Produza um relatório curto, só com fatos: CAs atendidos (com evidência), CAs pendentes, decisões, riscos, perguntas.
-3. Para integração, entregue um **roteiro** (como o `12-roteiro-conclusao-uc12.md`) com PRs, ordem de merge e fechamento de Issues. **Não execute** merge nem feche Issues; quem decide é o estudante.
+3. Para integração, entregue um **roteiro de conclusão** com PRs, ordem de merge e fechamento de Issues. **Não execute** merge nem feche Issues; quem decide é o estudante. O roteiro não depende de nenhum modelo externo; se o `12-roteiro-conclusao-uc12.md` existir (mapa da seção 2.1), use-o como referência de formato. A estrutura mínima, em um arquivo na pasta `ARTEFATOS` (ex.: `roteiro-conclusao-uc<NN>.md`), é:
+   1. **Tabela de passos**, na ordem de execução, com as colunas **Passo · Ação · Situação** (`Feito`, `Aberto para revisão` ou `Pendente (estudante)`). Inclua: merge de cada PR (e a ordem entre eles), fechamento de cada Issue com link para o PR e para a evidência, fechamento do Epic, movimentação dos itens do Project para `Done` e, se houver `state.yaml`, a aprovação dos gates. Só marque `Feito` o que foi realmente executado, com autorização expressa.
+   2. **Provas disponíveis:** caminhos da tabela de cobertura, da auditoria e da verificação no contêiner (ou **Aguardando evidência**).
+   3. **Ressalvas:** desvios do método, falhas conhecidas fora do escopo e alterações feitas no ambiente do estudante (banco de desenvolvimento, migrations).
+   4. **Encerramento:** seção acrescentada ao final, com data, só quando o estudante confirmar que o UC foi concluído.
 
 ---
 
@@ -271,8 +322,31 @@ Confirme também a pureza arquitetural (Material 12): entidade sem imports exter
 - Etapa 1: uma seção por item de 3.0 a 3.5, com tabelas.
 - Etapa 2: por unidade — objetivo, arquivos tocados, saída RED, saída GREEN, decisão de refatoração, regressão, commit sugerido.
 - Sempre termine cada resposta com **"Próximo passo"** e **"Perguntas em aberto"**.
-- Salve os artefatos em Markdown, organizados por finalidade, **somente na pasta `ARTEFATOS`**, sem sobrescrever arquivos existentes sem inspecioná-los antes. Ao final de cada etapa, liste os arquivos gravados (caminho completo).
+- Salve os artefatos em Markdown, organizados por finalidade, **somente na pasta `ARTEFATOS`**, sem sobrescrever arquivos existentes sem inspecioná-los antes. Ao final de cada etapa, liste os arquivos gravados (caminho completo). Os cenários `.http` seguem a organização da seção 4.2.1 e não ficam na pasta `ARTEFATOS`. O resumo final da seção 7 também fica fora dela, na pasta deste prompt.
 
 ## 6. PRIMEIRA RESPOSTA
 
-Sua primeira resposta deve ser **apenas** as quatro perguntas de 3.0 (UC de referência, entidade, dados retornados e destino dos artefatos), sem busca, sem código e sem documentos. Para a pergunta 3, mostre os atributos reais da entidade somente **depois** de a entidade ser confirmada; se necessário, faça as perguntas 1, 2 e 4 primeiro e a 3 na mensagem seguinte. Só então apresente o resultado de 3.1.
+Sua primeira resposta deve ser **apenas** as quatro perguntas de 3.0 (UC de referência, entidade, dados retornados e destino dos artefatos), sem busca, sem código e sem documentos. Para a pergunta 3, mostre os atributos reais da entidade somente **depois** de a entidade ser confirmada; se necessário, faça as perguntas 1, 2 e 4 primeiro e a 3 na mensagem seguinte. Só então apresente o resultado de 3.1. **Entre as respostas e o 3.1**, execute a localização das fontes da seção 2.1 (somente leitura) e, se faltar alguma, pergunte onde estão antes de seguir.
+
+## 7. RESUMO FINAL DA EXECUÇÃO (arquivo)
+
+Ao concluir a Etapa 2 (depois do roteiro de conclusão de 4.6) ou sempre que o estudante pedir, **gere o resumo final da execução em um arquivo**, escrito para o estudante ler com facilidade: texto corrido, em português, com títulos curtos e poucas tabelas. O relatório de fatos de 4.6 continua existindo; este resumo conta a história inteira em linguagem simples.
+
+**Onde gravar:** na mesma pasta deste prompt, com o nome `uc-listar-resumo-da-execucao-uc<NN>.md` (substitua `<NN>` pelo código do `ALVO`; ex.: `uc-listar-resumo-da-execucao-uc13.md`). Se o arquivo já existir, inspecione e mostre a diferença antes de sobrescrever. Não faça commit sem o estudante pedir; push e PR continuam exigindo confirmação.
+
+**Conteúdo, nesta ordem:**
+
+1. **Ponto de partida:** o que o prompt pede e como a execução começou.
+2. **Decisões do estudante:** `REF`, `ENTIDADE`, `CAMPOS`, `ALVO`, ator, paginação, lista vazia, soft delete (se houver), rota, ordenação e o que ele autorizou a versionar.
+3. **Etapa 1:** o que foi buscado, a decisão A ou B e os documentos criados (caminhos).
+4. **Planejamento no GitHub:** Epic, Sub-Issues, Project e `state.yaml`, com os números **reais**.
+5. **Etapa 2:** o que foi implementado em cada camada (núcleo, HTTP, persistência), o contrato, os cenários `.http` (com a organização de 4.2.1) e a auditoria.
+6. **O que deu errado ou ficou diferente do planejado:** cada desvio do método ou do prompt, inclusive RED que não falhou, correção de GREEN, divergências encontradas e ajustes de ferramentas. Registre também o que foi esquecido e corrigido depois.
+7. **Autorizações que afetaram o ambiente do estudante:** banco de desenvolvimento, migrations, `migration:revert`, merges, fechamento de issues, aprovação de gates e remoção de branches ou worktrees.
+8. **Resultados verificados:** comandos executados e saídas reais (contagens de testes que passam e falham, falhas conhecidas identificadas como tal, CI).
+9. **O que ainda não tem prova:** tudo que ficou **Aguardando evidência**.
+10. **O que aconteceu além do prompt:** trabalho extra pedido durante a sessão (índice, versionamento do prompt, reorganização de arquivos, sincronização da pasta local).
+11. **Onde está tudo:** repositório remoto e pasta local, com caminhos e números de issues/PRs/commits; diga se algo existe **só localmente**.
+12. **O que ficou pendente.**
+
+**Regras:** só fatos obtidos de fato nesta execução (regra 1); número de issue, PR e commit só se foi retornado por um comando; diferencie **Planejado × Documentado × Proposto × Confirmado × Efetivamente executado** (regra 9); sem autoavaliação de "aprovado". Termine a resposta com a lista do arquivo gravado (caminho completo), **"Próximo passo"** e **"Perguntas em aberto"**.
