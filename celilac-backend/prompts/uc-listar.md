@@ -300,9 +300,20 @@ Confirme também a pureza arquitetural (Material 12): entidade sem imports exter
 
 ### 4.6. Encerramento
 
-1. Atualize `docs/uc/<uc>/state.yaml` (se existir) e rode `method/scripts/check-state.sh` e `node method/scripts/check-links.mjs`.
+1. **Verificação de consistência**, conforme o que existe no workspace (mapa de fontes da seção 2.1):
+   - **Com `method/` e `docs/uc/<uc>/state.yaml`:** atualize o `state.yaml` e rode `method/scripts/check-state.sh` (com `--remote` se o `gh` estiver autenticado) e `node method/scripts/check-links.mjs`.
+   - **Sem a pasta `method/`** (ou sem esses scripts): **não** crie nem invente `state.yaml`, scripts ou validadores, e não pare por causa disso. Registre como **Observação** que os validadores do método não estão disponíveis e faça a conferência manual, somente leitura, anotando o resultado real de cada item:
+     1. todo arquivo e caminho citado nos artefatos existe (`ls` em cada caminho);
+     2. todo número de Issue e PR citado existe (`gh issue view <n>` e `gh pr view <n>`, se o `gh` estiver autenticado; senão marque **Aguardando evidência**);
+     3. cada CA da especificação aparece na tabela de cobertura com o teste que o prova, ou como pendente;
+     4. os nomes de testes citados existem nos arquivos de teste (`grep`).
+   - **Com `method/` mas sem `state.yaml`:** pergunte ao estudante se quer criar o estado do UC a partir do template do método; sem resposta afirmativa, siga a conferência manual acima.
 2. Produza um relatório curto, só com fatos: CAs atendidos (com evidência), CAs pendentes, decisões, riscos, perguntas.
-3. Para integração, entregue um **roteiro** (como o `12-roteiro-conclusao-uc12.md`) com PRs, ordem de merge e fechamento de Issues. **Não execute** merge nem feche Issues; quem decide é o estudante.
+3. Para integração, entregue um **roteiro de conclusão** com PRs, ordem de merge e fechamento de Issues. **Não execute** merge nem feche Issues; quem decide é o estudante. O roteiro não depende de nenhum modelo externo; se o `12-roteiro-conclusao-uc12.md` existir (mapa da seção 2.1), use-o como referência de formato. A estrutura mínima, em um arquivo na pasta `ARTEFATOS` (ex.: `roteiro-conclusao-uc<NN>.md`), é:
+   1. **Tabela de passos**, na ordem de execução, com as colunas **Passo · Ação · Situação** (`Feito`, `Aberto para revisão` ou `Pendente (estudante)`). Inclua: merge de cada PR (e a ordem entre eles), fechamento de cada Issue com link para o PR e para a evidência, fechamento do Epic, movimentação dos itens do Project para `Done` e, se houver `state.yaml`, a aprovação dos gates. Só marque `Feito` o que foi realmente executado, com autorização expressa.
+   2. **Provas disponíveis:** caminhos da tabela de cobertura, da auditoria e da verificação no contêiner (ou **Aguardando evidência**).
+   3. **Ressalvas:** desvios do método, falhas conhecidas fora do escopo e alterações feitas no ambiente do estudante (banco de desenvolvimento, migrations).
+   4. **Encerramento:** seção acrescentada ao final, com data, só quando o estudante confirmar que o UC foi concluído.
 
 ---
 
