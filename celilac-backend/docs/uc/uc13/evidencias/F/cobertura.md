@@ -21,6 +21,6 @@ Fatos de 2026-11-23, nesta branch (`feature/uc13-fatias-nucleo`). "Aguardando ev
 
 ## Itens sem prova completa
 - Fase E executada em 2026-11-23, com autorização do estudante: migration aplicada ao banco de desenvolvimento (`pnpm migration:run:prod`), API reconstruída da branch e `run-checks.sh --durability` com 30 ok e 0 falha (`docs/uc/uc13/evidencias/F/run-checks.txt`). O script grava produtos no banco de desenvolvimento via `POST /products`, como já fazia no UC12.
-- Collation: fixada em `pt-BR-x-icu` na consulta (existe na imagem `postgres:17`); se um banco vier sem ICU, a consulta falha em vez de ordenar diferente. O adaptador em memória usa `Intl.Collator('pt-BR')`, sem garantia de igualdade em todos os casos de borda.
+- Collation: fixada em `pt-BR-x-icu` na consulta (existe na imagem `postgres:17`); se um banco vier sem ICU, a consulta falha em vez de ordenar diferente. O adaptador em memória usa `Intl.Collator('pt-BR')`; o teste de paridade com 23 nomes passou (`docs/uc/uc13/evidencias/F/paridade-collation.txt`), sem garantia para outros casos de borda.
 - Falha real de consulta no PostgreSQL (500): só exercitada com repositório simulado.
 - `pnpm test`: 4 falhas conhecidas de `orders`; `pnpm test:e2e`: 1 falha conhecida de `orders` (ADR-001). Sem falhas novas.

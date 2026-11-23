@@ -3,6 +3,7 @@ import { DataSource, type Repository } from 'typeorm';
 import { afterAll, beforeAll, beforeEach, describe, expect, it } from 'vitest';
 import { createTestDataSource } from '../../../database/test-data-source.js';
 import { Product } from '../../../modules/products/entities/product.entity.js';
+import { InMemoryProductsRepository } from '../../../modules/products/repositories/in-memory-products.repository.js';
 import { ProductsService } from '../../../modules/products/services/products.service.js';
 import { ProductOrmEntity } from './product.orm-entity.js';
 import { TypeOrmProductsRepository } from './typeorm-products.repository.js';
@@ -251,5 +252,50 @@ describe('TypeOrmProductsRepository — persistência real no PostgreSQL', () =>
     const page = await new ProductsService(repository).listProducts();
 
     expect(page.items.map((product) => product.name)).toEqual(['A B', 'AA']);
+  });
+
+  it('should list names in the same order in the in-memory and PostgreSQL adapters (parity, CA08)', async () => {
+    const names = [
+      'abacaxi',
+      'Ácido',
+      'arroz',
+      'Banana',
+      'Zebra',
+      'A B',
+      'AA',
+      'a-b',
+      'ab',
+      'Água',
+      'água',
+      'Agua',
+      'Éclair',
+      'eclair',
+      'Eclair',
+      '10 itens',
+      '2 itens',
+      '_x',
+      'Ñandu',
+      'nata',
+      'Nata',
+      'ça',
+      'cb',
+    ];
+    const memory = new InMemoryProductsRepository();
+    for (const [index, name] of names.entries()) {
+      const product = new Product(
+        `00000000-0000-4000-8000-${String(index).padStart(12, '0')}`,
+        name,
+      );
+      await repository.save(product);
+      await memory.save(product);
+    }
+    const query = { offset: 0, limit: names.length };
+
+    const fromDatabase = await repository.findActivePage(query);
+    const fromMemory = await memory.findActivePage(query);
+
+    expect(fromMemory.items.map((product) => product.name)).toEqual(
+      fromDatabase.items.map((product) => product.name),
+    );
   });
 });
