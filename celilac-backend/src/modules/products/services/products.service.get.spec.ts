@@ -1,0 +1,42 @@
+import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { Product } from '../entities/product.entity.js';
+import { InMemoryProductsRepository } from '../repositories/in-memory-products.repository.js';
+import { ProductsService } from './products.service.js';
+
+const PRODUCT_ID = '11111111-1111-4111-8111-111111111111';
+
+describe('ProductsService.getProductById (UC14)', () => {
+  let repository: InMemoryProductsRepository;
+  let service: ProductsService;
+
+  beforeEach(() => {
+    repository = new InMemoryProductsRepository();
+    service = new ProductsService(repository);
+  });
+
+  it('should return the active product found by productId (CA01)', async () => {
+    await repository.save(new Product(PRODUCT_ID, 'Leite sem lactose'));
+    await repository.save(
+      new Product('22222222-2222-4222-8222-222222222222', 'Outro produto'),
+    );
+
+    const product = await service.getProductById(PRODUCT_ID);
+
+    expect({ productId: product.productId, name: product.name }).toEqual({
+      productId: PRODUCT_ID,
+      name: 'Leite sem lactose',
+    });
+  });
+
+  it('should not change the stored products when searching (CA08)', async () => {
+    await repository.save(new Product(PRODUCT_ID, 'Leite sem lactose'));
+    const saveSpy = vi.spyOn(repository, 'save');
+    const before = await repository.findActivePage({ offset: 0, limit: 100 });
+
+    await service.getProductById(PRODUCT_ID);
+
+    const after = await repository.findActivePage({ offset: 0, limit: 100 });
+    expect(saveSpy).not.toHaveBeenCalled();
+    expect(after).toEqual(before);
+  });
+});
