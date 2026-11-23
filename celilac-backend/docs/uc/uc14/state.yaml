@@ -1,21 +1,21 @@
-# Estado do UC14 (Buscar Produto por Identificador). Fase A em andamento: publicada, aguardando validação do estudante.
+# Estado do UC14 (Buscar Produto por Identificador). Fase A concluída em 2026-11-23: plano aprovado por evertonfoz.
 uc: UC14
 nome: Buscar Produto por Identificador
 documento: ../../../prompts/uc-14-buscar-produto.md
 arquetipo: consultar
 epic: { issue: 126, estado: open }
-fase_atual: A
+fase_atual: B
 
 fases:
   A:
-    status: em_andamento
+    status: concluida
     relatorio: relatorios/A.md
     gate:
-      - { item: "Epic e Sub-Issues criadas e reconciliadas com este arquivo", resultado: pendente }
-      - { item: "GitHub Project configurado com os 5 estados", resultado: pendente }
+      - { item: "Epic e Sub-Issues criadas e reconciliadas com este arquivo", resultado: aprovado, por: evertonfoz }
+      - { item: "GitHub Project configurado com os 5 estados", resultado: aprovado, por: evertonfoz }
     evidencias: [evidencias/A/publicacao.txt]
   B:
-    status: pendente
+    status: em_andamento
     relatorio: null
     gate:
       - { item: "Todas as fatias integradas na branch principal", resultado: pendente }

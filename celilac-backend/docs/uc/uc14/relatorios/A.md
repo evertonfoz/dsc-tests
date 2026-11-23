@@ -26,11 +26,11 @@ Publicar Epic, fatias e Project do UC14 e reconciliá-los com `docs/uc/uc14/stat
 ## 4. Gate de saída
 | Verificação | Como verificar | Resultado | Validado por |
 |---|---|---|---|
-| Epic e Sub-Issues conferem com o state.yaml | `check-state.sh --remote` | pendente | pessoa/CI |
-| Project com os 5 estados e itens posicionados | listagem do Project #6 | pendente | pessoa |
+| Epic e Sub-Issues conferem com o state.yaml | `check-state.sh --remote` (OK) | aprovado | evertonfoz (2026-11-23) |
+| Project com os 5 estados e itens posicionados | listagem do Project #6 | aprovado | evertonfoz (2026-11-23) |
 
 ## 5. Decisões e hipóteses
 Hipótese: corte em 5 fatias (ver `prompts/03-planejamento-github.md`), a validar pelo estudante.
 
 ## 6. Pendências e riscos
-O agente não marca o gate como aprovado. Falhas de `orders` são anteriores ao UC14.
+O gate foi aprovado pelo estudante, não pelo agente. Falhas de `orders` são anteriores ao UC14.
