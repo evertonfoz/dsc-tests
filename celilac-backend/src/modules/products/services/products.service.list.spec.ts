@@ -52,4 +52,11 @@ describe('ProductsService.listProducts (UC13)', () => {
 
     expect(product.deletedAt).toBeNull();
   });
+
+  it('should return an empty list with total 0 when there are no active products (CA02)', async () => {
+    const page = await service.listProducts();
+
+    expect(page.items).toEqual([]);
+    expect(page.total).toBe(0);
+  });
 });
