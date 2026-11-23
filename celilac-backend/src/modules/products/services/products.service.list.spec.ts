@@ -107,6 +107,19 @@ describe('ProductsService.listProducts (UC13)', () => {
     ]);
   });
 
+  it('should not ignore spaces when ordering names, like the pinned ICU pt-BR collation (CA08)', async () => {
+    await repository.save(
+      new Product('00000000-0000-4000-8000-000000000001', 'AA'),
+    );
+    await repository.save(
+      new Product('00000000-0000-4000-8000-000000000002', 'A B'),
+    );
+
+    const page = await service.listProducts();
+
+    expect(page.items.map((product) => product.name)).toEqual(['A B', 'AA']);
+  });
+
   it('should order by name then productId deterministically (CA08)', async () => {
     await repository.save(
       new Product('00000000-0000-4000-8000-000000000003', 'Banana'),

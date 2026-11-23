@@ -241,4 +241,15 @@ describe('TypeOrmProductsRepository — persistência real no PostgreSQL', () =>
       'Zebra',
     ]);
   });
+
+  it('should pin the ICU pt-BR collation instead of the database default, so spaces are not ignored (CA08)', async () => {
+    // A collation padrão do banco (glibc en_US) ignora o espaço no 1º nível ("AA" < "A B");
+    // a ICU pt-BR não ignora ("A B" < "AA").
+    await repository.save(new Product(randomUUID(), 'AA'));
+    await repository.save(new Product(randomUUID(), 'A B'));
+
+    const page = await new ProductsService(repository).listProducts();
+
+    expect(page.items.map((product) => product.name)).toEqual(['A B', 'AA']);
+  });
 });

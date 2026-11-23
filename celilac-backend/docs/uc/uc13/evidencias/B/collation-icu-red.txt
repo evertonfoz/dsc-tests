@@ -1,0 +1,47 @@
+The plugin "vite-tsconfig-paths" is detected. Vite now supports tsconfig paths resolution natively via the resolve.tsconfigPaths option. You can remove the plugin and set resolve.tsconfigPaths: true in your Vite config instead.
+
+ RUN  v4.1.11 /private/tmp/claude-501/-Users-evertoncoimbradearaujo-Documents-GitHub-dsc-tests-celilac-backend/b14ddcd5-f649-4907-906a-54492d8d9a18/scratchpad/wt-uc13/celilac-backend
+
+
+ Test Files  1 passed (1)
+      Tests  15 passed (15)
+   Start at  11:16:11
+   Duration  239ms (transform 29ms, setup 0ms, import 158ms, tests 4ms, environment 0ms)
+
+The plugin "vite-tsconfig-paths" is detected. Vite now supports tsconfig paths resolution natively via the resolve.tsconfigPaths option. You can remove the plugin and set resolve.tsconfigPaths: true in your Vite config instead.
+
+ RUN  v4.1.11 /private/tmp/claude-501/-Users-evertoncoimbradearaujo-Documents-GitHub-dsc-tests-celilac-backend/b14ddcd5-f649-4907-906a-54492d8d9a18/scratchpad/wt-uc13/celilac-backend
+
+ ❯ src/infrastructure/persistence/products/typeorm-products.repository.postgres.spec.ts (8 tests | 1 failed) 96ms
+     × should pin the ICU pt-BR collation instead of the database default, so spaces are not ignored (CA08) 6ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/infrastructure/persistence/products/typeorm-products.repository.postgres.spec.ts > TypeOrmProductsRepository — persistência real no PostgreSQL > should pin the ICU pt-BR collation instead of the database default, so spaces are not ignored (CA08)
+AssertionError: expected [ 'AA', 'A B' ] to deeply equal [ 'A B', 'AA' ]
+
+- Expected
++ Received
+
+  [
+-   "A B",
+    "AA",
++   "A B",
+  ]
+
+ ❯ src/infrastructure/persistence/products/typeorm-products.repository.postgres.spec.ts:253:55
+    251|     const page = await new ProductsService(repository).listProducts();
+    252|
+    253|     expect(page.items.map((product) => product.name)).toEqual(['A B', …
+       |                                                       ^
+    254|   });
+    255| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 7 passed (8)
+   Start at  11:16:11
+   Duration  449ms (transform 41ms, setup 0ms, import 287ms, tests 96ms, environment 0ms)
+
