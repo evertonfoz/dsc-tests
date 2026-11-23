@@ -1,0 +1,44 @@
+The plugin "vite-tsconfig-paths" is detected. Vite now supports tsconfig paths resolution natively via the resolve.tsconfigPaths option. You can remove the plugin and set resolve.tsconfigPaths: true in your Vite config instead.
+
+ RUN  v4.1.11 /private/tmp/claude-501/-Users-evertoncoimbradearaujo-Documents-GitHub-dsc-tests-celilac-backend/b14ddcd5-f649-4907-906a-54492d8d9a18/scratchpad/wt-uc13/celilac-backend
+
+ ❯ src/infrastructure/persistence/products/typeorm-products.repository.postgres.spec.ts (5 tests | 2 failed) 403ms
+     × should list only active products with the real database, excluding soft-deleted ones from the total (CA05) 6ms
+     × should keep rows created without deletedAt active after the UC13 migration (CA11) 3ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/infrastructure/persistence/products/typeorm-products.repository.postgres.spec.ts > TypeOrmProductsRepository — persistência real no PostgreSQL > should list only active products with the real database, excluding soft-deleted ones from the total (CA05)
+QueryFailedError: column "deletedAt" of relation "products" does not exist
+ ❯ PostgresQueryRunner.query node_modules/.pnpm/typeorm@1.1.2_pg@8.23.1_supports-color@7.2.0_ts-node@10.9.2_@types+node@24.19.0_typescript@6.0.3_/src/driver/postgres/PostgresQueryRunner.ts:345:18
+ ❯ DataSource.query node_modules/.pnpm/typeorm@1.1.2_pg@8.23.1_supports-color@7.2.0_ts-node@10.9.2_@types+node@24.19.0_typescript@6.0.3_/src/data-source/DataSource.ts:545:19
+ ❯ src/infrastructure/persistence/products/typeorm-products.repository.postgres.spec.ts:143:5
+    141|     await repository.save(new Product(randomUUID(), 'Ativo A'));
+    142|     await repository.save(new Product(randomUUID(), 'Ativo B'));
+    143|     await dataSource.query(
+       |     ^
+    144|       'INSERT INTO "products"."products" ("productId", "name", "delete…
+    145|       [randomUUID(), 'Removido'],
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  src/infrastructure/persistence/products/typeorm-products.repository.postgres.spec.ts > TypeOrmProductsRepository — persistência real no PostgreSQL > should keep rows created without deletedAt active after the UC13 migration (CA11)
+QueryFailedError: column "deletedAt" does not exist
+ ❯ PostgresQueryRunner.query node_modules/.pnpm/typeorm@1.1.2_pg@8.23.1_supports-color@7.2.0_ts-node@10.9.2_@types+node@24.19.0_typescript@6.0.3_/src/driver/postgres/PostgresQueryRunner.ts:345:18
+ ❯ DataSource.query node_modules/.pnpm/typeorm@1.1.2_pg@8.23.1_supports-color@7.2.0_ts-node@10.9.2_@types+node@24.19.0_typescript@6.0.3_/src/data-source/DataSource.ts:545:19
+ ❯ src/infrastructure/persistence/products/typeorm-products.repository.postgres.spec.ts:189:18
+    187|     );
+    188|
+    189|     const rows = await dataSource.query<Array<{ deletedAt: Date | null…
+       |                  ^
+    190|       'SELECT "deletedAt" FROM "products"."products" WHERE "productId"…
+    191|       [productId],
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed | 3 passed (5)
+   Start at  10:24:21
+   Duration  793ms (transform 40ms, setup 0ms, import 300ms, tests 403ms, environment 0ms)
+

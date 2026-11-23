@@ -136,4 +136,61 @@ describe('TypeOrmProductsRepository — persistência real no PostgreSQL', () =>
     );
     expect(rows).toHaveLength(0);
   });
+
+  it('should list only active products with the real database, excluding soft-deleted ones from the total (CA05)', async () => {
+    await repository.save(new Product(randomUUID(), 'Ativo A'));
+    await repository.save(new Product(randomUUID(), 'Ativo B'));
+    await dataSource.query(
+      'INSERT INTO "products"."products" ("productId", "name", "deletedAt") VALUES ($1, $2, now())',
+      [randomUUID(), 'Removido'],
+    );
+
+    const page = await new ProductsService(repository).listProducts();
+
+    expect(page.items.map((product) => product.name)).toEqual([
+      'Ativo A',
+      'Ativo B',
+    ]);
+    expect(page.total).toBe(2);
+    expect(page.items.every((product) => product.deletedAt === null)).toBe(
+      true,
+    );
+  });
+
+  it('should order by name then productId and paginate without gaps in the real database (CA04, CA08)', async () => {
+    const ids = [
+      '00000000-0000-4000-8000-000000000003',
+      '00000000-0000-4000-8000-000000000002',
+      '00000000-0000-4000-8000-000000000001',
+    ];
+    await repository.save(new Product(ids[0], 'Banana'));
+    await repository.save(new Product(ids[1], 'Arroz'));
+    await repository.save(new Product(ids[2], 'Arroz'));
+    const service = new ProductsService(repository);
+
+    const first = await service.listProducts({ page: 1, limit: 2 });
+    const second = await service.listProducts({ page: 2, limit: 2 });
+
+    expect(first.items.map((product) => product.productId)).toEqual([
+      ids[2],
+      ids[1],
+    ]);
+    expect(second.items.map((product) => product.productId)).toEqual([ids[0]]);
+    expect(first.total).toBe(3);
+  });
+
+  it('should keep rows created without deletedAt active after the UC13 migration (CA11)', async () => {
+    const productId = randomUUID();
+    await dataSource.query(
+      'INSERT INTO "products"."products" ("productId", "name") VALUES ($1, $2)',
+      [productId, 'Sem deletedAt informado'],
+    );
+
+    const rows = await dataSource.query<Array<{ deletedAt: Date | null }>>(
+      'SELECT "deletedAt" FROM "products"."products" WHERE "productId" = $1',
+      [productId],
+    );
+
+    expect(rows[0].deletedAt).toBeNull();
+  });
 });
