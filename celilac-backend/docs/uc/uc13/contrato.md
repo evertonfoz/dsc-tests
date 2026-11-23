@@ -1,6 +1,6 @@
 # Contrato — GET /products (UC13)
 
-> Fatos vêm dos testes `products.list.controller.spec.ts` (HTTP) e do spec PostgreSQL de persistência, executados em 2026-11-23 (`docs/uc/uc13/evidencias/C/`). Decisões: UC13, ADR-003, ADR-004 e ADR-005. Verificação no ambiente containerizado: **Aguardando evidência** (Fase E).
+> Fatos vêm dos testes `products.list.controller.spec.ts` (HTTP) e do spec PostgreSQL de persistência, executados em 2026-11-23 (`docs/uc/uc13/evidencias/C/`). Decisões: UC13, ADR-003, ADR-004 e ADR-005. Verificação no ambiente containerizado: `docs/uc/uc13/evidencias/F/run-checks.txt` (30 ok, 0 falha).
 
 ## Requisição
 `GET /products?page=<inteiro>&limit=<inteiro>`. Ambos opcionais; `page` ≥ 1 (padrão 1); `limit` entre 1 e 100 (padrão 20; o teto 100 foi confirmado pelo estudante). Parâmetros desconhecidos são ignorados.

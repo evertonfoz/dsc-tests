@@ -1,21 +1,21 @@
-# Estado do UC13 (Listar Produtos). Fase A publicada em 2026-11-23; nenhum gate aprovado: aguarda validação humana.
+# Estado do UC13 (Listar Produtos). Gates da Fase A aprovados por evertonfoz em 2026-11-23; demais gates pendentes de validação humana.
 uc: UC13
 nome: Listar Produtos
 documento: ../../planejamento/uc13-listar-produtos/02-uc-listar-produtos.md
 arquetipo: consultar
 epic: { issue: 104, estado: open }
-fase_atual: A
+fase_atual: C
 
 fases:
   A:
-    status: em_andamento
+    status: concluida
     relatorio: relatorios/A.md
     gate:
-      - { item: "Epic e Sub-Issues criadas e reconciliadas com este arquivo", resultado: pendente }
-      - { item: "GitHub Project configurado com os 5 estados", resultado: pendente }
+      - { item: "Epic e Sub-Issues criadas e reconciliadas com este arquivo", resultado: aprovado, por: evertonfoz }
+      - { item: "GitHub Project configurado com os 5 estados", resultado: aprovado, por: evertonfoz }
     evidencias: [evidencias/A/publicacao.txt]
   B:
-    status: pendente
+    status: em_andamento
     relatorio: null
     gate:
       - { item: "Todas as fatias integradas na branch principal", resultado: pendente }
