@@ -2,6 +2,7 @@ import { randomUUID } from 'node:crypto';
 import { Inject, Injectable } from '@nestjs/common';
 import { InvalidProductNameException } from '../../../common/exceptions/invalid-product-name.exception.js';
 import { ProductPersistenceFailedException } from '../../../common/exceptions/product-persistence-failed.exception.js';
+import { ProductLookupFailedException } from '../../../common/exceptions/product-lookup-failed.exception.js';
 import { ProductNotFoundException } from '../../../common/exceptions/product-not-found.exception.js';
 import { InvalidPaginationException } from '../../../common/exceptions/invalid-pagination.exception.js';
 import {
@@ -76,7 +77,13 @@ export class ProductsService {
   }
 
   async getProductById(productId: string): Promise<Product> {
-    const product = await this.productsRepository.findActiveById(productId);
+    let product: Product | null;
+    try {
+      product = await this.productsRepository.findActiveById(productId);
+    } catch (error) {
+      throw new ProductLookupFailedException(error);
+    }
+
     if (product === null) {
       throw new ProductNotFoundException(productId);
     }
