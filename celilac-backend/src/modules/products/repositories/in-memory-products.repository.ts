@@ -6,6 +6,16 @@ import {
   ProductsRepository,
 } from './products.repository.interface.js';
 
+function compareByNameThenId(a: Product, b: Product): number {
+  if (a.name !== b.name) {
+    return a.name < b.name ? -1 : 1;
+  }
+  if (a.productId === b.productId) {
+    return 0;
+  }
+  return a.productId < b.productId ? -1 : 1;
+}
+
 @Injectable()
 export class InMemoryProductsRepository implements ProductsRepository {
   private readonly products: Product[] = [];
