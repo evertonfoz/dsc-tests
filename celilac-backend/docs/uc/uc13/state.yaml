@@ -4,7 +4,7 @@ nome: Listar Produtos
 documento: ../../planejamento/uc13-listar-produtos/02-uc-listar-produtos.md
 arquetipo: consultar
 epic: { issue: 104, estado: open }
-fase_atual: C
+fase_atual: B
 
 fases:
   A:
