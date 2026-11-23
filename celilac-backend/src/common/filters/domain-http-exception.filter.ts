@@ -5,6 +5,7 @@ import { PaymentNotFoundException } from '../exceptions/payment-not-found.except
 import { PaymentNotApprovedException } from '../exceptions/payment-not-approved.exception.js';
 import { OrderAlreadyConfirmedException } from '../exceptions/order-already-confirmed.exception.js';
 import { InvalidProductNameException } from '../exceptions/invalid-product-name.exception.js';
+import { InvalidPaginationException } from '../exceptions/invalid-pagination.exception.js';
 import { ProductPersistenceFailedException } from '../exceptions/product-persistence-failed.exception.js';
 import type { Response } from 'express';
 
@@ -16,12 +17,14 @@ const DOMAIN_EXCEPTION_STATUS = new Map<DomainExceptionClass, HttpStatus>([
   [OrderAlreadyConfirmedException, HttpStatus.CONFLICT],
   [PaymentNotApprovedException, HttpStatus.UNPROCESSABLE_ENTITY],
   [InvalidProductNameException, HttpStatus.BAD_REQUEST],
+  [InvalidPaginationException, HttpStatus.BAD_REQUEST],
   [ProductPersistenceFailedException, HttpStatus.INTERNAL_SERVER_ERROR],
 ]);
 
 // Exceções de domínio respondidas no mesmo formato do ValidationPipe (ADR-004): message em lista e error "Bad Request".
 const VALIDATION_STYLE_EXCEPTIONS: DomainExceptionClass[] = [
   InvalidProductNameException,
+  InvalidPaginationException,
 ];
 
 @Catch()
