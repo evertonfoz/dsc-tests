@@ -59,4 +59,32 @@ describe('ProductsService.listProducts (UC13)', () => {
     expect(page.items).toEqual([]);
     expect(page.total).toBe(0);
   });
+
+  it('should paginate with default limit 20 and navigate pages without gaps (CA03, CA04)', async () => {
+    for (let index = 1; index <= 45; index += 1) {
+      const suffix = String(index).padStart(2, '0');
+      await repository.save(
+        new Product(
+          `00000000-0000-4000-8000-0000000000${suffix}`,
+          `Produto ${suffix}`,
+        ),
+      );
+    }
+
+    const first = await service.listProducts();
+    const second = await service.listProducts({ page: 2 });
+    const third = await service.listProducts({ page: 3 });
+    const custom = await service.listProducts({ page: 1, limit: 50 });
+
+    expect(first).toMatchObject({ page: 1, limit: 20, total: 45 });
+    expect(first.items).toHaveLength(20);
+    expect(second.items).toHaveLength(20);
+    expect(third.items).toHaveLength(5);
+    const ids = [...first.items, ...second.items, ...third.items].map(
+      (p) => p.productId,
+    );
+    expect(new Set(ids).size).toBe(45);
+    expect(custom.items).toHaveLength(45);
+    expect(custom.limit).toBe(50);
+  });
 });
