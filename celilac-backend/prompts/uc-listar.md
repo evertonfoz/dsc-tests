@@ -26,7 +26,7 @@ Antes de agir, **leia** estes materiais. Eles definem o padrão de processo; os 
 
 | Fonte | O que extrair |
 |---|---|
-| `prompts/uc-12.md` | **Modelo de especificação padrão** (pode ser substituído pelo `REF` escolhido em 3.0): as 13 seções (identificação, objetivo, atores, pré e pós-condições, fluxo principal, FA/FE, RN, validações, RF, considerações arquiteturais, CA, escopo). Itens não confirmados são marcados como proposta. |
+| `docs/planejamento/uc12-cadastrar-produto/uc-12.md` | **Modelo de especificação padrão** (pode ser substituído pelo `REF` escolhido em 3.0): as 13 seções (identificação, objetivo, atores, pré e pós-condições, fluxo principal, FA/FE, RN, validações, RF, considerações arquiteturais, CA, escopo). Itens não confirmados são marcados como proposta. |
 | `prompts/01` | Planejamento: Issue principal (Epic) + no mínimo 5 Sub-Issues, rastreabilidade, labels, GitHub Project com os estados `Backlog`, `Ready`, `In Progress`, `In Review`, `Done`. Sem inventar requisitos. |
 | `prompts/02` e `03` | Papéis, DoR, revisão cruzada, priorização, dependências, paralelismo, WIP (limite de trabalho em progresso). |
 | `prompts/04` e `05` | Branch por Issue, teste **RED** (falha) antes do código, implementação mínima **GREEN** (passa), evidências reais. |
@@ -62,7 +62,7 @@ Antes de agir, **leia** estes materiais. Eles definem o padrão de processo; os 
 Antes de buscar, criar, gravar ou comparar qualquer coisa, envie **uma única mensagem** com as quatro perguntas abaixo e **aguarde as respostas**. Não responda por conta própria nenhuma delas; se o estudante já tiver informado algo no início da conversa, apenas confirme.
 
 > **1. UC de referência (`REF`).** Qual caso de uso devo usar como base para criar, comparar ou validar o UC de listagem?
-> - (a) **UC12 — Cadastrar Produto** (`prompts/uc-12.md`), o padrão deste curso (sugerido);
+> - (a) **UC12 — Cadastrar Produto** (`docs/planejamento/uc12-cadastrar-produto/uc-12.md`), o padrão deste curso (sugerido);
 > - (b) **outro UC já documentado** — informe código e caminho;
 > - (c) **especificação original própria** — anexe ou informe o caminho.
 >
