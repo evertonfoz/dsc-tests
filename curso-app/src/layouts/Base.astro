@@ -5,8 +5,11 @@ import { lerOrigem } from '../conteudo/origem';
 
 interface Props {
   titulo: string;
+  tituloNoCabecalho?: string;
+  mostrarNavegacao?: boolean;
+  mostrarAviso?: boolean;
 }
-const { titulo } = Astro.props;
+const { titulo, tituloNoCabecalho, mostrarNavegacao = true, mostrarAviso = true } = Astro.props;
 // Variáveis de ambiente da construção (Node); sem depender de @types/node.
 const ambiente = (globalThis as { process?: { env: Record<string, string | undefined> } }).process?.env ?? {};
 const origem = lerOrigem(ambiente);
@@ -22,15 +25,18 @@ const origem = lerOrigem(ambiente);
   <body>
     <a class="pular" href="#conteudo">{textos.pularParaConteudo}</a>
     <header>
-      <p class="site">{textos.nomeDoSite}</p>
-      <nav aria-label={textos.navegacao}>
-        <ul>
-          <li><a href="/">{textos.linkIndice}</a></li>
-          <li><a href="/mapa/">{textos.linkMapa}</a></li>
-        </ul>
-      </nav>
+      {tituloNoCabecalho ? <h1 class="site">{tituloNoCabecalho}</h1> : <p class="site">{textos.nomeDoSite}</p>}
+      {mostrarNavegacao && (
+        <nav aria-label={textos.navegacao}>
+          <ul>
+            <li><a href="/">{textos.linkIndice}</a></li>
+            <li><a href="/siglas/">{textos.linkSiglas}</a></li>
+            <li><a href="/mapa/">{textos.linkMapa}</a></li>
+          </ul>
+        </nav>
+      )}
     </header>
-    <p class="aviso" role="note">{textos.avisoEmConstrucao}</p>
+    {mostrarAviso && <p class="aviso" role="note">{textos.avisoEmConstrucao}</p>}
     <main id="conteudo" tabindex="-1">
       <slot />
     </main>

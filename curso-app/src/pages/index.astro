@@ -1,20 +1,18 @@
 ---
-import { getEntry, render } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import Avisos from '../componentes/Avisos.astro';
-import { cursoValidado } from '../conteudo/carregar';
 import { textos } from '../textos';
-
-// Valida o curso inteiro antes de gerar qualquer página.
-await cursoValidado();
-
-const readme = await getEntry('indice', 'README');
-if (!readme) throw new Error('README.md do curso não encontrado em celilac-backend/method/didatico/curso/');
-const { Content, headings } = await render(readme);
-const titulo = headings.find((h) => h.depth === 1)?.text ?? 'Índice do curso';
 ---
-<Base titulo={titulo}>
+<Base titulo={textos.nomeDoSite} mostrarAviso={false}>
+  <h1>{textos.nomeDoSite}</h1>
+  <p class="abertura">Um guia prático para conduzir um caso de uso do problema à evidência verificável no seu próprio repositório.</p>
+  <p>Para estudantes de Ciência da Computação com noções básicas de Git e GitHub. Você vai aprender a planejar, implementar e verificar um caso de uso em etapas, usando testes, relatórios e revisão humana.</p>
+  <p class="acoes-inicio">
+    <a class="acao-principal" href="/m00/">Começar pelo módulo 0</a>
+  </p>
+  <section aria-labelledby="como-usar">
+    <h2 id="como-usar">Como usar este guia</h2>
+    <p>Leia as instruções aqui e faça as atividades no lugar indicado: no caderno, editor, terminal, repositório ou GitHub. Este site não recebe respostas nem registra seu progresso. Use os links de navegação para voltar à apresentação ou seguir ao módulo anterior e ao próximo.</p>
+  </section>
   <Avisos />
-  <p><a href="/mapa/">{textos.linkMapa}</a></p>
-  <Content />
 </Base>

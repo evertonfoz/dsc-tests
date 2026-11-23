@@ -14,7 +14,6 @@ const alvo = (id: string) => ({ href: `/${id}/`, titulo: curso.get(id)?.dados.ti
 const percurso = d.tipo === 'modulo' || d.tipo === 'apoio' || d.tipo === 'projeto' ? d : null;
 const pede = percurso?.prerequisitos.map(alvo) ?? [];
 const sePrecisar = percurso?.prerequisitos_se_precisar?.map(alvo) ?? [];
-const pratica = percurso?.pratica ? alvo(percurso.pratica) : null;
 ---
 <dl class="ficha">
   <dt>{textos.tipo}</dt>
@@ -35,12 +34,6 @@ const pratica = percurso?.pratica ? alvo(percurso.pratica) : null;
     <>
       <dt>{textos.sePrecisar}</dt>
       <dd><ul>{sePrecisar.map((p) => <li><a href={p.href}><TextoComCodigo texto={p.titulo} /></a></li>)}</ul></dd>
-    </>
-  )}
-  {pratica && (
-    <>
-      <dt>{textos.pratica}</dt>
-      <dd><a href={pratica.href}><TextoComCodigo texto={pratica.titulo} /></a></dd>
     </>
   )}
 </dl>

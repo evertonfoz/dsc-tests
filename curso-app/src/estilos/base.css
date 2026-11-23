@@ -40,8 +40,9 @@
 html { -webkit-text-size-adjust: 100%; }
 body {
   margin: 0 auto;
-  max-width: 46rem;
-  padding: 0 1rem 2rem;
+  width: 100%;
+  max-width: none;
+  padding: 0 5vw 2rem;
   background: var(--fundo);
   color: var(--texto);
   font: 1.0625rem/1.6 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
@@ -56,6 +57,7 @@ header .site { margin: 0; font-weight: 600; }
 nav ul { list-style: none; display: flex; flex-wrap: wrap; gap: 1rem; margin: .5rem 0 0; padding: 0; }
 nav a { display: inline-block; min-height: 24px; min-width: 24px; }
 .aviso { background: var(--aviso-fundo); border: 1px solid var(--borda); padding: .5rem .75rem; border-radius: 4px; }
+main { width: 100%; max-width: none; }
 main:focus { outline: none; }
 pre { overflow-x: auto; background: var(--codigo-fundo); padding: .75rem; border-radius: 4px; }
 code { font-size: .92em; }
@@ -69,6 +71,9 @@ th, td { border: 1px solid var(--borda); padding: .25rem .5rem; text-align: left
 blockquote { margin: 1rem 0; padding: 0 1rem; border-left: 4px solid var(--borda); color: var(--texto-suave); }
 img { max-width: 100%; height: auto; }
 footer { border-top: 1px solid var(--borda); margin-top: 2rem; color: var(--texto-suave); font-size: .9375rem; }
+.abertura { font-size: 1.2em; max-width: 65ch; }
+.acoes-inicio { display: flex; flex-wrap: wrap; gap: 1rem; margin: 1.5rem 0; }
+.acao-principal { display: inline-block; padding: .75rem 1rem; border: 2px solid currentColor; border-radius: .35rem; font-weight: 700; }
 
 .visualmente-oculto {
   position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;

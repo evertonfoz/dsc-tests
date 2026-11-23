@@ -28,12 +28,15 @@ const posicao = sequencia.findIndex((e) => e.dados.id === d.id);
 const anterior = posicao > 0 ? sequencia[posicao - 1] : undefined;
 const proximo = posicao >= 0 ? sequencia[posicao + 1] : undefined;
 const modulo = d.tipo === 'pratica' ? curso.get(d.pratica_de) : undefined;
+const numeroDoModulo = d.tipo === 'pratica' ? Number(d.pratica_de.match(/\d+$/)?.[0]) : undefined;
+const tituloDaPagina = d.tipo === 'pratica'
+  ? `Prática do módulo ${numeroDoModulo}`
+  : d.titulo;
 ---
-<Base titulo={tituloSimples(d.titulo)}>
-  <Titulo titulo={d.titulo} />
-  <Ficha entrada={entrada} curso={curso} />
+<Base titulo={tituloSimples(tituloDaPagina)} tituloNoCabecalho={d.tipo === 'pratica' ? tituloDaPagina : undefined} mostrarNavegacao={d.tipo !== 'pratica'} mostrarAviso={d.tipo !== 'pratica'}>
+  {d.tipo !== 'pratica' && <Titulo titulo={tituloDaPagina} />}
+  {d.tipo !== 'pratica' && <Ficha entrada={entrada} curso={curso} />}
   {d.tipo === 'projeto' && <Avisos />}
-  {d.tipo === 'pratica' && <p class="aviso" role="note">{textos.notaDaPratica}</p>}
   <Content />
   {modulo && <p><a href={`/${modulo.dados.id}/`}>{textos.voltarAoModulo(tituloSimples(modulo.dados.titulo))}</a></p>}
   {posicao >= 0 && <Sequencia anterior={anterior} proximo={proximo} />}

@@ -3,8 +3,9 @@ export const textos = {
   nomeDoSite: 'Curso: implementando um caso de uso com evidência',
   pularParaConteudo: 'Pular para o conteúdo',
   navegacao: 'Navegação principal',
-  linkIndice: 'Índice do curso',
-  linkMapa: 'Mapa dos módulos',
+  linkIndice: 'Apresentação',
+  linkSiglas: 'Consultar siglas',
+  linkMapa: 'Ver a sequência do curso',
   avisoEmConstrucao:
     'Versão em construção: dá para ler o curso inteiro. Ainda não há registro de progresso, gabaritos, prática guiada com os dados do seu projeto nem o kit inicial; eles chegam nas próximas versões.',
   rodapeOrigem: (commitCurto: string, data: string) => `Conteúdo do commit ${commitCurto} (${data}).`,
@@ -27,11 +28,6 @@ export const textos = {
   pede: 'Pede antes',
   pedeNada: 'nada; pode começar por aqui',
   sePrecisar: 'Se precisar',
-  pratica: 'Prática deste módulo',
-
-  // Prática (só leitura no M1).
-  notaDaPratica:
-    'Nesta versão, a prática é só para leitura. Os campos para suas respostas, os dados do seu projeto no lugar de {{variavel}} e o botão de copiar chegam numa próxima versão.',
   voltarAoModulo: (titulo: string) => `Voltar a: ${titulo}`,
 
   // Navegação no fim da página.
