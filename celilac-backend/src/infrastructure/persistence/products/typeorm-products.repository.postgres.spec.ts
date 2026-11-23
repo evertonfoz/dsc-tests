@@ -223,4 +223,22 @@ describe('TypeOrmProductsRepository — persistência real no PostgreSQL', () =>
     expect(rows).toHaveLength(1);
     expect(rows[0].deletedAt).toBeNull();
   });
+
+  it('should order names linguistically in the real database, with the same order as the in-memory adapter (CA08)', async () => {
+    const names = ['arroz', 'Banana', 'Ácido', 'Zebra', 'abacaxi'];
+    for (const name of names) {
+      await repository.save(new Product(randomUUID(), name));
+    }
+
+    const page = await new ProductsService(repository).listProducts();
+
+    // Depende da collation do banco de testes (en_US.utf8, verificada em 2026-11-23).
+    expect(page.items.map((product) => product.name)).toEqual([
+      'abacaxi',
+      'Ácido',
+      'arroz',
+      'Banana',
+      'Zebra',
+    ]);
+  });
 });

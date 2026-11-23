@@ -88,6 +88,25 @@ describe('ProductsService.listProducts (UC13)', () => {
     expect(custom.limit).toBe(50);
   });
 
+  it('should order names linguistically, ignoring case and accents like the database (CA08)', async () => {
+    const names = ['arroz', 'Banana', 'Ácido', 'Zebra', 'abacaxi'];
+    for (const [index, name] of names.entries()) {
+      await repository.save(
+        new Product(`00000000-0000-4000-8000-00000000000${index}`, name),
+      );
+    }
+
+    const page = await service.listProducts();
+
+    expect(page.items.map((product) => product.name)).toEqual([
+      'abacaxi',
+      'Ácido',
+      'arroz',
+      'Banana',
+      'Zebra',
+    ]);
+  });
+
   it('should order by name then productId deterministically (CA08)', async () => {
     await repository.save(
       new Product('00000000-0000-4000-8000-000000000003', 'Banana'),
