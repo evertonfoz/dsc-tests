@@ -1,0 +1,24 @@
+@baseUrl = http://localhost:3200
+
+# ==============================================================================
+# UC14 — Buscar Produto por Identificador (Ambiente Containerizado)
+# Somente leitura. Para o cenário 1, use um productId já existente (ex.: GET /products).
+# ==============================================================================
+
+### Cenário 0: obter um productId existente → esperado: 200 { items: [...] }
+GET {{baseUrl}}/products?limit=1
+
+###
+@produtoId = COLE_AQUI_UM_productId_DA_LISTAGEM
+
+### Cenário 1: buscar produto existente → esperado: 200 { productId, name }
+GET {{baseUrl}}/products/{{produtoId}}
+
+### Cenário 2: UUID sem produto → esperado: 404 (ProductNotFoundException)
+GET {{baseUrl}}/products/99999999-9999-4999-8999-999999999999
+
+### Cenário 3: identificador que não é UUID → esperado: 400 Bad Request
+GET {{baseUrl}}/products/abc
+
+### Cenário 4: rota inexistente → esperado: 404
+GET {{baseUrl}}/produtos/abc

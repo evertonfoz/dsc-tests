@@ -1,0 +1,55 @@
+================================================================================
+Iniciando verificações automatizadas da API CeliLac em http://localhost:3200
+================================================================================
+
+--- 1. Serviços em Docker Compose ---
+[OK]    Serviço API em execução ('running') (esperado: 'running', obtido: 'running')
+[OK]    Serviço Postgres saudável ('healthy') (esperado: 'healthy', obtido: 'healthy')
+
+--- 2. Smoke Tests HTTP ---
+[OK]    Smoke: GET / retorna 200 (esperado: '200', obtido: '200')
+[OK]    Smoke: GET rota inexistente retorna 404 (esperado: '404', obtido: '404')
+
+--- 3. Migrations no Banco de Desenvolvimento (Somente Leitura) ---
+[OK]    Nenhuma migration pendente no banco de dados (esperado: '0', obtido: '0')
+
+--- 4. Caso de Uso UC12 — Cadastrar Produto (POST /products) ---
+[OK]    Validação: nome vazio retorna 400 (esperado: '400', obtido: '400')
+[OK]    Validação: nome ausente retorna 400 (esperado: '400', obtido: '400')
+[OK]    Validação: nome com tipo inválido retorna 400 (esperado: '400', obtido: '400')
+[OK]    Cadastro com sucesso retorna identificador UUID preenchido (esperado: 'true', obtido: 'true')
+[OK]    Cadastro com sucesso retorna o nome enviado (esperado: 'Pão Automatizado Run-Checks 1795457004', obtido: 'Pão Automatizado Run-Checks 1795457004')
+[OK]    Validação: nome só com espaços retorna 400 (esperado: '400', obtido: '400')
+[OK]    Validação: nome com 121 caracteres retorna 400 (esperado: '400', obtido: '400')
+[OK]    Validação: nome com exatamente 120 caracteres retorna 201 com identificador (esperado: 'true', obtido: 'true')
+[OK]    Contrato: JSON inválido retorna 400 (esperado: '400', obtido: '400')
+[OK]    Contrato: o 400 traz message (lista), error e statusCode (esperado: 'true', obtido: 'true')
+[OK]    Contrato UC13: GET /products retorna 200 (esperado: '200', obtido: '200')
+[OK]    Contrato UC13: a listagem traz items, page, limit e total (esperado: 'true', obtido: 'true')
+[OK]    Contrato UC13: cada item traz somente productId e name (esperado: 'true', obtido: 'true')
+[OK]    Contrato UC13: o limite padrão é 20 (esperado: '20', obtido: '20')
+[OK]    Contrato UC13: limit=101 retorna 400 (esperado: '400', obtido: '400')
+[OK]    Contrato UC13: page=0 retorna 400 (esperado: '400', obtido: '400')
+[OK]    Contrato UC13: limit não numérico retorna 400 (esperado: '400', obtido: '400')
+[OK]    Contrato UC13: total da API confere com os produtos ativos no banco (esperado: '46', obtido: '46')
+[OK]    Contrato UC14: GET /products/:productId retorna 200 (esperado: '200', obtido: '200')
+[OK]    Contrato UC14: a busca traz somente productId e name (esperado: 'true', obtido: 'true')
+[OK]    Contrato UC14: a busca devolve o produto cadastrado (esperado: 'Pão Automatizado Run-Checks 1795457004', obtido: 'Pão Automatizado Run-Checks 1795457004')
+[OK]    Contrato UC14: UUID sem produto retorna 404 (esperado: '404', obtido: '404')
+[OK]    Contrato UC14: o 404 traz error ProductNotFoundException (esperado: 'ProductNotFoundException', obtido: 'ProductNotFoundException')
+[OK]    Contrato UC14: identificador que não é UUID retorna 400 (esperado: '400', obtido: '400')
+[OK]    Contrato UC14: o 400 traz message (lista) e error Bad Request (esperado: 'true', obtido: 'true')
+[OK]    Contrato UC14: sub-rota inexistente retorna 404 (esperado: '404', obtido: '404')
+[OK]    Contrato: POST em rota inexistente retorna 404 (esperado: '404', obtido: '404')
+[OK]    Propriedade extra descartada pelo ValidationPipe (whitelist) (esperado: 'descartado', obtido: 'descartado')
+
+--- 5. Recurso de Apoio: Orders (Fronteira HTTP sem Seed) ---
+[OK]    Confirmação de pedido com ID inválido retorna 400 (esperado: '400', obtido: '400')
+[OK]    Confirmação de pedido com UUID inexistente retorna 404 (esperado: '404', obtido: '404')
+
+--- 6. Verificação de Persistência Direta no PostgreSQL ---
+[OK]    Registro do produto criado persistido no banco com nome correto (esperado: 'Pão Automatizado Run-Checks 1795457004', obtido: 'Pão Automatizado Run-Checks 1795457004')
+
+================================================================================
+Resultado: 36 ok, 0 falha(s)
+================================================================================

@@ -1,4 +1,5 @@
-import { Body, Controller, Get, Post, Query } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common';
+import { createProductIdPipe } from '../../../common/pipes/product-id.pipe.js';
 import { CreateProductDto } from '../dtos/create-product.dto.js';
 import { ListProductsQueryDto } from '../dtos/list-products-query.dto.js';
 import {
@@ -34,5 +35,14 @@ export class ProductsController {
     });
 
     return toProductsPageResponse(page);
+  }
+
+  @Get(':productId')
+  async getProductById(
+    @Param('productId', createProductIdPipe()) productId: string,
+  ): Promise<ProductResponseDto> {
+    const product = await this.productsService.getProductById(productId);
+
+    return toProductResponse(product);
   }
 }

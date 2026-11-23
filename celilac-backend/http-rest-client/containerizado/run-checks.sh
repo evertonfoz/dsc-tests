@@ -155,6 +155,27 @@ db_active_total=$(echo 'SELECT count(*) FROM products.products WHERE "deletedAt"
 api_total=$(curl -s "$BASE/products?limit=1" | node -e "let d='';process.stdin.on('data',c=>d+=c).on('end',()=>{try{console.log(JSON.parse(d).total)}catch{console.log('')}})")
 check "Contrato UC13: total da API confere com os produtos ativos no banco" "$db_active_total" "$api_total"
 
+# UC14: GET /products/:productId (somente leitura; usa o produto criado acima).
+if [ -n "$created_id" ]; then
+  get_body=$(curl -s "$BASE/products/$created_id")
+  code_get_one=$(status "$BASE/products/$created_id")
+  check "Contrato UC14: GET /products/:productId retorna 200" "200" "$code_get_one"
+  check "Contrato UC14: a busca traz somente productId e name" "true" "$(node -e "try{const b=JSON.parse(process.argv[1]);console.log(Object.keys(b).sort().join()==='name,productId')}catch{console.log(false)}" "$get_body")"
+  check "Contrato UC14: a busca devolve o produto cadastrado" "$product_name" "$(extract_json_field "$get_body" "name")"
+else
+  check "Contrato UC14: busca requer produto cadastrado" "id_valido" "id_vazio"
+fi
+missing_body=$(curl -s "$BASE/products/99999999-9999-4999-8999-999999999999")
+code_missing=$(status "$BASE/products/99999999-9999-4999-8999-999999999999")
+check "Contrato UC14: UUID sem produto retorna 404" "404" "$code_missing"
+check "Contrato UC14: o 404 traz error ProductNotFoundException" "ProductNotFoundException" "$(extract_json_field "$missing_body" "error")"
+bad_id_body=$(curl -s "$BASE/products/abc")
+code_bad_id=$(status "$BASE/products/abc")
+check "Contrato UC14: identificador que não é UUID retorna 400" "400" "$code_bad_id"
+check "Contrato UC14: o 400 traz message (lista) e error Bad Request" "true" "$(node -e "try{const b=JSON.parse(process.argv[1]);console.log(Array.isArray(b.message)&&b.error==='Bad Request'&&b.statusCode===400)}catch{console.log(false)}" "$bad_id_body")"
+code_subroute=$(status "$BASE/products/99999999-9999-4999-8999-999999999999/extra")
+check "Contrato UC14: sub-rota inexistente retorna 404" "404" "$code_subroute"
+
 code_wrong_route=$(status -X POST "$BASE/produtos" -H "Content-Type: application/json" -d '{"name":"x"}')
 check "Contrato: POST em rota inexistente retorna 404" "404" "$code_wrong_route"
 

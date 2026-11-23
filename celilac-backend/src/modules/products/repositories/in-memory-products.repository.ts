@@ -38,4 +38,13 @@ export class InMemoryProductsRepository implements ProductsRepository {
       total: active.length,
     };
   }
+
+  async findActiveById(productId: string): Promise<Product | null> {
+    return (
+      this.products.find(
+        (product) =>
+          product.productId === productId && product.deletedAt === null,
+      ) ?? null
+    );
+  }
 }

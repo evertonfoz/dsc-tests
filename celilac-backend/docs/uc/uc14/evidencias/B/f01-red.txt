@@ -1,0 +1,40 @@
+The plugin "vite-tsconfig-paths" is detected. Vite now supports tsconfig paths resolution natively via the resolve.tsconfigPaths option. You can remove the plugin and set resolve.tsconfigPaths: true in your Vite config instead.
+
+ RUN  v4.1.11 /Users/evertoncoimbradearaujo/Documents/GitHub/dsc-tests/celilac-backend
+
+ ❯ src/modules/products/services/products.service.get.spec.ts (2 tests | 2 failed) 3ms
+     × should return the active product found by productId (CA01) 2ms
+     × should not change the stored products when searching (CA08) 0ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/modules/products/services/products.service.get.spec.ts > ProductsService.getProductById (UC14) > should return the active product found by productId (CA01)
+TypeError: service.getProductById is not a function
+ ❯ src/modules/products/services/products.service.get.spec.ts:23:35
+     21|     );
+     22|
+     23|     const product = await service.getProductById(PRODUCT_ID);
+       |                                   ^
+     24|
+     25|     expect({ productId: product.productId, name: product.name }).toEqu…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  src/modules/products/services/products.service.get.spec.ts > ProductsService.getProductById (UC14) > should not change the stored products when searching (CA08)
+TypeError: service.getProductById is not a function
+ ❯ src/modules/products/services/products.service.get.spec.ts:36:19
+     34|     const before = await repository.findActivePage({ offset: 0, limit:…
+     35|
+     36|     await service.getProductById(PRODUCT_ID);
+       |                   ^
+     37|
+     38|     const after = await repository.findActivePage({ offset: 0, limit: …
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed (2)
+   Start at  14:54:31
+   Duration  245ms (transform 42ms, setup 0ms, import 160ms, tests 3ms, environment 0ms)
+
