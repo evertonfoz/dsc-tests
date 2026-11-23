@@ -14,4 +14,11 @@ export class ProductOrmEntity {
     nullable: false,
   })
   name!: string;
+
+  @Column({
+    type: 'timestamptz',
+    name: 'deletedAt',
+    nullable: true,
+  })
+  deletedAt!: Date | null;
 }

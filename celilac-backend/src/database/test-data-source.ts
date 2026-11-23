@@ -4,6 +4,7 @@ import { ProductOrmEntity } from '../infrastructure/persistence/products/product
 import { CreateProductsTable1794255600000 } from './migrations/1794255600000-CreateProductsTable.js';
 import { OrderEntity } from '../infrastructure/persistence/orders/order.orm-entity.js';
 import { CreateOrders1792519198708 } from './migrations/1792519198708-CreateOrders.js';
+import { AddDeletedAtToProducts1794342000000 } from './migrations/1794342000000-AddDeletedAtToProducts.js';
 import { EnableUuidOssp1792519198707 } from './migrations/1792519198707-EnableUuidOssp.js';
 
 export interface TestDataSourceOptions {
@@ -52,8 +53,9 @@ export function createTestDataSource(
           EnableUuidOssp1792519198707,
           CreateOrders1792519198708,
           CreateProductsTable1794255600000,
+          AddDeletedAtToProducts1794342000000,
         ]
-      : [CreateProductsTable1794255600000],
+      : [CreateProductsTable1794255600000, AddDeletedAtToProducts1794342000000],
     synchronize: false,
   });
 }

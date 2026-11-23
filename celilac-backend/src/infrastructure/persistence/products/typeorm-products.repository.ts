@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { IsNull, Repository } from 'typeorm';
 import { Product } from '../../../modules/products/entities/product.entity.js';
 import {
   type ProductsPageQuery,
@@ -26,6 +26,7 @@ export class TypeOrmProductsRepository implements ProductsRepository {
 
   async findActivePage(query: ProductsPageQuery): Promise<ProductsPageResult> {
     const [entities, total] = await this.ormRepository.findAndCount({
+      where: { deletedAt: IsNull() },
       order: { name: 'ASC', productId: 'ASC' },
       skip: query.offset,
       take: query.limit,
