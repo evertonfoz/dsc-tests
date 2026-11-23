@@ -7,7 +7,7 @@
 | Período | 2026-11-23 |
 | Responsável | evertonfoz |
 | Issue(s) | #137, Epic #126 |
-| Branch / PR | `feature/uc14-buscar-produto` / PR ainda não aberto |
+| Branch / PR | `feature/uc14-buscar-produto` / PR #138 |
 | Commit de referência | `0585749` (último commit antes desta fase) |
 
 ## 1. Objetivo da fase
