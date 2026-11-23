@@ -1,4 +1,5 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { ProductNotFoundException } from '../../../common/exceptions/product-not-found.exception.js';
 import { Product } from '../entities/product.entity.js';
 import { InMemoryProductsRepository } from '../repositories/in-memory-products.repository.js';
 import { ProductsService } from './products.service.js';
@@ -38,5 +39,15 @@ describe('ProductsService.getProductById (UC14)', () => {
     const after = await repository.findActivePage({ offset: 0, limit: 100 });
     expect(saveSpy).not.toHaveBeenCalled();
     expect(after).toEqual(before);
+  });
+
+  it('should throw ProductNotFoundException when the product does not exist (CA03)', async () => {
+    await repository.save(new Product(PRODUCT_ID, 'Leite sem lactose'));
+
+    const result = service.getProductById(
+      '99999999-9999-4999-8999-999999999999',
+    );
+
+    await expect(result).rejects.toBeInstanceOf(ProductNotFoundException);
   });
 });
