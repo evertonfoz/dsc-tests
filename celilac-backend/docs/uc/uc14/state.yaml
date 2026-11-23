@@ -1,10 +1,10 @@
-# Estado do UC14 (Buscar Produto por Identificador). Fase A concluída em 2026-11-23: plano aprovado por evertonfoz.
+# Estado do UC14 (Buscar Produto por Identificador). UC concluído em 2026-11-23: PR #138 integrado em 6963f1f; Epic #126 fechado. Gates aprovados por delegação expressa do estudante (evertonfoz: "Pode fazer tudo") ou por CI.
 uc: UC14
 nome: Buscar Produto por Identificador
 documento: ../../../prompts/uc-14-buscar-produto.md
 arquetipo: consultar
-epic: { issue: 126, estado: open }
-fase_atual: B
+epic: { issue: 126, estado: closed }
+fase_atual: concluido
 
 fases:
   A:
@@ -15,44 +15,44 @@ fases:
       - { item: "GitHub Project configurado com os 5 estados", resultado: aprovado, por: evertonfoz }
     evidencias: [evidencias/A/publicacao.txt]
   B:
-    status: em_andamento
-    relatorio: null
+    status: concluida
+    relatorio: relatorios/B-C.md
     gate:
-      - { item: "Todas as fatias integradas na branch principal", resultado: pendente }
-      - { item: "CI verde na branch principal", resultado: pendente }
+      - { item: "Todas as fatias integradas na branch principal", resultado: aprovado, por: evertonfoz }
+      - { item: "CI verde na branch principal", resultado: aprovado, por: CI }
     evidencias: []
   C:
-    status: em_andamento
-    relatorio: null
+    status: concluida
+    relatorio: relatorios/B-C.md
     gate:
-      - { item: "C1 (HTTP) e C2 (persistência) integradas", resultado: pendente }
-      - { item: "CI verde na branch principal", resultado: pendente }
+      - { item: "C1 (HTTP) e C2 (persistência) integradas", resultado: aprovado, por: evertonfoz }
+      - { item: "CI verde na branch principal", resultado: aprovado, por: CI }
     evidencias: [evidencias/B/c1-red.txt, evidencias/B/c1-green.txt, evidencias/B/c2-red.txt, evidencias/B/c2-green.txt, evidencias/B/c2-integration.txt, evidencias/B/c1-c2-e2e.txt]
   D:
-    status: em_andamento
-    relatorio: null
+    status: concluida
+    relatorio: relatorios/B-C.md
     gate:
-      - { item: "Cada cenário do contrato de GET /products/:productId documentado e testado", resultado: pendente }
+      - { item: "Cada cenário do contrato de GET /products/:productId documentado e testado", resultado: aprovado, por: evertonfoz }
     evidencias: [evidencias/B/c1-green.txt, evidencias/B/c2-integration.txt, evidencias/B/c1-c2-e2e.txt]
   E:
-    status: em_andamento
-    relatorio: null
+    status: concluida
+    relatorio: relatorios/B-C.md
     gate:
-      - { item: "O script termina com 0 falhas no contêiner", resultado: pendente }
-      - { item: "O mesmo script passa no CI (smoke)", resultado: pendente }
+      - { item: "O script termina com 0 falhas no contêiner", resultado: aprovado, por: evertonfoz }
+      - { item: "O mesmo script passa no CI (smoke)", resultado: aprovado, por: CI }
     evidencias: [evidencias/E/run-checks.txt]
   F:
-    status: em_andamento
+    status: concluida
     relatorio: relatorios/F.md
     gate:
-      - { item: "Todo item do UC tem teste que o prova ou ADR", resultado: pendente }
-      - { item: "Arquitetura em conformidade, achados tratados", resultado: pendente }
-      - { item: "state.yaml, documentos e GitHub consistentes", resultado: pendente }
-      - { item: "Issues e Epic fechados", resultado: pendente }
+      - { item: "Todo item do UC tem teste que o prova ou ADR", resultado: aprovado, por: evertonfoz }
+      - { item: "Arquitetura em conformidade, achados tratados", resultado: aprovado, por: evertonfoz }
+      - { item: "state.yaml, documentos e GitHub consistentes", resultado: aprovado, por: CI }
+      - { item: "Issues e Epic fechados", resultado: aprovado, por: evertonfoz }
     evidencias: [evidencias/F/cobertura.md, evidencias/F/auditoria.md, evidencias/F/auditoria.txt, evidencias/F/regressao.txt]
 
 # Issues de fase: A #132, C1 #133, C2 #134, D #135, E #136, F #137.
-# Branch única (decisão do estudante): feature/uc14-buscar-produto.
+# PR único das cinco fatias: #138, integrado em 6963f1f (decisão do estudante; pr_compartilhado). Branch única: feature/uc14-buscar-produto.
 fatias:
   - id: F01
     comportamento: "Buscar produto ativo por productId e retornar productId e name"
@@ -61,7 +61,7 @@ fatias:
     branch: feature/uc14-buscar-produto
     pr: 138
     pr_compartilhado: true
-    status: em_revisao
+    status: integrada
     responsavel: evertonfoz
     revisor: evertonfoz
     evidencias: [evidencias/B/f01-red.txt, evidencias/B/f01-green.txt]
@@ -72,7 +72,7 @@ fatias:
     branch: feature/uc14-buscar-produto
     pr: 138
     pr_compartilhado: true
-    status: em_revisao
+    status: integrada
     responsavel: evertonfoz
     revisor: evertonfoz
     evidencias: [evidencias/B/f02-red.txt, evidencias/B/f02-green.txt]
@@ -83,7 +83,7 @@ fatias:
     branch: feature/uc14-buscar-produto
     pr: 138
     pr_compartilhado: true
-    status: em_revisao
+    status: integrada
     responsavel: evertonfoz
     revisor: evertonfoz
     evidencias: [evidencias/B/f03-red.txt, evidencias/B/f03-green.txt]
@@ -94,7 +94,7 @@ fatias:
     branch: feature/uc14-buscar-produto
     pr: 138
     pr_compartilhado: true
-    status: em_revisao
+    status: integrada
     responsavel: evertonfoz
     revisor: evertonfoz
     evidencias: [evidencias/B/f04-red.txt, evidencias/B/f04-green.txt]
@@ -105,7 +105,7 @@ fatias:
     branch: feature/uc14-buscar-produto
     pr: 138
     pr_compartilhado: true
-    status: em_revisao
+    status: integrada
     responsavel: evertonfoz
     revisor: evertonfoz
     evidencias: [evidencias/B/f05-red.txt, evidencias/B/f05-green.txt]

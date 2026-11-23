@@ -51,7 +51,8 @@ Epic **#126**; fatias **#127** (F01), **#128** (F02), **#129** (F03), **#130** (
 - `run-checks.sh` no banco de desenvolvimento: 2 `POST /products` de teste. Nenhuma migration aplicada ou revertida.
 - Testes de integração e e2e contra `postgres_test`.
 - Renomeei a branch local (sem push) de `docs/uc14-buscar-produto` para `feature/uc14-buscar-produto`.
-- Push da branch e abertura do PR #138, ao final, com autorização do estudante. Não houve merge, fechamento de issue, remoção de branch ou worktree.
+- Push da branch e abertura do PR #138 (autorizados ao final do fluxo).
+- Com a instrução "Pode fazer tudo": merge do PR #138 (`6963f1f`), fechamento das issues #126 a #137, itens do Project #6 em `Done`, aprovação dos gates no `state.yaml` (por delegação do estudante ou por CI, conforme o arquivo) e remoção da branch `feature/uc14-buscar-produto` depois do encerramento, num segundo PR de documentação.
 
 ## 8. Resultados verificados
 | Verificação | Resultado |
@@ -66,22 +67,22 @@ Epic **#126**; fatias **#127** (F01), **#128** (F02), **#129** (F03), **#130** (
 | CI do PR #138 (commit `63ac179`) | Qualidade, Integração e E2E, Smoke do Docker Compose (inclui `run-checks.sh`) e GitGuardian: todos `pass` |
 
 ## 9. O que ainda não tem prova
-CI na branch principal (o CI do PR #138 passou, ver item 8); produto removido no contêiner; falha `500` real via HTTP. Gates das Fases B a F, ainda `pendente`.
+CI na `main` depois do merge (o CI do PR #138 passou, ver item 8); produto removido no contêiner; falha `500` real via HTTP. Aprovação independente dos gates: foram aprovados por delegação do estudante, que é também autor e revisor (modo solo).
 
 ## 10. O que aconteceu além do prompt
 Commit da movimentação de `uc-listar*.md` para `prompts/uc-13/`; criação de `docs/uc/uc14/README.md`; atualização do índice `13-02-estrutura-colecao.md`; uso do `state.yaml` e dos playbooks do método, que o prompt cita como opcionais.
 
 ## 11. Onde está tudo
-- **Branch:** `feature/uc14-buscar-produto`, com push feito e **PR #138** aberto contra `main` (autorizado pelo estudante ao final do fluxo).
+- **Repositório remoto:** PR **#138** integrado em `main` (`6963f1f`); issues #126 a #137 fechadas. Um segundo PR de documentação registra o encerramento.
 - **GitHub:** issues #126 a #137 e Project #6 (existem no remoto).
 - **Documentos:** `prompts/` (UC, 00, 01, 03 e este resumo) e `docs/uc/uc14/` (state, contrato, README, roteiro, relatórios A e F, evidências A, B, E, F).
 - **Código:** `src/` e `test/`; `.http` em `http-rest-client/`.
 
 ## 12. O que ficou pendente
-CI, merge, fechamento das issues e do Epic, aprovação dos gates e `fase_atual: concluido` (ver `docs/uc/uc14/roteiro-conclusao-uc14.md`). Outras entidades (ex.: `Order`) ou operações viram **novas execuções** do prompt.
+Nada do UC14. Outras entidades (ex.: `Order`) ou operações viram **novas execuções** do prompt.
 
 ## Próximo passo
-Acompanhar o CI do PR #138, revisar e decidir sobre o merge.
+Conferir o CI da `main` e iniciar outra execução do prompt, se desejar.
 
 ## Perguntas em aberto
-Nenhuma crítica. Aguardo suas instruções sobre o merge.
+Nenhuma crítica. Nenhuma.
