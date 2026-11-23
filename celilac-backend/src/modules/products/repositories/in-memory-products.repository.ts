@@ -6,9 +6,13 @@ import {
   ProductsRepository,
 } from './products.repository.interface.js';
 
+// Aproxima a collation do banco (en_US.utf8: sem distinguir caixa e acentos em primeiro nível).
+const nameCollator = new Intl.Collator('pt-BR');
+
 function compareByNameThenId(a: Product, b: Product): number {
-  if (a.name !== b.name) {
-    return a.name < b.name ? -1 : 1;
+  const byName = nameCollator.compare(a.name, b.name);
+  if (byName !== 0) {
+    return byName;
   }
   if (a.productId === b.productId) {
     return 0;
