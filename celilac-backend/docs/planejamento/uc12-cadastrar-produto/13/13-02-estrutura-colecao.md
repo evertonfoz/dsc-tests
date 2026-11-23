@@ -8,8 +8,12 @@ http-rest-client/
 ├── tests/
 │   └── hello-world.http
 ├── products/
-│   ├── products-controller.http
-│   └── test-scenarios.http
+│   ├── uc12-cadastrar-produto/
+│   │   ├── products-controller.http
+│   │   └── test-scenarios.http
+│   └── uc13-listar-produtos/
+│       ├── products-controller.http
+│       └── test-scenarios.http
 ├── orders/
 │   ├── orders-controller.http
 │   └── test-scenarios.http
@@ -28,8 +32,9 @@ http-rest-client/
 | Diretório / Arquivo | Papel Técnico | Comportamento Verificado |
 |---|---|---|
 | `tests/hello-world.http` | Sanidade mínima (smoke test básico) | Valida rota raiz (`GET /` → 200) e roteamento de erro (`GET /not-found-endpoint` → 404). |
-| `products/products-controller.http` | Desenvolvimento do Controller do UC12 | Exemplos de requisições utilizadas no ciclo iterativo de implementação do caso de uso. |
-| `products/test-scenarios.http` | Matriz de cenários do caso de uso | Cobertura sistemática de casos de aceite, campos vazios, ausentes, tipos inválidos e descarte de campos extras. |
+| `products/uc12-cadastrar-produto/products-controller.http` | Desenvolvimento do Controller do UC12 | Exemplos de requisições utilizadas no ciclo iterativo de implementação do caso de uso. |
+| `products/uc12-cadastrar-produto/test-scenarios.http` | Matriz de cenários do caso de uso | Cobertura sistemática de casos de aceite, campos vazios, ausentes, tipos inválidos e descarte de campos extras. |
+| `products/uc13-listar-produtos/` | Requisições e cenários do UC13 (Listar Produtos), mesma divisão em `products-controller.http` e `test-scenarios.http` | `GET /products` com paginação, página além do fim e parâmetros inválidos (200, 400, 404). |
 | `orders/orders-controller.http` | Recurso de apoio (desenvolvimento) | Requisições pontuais para a rota `POST /orders/:id/confirm`. |
 | `orders/test-scenarios.http` | Cenários do recurso de apoio | Separação entre Grupo A (fronteira HTTP sem dados) e Grupo B (dependentes de seed). |
 | `containerizado/00-smoke.http` | Sanidade no contêiner | Verificação de disponibilidade da API após subida da stack Docker Compose. |

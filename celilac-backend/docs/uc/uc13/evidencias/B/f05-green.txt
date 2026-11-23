@@ -1,0 +1,10 @@
+The plugin "vite-tsconfig-paths" is detected. Vite now supports tsconfig paths resolution natively via the resolve.tsconfigPaths option. You can remove the plugin and set resolve.tsconfigPaths: true in your Vite config instead.
+
+ RUN  v4.1.11 /private/tmp/claude-501/-Users-evertoncoimbradearaujo-Documents-GitHub-dsc-tests-celilac-backend/b14ddcd5-f649-4907-906a-54492d8d9a18/scratchpad/wt-uc13/celilac-backend
+
+
+ Test Files  1 passed (1)
+      Tests  1 passed | 12 skipped (13)
+   Start at  10:22:59
+   Duration  200ms (transform 27ms, setup 0ms, import 125ms, tests 1ms, environment 0ms)
+

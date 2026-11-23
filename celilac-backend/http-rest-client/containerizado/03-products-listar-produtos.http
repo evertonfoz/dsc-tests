@@ -1,0 +1,27 @@
+@baseUrl = http://localhost:3200
+
+# ==============================================================================
+# UC13 — Listar Produtos (Ambiente Containerizado)
+# Somente leitura. Os cenários dependem da migration AddDeletedAtToProducts aplicada.
+# ==============================================================================
+
+### Cenário 1: listagem padrão → esperado: 200 { items, page: 1, limit: 20, total }
+GET {{baseUrl}}/products
+
+### Cenário 2: página e limite → esperado: 200 com page=2 e limit=5
+GET {{baseUrl}}/products?page=2&limit=5
+
+### Cenário 3: página além do fim → esperado: 200 com items vazio
+GET {{baseUrl}}/products?page=100000
+
+### Cenário 4: page=0 → esperado: 400 Bad Request
+GET {{baseUrl}}/products?page=0
+
+### Cenário 5: limit=101 (acima do teto) → esperado: 400 Bad Request
+GET {{baseUrl}}/products?limit=101
+
+### Cenário 6: limit não numérico → esperado: 400 Bad Request
+GET {{baseUrl}}/products?limit=abc
+
+### Cenário 7: rota inexistente → esperado: 404
+GET {{baseUrl}}/produtos

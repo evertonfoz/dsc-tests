@@ -1,0 +1,36 @@
+# Auditoria arquitetural UC13 — 2026-11-23T14:22:58Z — base 7ea867d
+
+## Entidade Product: imports
+(nenhum import)
+
+## Service: imports de typeorm / dtos / express
+1:import { randomUUID } from 'node:crypto';
+2:import { Inject, Injectable } from '@nestjs/common';
+3:import { InvalidProductNameException } from '../../../common/exceptions/invalid-product-name.exception.js';
+4:import { ProductPersistenceFailedException } from '../../../common/exceptions/product-persistence-failed.exception.js';
+5:import { InvalidPaginationException } from '../../../common/exceptions/invalid-pagination.exception.js';
+6:import { MAX_PRODUCT_NAME_LENGTH } from '../entities/product-name.rules.js';
+7:import { Product } from '../entities/product.entity.js';
+8:import {
+
+## Controller: referências a typeorm
+(nenhuma)
+
+## Contrato do Repository: referências a typeorm
+(nenhuma)
+
+## Mappers: resposta HTTP e persistência separados
+src/infrastructure/persistence/products:
+product.mapper.ts
+product.orm-entity.ts
+typeorm-products.repository.postgres.spec.ts
+typeorm-products.repository.ts
+
+src/modules/products/mappers:
+product-response.mapper.ts
+
+## Resposta HTTP: campo deletedAt
+(deletedAt ausente da resposta)
+
+## Imports de typeorm fora de infrastructure/database
+(nenhum)

@@ -1,0 +1,15 @@
+# Publicação em 2026-11-23T13:20:29Z; Sub-Issues vinculadas ao Epic #104 e itens no Project #6 (Backlog; F01 em Ready)
+#104 [UC13] Listar Produtos
+#105 [UC13][Fase A] Planejamento e publicação do UC13
+#106 [UC13][F01] Listar produtos ativos com productId e name
+#107 [UC13][F02] Excluir produtos removidos (soft delete) da lista e do total
+#108 [UC13][F03] Lista vazia é sucesso
+#109 [UC13][F04] Paginar com padrão de 20 itens
+#110 [UC13][F05] Ordenar por name e productId
+#111 [UC13][F06] Rejeitar paginação inválida no núcleo
+#112 [UC13][F07] Informar falha de persistência na listagem
+#113 [UC13][Fase C1] Adaptador HTTP de GET /products
+#114 [UC13][Fase C2] Persistência real: deletedAt e listagem paginada
+#115 [UC13][Fase D] Contrato de GET /products
+#116 [UC13][Fase E] Verificação reprodutível da listagem
+#117 [UC13][Fase F] Auditoria e encerramento do UC13

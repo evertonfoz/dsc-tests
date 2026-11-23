@@ -1,6 +1,24 @@
 import { Injectable } from '@nestjs/common';
 import { Product } from '../entities/product.entity.js';
-import { ProductsRepository } from './products.repository.interface.js';
+import {
+  ProductsPageQuery,
+  ProductsPageResult,
+  ProductsRepository,
+} from './products.repository.interface.js';
+
+// Aproxima a collation do banco (en_US.utf8: sem distinguir caixa e acentos em primeiro nível).
+const nameCollator = new Intl.Collator('pt-BR');
+
+function compareByNameThenId(a: Product, b: Product): number {
+  const byName = nameCollator.compare(a.name, b.name);
+  if (byName !== 0) {
+    return byName;
+  }
+  if (a.productId === b.productId) {
+    return 0;
+  }
+  return a.productId < b.productId ? -1 : 1;
+}
 
 @Injectable()
 export class InMemoryProductsRepository implements ProductsRepository {
@@ -9,5 +27,15 @@ export class InMemoryProductsRepository implements ProductsRepository {
   async save(product: Product): Promise<Product> {
     this.products.push(product);
     return product;
+  }
+
+  async findActivePage(query: ProductsPageQuery): Promise<ProductsPageResult> {
+    const active = this.products
+      .filter((product) => product.deletedAt === null)
+      .sort(compareByNameThenId);
+    return {
+      items: active.slice(query.offset, query.offset + query.limit),
+      total: active.length,
+    };
   }
 }

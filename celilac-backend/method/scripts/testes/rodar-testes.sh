@@ -19,6 +19,9 @@ if out=$(node "$CHK" "$FX/valido.yaml" 2>&1); then ok "valido.yaml é aceito"; e
 # fase B reaberta com fase posterior em andamento (ADR-004 do método) é aceita
 if out=$(node "$CHK" "$FX/reaberta-valida.yaml" 2>&1); then ok "reaberta-valida.yaml é aceito (retorno a fase anterior)"; else fail "reaberta-valida.yaml deveria ser aceito"; echo "$out"; fi
 
+# PR compartilhado por várias fatias, declarado em todas (ADR-005 do método), é aceito
+if out=$(node "$CHK" "$FX/pr-compartilhado-valido.yaml" 2>&1); then ok "pr-compartilhado-valido.yaml é aceito"; else fail "pr-compartilhado-valido.yaml deveria ser aceito"; echo "$out"; fi
+
 # inválidos: arquivo|trecho esperado
 casos=(
   "inv-arquetipo|arquetipo inválido"
@@ -26,6 +29,7 @@ casos=(
   "inv-documento-inexistente|documento: arquivo não encontrado"
   "inv-pr-faltando|exige pr"
   "inv-issue-duplicada|já usada pela fatia"
+  "inv-pr-compartilhado-nao-declarado|declare pr_compartilhado: true"
   "inv-evidencia-inexistente|arquivo não encontrado"
   "inv-fase-salto|não está concluída"
   "inv-gate-sem-por|exige \"por\""

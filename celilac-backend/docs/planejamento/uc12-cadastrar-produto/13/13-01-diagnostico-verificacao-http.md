@@ -100,7 +100,7 @@
 
 1. **Reestruturar o diretório `http-rest-client/`**:
    * Criar `http-rest-client/tests/hello-world.http` (smoke tests).
-   * Criar `http-rest-client/products/products-controller.http` e `test-scenarios.http` (UC12).
+   * Criar `http-rest-client/products/uc12-cadastrar-produto/products-controller.http` e `test-scenarios.http` (UC12).
    * Migrar e padronizar `http-rest-client/orders/orders-controller.http` e `test-scenarios.http` (recurso de apoio).
    * Criar a pasta `http-rest-client/containerizado/` com `README.md`, `00-smoke.http`, `01-products-cadastrar-produto.http`, `02-orders-fronteira.http` e `run-checks.sh`.
 2. **Executar requisições reais** e documentar cada status obtido.

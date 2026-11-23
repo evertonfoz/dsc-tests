@@ -228,8 +228,14 @@ export function validar(state, opcoes = {}) {
       if (Number.isInteger(s.issue)) {
         if (issues.has(s.issue)) err(`${c}: issue #${s.issue} já usada pela fatia ${issues.get(s.issue)}`); else issues.set(s.issue, s.id);
       }
+      if (s.pr_compartilhado !== undefined && typeof s.pr_compartilhado !== 'boolean') err(`${c}.pr_compartilhado deve ser true ou false`);
+      if (s.pr_compartilhado === true && !Number.isInteger(s.pr)) err(`${c}.pr_compartilhado exige pr`);
       if (Number.isInteger(s.pr)) {
-        if (prs.has(s.pr)) err(`${c}: PR #${s.pr} já usado pela fatia ${prs.get(s.pr)}`); else prs.set(s.pr, s.id);
+        // PR compartilhado (ADR-005 do método): permitido só se TODAS as fatias com esse PR o declaram.
+        const anterior = prs.get(s.pr);
+        if (anterior && !(anterior.compartilhado && s.pr_compartilhado === true)) {
+          err(`${c}: PR #${s.pr} já usado pela fatia ${anterior.id}; para compartilhar um PR, declare pr_compartilhado: true em todas as fatias dele`);
+        } else if (!anterior) prs.set(s.pr, { id: s.id, compartilhado: s.pr_compartilhado === true });
       }
       if (['em_andamento', 'em_revisao', 'integrada'].includes(s.status)) {
         if (!Number.isInteger(s.issue)) err(`${c} (${s.status}) exige issue`);
