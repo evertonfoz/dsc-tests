@@ -20,3 +20,6 @@ Cobertura item a item: `docs/uc/uc13/evidencias/F/cobertura.md`. Auditoria: `doc
 - Sete fatias entregues em um único PR (exceção da regra 11, decisão do estudante, registrada na ADR-005 do método).
 - Falhas conhecidas de `orders` (ADR-001) seguem fora do escopo.
 - Migration aplicada ao banco de desenvolvimento em 2026-11-23, com autorização.
+
+## Encerramento (2026-11-23)
+PR #119 integrado (ee4415b); #117 e o Epic #104 fechados com link para a evidência e movidos para `Done` no Project #6; gates das fases A a F aprovados no `state.yaml` por `evertonfoz` (autorização expressa do estudante) e por CI (checks verdes no `main`, `celilac-backend CI` em ee4415b); `fase_atual: concluido`.
