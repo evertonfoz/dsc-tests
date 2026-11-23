@@ -51,7 +51,7 @@ Epic **#126**; fatias **#127** (F01), **#128** (F02), **#129** (F03), **#130** (
 - `run-checks.sh` no banco de desenvolvimento: 2 `POST /products` de teste. Nenhuma migration aplicada ou revertida.
 - Testes de integração e e2e contra `postgres_test`.
 - Renomeei a branch local (sem push) de `docs/uc14-buscar-produto` para `feature/uc14-buscar-produto`.
-- Não houve merge, fechamento de issue, push, remoção de branch ou worktree.
+- Push da branch e abertura do PR #138, ao final, com autorização do estudante. Não houve merge, fechamento de issue, remoção de branch ou worktree.
 
 ## 8. Resultados verificados
 | Verificação | Resultado |
@@ -65,22 +65,22 @@ Epic **#126**; fatias **#127** (F01), **#128** (F02), **#129** (F03), **#130** (
 | `check-state.sh --remote` e `check-links.mjs` | válidos |
 
 ## 9. O que ainda não tem prova
-CI na branch principal; push; PR; produto removido no contêiner; falha `500` real via HTTP. Gates das Fases B a F, ainda `pendente`.
+CI na branch principal e no PR #138 (ver Verificação abaixo); produto removido no contêiner; falha `500` real via HTTP. Gates das Fases B a F, ainda `pendente`.
 
 ## 10. O que aconteceu além do prompt
 Commit da movimentação de `uc-listar*.md` para `prompts/uc-13/`; criação de `docs/uc/uc14/README.md`; atualização do índice `13-02-estrutura-colecao.md`; uso do `state.yaml` e dos playbooks do método, que o prompt cita como opcionais.
 
 ## 11. Onde está tudo
-- **Branch local:** `feature/uc14-buscar-produto`, 15 commits desde `992cd44`, **só local** (sem push).
+- **Branch:** `feature/uc14-buscar-produto`, com push feito e **PR #138** aberto contra `main` (autorizado pelo estudante ao final do fluxo).
 - **GitHub:** issues #126 a #137 e Project #6 (existem no remoto).
 - **Documentos:** `prompts/` (UC, 00, 01, 03 e este resumo) e `docs/uc/uc14/` (state, contrato, README, roteiro, relatórios A e F, evidências A, B, E, F).
 - **Código:** `src/` e `test/`; `.http` em `http-rest-client/`.
 
 ## 12. O que ficou pendente
-Push, PR, CI, merge, fechamento das issues e do Epic, aprovação dos gates e `fase_atual: concluido` (ver `docs/uc/uc14/roteiro-conclusao-uc14.md`). Outras entidades (ex.: `Order`) ou operações viram **novas execuções** do prompt.
+CI, merge, fechamento das issues e do Epic, aprovação dos gates e `fase_atual: concluido` (ver `docs/uc/uc14/roteiro-conclusao-uc14.md`). Outras entidades (ex.: `Order`) ou operações viram **novas execuções** do prompt.
 
 ## Próximo passo
-Revisar os artefatos, decidir sobre o push e o PR.
+Acompanhar o CI do PR #138, revisar e decidir sobre o merge.
 
 ## Perguntas em aberto
-Nenhuma crítica. Aguardo suas instruções sobre o push e o PR.
+Nenhuma crítica. Aguardo suas instruções sobre o merge.

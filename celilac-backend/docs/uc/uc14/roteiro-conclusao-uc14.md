@@ -6,8 +6,8 @@
 
 | Passo | Ação | Situação |
 |---|---|---|
-| 1 | Push da branch `feature/uc14-buscar-produto` | Pendente (estudante) |
-| 2 | Abrir um PR único (fatias F01 a F05 e Fases C a F), citando #126 a #137 | Pendente (estudante) |
+| 1 | Push da branch `feature/uc14-buscar-produto` | Feito (autorizado pelo estudante) |
+| 2 | Abrir um PR único (fatias F01 a F05 e Fases C a F), citando #126 a #137 | Feito: PR #138, aberto para revisão |
 | 3 | CI verde no PR (qualidade, integração/E2E, smoke do Compose, `run-checks.sh`) | Pendente (estudante) |
 | 4 | Merge do PR (`pr_compartilhado: true` em F01 a F05, como no UC13) | Pendente (estudante) |
 | 5 | Fechar #127 a #131 (fatias), com link para o PR e para `evidencias/B/` | Pendente (estudante) |
@@ -17,7 +17,7 @@
 | 9 | Aprovar os gates das Fases B a F no `state.yaml`, atualizar `epic.estado` e `fase_atual: concluido`, e rodar `check-state.sh --remote` | Pendente (estudante) |
 | 10 | Atualizar `branch`, `pr` e `status: integrada` das fatias no `state.yaml` | Pendente (estudante) |
 
-Feito até aqui: planejamento publicado (Fase A, gate aprovado por evertonfoz em 2026-11-23).
+Feito até aqui: planejamento publicado (Fase A, gate aprovado por evertonfoz em 2026-11-23), push e PR #138.
 
 ## Provas disponíveis
 - Cobertura: `docs/uc/uc14/evidencias/F/cobertura.md`.

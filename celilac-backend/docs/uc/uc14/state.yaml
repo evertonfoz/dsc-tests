@@ -59,8 +59,9 @@ fatias:
     criterios: [CA01, CA08, RN04, RN05, RF01, RF04]
     issue: 127
     branch: feature/uc14-buscar-produto
-    pr: null
-    status: em_andamento
+    pr: 138
+    pr_compartilhado: true
+    status: em_revisao
     responsavel: evertonfoz
     revisor: evertonfoz
     evidencias: [evidencias/B/f01-red.txt, evidencias/B/f01-green.txt]
@@ -69,8 +70,9 @@ fatias:
     criterios: [CA03, FA01, RF03]
     issue: 128
     branch: feature/uc14-buscar-produto
-    pr: null
-    status: em_andamento
+    pr: 138
+    pr_compartilhado: true
+    status: em_revisao
     responsavel: evertonfoz
     revisor: evertonfoz
     evidencias: [evidencias/B/f02-red.txt, evidencias/B/f02-green.txt]
@@ -79,8 +81,9 @@ fatias:
     criterios: [CA04, FA02, RN01, RN02]
     issue: 129
     branch: feature/uc14-buscar-produto
-    pr: null
-    status: em_andamento
+    pr: 138
+    pr_compartilhado: true
+    status: em_revisao
     responsavel: evertonfoz
     revisor: evertonfoz
     evidencias: [evidencias/B/f03-red.txt, evidencias/B/f03-green.txt]
@@ -89,8 +92,9 @@ fatias:
     criterios: [CA06, FE01, RF05]
     issue: 130
     branch: feature/uc14-buscar-produto
-    pr: null
-    status: em_andamento
+    pr: 138
+    pr_compartilhado: true
+    status: em_revisao
     responsavel: evertonfoz
     revisor: evertonfoz
     evidencias: [evidencias/B/f04-red.txt, evidencias/B/f04-green.txt]
@@ -99,8 +103,9 @@ fatias:
     criterios: [CA05, FA03, RN03, RF02]
     issue: 131
     branch: feature/uc14-buscar-produto
-    pr: null
-    status: em_andamento
+    pr: 138
+    pr_compartilhado: true
+    status: em_revisao
     responsavel: evertonfoz
     revisor: evertonfoz
     evidencias: [evidencias/B/f05-red.txt, evidencias/B/f05-green.txt]
