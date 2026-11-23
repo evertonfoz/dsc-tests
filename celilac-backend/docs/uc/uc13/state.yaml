@@ -30,9 +30,16 @@ fases:
     evidencias: [evidencias/C/c1-red.txt, evidencias/C/c1-green.txt, evidencias/C/c2-red.txt, evidencias/C/c2-green.txt, evidencias/C/e2e.txt]
   D: { status: em_andamento, relatorio: null, gate: [], evidencias: [] }
   E: { status: pendente, relatorio: null, gate: [], evidencias: [] }
-  F: { status: pendente, relatorio: null, gate: [], evidencias: [] }
+  F:
+    status: em_andamento
+    relatorio: relatorios/F.md
+    gate:
+      - { item: "Todo item do UC tem teste que o prova ou ADR", resultado: pendente }
+      - { item: "Arquitetura em conformidade, achados tratados", resultado: pendente }
+      - { item: "Issues e Epic fechados", resultado: pendente }
+    evidencias: [evidencias/F/cobertura.md, evidencias/F/auditoria.md, evidencias/F/refatoracao-regressao.txt]
 
-# PR único das sete fatias: #118 (decisão do estudante). O validador exige um PR por fatia, então o campo pr fica null até haver divisão ou ajuste do método.
+# PR único das sete fatias: #118, integrado em 7ea867d (decisão do estudante). O validador exige um PR por fatia, então o campo pr fica null até haver divisão ou ajuste do método.
 # Issues de fase: A #105, C1 #113, C2 #114, D #115, E #116, F #117.
 fatias:
   - id: F01

@@ -3,15 +3,16 @@ import { Inject, Injectable } from '@nestjs/common';
 import { InvalidProductNameException } from '../../../common/exceptions/invalid-product-name.exception.js';
 import { ProductPersistenceFailedException } from '../../../common/exceptions/product-persistence-failed.exception.js';
 import { InvalidPaginationException } from '../../../common/exceptions/invalid-pagination.exception.js';
+import {
+  DEFAULT_PAGE_LIMIT,
+  MAX_PAGE_LIMIT,
+} from '../entities/product-pagination.rules.js';
 import { MAX_PRODUCT_NAME_LENGTH } from '../entities/product-name.rules.js';
 import { Product } from '../entities/product.entity.js';
 import {
   PRODUCTS_REPOSITORY,
   type ProductsRepository,
 } from '../repositories/products.repository.interface.js';
-
-export const DEFAULT_PAGE_LIMIT = 20;
-export const MAX_PAGE_LIMIT = 100;
 
 export interface ListProductsQuery {
   page?: number;
