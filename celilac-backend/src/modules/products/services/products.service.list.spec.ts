@@ -87,4 +87,26 @@ describe('ProductsService.listProducts (UC13)', () => {
     expect(custom.items).toHaveLength(45);
     expect(custom.limit).toBe(50);
   });
+
+  it('should order by name then productId deterministically (CA08)', async () => {
+    await repository.save(
+      new Product('00000000-0000-4000-8000-000000000003', 'Banana'),
+    );
+    await repository.save(
+      new Product('00000000-0000-4000-8000-000000000002', 'Arroz'),
+    );
+    await repository.save(
+      new Product('00000000-0000-4000-8000-000000000001', 'Arroz'),
+    );
+
+    const first = await service.listProducts();
+    const second = await service.listProducts();
+
+    expect(first.items.map((p) => p.productId)).toEqual([
+      '00000000-0000-4000-8000-000000000001',
+      '00000000-0000-4000-8000-000000000002',
+      '00000000-0000-4000-8000-000000000003',
+    ]);
+    expect(second.items).toEqual(first.items);
+  });
 });
