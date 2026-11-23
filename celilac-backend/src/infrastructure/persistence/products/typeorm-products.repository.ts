@@ -1,8 +1,12 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { IsNull, Repository } from 'typeorm';
 import { Product } from '../../../modules/products/entities/product.entity.js';
-import { type ProductsRepository } from '../../../modules/products/repositories/products.repository.interface.js';
+import {
+  type ProductsPageQuery,
+  type ProductsPageResult,
+  type ProductsRepository,
+} from '../../../modules/products/repositories/products.repository.interface.js';
 import { ProductMapper } from './product.mapper.js';
 import { ProductOrmEntity } from './product.orm-entity.js';
 
@@ -18,5 +22,20 @@ export class TypeOrmProductsRepository implements ProductsRepository {
     const savedEntity = await this.ormRepository.save(entity);
 
     return ProductMapper.toDomain(savedEntity);
+  }
+
+  async findActivePage(query: ProductsPageQuery): Promise<ProductsPageResult> {
+    // Collation fixada (ICU pt-BR) para que a ordem não dependa da collation padrão do banco
+    // e coincida com o adaptador em memória (Intl.Collator('pt-BR')).
+    const [entities, total] = await this.ormRepository
+      .createQueryBuilder('product')
+      .where('product.deletedAt IS NULL')
+      .orderBy('product.name COLLATE "pt-BR-x-icu"', 'ASC')
+      .addOrderBy('product.productId', 'ASC')
+      .skip(query.offset)
+      .take(query.limit)
+      .getManyAndCount();
+
+    return { items: entities.map(ProductMapper.toDomain), total };
   }
 }

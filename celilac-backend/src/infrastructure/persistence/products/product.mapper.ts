@@ -7,11 +7,12 @@ export class ProductMapper {
 
     entity.productId = product.productId;
     entity.name = product.name;
+    entity.deletedAt = product.deletedAt;
 
     return entity;
   }
 
   static toDomain(entity: ProductOrmEntity): Product {
-    return new Product(entity.productId, entity.name);
+    return new Product(entity.productId, entity.name, entity.deletedAt ?? null);
   }
 }

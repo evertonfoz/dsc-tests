@@ -13,6 +13,7 @@ describe('ProductsService', () => {
   beforeEach(async () => {
     const productsRepositoryMock: Mocked<ProductsRepository> = {
       save: vi.fn(),
+      findActivePage: vi.fn(),
     };
 
     const module: TestingModule = await Test.createTestingModule({
@@ -53,7 +54,9 @@ describe('ProductsService', () => {
 
   it('should report an incomplete operation when persistence fails (FE01)', async () => {
     productsRepository.save.mockRejectedValue(
-      new Error('connection refused at 10.0.0.5:5432 (relation "products" does not exist)'),
+      new Error(
+        'connection refused at 10.0.0.5:5432 (relation "products" does not exist)',
+      ),
     );
 
     const result = service.createProduct('Celular XYZ');
@@ -61,7 +64,9 @@ describe('ProductsService', () => {
     await expect(result).rejects.toMatchObject({
       name: 'ProductPersistenceFailedException',
     });
-    await expect(result).rejects.not.toThrow(/connection refused|10\.0\.0\.5|relation/);
+    await expect(result).rejects.not.toThrow(
+      /connection refused|10\.0\.0\.5|relation/,
+    );
   });
 
   it('should reject a blank product name in the service without saving (RN01)', async () => {

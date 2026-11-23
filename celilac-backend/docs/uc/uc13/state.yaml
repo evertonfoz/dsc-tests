@@ -1,0 +1,107 @@
+# Estado do UC13 (Listar Produtos). Gates da Fase A aprovados por evertonfoz em 2026-11-23; demais gates pendentes de validação humana.
+uc: UC13
+nome: Listar Produtos
+documento: ../../planejamento/uc13-listar-produtos/02-uc-listar-produtos.md
+arquetipo: consultar
+epic: { issue: 104, estado: open }
+fase_atual: B
+
+fases:
+  A:
+    status: concluida
+    relatorio: relatorios/A.md
+    gate:
+      - { item: "Epic e Sub-Issues criadas e reconciliadas com este arquivo", resultado: aprovado, por: evertonfoz }
+      - { item: "GitHub Project configurado com os 5 estados", resultado: aprovado, por: evertonfoz }
+    evidencias: [evidencias/A/publicacao.txt]
+  B:
+    status: em_andamento
+    relatorio: null
+    gate:
+      - { item: "Todas as fatias integradas na branch principal", resultado: pendente }
+      - { item: "CI verde na branch principal", resultado: pendente }
+    evidencias: []
+  C:
+    status: em_andamento
+    relatorio: null
+    gate:
+      - { item: "C1 (HTTP) e C2 (persistência) integradas", resultado: pendente }
+      - { item: "CI verde na branch principal", resultado: pendente }
+    evidencias: [evidencias/C/c1-red.txt, evidencias/C/c1-green.txt, evidencias/C/c2-red.txt, evidencias/C/c2-green.txt, evidencias/C/e2e.txt]
+  D: { status: em_andamento, relatorio: null, gate: [], evidencias: [] }
+  E: { status: pendente, relatorio: null, gate: [], evidencias: [] }
+  F: { status: pendente, relatorio: null, gate: [], evidencias: [] }
+
+# PR único das sete fatias: #118 (decisão do estudante). O validador exige um PR por fatia, então o campo pr fica null até haver divisão ou ajuste do método.
+# Issues de fase: A #105, C1 #113, C2 #114, D #115, E #116, F #117.
+fatias:
+  - id: F01
+    comportamento: "Listar produtos ativos devolve productId e name"
+    criterios: [CA01, RN04, RF01, RF03]
+    issue: 106
+    branch: feature/uc13-fatias-nucleo
+    pr: null
+    status: em_andamento
+    responsavel: evertonfoz
+    revisor: evertonfoz
+    evidencias: [evidencias/B/f01-red.txt, evidencias/B/f01-green.txt]
+  - id: F02
+    comportamento: "Produtos removidos (deletedAt) não aparecem na lista nem no total; novos produtos nascem ativos"
+    criterios: [CA05, CA10, RN01, RN06, RF05, RF07, FA02]
+    issue: 107
+    branch: feature/uc13-fatias-nucleo
+    pr: null
+    status: em_andamento
+    responsavel: evertonfoz
+    revisor: evertonfoz
+    evidencias: [evidencias/B/f02-red.txt, evidencias/B/f02-green.txt]
+  - id: F03
+    comportamento: "Lista vazia é sucesso, com total 0"
+    criterios: [CA02, RN03, RF04, FA01]
+    issue: 108
+    branch: feature/uc13-fatias-nucleo
+    pr: null
+    status: em_andamento
+    responsavel: evertonfoz
+    revisor: evertonfoz
+    evidencias: [evidencias/B/f03-teste.txt]
+  - id: F04
+    comportamento: "Paginação com padrão de 20 itens e navegação entre páginas"
+    criterios: [CA03, CA04, RN02, RF02]
+    issue: 109
+    branch: feature/uc13-fatias-nucleo
+    pr: null
+    status: em_andamento
+    responsavel: evertonfoz
+    revisor: evertonfoz
+    evidencias: [evidencias/B/f04-red.txt, evidencias/B/f04-green.txt]
+  - id: F05
+    comportamento: "Ordenação por name e, em empate, por productId"
+    criterios: [CA08, RN05]
+    issue: 110
+    branch: feature/uc13-fatias-nucleo
+    pr: null
+    status: em_andamento
+    responsavel: evertonfoz
+    revisor: evertonfoz
+    evidencias: [evidencias/B/f05-red.txt, evidencias/B/f05-green-tentativa-falha.txt, evidencias/B/f05-green.txt]
+  - id: F06
+    comportamento: "Paginação inválida é rejeitada no núcleo, sem consultar o repositório"
+    criterios: [CA06, FA03, RF06]
+    issue: 111
+    branch: feature/uc13-fatias-nucleo
+    pr: null
+    status: em_andamento
+    responsavel: evertonfoz
+    revisor: evertonfoz
+    evidencias: [evidencias/B/f06-f07-red.txt, evidencias/B/f06-f07-green.txt]
+  - id: F07
+    comportamento: "Falha ao consultar é informada como operação não concluída, sem vazar detalhes"
+    criterios: [CA09, FE01]
+    issue: 112
+    branch: feature/uc13-fatias-nucleo
+    pr: null
+    status: em_andamento
+    responsavel: evertonfoz
+    revisor: evertonfoz
+    evidencias: [evidencias/B/f06-f07-red.txt, evidencias/B/f06-f07-green.txt]

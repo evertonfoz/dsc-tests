@@ -1,0 +1,56 @@
+The plugin "vite-tsconfig-paths" is detected. Vite now supports tsconfig paths resolution natively via the resolve.tsconfigPaths option. You can remove the plugin and set resolve.tsconfigPaths: true in your Vite config instead.
+
+ RUN  v4.1.11 /private/tmp/claude-501/-Users-evertoncoimbradearaujo-Documents-GitHub-dsc-tests-celilac-backend/b14ddcd5-f649-4907-906a-54492d8d9a18/scratchpad/wt-uc13/celilac-backend
+
+ ❯ src/modules/products/services/products.service.list.spec.ts (3 tests | 2 failed) 4ms
+     × should exclude soft-deleted products from the list and the total (CA05) 2ms
+     × should create new products as active (CA10) 0ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/modules/products/services/products.service.list.spec.ts > ProductsService.listProducts (UC13) > should exclude soft-deleted products from the list and the total (CA05)
+AssertionError: expected [ 'Ativo', 'Removido' ] to deeply equal [ 'Ativo' ]
+
+- Expected
++ Received
+
+  [
+    "Ativo",
++   "Removido",
+  ]
+
+ ❯ src/modules/products/services/products.service.list.spec.ts:46:55
+     44|     const page = await service.listProducts();
+     45|
+     46|     expect(page.items.map((product) => product.name)).toEqual(['Ativo'…
+       |                                                       ^
+     47|     expect(page.total).toBe(1);
+     48|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  src/modules/products/services/products.service.list.spec.ts > ProductsService.listProducts (UC13) > should create new products as active (CA10)
+AssertionError: expected undefined to be null
+
+- Expected:
+null
+
++ Received:
+undefined
+
+ ❯ src/modules/products/services/products.service.list.spec.ts:53:31
+     51|     const product = await service.createProduct('Novo');
+     52|
+     53|     expect(product.deletedAt).toBeNull();
+       |                               ^
+     54|   });
+     55| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed | 1 passed (3)
+   Start at  10:21:59
+   Duration  203ms (transform 23ms, setup 0ms, import 122ms, tests 4ms, environment 0ms)
+

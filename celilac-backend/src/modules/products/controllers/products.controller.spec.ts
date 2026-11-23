@@ -29,9 +29,7 @@ describe('ProductsController (HTTP)', () => {
     }).compile();
 
     app = moduleFixture.createNestApplication();
-    app.useGlobalPipes(
-      createValidationPipe(),
-    );
+    app.useGlobalPipes(createValidationPipe());
 
     await app.init();
   });
@@ -88,7 +86,9 @@ describe('ProductsController (HTTP)', () => {
       .send({ name: 'Produto de exemplo' })
       .expect(201);
 
-    expect(serviceMock.createProduct).toHaveBeenCalledWith('Produto de exemplo');
+    expect(serviceMock.createProduct).toHaveBeenCalledWith(
+      'Produto de exemplo',
+    );
     expect(response.body).not.toHaveProperty('internalNote');
     expect(response.body).toEqual({
       productId: '550e8400-e29b-41d4-a716-446655440000',

@@ -3,14 +3,7 @@ import { Test, type TestingModule } from '@nestjs/testing';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import request from 'supertest';
 import { type App } from 'supertest/types.js';
-import {
-  afterAll,
-  beforeAll,
-  describe,
-  expect,
-  it,
-  vi,
-} from 'vitest';
+import { afterAll, beforeAll, describe, expect, it, vi } from 'vitest';
 import { ProductOrmEntity } from '../../infrastructure/persistence/products/product.orm-entity.js';
 import { ProductsController } from './controllers/products.controller.js';
 import { Product } from './entities/product.entity.js';
@@ -22,7 +15,6 @@ import {
 } from './repositories/products.repository.interface.js';
 import { ProductsService } from './services/products.service.js';
 import { createValidationPipe } from '../../common/config/validation-pipe.js';
-
 
 describe('POST /products — integração', () => {
   let app: INestApplication<App>;
@@ -47,9 +39,7 @@ describe('POST /products — integração', () => {
 
     app = moduleRef.createNestApplication();
 
-    app.useGlobalPipes(
-      createValidationPipe(),
-    );
+    app.useGlobalPipes(createValidationPipe());
 
     await app.init();
   });
@@ -76,9 +66,7 @@ describe('POST /products — integração', () => {
       name: 'Celular XYZ',
     });
 
-    expect(response.body.productId).toEqual(
-      expect.any(String),
-    );
+    expect(response.body.productId).toEqual(expect.any(String));
 
     expect(saveSpy).toHaveBeenCalledTimes(1);
     expect(saveSpy).toHaveBeenCalledWith(

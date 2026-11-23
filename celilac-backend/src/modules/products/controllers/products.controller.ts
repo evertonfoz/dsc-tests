@@ -1,8 +1,11 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post, Query } from '@nestjs/common';
 import { CreateProductDto } from '../dtos/create-product.dto.js';
+import { ListProductsQueryDto } from '../dtos/list-products-query.dto.js';
 import {
   type ProductResponseDto,
+  type ProductsPageResponseDto,
   toProductResponse,
+  toProductsPageResponse,
 } from '../mappers/product-response.mapper.js';
 import { ProductsService } from '../services/products.service.js';
 
@@ -19,5 +22,17 @@ export class ProductsController {
     );
 
     return toProductResponse(product);
+  }
+
+  @Get()
+  async listProducts(
+    @Query() query: ListProductsQueryDto,
+  ): Promise<ProductsPageResponseDto> {
+    const page = await this.productsService.listProducts({
+      page: query.page,
+      limit: query.limit,
+    });
+
+    return toProductsPageResponse(page);
   }
 }

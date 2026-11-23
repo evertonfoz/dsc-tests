@@ -35,7 +35,9 @@ describe('ProductsController — mapeamento de erros do núcleo (HTTP)', () => {
   });
 
   it('should map InvalidProductNameException to 400 at the HTTP boundary', async () => {
-    serviceMock.createProduct.mockRejectedValue(new InvalidProductNameException());
+    serviceMock.createProduct.mockRejectedValue(
+      new InvalidProductNameException(),
+    );
 
     const response = await request(app.getHttpServer())
       .post('/products')
@@ -91,7 +93,9 @@ describe('ProductsController — mapeamento de erros do núcleo (HTTP)', () => {
   it('should map ProductPersistenceFailedException to 500 without leaking internal details', async () => {
     serviceMock.createProduct.mockRejectedValue(
       new ProductPersistenceFailedException(
-        new Error('connection refused at 10.0.0.5:5432 (relation "products" does not exist)'),
+        new Error(
+          'connection refused at 10.0.0.5:5432 (relation "products" does not exist)',
+        ),
       ),
     );
 
@@ -105,6 +109,8 @@ describe('ProductsController — mapeamento de erros do núcleo (HTTP)', () => {
       message: 'Product registration could not be completed.',
       error: 'ProductPersistenceFailedException',
     });
-    expect(JSON.stringify(response.body)).not.toMatch(/connection refused|10\.0\.0\.5|relation/);
+    expect(JSON.stringify(response.body)).not.toMatch(
+      /connection refused|10\.0\.0\.5|relation/,
+    );
   });
 });
