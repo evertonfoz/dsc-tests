@@ -43,3 +43,42 @@ Content-Type: application/json
   "categoria": "massas",
   "codigoInterno": "IGNORAR_CAMPO"
 }
+
+# ==============================================================================
+# Casos de Teste do UC13 — Listar Produtos
+# GET /products: só produtos ativos (deletedAt nulo), ordenados por nome e productId,
+# paginados (padrão 20, limit até 100). Item = { productId, name }.
+# ==============================================================================
+
+### Cenário 1: Listagem padrão (CA01, CA03) → esperado: 200 OK { items, page: 1, limit: 20, total }
+GET {{baseUrl}}/products
+
+### Cenário 2: Cadastrar e listar (fluxo UC12 → UC13) → esperado: 201 Created
+# @name produtoParaListar
+POST {{baseUrl}}/products
+Content-Type: application/json
+
+{
+  "name": "Produto para Listagem UC13"
+}
+
+### Cenário 2b: Listar após o cadastro (CA01) → esperado: 200 OK, total inclui o produto acima
+GET {{baseUrl}}/products?limit=100
+
+### Cenário 3: Página e limite (CA03, CA04) → esperado: 200 OK com page=2 e limit=5
+GET {{baseUrl}}/products?page=2&limit=5
+
+### Cenário 4: Página além do fim (CA02) → esperado: 200 OK com items vazio
+GET {{baseUrl}}/products?page=100000
+
+### Cenário 5: page=0 (CA06) → esperado: 400 Bad Request
+GET {{baseUrl}}/products?page=0
+
+### Cenário 6: limit acima do teto, 101 (CA06) → esperado: 400 Bad Request
+GET {{baseUrl}}/products?limit=101
+
+### Cenário 7: limit não numérico (CA06) → esperado: 400 Bad Request
+GET {{baseUrl}}/products?limit=abc
+
+### Cenário 8: Rota inexistente (CA12) → esperado: 404 Not Found
+GET {{baseUrl}}/produtos
