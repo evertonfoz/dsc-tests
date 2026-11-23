@@ -1,0 +1,24 @@
+@baseUrl = http://localhost:3200
+
+# UC14 — Buscar Produto por Identificador (GET /products/:productId)
+
+### Cadastrar um produto para buscar (UC12) → esperado: 201 Created
+# @name produtoParaBuscar
+POST {{baseUrl}}/products
+Content-Type: application/json
+
+{
+  "name": "Produto para Busca UC14"
+}
+
+###
+@produtoId = {{produtoParaBuscar.response.body.productId}}
+
+### Buscar o produto cadastrado → esperado: 200 OK { productId, name }
+GET {{baseUrl}}/products/{{produtoId}}
+
+### Buscar UUID sem produto → esperado: 404 Not Found (ProductNotFoundException)
+GET {{baseUrl}}/products/99999999-9999-4999-8999-999999999999
+
+### Buscar identificador que não é UUID → esperado: 400 Bad Request (message em lista)
+GET {{baseUrl}}/products/abc
