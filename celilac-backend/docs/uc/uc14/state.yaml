@@ -28,8 +28,19 @@ fases:
       - { item: "C1 (HTTP) e C2 (persistência) integradas", resultado: pendente }
       - { item: "CI verde na branch principal", resultado: pendente }
     evidencias: [evidencias/B/c1-red.txt, evidencias/B/c1-green.txt, evidencias/B/c2-red.txt, evidencias/B/c2-green.txt, evidencias/B/c2-integration.txt, evidencias/B/c1-c2-e2e.txt]
-  D: { status: pendente, relatorio: null, gate: [], evidencias: [] }
-  E: { status: pendente, relatorio: null, gate: [], evidencias: [] }
+  D:
+    status: em_andamento
+    relatorio: null
+    gate:
+      - { item: "Cada cenário do contrato de GET /products/:productId documentado e testado", resultado: pendente }
+    evidencias: [evidencias/B/c1-green.txt, evidencias/B/c2-integration.txt, evidencias/B/c1-c2-e2e.txt]
+  E:
+    status: em_andamento
+    relatorio: null
+    gate:
+      - { item: "O script termina com 0 falhas no contêiner", resultado: pendente }
+      - { item: "O mesmo script passa no CI (smoke)", resultado: pendente }
+    evidencias: [evidencias/E/run-checks.txt]
   F: { status: pendente, relatorio: null, gate: [], evidencias: [] }
 
 # Issues de fase: A #132, C1 #133, C2 #134, D #135, E #136, F #137.
