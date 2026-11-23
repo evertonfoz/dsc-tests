@@ -193,4 +193,34 @@ describe('TypeOrmProductsRepository — persistência real no PostgreSQL', () =>
 
     expect(rows[0].deletedAt).toBeNull();
   });
+
+  it('should revert and reapply the UC13 migration, keeping existing products (CA11)', async () => {
+    const productId = randomUUID();
+    await repository.save(new Product(productId, 'Produto anterior'));
+
+    const columnExists = async (): Promise<boolean> => {
+      const rows = await dataSource.query<unknown[]>(
+        `SELECT 1 FROM information_schema.columns
+         WHERE table_schema = 'products' AND table_name = 'products' AND column_name = 'deletedAt'`,
+      );
+      return rows.length === 1;
+    };
+
+    expect(await columnExists()).toBe(true);
+    try {
+      // Banco de testes validado em beforeAll (TEST_DB_ALLOW_DESTRUCTIVE=true).
+      await dataSource.undoLastMigration();
+      expect(await columnExists()).toBe(false);
+    } finally {
+      await dataSource.runMigrations();
+    }
+
+    expect(await columnExists()).toBe(true);
+    const rows = await dataSource.query<Array<{ deletedAt: Date | null }>>(
+      'SELECT "deletedAt" FROM "products"."products" WHERE "productId" = $1',
+      [productId],
+    );
+    expect(rows).toHaveLength(1);
+    expect(rows[0].deletedAt).toBeNull();
+  });
 });
