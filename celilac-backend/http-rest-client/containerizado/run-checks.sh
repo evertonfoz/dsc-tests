@@ -134,8 +134,26 @@ check "Contrato: JSON inválido retorna 400" "400" "$code_bad_json"
 error_body=$(curl -s -X POST "$BASE/products" -H "Content-Type: application/json" -d '{"name":""}')
 check "Contrato: o 400 traz message (lista), error e statusCode" "true" "$(node -e "try{const b=JSON.parse(process.argv[1]);console.log(Array.isArray(b.message)&&b.error==='Bad Request'&&b.statusCode===400)}catch{console.log(false)}" "$error_body")"
 
+# UC13: GET /products passou a listar produtos ativos (antes era 404).
 code_get_products=$(status "$BASE/products")
-check "Contrato: GET /products retorna 404" "404" "$code_get_products"
+check "Contrato UC13: GET /products retorna 200" "200" "$code_get_products"
+
+list_body=$(curl -s "$BASE/products?page=1&limit=5")
+check "Contrato UC13: a listagem traz items, page, limit e total" "true" "$(node -e "try{const b=JSON.parse(process.argv[1]);console.log(Array.isArray(b.items)&&b.page===1&&b.limit===5&&typeof b.total==='number')}catch{console.log(false)}" "$list_body")"
+check "Contrato UC13: cada item traz somente productId e name" "true" "$(node -e "try{const b=JSON.parse(process.argv[1]);console.log(b.items.every(i=>Object.keys(i).sort().join()==='name,productId'))}catch{console.log(false)}" "$list_body")"
+default_limit=$(curl -s "$BASE/products" | node -e "let d='';process.stdin.on('data',c=>d+=c).on('end',()=>{try{console.log(JSON.parse(d).limit)}catch{console.log('')}})")
+check "Contrato UC13: o limite padrão é 20" "20" "$default_limit"
+
+code_limit_alto=$(status "$BASE/products?limit=101")
+check "Contrato UC13: limit=101 retorna 400" "400" "$code_limit_alto"
+code_page_zero=$(status "$BASE/products?page=0")
+check "Contrato UC13: page=0 retorna 400" "400" "$code_page_zero"
+code_limit_texto=$(status "$BASE/products?limit=abc")
+check "Contrato UC13: limit não numérico retorna 400" "400" "$code_limit_texto"
+
+db_active_total=$(echo 'SELECT count(*) FROM products.products WHERE "deletedAt" IS NULL;' | sql | tr -d '\r')
+api_total=$(curl -s "$BASE/products?limit=1" | node -e "let d='';process.stdin.on('data',c=>d+=c).on('end',()=>{try{console.log(JSON.parse(d).total)}catch{console.log('')}})")
+check "Contrato UC13: total da API confere com os produtos ativos no banco" "$db_active_total" "$api_total"
 
 code_wrong_route=$(status -X POST "$BASE/produtos" -H "Content-Type: application/json" -d '{"name":"x"}')
 check "Contrato: POST em rota inexistente retorna 404" "404" "$code_wrong_route"
