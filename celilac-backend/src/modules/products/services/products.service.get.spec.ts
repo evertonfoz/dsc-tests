@@ -1,4 +1,5 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { ProductLookupFailedException } from '../../../common/exceptions/product-lookup-failed.exception.js';
 import { ProductNotFoundException } from '../../../common/exceptions/product-not-found.exception.js';
 import { Product } from '../entities/product.entity.js';
 import { InMemoryProductsRepository } from '../repositories/in-memory-products.repository.js';
@@ -59,5 +60,16 @@ describe('ProductsService.getProductById (UC14)', () => {
     const result = service.getProductById(PRODUCT_ID);
 
     await expect(result).rejects.toBeInstanceOf(ProductNotFoundException);
+  });
+
+  it('should throw ProductLookupFailedException when the repository fails (CA06)', async () => {
+    vi.spyOn(repository, 'findActiveById').mockRejectedValue(
+      new Error('connection refused at 10.0.0.5:5432'),
+    );
+
+    const result = service.getProductById(PRODUCT_ID);
+
+    await expect(result).rejects.toBeInstanceOf(ProductLookupFailedException);
+    await expect(result).rejects.not.toThrow(/10\.0\.0\.5|5432/);
   });
 });
