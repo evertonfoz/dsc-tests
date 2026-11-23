@@ -30,9 +30,16 @@ fases:
     evidencias: [evidencias/C/c1-red.txt, evidencias/C/c1-green.txt, evidencias/C/c2-red.txt, evidencias/C/c2-green.txt, evidencias/C/e2e.txt]
   D: { status: em_andamento, relatorio: null, gate: [], evidencias: [] }
   E: { status: pendente, relatorio: null, gate: [], evidencias: [] }
-  F: { status: pendente, relatorio: null, gate: [], evidencias: [] }
+  F:
+    status: em_andamento
+    relatorio: relatorios/F.md
+    gate:
+      - { item: "Todo item do UC tem teste que o prova ou ADR", resultado: pendente }
+      - { item: "Arquitetura em conformidade, achados tratados", resultado: pendente }
+      - { item: "Issues e Epic fechados", resultado: pendente }
+    evidencias: [evidencias/F/cobertura.md, evidencias/F/auditoria.md, evidencias/F/refatoracao-regressao.txt]
 
-# PR único das sete fatias: #118 (decisão do estudante). O validador exige um PR por fatia, então o campo pr fica null até haver divisão ou ajuste do método.
+# PR único das sete fatias: #118, integrado em 7ea867d (decisão do estudante; exceção prevista na ADR-005 do método, pr_compartilhado).
 # Issues de fase: A #105, C1 #113, C2 #114, D #115, E #116, F #117.
 fatias:
   - id: F01
@@ -40,8 +47,9 @@ fatias:
     criterios: [CA01, RN04, RF01, RF03]
     issue: 106
     branch: feature/uc13-fatias-nucleo
-    pr: null
-    status: em_andamento
+    pr: 118
+    pr_compartilhado: true
+    status: integrada
     responsavel: evertonfoz
     revisor: evertonfoz
     evidencias: [evidencias/B/f01-red.txt, evidencias/B/f01-green.txt]
@@ -50,8 +58,9 @@ fatias:
     criterios: [CA05, CA10, RN01, RN06, RF05, RF07, FA02]
     issue: 107
     branch: feature/uc13-fatias-nucleo
-    pr: null
-    status: em_andamento
+    pr: 118
+    pr_compartilhado: true
+    status: integrada
     responsavel: evertonfoz
     revisor: evertonfoz
     evidencias: [evidencias/B/f02-red.txt, evidencias/B/f02-green.txt]
@@ -60,8 +69,9 @@ fatias:
     criterios: [CA02, RN03, RF04, FA01]
     issue: 108
     branch: feature/uc13-fatias-nucleo
-    pr: null
-    status: em_andamento
+    pr: 118
+    pr_compartilhado: true
+    status: integrada
     responsavel: evertonfoz
     revisor: evertonfoz
     evidencias: [evidencias/B/f03-teste.txt]
@@ -70,8 +80,9 @@ fatias:
     criterios: [CA03, CA04, RN02, RF02]
     issue: 109
     branch: feature/uc13-fatias-nucleo
-    pr: null
-    status: em_andamento
+    pr: 118
+    pr_compartilhado: true
+    status: integrada
     responsavel: evertonfoz
     revisor: evertonfoz
     evidencias: [evidencias/B/f04-red.txt, evidencias/B/f04-green.txt]
@@ -80,8 +91,9 @@ fatias:
     criterios: [CA08, RN05]
     issue: 110
     branch: feature/uc13-fatias-nucleo
-    pr: null
-    status: em_andamento
+    pr: 118
+    pr_compartilhado: true
+    status: integrada
     responsavel: evertonfoz
     revisor: evertonfoz
     evidencias: [evidencias/B/f05-red.txt, evidencias/B/f05-green-tentativa-falha.txt, evidencias/B/f05-green.txt]
@@ -90,8 +102,9 @@ fatias:
     criterios: [CA06, FA03, RF06]
     issue: 111
     branch: feature/uc13-fatias-nucleo
-    pr: null
-    status: em_andamento
+    pr: 118
+    pr_compartilhado: true
+    status: integrada
     responsavel: evertonfoz
     revisor: evertonfoz
     evidencias: [evidencias/B/f06-f07-red.txt, evidencias/B/f06-f07-green.txt]
@@ -100,8 +113,9 @@ fatias:
     criterios: [CA09, FE01]
     issue: 112
     branch: feature/uc13-fatias-nucleo
-    pr: null
-    status: em_andamento
+    pr: 118
+    pr_compartilhado: true
+    status: integrada
     responsavel: evertonfoz
     revisor: evertonfoz
     evidencias: [evidencias/B/f06-f07-red.txt, evidencias/B/f06-f07-green.txt]
