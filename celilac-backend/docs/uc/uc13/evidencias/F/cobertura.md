@@ -5,7 +5,7 @@ Fatos de 2026-11-23, nesta branch (`feature/uc13-fatias-nucleo`). "Aguardando ev
 | CA | Teste que prova (nome do `it`) | Arquivo | Situação |
 |---|---|---|---|
 | CA01, RN04 | `should list the active products with productId and name (CA01)` · `should return 200 with the page envelope and only productId and name per item (CA01, CA07)` | `products.service.list.spec.ts` · `products.list.controller.spec.ts` | Executado |
-| CA02, RN03, FA01 | `should return an empty list with total 0 when there are no active products (CA02)` · `should return 200 with an empty page when there are no active products (CA02)` | idem | Executado (RED da F03 não falhou: ver `evidencias/B/f03-teste.txt`) |
+| CA02, RN03, FA01 | `should return an empty list with total 0 when there are no active products (CA02)` · `should return 200 with an empty page when there are no active products (CA02)` | idem | Executado (RED da F03 não falhou: ver `docs/uc/uc13/evidencias/B/f03-teste.txt`) |
 | CA03, RN02 | `should paginate with default limit 20 and navigate pages without gaps (CA03, CA04)` · `should honor page and limit query parameters (CA03)` | idem | Executado |
 | CA04 | `should paginate with default limit 20 …` · `should order by name then productId and paginate without gaps in the real database (CA04, CA08)` | service e `typeorm-products.repository.postgres.spec.ts` | Executado (PostgreSQL de testes) |
 | CA05, RN01, RN06, FA02 | `should exclude soft-deleted products from the list and the total (CA05)` · `should list only active products with the real database, excluding soft-deleted ones from the total (CA05)` | service e postgres spec | Executado |
