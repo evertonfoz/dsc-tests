@@ -11,6 +11,11 @@ import {
 
 export const DEFAULT_PAGE_LIMIT = 20;
 
+export interface ListProductsQuery {
+  page?: number;
+  limit?: number;
+}
+
 export interface ProductsPage {
   items: Product[];
   page: number;
@@ -38,12 +43,14 @@ export class ProductsService {
     }
   }
 
-  async listProducts(): Promise<ProductsPage> {
+  async listProducts(query: ListProductsQuery = {}): Promise<ProductsPage> {
+    const page = query.page ?? 1;
+    const limit = query.limit ?? DEFAULT_PAGE_LIMIT;
     const { items, total } = await this.productsRepository.findActivePage({
-      offset: 0,
-      limit: DEFAULT_PAGE_LIMIT,
+      offset: (page - 1) * limit,
+      limit,
     });
 
-    return { items, page: 1, limit: DEFAULT_PAGE_LIMIT, total };
+    return { items, page, limit, total };
   }
 }
