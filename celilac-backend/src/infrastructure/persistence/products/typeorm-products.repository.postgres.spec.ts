@@ -298,4 +298,79 @@ describe('TypeOrmProductsRepository — persistência real no PostgreSQL', () =>
       fromDatabase.items.map((product) => product.name),
     );
   });
+
+  it('should find an active product by productId in the real database (UC14, CA01)', async () => {
+    const product = new Product(randomUUID(), 'Pão sem glúten');
+    await repository.save(product);
+    await repository.save(new Product(randomUUID(), 'Outro produto'));
+
+    const found = await repository.findActiveById(product.productId);
+
+    expect(found).toBeInstanceOf(Product);
+    expect(found?.productId).toBe(product.productId);
+    expect(found?.name).toBe('Pão sem glúten');
+  });
+
+  it('should return null for a productId that does not exist in the real database (UC14, CA03)', async () => {
+    const found = await repository.findActiveById(randomUUID());
+
+    expect(found).toBeNull();
+  });
+
+  it('should return null for a soft-deleted product in the real database (UC14, CA04)', async () => {
+    const product = new Product(
+      randomUUID(),
+      'Removido',
+      new Date('2026-11-01T00:00:00Z'),
+    );
+    await repository.save(product);
+
+    const found = await repository.findActiveById(product.productId);
+
+    expect(found).toBeNull();
+  });
+
+  it('should throw ProductNotFoundException through the service for a removed product with the real database (UC14, CA04)', async () => {
+    const service = new ProductsService(repository);
+    const product = new Product(
+      randomUUID(),
+      'Removido',
+      new Date('2026-11-01T00:00:00Z'),
+    );
+    await repository.save(product);
+
+    const result = service.getProductById(product.productId);
+
+    await expect(result).rejects.toMatchObject({
+      name: 'ProductNotFoundException',
+    });
+  });
+
+  it('should report a lookup failure when the real database rejects the query, without leaking details (UC14, CA06)', async () => {
+    const service = new ProductsService(repository);
+
+    // O PostgreSQL rejeita texto que não é UUID em coluna uuid (22P02): falha real de banco, não "não encontrado".
+    const result = service.getProductById('not-a-uuid');
+
+    await expect(result).rejects.toMatchObject({
+      name: 'ProductLookupFailedException',
+    });
+    await expect(result).rejects.not.toThrow(/invalid input syntax|uuid/i);
+  });
+
+  it('should not create or alter rows when searching (UC14, CA08)', async () => {
+    const product = new Product(randomUUID(), 'Intacto');
+    await repository.save(product);
+    const before = await dataSource.query<ProductRow[]>(
+      'SELECT "productId", "name", "deletedAt" FROM "products"."products"',
+    );
+
+    await repository.findActiveById(product.productId);
+    await repository.findActiveById(randomUUID());
+
+    const after = await dataSource.query<ProductRow[]>(
+      'SELECT "productId", "name", "deletedAt" FROM "products"."products"',
+    );
+    expect(after).toEqual(before);
+  });
 });

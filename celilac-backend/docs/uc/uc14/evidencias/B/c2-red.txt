@@ -1,0 +1,7 @@
+# C2: sem RED (findActiveById do TypeORM entregue na F01). Mutação: filtro deletedAt removido.
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+ FAIL  src/infrastructure/persistence/products/typeorm-products.repository.postgres.spec.ts > TypeOrmProductsRepository — persistência real no PostgreSQL > should return null for a soft-deleted product in the real database (UC14, CA04)
+AssertionError: expected Product{ …(3) } to be null
+ FAIL  src/infrastructure/persistence/products/typeorm-products.repository.postgres.spec.ts > TypeOrmProductsRepository — persistência real no PostgreSQL > should throw ProductNotFoundException through the service for a removed product with the real database (UC14, CA04)
+AssertionError: promise resolved "Product{ …(3) }" instead of rejecting
+      Tests  2 failed | 13 passed (15)

@@ -21,7 +21,13 @@ fases:
       - { item: "Todas as fatias integradas na branch principal", resultado: pendente }
       - { item: "CI verde na branch principal", resultado: pendente }
     evidencias: []
-  C: { status: pendente, relatorio: null, gate: [], evidencias: [] }
+  C:
+    status: em_andamento
+    relatorio: null
+    gate:
+      - { item: "C1 (HTTP) e C2 (persistência) integradas", resultado: pendente }
+      - { item: "CI verde na branch principal", resultado: pendente }
+    evidencias: [evidencias/B/c1-red.txt, evidencias/B/c1-green.txt, evidencias/B/c2-red.txt, evidencias/B/c2-green.txt, evidencias/B/c2-integration.txt, evidencias/B/c1-c2-e2e.txt]
   D: { status: pendente, relatorio: null, gate: [], evidencias: [] }
   E: { status: pendente, relatorio: null, gate: [], evidencias: [] }
   F: { status: pendente, relatorio: null, gate: [], evidencias: [] }
