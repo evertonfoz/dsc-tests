@@ -1,10 +1,10 @@
-# Estado do UC13 (Listar Produtos). Gates da Fase A aprovados por evertonfoz em 2026-11-23; demais gates pendentes de validação humana.
+# Estado do UC13 (Listar Produtos). UC concluído em 2026-11-23: gates aprovados por evertonfoz (pessoa) e CI; PRs #118 e #119; Epic #104 fechado.
 uc: UC13
 nome: Listar Produtos
 documento: ../../planejamento/uc13-listar-produtos/02-uc-listar-produtos.md
 arquetipo: consultar
-epic: { issue: 104, estado: open }
-fase_atual: B
+epic: { issue: 104, estado: closed }
+fase_atual: concluido
 
 fases:
   A:
@@ -15,29 +15,42 @@ fases:
       - { item: "GitHub Project configurado com os 5 estados", resultado: aprovado, por: evertonfoz }
     evidencias: [evidencias/A/publicacao.txt]
   B:
-    status: em_andamento
-    relatorio: null
+    status: concluida
+    relatorio: relatorios/B-C.md
     gate:
-      - { item: "Todas as fatias integradas na branch principal", resultado: pendente }
-      - { item: "CI verde na branch principal", resultado: pendente }
-    evidencias: []
+      - { item: "Todas as fatias integradas na branch principal", resultado: aprovado, por: evertonfoz }
+      - { item: "CI verde na branch principal", resultado: aprovado, por: CI }
+    evidencias: [evidencias/B/f01-green.txt, evidencias/B/f02-green.txt, evidencias/B/f04-green.txt, evidencias/B/f05-green.txt, evidencias/B/f06-f07-green.txt]
   C:
-    status: em_andamento
-    relatorio: null
+    status: concluida
+    relatorio: relatorios/B-C.md
     gate:
-      - { item: "C1 (HTTP) e C2 (persistência) integradas", resultado: pendente }
-      - { item: "CI verde na branch principal", resultado: pendente }
-    evidencias: [evidencias/C/c1-red.txt, evidencias/C/c1-green.txt, evidencias/C/c2-red.txt, evidencias/C/c2-green.txt, evidencias/C/e2e.txt]
-  D: { status: em_andamento, relatorio: null, gate: [], evidencias: [] }
-  E: { status: pendente, relatorio: null, gate: [], evidencias: [] }
+      - { item: "C1 (HTTP) e C2 (persistência) integradas", resultado: aprovado, por: evertonfoz }
+      - { item: "Migration verificada, inclusive down e up no banco de testes", resultado: aprovado, por: evertonfoz }
+      - { item: "CI verde na branch principal", resultado: aprovado, por: CI }
+    evidencias: [evidencias/C/c1-red.txt, evidencias/C/c1-green.txt, evidencias/C/c2-red.txt, evidencias/C/c2-green.txt, evidencias/C/c2-reversibilidade.txt, evidencias/C/e2e.txt]
+  D:
+    status: concluida
+    relatorio: relatorios/B-C.md
+    gate:
+      - { item: "Cada cenário do contrato de GET /products documentado e testado", resultado: aprovado, por: evertonfoz }
+    evidencias: [evidencias/C/c1-green.txt]
+  E:
+    status: concluida
+    relatorio: relatorios/B-C.md
+    gate:
+      - { item: "O script termina com 0 falhas no contêiner", resultado: aprovado, por: evertonfoz }
+      - { item: "O mesmo script passa no CI (smoke)", resultado: aprovado, por: CI }
+    evidencias: [evidencias/F/run-checks.txt]
   F:
-    status: em_andamento
+    status: concluida
     relatorio: relatorios/F.md
     gate:
-      - { item: "Todo item do UC tem teste que o prova ou ADR", resultado: pendente }
-      - { item: "Arquitetura em conformidade, achados tratados", resultado: pendente }
-      - { item: "Issues e Epic fechados", resultado: pendente }
-    evidencias: [evidencias/F/cobertura.md, evidencias/F/auditoria.md, evidencias/F/refatoracao-regressao.txt]
+      - { item: "Todo item do UC tem teste que o prova ou ADR", resultado: aprovado, por: evertonfoz }
+      - { item: "Arquitetura em conformidade, achados tratados", resultado: aprovado, por: evertonfoz }
+      - { item: "state.yaml, documentos e GitHub consistentes", resultado: aprovado, por: CI }
+      - { item: "Issues e Epic fechados", resultado: aprovado, por: evertonfoz }
+    evidencias: [evidencias/F/cobertura.md, evidencias/F/auditoria.md, evidencias/F/refatoracao-regressao.txt, evidencias/F/paridade-collation.txt]
 
 # PR único das sete fatias: #118, integrado em 7ea867d (decisão do estudante; exceção prevista na ADR-005 do método, pr_compartilhado).
 # Issues de fase: A #105, C1 #113, C2 #114, D #115, E #116, F #117.
