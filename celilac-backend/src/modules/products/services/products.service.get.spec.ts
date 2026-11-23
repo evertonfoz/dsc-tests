@@ -50,4 +50,14 @@ describe('ProductsService.getProductById (UC14)', () => {
 
     await expect(result).rejects.toBeInstanceOf(ProductNotFoundException);
   });
+
+  it('should throw ProductNotFoundException when the product is removed (CA04)', async () => {
+    await repository.save(
+      new Product(PRODUCT_ID, 'Removido', new Date('2026-11-01T00:00:00Z')),
+    );
+
+    const result = service.getProductById(PRODUCT_ID);
+
+    await expect(result).rejects.toBeInstanceOf(ProductNotFoundException);
+  });
 });
