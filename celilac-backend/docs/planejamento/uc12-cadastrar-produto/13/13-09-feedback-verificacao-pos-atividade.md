@@ -57,8 +57,8 @@ http-rest-client/containerizado/README.md
 http-rest-client/containerizado/run-checks.sh
 http-rest-client/orders/orders-controller.http
 http-rest-client/orders/test-scenarios.http
-http-rest-client/products/products-controller.http
-http-rest-client/products/test-scenarios.http
+http-rest-client/products/uc12-cadastrar-produto/products-controller.http
+http-rest-client/products/uc12-cadastrar-produto/test-scenarios.http
 http-rest-client/tests/hello-world.http
 ```
 * **Permissão e Modo Git:**
