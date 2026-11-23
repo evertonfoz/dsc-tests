@@ -30,7 +30,7 @@ export class ProductsService {
       throw new InvalidProductNameException();
     }
 
-    const product = new Product(randomUUID(), name);
+    const product = new Product(randomUUID(), name, null);
     try {
       return await this.productsRepository.save(product);
     } catch (error) {
