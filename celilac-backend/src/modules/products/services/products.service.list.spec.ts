@@ -1,4 +1,4 @@
-import { beforeEach, describe, expect, it } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { Product } from '../entities/product.entity.js';
 import { InMemoryProductsRepository } from '../repositories/in-memory-products.repository.js';
 import { ProductsService } from './products.service.js';
@@ -108,5 +108,45 @@ describe('ProductsService.listProducts (UC13)', () => {
       '00000000-0000-4000-8000-000000000003',
     ]);
     expect(second.items).toEqual(first.items);
+  });
+});
+
+describe('ProductsService.listProducts, entradas e falhas (UC13)', () => {
+  const findActivePage = vi.fn();
+  const service = new ProductsService({ save: vi.fn(), findActivePage });
+
+  beforeEach(() => {
+    findActivePage.mockReset();
+  });
+
+  it.each([
+    { page: 0 },
+    { page: -1 },
+    { page: 1.5 },
+    { limit: 0 },
+    { limit: 101 },
+    { limit: Number.NaN },
+  ])(
+    'should reject invalid pagination %o without querying the repository (CA06)',
+    async (query) => {
+      await expect(service.listProducts(query)).rejects.toMatchObject({
+        name: 'InvalidPaginationException',
+      });
+
+      expect(findActivePage).not.toHaveBeenCalled();
+    },
+  );
+
+  it('should report a persistence failure on listing without leaking details (CA09)', async () => {
+    findActivePage.mockRejectedValue(
+      new Error('connection refused at 10.0.0.5:5432'),
+    );
+
+    const result = service.listProducts();
+
+    await expect(result).rejects.toMatchObject({
+      name: 'ProductPersistenceFailedException',
+    });
+    await expect(result).rejects.not.toThrow(/10\.0\.0\.5|5432/);
   });
 });

@@ -1,0 +1,95 @@
+The plugin "vite-tsconfig-paths" is detected. Vite now supports tsconfig paths resolution natively via the resolve.tsconfigPaths option. You can remove the plugin and set resolve.tsconfigPaths: true in your Vite config instead.
+
+ RUN  v4.1.11 /private/tmp/claude-501/-Users-evertoncoimbradearaujo-Documents-GitHub-dsc-tests-celilac-backend/b14ddcd5-f649-4907-906a-54492d8d9a18/scratchpad/wt-uc13/celilac-backend
+
+ ❯ src/modules/products/services/products.service.list.spec.ts (13 tests | 8 failed) 8ms
+     × should order by name then productId deterministically (CA08) 3ms
+     × should reject invalid pagination { page: +0 } without querying the repository (CA06) 1ms
+     × should reject invalid pagination { page: -1 } without querying the repository (CA06) 0ms
+     × should reject invalid pagination { page: 1.5 } without querying the repository (CA06) 0ms
+     × should reject invalid pagination { limit: +0 } without querying the repository (CA06) 0ms
+     × should reject invalid pagination { limit: 101 } without querying the repository (CA06) 0ms
+     × should reject invalid pagination { limit: NaN } without querying the repository (CA06) 0ms
+     × should report a persistence failure on listing without leaking details (CA09) 0ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 8 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/modules/products/services/products.service.list.spec.ts > ProductsService.listProducts (UC13) > should order by name then productId deterministically (CA08)
+AssertionError: expected [ …(3) ] to deeply equal [ …(3) ]
+
+- Expected
++ Received
+
+  [
+-   "00000000-0000-4000-8000-000000000001",
+-   "00000000-0000-4000-8000-000000000002",
+    "00000000-0000-4000-8000-000000000003",
++   "00000000-0000-4000-8000-000000000002",
++   "00000000-0000-4000-8000-000000000001",
+  ]
+
+ ❯ src/modules/products/services/products.service.list.spec.ts:105:49
+    103|     const second = await service.listProducts();
+    104|
+    105|     expect(first.items.map((p) => p.productId)).toEqual([
+       |                                                 ^
+    106|       '00000000-0000-4000-8000-000000000001',
+    107|       '00000000-0000-4000-8000-000000000002',
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/8]⎯
+
+ FAIL  src/modules/products/services/products.service.list.spec.ts > ProductsService.listProducts, entradas e falhas (UC13) > should reject invalid pagination { page: +0 } without querying the repository (CA06)
+ FAIL  src/modules/products/services/products.service.list.spec.ts > ProductsService.listProducts, entradas e falhas (UC13) > should reject invalid pagination { page: -1 } without querying the repository (CA06)
+ FAIL  src/modules/products/services/products.service.list.spec.ts > ProductsService.listProducts, entradas e falhas (UC13) > should reject invalid pagination { page: 1.5 } without querying the repository (CA06)
+ FAIL  src/modules/products/services/products.service.list.spec.ts > ProductsService.listProducts, entradas e falhas (UC13) > should reject invalid pagination { limit: +0 } without querying the repository (CA06)
+ FAIL  src/modules/products/services/products.service.list.spec.ts > ProductsService.listProducts, entradas e falhas (UC13) > should reject invalid pagination { limit: 101 } without querying the repository (CA06)
+ FAIL  src/modules/products/services/products.service.list.spec.ts > ProductsService.listProducts, entradas e falhas (UC13) > should reject invalid pagination { limit: NaN } without querying the repository (CA06)
+AssertionError: expected TypeError: Cannot destructure property 'i… to match object { name: 'InvalidPaginationException' }
+
+- Expected
++ Received
+
+- {
+-   "name": "InvalidPaginationException",
++ TypeError {
++   "message": "Cannot destructure property 'items' of '(intermediate value)' as it is undefined.",
+  }
+
+ ❯ src/modules/products/services/products.service.list.spec.ts:132:48
+    130|     'should reject invalid pagination %o without querying the reposito…
+    131|     async (query) => {
+    132|       await expect(service.listProducts(query)).rejects.toMatchObject({
+       |                                                ^
+    133|         name: 'InvalidPaginationException',
+    134|       });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/8]⎯
+
+ FAIL  src/modules/products/services/products.service.list.spec.ts > ProductsService.listProducts, entradas e falhas (UC13) > should report a persistence failure on listing without leaking details (CA09)
+AssertionError: expected Error: connection refused at 10.0.0.5:5432 to match object { Object (name) }
+
+- Expected
++ Received
+
+- {
+-   "name": "ProductPersistenceFailedException",
++ Error {
++   "message": "connection refused at 10.0.0.5:5432",
+  }
+
+ ❯ src/modules/products/services/products.service.list.spec.ts:147:25
+    145|     const result = service.listProducts();
+    146|
+    147|     await expect(result).rejects.toMatchObject({
+       |                         ^
+    148|       name: 'ProductPersistenceFailedException',
+    149|     });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/8]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  8 failed | 5 passed (13)
+   Start at  10:22:46
+   Duration  171ms (transform 26ms, setup 0ms, import 90ms, tests 8ms, environment 0ms)
+
