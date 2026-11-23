@@ -11,6 +11,9 @@ pratica: m02-pratica
 
 # Módulo 2 — Por que o plano e a realidade divergem?
 
+> **Pré-requisito:** módulo 1 e o apoio A (`apoio-a-github-alem-do-basico.md`). Duração sugerida: 2 aulas.
+> **Você vai:** criar um arquivo único que diz **em que ponto** está o seu caso de uso, e usar um programa para conferir se ele diz a verdade.
+
 ---
 
 ## 1. O problema

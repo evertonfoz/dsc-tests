@@ -12,7 +12,7 @@ pratica_de: m02
 > **Antes de começar:** o seu repositório precisa ter a pasta `method/` (com `method/templates/state.yaml` e `method/scripts/check-state.sh`) e o documento do seu caso de uso. Se ainda não tiver a pasta `method/`, copie-a do repositório do curso.
 > **Sobre os prompts:** são para o seu assistente de IA (inteligência artificial). O que ele disser é hipótese até você ver a saída real de um comando.
 
-Os textos entre chaves duplas, como `{{uc}}`, são os dados do seu projeto. Na aplicação do curso, eles são preenchidos com o que você informou em "Meu projeto"; lendo este arquivo no GitHub, troque-os você mesmo.
+Os textos entre chaves duplas, como `{{uc}}`, são os dados do seu projeto. A aplicação do curso não coleta esses dados. Ao usar o arquivo no seu repositório, substitua cada variável pelos dados que você decidiu para o seu projeto; os exemplos são apenas ilustrativos.
 
 | Variável | O que é | Exemplo |
 |---|---|---|
@@ -169,7 +169,7 @@ method/scripts/check-state.sh docs/uc/{{uc_pasta}}/state.yaml
 echo "código de saída: $?"
 ```
 
-**O que você deve ver** (saída obtida com um `state.yaml` de exemplo nesta mesma situação):
+**Exemplo didático ilustrativo** (saída esperada ao provocar este erro; não é uma execução no seu repositório):
 
 ```text
 ERRO   fatias[0] (integrada) exige issue
@@ -233,3 +233,8 @@ Se o GitHub contradisser o state.yaml, explique a divergência e pergunte o que 
 
 ## Ao terminar
 Volte ao módulo e confira a seção "Como saber que funcionou" de `m02-estado-como-fonte.md`.
+
+
+## Formato para guardar saídas reais
+
+Quando a prática pedir para guardar uma execução, use `method/templates/evidencia-de-comando.md` em `docs/uc/{{uc_pasta}}/evidencias/<fase>/`. Os blocos de saída deste arquivo são exemplos didáticos; substitua-os pela saída realmente obtida no seu projeto.

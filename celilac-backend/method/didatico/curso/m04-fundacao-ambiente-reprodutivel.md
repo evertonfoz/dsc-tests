@@ -6,9 +6,13 @@ ordem: 9
 prerequisitos: [apoio-c, apoio-d, m03]
 duracao: '2 aulas'
 gabarito: m04-gabarito
+pratica: m04-pratica
 ---
 
 # Módulo 4 — Por que "na minha máquina funciona" não basta?
+
+> **Pré-requisito:** apoios C e D e o módulo 3. Duração sugerida: 2 aulas.
+> **Você vai:** separar o que se resolve **uma vez por projeto** (a Fundação) do que se repete **a cada caso de uso**, e montar a Fundação do seu projeto.
 
 ---
 
@@ -76,14 +80,8 @@ e rode a verificação lá.
 - **Proibições valem para quem executa.** Nada de `docker compose down -v`, `DROP`, `TRUNCATE` ou reverter migrations sem autorização, inclusive para o assistente de IA (inteligência artificial).
 
 ## 6. Pratique no seu domínio
-Nesta ordem (a ordem importa):
-1. Abra uma issue de fundação e uma branch `chore/<resumo>`.
-2. **Perfil do projeto:** copie `method/templates/project-profile.md` e preencha com os comandos reais.
-3. **Compose sem segredos**, com `.env.example` (apoio D).
-4. **Banco de testes isolado**, com as três travas, e um teste que prove que ele **recusa** rodar contra o banco de desenvolvimento.
-5. **Script de verificação** que roda lint, build e testes.
-6. **CI** que chama o script (apoio C).
-7. **Valide em cópia limpa** (seção 4.3) e só então abra o PR.
+
+Faça a atividade passo a passo em [`m04-pratica.md`](./m04-pratica.md). Produza os artefatos no seu repositório e confira cada resultado no caminho e nos critérios indicados no arquivo de prática.
 
 ## 7. Como saber que funcionou
 - [ ] Um colega, numa pasta nova, sobe tudo seguindo só o repositório.

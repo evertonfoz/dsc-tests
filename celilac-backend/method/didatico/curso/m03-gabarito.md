@@ -1,13 +1,13 @@
 ---
 id: m03-gabarito
 tipo: gabarito
-titulo: 'Gabarito do professor — Módulo 3'
+titulo: 'Gabarito para autoestudo — Módulo 3'
 gabarito_de: [m03]
 ---
 
-# Gabarito do professor — Módulo 3
+# Gabarito para autoestudo — Módulo 3
 
-> Uso exclusivo do professor.
+> Este gabarito é público. Tente primeiro a atividade no seu projeto e use as respostas para comparar o raciocínio. Isso é orientação de estudo, não bloqueio; resultados do CeliLac são referência documentada, não execução no seu projeto.
 
 ## Atividade da seção 2
 | Pergunta | Resposta esperada |
@@ -16,18 +16,18 @@ gabarito_de: [m03]
 | O que faz `createProduct`? | Só lança `Error('Not implemented: createProduct')` |
 | O robô aceitaria uma terceira mudança? | Não: a `main` já está vermelha; o novo PR herdaria a falha |
 
-Pré-requisitos do aluno para a atividade: Node.js, pnpm e o repositório clonado com histórico completo.
+Antes de repetir a atividade do repositório de referência, você precisa de Node.js, pnpm e clone com histórico completo. No seu projeto, registre os pré-requisitos reais.
 
-## Pontos para discussão
+## Raciocínio para conferir
 1. Em que a divisão por camada parecia correta? (tarefas pequenas, papéis claros) E por que falha? (separa RED e GREEN)
 2. Um teste vermelho deve ir para a `main` se o código vem no próximo PR? (não: o PR precisa ser autossuficiente)
 3. Quando um PR empilhado pode ser aceitável? (equipes experientes, com revisão em sequência e CI próprio; fora do padrão do curso)
 
-## Verificação da prática
-Pedir: o histórico de commits do PR (RED antes de GREEN), a saída do RED, a do GREEN e uma frase de comportamento por fatia.
+## Como conferir sua prática
+Confira no seu projeto: o histórico de commits do PR (RED antes de GREEN), a saída do RED, a do GREEN e uma frase de comportamento por fatia.
 
-## Critérios de avaliação sugeridos
-| Critério | Peso |
+## Autoavaliação sugerida
+| Critério | Peso sugerido |
 |---|---|
 | Fatias descritas como comportamento (nenhuma como camada) | 30% |
 | Nome de teste RED no formato combinado | 15% |

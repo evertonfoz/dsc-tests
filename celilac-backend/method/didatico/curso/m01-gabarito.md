@@ -1,33 +1,33 @@
 ---
 id: m01-gabarito
 tipo: gabarito
-titulo: 'Gabarito do professor — Módulo 1'
+titulo: 'Gabarito para autoestudo — Módulo 1'
 gabarito_de: [m01]
 ---
 
-# Gabarito do professor — Módulo 1
+# Gabarito para autoestudo — Módulo 1
 
-> Uso exclusivo do professor. Não distribua antes da atividade da seção 2.
+> Este gabarito é público. Tente primeiro a atividade no seu projeto e use a resposta para comparar o raciocínio; isso é uma recomendação pedagógica, não uma trava. Os fatos sobre o CeliLac são referências do material e não resultados executados no seu projeto.
 
 ## Atividade da seção 2 (estado `b71f5e1`)
-| Afirmação | O que o aluno deve encontrar |
+| Afirmação | O que conferir no material |
 |---|---|
 | Preço positivo (RN02) | Não existe: `Product` só tem `productId` e `name`; não há DTO (*Data Transfer Object*) nem teste de preço. Resposta correta: "não implementado". |
 | Falha de persistência (FE01) | O serviço apenas chama `save` e não trata falha; há um único teste do serviço (caso feliz). Resposta correta: "sem teste". |
 | Nome obrigatório (RN01) | Existe só no DTO da fronteira HTTP (o protocolo de entrada da API); o serviço aceita nome vazio. Resposta correta: "coberta apenas na fronteira". |
 
-## Respostas esperadas
-- A tabela do aluno não deve repetir os 100%.
-- O aluno deve distinguir "o relatório diz" de "o código mostra" de "o teste executado prova".
-- Aceite o erro "o preço deveria existir" **somente** se o aluno também percebeu que o documento chama a validação de preço de "ilustrativa"; a decisão de adiar é do professor responsável pelo caso.
+## Como conferir sua resposta
+- Sua tabela de cobertura não deve repetir os 100%: a evidência do projeto de referência mostrou itens sem prova.
+- Confira se você distingue "o relatório diz" de "o código mostra" de "o teste executado prova".
+- Ao revisar sua resposta, aceite a diferença "o preço deveria existir" **somente** se você também percebeu que o documento chama a validação de preço de "ilustrativa"; a decisão de adiar cabe à pessoa responsável pelo seu caso de uso.
 
-## Pontos para discussão em aula
+## Raciocínio para conferir
 1. Por que a porcentagem de cobertura de linhas não responde à pergunta do módulo?
 2. Quem deve decidir a destinação de um item sem teste? (Resposta esperada: a pessoa responsável pelo caso de uso, não o assistente.)
 3. Em que situação "adiar com ADR" (*Architecture Decision Record*) é melhor que "implementar"? (Quando a especificação não define a regra.)
 
-## Critérios de avaliação sugeridos (tarefa da seção 6)
-| Critério | Peso |
+## Autoavaliação sugerida (tarefa da seção 6)
+| Critério | Peso sugerido |
 |---|---|
 | Uma linha por item, com identificador | 25% |
 | Situação coerente (nenhum "coberto" sem teste) | 30% |

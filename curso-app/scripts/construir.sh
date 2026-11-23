@@ -10,8 +10,8 @@ commit="$(git rev-parse HEAD)"
 data="$(git show -s --format=%cI HEAD)"
 
 # O rodapé mostra o commit; se há mudanças não commitadas no que entra na imagem, ele não descreve o conteúdo.
-if [ -n "$(git status --porcelain -- curso-app celilac-backend/method/didatico/curso)" ]; then
-  echo "Aviso: há mudanças não commitadas em curso-app/ ou no curso; o rodapé mostrará o commit ${commit:0:7}, que não as contém." >&2
+if [ -n "$(git status --porcelain -- curso-app celilac-backend/method/didatico/curso celilac-backend/docs/uc/uc12 celilac-backend/docs/planejamento/uc12-cadastrar-produto/uc-12.md)" ]; then
+  echo "Aviso: há mudanças não commitadas na aplicação ou no conteúdo que ela publica; o rodapé mostrará o commit ${commit:0:7}, que não as contém." >&2
 fi
 
 # Commits citados no curso têm de existir no histórico (E8, P7). Fica fora do Docker, que não recebe o .git.

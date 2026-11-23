@@ -6,9 +6,13 @@ ordem: 10
 prerequisitos: [m03, apoio-b]
 duracao: '2 aulas'
 gabarito: m05-gabarito
+pratica: m05-pratica
 ---
 
 # Módulo 5 — Onde mora a regra de negócio?
+
+> **Pré-requisito:** módulo 3 e apoio B. Duração sugerida: 2 aulas.
+> **Você vai:** colocar uma regra de negócio no **núcleo** da aplicação, em vez de deixá-la só na entrada, e ver uma única linha de código evoluir por três fatias.
 
 ---
 
@@ -107,14 +111,8 @@ Executei isso ao preparar este módulo: a troca de um único caractere faz **ess
 > **Regra do método:** um teste que passa de primeira só prova algo depois de uma **mutação** (uma alteração proposital do código) que o faça falhar. Você acabou de fazer uma.
 
 ## 5. Pratique no seu domínio
-Use o caso de uso e as fatias dos módulos anteriores. Cada item abaixo é **uma fatia**, em branch e PR próprios:
-1. **Fatia 1 (regra mais simples):** o seu campo obrigatório não pode ser vazio.
-   - RED: teste com o repositório simulado; veja falhar pelo motivo certo e guarde a saída.
-   - GREEN: o mínimo.
-2. **Fatia 2 (um caso que você não previu):** o mesmo campo só com espaços (ou o equivalente do seu domínio).
-3. **Fatia 3 (limite):** um tamanho máximo. Escreva **dois** testes: um acima do limite (RED) e um **exatamente no limite** (deve passar).
-4. **Mutação:** troque `>` por `>=` e confirme que o teste do limite falha. Guarde a saída. Desfaça.
-5. Garanta que **nenhuma** das fatias importa nada de HTTP ou de banco dentro do serviço.
+
+Faça a atividade passo a passo em [`m05-pratica.md`](./m05-pratica.md). Produza os artefatos no seu repositório e confira cada resultado no caminho e nos critérios indicados no arquivo de prática.
 
 ## 6. Como saber que funcionou
 - [ ] Cada fatia tem RED antes de GREEN, em commits separados.

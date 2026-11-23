@@ -6,9 +6,13 @@ ordem: 12
 prerequisitos: [m05, m06, apoio-b]
 duracao: '2 aulas'
 gabarito: m07-gabarito
+pratica: m07-pratica
 ---
 
 # Módulo 7 — Seu teste prova alguma coisa?
+
+> **Pré-requisito:** módulos 5 e 6 e apoio B. Duração sugerida: 2 aulas.
+> **Você vai:** aprender a **estragar o código de propósito** para descobrir se os seus testes percebem, e a registrar essa prova.
 
 ---
 
@@ -123,16 +127,8 @@ Resultado: **os 16 testes de `products` passaram**. O mutante sobreviveu.
 O que isso significa? Que nenhum teste distingue "tamanho do texto" de "tamanho do texto sem os espaços das pontas". Um nome com 119 letras e 2 espaços no fim (121 no total) é aceito ou rejeitado? **O caso de uso não define.** Pode ser um mutante irrelevante (se a regra é indiferente) ou uma lacuna real (se a regra deveria ser clara). Quem decide é uma pessoa, e o resultado vira um teste ou uma decisão registrada, como no módulo 1.
 
 ## 7. Pratique no seu domínio
-1. Escolha **três testes** que você escreveu nos módulos 5 e 6.
-2. Para cada um, proponha **dois mutantes** de tipos diferentes (tabela 4.1).
-3. Preencha esta tabela, guardando a saída de cada execução:
 
-| Teste | Mutante | Esperado | Obtido | Morto ou sobreviveu |
-|---|---|---|---|---|
-| (nome do teste) | (o que estragou) | falha | (resultado) | |
-
-4. Para cada **sobrevivente**, escolha: (a) escrever o teste que o mata; (b) declarar que o mutante é irrelevante e **explicar por quê**; (c) registrar uma pergunta para quem decide a regra.
-5. Garanta que, ao final, `git status` está limpo e nenhuma mutação foi commitada.
+Faça a atividade passo a passo em [`m07-pratica.md`](./m07-pratica.md). Produza os artefatos no seu repositório e confira cada resultado no caminho e nos critérios indicados no arquivo de prática.
 
 ## 8. Como saber que funcionou
 - [ ] Cada mutante tem uma saída guardada.

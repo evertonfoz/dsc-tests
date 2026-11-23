@@ -1,18 +1,18 @@
 ---
 id: m12-gabarito
 tipo: gabarito
-titulo: 'Gabarito do professor — Módulo 12'
+titulo: 'Gabarito para autoestudo — Módulo 12'
 gabarito_de: [m12]
 ---
 
-# Gabarito do professor — Módulo 12
+# Gabarito para autoestudo — Módulo 12
 
-> Uso exclusivo do professor.
+> Este gabarito é público. Tente primeiro a atividade no seu projeto e use as respostas para comparar o raciocínio. Isso é orientação de estudo, não bloqueio; resultados do CeliLac são referência documentada, não execução no seu projeto.
 
 ## Seção 2 (tabela sugerida)
 | # | Quem | Observação |
 |---|---|---|
-| 1 | A | rascunho; o aluno confere (módulos 5 e 7) |
+| 1 | A | rascunho; você confere (módulos 5 e 7) |
 | 2 | P | merge é humano (regra 9); o CI verde é condição, não substituto |
 | 3 | P ou C | objetivo (CI verde): CI; julgamento: pessoa; nunca a IA (regra 21) |
 | 4 | C | só vale com saída de execução; a IA relatando "passam" é hipótese |
@@ -24,7 +24,10 @@ gabarito_de: [m12]
 | 10 | A propõe, P decide | ADR-004 do método (módulo 10) |
 Aceitar variações justificadas, principalmente 3 e 4.
 
-## Fatos verificados na preparação
+## Fatos registrados na preparação do material
+
+Os itens abaixo descrevem evidências e observações do projeto de referência registradas quando este gabarito foi escrito. Não são resultados de uma execução sua nem desta revisão.
+
 - `method/AGENTS.md`: regras 1, 3, 4, 8, 9, 14 e 21 conforme citadas.
 - `docs/uc/uc12/relatorios/F.md` abre com "Fatos e evidências, sem veredicto" e lista cobertura (RF02 parcial; RN02 e FA02 não implementados por ADR-002).
 - `docs/uc/uc12/evidencias/F/auditoria.md`: achados A1 a A7 (A2 e A7 tratados, A3 decidido, A6 é o #27 aberto).
@@ -44,7 +47,7 @@ Aceitar variações justificadas, principalmente 3 e 4.
 - A frase "um método não elimina o erro, torna visível a tempo" é opinião do material, não resultado medido.
 - Prática 6 (revisor independente) pode ser inviável em trabalho solo; aceitar a declaração da ausência.
 
-## Sinais de que o aluno não entendeu
+## Reveja sua resposta se
 - Deixa a IA marcar o gate.
 - Relatório sem pendências.
 - Autoriza comandos destrutivos em bloco.

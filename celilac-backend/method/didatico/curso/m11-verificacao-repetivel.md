@@ -6,9 +6,13 @@ ordem: 16
 prerequisitos: [m04, m07, m08, m09, apoio-c, apoio-d]
 duracao: '2 aulas'
 gabarito: m11-gabarito
+pratica: m11-pratica
 ---
 
 # Módulo 11 — Outra pessoa consegue repetir sua verificação?
+
+> **Pré-requisito:** módulos 4, 7, 8 e 9, e apoios C e D. Duração sugerida: 2 aulas.
+> **Você vai:** transformar "eu verifiquei" em um **script que qualquer pessoa roda**, provar que o script **detecta código errado** (controle negativo) e provar que o dado **sobrevive a um reinício** (durabilidade).
 
 ---
 
@@ -81,12 +85,8 @@ O relatório da fase E (`docs/uc/uc12/relatorios/E.md`) registra, sem enfeite:
 - revisão solo ou feita pela IA (inteligência artificial) não é revisão independente.
 
 ## 6. Pratique no seu domínio
-1. Faça o **diagnóstico**: liste cada linha do seu contrato e marque se tem cenário e verificação. Guarde.
-2. Escreva a coleção `.http` e as verificações no script (um só script).
-3. Faça o **controle negativo**: rode o script contra uma versão **errada** do seu código (por exemplo, a de antes de uma correção, ou uma mutação do módulo 7). Guarde a saída com os `[FALHA]` esperados.
-4. Prove a **durabilidade**: reinicie só a aplicação e releia o registro. Guarde.
-5. Troque com um colega (seção 2): ele roda **o seu** roteiro em uma máquina que não é a sua. Anote o que ele precisou adivinhar e corrija o roteiro.
-6. Confirme que o script roda no CI e **leia o log** do job.
+
+Faça a atividade passo a passo em [`m11-pratica.md`](./m11-pratica.md). Produza os artefatos no seu repositório e confira cada resultado no caminho e nos critérios indicados no arquivo de prática.
 
 ## 7. Como saber que funcionou
 - [ ] Cada linha do contrato tem cenário e verificação.

@@ -6,9 +6,13 @@ ordem: 11
 prerequisitos: [m05, apoio-b]
 duracao: '2 aulas'
 gabarito: m06-gabarito
+pratica: m06-pratica
 ---
 
 # Módulo 6 — O que o cliente vê quando o banco falha?
+
+> **Pré-requisito:** módulo 5 e apoio B. Duração sugerida: 2 aulas.
+> **Você vai:** transformar uma falha de infraestrutura em uma resposta compreensível e segura, e decidir (e registrar) qual código HTTP (*HyperText Transfer Protocol*, o protocolo da web) cada situação merece.
 
 ---
 
@@ -102,12 +106,8 @@ Consequência: se o banco cair em produção, o cliente recebe a mensagem genér
 > **Lição:** uma afirmação num documento ("vai para o log") é uma hipótese até haver um teste ou um trecho de código que a sustente.
 
 ## 6. Pratique no seu domínio
-1. **Fatia de falha (núcleo):** escreva o teste RED com um repositório simulado que rejeita com uma mensagem cheia de detalhes inventados (endereço, tabela). Ele deve afirmar a exceção esperada **e** a ausência desses detalhes. Veja falhar. Guarde a saída.
-2. **GREEN:** o `try/catch` que traduz e guarda o `cause`.
-3. **Fronteira HTTP:** crie o filtro (ou o mecanismo do seu framework) que mapeia suas exceções para status. Teste pela API: um erro de validação devolve 400; a falha de persistência devolve 500 **sem** os detalhes.
-4. **Escreva a ADR** do mapeamento, com contexto, tabela de status e **uma consequência negativa**.
-5. **Banco real:** provoque uma falha verdadeira no seu banco de testes e confirme a tradução. Faça a mutação (remova o `try/catch`) e guarde a saída que mostra o erro bruto.
-6. **Registro:** acrescente o log da causa no ponto em que a exceção é tratada e **teste** que ele foi chamado (sem colocar o log na resposta).
+
+Faça a atividade passo a passo em [`m06-pratica.md`](./m06-pratica.md). Produza os artefatos no seu repositório e confira cada resultado no caminho e nos critérios indicados no arquivo de prática.
 
 ## 7. Como saber que funcionou
 - [ ] Erro do cliente devolve 4xx e falha do sistema devolve 5xx.

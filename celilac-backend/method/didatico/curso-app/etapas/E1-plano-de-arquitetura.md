@@ -1,5 +1,7 @@
 # E1 — Plano de arquitetura
 
+> **Direção revista (2026-11-21):** a decisão histórica B′ descreveu a arquitetura de execução, mas as partes sobre progresso no navegador, exportação/importação e submissão do caso de uso foram substituídas pelo pedido atual do professor. A aplicação não coleta nem guarda dados do aluno. Veja [estado.md](../estado.md) e issue [#98](https://github.com/evertonfoz/dsc-tests/issues/98).
+
 > Etapa E1 do plano da aplicação web do curso. Data: 2026-11-21. Situação: **aguardando a escolha do professor**.
 > Convenção: **[Fato]** lido no repositório (com caminho); **[Recomendação]** proposta minha; **[Suposição]** a confirmar.
 

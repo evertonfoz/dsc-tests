@@ -63,17 +63,22 @@ for pagina in / /m00/; do
   fi
 done
 
-# M1, critério 5: nenhum gabarito publicado no site gerado.
-gabaritos="$(docker run --rm --entrypoint sh "$imagem" -c 'find /usr/share/nginx/html -iname "*gabarito*"')"
-if [ -n "$gabaritos" ]; then
-  falha "(M1-5) gabarito no site gerado: $(echo "$gabaritos" | head -3 | tr '\n' ' ')"
+# Os gabaritos estão disponíveis em divulgação nativa e não dependem de dados do aluno.
+gabarito_html="$(curl -fsS http://127.0.0.1:4321/m01-gabarito/)"
+if grep -q '<details class="gabarito"' <<<"$gabarito_html" && grep -q 'faça primeiro a atividade' <<<"$gabarito_html"; then
+  ok "rota do gabarito com divulgação e instrução de tentativa"
 else
-  ok "(M1-5) nenhum gabarito no site gerado"
+  falha "rota do gabarito sem divulgação acessível"
+fi
+if ! curl -fsS http://127.0.0.1:4321/ | grep -q 'seus-dados'; then
+  ok "página inicial sem tela de dados do aluno"
+else
+  falha "página inicial ainda referencia tela de dados"
 fi
 
-# M1: as páginas de leitura respondem (a lista completa é conferida pelo Playwright).
-for pagina in /mapa/ /m01/ /apoio-a/ /m02-pratica/ /projeto-final/; do
-  if curl -fsS -o /dev/null "http://127.0.0.1:4321$pagina"; then ok "(M1-1) $pagina responde"; else falha "(M1-1) $pagina não responde"; fi
+# M1/M2: páginas representativas respondem (a lista completa é conferida pelo Playwright).
+for pagina in /indice/ /mapa/ /m01/ /apoio-a/ /m02-pratica/ /projeto-final/ /uc12/ /uc12/state/ /uc12/relatorios/F/ /uc12/evidencias/F/cobertura/ /uc12/documento/; do
+  if curl -fsS -o /dev/null "http://127.0.0.1:4321$pagina"; then ok "(M1/M2) $pagina responde"; else falha "(M1/M2) $pagina não responde"; fi
 done
 
 # Redirecionamento relativo (porta interna 8080 não vaza) e política de segurança.

@@ -29,14 +29,17 @@ export function idsCitados(linha: string): Set<string> {
 
 /**
  * Regra: os ids citados contêm todos os `prerequisitos` e nada fora de
- * `prerequisitos` ∪ `prerequisitos_se_precisar`; a linha é opcional;
+ * `prerequisitos` ∪ `prerequisitos_se_precisar`; sem a linha, `prerequisitos` tem de ser vazio;
  * se a linha tiver "Duração sugerida", ela contém o valor de `duracao`.
  */
 export function compararPrerequisito(arquivo: string, corpo: string, dados: FrontMatterPercurso): string[] {
   const erros: string[] = [];
   const msg = (motivo: string) => `conteúdo inválido: ${arquivo}: linha "Pré-requisito": ${motivo}`;
   const linha = linhaDePrerequisito(corpo);
-  if (!linha) return erros;
+  if (!linha) {
+    if (dados.prerequisitos.length > 0) erros.push(msg(`ausente, mas prerequisitos tem ${dados.prerequisitos.join(', ')}`));
+    return erros;
+  }
   const citados = idsCitados(linha);
   const permitidos = new Set([...dados.prerequisitos, ...(dados.prerequisitos_se_precisar ?? [])]);
   for (const id of dados.prerequisitos) {

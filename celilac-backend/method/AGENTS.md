@@ -40,7 +40,7 @@ Os procedimentos de cada fase estão em `method/playbooks/`. O perfil do projeto
 
 ## 4. Regras de documentação
 
-17. **Um relatório por fase**, no template `method/templates/relatorio-de-fase.md`, com no máximo ~2 páginas. Saídas brutas de comandos vão para `docs/uc/<UC>/evidencias/`, não para o relatório.
+17. **Um relatório por fase**, no template `method/templates/relatorio-de-fase.md`, com no máximo ~2 páginas. Saídas brutas de comandos vão para `docs/uc/<UC>/evidencias/`, não para o relatório; use `method/templates/evidencia-de-comando.md` para identificar comando, data/hora UTC, commit de base e saída real.
 18. **Decisões arquiteturais viram ADR** (`method/templates/adr.md`), uma por decisão.
 19. **Links e caminhos citados em documentos devem existir.** Verifique antes de entregar com `node method/scripts/check-links.mjs` (o CI também roda). Para citar de propósito um caminho inexistente (como exemplo), termine a linha com `<!-- links:ignore -->`.
 20. **Linguagem:** português técnico-acadêmico. Termos consagrados em inglês (Draft PR, DoR, stacked PR, RED/GREEN) permanecem.

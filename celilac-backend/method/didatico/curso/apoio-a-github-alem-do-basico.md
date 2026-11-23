@@ -5,6 +5,7 @@ titulo: 'Apoio A — GitHub além do básico'
 ordem: 3
 prerequisitos: []
 duracao: '1 aula'
+pratica: apoio-a-pratica
 ---
 
 # Apoio A — GitHub além do básico
@@ -50,10 +51,8 @@ Mais três hábitos que dão o rastro:
 Autentique-se uma vez com `gh auth login` e confira com `gh auth status`.
 
 ## 5. Pratique no seu domínio
-1. Crie um repositório (ou use o do seu projeto) e escreva **uma issue** para o seu caso de uso, com: objetivo, critérios de aceite (o que precisa ser verdade para estar pronto) e fora do escopo.
-2. Crie uma **branch** com o número da issue no nome.
-3. Faça um commit pequeno com `(refs #N)` na mensagem e abra um **PR em rascunho**.
-4. Confira no GitHub que a issue mostra a menção do commit.
+
+Faça a atividade passo a passo em [`apoio-a-pratica.md`](./apoio-a-pratica.md). Produza os artefatos no seu repositório e confira cada resultado no caminho e nos critérios indicados no arquivo de prática.
 
 ## 6. Como saber que funcionou
 - [ ] Do PR chego à issue e da issue chego ao PR.

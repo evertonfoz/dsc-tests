@@ -1,13 +1,13 @@
 ---
 id: m05-gabarito
 tipo: gabarito
-titulo: 'Gabarito do professor — Módulo 5'
+titulo: 'Gabarito para autoestudo — Módulo 5'
 gabarito_de: [m05]
 ---
 
-# Gabarito do professor — Módulo 5
+# Gabarito para autoestudo — Módulo 5
 
-> Uso exclusivo do professor.
+> Este gabarito é público. Tente primeiro a atividade no seu projeto e use as respostas para comparar o raciocínio. Isso é orientação de estudo, não bloqueio; resultados do CeliLac são referência documentada, não execução no seu projeto.
 
 ## Atividade da seção 2 (no commit `b71f5e1`)
 | Pergunta | Resposta esperada |
@@ -21,13 +21,13 @@ gabarito_de: [m05]
 - **Exercício 2:** o UC12 chama a validação de "nome obrigatório" sem definir "vazio"; o caso `''` foi o primeiro interpretado. O caso de "só espaços" apareceu no inventário do contrato real da API, na fase D (módulo 9).
 - **Exercício 3:** exigir teste em `tamanho_mínimo` (aceita) e `tamanho_mínimo - 1` (rejeita).
 
-## Pontos para discussão
+## Raciocínio para conferir
 1. Defesa em profundidade: por que manter a barreira do DTO se o núcleo já valida? (rejeita cedo, devolve resposta rápida e padronizada; o núcleo é a rede de segurança)
 2. Em que situação o teste de valor-limite seria desnecessário? (quando não há limite numérico)
 3. O que muda se a regra depende do banco (por exemplo, unicidade)? (não se resolve só no núcleo; ver módulo 8)
 
-## Critérios de avaliação sugeridos
-| Critério | Peso |
+## Autoavaliação sugerida
+| Critério | Peso sugerido |
 |---|---|
 | Três fatias, cada uma com RED e GREEN em commits separados | 30% |
 | Testes afirmam a rejeição **e** a ausência de gravação | 20% |

@@ -1,6 +1,5 @@
 ---
-// Uma página por módulo, apoio, projeto final e prática (plano do M1, seção 3).
-// Gabaritos não viram página antes do M3.
+// Uma página por módulo, apoio, projeto final, prática e gabarito.
 import { render } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import Titulo from '../componentes/Titulo.astro';
@@ -14,7 +13,6 @@ import { textos } from '../textos';
 export async function getStaticPaths() {
   const curso = await cursoValidado();
   return [...curso.values()]
-    .filter((e) => e.dados.tipo !== 'gabarito')
     .map((e) => ({ params: { id: e.dados.id } }));
 }
 
@@ -28,16 +26,35 @@ const posicao = sequencia.findIndex((e) => e.dados.id === d.id);
 const anterior = posicao > 0 ? sequencia[posicao - 1] : undefined;
 const proximo = posicao >= 0 ? sequencia[posicao + 1] : undefined;
 const modulo = d.tipo === 'pratica' ? curso.get(d.pratica_de) : undefined;
-const numeroDoModulo = d.tipo === 'pratica' ? Number(d.pratica_de.match(/\d+$/)?.[0]) : undefined;
-const tituloDaPagina = d.tipo === 'pratica'
-  ? `Prática do módulo ${numeroDoModulo}`
-  : d.titulo;
+const entradaGabarito = d.tipo === 'modulo' || d.tipo === 'apoio' || d.tipo === 'projeto' ? curso.get(d.gabarito ?? '') : undefined;
+const conteudoAssociado = d.tipo === 'gabarito' ? curso.get(d.gabarito_de[0] ?? '') : undefined;
 ---
-<Base titulo={tituloSimples(tituloDaPagina)} tituloNoCabecalho={d.tipo === 'pratica' ? tituloDaPagina : undefined} mostrarNavegacao={d.tipo !== 'pratica'} mostrarAviso={d.tipo !== 'pratica'}>
-  {d.tipo !== 'pratica' && <Titulo titulo={tituloDaPagina} />}
-  {d.tipo !== 'pratica' && <Ficha entrada={entrada} curso={curso} />}
-  {d.tipo === 'projeto' && <Avisos />}
-  <Content />
-  {modulo && <p><a href={`/${modulo.dados.id}/`}>{textos.voltarAoModulo(tituloSimples(modulo.dados.titulo))}</a></p>}
-  {posicao >= 0 && <Sequencia anterior={anterior} proximo={proximo} />}
+<Base titulo={tituloSimples(d.titulo)}>
+  {d.tipo !== 'modulo' && (
+    <nav aria-label="Caminho de navegação" class="breadcrumb">
+      <a href="/">Apresentação</a> · <a href="/mapa/">Mapa dos módulos</a> · <span aria-current="page">{tituloSimples(d.titulo)}</span>
+    </nav>
+  )}
+  <Titulo titulo={d.titulo} />
+  {d.tipo === 'gabarito' ? (
+    <>
+      <p class="aviso" role="note">Este arquivo foi escrito originalmente como gabarito do professor. Considere esse contexto ao consultar a resposta.</p>
+      <details class="gabarito">
+        <summary>Mostrar o gabarito. Se quiser preservar a tentativa, faça primeiro a atividade no local indicado no módulo.</summary>
+        <Ficha entrada={entrada} curso={curso} />
+        <Content />
+      </details>
+      {conteudoAssociado && <p><a href={`/${conteudoAssociado.dados.id}/`}>Voltar ao conteúdo associado</a></p>}
+    </>
+  ) : (
+    <>
+      {d.tipo !== 'modulo' && <Ficha entrada={entrada} curso={curso} />}
+      {d.tipo === 'projeto' && <Avisos />}
+      {d.tipo === 'pratica' && <p class="aviso" role="note">{textos.notaDaPratica}</p>}
+      <Content />
+      {entradaGabarito?.dados.tipo === 'gabarito' && <p><a href={`/${entradaGabarito.dados.id}/`}>Ir ao gabarito, depois de tentar no local indicado</a></p>}
+      {modulo && <p><a href={`/${modulo.dados.id}/`}>{textos.voltarAoModulo(tituloSimples(modulo.dados.titulo))}</a></p>}
+      {posicao >= 0 && <Sequencia anterior={anterior} proximo={proximo} />}
+    </>
+  )}
 </Base>

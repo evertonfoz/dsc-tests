@@ -8,6 +8,7 @@ on:
       - 'curso-app/**'
       - 'celilac-backend/method/**'
       - 'celilac-backend/docs/uc/uc12/**'
+      - 'celilac-backend/docs/planejamento/uc12-cadastrar-produto/uc-12.md'
       - 'mascotes/web/**'
       - '.github/workflows/curso-app-ci.yml'
   push:
@@ -16,6 +17,7 @@ on:
       - 'curso-app/**'
       - 'celilac-backend/method/**'
       - 'celilac-backend/docs/uc/uc12/**'
+      - 'celilac-backend/docs/planejamento/uc12-cadastrar-produto/uc-12.md'
       - 'mascotes/web/**'
       - '.github/workflows/curso-app-ci.yml'
 

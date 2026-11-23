@@ -6,6 +6,7 @@ ordem: 8
 prerequisitos: [apoio-c]
 duracao: '2 aulas'
 gabarito: m04-gabarito
+pratica: apoio-d-pratica
 ---
 
 # Apoio D — Contêineres: Docker e Compose
@@ -89,12 +90,8 @@ As variáveis ficam em um arquivo `.env`, **ignorado pelo Git**, e o repositóri
 Neste curso, o `-v` está proibido sem autorização explícita, e o mesmo vale para `DROP` e `TRUNCATE` (comandos SQL que apagam tabelas e dados). Para parar sem perder nada, use `docker compose stop`.
 
 ## 5. Pratique no seu domínio
-1. Escreva um `compose.yaml` com **um** serviço de banco (a imagem e a versão que o seu projeto usa), com volume e `healthcheck`.
-2. Crie o `.env.example` (sem segredos) e o seu `.env` (ignorado pelo Git; confira o `.gitignore`).
-3. Suba com `docker compose up -d` e confira com `docker compose ps` até aparecer **healthy**.
-4. Conecte a sua aplicação ao banco do contêiner.
-5. Pare com `docker compose stop`, suba de novo e confirme que **os dados continuam lá**.
-6. Remova o `DB_PASSWORD` do `.env` e rode: leia a mensagem de erro.
+
+Faça a atividade passo a passo em [`apoio-d-pratica.md`](./apoio-d-pratica.md). Produza os artefatos no seu repositório e confira cada resultado no caminho e nos critérios indicados no arquivo de prática.
 
 ## 6. Como saber que funcionou
 - [ ] Um colega clona o repositório, copia o `.env.example` para `.env`, define a senha e sobe tudo sem me perguntar nada.

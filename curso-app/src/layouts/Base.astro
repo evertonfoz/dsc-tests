@@ -2,17 +2,20 @@
 import '../estilos/base.css';
 import { textos } from '../textos';
 import { lerOrigem } from '../conteudo/origem';
+import { atribuirMascotes, arquivosDeMascotes } from '../conteudo/mascotes';
+import { percurso } from '../conteudo/carregar';
+import Paineis from '../componentes/Paineis.astro';
 
 interface Props {
   titulo: string;
-  tituloNoCabecalho?: string;
-  mostrarNavegacao?: boolean;
-  mostrarAviso?: boolean;
 }
-const { titulo, tituloNoCabecalho, mostrarNavegacao = true, mostrarAviso = true } = Astro.props;
+const { titulo } = Astro.props;
 // Variáveis de ambiente da construção (Node); sem depender de @types/node.
 const ambiente = (globalThis as { process?: { env: Record<string, string | undefined> } }).process?.env ?? {};
 const origem = lerOrigem(ambiente);
+const itens = await percurso();
+const rotas = ['/', '/indice/', '/mapa/', ...itens.map((e) => `/${e.dados.id}/`)];
+const mascote = atribuirMascotes(rotas, arquivosDeMascotes, origem?.commit ?? 'a-confirmar').get(Astro.url.pathname);
 ---
 <!doctype html>
 <html lang="pt-BR">
@@ -24,22 +27,23 @@ const origem = lerOrigem(ambiente);
   </head>
   <body>
     <a class="pular" href="#conteudo">{textos.pularParaConteudo}</a>
-    <header>
-      {tituloNoCabecalho ? <h1 class="site">{tituloNoCabecalho}</h1> : <p class="site">{textos.nomeDoSite}</p>}
-      {mostrarNavegacao && (
-        <nav aria-label={textos.navegacao}>
-          <ul>
-            <li><a href="/">{textos.linkIndice}</a></li>
-            <li><a href="/siglas/">{textos.linkSiglas}</a></li>
-            <li><a href="/mapa/">{textos.linkMapa}</a></li>
-          </ul>
-        </nav>
-      )}
+    <header class="cabecalho-site">
+      <p class="site">{textos.nomeDoSite}</p>
+      <nav aria-label={textos.navegacao}>
+        <ul>
+          <li><a href="/">{textos.linkInicio}</a></li>
+          <li><button type="button" data-abrir-drawer="indice">{textos.linkIndice}</button></li>
+          <li><button type="button" data-abrir-drawer="siglas">Consultar siglas</button></li>
+          <li><button type="button" data-abrir-drawer="sequencia">Ver a sequência do curso</button></li>
+          <li><a href="/uc12/state/">{textos.linkUc12}</a></li>
+        </ul>
+      </nav>
+      {mascote && <img class="mascote" src={`/mascotes/${mascote}`} alt="" width="128" height="128" loading="lazy" />}
     </header>
-    {mostrarAviso && <p class="aviso" role="note">{textos.avisoEmConstrucao}</p>}
     <main id="conteudo" tabindex="-1">
       <slot />
     </main>
+    <Paineis />
     <footer>
       {origem ? (
         <p data-origem-commit={origem.commit}>
@@ -52,3 +56,7 @@ const origem = lerOrigem(ambiente);
     </footer>
   </body>
 </html>
+
+<script>
+  import '../scripts/siglas';
+</script>

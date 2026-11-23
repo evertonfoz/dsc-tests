@@ -22,4 +22,12 @@ const indice = defineCollection({
   }),
 });
 
-export const collections = { curso, indice };
+const uc12 = defineCollection({
+  loader: glob({
+    base: '../celilac-backend/docs',
+    pattern: ['uc/uc12/**/*.md', 'planejamento/uc12-cadastrar-produto/uc-12.md'],
+    generateId: ({ entry }) => entry,
+  }),
+});
+
+export const collections = { curso, indice, uc12 };

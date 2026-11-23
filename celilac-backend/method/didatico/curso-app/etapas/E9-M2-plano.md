@@ -1,6 +1,6 @@
 # E9 — Plano do marco M2 (UC12 navegável)
 
-> Proposta preparada em 2026-11-21. Situação: aguardando aprovação do professor. Esta sessão não implementou o M2 nem alterou conteúdo-fonte do curso ou do UC12.
+> Plano aprovado pelo professor em 2026-11-21. Implementação do M2 em andamento na branch `codex/curso-app-m2`; conteúdo-fonte do curso e do UC12 não foi alterado.
 >
 > Convenção: **[Confirmado no repositório]** leitura desta cópia local; **[Confirmado no GitHub]** consulta ao GitHub nesta sessão; **[Proposta]** decisão técnica para aprovação; **[Aguardando aprovação]** escolha do professor.
 
@@ -27,11 +27,11 @@ Rotas legíveis sugeridas:
 | `docs/uc/uc12/evidencias/**` | `/uc12/evidencias/{fase}/{nome-sem-extensão}/` | `.md` renderizado; `.txt` em texto escapado dentro de bloco de código |
 | `docs/planejamento/uc12-cadastrar-produto/uc-12.md` | `/uc12/documento/` | Markdown renderizado, identificado como documento-fonte do caso de uso |
 
-As rotas públicas serão produzidas só para os 36 arquivos do inventário, não para todos os arquivos potencialmente existentes nas pastas. O `state.yaml` será a navegação principal: os caminhos de `documento`, `relatorio` e `evidencias` serão links internos, com nome de fase e título de evidência quando disponíveis. Todas as páginas terão link de retorno ao índice do curso e ao `/uc12/state/`.
+As rotas públicas cobrem os 36 arquivos do inventário do `state.yaml` e três arquivos UC12 adicionais citados diretamente pelos módulos publicados (39 destinos no total). Esses extras são incluídos para que os links do curso também funcionem., não para todos os arquivos potencialmente existentes nas pastas. O `state.yaml` será a navegação principal: os caminhos de `documento`, `relatorio` e `evidencias` serão links internos, com nome de fase e título de evidência quando disponíveis. Todas as páginas terão link de retorno ao índice do curso e ao `/uc12/state/`.
 
 ### Links a partir do curso
 
-**[Proposta]** Estender o resolvedor de referências do Markdown para reconhecer caminhos relativos a `celilac-backend/` que, após normalização segura, apontem para os 36 arquivos do inventário. Exemplos já existentes em módulos publicados:
+**[Proposta]** Estender o resolvedor de referências do Markdown para reconhecer caminhos relativos a `celilac-backend/` que, após normalização segura, apontem para os 39 destinos publicados (36 do inventário do `state.yaml` e três citações diretas adicionais). Exemplos já existentes em módulos publicados:
 
 - m00: relatório de consistência e evidências D/contrato-atual e F/cobertura;
 - m01: evidência F/cobertura;
@@ -50,11 +50,11 @@ O m10 e gabaritos também citam artefatos UC12; os gabaritos permanecem sem pág
 
 | Critério M2 da E7 | Evidência planejada | Nível |
 |---|---|---|
-| (1) Todo arquivo citado por `state.yaml` tem página | Teste unitário do inventário: exatamente os 36 destinos citados existem e têm rota; retirar temporariamente um destino da cópia de teste ou apontar para caminho ausente deve falhar a construção. Playwright visita cada rota e confirma resposta 200, título e origem esperados. | CI e construção |
+| (1) Todo arquivo citado por `state.yaml` tem página | Teste unitário do inventário: exatamente os 36 destinos citados pelo estado, mais três referências diretas dos módulos existem e têm rota; retirar temporariamente um destino da cópia de teste ou apontar para caminho ausente deve falhar a construção. Playwright visita cada rota e confirma resposta 200, título e origem esperados. | CI e construção |
 | (2) Links internos UC12 ↔ módulos funcionam | Teste unitário normaliza e resolve cada referência para o destino esperado; Playwright percorre os links de todos os módulos publicados que citam UC12 e valida status/rota, percorre os links do `state.yaml` para relatório, evidência e documento, e retorna do UC12 ao módulo relacionado. Nenhum destino interno deve ser externo. | CI e navegador |
 | Demonstração pedida na E7 | Abrir `/m00/`; seguir o link para `/uc12/state/`; no estado abrir um relatório, e no relatório abrir uma evidência; retornar ao módulo citado. Mostrar também um link ao documento UC12. | Manual |
 
-**[Proposta]** Adicionar testes de navegação em ambas as larguras que já são usadas pelo M1 (320 e 1280 px), conferir foco de teclado nas páginas com YAML/log longo e rodar axe-core nas 36 rotas. O aceite formal M2 não pede leitura de tela manual; testar VoiceOver/zoom continuará registrado como manual executado ou a confirmar.
+**[Proposta]** Adicionar testes de navegação em ambas as larguras que já são usadas pelo M1 (320 e 1280 px), conferir foco de teclado nas páginas com YAML/log longo e rodar axe-core nas 39 rotas. O aceite formal M2 não pede leitura de tela manual; testar VoiceOver/zoom continuará registrado como manual executado ou a confirmar.
 
 ## 4. Mudanças técnicas necessárias
 
@@ -101,11 +101,11 @@ O m10 e gabaritos também citam artefatos UC12; os gabaritos permanecem sem pág
 
 ## 7. Estimativa, sequência e gate
 
-- **Estimativa da E7:** 1 a 2 sessões para páginas YAML e evidências em texto. A proposta preserva essa faixa; a quantidade de 36 rotas é pequena, mas a validação de referências e renderizações é a parte de maior incerteza.
+- **Estimativa da E7:** 1 a 2 sessões para páginas YAML e evidências em texto. A proposta preserva essa faixa; a quantidade de 39 rotas é pequena, mas a validação de referências e renderizações é a parte de maior incerteza.
 - **Sequência após aprovação:** (1) implementar inventário e renderizadores; (2) resolver links bidirecionais; (3) adicionar testes de build, unidade, navegador e imagem; (4) revisar a demonstração e registrar evidências no PR.
 - **Gate proposto:** apresentar rotas e demonstração do m00; provar em CI os dois critérios da E7 e mostrar que nenhuma fonte foi parar na imagem nginx final. Acessibilidade manual fica identificada como executada ou a confirmar, sem afirmar evidência não obtida.
 - **Aprovações necessárias para prosseguir:** aprovação deste plano e das escolhas da seção 6; autorização explícita para a implementação do M2, incluindo branch e PR; autorização explícita para declarar/atualizar a dependência `yaml` se essa recomendação for aceita. O merge do futuro PR não está autorizado por esta sessão.
 
 ## 8. Atualização registrada
 
-O arquivo `estado.md` foi reconciliado nesta sessão: M1b consta como integrado pelo #90, com SHA de merge, SHA testado, seis checks verdes e branch mantida; o próximo marco consta como M2, com plano aguardando aprovação. Os registros anteriores de M1a/M1b foram preservados como histórico.
+O arquivo `estado.md` foi reconciliado nesta sessão: M1b consta como integrado pelo #90, com SHA de merge, SHA testado, seis checks verdes e branch mantida; o próximo marco consta como M2, com plano aprovado e implementação iniciada na branch `codex/curso-app-m2`. Os registros anteriores de M1a/M1b foram preservados como histórico.

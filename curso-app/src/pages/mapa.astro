@@ -1,10 +1,10 @@
 ---
-// Mapa na ordem de `ordem` (plano do M1, seção 6). No M1a, só a lista; o grafo entra no M1b
-// e esta lista continua sendo o equivalente acessível dele.
+// A sequência linear é a navegação principal; o grafo complementa a lista.
 import Base from '../layouts/Base.astro';
 import TextoComCodigo from '../componentes/TextoComCodigo.astro';
 import { cursoValidado, percurso } from '../conteudo/carregar';
 import { textos } from '../textos';
+import Grafo from '../componentes/Grafo.astro';
 
 const curso = await cursoValidado();
 const itens = await percurso();
@@ -13,9 +13,11 @@ const titulo = (id: string) => curso.get(id)?.dados.titulo ?? id;
 <Base titulo={textos.tituloMapa}>
   <h1>{textos.tituloMapa}</h1>
   <p>{textos.introducaoMapa}</p>
+  <h2>{textos.tituloListaMapa}</h2>
   <ol class="mapa" data-mapa>
     {itens.map((e) => (
       <li data-id={e.dados.id}>
+        <p class="tipo-pagina">{textos.tipos[e.dados.tipo] ?? e.dados.tipo}</p>
         <a href={`/${e.dados.id}/`}><TextoComCodigo texto={e.dados.titulo} /></a>
         <dl>
           <dt>{textos.duracao}</dt>
@@ -42,4 +44,9 @@ const titulo = (id: string) => curso.get(id)?.dados.titulo ?? id;
       </li>
     ))}
   </ol>
+  <details class="mapa-grafo">
+    <summary>{textos.verDiagrama}</summary>
+    <p>{textos.descricaoGrafo}</p>
+    <Grafo itens={itens} titulo={textos.tituloGrafo} legendaObrigatorio={textos.legendaObrigatorio} legendaCondicional={textos.legendaCondicional} />
+  </details>
 </Base>

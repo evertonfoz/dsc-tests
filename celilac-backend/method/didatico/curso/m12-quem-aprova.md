@@ -6,9 +6,13 @@ ordem: 17
 prerequisitos: [m01, m02, m03, m07, m10, m11]
 duracao: '2 aulas'
 gabarito: m12-gabarito
+pratica: m12-pratica
 ---
 
 # Módulo 12 — Quem aprova, e o que a IA pode fazer?
+
+> **Pré-requisito:** módulos 1, 2, 3, 7, 10 e 11. Duração sugerida: 2 aulas.
+> **Você vai:** separar, com regras escritas, o que a IA (inteligência artificial) **pode fazer**, o que **só uma pessoa decide** e o que **só o CI** (integração contínua, o robô que roda as verificações, apoio C) pode atestar, e fazer uma **auditoria** do que o caso de uso realmente entregou.
 
 ---
 
@@ -90,15 +94,12 @@ O arquivo `method/orquestrador/prompt-do-estudante.md` é um texto que você ent
 Um método não elimina o erro; ele torna o erro **visível a tempo**.
 
 ## 6. Pratique no seu domínio
-1. Releia suas respostas da seção 2 e compare com as regras da seção 4.1. Ajuste o que divergir e explique.
-2. Escreva as **suas cinco regras** para o uso da IA no seu caso de uso (como em `AGENTS.md`): o que ela pode, o que só você decide, o que exige autorização específica.
-3. Peça à IA que revise um PR seu e **registre** no PR que foi revisão por IA. Escolha **uma** afirmação dela, confira-a você e anote o resultado.
-4. Faça a **cobertura real** do seu caso de uso: liste cada requisito, regra, critério e fluxo, o **teste que o prova** (rodado) e a classificação (coberto, parcial, não implementado, aguardando decisão).
-5. Escreva as **pendências** do seu caso de uso, uma a uma, com etiqueta e destino.
-6. Peça a um colega que atue como **revisor independente** e registre o que ele achou que você não viu.
+
+Faça a atividade passo a passo em [`m12-pratica.md`](./m12-pratica.md). Produza os artefatos no seu repositório e confira cada resultado no caminho e nos critérios indicados no arquivo de prática.
 
 ## 7. Como saber que funcionou
 - [ ] Você tem regras escritas, e sabe dizer qual ação é de quem.
+- [ ] `AGENTS.md` existe na raiz e aponta para o projeto e o caso de uso corretos; `method/AGENTS.md` permanece em `method/`.
 - [ ] Nenhum gate seu foi "aprovado" por IA.
 - [ ] Cada afirmação do relatório tem etiqueta e evidência.
 - [ ] Há uma tabela de cobertura real e uma lista de pendências.

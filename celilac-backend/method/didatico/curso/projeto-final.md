@@ -11,7 +11,7 @@ gabarito: projeto-final-gabarito
 
 # Projeto final — Conduza um caso de uso seu, do início ao fim
 
-> **Pré-requisito:** módulos 0 a 12 (e os apoios que você precisou). Duração sugerida: 4 a 6 semanas, em trabalho individual ou em dupla (estimativa do material, ainda não testada com turmas).
+> **Pré-requisito:** módulos 0 a 12 (e os apoios que você precisou). Duração sugerida: 4 a 6 semanas, em trabalho individual ou em equipe (estimativa do material, ainda não testada com turmas).
 > **Você vai:** aplicar o método completo ao caso de uso que escolheu no início do curso, entregando **evidências**, e não apenas código.
 
 ---
@@ -40,7 +40,8 @@ Confira o que o módulo 4 pediu; sem isto, o método não começa:
 - [ ] `project-profile.md` preenchido, sem itens críticos `a confirmar`;
 - [ ] banco de testes separado e com as travas do módulo 8;
 - [ ] CI (integração contínua) rodando na branch principal e **verde**;
-- [ ] `method/` copiado e o `AGENTS.md` na raiz (módulo 12);
+- [ ] `method/` copiado, mantendo `method/AGENTS.md` no método;
+- [ ] `AGENTS.md` do seu projeto criado na raiz a partir de `method/templates/AGENTS-aluno.md` e personalizado no módulo 12;
 - [ ] o documento do seu caso de uso no repositório.
 
 **Limite declarado:** só o tipo de caso de uso "criar" (cadastrar algo) foi exercitado em um caso real (UC12, concluído). Se o seu for consultar, atualizar, excluir ou autenticar, os guias são **esboços**: avise o professor e registre isso no relatório.

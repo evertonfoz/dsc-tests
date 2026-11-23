@@ -60,7 +60,9 @@ describe('compararPrerequisito', () => {
     expect(compararPrerequisito('apoio-b.md', '# Apoio B\n\nCorpo.', dados({ prerequisitos: [] }))).toEqual([]);
   });
 
-  it('aceita arquivo sem a linha quando prerequisitos estão apenas no front matter', () => {
-    expect(compararPrerequisito('m02.md', '# M2\n', dados({ prerequisitos: ['m01'] }))).toEqual([]);
+  it('acusa arquivo sem a linha quando prerequisitos não é vazio', () => {
+    expect(compararPrerequisito('m02.md', '# M2\n', dados({ prerequisitos: ['m01'] }))).toEqual([
+      'conteúdo inválido: m02.md: linha "Pré-requisito": ausente, mas prerequisitos tem m01',
+    ]);
   });
 });
