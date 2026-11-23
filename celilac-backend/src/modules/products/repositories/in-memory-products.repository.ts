@@ -26,9 +26,9 @@ export class InMemoryProductsRepository implements ProductsRepository {
   }
 
   async findActivePage(query: ProductsPageQuery): Promise<ProductsPageResult> {
-    const active = this.products.filter(
-      (product) => product.deletedAt === null,
-    );
+    const active = this.products
+      .filter((product) => product.deletedAt === null)
+      .sort(compareByNameThenId);
     return {
       items: active.slice(query.offset, query.offset + query.limit),
       total: active.length,

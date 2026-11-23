@@ -2,38 +2,9 @@ The plugin "vite-tsconfig-paths" is detected. Vite now supports tsconfig paths r
 
  RUN  v4.1.11 /private/tmp/claude-501/-Users-evertoncoimbradearaujo-Documents-GitHub-dsc-tests-celilac-backend/b14ddcd5-f649-4907-906a-54492d8d9a18/scratchpad/wt-uc13/celilac-backend
 
- ❯ src/modules/products/services/products.service.list.spec.ts (6 tests | 1 failed) 10ms
-     × should order by name then productId deterministically (CA08) 5ms
 
-⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
-
- FAIL  src/modules/products/services/products.service.list.spec.ts > ProductsService.listProducts (UC13) > should order by name then productId deterministically (CA08)
-AssertionError: expected [ …(3) ] to deeply equal [ …(3) ]
-
-- Expected
-+ Received
-
-  [
--   "00000000-0000-4000-8000-000000000001",
--   "00000000-0000-4000-8000-000000000002",
-    "00000000-0000-4000-8000-000000000003",
-+   "00000000-0000-4000-8000-000000000002",
-+   "00000000-0000-4000-8000-000000000001",
-  ]
-
- ❯ src/modules/products/services/products.service.list.spec.ts:105:49
-    103|     const second = await service.listProducts();
-    104|
-    105|     expect(first.items.map((p) => p.productId)).toEqual([
-       |                                                 ^
-    106|       '00000000-0000-4000-8000-000000000001',
-    107|       '00000000-0000-4000-8000-000000000002',
-
-⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
-
-
- Test Files  1 failed | 4 passed (5)
-      Tests  1 failed | 21 passed (22)
-   Start at  10:22:45
-   Duration  573ms (transform 136ms, setup 0ms, import 1.50s, tests 341ms, environment 0ms)
+ Test Files  1 passed (1)
+      Tests  1 passed | 12 skipped (13)
+   Start at  10:22:59
+   Duration  200ms (transform 27ms, setup 0ms, import 125ms, tests 1ms, environment 0ms)
 
