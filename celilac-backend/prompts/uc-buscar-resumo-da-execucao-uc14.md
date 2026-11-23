@@ -63,9 +63,10 @@ Epic **#126**; fatias **#127** (F01), **#128** (F02), **#129** (F03), **#130** (
 | `pnpm build` / `pnpm lint` | exit 0 / exit 0 (17 avisos anteriores) |
 | `run-checks.sh` no contêiner | 36 ok, 0 falha |
 | `check-state.sh --remote` e `check-links.mjs` | válidos |
+| CI do PR #138 (commit `63ac179`) | Qualidade, Integração e E2E, Smoke do Docker Compose (inclui `run-checks.sh`) e GitGuardian: todos `pass` |
 
 ## 9. O que ainda não tem prova
-CI na branch principal e no PR #138 (ver Verificação abaixo); produto removido no contêiner; falha `500` real via HTTP. Gates das Fases B a F, ainda `pendente`.
+CI na branch principal (o CI do PR #138 passou, ver item 8); produto removido no contêiner; falha `500` real via HTTP. Gates das Fases B a F, ainda `pendente`.
 
 ## 10. O que aconteceu além do prompt
 Commit da movimentação de `uc-listar*.md` para `prompts/uc-13/`; criação de `docs/uc/uc14/README.md`; atualização do índice `13-02-estrutura-colecao.md`; uso do `state.yaml` e dos playbooks do método, que o prompt cita como opcionais.
