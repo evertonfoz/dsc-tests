@@ -73,4 +73,14 @@ export class ProductsService {
       );
     }
   }
+
+  async getProductById(productId: string): Promise<Product> {
+    const product = await this.productsRepository.findActiveById(productId);
+    if (product === null) {
+      // Provisório (F01): a F02 (#128) troca por ProductNotFoundException.
+      throw new Error('Product not found.');
+    }
+
+    return product;
+  }
 }

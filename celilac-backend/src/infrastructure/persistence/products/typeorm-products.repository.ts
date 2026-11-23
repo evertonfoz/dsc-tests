@@ -38,4 +38,12 @@ export class TypeOrmProductsRepository implements ProductsRepository {
 
     return { items: entities.map(ProductMapper.toDomain), total };
   }
+
+  async findActiveById(productId: string): Promise<Product | null> {
+    const entity = await this.ormRepository.findOne({
+      where: { productId, deletedAt: IsNull() },
+    });
+
+    return entity === null ? null : ProductMapper.toDomain(entity);
+  }
 }
