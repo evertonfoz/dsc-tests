@@ -38,6 +38,18 @@ Antes de agir, **leia** estes materiais. Eles definem o padrão de processo; os 
 | `prompts/13` | Coleção REST Client (`.http`) e verificação automatizada (`run-checks.sh`) com **Esperado × Obtido**. |
 | `docs/uc/`, `docs/adr/`, `project-profile.md`, `method/` (se existirem) | Estado real dos UCs existentes, decisões já tomadas (ADRs) e playbooks por fase. |
 
+### 2.1. Localizar as fontes no workspace em execução
+
+A tabela acima descreve o workspace de origem deste prompt (o projeto CeliLac). Os caminhos são **referências**, não suposições: o workspace em execução pode ter outra estrutura. Logo **depois** de receber as quatro respostas de 3.0 e **antes** de 3.1 (a primeira resposta continua sendo só as quatro perguntas, ver seção 6), verifique onde cada fonte está:
+
+1. Para cada linha da tabela, procure no workspace atual, em modo somente leitura (`ls`, busca por nome), aceitando variações de nome: os Materiais `prompts/01` a `prompts/13` podem ter sufixo (ex.: `01-planejamento-....md`, `10A-....md`) e as pastas `docs/`, `method/` e o `project-profile.md` podem estar em outro nível. Nada é criado nem alterado.
+2. Monte uma tabela curta: **fonte esperada · encontrada? · caminho real**.
+3. Se todas foram encontradas, siga e use os **caminhos reais** encontrados, não os da tabela.
+4. Se faltar alguma fonte (principalmente o modelo de especificação e os Materiais), **pare e pergunte em uma única mensagem**: liste o que foi achado e o que não foi, e peça ao estudante que informe o caminho de cada fonte ausente ou diga que ela não existe. Se não existir, ofereça as saídas: usar só o `REF` informado em 3.0, usar o modelo de 13 seções descrito neste prompt, ou receber o documento anexado. **Não reconstrua o conteúdo de uma fonte ausente de memória.**
+5. As fontes marcadas "(se existirem)" (`docs/uc/`, `docs/adr/`, `project-profile.md`, `method/`) não bloqueiam a execução quando faltam. Registre como **Observação** que ADRs, estado dos UCs e playbooks não puderam ser verificados e pergunte, na mesma mensagem do passo 4, se existe um equivalente em outro caminho.
+6. Se o estudante informar um caminho fora do workspace aberto, avise e peça confirmação antes de ler.
+7. Grave o mapa **fonte → caminho real** em `00-uc-referencia.md` (pasta `ARTEFATOS`) e use-o em todo o restante da execução.
+
 ### Regras herdadas que continuam valendo
 
 1. Não invente requisitos, regras, endpoints, números de Issue/PR, portas, scripts, commits nem resultados de execução. Tudo que não estiver confirmado é **proposta** ou **pergunta**.
@@ -303,7 +315,7 @@ Confirme também a pureza arquitetural (Material 12): entidade sem imports exter
 
 ## 6. PRIMEIRA RESPOSTA
 
-Sua primeira resposta deve ser **apenas** as quatro perguntas de 3.0 (UC de referência, entidade, dados retornados e destino dos artefatos), sem busca, sem código e sem documentos. Para a pergunta 3, mostre os atributos reais da entidade somente **depois** de a entidade ser confirmada; se necessário, faça as perguntas 1, 2 e 4 primeiro e a 3 na mensagem seguinte. Só então apresente o resultado de 3.1.
+Sua primeira resposta deve ser **apenas** as quatro perguntas de 3.0 (UC de referência, entidade, dados retornados e destino dos artefatos), sem busca, sem código e sem documentos. Para a pergunta 3, mostre os atributos reais da entidade somente **depois** de a entidade ser confirmada; se necessário, faça as perguntas 1, 2 e 4 primeiro e a 3 na mensagem seguinte. Só então apresente o resultado de 3.1. **Entre as respostas e o 3.1**, execute a localização das fontes da seção 2.1 (somente leitura) e, se faltar alguma, pergunte onde estão antes de seguir.
 
 ## 7. RESUMO FINAL DA EXECUÇÃO (arquivo)
 
