@@ -43,6 +43,7 @@ fatias:
     issue: null
     branch: null
     pr: null
+    # pr_compartilhado: true   # opcional: só se o PR cobre mais de uma fatia; declare em todas elas (ADR-005 do método)
     status: planejada
     responsavel: login-autor
     revisor: login-revisor
