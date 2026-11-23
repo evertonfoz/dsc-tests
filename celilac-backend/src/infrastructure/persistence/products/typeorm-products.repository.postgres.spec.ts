@@ -1,13 +1,6 @@
 import { randomUUID } from 'node:crypto';
 import { DataSource, type Repository } from 'typeorm';
-import {
-  afterAll,
-  beforeAll,
-  beforeEach,
-  describe,
-  expect,
-  it,
-} from 'vitest';
+import { afterAll, beforeAll, beforeEach, describe, expect, it } from 'vitest';
 import { createTestDataSource } from '../../../database/test-data-source.js';
 import { Product } from '../../../modules/products/entities/product.entity.js';
 import { ProductsService } from '../../../modules/products/services/products.service.js';
@@ -54,9 +47,8 @@ describe('TypeOrmProductsRepository — persistência real no PostgreSQL', () =>
 
       // Distinção entre a porta configurada no cliente (host: 5435)
       // e a porta interna do servidor PostgreSQL no contêiner (5432).
-      const configuredClientPort = (
-        dataSource.options as { port?: number }
-      ).port;
+      const configuredClientPort = (dataSource.options as { port?: number })
+        .port;
       expect(configuredClientPort).toBe(Number(process.env.TEST_DB_PORT));
       expect(Number(identity.porta)).toBe(5432);
 
@@ -105,10 +97,7 @@ describe('TypeOrmProductsRepository — persistência real no PostgreSQL', () =>
   });
 
   it('deve persistir um produto no PostgreSQL e confirmar o registro diretamente no banco', async () => {
-    const product = new Product(
-      randomUUID(),
-      'Farinha de Amêndoas Sem Glúten',
-    );
+    const product = new Product(randomUUID(), 'Farinha de Amêndoas Sem Glúten');
 
     const savedProduct = await repository.save(product);
 
@@ -138,7 +127,9 @@ describe('TypeOrmProductsRepository — persistência real no PostgreSQL', () =>
     await expect(result).rejects.toMatchObject({
       name: 'ProductPersistenceFailedException',
     });
-    await expect(result).rejects.not.toThrow(/invalid byte sequence|0x00|encoding|utf8/i);
+    await expect(result).rejects.not.toThrow(
+      /invalid byte sequence|0x00|encoding|utf8/i,
+    );
 
     const rows = await dataSource.query<ProductRow[]>(
       'SELECT "productId" FROM "products"."products"',

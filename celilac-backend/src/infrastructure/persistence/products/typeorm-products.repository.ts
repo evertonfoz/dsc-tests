@@ -2,7 +2,11 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Product } from '../../../modules/products/entities/product.entity.js';
-import { type ProductsRepository } from '../../../modules/products/repositories/products.repository.interface.js';
+import {
+  type ProductsPageQuery,
+  type ProductsPageResult,
+  type ProductsRepository,
+} from '../../../modules/products/repositories/products.repository.interface.js';
 import { ProductMapper } from './product.mapper.js';
 import { ProductOrmEntity } from './product.orm-entity.js';
 
@@ -18,5 +22,15 @@ export class TypeOrmProductsRepository implements ProductsRepository {
     const savedEntity = await this.ormRepository.save(entity);
 
     return ProductMapper.toDomain(savedEntity);
+  }
+
+  async findActivePage(query: ProductsPageQuery): Promise<ProductsPageResult> {
+    const [entities, total] = await this.ormRepository.findAndCount({
+      order: { name: 'ASC', productId: 'ASC' },
+      skip: query.offset,
+      take: query.limit,
+    });
+
+    return { items: entities.map(ProductMapper.toDomain), total };
   }
 }

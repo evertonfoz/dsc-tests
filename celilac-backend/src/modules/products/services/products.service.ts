@@ -9,6 +9,15 @@ import {
   type ProductsRepository,
 } from '../repositories/products.repository.interface.js';
 
+export const DEFAULT_PAGE_LIMIT = 20;
+
+export interface ProductsPage {
+  items: Product[];
+  page: number;
+  limit: number;
+  total: number;
+}
+
 @Injectable()
 export class ProductsService {
   constructor(
@@ -27,5 +36,14 @@ export class ProductsService {
     } catch (error) {
       throw new ProductPersistenceFailedException(error);
     }
+  }
+
+  async listProducts(): Promise<ProductsPage> {
+    const { items, total } = await this.productsRepository.findActivePage({
+      offset: 0,
+      limit: DEFAULT_PAGE_LIMIT,
+    });
+
+    return { items, page: 1, limit: DEFAULT_PAGE_LIMIT, total };
   }
 }
