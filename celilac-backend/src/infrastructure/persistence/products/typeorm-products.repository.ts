@@ -25,12 +25,16 @@ export class TypeOrmProductsRepository implements ProductsRepository {
   }
 
   async findActivePage(query: ProductsPageQuery): Promise<ProductsPageResult> {
-    const [entities, total] = await this.ormRepository.findAndCount({
-      where: { deletedAt: IsNull() },
-      order: { name: 'ASC', productId: 'ASC' },
-      skip: query.offset,
-      take: query.limit,
-    });
+    // Collation fixada (ICU pt-BR) para que a ordem não dependa da collation padrão do banco
+    // e coincida com o adaptador em memória (Intl.Collator('pt-BR')).
+    const [entities, total] = await this.ormRepository
+      .createQueryBuilder('product')
+      .where('product.deletedAt IS NULL')
+      .orderBy('product.name COLLATE "pt-BR-x-icu"', 'ASC')
+      .addOrderBy('product.productId', 'ASC')
+      .skip(query.offset)
+      .take(query.limit)
+      .getManyAndCount();
 
     return { items: entities.map(ProductMapper.toDomain), total };
   }
