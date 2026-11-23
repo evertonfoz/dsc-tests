@@ -41,7 +41,15 @@ fases:
       - { item: "O script termina com 0 falhas no contêiner", resultado: pendente }
       - { item: "O mesmo script passa no CI (smoke)", resultado: pendente }
     evidencias: [evidencias/E/run-checks.txt]
-  F: { status: pendente, relatorio: null, gate: [], evidencias: [] }
+  F:
+    status: em_andamento
+    relatorio: relatorios/F.md
+    gate:
+      - { item: "Todo item do UC tem teste que o prova ou ADR", resultado: pendente }
+      - { item: "Arquitetura em conformidade, achados tratados", resultado: pendente }
+      - { item: "state.yaml, documentos e GitHub consistentes", resultado: pendente }
+      - { item: "Issues e Epic fechados", resultado: pendente }
+    evidencias: [evidencias/F/cobertura.md, evidencias/F/auditoria.md, evidencias/F/auditoria.txt, evidencias/F/regressao.txt]
 
 # Issues de fase: A #132, C1 #133, C2 #134, D #135, E #136, F #137.
 # Branch única (decisão do estudante): feature/uc14-buscar-produto.

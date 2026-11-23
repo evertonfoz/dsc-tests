@@ -1,0 +1,16 @@
+## Entidade sem imports externos
+(nenhum import)
+## Service sem TypeORM/DTO HTTP/express
+(nenhum)
+## Controller sem TypeORM
+(nenhum)
+## Contrato do Repository sem TypeORM
+(nenhum)
+## Mappers: resposta e persistência separados
+src/infrastructure/persistence/products/product.mapper.ts
+
+src/modules/products/mappers:
+product-response.mapper.ts
+## Nomes preservados (productId; save/findActivePage intactos)
++  /** Produto ativo (não removido) pelo identificador, ou `null` se não houver (UC14). */
++  findActiveById(productId: string): Promise<Product | null>;
