@@ -11,9 +11,6 @@ gabarito: m01-gabarito
 
 # Módulo 1 — "100% coberto": quem prova?
 
-> **Pré-requisito:** módulo 0 e o apoio B (testes automatizados), se você ainda não escreveu um teste com `it(...)`. Duração sugerida: 2 aulas.
-> **Você vai:** transformar uma afirmação de cobertura em uma tabela que qualquer pessoa consegue conferir, e aprender a registrar o que **não** foi feito.
-
 ---
 
 ## 1. O problema

@@ -10,9 +10,6 @@ gabarito: m07-gabarito
 
 # Módulo 7 — Seu teste prova alguma coisa?
 
-> **Pré-requisito:** módulos 5 e 6 e apoio B. Duração sugerida: 2 aulas.
-> **Você vai:** aprender a **estragar o código de propósito** para descobrir se os seus testes percebem, e a registrar essa prova.
-
 ---
 
 ## 1. O problema

@@ -10,9 +10,6 @@ gabarito: m10-gabarito
 
 # Módulo 10 — E se uma fatia aparecer tarde demais?
 
-> **Pré-requisito:** módulos 1, 2, 3 e 9. Duração sugerida: 1 a 2 aulas.
-> **Você vai:** aprender o que fazer quando, no meio do caminho, descobre-se um comportamento que ninguém planejou, **sem** esconder o desvio nem fingir que o plano estava certo.
-
 ---
 
 ## 1. O problema

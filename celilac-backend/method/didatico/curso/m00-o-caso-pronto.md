@@ -5,12 +5,10 @@ titulo: 'Módulo 0 — O que significa um caso de uso estar "pronto"?'
 ordem: 1
 prerequisitos: []
 duracao: '60 a 90 minutos'
+pratica: m00-pratica
 ---
 
 # Módulo 0 — O que significa um caso de uso estar "pronto"?
-
-> **Antes de começar:** leia o `README.md` desta pasta. Duração sugerida: 60 a 90 minutos.
-> **Você vai:** perceber a distância entre "parece pronto" e "está provado", conhecer o caso de referência e escolher o seu caso de uso.
 
 ---
 
@@ -80,7 +78,9 @@ O método tem **duas camadas** e **seis fases**. Você as estudará uma a uma; p
 Dois arquivos ligam tudo: o `state.yaml` (o estado de cada caso de uso) e o `AGENTS.md` (as regras que o assistente de IA, inteligência artificial, deve seguir). Ambos são ensinados nos módulos 2 e 12.
 
 ## 7. Pratique no seu domínio
-1. **Escolha** o seu caso de uso, conforme os critérios do `README.md` (cria algo, tem regra, grava em banco).
+Abra o [roteiro da prática do módulo 0](/m00-pratica/) para ver a atividade em uma página própria.
+
+1. **Escolha** um caso de uso que crie algo, tenha regras de negócio e grave dados em banco.
 2. **Escreva** em meia página: o ator, o fluxo principal, **duas regras de negócio** e **um fluxo de falha**. Se o seu texto tiver "validar os dados" sem dizer quais, ainda está vago.
 3. **Refaça as cinco perguntas** da seção 2 para o seu caso de uso, agora com os nomes reais.
 4. **Anote**, para cada resposta, *como você provaria*: qual teste, qual comando.

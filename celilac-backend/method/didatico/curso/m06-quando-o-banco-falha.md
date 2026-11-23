@@ -10,9 +10,6 @@ gabarito: m06-gabarito
 
 # Módulo 6 — O que o cliente vê quando o banco falha?
 
-> **Pré-requisito:** módulo 5 e apoio B. Duração sugerida: 2 aulas.
-> **Você vai:** transformar uma falha de infraestrutura em uma resposta compreensível e segura, e decidir (e registrar) qual código HTTP (*HyperText Transfer Protocol*, o protocolo da web) cada situação merece.
-
 ---
 
 ## 1. O problema

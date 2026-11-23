@@ -10,9 +10,6 @@ gabarito: m04-gabarito
 
 # Módulo 4 — Por que "na minha máquina funciona" não basta?
 
-> **Pré-requisito:** apoios C e D e o módulo 3. Duração sugerida: 2 aulas.
-> **Você vai:** separar o que se resolve **uma vez por projeto** (a Fundação) do que se repete **a cada caso de uso**, e montar a Fundação do seu projeto.
-
 ---
 
 ## 1. O problema

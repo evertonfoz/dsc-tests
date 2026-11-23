@@ -10,9 +10,6 @@ gabarito: m05-gabarito
 
 # Módulo 5 — Onde mora a regra de negócio?
 
-> **Pré-requisito:** módulo 3 e apoio B. Duração sugerida: 2 aulas.
-> **Você vai:** colocar uma regra de negócio no **núcleo** da aplicação, em vez de deixá-la só na entrada, e ver uma única linha de código evoluir por três fatias.
-
 ---
 
 ## 1. O problema

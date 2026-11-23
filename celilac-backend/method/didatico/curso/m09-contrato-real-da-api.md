@@ -10,10 +10,6 @@ gabarito: m09-gabarito
 
 # Módulo 9 — Alguém olhou o contrato real da API?
 
-> **Pré-requisito:** módulos 3, 5, 6, 7 e 8. Duração sugerida: 2 aulas.
-> **Sigla:** API (*Application Programming Interface*) é a interface pela qual outros programas usam o seu sistema.
-> **Você vai:** descobrir o que a sua API **de fato responde** (e não o que você acha que responde), decidir o que fazer com cada diferença e fixar o resultado em um documento e em testes.
-
 ---
 
 ## 1. O problema

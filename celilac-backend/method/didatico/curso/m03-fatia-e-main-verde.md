@@ -10,9 +10,6 @@ gabarito: m03-gabarito
 
 # Módulo 3 — Por que a `main` ficou vermelha?
 
-> **Pré-requisito:** apoios A e B, e o módulo 2. Duração sugerida: 2 aulas.
-> **Você vai:** reproduzir um problema real, entender por que dividir o trabalho por camada o causa, e aprender a dividir por **comportamento**.
-
 ---
 
 ## 1. O problema

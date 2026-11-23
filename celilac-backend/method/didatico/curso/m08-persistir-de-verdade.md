@@ -10,9 +10,6 @@ gabarito: m08-gabarito
 
 # Módulo 8 — Como persistir de verdade?
 
-> **Pré-requisito:** módulos 4 a 7 e apoio D (contêineres). Duração sugerida: 2 a 3 aulas.
-> **Você vai:** trocar o repositório "de mentira" (em memória) por um que grava em um banco real, e provar que o dado **realmente** foi gravado e que o banco **do zero** fica com a estrutura certa.
-
 ---
 
 ## 1. O problema

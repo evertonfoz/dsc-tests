@@ -10,9 +10,6 @@ gabarito: m11-gabarito
 
 # Módulo 11 — Outra pessoa consegue repetir sua verificação?
 
-> **Pré-requisito:** módulos 4, 7, 8 e 9, e apoios C e D. Duração sugerida: 2 aulas.
-> **Você vai:** transformar "eu verifiquei" em um **script que qualquer pessoa roda**, provar que o script **detecta código errado** (controle negativo) e provar que o dado **sobrevive a um reinício** (durabilidade).
-
 ---
 
 ## 1. O problema
