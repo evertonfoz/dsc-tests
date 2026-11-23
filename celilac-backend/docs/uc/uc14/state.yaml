@@ -1,0 +1,81 @@
+# Estado do UC14 (Buscar Produto por Identificador). Fase A em andamento: publicada, aguardando validação do estudante.
+uc: UC14
+nome: Buscar Produto por Identificador
+documento: ../../../prompts/uc-14-buscar-produto.md
+arquetipo: consultar
+epic: { issue: 126, estado: open }
+fase_atual: A
+
+fases:
+  A:
+    status: em_andamento
+    relatorio: relatorios/A.md
+    gate:
+      - { item: "Epic e Sub-Issues criadas e reconciliadas com este arquivo", resultado: pendente }
+      - { item: "GitHub Project configurado com os 5 estados", resultado: pendente }
+    evidencias: [evidencias/A/publicacao.txt]
+  B:
+    status: pendente
+    relatorio: null
+    gate:
+      - { item: "Todas as fatias integradas na branch principal", resultado: pendente }
+      - { item: "CI verde na branch principal", resultado: pendente }
+    evidencias: []
+  C: { status: pendente, relatorio: null, gate: [], evidencias: [] }
+  D: { status: pendente, relatorio: null, gate: [], evidencias: [] }
+  E: { status: pendente, relatorio: null, gate: [], evidencias: [] }
+  F: { status: pendente, relatorio: null, gate: [], evidencias: [] }
+
+# Issues de fase: A #132, C1 #133, C2 #134, D #135, E #136, F #137.
+# Branch única (decisão do estudante): feature/uc14-buscar-produto.
+fatias:
+  - id: F01
+    comportamento: "Buscar produto ativo por productId e retornar productId e name"
+    criterios: [CA01, CA08, RN04, RN05, RF01, RF04]
+    issue: 127
+    branch: null
+    pr: null
+    status: planejada
+    responsavel: evertonfoz
+    revisor: evertonfoz
+    evidencias: []
+  - id: F02
+    comportamento: "Produto inexistente lança ProductNotFoundException"
+    criterios: [CA03, FA01, RF03]
+    issue: 128
+    branch: null
+    pr: null
+    status: planejada
+    responsavel: evertonfoz
+    revisor: evertonfoz
+    evidencias: []
+  - id: F03
+    comportamento: "Produto removido (soft delete) é tratado como inexistente"
+    criterios: [CA04, FA02, RN01, RN02]
+    issue: 129
+    branch: null
+    pr: null
+    status: planejada
+    responsavel: evertonfoz
+    revisor: evertonfoz
+    evidencias: []
+  - id: F04
+    comportamento: "Falha de persistência na consulta lança ProductLookupFailedException"
+    criterios: [CA06, FE01, RF05]
+    issue: 130
+    branch: null
+    pr: null
+    status: planejada
+    responsavel: evertonfoz
+    revisor: evertonfoz
+    evidencias: []
+  - id: F05
+    comportamento: "Identificador que não é UUID é rejeitado com InvalidProductIdException"
+    criterios: [CA05, FA03, RN03, RF02]
+    issue: 131
+    branch: null
+    pr: null
+    status: planejada
+    responsavel: evertonfoz
+    revisor: evertonfoz
+    evidencias: []

@@ -1,0 +1,14 @@
+# Publicação em 2026-11-23T17:50:30Z; Sub-Issues vinculadas ao Epic #126 e itens no Project #6 (Backlog; F01 em Ready)
+#126 [UC14] Buscar Produto por Identificador
+#127 [UC14][F01] Buscar produto ativo por productId e retornar productId e name
+#128 [UC14][F02] Produto inexistente lança ProductNotFoundException
+#129 [UC14][F03] Produto removido (soft delete) é tratado como inexistente
+#130 [UC14][F04] Falha de persistência na consulta lança ProductLookupFailedException
+#131 [UC14][F05] Identificador que não é UUID é rejeitado com InvalidProductIdException
+#132 [UC14][Fase A] Planejamento e publicação do UC14
+#133 [UC14][Fase C1] Adaptador HTTP de GET /products/:productId
+#134 [UC14][Fase C2] Persistência real: busca de produto ativo por productId
+#135 [UC14][Fase D] Contrato de GET /products/:productId
+#136 [UC14][Fase E] Verificação reprodutível da busca por productId
+#137 [UC14][Fase F] Auditoria e encerramento do UC14
+127 128 129 130 131 132 133 134 135 136 137 
