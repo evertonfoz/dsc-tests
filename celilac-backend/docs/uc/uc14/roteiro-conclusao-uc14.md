@@ -8,16 +8,16 @@
 |---|---|---|
 | 1 | Push da branch `feature/uc14-buscar-produto` | Feito (autorizado pelo estudante) |
 | 2 | Abrir um PR único (fatias F01 a F05 e Fases C a F), citando #126 a #137 | Feito: PR #138, aberto para revisão |
-| 3 | CI verde no PR (qualidade, integração/E2E, smoke do Compose, `run-checks.sh`) | Pendente (estudante) |
-| 4 | Merge do PR (`pr_compartilhado: true` em F01 a F05, como no UC13) | Pendente (estudante) |
-| 5 | Fechar #127 a #131 (fatias), com link para o PR e para `evidencias/B/` | Pendente (estudante) |
-| 6 | Fechar #132 (Fase A), #133 e #134 (C), #135 (D), #136 (E) e #137 (F) | Pendente (estudante) |
-| 7 | Fechar o Epic #126 | Pendente (estudante) |
-| 8 | Mover os itens do Project #6 para `Done` | Pendente (estudante) |
-| 9 | Aprovar os gates das Fases B a F no `state.yaml`, atualizar `epic.estado` e `fase_atual: concluido`, e rodar `check-state.sh --remote` | Pendente (estudante) |
-| 10 | Atualizar `branch`, `pr` e `status: integrada` das fatias no `state.yaml` | Pendente (estudante) |
+| 3 | CI verde no PR (qualidade, integração/E2E, smoke do Compose, `run-checks.sh`) | Feito: 4 checks `pass` no PR #138 |
+| 4 | Merge do PR (`pr_compartilhado: true` em F01 a F05, como no UC13) | Feito: merge `6963f1f` (autorizado pelo estudante) |
+| 5 | Fechar #127 a #131 (fatias), com link para o PR e para `evidencias/B/` | Feito: #127 a #131 fechadas |
+| 6 | Fechar #132 (Fase A), #133 e #134 (C), #135 (D), #136 (E) e #137 (F) | Feito: #132 a #137 fechadas |
+| 7 | Fechar o Epic #126 | Feito: #126 fechado |
+| 8 | Mover os itens do Project #6 para `Done` | Feito: itens do Project #6 em `Done` |
+| 9 | Aprovar os gates das Fases B a F no `state.yaml`, atualizar `epic.estado` e `fase_atual: concluido`, e rodar `check-state.sh --remote` | Feito: gates aprovados por delegação expressa do estudante ("Pode fazer tudo") ou por CI; `fase_atual: concluido` |
+| 10 | Atualizar `branch`, `pr` e `status: integrada` das fatias no `state.yaml` | Feito: fatias `integrada`, `pr: 138` |
 
-Feito até aqui: planejamento publicado (Fase A, gate aprovado por evertonfoz em 2026-11-23), push e PR #138.
+Feito: todos os passos acima, em 2026-11-23.
 
 ## Provas disponíveis
 - Cobertura: `docs/uc/uc14/evidencias/F/cobertura.md`.
@@ -34,4 +34,4 @@ Feito até aqui: planejamento publicado (Fase A, gate aprovado por evertonfoz em
 - Alterações no ambiente do estudante: `docker compose up -d --build api` (só a API recriada) e 2 `POST /products` de teste no banco de desenvolvimento pelo `run-checks.sh`. Nenhuma migration aplicada.
 
 ## Encerramento
-*(preencher com data só quando o estudante confirmar que o UC foi concluído.)*
+UC14 concluído em 2026-11-23, por instrução expressa do estudante ("Pode fazer tudo"). PR #138 integrado em `6963f1f`; Epic #126 e issues #127 a #137 fechados. A branch `feature/uc14-buscar-produto` é removida depois deste encerramento. Registrado pelo agente; aprovações dos gates por delegação do estudante e por CI.
