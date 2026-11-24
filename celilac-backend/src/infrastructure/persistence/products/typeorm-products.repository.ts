@@ -63,4 +63,13 @@ export class TypeOrmProductsRepository implements ProductsRepository {
     const rows = result.raw as ProductOrmEntity[];
     return rows.length === 0 ? null : ProductMapper.toDomain(rows[0]);
   }
+
+  /** Provisório (F01 do UC16): a remoção real no PostgreSQL entra na Fase C2 (#164). */
+  removeActive(_productId: string): Promise<boolean> {
+    return Promise.reject(
+      new Error(
+        'removeActive ainda não implementado no TypeORM (UC16, Fase C2).',
+      ),
+    );
+  }
 }

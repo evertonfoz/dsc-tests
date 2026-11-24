@@ -35,7 +35,7 @@ Publicar Epic, fatias e Project do UC16 e reconciliá-los com `docs/uc/uc16/stat
 
 | Item | Teste que prova | Situação |
 |---|---|---|
-| Fluxo principal: `204` sem corpo (RF01, RF04, RN09, CA01) | — | A implementar |
+| Fluxo principal: `204` sem corpo (RF01, RF04, RN09, CA01) | `should remove the active product and resolve without a body (CA01, RN09)` e `should leave the removed product out of the active products of the repository (CA01, RN01)` (`products.service.remove.spec.ts`) | **Parcial:** só o núcleo, com repositório em memória; o `204` é da Fase C1 e a remoção no banco, da C2 |
 | Produto removido continua no banco com `deletedAt` e os mesmos `productId` e `name` (RN01, CA06) | — | A implementar |
 | Busca responde `404` depois da remoção (RF05, RN03, CA02) | — | A implementar |
 | Listagem não traz o produto e o total diminui em 1 (RF05, RN03, CA03) | — | A implementar |
