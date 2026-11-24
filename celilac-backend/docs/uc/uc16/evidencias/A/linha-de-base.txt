@@ -1,0 +1,30 @@
+**O que foi executado:** pnpm install --frozen-lockfile; pnpm build; pnpm lint; pnpm test (nesta ordem, um por vez)
+**Data e hora UTC:** 2026-11-24T17:38:49Z (início da sequência)
+**Commit de base:** 38ac6d651c7f075d4d254a48f87e175184858bad (branch docs/uc16-etapa1)
+**Diretório/ambiente:** celilac-backend/, máquina do estudante, sem tocar o banco de desenvolvimento (testes unitários apenas)
+**Código de saída:** install 0 · build 0 · lint 0 · test 1
+
+--- pnpm install --frozen-lockfile (final) ---
+Changelog: https://pnpm.io/v/12.23.0
+To update, run: pnpm self-update
+Done in 286ms using pnpm v12.8.1
+exit=0
+
+--- pnpm build (final) ---
+$ nest build
+exit=0
+
+--- pnpm lint (resumo: 16 linhas com 'warning'; saída final) ---
+src/modules/products/services/products.service.spec.ts:85:31: warning typescript(unbound-method): Avoid referencing unbound methods which may cause unintentional scoping of `this`. help: If your function does not access `this`, you can annotate it with `this: void`, or consider using an arrow function instead.
+exit=0
+
+--- pnpm test (resumo e arquivos que falharam) ---
+      Tests  4 failed | 81 passed (85)
+ FAIL  src/modules/orders/services/orders.services.spec.ts > OrdersService > should confirm order when payment is approved
+ FAIL  src/modules/orders/services/orders.services.spec.ts > OrdersService > should fail when payment is pending
+ FAIL  src/modules/orders/services/orders.services.spec.ts > OrdersService > should fail when payment is rejected
+ FAIL  src/modules/orders/services/orders.services.spec.ts > OrdersService > should throw PaymentNotFoundException when payment does not exist
+ Test Files  1 failed | 12 passed (13)
+exit=1
+
+**Leitura do resultado:** a linha de base antes de qualquer alteração do UC16 é: build e lint sem erros (somente avisos) e `pnpm test` com 81 testes passando e 4 falhando, todos em `src/modules/orders/services/orders.services.spec.ts`, que são as falhas conhecidas do exercício de pedidos (ADR-001). Isso **não** é culpa do UC16. Não confirma nada sobre o banco real nem sobre o contêiner (integração, e2e e `run-checks.sh` não foram executados).
