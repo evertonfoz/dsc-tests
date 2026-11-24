@@ -18,4 +18,9 @@ export interface ProductsRepository {
   findActivePage(query: ProductsPageQuery): Promise<ProductsPageResult>;
   /** Produto ativo (não removido) pelo identificador, ou `null` se não houver (UC14). */
   findActiveById(productId: string): Promise<Product | null>;
+  /**
+   * Altera o nome do produto ativo (não removido) e o retorna atualizado, ou `null` se não houver
+   * produto ativo com o identificador (UC15). Operação única: não deixa alteração pela metade.
+   */
+  updateActiveName(productId: string, name: string): Promise<Product | null>;
 }

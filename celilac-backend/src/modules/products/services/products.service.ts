@@ -36,9 +36,7 @@ export class ProductsService {
   ) {}
 
   async createProduct(name: string): Promise<Product> {
-    if (name.trim() === '' || name.length > MAX_PRODUCT_NAME_LENGTH) {
-      throw new InvalidProductNameException();
-    }
+    this.assertValidName(name);
 
     const product = new Product(randomUUID(), name, null);
     try {
@@ -89,5 +87,32 @@ export class ProductsService {
     }
 
     return product;
+  }
+
+  async updateProductName(productId: string, name: string): Promise<Product> {
+    this.assertValidName(name);
+
+    let product: Product | null;
+    try {
+      product = await this.productsRepository.updateActiveName(productId, name);
+    } catch (error) {
+      throw new ProductPersistenceFailedException(
+        error,
+        'Product update could not be completed.',
+      );
+    }
+
+    if (product === null) {
+      throw new ProductNotFoundException(productId);
+    }
+
+    return product;
+  }
+
+  /** Regra do nome (ADR-004), compartilhada pelo cadastro (UC12) e pela alteração (UC15). */
+  private assertValidName(name: string): void {
+    if (name.trim() === '' || name.length > MAX_PRODUCT_NAME_LENGTH) {
+      throw new InvalidProductNameException();
+    }
   }
 }
