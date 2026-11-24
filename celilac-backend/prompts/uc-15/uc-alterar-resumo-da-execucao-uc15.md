@@ -22,7 +22,7 @@ Epic **#141**; fatias **#142 a #146** (F01 a F05); fases **#147 a #152** (A, C1,
 - **Contrato:** `docs/uc/uc15/contrato.md`. **Auditoria:** `docs/uc/uc15/evidencias/F/auditoria.txt` (pureza arquitetural conferida).
 
 ## 6. Cobertura e decisões
-Tabela em `docs/uc/uc15/relatorios/A.md` (seção 7): 12 itens *Coberto*, 1 *Parcial* (cenários `.http` não executados), 1 *Aguardando evidência* (`run-checks.sh`) e 2 *Não implementado* (ADR-006 concorrência, ADR-007 autenticação). Itens e nomes de teste conferidos por `grep`.
+Tabela em `docs/uc/uc15/relatorios/A.md` (seção 7): 13 itens *Coberto*, 1 *Parcial* (cenários `.http` não executados), 1 *Aguardando evidência* (`run-checks.sh`) e 2 *Não implementado* (ADR-006 concorrência, ADR-007 autenticação). Itens e nomes de teste conferidos por `grep`.
 
 ## 7. O que deu errado ou ficou diferente
 - RED que não falhou em F02, F03 e F05: eu escrevi, no GREEN de F01, a tradução de "não encontrado" e de falha de persistência. Só F04 teve RED real.
