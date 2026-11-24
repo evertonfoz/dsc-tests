@@ -48,6 +48,18 @@ Se a Fase D, E ou F revelar um comportamento sem fatia, ele **não** vira exceç
 
 *Os demais arquétipos têm catálogos em `matriz-arquetipos.md` (esboços).*
 
+## 5.1. Catálogo de fatias típicas — arquétipo `atualizar` (validado no UC15)
+
+| Fatia | Comportamento | Prova |
+|---|---|---|
+| F01 | Atualização válida: grava o novo valor e devolve o item atualizado; atributos não alterados permanecem | Teste do Service com Repository em memória; releitura |
+| F02 | Item inexistente lança a exceção de "não encontrado" | Teste do Service |
+| F03 | Item removido logicamente é tratado como inexistente e **não é alterado** | Teste do Service e do PostgreSQL de testes |
+| F04 | Valor inválido lança a exceção de validação **sem chamar o Repository** | Teste do Service (releitura do valor anterior) |
+| F05 | Falha de persistência lança a exceção de falha, sem expor a causa e sem alteração parcial | Teste do Service e falha real do PostgreSQL |
+
+Fases C1 (rota, DTO, pipe do identificador, mapeamento de erros) e C2 (atualização atômica) seguem como no `criar`. **Cuidado com o RED:** se o GREEN da F01 já inclui "não encontrado" e a tradução de falha, F02, F03 e F05 nascem sem RED; escreva o mínimo na F01 (UC15: isso não foi feito).
+
 ## 6. Exemplo retrospectivo: o UC12 (CeliLac)
 > Reconstrução didática **depois do fato**. A decomposição abaixo é uma **hipótese** de como o UC12 poderia ter sido cortado; o estado das fatias é **Confirmado no código** em 2026-11-20.
 

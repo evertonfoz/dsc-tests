@@ -48,4 +48,4 @@ Nada além do pedido.
 `main` (merge e138874 do PR #153), Issues #141 a #152 (fechadas), rótulo `uc15` e o Project #6 (itens em `Done`). Branch de encerramento: `docs/uc15-encerramento`. Pasta: `celilac-backend/`.
 
 ## 13. Pendente
-Promoção do arquétipo `atualizar` (esboço) a validado em `method/playbooks/matriz-arquetipos.md`; execução individual dos arquivos `.http` (CA13 *Parcial*); outras entidades ou operações (remover, restaurar, alterar em lote) em novas execuções deste prompt.
+Execução individual dos arquivos `.http` (CA13 *Parcial*); outras entidades ou operações (remover, restaurar, alterar em lote) em novas execuções deste prompt. O arquétipo `atualizar` foi promovido a validado (UC15) no PR de encerramento.

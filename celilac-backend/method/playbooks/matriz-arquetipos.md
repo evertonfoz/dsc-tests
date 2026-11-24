@@ -1,11 +1,11 @@
 # Matriz de aplicabilidade por arquétipo de caso de uso
 
-> **Grau de validação.** Só o arquétipo **criar** foi exercitado em prática (UC12 / CeliLac). Os demais são **esboços**: hipóteses fundamentadas no que cada tipo costuma exigir, **ainda não executadas**. Cada esboço deve ser validado no primeiro caso de uso real daquele tipo e então promovido (ou corrigido) com evidências.
+> **Grau de validação.** Os arquétipos **criar** (UC12 / CeliLac) e **atualizar** (UC15 / CeliLac, 2026-11-24) foram exercitados em prática. Os demais são **esboços**: hipóteses fundamentadas no que cada tipo costuma exigir, **ainda não executadas**. (O UC13 e o UC14 exercitaram consultas no CeliLac, mas esta matriz ainda não foi atualizada para `consultar`.) Cada esboço deve ser validado no primeiro caso de uso real daquele tipo e então promovido (ou corrigido) com evidências.
 > Legenda: `=` igual ao `criar` · `±` muda parcialmente (ver nota) · `+` fase ganha passos · `−` fase simplificada.
 
 ## 1. Visão geral por fase
 
-| Fase | criar *(validado)* | consultar *(esboço)* | atualizar *(esboço)* | excluir *(esboço)* | autenticar *(esboço)* |
+| Fase | criar *(validado)* | consultar *(esboço)* | atualizar *(validado, UC15)* | excluir *(esboço)* | autenticar *(esboço)* |
 |---|---|---|---|---|---|
 | **A** Planejar e publicar | referência | = | = | = | + segurança como item de planejamento |
 | **B** Fatias (núcleo) | ver seção 2 | ± fatias de leitura (sem efeito colateral) | + estado anterior e conflitos | + integridade e política de remoção | + hash, política de credenciais |
@@ -33,11 +33,13 @@
 - **Riscos:** consulta sem limite; vazar campos internos (Fase D).
 - **A validar:** como semear dados de forma isolada (banco de testes).
 
-### 3.2. `atualizar` *(esboço)*
-- **Fatias típicas:** atualização válida; recurso inexistente (404); entrada inválida (400); atualização parcial vs. total; conflito/concorrência (409), se o UC definir; imutabilidade de campos.
-- **Muda:** o teste RED parte de um **estado anterior**; a fase C2 precisa de teste de reescrita sem perda de campos não enviados.
-- **Riscos:** sobrescrever campos; falta de controle de concorrência.
-- **A validar:** se `PUT` vs. `PATCH` vem do UC ou de decisão da equipe (ADR).
+### 3.2. `atualizar` *(validado, UC15)*
+- **Fatias típicas (confirmadas no UC15):** atualização válida com a resposta contendo o item atualizado; recurso inexistente (404); removido logicamente tratado como inexistente e **não alterado**; entrada inválida (400) sem gravar; falha de persistência (500) sem alteração parcial. Identificador malformado (400) é da fase C1 (pipe), não do núcleo.
+- **Muda:** o teste RED parte de um **estado anterior** (item já cadastrado). Cada recusa precisa provar que **nada foi gravado** (reler o item). A fase C2 precisa de teste de reescrita sem perda de campos não enviados e de falha real do banco com nome anterior preservado.
+- **Riscos observados:** (1) a gravação existente (`save`) pode **inserir** em uma implementação e **atualizar** em outra: no UC15 o `save` em memória acrescentava e duplicaria o item, então o Repository ganhou uma operação própria (`updateActiveName`), sem mudar o contrato anterior; (2) a atualização deve ser **uma única instrução** condicionada ao estado ativo (`UPDATE ... WHERE ... AND deletedAt IS NULL RETURNING`), para não haver alteração pela metade nem corrida entre ler e gravar; (3) o corte em fatias pode esconder RED que não falha: se o GREEN da primeira fatia já traduz exceções, as fatias seguintes passam sem RED (aconteceu em F02, F03 e F05 do UC15).
+- **Decisões que o UC precisa tomar (viram ADR ou seção do UC):** `PUT` ou `PATCH` (no UC15, `PUT` por haver um único atributo alterável; reavaliar quando houver mais de um); campo não alterável no corpo ignorado ou rejeitado (no UC15, ignorado, conforme ADR-004); alterar para o mesmo valor (no UC15, sucesso); concorrência (no UC15, *last write wins*, ADR-006, com condição para retomar).
+- **Fase E:** a verificação em contêiner **grava** no banco de desenvolvimento; o `run-checks.sh` deve alterar apenas um produto criado por ele mesmo e a execução exige autorização expressa.
+- **Ainda não exercitado:** `PATCH` e o caso de corpo vazio; atualização parcial de vários atributos; conflito `409` e controle de concorrência.
 
 ### 3.3. `excluir` *(esboço)*
 - **Fatias típicas:** exclusão de item existente (204); inexistente (404 ou 204 idempotente — decisão do UC); item com dependências (409 ou cascata — decisão); exclusão lógica vs. física.

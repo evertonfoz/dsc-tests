@@ -77,7 +77,7 @@ O agente **não** marca `aprovado` nem faz merge (regras 9 e 21).
 |---|---|---|
 | criar | `POST`, 201/400 (e 409 se houver unicidade); gravar e reler | validado (UC12) |
 | consultar | `GET`, 200/404, filtros e paginação; índices | esboço |
-| atualizar | `PUT`/`PATCH`, 200/404/409; concorrência | esboço |
+| atualizar | `PUT`/`PATCH`, 200/404/409; concorrência | validado (UC15) |
 | excluir | `DELETE`, 204/404; remoção física ou lógica; integridade referencial | esboço |
 | autenticar | login 200/401 sem vazar detalhes; armazenamento seguro de credenciais | esboço |
 

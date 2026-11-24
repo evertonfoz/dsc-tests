@@ -34,7 +34,14 @@
 | `state.yaml`, documentos e GitHub consistentes | aprovado (`check-state.sh --remote` e `check-links.mjs`) | CI e verificação local |
 | Issues e Epic fechados | aprovado: #141 a #152 fechadas após o merge; itens do Project #6 em `Done` | evertonfoz (2026-11-24) |
 
-## 4. Pendências e riscos
+## 4. Promoção do arquétipo `atualizar` (esboço → validado)
+Autorizada pelo estudante em 2026-11-24. O que foi diferente do esboço, registrado em `method/playbooks/matriz-arquetipos.md` (seção 3.2) e em `guia-decomposicao-em-fatias.md` (seção 5.1):
+- `PUT` escolhido por haver um único atributo alterável (o esboço deixava `PUT`/`PATCH` em aberto); 409 e concorrência ficaram **fora** do UC (ADR-006).
+- Risco novo: o `save` em memória acrescenta, então o Repository ganhou operação própria de atualização.
+- Atualização atômica (`UPDATE ... AND deletedAt IS NULL RETURNING`).
+- Corte em fatias pode gerar RED que não falha (F02, F03 e F05).
+- Não exercitado: `PATCH`, corpo vazio, vários atributos, `409`.
+
+## 5. Pendências e riscos
 - Merge feito pelo assistente por autorização expressa do estudante; CI da `main` com sucesso (run 45438561157).
 - Item *Parcial* (CA13): os arquivos `.http` não foram executados um a um; o contrato foi provado pelo `run-checks.sh`.
-- O arquétipo `atualizar` segue como esboço no método.

@@ -25,8 +25,8 @@
 
 ## Ressalvas
 - Falhas conhecidas fora do escopo: 4 testes de `orders` no `pnpm test` e 1 no `pnpm test:e2e` (ADR-001).
-- O arquétipo `atualizar` do método continua **esboço**; este UC pode servir para promovê-lo, o que exige decisão do estudante (`method/playbooks/matriz-arquetipos.md`, seção 4).
+- O arquétipo `atualizar` foi promovido de esboço a validado (UC15) em `method/playbooks/matriz-arquetipos.md`.
 - Alterações no ambiente do estudante: API reconstruída e `run-checks.sh` executado no banco de desenvolvimento (2 produtos de teste criados e 1 renomeado), com autorização. O banco de testes (`celilac_test`) foi truncado e reutilizado pelos testes de integração, como previsto.
 
 ## Encerramento
-Em 2026-11-24 o estudante autorizou o merge e a sequência ("Faça o merge e dê sequência"). O PR #153 foi integrado em e138874, o CI da `main` passou, as Issues #141 a #152 foram fechadas e o Project #6 foi movido para `Done`. Pendente apenas a promoção do arquétipo `atualizar` (decisão do estudante).
+Em 2026-11-24 o estudante autorizou o merge e a sequência ("Faça o merge e dê sequência"). O PR #153 foi integrado em e138874, o CI da `main` passou, as Issues #141 a #152 foram fechadas e o Project #6 foi movido para `Done`. O arquétipo `atualizar` foi promovido a validado (UC15) a pedido do estudante.
