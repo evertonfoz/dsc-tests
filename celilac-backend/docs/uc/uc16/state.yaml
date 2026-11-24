@@ -52,8 +52,9 @@ fatias:
     criterios: [CA01, CA06, RN01, RN09, RF01, RF04]
     issue: 157
     branch: feature/uc16-remover-produto
-    pr: null
-    status: em_andamento
+    pr: 168
+    pr_compartilhado: true
+    status: em_revisao
     responsavel: evertonfoz
     revisor: null
     evidencias: []
@@ -62,8 +63,9 @@ fatias:
     criterios: [CA07, FA01, RN02, RF03]
     issue: 158
     branch: feature/uc16-remover-produto
-    pr: null
-    status: em_andamento
+    pr: 168
+    pr_compartilhado: true
+    status: em_revisao
     responsavel: evertonfoz
     revisor: null
     evidencias: []
@@ -72,8 +74,9 @@ fatias:
     criterios: [CA08, FA02, RN07, RF03]
     issue: 159
     branch: feature/uc16-remover-produto
-    pr: null
-    status: em_andamento
+    pr: 168
+    pr_compartilhado: true
+    status: em_revisao
     responsavel: evertonfoz
     revisor: null
     evidencias: []
@@ -82,8 +85,9 @@ fatias:
     criterios: [CA11, FE01, RN05, RF06]
     issue: 160
     branch: feature/uc16-remover-produto
-    pr: null
-    status: em_andamento
+    pr: 168
+    pr_compartilhado: true
+    status: em_revisao
     responsavel: evertonfoz
     revisor: null
     evidencias: []
@@ -92,8 +96,9 @@ fatias:
     criterios: [CA02, CA03, CA04, CA05, RN03, RN06, RF05, RF07]
     issue: 161
     branch: feature/uc16-remover-produto
-    pr: null
-    status: em_andamento
+    pr: 168
+    pr_compartilhado: true
+    status: em_revisao
     responsavel: evertonfoz
     revisor: null
     evidencias: []
