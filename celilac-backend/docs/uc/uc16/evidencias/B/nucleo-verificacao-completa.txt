@@ -1,0 +1,142 @@
+**O que foi executado:** pnpm build && pnpm lint && pnpm test
+**Data e hora UTC:** 2026-11-24T18:16:22Z
+**Commit de base:** 39ddeff5ecc110b247fe36ff1e070ea8b8f293a5 Exit code diferente de 0 é esperado se os 4 testes conhecidos de orders falharem.
+**Diretório/ambiente:** celilac-backend/, testes unitários (repositório em memória); sem banco
+**Código de saída:** 1
+
+src/infrastructure/persistence/orders/typeorm-orders.repository.ts:30:14: warning eslint(no-unused-vars): Parameter 'orderId' is declared but never used. Unused parameters should start with a '_'. help: Consider removing this parameter.
+src/modules/orders/services/orders.service.ts:8:3: warning eslint(no-unused-vars): Identifier 'PAYMENTS_REPOSITORY' is imported but never used. help: Consider removing this import.
+src/modules/orders/services/orders.service.ts:9:8: warning eslint(no-unused-vars): Type 'PaymentsRepository' is imported but never used. help: Consider removing this import.
+src/modules/orders/services/orders.service.ts:11:10: warning eslint(no-unused-vars): Identifier 'PaymentNotFoundException' is imported but never used. help: Consider removing this import.
+src/modules/orders/services/orders.service.ts:12:10: warning eslint(no-unused-vars): Identifier 'PaymentNotApprovedException' is imported but never used. help: Consider removing this import.
+src/modules/orders/services/orders.service.ts:13:10: warning eslint(no-unused-vars): Identifier 'PaymentStatus' is imported but never used. help: Consider removing this import.
+test/orders/confirm-order.e2e-spec.ts:10:10: warning eslint(no-unused-vars): Identifier 'PaymentStatus' is imported but never used. help: Consider removing this import.
+src/modules/orders/services/orders.services.spec.ts:11:5: warning eslint(no-unused-vars): Identifier 'OrdersRepository' is imported but never used. help: Consider removing this import.
+src/scripts/verify-persistence.ts:6:10: warning eslint(no-unused-vars): Identifier 'PaymentStatus' is imported but never used. help: Consider removing this import.
+src/infrastructure/persistence/products/typeorm-products.repository.ts:39:48: warning typescript(unbound-method): Avoid referencing unbound methods which may cause unintentional scoping of `this`. help: If your function does not access `this`, you can annotate it with `this: void`, or consider using an arrow function instead.
+src/modules/orders/services/orders.services.spec.ts:86:32: warning typescript(unbound-method): Avoid referencing unbound methods which may cause unintentional scoping of `this`. help: If your function does not access `this`, you can annotate it with `this: void`, or consider using an arrow function instead.
+src/modules/products/services/products.service.spec.ts:39:31: warning typescript(unbound-method): Avoid referencing unbound methods which may cause unintentional scoping of `this`. help: If your function does not access `this`, you can annotate it with `this: void`, or consider using an arrow function instead.
+src/modules/products/services/products.service.spec.ts:40:31: warning typescript(unbound-method): Avoid referencing unbound methods which may cause unintentional scoping of `this`. help: If your function does not access `this`, you can annotate it with `this: void`, or consider using an arrow function instead.
+src/modules/products/services/products.service.spec.ts:52:31: warning typescript(unbound-method): Avoid referencing unbound methods which may cause unintentional scoping of `this`. help: If your function does not access `this`, you can annotate it with `this: void`, or consider using an arrow function instead.
+src/modules/products/services/products.service.spec.ts:77:31: warning typescript(unbound-method): Avoid referencing unbound methods which may cause unintentional scoping of `this`. help: If your function does not access `this`, you can annotate it with `this: void`, or consider using an arrow function instead.
+src/modules/products/services/products.service.spec.ts:85:31: warning typescript(unbound-method): Avoid referencing unbound methods which may cause unintentional scoping of `this`. help: If your function does not access `this`, you can annotate it with `this: void`, or consider using an arrow function instead.
+
+ RUN  v4.1.11 /Users/evertoncoimbradearaujo/Documents/GitHub/dsc-tests/celilac-backend
+
+ ❯ src/modules/orders/services/orders.services.spec.ts (6 tests | 4 failed) 122ms
+     × should throw PaymentNotFoundException when payment does not exist 7ms
+     × should fail when payment is pending 2ms
+     × should fail when payment is rejected 1ms
+     × should confirm order when payment is approved 6ms
+
+ Test Files  1 failed | 13 passed (14)
+      Tests  4 failed | 93 passed (97)
+   Start at  15:16:24
+   Duration  965ms (transform 579ms, setup 0ms, import 5.11s, tests 1.38s, environment 1ms)
+
+$ nest build
+$ oxlint --type-aware src/ test/
+$ vitest run
+The plugin "vite-tsconfig-paths" is detected. Vite now supports tsconfig paths resolution natively via the resolve.tsconfigPaths option. You can remove the plugin and set resolve.tsconfigPaths: true in your Vite config instead.
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 4 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/modules/orders/services/orders.services.spec.ts > OrdersService > should throw PaymentNotFoundException when payment does not exist
+AssertionError: expected error to be instance of PaymentNotFoundException
+
+- Expected:
+[Function PaymentNotFoundException]
+
++ Received:
+TypeError {
+  "message": "Cannot read properties of undefined (reading 'orderId')",
+}
+
+ ❯ src/modules/orders/services/orders.services.spec.ts:96:10
+     94|         await expect(
+     95|             service.confirmOrder(ORDER_ID),
+     96|         ).rejects.toThrow(PaymentNotFoundException);
+       |          ^
+     97|
+     98|         expect(ordersRepository.save).not.toHaveBeenCalled();
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/4]⎯
+
+ FAIL  src/modules/orders/services/orders.services.spec.ts > OrdersService > should fail when payment is pending
+AssertionError: expected error to be instance of PaymentNotApprovedException
+
+- Expected:
+[Function PaymentNotApprovedException]
+
++ Received:
+TypeError {
+  "message": "Cannot read properties of undefined (reading 'orderId')",
+}
+
+ ❯ src/modules/orders/services/orders.services.spec.ts:109:10
+    107|         await expect(
+    108|             service.confirmOrder(ORDER_ID),
+    109|         ).rejects.toThrow(PaymentNotApprovedException);
+       |          ^
+    110|
+    111|         expect(ordersRepository.save).not.toHaveBeenCalled();
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/4]⎯
+
+ FAIL  src/modules/orders/services/orders.services.spec.ts > OrdersService > should fail when payment is rejected
+AssertionError: expected error to be instance of PaymentNotApprovedException
+
+- Expected:
+[Function PaymentNotApprovedException]
+
++ Received:
+TypeError {
+  "message": "Cannot read properties of undefined (reading 'orderId')",
+}
+
+ ❯ src/modules/orders/services/orders.services.spec.ts:122:10
+    120|         await expect(
+    121|             service.confirmOrder(ORDER_ID),
+    122|         ).rejects.toThrow(PaymentNotApprovedException);
+       |          ^
+    123|
+    124|         expect(ordersRepository.save).not.toHaveBeenCalled();
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/4]⎯
+
+ FAIL  src/modules/orders/services/orders.services.spec.ts > OrdersService > should confirm order when payment is approved
+AssertionError: expected "vi.fn()" to be called with arguments: [ ObjectContaining{…} ]
+
+Received:
+
+  1st vi.fn() call:
+
+  [
+-   ObjectContaining {
++   Order {
++     "createdAt": 2026-11-24T18:16:24.756Z,
++     "customerId": "customer-id",
++     "deletedAt": null,
+      "orderId": "order-id",
+-     "status": "CONFIRMED",
++     "status": "PENDING",
++     "updatedAt": 2026-11-24T18:16:24.756Z,
+    },
+  ]
+
+
+Number of calls: 1
+
+ ❯ src/modules/orders/services/orders.services.spec.ts:152:39
+    150|
+    151|         expect(ordersRepository.save).toHaveBeenCalledTimes(1);
+    152|         expect(ordersRepository.save).toHaveBeenCalledWith(
+       |                                       ^
+    153|             expect.objectContaining({
+    154|                 orderId: ORDER_ID,
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/4]⎯
+
+[ELIFECYCLE] Test failed. See above for more details.
+
+**Leitura do resultado:** Fim do núcleo (F01 a F05): build compila; lint só com avisos; testes: só devem falhar os 4 conhecidos de orders.services.spec.ts (ADR-001), como na linha de base.

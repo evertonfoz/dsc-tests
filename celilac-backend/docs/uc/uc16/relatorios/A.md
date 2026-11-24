@@ -37,10 +37,10 @@ Publicar Epic, fatias e Project do UC16 e reconciliá-los com `docs/uc/uc16/stat
 |---|---|---|
 | Fluxo principal: `204` sem corpo (RF01, RF04, RN09, CA01) | `should remove the active product and resolve without a body (CA01, RN09)` e `should leave the removed product out of the active products of the repository (CA01, RN01)` (`products.service.remove.spec.ts`) | **Parcial:** só o núcleo, com repositório em memória; o `204` é da Fase C1 e a remoção no banco, da C2 |
 | Produto removido continua no banco com `deletedAt` e os mesmos `productId` e `name` (RN01, CA06) | — | A implementar |
-| Busca responde `404` depois da remoção (RF05, RN03, CA02) | — | A implementar |
-| Listagem não traz o produto e o total diminui em 1 (RF05, RN03, CA03) | — | A implementar |
-| Alteração responde `404` e não altera (RF05, RN03, CA04) | — | A implementar |
-| Só o produto alvo é afetado (RF07, RN06, CA05) | — | A implementar |
+| Busca responde `404` depois da remoção (RF05, RN03, CA02) | `should throw ProductNotFoundException when getting the removed product (CA02, RN03)` (`products.service.remove.spec.ts`; caracterização) | **Parcial:** núcleo coberto; o `404` HTTP e o banco real ficam para C1 e C2 |
+| Listagem não traz o produto e o total diminui em 1 (RF05, RN03, CA03) | `should leave the removed product out of the listing and decrease the total by one (CA03, RN03)` (`products.service.remove.spec.ts`; caracterização) | **Parcial:** núcleo coberto; banco real na Fase C2 |
+| Alteração responde `404` e não altera (RF05, RN03, CA04) | `should throw ProductNotFoundException when updating the removed product (CA04, RN03)` (`products.service.remove.spec.ts`; caracterização) | **Parcial:** núcleo coberto; o `404` HTTP e o banco real ficam para C1 e C2 |
+| Só o produto alvo é afetado (RF07, RN06, CA05) | `should keep the other products active and unchanged (CA05, RN06)` e `should not remove any other product when the identifier does not exist (CA07, RN05)` (`products.service.remove.spec.ts`) | **Parcial:** núcleo coberto; banco real na Fase C2 |
 | FA01 — produto inexistente, `404` (RF03, RN02, CA07) | `should throw ProductNotFoundException when there is no product with the identifier (CA07, FA01)` e `should not remove any other product when the identifier does not exist (CA07, RN05)` (`products.service.remove.spec.ts`) | **Parcial:** núcleo coberto; o `404` HTTP é da Fase C1 e o comportamento no banco, da C2 |
 | FA02 — produto já removido, `404` e `deletedAt` preservado (RF03, RN07, CA08) | `should throw ProductNotFoundException when the product was already removed (CA08, FA02)` e `should throw ProductNotFoundException when removing the same product twice (CA08, RN07)` (`products.service.remove.spec.ts`; teste de caracterização, sem RED real) | **Parcial:** o `404` no núcleo está coberto; a preservação do `deletedAt` original só se prova no banco (Fase C2) |
 | FA03 — identificador inválido, `400` (RF02, RN04, CA09) | — | A implementar |

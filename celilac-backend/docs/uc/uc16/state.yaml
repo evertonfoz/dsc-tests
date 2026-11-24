@@ -75,9 +75,9 @@ fatias:
     comportamento: "Produto removido some da listagem, da busca e da alteração, e os outros produtos seguem ativos"
     criterios: [CA02, CA03, CA04, CA05, RN03, RN06, RF05, RF07]
     issue: 161
-    branch: null
+    branch: feature/uc16-remover-produto
     pr: null
-    status: planejada
+    status: em_andamento
     responsavel: evertonfoz
     revisor: null
     evidencias: []
