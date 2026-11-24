@@ -41,7 +41,7 @@ Publicar Epic, fatias e Project do UC16 e reconciliá-los com `docs/uc/uc16/stat
 | Listagem não traz o produto e o total diminui em 1 (RF05, RN03, CA03) | — | A implementar |
 | Alteração responde `404` e não altera (RF05, RN03, CA04) | — | A implementar |
 | Só o produto alvo é afetado (RF07, RN06, CA05) | — | A implementar |
-| FA01 — produto inexistente, `404` (RF03, RN02, CA07) | — | A implementar |
+| FA01 — produto inexistente, `404` (RF03, RN02, CA07) | `should throw ProductNotFoundException when there is no product with the identifier (CA07, FA01)` e `should not remove any other product when the identifier does not exist (CA07, RN05)` (`products.service.remove.spec.ts`) | **Parcial:** núcleo coberto; o `404` HTTP é da Fase C1 e o comportamento no banco, da C2 |
 | FA02 — produto já removido, `404` e `deletedAt` preservado (RF03, RN07, CA08) | — | A implementar |
 | FA03 — identificador inválido, `400` (RF02, RN04, CA09) | — | A implementar |
 | FA04 — corpo ignorado (CA10) | — | A implementar |

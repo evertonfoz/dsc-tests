@@ -1,0 +1,19 @@
+**O que foi executado:** pnpm build && pnpm exec vitest run src/modules/products
+**Data e hora UTC:** 2026-11-24T18:13:37Z
+**Commit de base:** 73821e65624c6602448ecd073ecb0dac47bf0f9c
+**Diretório/ambiente:** celilac-backend/, testes unitários (repositório em memória); sem banco
+**Código de saída:** 0
+
+
+ RUN  v4.1.11 /Users/evertoncoimbradearaujo/Documents/GitHub/dsc-tests/celilac-backend
+
+
+ Test Files  11 passed (11)
+      Tests  80 passed (80)
+   Start at  15:13:39
+   Duration  827ms (transform 373ms, setup 0ms, import 4.57s, tests 813ms, environment 1ms)
+
+$ nest build
+The plugin "vite-tsconfig-paths" is detected. Vite now supports tsconfig paths resolution natively via the resolve.tsconfigPaths option. You can remove the plugin and set resolve.tsconfigPaths: true in your Vite config instead.
+
+**Leitura do resultado:** Build compila e a suíte de products passa, sem regressão nos UC12 a UC15.

@@ -110,7 +110,10 @@ export class ProductsService {
   }
 
   async removeProduct(productId: string): Promise<void> {
-    await this.productsRepository.removeActive(productId);
+    const removed = await this.productsRepository.removeActive(productId);
+    if (!removed) {
+      throw new ProductNotFoundException(productId);
+    }
   }
 
   /** Regra do nome (ADR-004), compartilhada pelo cadastro (UC12) e pela alteração (UC15). */
