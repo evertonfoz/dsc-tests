@@ -1,12 +1,12 @@
 # Resumo da execução do UC16 — Remover Produto
 
-> Escrito para o estudante. Só fatos obtidos nesta execução (2026-11-24). **Situação:** implementado na branch `feature/uc16-remover-produto` (push feito até a Fase E; a Fase F está commitada, sem push), **sem PR e sem merge**. Gates das fases B a F pendentes de aprovação do estudante; `fase_atual: B`.
+> Escrito para o estudante. Só fatos obtidos nesta execução (2026-11-24). **Situação:** implementado na branch `feature/uc16-remover-produto`, publicada com push e PR #168 e **integrada na `main`** (merge 84dc4a9, em 2026-11-24) após autorização expressa. Gates aprovados em nome do estudante por essa autorização; `fase_atual: concluido`.
 
 ## 1. Ponto de partida
 O prompt `uc-remover.md` pede um UC de remoção de uma entidade, reaproveitando o processo do UC12 e o padrão dos UC13 a UC15. A execução começou só com perguntas, como o prompt exige.
 
 ## 2. Decisões do estudante
-`REF` = UC15; `ENTIDADE` = `Product`; `CHAVE` = `productId`; `POLITICA` = remoção lógica; `MARCA` = `deletedAt` existente (ADR-005); `RESPOSTA` = `204` sem corpo; ator público (ADR-008); `DELETE /products/:productId` com corpo ignorado; identificador inválido `400`; inexistente e já removido `404` (o `deletedAt` original é preservado); falha ao gravar `500` genérico; remoções simultâneas: exatamente uma tem sucesso; fora do UC: restauração, remoção física e lote (ADR-009 a ADR-011). Autorizou versionar os artefatos, criar a estrutura, as Issues, iniciar a Etapa 2, escolher **PR único** (opção B), os pushes, o banco de testes, a reconstrução da API e a execução do `run-checks.sh` no banco de desenvolvimento.
+`REF` = UC15; `ENTIDADE` = `Product`; `CHAVE` = `productId`; `POLITICA` = remoção lógica; `MARCA` = `deletedAt` existente (ADR-005); `RESPOSTA` = `204` sem corpo; ator público (ADR-008); `DELETE /products/:productId` com corpo ignorado; identificador inválido `400`; inexistente e já removido `404` (o `deletedAt` original é preservado); falha ao gravar `500` genérico; remoções simultâneas: exatamente uma tem sucesso; fora do UC: restauração, remoção física e lote (ADR-009 a ADR-011). Autorizou versionar os artefatos, criar a estrutura, as Issues, iniciar a Etapa 2, escolher **PR único** (opção B), os pushes, o banco de testes, a reconstrução da API, a execução do `run-checks.sh` no banco de desenvolvimento, o PR #168, o merge e o fechamento das Issues.
 
 ## 3. Etapa 1
 Busca: nenhuma rota `@Delete`, Issue ou especificação do UC16. Documentos em `prompts/uc-16/artefatos/` (00 a 05) e estrutura criada: `docs/planejamento/uc16-remover-produto/`, `docs/uc/uc16/`, ADR-008 a ADR-011. Fase A aprovada por você.
@@ -41,13 +41,13 @@ Issues e rótulo `uc16` no GitHub e itens no Project #6. Push da branch. Banco d
 `pnpm build` e `pnpm lint`: sem erros (avisos). `pnpm test`: 100 passam e 4 falham (`orders`, ADR-001; linha de base: 81 passam e 4 falham). `pnpm test:integration`: 24 passam. `pnpm test:e2e`: 25 passam e 1 falha (`orders`). `run-checks.sh --durability`: 59 ok, 0 falha. Regressão UC12 a UC15 nos testes de products e common: 98 passam. Evidências em `docs/uc/uc16/evidencias/`.
 
 ## 10. Sem prova ainda (Aguardando evidência)
-CI (não há PR). Execução individual dos `.http`. Concorrência com duas requisições HTTP. Cenário `.http` para CA11 e CA12.
+O CI passou (PR #168: 4 jobs; `main`: run 45460697698). Falta: execução individual dos `.http`. Concorrência com duas requisições HTTP. Cenário `.http` para CA11 e CA12.
 
 ## 11. Além do prompt
 Nada além do pedido. Proposta de promoção do arquétipo `excluir` registrada em `relatorios/F.md`, **sem editar o método**.
 
 ## 12. Onde está tudo
-Branch `feature/uc16-remover-produto`, Issues #156 a #167, rótulo `uc16`, Project #6. Roteiro: `prompts/uc-16/artefatos/roteiro-conclusao-uc16.md`. Pasta: `celilac-backend/`.
+`main` (merge 84dc4a9 do PR #168), Issues #156 a #167 (fechadas), rótulo `uc16` e o Project #6 (itens em `Done`). Branch de encerramento: `docs/uc16-encerramento`. Roteiro: `prompts/uc-16/artefatos/roteiro-conclusao-uc16.md`. Pasta: `celilac-backend/`.
 
 ## 13. Pendente
-Enviar a Fase F, abrir o PR, conferir o CI, aprovar os gates, merge e fechamento (ver o roteiro). Decidir a promoção de `excluir`.
+Decidir a promoção do arquétipo `excluir` (proposta em `relatorios/F.md`, seção 4). Módulo 3 do curso para o UC16.

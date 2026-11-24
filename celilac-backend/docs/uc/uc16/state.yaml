@@ -1,12 +1,10 @@
-# Estado do UC16 (Remover Produto). Etapa 1 aprovada pelo estudante em 2026-11-24; planejamento publicado (Epic #156, fatias #157 a #161, fases #162 a #167). Fase A aprovada pelo estudante (evertonfoz) em 2026-11-24.
-# PR único para as fatias, com pr_compartilhado (opção B escolhida pelo estudante); cada commit deve manter o build verde. Branch única: feature/uc16-remover-produto.
-# Gates: aprovar é decisão do estudante (ou do CI, nos gates objetivos).
+# Estado do UC16 (Remover Produto). UC concluído em 2026-11-24: PR #168 integrado em 84dc4a9 (CI da main com sucesso, run 45460697698); Epic #156 fechado. Gates aprovados pelo estudante (evertonfoz) ou por CI; o merge e o fechamento das issues foram feitos pelo assistente por autorização expressa do estudante ("Autorizo o merge e o fechamento, siga o roteiro"). O arquétipo `excluir` NÃO foi promovido (decisão pendente do estudante).
 uc: UC16
 nome: Remover Produto
 documento: ../../../prompts/uc-16/artefatos/03-uc-16-remover-produto.md
 arquetipo: excluir
-epic: { issue: 156, estado: open }
-fase_atual: B
+epic: { issue: 156, estado: closed }
+fase_atual: concluido
 
 fases:
   A:
@@ -17,34 +15,44 @@ fases:
       - { item: "GitHub Project configurado com os 5 estados", resultado: aprovado, por: evertonfoz }
     evidencias: [evidencias/A/linha-de-base.txt, evidencias/A/publicacao.txt]
   B:
-    status: em_andamento
-    relatorio: null
+    status: concluida
+    relatorio: relatorios/A.md
     gate:
-      - { item: "Todas as fatias integradas na branch principal", resultado: pendente }
-      - { item: "CI verde na branch principal", resultado: pendente }
-    evidencias: []
+      - { item: "Todas as fatias integradas na branch principal", resultado: aprovado, por: evertonfoz }
+      - { item: "CI verde na branch principal", resultado: aprovado, por: CI }
+    evidencias: [evidencias/B/f01-red.txt, evidencias/B/f01-green.txt, evidencias/B/f02-red.txt, evidencias/B/f02-green.txt, evidencias/B/f03-caracterizacao.txt, evidencias/B/f04-red.txt, evidencias/B/f04-green.txt, evidencias/B/f05-caracterizacao.txt, evidencias/B/nucleo-verificacao-completa.txt]
   C:
-    status: em_andamento
+    status: concluida
     relatorio: relatorios/C.md
-    gate: []
-    evidencias: []
+    gate:
+      - { item: "C1 (HTTP) e C2 (persistência) implementadas e testadas na branch do PR #168", resultado: aprovado, por: evertonfoz }
+      - { item: "CI verde no PR #168", resultado: aprovado, por: CI }
+    evidencias: [evidencias/C/c1-red.txt, evidencias/C/c1-green.txt, evidencias/C/c2-red.txt, evidencias/C/c2-green.txt, evidencias/C/c2-e2e.txt]
   D:
-    status: em_andamento
-    relatorio: null
-    gate: []
-    evidencias: []
+    status: concluida
+    relatorio: relatorios/D.md
+    gate:
+      - { item: "Cada cenário do contrato de DELETE /products/:productId documentado e testado", resultado: aprovado, por: evertonfoz }
+    evidencias: [evidencias/D/contrato-testes.txt]
   E:
-    status: em_andamento
+    status: concluida
     relatorio: relatorios/E.md
-    gate: []
+    gate:
+      - { item: "O script termina com 0 falhas no contêiner", resultado: aprovado, por: evertonfoz }
+      - { item: "O mesmo script passa no CI (smoke)", resultado: aprovado, por: CI }
     evidencias: [evidencias/E/antes-rota-inexistente.txt, evidencias/E/run-checks-1-erro-no-script.txt, evidencias/E/run-checks.txt]
   F:
-    status: em_andamento
+    status: concluida
     relatorio: relatorios/F.md
-    gate: []
+    gate:
+      - { item: "Todo item do UC tem teste que o prova ou ADR", resultado: aprovado, por: evertonfoz }
+      - { item: "Arquitetura em conformidade, achados tratados", resultado: aprovado, por: evertonfoz }
+      - { item: "state.yaml, documentos e GitHub consistentes", resultado: aprovado, por: CI }
+      - { item: "Issues e Epic fechados", resultado: aprovado, por: evertonfoz }
     evidencias: [evidencias/F/verificacao-final.txt, evidencias/F/auditoria.txt, evidencias/F/cobertura.md, evidencias/F/regressao.txt, evidencias/F/dependencias-fk.txt]
 
-# Issues de fase: A #162, C1 #163, C2 #164, D #165, E #166, F #167. Um PR por fatia (padrão do método), salvo decisão em contrário.
+# Issues de fase: A #162, C1 #163, C2 #164, D #165, E #166, F #167.
+# PR único das fatias: #168, integrado em 84dc4a9 (pr_compartilhado). Branch única: feature/uc16-remover-produto.
 # Fatias do núcleo (Fase B). Os critérios CA09, CA10, CA12 e CA13 são das Fases C a E (HTTP, persistência real e verificação).
 fatias:
   - id: F01
@@ -54,10 +62,10 @@ fatias:
     branch: feature/uc16-remover-produto
     pr: 168
     pr_compartilhado: true
-    status: em_revisao
+    status: integrada
     responsavel: evertonfoz
-    revisor: null
-    evidencias: []
+    revisor: evertonfoz
+    evidencias: [evidencias/B/f01-red.txt, evidencias/B/f01-green.txt]
   - id: F02
     comportamento: "Produto inexistente lança ProductNotFoundException na remoção e nada é gravado"
     criterios: [CA07, FA01, RN02, RF03]
@@ -65,10 +73,10 @@ fatias:
     branch: feature/uc16-remover-produto
     pr: 168
     pr_compartilhado: true
-    status: em_revisao
+    status: integrada
     responsavel: evertonfoz
-    revisor: null
-    evidencias: []
+    revisor: evertonfoz
+    evidencias: [evidencias/B/f02-red.txt, evidencias/B/f02-green.txt]
   - id: F03
     comportamento: "Produto já removido é tratado como inexistente na remoção e o deletedAt original é preservado"
     criterios: [CA08, FA02, RN07, RF03]
@@ -76,10 +84,10 @@ fatias:
     branch: feature/uc16-remover-produto
     pr: 168
     pr_compartilhado: true
-    status: em_revisao
+    status: integrada
     responsavel: evertonfoz
-    revisor: null
-    evidencias: []
+    revisor: evertonfoz
+    evidencias: [evidencias/B/f03-caracterizacao.txt]
   - id: F04
     comportamento: "Falha de persistência na remoção lança ProductPersistenceFailedException sem remoção parcial"
     criterios: [CA11, FE01, RN05, RF06]
@@ -87,10 +95,10 @@ fatias:
     branch: feature/uc16-remover-produto
     pr: 168
     pr_compartilhado: true
-    status: em_revisao
+    status: integrada
     responsavel: evertonfoz
-    revisor: null
-    evidencias: []
+    revisor: evertonfoz
+    evidencias: [evidencias/B/f04-red.txt, evidencias/B/f04-green.txt]
   - id: F05
     comportamento: "Produto removido some da listagem, da busca e da alteração, e os outros produtos seguem ativos"
     criterios: [CA02, CA03, CA04, CA05, RN03, RN06, RF05, RF07]
@@ -98,7 +106,7 @@ fatias:
     branch: feature/uc16-remover-produto
     pr: 168
     pr_compartilhado: true
-    status: em_revisao
+    status: integrada
     responsavel: evertonfoz
-    revisor: null
-    evidencias: []
+    revisor: evertonfoz
+    evidencias: [evidencias/B/f05-caracterizacao.txt]

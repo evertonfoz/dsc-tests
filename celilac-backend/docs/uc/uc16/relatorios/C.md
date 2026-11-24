@@ -33,8 +33,8 @@
 A tabela vigente está em `A.md` (seção 4) e é atualizada a cada fatia.
 
 ## 5. Gate de saída
-Pendente: aprovação do estudante. Nenhum gate foi aprovado por mim.
+Aprovado pelo estudante e pelo CI (ver `state.yaml`).
 
 ## 6. Pendências e riscos
-- Sem PR, sem merge e sem fechamento de issues. Os commits da C1 e da C2 ainda não foram enviados ao remoto.
+- Integrado no PR #168 (84dc4a9); CI do PR e da `main` com sucesso.
 - A conferência de dependências (chaves estrangeiras para `products`) no banco de desenvolvimento fica para a Fase F.

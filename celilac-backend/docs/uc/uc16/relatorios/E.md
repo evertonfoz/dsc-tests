@@ -31,8 +31,8 @@
 Vigente em `A.md` (seção 4). Nesta fase a linha de regressão (RF08, CA13) passou a ter a evidência do `run-checks.sh`.
 
 ## 5. Gate de saída
-Pendente: aprovação do estudante. Nenhum gate foi aprovado por mim.
+Aprovado pelo estudante e pelo CI (ver `state.yaml`); o smoke do Compose com `run-checks` passou no CI do PR #168.
 
 ## 6. Pendências e riscos
-- O CI ainda não rodou no PR único (não há PR).
-- Sem merge e sem fechamento de issues.
+- CI do PR #168 e da `main` com sucesso.
+- Integrado em 84dc4a9; issues fechadas.
