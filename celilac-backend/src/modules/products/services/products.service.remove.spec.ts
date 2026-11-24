@@ -1,9 +1,11 @@
 import { beforeEach, describe, expect, it } from 'vitest';
+import { ProductNotFoundException } from '../../../common/exceptions/product-not-found.exception.js';
 import { Product } from '../entities/product.entity.js';
 import { InMemoryProductsRepository } from '../repositories/in-memory-products.repository.js';
 import { ProductsService } from './products.service.js';
 
 const PRODUCT_ID = '11111111-1111-4111-8111-111111111111';
+const OTHER_ID = '22222222-2222-4222-8222-222222222222';
 
 describe('ProductsService.removeProduct (UC16)', () => {
   let repository: InMemoryProductsRepository;
@@ -26,5 +28,21 @@ describe('ProductsService.removeProduct (UC16)', () => {
     await service.removeProduct(PRODUCT_ID);
 
     expect(await repository.findActiveById(PRODUCT_ID)).toBeNull();
+  });
+
+  it('should throw ProductNotFoundException when there is no product with the identifier (CA07, FA01)', async () => {
+    await expect(service.removeProduct(OTHER_ID)).rejects.toBeInstanceOf(
+      ProductNotFoundException,
+    );
+  });
+
+  it('should not remove any other product when the identifier does not exist (CA07, RN05)', async () => {
+    await repository.save(new Product(PRODUCT_ID, 'Leite sem lactose'));
+
+    await expect(service.removeProduct(OTHER_ID)).rejects.toBeInstanceOf(
+      ProductNotFoundException,
+    );
+
+    expect(await repository.findActiveById(PRODUCT_ID)).not.toBeNull();
   });
 });

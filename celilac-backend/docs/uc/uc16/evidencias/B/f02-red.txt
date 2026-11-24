@@ -1,0 +1,65 @@
+**O que foi executado:** pnpm exec vitest run src/modules/products/services/products.service.remove.spec.ts
+**Data e hora UTC:** 2026-11-24T18:11:09Z
+**Commit de base:** 3acb5252305471d9ab020ae7d0340148a7537f58 (teste novo da F02 ainda não commitado)
+**Diretório/ambiente:** celilac-backend/, testes unitários (repositório em memória); sem banco
+**Código de saída:** 1
+
+
+ RUN  v4.1.11 /Users/evertoncoimbradearaujo/Documents/GitHub/dsc-tests/celilac-backend
+
+ ❯ src/modules/products/services/products.service.remove.spec.ts (4 tests | 2 failed) 4ms
+     × should throw ProductNotFoundException when there is no product with the identifier (CA07, FA01) 2ms
+     × should not remove any other product when the identifier does not exist (CA07, RN05) 0ms
+
+ Test Files  1 failed (1)
+      Tests  2 failed | 2 passed (4)
+   Start at  15:11:09
+   Duration  237ms (transform 38ms, setup 0ms, import 146ms, tests 4ms, environment 0ms)
+
+The plugin "vite-tsconfig-paths" is detected. Vite now supports tsconfig paths resolution natively via the resolve.tsconfigPaths option. You can remove the plugin and set resolve.tsconfigPaths: true in your Vite config instead.
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/modules/products/services/products.service.remove.spec.ts > ProductsService.removeProduct (UC16) > should throw ProductNotFoundException when there is no product with the identifier (CA07, FA01)
+AssertionError: promise resolved "undefined" instead of rejecting
+
+- Expected:
+Error {
+  "message": "rejected promise",
+}
+
++ Received:
+undefined
+
+ ❯ src/modules/products/services/products.service.remove.spec.ts:34:50
+     32|
+     33|   it('should throw ProductNotFoundException when there is no product w…
+     34|     await expect(service.removeProduct(OTHER_ID)).rejects.toBeInstance…
+       |                                                  ^
+     35|       ProductNotFoundException,
+     36|     );
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  src/modules/products/services/products.service.remove.spec.ts > ProductsService.removeProduct (UC16) > should not remove any other product when the identifier does not exist (CA07, RN05)
+AssertionError: promise resolved "undefined" instead of rejecting
+
+- Expected:
+Error {
+  "message": "rejected promise",
+}
+
++ Received:
+undefined
+
+ ❯ src/modules/products/services/products.service.remove.spec.ts:42:50
+     40|     await repository.save(new Product(PRODUCT_ID, 'Leite sem lactose')…
+     41|
+     42|     await expect(service.removeProduct(OTHER_ID)).rejects.toBeInstance…
+       |                                                  ^
+     43|       ProductNotFoundException,
+     44|     );
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+**Leitura do resultado:** os dois testes novos da F02 falham porque `removeProduct` não lança nada quando não há produto ativo (o GREEN da F01 ignora o resultado do Repository), que é o motivo esperado do RED. Os dois testes da F01 continuam passando. Não prova ainda o comportamento correto.
