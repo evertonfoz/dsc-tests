@@ -1,5 +1,6 @@
-import { beforeEach, describe, expect, it } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { ProductNotFoundException } from '../../../common/exceptions/product-not-found.exception.js';
+import { ProductPersistenceFailedException } from '../../../common/exceptions/product-persistence-failed.exception.js';
 import { Product } from '../entities/product.entity.js';
 import { InMemoryProductsRepository } from '../repositories/in-memory-products.repository.js';
 import { ProductsService } from './products.service.js';
@@ -63,5 +64,31 @@ describe('ProductsService.removeProduct (UC16)', () => {
     await expect(service.removeProduct(PRODUCT_ID)).rejects.toBeInstanceOf(
       ProductNotFoundException,
     );
+  });
+
+  it('should throw ProductPersistenceFailedException without leaking the cause when the repository fails (CA11, FE01)', async () => {
+    vi.spyOn(repository, 'removeActive').mockRejectedValue(
+      new Error('connection refused at 10.0.0.5:5432'),
+    );
+
+    const result = service.removeProduct(PRODUCT_ID);
+
+    await expect(result).rejects.toBeInstanceOf(
+      ProductPersistenceFailedException,
+    );
+    await expect(result).rejects.not.toThrow(/10\.0\.0\.5|5432/);
+  });
+
+  it('should keep the product active when the repository fails (CA11, RN05)', async () => {
+    await repository.save(new Product(PRODUCT_ID, 'Leite sem lactose'));
+    vi.spyOn(repository, 'removeActive').mockRejectedValue(
+      new Error('connection lost'),
+    );
+
+    await expect(service.removeProduct(PRODUCT_ID)).rejects.toBeInstanceOf(
+      ProductPersistenceFailedException,
+    );
+
+    expect(await repository.findActiveById(PRODUCT_ID)).not.toBeNull();
   });
 });

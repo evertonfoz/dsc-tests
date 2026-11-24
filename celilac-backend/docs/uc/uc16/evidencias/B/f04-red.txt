@@ -1,0 +1,47 @@
+**O que foi executado:** pnpm exec vitest run src/modules/products/services/products.service.remove.spec.ts
+**Data e hora UTC:** 2026-11-24T18:15:14Z
+**Commit de base:** 71f096bffe480b62fd0ba1c812878ca0ace228a7
+**Diretório/ambiente:** celilac-backend/, testes unitários (repositório em memória); sem banco
+**Código de saída:** 1
+
+
+ RUN  v4.1.11 /Users/evertoncoimbradearaujo/Documents/GitHub/dsc-tests/celilac-backend
+
+ ❯ src/modules/products/services/products.service.remove.spec.ts (8 tests | 2 failed) 4ms
+     × should throw ProductPersistenceFailedException without leaking the cause when the repository fails (CA11, FE01) 2ms
+     × should keep the product active when the repository fails (CA11, RN05) 0ms
+
+ Test Files  1 failed (1)
+      Tests  2 failed | 6 passed (8)
+   Start at  15:15:14
+   Duration  265ms (transform 39ms, setup 0ms, import 166ms, tests 4ms, environment 0ms)
+
+The plugin "vite-tsconfig-paths" is detected. Vite now supports tsconfig paths resolution natively via the resolve.tsconfigPaths option. You can remove the plugin and set resolve.tsconfigPaths: true in your Vite config instead.
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/modules/products/services/products.service.remove.spec.ts > ProductsService.removeProduct (UC16) > should throw ProductPersistenceFailedException without leaking the cause when the repository fails (CA11, FE01)
+AssertionError: expected Error: connection refused at 10.0.0.5:5432 to be an instance of ProductPersistenceFailedException
+ ❯ src/modules/products/services/products.service.remove.spec.ts:76:25
+     74|     const result = service.removeProduct(PRODUCT_ID);
+     75|
+     76|     await expect(result).rejects.toBeInstanceOf(
+       |                         ^
+     77|       ProductPersistenceFailedException,
+     78|     );
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  src/modules/products/services/products.service.remove.spec.ts > ProductsService.removeProduct (UC16) > should keep the product active when the repository fails (CA11, RN05)
+AssertionError: expected Error: connection lost to be an instance of ProductPersistenceFailedException
+ ❯ src/modules/products/services/products.service.remove.spec.ts:88:52
+     86|     );
+     87|
+     88|     await expect(service.removeProduct(PRODUCT_ID)).rejects.toBeInstan…
+       |                                                    ^
+     89|       ProductPersistenceFailedException,
+     90|     );
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+**Leitura do resultado:** RED real: os 2 testes novos da F04 falham porque o erro do repositório sai sem tradução (não vira ProductPersistenceFailedException); os 6 anteriores passam.

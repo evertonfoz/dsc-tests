@@ -65,9 +65,9 @@ fatias:
     comportamento: "Falha de persistência na remoção lança ProductPersistenceFailedException sem remoção parcial"
     criterios: [CA11, FE01, RN05, RF06]
     issue: 160
-    branch: null
+    branch: feature/uc16-remover-produto
     pr: null
-    status: planejada
+    status: em_andamento
     responsavel: evertonfoz
     revisor: null
     evidencias: []
