@@ -1,0 +1,14 @@
+# Publicação em 2026-11-24; Sub-Issues vinculadas ao Epic #141 e itens no Project #6 (Backlog; F01 em Ready)
+#141 [UC15] Alterar Produto
+#142 [UC15][F01] Alterar nome de produto ativo e retornar o produto atualizado
+#143 [UC15][F02] Produto inexistente lança ProductNotFoundException na alteração
+#144 [UC15][F03] Produto removido (soft delete) é tratado como inexistente e não é alterado
+#145 [UC15][F04] Nome inválido lança InvalidProductNameException sem gravar
+#146 [UC15][F05] Falha de persistência na alteração lança ProductPersistenceFailedException sem alteração parcial
+#147 [UC15][Fase A] Planejamento e publicação do UC15
+#148 [UC15][Fase C1] Adaptador HTTP de PUT /products/:productId
+#149 [UC15][Fase C2] Persistência real: atualização de produto ativo por productId
+#150 [UC15][Fase D] Contrato de PUT /products/:productId
+#151 [UC15][Fase E] Verificação reprodutível da alteração de produto
+#152 [UC15][Fase F] Auditoria e encerramento do UC15
+sub_issues_summary: {"completed":0,"percent_completed":0,"total":11}

@@ -1,0 +1,17 @@
+# Comando: pnpm exec vitest run src/modules/products/controllers/products.update.controller.spec.ts
+# Data/hora (UTC): 2026-11-24T14:39:07Z
+# Commit base: 4bf1ac98deeb234eb5ec3cf30357fe33719acb55
+# Diretório: /Users/evertoncoimbradearaujo/Documents/GitHub/dsc-tests/celilac-backend
+# Código de saída: 0
+# Leitura: GREEN: PUT /products/:productId implementado; 12 testes do controller passam
+
+The plugin "vite-tsconfig-paths" is detected. Vite now supports tsconfig paths resolution natively via the resolve.tsconfigPaths option. You can remove the plugin and set resolve.tsconfigPaths: true in your Vite config instead.
+
+ RUN  v4.1.11 /Users/evertoncoimbradearaujo/Documents/GitHub/dsc-tests/celilac-backend
+
+
+ Test Files  1 passed (1)
+      Tests  12 passed (12)
+   Start at  11:39:07
+   Duration  445ms (transform 38ms, setup 0ms, import 284ms, tests 96ms, environment 0ms)
+

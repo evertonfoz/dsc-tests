@@ -1,0 +1,50 @@
+@baseUrl = http://localhost:3200
+
+# UC15 — Alterar Produto (PUT /products/:productId). A alteração GRAVA dados: execute só com a API apontando para um ambiente que possa ser alterado.
+
+### Cadastrar um produto para alterar (UC12) → esperado: 201 Created
+# @name produtoParaAlterar
+POST {{baseUrl}}/products
+Content-Type: application/json
+
+{
+  "name": "Produto para Alterar UC15"
+}
+
+###
+@produtoId = {{produtoParaAlterar.response.body.productId}}
+
+### Alterar o nome → esperado: 200 OK { productId, name } com o nome novo
+PUT {{baseUrl}}/products/{{produtoId}}
+Content-Type: application/json
+
+{
+  "name": "Produto Alterado UC15"
+}
+
+### Reler o produto → esperado: 200 OK com o nome novo
+GET {{baseUrl}}/products/{{produtoId}}
+
+### Alterar UUID sem produto → esperado: 404 Not Found (ProductNotFoundException)
+PUT {{baseUrl}}/products/99999999-9999-4999-8999-999999999999
+Content-Type: application/json
+
+{
+  "name": "Qualquer"
+}
+
+### Alterar com identificador que não é UUID → esperado: 400 Bad Request
+PUT {{baseUrl}}/products/abc
+Content-Type: application/json
+
+{
+  "name": "Qualquer"
+}
+
+### Alterar com nome vazio → esperado: 400 Bad Request (nome anterior preservado)
+PUT {{baseUrl}}/products/{{produtoId}}
+Content-Type: application/json
+
+{
+  "name": ""
+}

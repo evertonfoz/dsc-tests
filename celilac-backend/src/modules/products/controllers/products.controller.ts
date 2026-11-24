@@ -1,6 +1,7 @@
-import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Put, Query } from '@nestjs/common';
 import { createProductIdPipe } from '../../../common/pipes/product-id.pipe.js';
 import { CreateProductDto } from '../dtos/create-product.dto.js';
+import { UpdateProductDto } from '../dtos/update-product.dto.js';
 import { ListProductsQueryDto } from '../dtos/list-products-query.dto.js';
 import {
   type ProductResponseDto,
@@ -42,6 +43,19 @@ export class ProductsController {
     @Param('productId', createProductIdPipe()) productId: string,
   ): Promise<ProductResponseDto> {
     const product = await this.productsService.getProductById(productId);
+
+    return toProductResponse(product);
+  }
+
+  @Put(':productId')
+  async updateProduct(
+    @Param('productId', createProductIdPipe()) productId: string,
+    @Body() updateProductDto: UpdateProductDto,
+  ): Promise<ProductResponseDto> {
+    const product = await this.productsService.updateProductName(
+      productId,
+      updateProductDto.name,
+    );
 
     return toProductResponse(product);
   }

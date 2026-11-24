@@ -1,0 +1,73 @@
+# Comando: pnpm exec vitest run src/modules/products/services/products.service.update.spec.ts
+# Data/hora (UTC): 2026-11-24T14:38:01Z
+# Commit base: e2ba24262543053b73541271e2e9bf4956470c7b
+# Diretório: /Users/evertoncoimbradearaujo/Documents/GitHub/dsc-tests/celilac-backend
+# Código de saída: 1
+# Leitura: RED esperado: updateProductName ainda não existe (TypeError: service.updateProductName is not a function)
+
+The plugin "vite-tsconfig-paths" is detected. Vite now supports tsconfig paths resolution natively via the resolve.tsconfigPaths option. You can remove the plugin and set resolve.tsconfigPaths: true in your Vite config instead.
+
+ RUN  v4.1.11 /Users/evertoncoimbradearaujo/Documents/GitHub/dsc-tests/celilac-backend
+
+ ❯ src/modules/products/services/products.service.update.spec.ts (4 tests | 4 failed) 3ms
+     × should change the name of the active product and return it (CA01) 1ms
+     × should keep productId, deletedAt and the other products unchanged, without duplicating (CA04) 1ms
+     × should succeed when the new name equals the current one (CA09) 0ms
+     × should keep the name of the last of two sequential updates (CA11, RN08) 0ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 4 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/modules/products/services/products.service.update.spec.ts > ProductsService.updateProductName (UC15) > should change the name of the active product and return it (CA01)
+TypeError: service.updateProductName is not a function
+ ❯ src/modules/products/services/products.service.update.spec.ts:21:35
+     19|     await repository.save(new Product(PRODUCT_ID, 'Leite sem lactose')…
+     20|
+     21|     const product = await service.updateProductName(PRODUCT_ID, 'Leite…
+       |                                   ^
+     22|
+     23|     expect({ productId: product.productId, name: product.name }).toEqu…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/4]⎯
+
+ FAIL  src/modules/products/services/products.service.update.spec.ts > ProductsService.updateProductName (UC15) > should keep productId, deletedAt and the other products unchanged, without duplicating (CA04)
+TypeError: service.updateProductName is not a function
+ ❯ src/modules/products/services/products.service.update.spec.ts:35:35
+     33|     await repository.save(new Product(OTHER_ID, 'Outro produto'));
+     34|
+     35|     const product = await service.updateProductName(PRODUCT_ID, 'Leite…
+       |                                   ^
+     36|
+     37|     expect(product.productId).toBe(PRODUCT_ID);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/4]⎯
+
+ FAIL  src/modules/products/services/products.service.update.spec.ts > ProductsService.updateProductName (UC15) > should succeed when the new name equals the current one (CA09)
+TypeError: service.updateProductName is not a function
+ ❯ src/modules/products/services/products.service.update.spec.ts:47:35
+     45|     await repository.save(new Product(PRODUCT_ID, 'Leite sem lactose')…
+     46|
+     47|     const product = await service.updateProductName(PRODUCT_ID, 'Leite…
+       |                                   ^
+     48|
+     49|     expect(product.name).toBe('Leite sem lactose');
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/4]⎯
+
+ FAIL  src/modules/products/services/products.service.update.spec.ts > ProductsService.updateProductName (UC15) > should keep the name of the last of two sequential updates (CA11, RN08)
+TypeError: service.updateProductName is not a function
+ ❯ src/modules/products/services/products.service.update.spec.ts:55:19
+     53|     await repository.save(new Product(PRODUCT_ID, 'Leite sem lactose')…
+     54|
+     55|     await service.updateProductName(PRODUCT_ID, 'Primeiro');
+       |                   ^
+     56|     await service.updateProductName(PRODUCT_ID, 'Segundo');
+     57|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/4]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  4 failed (4)
+   Start at  11:38:01
+   Duration  213ms (transform 28ms, setup 0ms, import 138ms, tests 3ms, environment 0ms)
+

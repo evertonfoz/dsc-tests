@@ -14,7 +14,10 @@ http-rest-client/
 │   ├── uc13-listar-produtos/
 │   │   ├── products-controller.http
 │   │   └── test-scenarios.http
-│   └── uc14-buscar-produto/
+│   ├── uc14-buscar-produto/
+│   │   ├── products-controller.http
+│   │   └── test-scenarios.http
+│   └── uc15-alterar-produto/
 │       ├── products-controller.http
 │       └── test-scenarios.http
 ├── orders/
@@ -27,6 +30,7 @@ http-rest-client/
     ├── 02-orders-fronteira.http
     ├── 03-products-listar-produtos.http
     ├── 04-products-buscar-produto.http
+    ├── 05-products-alterar-produto.http
     └── run-checks.sh
 ```
 
@@ -41,12 +45,14 @@ http-rest-client/
 | `products/uc12-cadastrar-produto/test-scenarios.http` | Matriz de cenários do caso de uso | Cobertura sistemática de casos de aceite, campos vazios, ausentes, tipos inválidos e descarte de campos extras. |
 | `products/uc13-listar-produtos/` | Requisições e cenários do UC13 (Listar Produtos), mesma divisão em `products-controller.http` e `test-scenarios.http` | `GET /products` com paginação, página além do fim e parâmetros inválidos (200, 400, 404). |
 | `products/uc14-buscar-produto/` | Requisições e cenários do UC14 (Buscar Produto), mesma divisão em `products-controller.http` e `test-scenarios.http` | `GET /products/:productId` com produto existente, UUID sem produto, identificador inválido e sub-rota (200, 404, 400). |
+| `products/uc15-alterar-produto/` | Requisições e cenários do UC15 (Alterar Produto), mesma divisão em `products-controller.http` e `test-scenarios.http` | `PUT /products/:productId` com alteração, UUID sem produto, identificador inválido, nome inválido e sub-rota (200, 404, 400). **Grava dados.** |
 | `orders/orders-controller.http` | Recurso de apoio (desenvolvimento) | Requisições pontuais para a rota `POST /orders/:id/confirm`. |
 | `orders/test-scenarios.http` | Cenários do recurso de apoio | Separação entre Grupo A (fronteira HTTP sem dados) e Grupo B (dependentes de seed). |
 | `containerizado/00-smoke.http` | Sanidade no contêiner | Verificação de disponibilidade da API após subida da stack Docker Compose. |
 | `containerizado/01-products-cadastrar-produto.http` | Caso de uso principal no contêiner | Execução do UC12 com encadeamento de resposta (`# @name` e variável `@produtoId`) para consulta SQL direta. |
 | `containerizado/03-products-listar-produtos.http` | Listagem do UC13 no contêiner | `GET /products` com paginação e parâmetros inválidos (200, 400, 404); somente leitura. |
 | `containerizado/04-products-buscar-produto.http` | Busca do UC14 no contêiner | `GET /products/:productId` (200, 404, 400); somente leitura. |
+| `containerizado/05-products-alterar-produto.http` | Alteração do UC15 no contêiner | `PUT /products/:productId` (200, 404, 400); **grava dados** no banco de desenvolvimento. |
 | `containerizado/02-orders-fronteira.http` | Fronteira de apoio no contêiner | Validação de pipe (`ParseUUIDPipe`) e exceção de domínio (`OrderNotFoundException`). |
 | `containerizado/README.md` | Documentação operacional | Manual com pré-requisitos, regras de segurança, comandos SQL de auditoria e escopo de execução. |
 | `containerizado/run-checks.sh` | Verificação automatizada | Script bash com asserções, contadores `pass`/`fail`, teste de durabilidade e código de saída semântico. |

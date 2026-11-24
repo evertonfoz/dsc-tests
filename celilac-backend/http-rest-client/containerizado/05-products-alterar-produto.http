@@ -1,0 +1,59 @@
+@baseUrl = http://localhost:3200
+
+# ==============================================================================
+# UC15 — Alterar Produto (Ambiente Containerizado)
+# ATENÇÃO: GRAVA dados no banco de desenvolvimento. Execute só com autorização.
+# O produto alterado é criado pelo próprio arquivo (Cenário 0), não um produto existente seu.
+# ==============================================================================
+
+### Cenário 0: cadastrar produto de teste → esperado: 201 { productId, name }
+# @name produtoParaAlterar
+POST {{baseUrl}}/products
+Content-Type: application/json
+
+{
+  "name": "Produto para Alterar UC15 (containerizado)"
+}
+
+###
+@produtoId = {{produtoParaAlterar.response.body.productId}}
+
+### Cenário 1: alterar o nome → esperado: 200 { productId, name } com o nome novo
+PUT {{baseUrl}}/products/{{produtoId}}
+Content-Type: application/json
+
+{
+  "name": "Produto Alterado UC15 (containerizado)"
+}
+
+### Cenário 2: UUID sem produto → esperado: 404 (ProductNotFoundException)
+PUT {{baseUrl}}/products/99999999-9999-4999-8999-999999999999
+Content-Type: application/json
+
+{
+  "name": "Qualquer"
+}
+
+### Cenário 3: identificador que não é UUID → esperado: 400 Bad Request
+PUT {{baseUrl}}/products/abc
+Content-Type: application/json
+
+{
+  "name": "Qualquer"
+}
+
+### Cenário 4: nome vazio → esperado: 400 Bad Request (nome anterior preservado)
+PUT {{baseUrl}}/products/{{produtoId}}
+Content-Type: application/json
+
+{
+  "name": ""
+}
+
+### Cenário 5: rota inexistente → esperado: 404
+PUT {{baseUrl}}/produtos/abc
+Content-Type: application/json
+
+{
+  "name": "Qualquer"
+}
