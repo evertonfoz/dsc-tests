@@ -7,7 +7,7 @@
 | Período | 2026-11-24 |
 | Responsável | evertonfoz |
 | Issue(s) | #152 (fase), Epic #141 |
-| PR | #153 (aberto, sem merge) |
+| PR | #153 (integrado em e138874 em 2026-11-24) |
 
 ## 1. O que foi feito
 - Verificação final: build, lint, `pnpm test`, integração e e2e — Executado (`../evidencias/F/verificacao-final.txt`).
@@ -32,9 +32,9 @@
 | Todo item do UC tem teste que o prova ou ADR | aprovado (13 *Coberto*, 1 *Parcial*, 2 *Não implementado* com ADR-006 e ADR-007) | evertonfoz (2026-11-24) |
 | Arquitetura em conformidade, achados tratados | aprovado (nenhum achado) | evertonfoz (2026-11-24) |
 | `state.yaml`, documentos e GitHub consistentes | aprovado (`check-state.sh --remote` e `check-links.mjs`) | CI e verificação local |
-| Issues e Epic fechados | **pendente**: dependem do merge do PR #153 | aguardando o estudante |
+| Issues e Epic fechados | aprovado: #141 a #152 fechadas após o merge; itens do Project #6 em `Done` | evertonfoz (2026-11-24) |
 
 ## 4. Pendências e riscos
-- O PR #153 não foi integrado; Issues #141 a #152 seguem abertas.
+- Merge feito pelo assistente por autorização expressa do estudante; CI da `main` com sucesso (run 45438561157).
 - Item *Parcial* (CA13): os arquivos `.http` não foram executados um a um; o contrato foi provado pelo `run-checks.sh`.
 - O arquétipo `atualizar` segue como esboço no método.

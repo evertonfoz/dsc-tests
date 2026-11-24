@@ -1,10 +1,10 @@
-# Estado do UC15 (Alterar Produto). Epic #141 e issues #142 a #152 criadas em 2026-11-24 com autorização expressa do estudante ("Aprovo, pode criar tudo e iniciar a Etapa 2"). Núcleo, HTTP e persistência implementados na branch feature/uc15-alterar-produto (PR #153 aberto, sem merge). Os gates só serão marcados "aprovado" quando o estudante os validar.
+# Estado do UC15 (Alterar Produto). UC concluído em 2026-11-24: PR #153 integrado em e138874; Epic #141 fechado. Gates aprovados pelo estudante (evertonfoz) ou por CI; o merge e o fechamento das issues foram feitos pelo assistente por autorização expressa do estudante ("Faça o merge e dê sequência").
 uc: UC15
 nome: Alterar Produto
 documento: ../../../prompts/uc-15/artefatos/03-uc-15-alterar-produto.md
 arquetipo: atualizar
-epic: { issue: 141, estado: open }
-fase_atual: B
+epic: { issue: 141, estado: closed }
+fase_atual: concluido
 
 fases:
   A:
@@ -15,11 +15,11 @@ fases:
       - { item: "GitHub Project configurado com os 5 estados", resultado: aprovado, por: evertonfoz }
     evidencias: [evidencias/A/publicacao.txt]
   B:
-    status: em_andamento
+    status: concluida
     relatorio: relatorios/B-C.md
     gate:
-      - { item: "Todas as fatias integradas na branch principal", resultado: pendente }
-      - { item: "CI verde na branch principal", resultado: pendente }
+      - { item: "Todas as fatias integradas na branch principal", resultado: aprovado, por: evertonfoz }
+      - { item: "CI verde na branch principal", resultado: aprovado, por: CI }
     evidencias: [evidencias/B/f01-red.txt, evidencias/B/f01-green.txt, evidencias/B/f02-f05-red.txt, evidencias/B/f02-f05-green.txt]
   C:
     status: concluida
@@ -42,17 +42,17 @@ fases:
       - { item: "O mesmo script passa no CI (smoke)", resultado: aprovado, por: CI }
     evidencias: [evidencias/E/run-checks.txt]
   F:
-    status: em_andamento
+    status: concluida
     relatorio: relatorios/F.md
     gate:
       - { item: "Todo item do UC tem teste que o prova ou ADR", resultado: aprovado, por: evertonfoz }
       - { item: "Arquitetura em conformidade, achados tratados", resultado: aprovado, por: evertonfoz }
       - { item: "state.yaml, documentos e GitHub consistentes", resultado: aprovado, por: CI }
-      - { item: "Issues e Epic fechados", resultado: pendente }
+      - { item: "Issues e Epic fechados", resultado: aprovado, por: evertonfoz }
     evidencias: [evidencias/F/cobertura.md, evidencias/F/auditoria.md, evidencias/F/auditoria.txt, evidencias/F/regressao.txt, evidencias/F/verificacao-final.txt]
 
 # Issues de fase: A #147, C1 #148, C2 #149, D #150, E #151, F #152.
-# Branch única das fatias: feature/uc15-alterar-produto. PR ainda não aberto.
+# PR único das fatias: #153, integrado em e138874 (pr_compartilhado). Branch única: feature/uc15-alterar-produto.
 fatias:
   - id: F01
     comportamento: "Alterar nome de produto ativo e retornar o produto atualizado"
@@ -61,7 +61,7 @@ fatias:
     branch: feature/uc15-alterar-produto
     pr: 153
     pr_compartilhado: true
-    status: em_revisao
+    status: integrada
     responsavel: evertonfoz
     revisor: evertonfoz
     evidencias: [evidencias/B/f01-red.txt, evidencias/B/f01-green.txt]
@@ -72,7 +72,7 @@ fatias:
     branch: feature/uc15-alterar-produto
     pr: 153
     pr_compartilhado: true
-    status: em_revisao
+    status: integrada
     responsavel: evertonfoz
     revisor: evertonfoz
     evidencias: [evidencias/B/f02-f05-red.txt, evidencias/B/f02-f05-green.txt]
@@ -83,7 +83,7 @@ fatias:
     branch: feature/uc15-alterar-produto
     pr: 153
     pr_compartilhado: true
-    status: em_revisao
+    status: integrada
     responsavel: evertonfoz
     revisor: evertonfoz
     evidencias: [evidencias/B/f02-f05-red.txt, evidencias/B/f02-f05-green.txt]
@@ -94,7 +94,7 @@ fatias:
     branch: feature/uc15-alterar-produto
     pr: 153
     pr_compartilhado: true
-    status: em_revisao
+    status: integrada
     responsavel: evertonfoz
     revisor: evertonfoz
     evidencias: [evidencias/B/f02-f05-red.txt, evidencias/B/f02-f05-green.txt]
@@ -105,7 +105,7 @@ fatias:
     branch: feature/uc15-alterar-produto
     pr: 153
     pr_compartilhado: true
-    status: em_revisao
+    status: integrada
     responsavel: evertonfoz
     revisor: evertonfoz
     evidencias: [evidencias/B/f02-f05-red.txt, evidencias/B/f02-f05-green.txt]
