@@ -23,7 +23,11 @@ fases:
       - { item: "Todas as fatias integradas na branch principal", resultado: pendente }
       - { item: "CI verde na branch principal", resultado: pendente }
     evidencias: []
-  C: { status: pendente, relatorio: null, gate: [], evidencias: [] }
+  C:
+    status: em_andamento
+    relatorio: null
+    gate: []
+    evidencias: []
   D: { status: pendente, relatorio: null, gate: [], evidencias: [] }
   E: { status: pendente, relatorio: null, gate: [], evidencias: [] }
   F: { status: pendente, relatorio: null, gate: [], evidencias: [] }

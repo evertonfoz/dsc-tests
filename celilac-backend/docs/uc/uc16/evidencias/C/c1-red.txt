@@ -1,0 +1,158 @@
+**O que foi executado:** pnpm exec vitest run src/modules/products/controllers/products.remove.controller.spec.ts
+**Data e hora UTC:** 2026-11-24T18:17:24Z
+**Commit de base:** f53dde0c31786a29f625afd9605192d259624e45
+**Diretório/ambiente:** celilac-backend/, testes unitários (repositório em memória); sem banco
+**Código de saída:** 1
+
+
+ RUN  v4.1.11 /Users/evertoncoimbradearaujo/Documents/GitHub/dsc-tests/celilac-backend
+
+ ❯ src/modules/products/controllers/products.remove.controller.spec.ts (7 tests | 7 failed) 78ms
+     × should return 204 without a body and make the product disappear (CA01, CA02) 58ms
+     × should ignore any body sent with the request (CA10, FA04) 7ms
+     × should return 404 in the domain error format when the product does not exist (CA07, FA01) 4ms
+     × should return 404 for an already removed product and keep its deletedAt (CA08, FA02) 3ms
+     × should return 404 on the second of two consecutive removals (CA08, RN07) 2ms
+     × should return 400 in the ValidationPipe format for a non-UUID id, without calling the service (CA09, FA03) 2ms
+     × should return 500 with a generic message and no cause details (CA11, FE01) 2ms
+
+ Test Files  1 failed (1)
+      Tests  7 failed (7)
+   Start at  15:17:25
+   Duration  457ms (transform 41ms, setup 0ms, import 301ms, tests 78ms, environment 0ms)
+
+The plugin "vite-tsconfig-paths" is detected. Vite now supports tsconfig paths resolution natively via the resolve.tsconfigPaths option. You can remove the plugin and set resolve.tsconfigPaths: true in your Vite config instead.
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 7 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/modules/products/controllers/products.remove.controller.spec.ts > DELETE /products/:productId (UC16), com serviço real e repositório em memória > should return 204 without a body and make the product disappear (CA01, CA02)
+Error: expected 204 "No Content", got 404 "Not Found"
+ ❯ src/modules/products/controllers/products.remove.controller.spec.ts:55:8
+     53|     const response = await request(app.getHttpServer())
+     54|       .delete(`/products/${PRODUCT_ID}`)
+     55|       .expect(204);
+       |        ^
+     56|
+     57|     expect(response.text).toBe('');
+ ❯ Test._assertStatus node_modules/.pnpm/supertest@7.3.0_supports-color@7.2.0/node_modules/supertest/lib/test.js:376:14
+ ❯ node_modules/.pnpm/supertest@7.3.0_supports-color@7.2.0/node_modules/supertest/lib/test.js:432:13
+ ❯ Test._assertFunction node_modules/.pnpm/supertest@7.3.0_supports-color@7.2.0/node_modules/supertest/lib/test.js:409:13
+ ❯ Test.assert node_modules/.pnpm/supertest@7.3.0_supports-color@7.2.0/node_modules/supertest/lib/test.js:274:23
+ ❯ localAssert node_modules/.pnpm/supertest@7.3.0_supports-color@7.2.0/node_modules/supertest/lib/test.js:196:38
+ ❯ Server.<anonymous> node_modules/.pnpm/supertest@7.3.0_supports-color@7.2.0/node_modules/supertest/lib/test.js:203:13
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/7]⎯
+
+ FAIL  src/modules/products/controllers/products.remove.controller.spec.ts > DELETE /products/:productId (UC16), com serviço real e repositório em memória > should ignore any body sent with the request (CA10, FA04)
+Error: expected 204 "No Content", got 404 "Not Found"
+ ❯ src/modules/products/controllers/products.remove.controller.spec.ts:69:8
+     67|       .delete(`/products/${PRODUCT_ID}`)
+     68|       .send({ productId: OTHER_ID, name: 'x', deletedAt: null })
+     69|       .expect(204);
+       |        ^
+     70|
+     71|     await request(app.getHttpServer()).get(`/products/${PRODUCT_ID}`).…
+ ❯ Test._assertStatus node_modules/.pnpm/supertest@7.3.0_supports-color@7.2.0/node_modules/supertest/lib/test.js:376:14
+ ❯ node_modules/.pnpm/supertest@7.3.0_supports-color@7.2.0/node_modules/supertest/lib/test.js:432:13
+ ❯ Test._assertFunction node_modules/.pnpm/supertest@7.3.0_supports-color@7.2.0/node_modules/supertest/lib/test.js:409:13
+ ❯ Test.assert node_modules/.pnpm/supertest@7.3.0_supports-color@7.2.0/node_modules/supertest/lib/test.js:274:23
+ ❯ localAssert node_modules/.pnpm/supertest@7.3.0_supports-color@7.2.0/node_modules/supertest/lib/test.js:196:38
+ ❯ Server.<anonymous> node_modules/.pnpm/supertest@7.3.0_supports-color@7.2.0/node_modules/supertest/lib/test.js:203:13
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/7]⎯
+
+ FAIL  src/modules/products/controllers/products.remove.controller.spec.ts > DELETE /products/:productId (UC16), com serviço real e repositório em memória > should return 404 in the domain error format when the product does not exist (CA07, FA01)
+AssertionError: expected { …(3) } to deeply equal { statusCode: 404, …(2) }
+
+- Expected
++ Received
+
+  {
+-   "error": "ProductNotFoundException",
+-   "message": "Product with id \"99999999-9999-4999-8999-999999999999\" was not found.",
++   "error": "Not Found",
++   "message": "Cannot DELETE /products/99999999-9999-4999-8999-999999999999",
+    "statusCode": 404,
+  }
+
+ ❯ src/modules/products/controllers/products.remove.controller.spec.ts:80:27
+     78|       .expect(404);
+     79|
+     80|     expect(response.body).toEqual({
+       |                           ^
+     81|       statusCode: 404,
+     82|       message: `Product with id "${MISSING_ID}" was not found.`,
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/7]⎯
+
+ FAIL  src/modules/products/controllers/products.remove.controller.spec.ts > DELETE /products/:productId (UC16), com serviço real e repositório em memória > should return 404 for an already removed product and keep its deletedAt (CA08, FA02)
+AssertionError: expected 'Not Found' to be 'ProductNotFoundException' // Object.is equality
+
+Expected: "ProductNotFoundException"
+Received: "Not Found"
+
+ ❯ src/modules/products/controllers/products.remove.controller.spec.ts:95:33
+     93|       .expect(404);
+     94|
+     95|     expect(response.body.error).toBe('ProductNotFoundException');
+       |                                 ^
+     96|     const stored = (repository as unknown as { products: Product[] }).…
+     97|     expect(stored).toEqual([new Product(PRODUCT_ID, 'Removido', remove…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/7]⎯
+
+ FAIL  src/modules/products/controllers/products.remove.controller.spec.ts > DELETE /products/:productId (UC16), com serviço real e repositório em memória > should return 404 on the second of two consecutive removals (CA08, RN07)
+Error: expected 204 "No Content", got 404 "Not Found"
+ ❯ src/modules/products/controllers/products.remove.controller.spec.ts:103:74
+    101|     await repository.save(new Product(PRODUCT_ID, 'Leite sem lactose')…
+    102|
+    103|     await request(app.getHttpServer()).delete(`/products/${PRODUCT_ID}…
+       |                                                                          ^
+    104|     await request(app.getHttpServer()).delete(`/products/${PRODUCT_ID}…
+    105|   });
+ ❯ Test._assertStatus node_modules/.pnpm/supertest@7.3.0_supports-color@7.2.0/node_modules/supertest/lib/test.js:376:14
+ ❯ node_modules/.pnpm/supertest@7.3.0_supports-color@7.2.0/node_modules/supertest/lib/test.js:432:13
+ ❯ Test._assertFunction node_modules/.pnpm/supertest@7.3.0_supports-color@7.2.0/node_modules/supertest/lib/test.js:409:13
+ ❯ Test.assert node_modules/.pnpm/supertest@7.3.0_supports-color@7.2.0/node_modules/supertest/lib/test.js:274:23
+ ❯ localAssert node_modules/.pnpm/supertest@7.3.0_supports-color@7.2.0/node_modules/supertest/lib/test.js:196:38
+ ❯ Server.<anonymous> node_modules/.pnpm/supertest@7.3.0_supports-color@7.2.0/node_modules/supertest/lib/test.js:203:13
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/7]⎯
+
+ FAIL  src/modules/products/controllers/products.remove.controller.spec.ts > DELETE /products/:productId (UC16), com serviço simulado > should return 400 in the ValidationPipe format for a non-UUID id, without calling the service (CA09, FA03)
+Error: expected 400 "Bad Request", got 404 "Not Found"
+ ❯ src/modules/products/controllers/products.remove.controller.spec.ts:124:8
+    122|     const response = await request(app.getHttpServer())
+    123|       .delete('/products/abc')
+    124|       .expect(400);
+       |        ^
+    125|
+    126|     expect(response.body).toEqual({
+ ❯ Test._assertStatus node_modules/.pnpm/supertest@7.3.0_supports-color@7.2.0/node_modules/supertest/lib/test.js:376:14
+ ❯ node_modules/.pnpm/supertest@7.3.0_supports-color@7.2.0/node_modules/supertest/lib/test.js:432:13
+ ❯ Test._assertFunction node_modules/.pnpm/supertest@7.3.0_supports-color@7.2.0/node_modules/supertest/lib/test.js:409:13
+ ❯ Test.assert node_modules/.pnpm/supertest@7.3.0_supports-color@7.2.0/node_modules/supertest/lib/test.js:274:23
+ ❯ localAssert node_modules/.pnpm/supertest@7.3.0_supports-color@7.2.0/node_modules/supertest/lib/test.js:196:38
+ ❯ Server.<anonymous> node_modules/.pnpm/supertest@7.3.0_supports-color@7.2.0/node_modules/supertest/lib/test.js:203:13
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/7]⎯
+
+ FAIL  src/modules/products/controllers/products.remove.controller.spec.ts > DELETE /products/:productId (UC16), com serviço simulado > should return 500 with a generic message and no cause details (CA11, FE01)
+Error: expected 500 "Internal Server Error", got 404 "Not Found"
+ ❯ src/modules/products/controllers/products.remove.controller.spec.ts:144:8
+    142|     const response = await request(app.getHttpServer())
+    143|       .delete(`/products/${PRODUCT_ID}`)
+    144|       .expect(500);
+       |        ^
+    145|
+    146|     expect(response.body).toEqual({
+ ❯ Test._assertStatus node_modules/.pnpm/supertest@7.3.0_supports-color@7.2.0/node_modules/supertest/lib/test.js:376:14
+ ❯ node_modules/.pnpm/supertest@7.3.0_supports-color@7.2.0/node_modules/supertest/lib/test.js:432:13
+ ❯ Test._assertFunction node_modules/.pnpm/supertest@7.3.0_supports-color@7.2.0/node_modules/supertest/lib/test.js:409:13
+ ❯ Test.assert node_modules/.pnpm/supertest@7.3.0_supports-color@7.2.0/node_modules/supertest/lib/test.js:274:23
+ ❯ localAssert node_modules/.pnpm/supertest@7.3.0_supports-color@7.2.0/node_modules/supertest/lib/test.js:196:38
+ ❯ Server.<anonymous> node_modules/.pnpm/supertest@7.3.0_supports-color@7.2.0/node_modules/supertest/lib/test.js:203:13
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/7]⎯
+
+**Leitura do resultado:** RED real: a rota DELETE ainda não existe, então os testes de 204, 404 de domínio e 500 falham; o Nest responde 404 genérico a toda chamada.
