@@ -45,4 +45,23 @@ describe('ProductsService.removeProduct (UC16)', () => {
 
     expect(await repository.findActiveById(PRODUCT_ID)).not.toBeNull();
   });
+
+  it('should throw ProductNotFoundException when the product was already removed (CA08, FA02)', async () => {
+    await repository.save(
+      new Product(PRODUCT_ID, 'Leite sem lactose', new Date('2026-01-01')),
+    );
+
+    await expect(service.removeProduct(PRODUCT_ID)).rejects.toBeInstanceOf(
+      ProductNotFoundException,
+    );
+  });
+
+  it('should throw ProductNotFoundException when removing the same product twice (CA08, RN07)', async () => {
+    await repository.save(new Product(PRODUCT_ID, 'Leite sem lactose'));
+    await service.removeProduct(PRODUCT_ID);
+
+    await expect(service.removeProduct(PRODUCT_ID)).rejects.toBeInstanceOf(
+      ProductNotFoundException,
+    );
+  });
 });

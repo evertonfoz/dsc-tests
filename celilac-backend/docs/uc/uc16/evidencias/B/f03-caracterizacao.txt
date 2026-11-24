@@ -1,0 +1,18 @@
+**O que foi executado:** pnpm exec vitest run src/modules/products/services/products.service.remove.spec.ts
+**Data e hora UTC:** 2026-11-24T18:14:10Z
+**Commit de base:** 4db1d0461ad58fec05eeef916f8f0f0a66d98d2b F03 é caracterização, sem RED real.
+**Diretório/ambiente:** celilac-backend/, testes unitários (repositório em memória); sem banco
+**Código de saída:** 0
+
+
+ RUN  v4.1.11 /Users/evertoncoimbradearaujo/Documents/GitHub/dsc-tests/celilac-backend
+
+
+ Test Files  1 passed (1)
+      Tests  6 passed (6)
+   Start at  15:14:11
+   Duration  221ms (transform 28ms, setup 0ms, import 152ms, tests 2ms, environment 0ms)
+
+The plugin "vite-tsconfig-paths" is detected. Vite now supports tsconfig paths resolution natively via the resolve.tsconfigPaths option. You can remove the plugin and set resolve.tsconfigPaths: true in your Vite config instead.
+
+**Leitura do resultado:** Teste de caracterização: os 2 testes novos da F03 passam sem código novo, porque a F02 já trata produto sem registro ativo como inexistente. Não há RED real. O deletedAt original preservado só pode ser provado no banco (UPDATE com deletedAt IS NULL), na Fase C2; o repositório em memória não expõe o registro removido.
