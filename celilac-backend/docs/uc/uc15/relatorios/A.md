@@ -27,14 +27,14 @@ Publicar Epic, fatias e Project do UC15 e reconciliá-los com `docs/uc/uc15/stat
 ## 4. Gate de saída
 | Verificação | Como verificar | Resultado | Validado por |
 |---|---|---|---|
-| Epic e Sub-Issues conferem com o state.yaml | `check-state.sh --remote` | pendente | aguardando o estudante |
-| Project com os 5 estados e itens posicionados | listagem do Project #6 | pendente | aguardando o estudante |
+| Epic e Sub-Issues conferem com o state.yaml | `check-state.sh --remote` (OK) | aprovado | evertonfoz (2026-11-24) |
+| Project com os 5 estados e itens posicionados | itens #141 a #152 adicionados ao Project #6 (Backlog; F01 em Ready) | aprovado | evertonfoz (2026-11-24) |
 
 ## 5. Decisões e hipóteses
 Corte em 5 fatias e 6 fases, no mesmo padrão do UC14. Hipótese a validar: o arquétipo `atualizar` é um esboço do método (`method/playbooks/matriz-arquetipos.md`).
 
 ## 6. Pendências e riscos
-Os gates ainda não foram aprovados pelo estudante. Falhas de `orders` são anteriores ao UC15.
+Gates da Fase A aprovados pelo estudante em 2026-11-24. Falhas de `orders` são anteriores ao UC15.
 
 ## 7. Tabela de cobertura (atualizada na Etapa 2, 2026-11-24)
 

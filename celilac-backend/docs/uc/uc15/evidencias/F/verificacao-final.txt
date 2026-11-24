@@ -1,0 +1,18 @@
+# Comando: bash /private/tmp/claude-501/-Users-evertoncoimbradearaujo-Documents-GitHub-dsc-tests-celilac-backend/79874a53-c435-4acd-bdf6-966f3691de4d/scratchpad/final.sh
+# Data/hora (UTC): 2026-11-24T16:23:49Z
+# Commit base: f0b17bc0b1e86d3cba5522f8232cf17b2a38356f
+# Diretório: /Users/evertoncoimbradearaujo/Documents/GitHub/dsc-tests/celilac-backend
+# Código de saída: 0
+# Leitura: Verificação final antes do encerramento: build, lint, test, integração e e2e (falhas conhecidas de orders, ADR-001)
+
+build exit=0
+src/modules/orders/services/orders.service.ts:11:10: warning eslint(no-unused-vars): Identifier 'PaymentNotFoundException' is imported but never used. help: Consider removing this import.
+lint exit=0
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 4 ⎯⎯⎯⎯⎯⎯⎯
+ Test Files  1 failed | 12 passed (13)
+      Tests  4 failed | 81 passed (85)
+ Test Files  1 passed (1)
+      Tests  19 passed (19)
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+ Test Files  1 failed | 6 passed (7)
+      Tests  1 failed | 21 passed (22)

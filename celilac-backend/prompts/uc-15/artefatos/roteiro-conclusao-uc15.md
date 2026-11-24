@@ -6,16 +6,16 @@
 
 | Passo | Ação | Situação |
 |---|---|---|
-| 1 | Revisar e aprovar o gate da Fase A (`docs/uc/uc15/relatorios/A.md`, seção 4) | Pendente (estudante) |
+| 1 | Aprovar os gates das Fases A, C, D, E e F (itens verificáveis) em `state.yaml` | Feito (2026-11-24, pelo estudante) |
 | 2 | `run-checks.sh --durability` no contêiner reconstruído: 47 ok, 0 falha (`docs/uc/uc15/evidencias/E/run-checks.txt`) | Feito |
 | 3 | Push da branch `feature/uc15-alterar-produto` | Feito |
 | 4 | PR único das fatias F01 a F05, C1, C2 e D | Aberto para revisão |
-| 5 | Conferir o CI (`pnpm test:e2e` com as exclusões conhecidas e o smoke do Compose com `run-checks.sh --durability`) | Pendente (estudante) |
+| 5 | Conferir o CI do PR #153 (qualidade, integração e e2e, smoke do Compose e GitGuardian) | Feito (4 jobs com sucesso) |
 | 6 | Merge do PR | Pendente (estudante) |
 | 7 | Fechar #142 a #146 e #148 a #150 com link para o PR e para `docs/uc/uc15/evidencias/` | Pendente (estudante) |
-| 8 | Executar a Fase E (evidência do `run-checks.sh`) e a Fase F (auditoria) e fechar #151 e #152 | Pendente (estudante) |
+| 8 | Fases E e F executadas (evidências em `docs/uc/uc15/evidencias/E/` e `F/`); fechar #151 e #152 | Fechamento pendente (estudante) |
 | 9 | Fechar o Epic #141 e mover os itens do Project #6 para `Done` | Pendente (estudante) |
-| 10 | Aprovar os gates no `state.yaml` e rodar `method/scripts/check-state.sh docs/uc/uc15/state.yaml --remote` | Pendente (estudante) |
+| 10 | Depois do merge: aprovar o gate da Fase B e o item "Issues e Epic fechados" da Fase F, avançar `fase_atual` para `concluido` e rodar `method/scripts/check-state.sh docs/uc/uc15/state.yaml --remote` | Pendente (estudante) |
 
 ## Provas disponíveis
 - Tabela de cobertura: `docs/uc/uc15/relatorios/A.md`, seção 7.

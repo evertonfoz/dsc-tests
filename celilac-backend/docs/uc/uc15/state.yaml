@@ -1,18 +1,18 @@
-# Estado do UC15 (Alterar Produto). Epic #141 e issues #142 a #152 criadas em 2026-11-24 com autorização expressa do estudante ("Aprovo, pode criar tudo e iniciar a Etapa 2"). Núcleo, HTTP e persistência implementados na branch feature/uc15-alterar-produto (sem PR, sem push). Os gates só serão marcados "aprovado" quando o estudante os validar.
+# Estado do UC15 (Alterar Produto). Epic #141 e issues #142 a #152 criadas em 2026-11-24 com autorização expressa do estudante ("Aprovo, pode criar tudo e iniciar a Etapa 2"). Núcleo, HTTP e persistência implementados na branch feature/uc15-alterar-produto (PR #153 aberto, sem merge). Os gates só serão marcados "aprovado" quando o estudante os validar.
 uc: UC15
 nome: Alterar Produto
 documento: ../../../prompts/uc-15/artefatos/03-uc-15-alterar-produto.md
 arquetipo: atualizar
 epic: { issue: 141, estado: open }
-fase_atual: A
+fase_atual: B
 
 fases:
   A:
-    status: em_andamento
+    status: concluida
     relatorio: relatorios/A.md
     gate:
-      - { item: "Epic e Sub-Issues criadas e reconciliadas com este arquivo", resultado: pendente }
-      - { item: "GitHub Project configurado com os 5 estados", resultado: pendente }
+      - { item: "Epic e Sub-Issues criadas e reconciliadas com este arquivo", resultado: aprovado, por: evertonfoz }
+      - { item: "GitHub Project configurado com os 5 estados", resultado: aprovado, por: evertonfoz }
     evidencias: [evidencias/A/publicacao.txt]
   B:
     status: em_andamento
@@ -22,23 +22,34 @@ fases:
       - { item: "CI verde na branch principal", resultado: pendente }
     evidencias: [evidencias/B/f01-red.txt, evidencias/B/f01-green.txt, evidencias/B/f02-f05-red.txt, evidencias/B/f02-f05-green.txt]
   C:
-    status: em_andamento
-    relatorio: relatorios/B-C.md
-    gate: []
-    evidencias: [evidencias/B/c1-red.txt, evidencias/B/c1-green.txt, evidencias/B/c2-red.txt, evidencias/B/c2-integration.txt, evidencias/B/c1-c2-e2e.txt]
-  D:
-    status: em_andamento
-    relatorio: relatorios/B-C.md
-    gate: []
-    evidencias: [evidencias/B/c1-green.txt, evidencias/B/c2-integration.txt, evidencias/B/c1-c2-e2e.txt]
-  E:
-    status: em_andamento
+    status: concluida
     relatorio: relatorios/B-C.md
     gate:
-      - { item: "O script termina com 0 falhas no contêiner", resultado: pendente }
-      - { item: "O mesmo script passa no CI (smoke)", resultado: pendente }
+      - { item: "C1 (HTTP) e C2 (persistência) implementadas e testadas na branch do PR #153", resultado: aprovado, por: evertonfoz }
+      - { item: "CI verde no PR #153", resultado: aprovado, por: CI }
+    evidencias: [evidencias/B/c1-red.txt, evidencias/B/c1-green.txt, evidencias/B/c2-red.txt, evidencias/B/c2-integration.txt, evidencias/B/c1-c2-e2e.txt]
+  D:
+    status: concluida
+    relatorio: relatorios/B-C.md
+    gate:
+      - { item: "Cada cenário do contrato de PUT /products/:productId documentado e testado", resultado: aprovado, por: evertonfoz }
+    evidencias: [evidencias/B/c1-green.txt, evidencias/B/c2-integration.txt, evidencias/B/c1-c2-e2e.txt]
+  E:
+    status: concluida
+    relatorio: relatorios/B-C.md
+    gate:
+      - { item: "O script termina com 0 falhas no contêiner", resultado: aprovado, por: evertonfoz }
+      - { item: "O mesmo script passa no CI (smoke)", resultado: aprovado, por: CI }
     evidencias: [evidencias/E/run-checks.txt]
-  F: { status: pendente, relatorio: null, gate: [], evidencias: [] }
+  F:
+    status: em_andamento
+    relatorio: relatorios/F.md
+    gate:
+      - { item: "Todo item do UC tem teste que o prova ou ADR", resultado: aprovado, por: evertonfoz }
+      - { item: "Arquitetura em conformidade, achados tratados", resultado: aprovado, por: evertonfoz }
+      - { item: "state.yaml, documentos e GitHub consistentes", resultado: aprovado, por: CI }
+      - { item: "Issues e Epic fechados", resultado: pendente }
+    evidencias: [evidencias/F/cobertura.md, evidencias/F/auditoria.md, evidencias/F/auditoria.txt, evidencias/F/regressao.txt, evidencias/F/verificacao-final.txt]
 
 # Issues de fase: A #147, C1 #148, C2 #149, D #150, E #151, F #152.
 # Branch única das fatias: feature/uc15-alterar-produto. PR ainda não aberto.
@@ -48,8 +59,9 @@ fatias:
     criterios: [CA01, CA03, CA04, CA09, CA11, RN01, RN06, RN07, RN08, RF01, RF05, RF06]
     issue: 142
     branch: feature/uc15-alterar-produto
-    pr: null
-    status: em_andamento
+    pr: 153
+    pr_compartilhado: true
+    status: em_revisao
     responsavel: evertonfoz
     revisor: evertonfoz
     evidencias: [evidencias/B/f01-red.txt, evidencias/B/f01-green.txt]
@@ -58,8 +70,9 @@ fatias:
     criterios: [CA05, FA01, RF03]
     issue: 143
     branch: feature/uc15-alterar-produto
-    pr: null
-    status: em_andamento
+    pr: 153
+    pr_compartilhado: true
+    status: em_revisao
     responsavel: evertonfoz
     revisor: evertonfoz
     evidencias: [evidencias/B/f02-f05-red.txt, evidencias/B/f02-f05-green.txt]
@@ -68,8 +81,9 @@ fatias:
     criterios: [CA06, FA02, RN02]
     issue: 144
     branch: feature/uc15-alterar-produto
-    pr: null
-    status: em_andamento
+    pr: 153
+    pr_compartilhado: true
+    status: em_revisao
     responsavel: evertonfoz
     revisor: evertonfoz
     evidencias: [evidencias/B/f02-f05-red.txt, evidencias/B/f02-f05-green.txt]
@@ -78,8 +92,9 @@ fatias:
     criterios: [CA08, FA04, RN03, RN05, RF04]
     issue: 145
     branch: feature/uc15-alterar-produto
-    pr: null
-    status: em_andamento
+    pr: 153
+    pr_compartilhado: true
+    status: em_revisao
     responsavel: evertonfoz
     revisor: evertonfoz
     evidencias: [evidencias/B/f02-f05-red.txt, evidencias/B/f02-f05-green.txt]
@@ -88,8 +103,9 @@ fatias:
     criterios: [CA10, FE01, RN05, RF07]
     issue: 146
     branch: feature/uc15-alterar-produto
-    pr: null
-    status: em_andamento
+    pr: 153
+    pr_compartilhado: true
+    status: em_revisao
     responsavel: evertonfoz
     revisor: evertonfoz
     evidencias: [evidencias/B/f02-f05-red.txt, evidencias/B/f02-f05-green.txt]
