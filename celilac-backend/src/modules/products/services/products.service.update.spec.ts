@@ -21,7 +21,10 @@ describe('ProductsService.updateProductName (UC15)', () => {
   it('should change the name of the active product and return it (CA01)', async () => {
     await repository.save(new Product(PRODUCT_ID, 'Leite sem lactose'));
 
-    const product = await service.updateProductName(PRODUCT_ID, 'Leite integral');
+    const product = await service.updateProductName(
+      PRODUCT_ID,
+      'Leite integral',
+    );
 
     expect({ productId: product.productId, name: product.name }).toEqual({
       productId: PRODUCT_ID,
@@ -35,7 +38,10 @@ describe('ProductsService.updateProductName (UC15)', () => {
     await repository.save(new Product(PRODUCT_ID, 'Leite sem lactose'));
     await repository.save(new Product(OTHER_ID, 'Outro produto'));
 
-    const product = await service.updateProductName(PRODUCT_ID, 'Leite integral');
+    const product = await service.updateProductName(
+      PRODUCT_ID,
+      'Leite integral',
+    );
 
     expect(product.productId).toBe(PRODUCT_ID);
     expect(product.deletedAt).toBeNull();
@@ -47,7 +53,10 @@ describe('ProductsService.updateProductName (UC15)', () => {
   it('should succeed when the new name equals the current one (CA09)', async () => {
     await repository.save(new Product(PRODUCT_ID, 'Leite sem lactose'));
 
-    const product = await service.updateProductName(PRODUCT_ID, 'Leite sem lactose');
+    const product = await service.updateProductName(
+      PRODUCT_ID,
+      'Leite sem lactose',
+    );
 
     expect(product.name).toBe('Leite sem lactose');
   });

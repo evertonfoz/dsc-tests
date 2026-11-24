@@ -1,0 +1,185 @@
+# Comando: pnpm exec vitest run src/modules/products/controllers/products.update.controller.spec.ts
+# Data/hora (UTC): 2026-11-24T14:38:58Z
+# Commit base: 4bf1ac98deeb234eb5ec3cf30357fe33719acb55
+# Diretório: /Users/evertoncoimbradearaujo/Documents/GitHub/dsc-tests/celilac-backend
+# Código de saída: 1
+# Leitura: RED esperado: PUT /products/:productId ainda não existe, então as requisições respondem 404 do framework
+
+The plugin "vite-tsconfig-paths" is detected. Vite now supports tsconfig paths resolution natively via the resolve.tsconfigPaths option. You can remove the plugin and set resolve.tsconfigPaths: true in your Vite config instead.
+
+ RUN  v4.1.11 /Users/evertoncoimbradearaujo/Documents/GitHub/dsc-tests/celilac-backend
+
+ ❯ src/modules/products/controllers/products.update.controller.spec.ts (12 tests | 12 failed) 96ms
+     × should return 200 with only productId and the new name, and persist it (CA01, CA02, CA03) 65ms
+     × should ignore productId and deletedAt sent in the body (CA04, FA05) 3ms
+     × should return 200 when the new name equals the current one (CA09) 2ms
+     × should return 404 in the domain error format when the product does not exist (CA05) 4ms
+     × should return 404 for a removed product and leave it unchanged (CA06) 3ms
+     × should return 400 in the ValidationPipe format for a name that is missing and keep the old name (CA08) 2ms
+     × should return 400 in the ValidationPipe format for a name that is not a string and keep the old name (CA08) 2ms
+     × should return 400 in the ValidationPipe format for a name that is empty and keep the old name (CA08) 2ms
+     × should return 400 in the ValidationPipe format for a name that is only spaces and keep the old name (CA08) 2ms
+     × should return 400 in the ValidationPipe format for a name that is 121 characters and keep the old name (CA08) 7ms
+     × should return 400 in the ValidationPipe format for a non-UUID id, without calling the service (CA07) 2ms
+     × should return 500 with a generic message and no cause details (CA10) 3ms
+
+⎯⎯⎯⎯⎯⎯ Failed Tests 12 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/modules/products/controllers/products.update.controller.spec.ts > PUT /products/:productId (UC15), com serviço real e repositório em memória > should return 200 with only productId and the new name, and persist it (CA01, CA02, CA03)
+Error: expected 200 "OK", got 404 "Not Found"
+ ❯ src/modules/products/controllers/products.update.controller.spec.ts:56:8
+     54|       .put(`/products/${PRODUCT_ID}`)
+     55|       .send({ name: 'Leite integral' })
+     56|       .expect(200);
+       |        ^
+     57|
+     58|     expect(response.body).toEqual({
+ ❯ Test._assertStatus node_modules/.pnpm/supertest@7.3.0_supports-color@7.2.0/node_modules/supertest/lib/test.js:376:14
+ ❯ node_modules/.pnpm/supertest@7.3.0_supports-color@7.2.0/node_modules/supertest/lib/test.js:432:13
+ ❯ Test._assertFunction node_modules/.pnpm/supertest@7.3.0_supports-color@7.2.0/node_modules/supertest/lib/test.js:409:13
+ ❯ Test.assert node_modules/.pnpm/supertest@7.3.0_supports-color@7.2.0/node_modules/supertest/lib/test.js:274:23
+ ❯ localAssert node_modules/.pnpm/supertest@7.3.0_supports-color@7.2.0/node_modules/supertest/lib/test.js:196:38
+ ❯ Server.<anonymous> node_modules/.pnpm/supertest@7.3.0_supports-color@7.2.0/node_modules/supertest/lib/test.js:203:13
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/12]⎯
+
+ FAIL  src/modules/products/controllers/products.update.controller.spec.ts > PUT /products/:productId (UC15), com serviço real e repositório em memória > should ignore productId and deletedAt sent in the body (CA04, FA05)
+Error: expected 200 "OK", got 404 "Not Found"
+ ❯ src/modules/products/controllers/products.update.controller.spec.ts:78:8
+     76|         deletedAt: '2026-11-01T00:00:00Z',
+     77|       })
+     78|       .expect(200);
+       |        ^
+     79|
+     80|     expect(response.body).toEqual({
+ ❯ Test._assertStatus node_modules/.pnpm/supertest@7.3.0_supports-color@7.2.0/node_modules/supertest/lib/test.js:376:14
+ ❯ node_modules/.pnpm/supertest@7.3.0_supports-color@7.2.0/node_modules/supertest/lib/test.js:432:13
+ ❯ Test._assertFunction node_modules/.pnpm/supertest@7.3.0_supports-color@7.2.0/node_modules/supertest/lib/test.js:409:13
+ ❯ Test.assert node_modules/.pnpm/supertest@7.3.0_supports-color@7.2.0/node_modules/supertest/lib/test.js:274:23
+ ❯ localAssert node_modules/.pnpm/supertest@7.3.0_supports-color@7.2.0/node_modules/supertest/lib/test.js:196:38
+ ❯ Server.<anonymous> node_modules/.pnpm/supertest@7.3.0_supports-color@7.2.0/node_modules/supertest/lib/test.js:203:13
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/12]⎯
+
+ FAIL  src/modules/products/controllers/products.update.controller.spec.ts > PUT /products/:productId (UC15), com serviço real e repositório em memória > should return 200 when the new name equals the current one (CA09)
+Error: expected 200 "OK", got 404 "Not Found"
+ ❯ src/modules/products/controllers/products.update.controller.spec.ts:94:8
+     92|       .put(`/products/${PRODUCT_ID}`)
+     93|       .send({ name: 'Leite sem lactose' })
+     94|       .expect(200);
+       |        ^
+     95|
+     96|     expect(response.body.name).toBe('Leite sem lactose');
+ ❯ Test._assertStatus node_modules/.pnpm/supertest@7.3.0_supports-color@7.2.0/node_modules/supertest/lib/test.js:376:14
+ ❯ node_modules/.pnpm/supertest@7.3.0_supports-color@7.2.0/node_modules/supertest/lib/test.js:432:13
+ ❯ Test._assertFunction node_modules/.pnpm/supertest@7.3.0_supports-color@7.2.0/node_modules/supertest/lib/test.js:409:13
+ ❯ Test.assert node_modules/.pnpm/supertest@7.3.0_supports-color@7.2.0/node_modules/supertest/lib/test.js:274:23
+ ❯ localAssert node_modules/.pnpm/supertest@7.3.0_supports-color@7.2.0/node_modules/supertest/lib/test.js:196:38
+ ❯ Server.<anonymous> node_modules/.pnpm/supertest@7.3.0_supports-color@7.2.0/node_modules/supertest/lib/test.js:203:13
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/12]⎯
+
+ FAIL  src/modules/products/controllers/products.update.controller.spec.ts > PUT /products/:productId (UC15), com serviço real e repositório em memória > should return 404 in the domain error format when the product does not exist (CA05)
+AssertionError: expected { …(3) } to deeply equal { statusCode: 404, …(2) }
+
+- Expected
++ Received
+
+  {
+-   "error": "ProductNotFoundException",
+-   "message": "Product with id \"99999999-9999-4999-8999-999999999999\" was not found.",
++   "error": "Not Found",
++   "message": "Cannot PUT /products/99999999-9999-4999-8999-999999999999",
+    "statusCode": 404,
+  }
+
+ ❯ src/modules/products/controllers/products.update.controller.spec.ts:105:27
+    103|       .expect(404);
+    104|
+    105|     expect(response.body).toEqual({
+       |                           ^
+    106|       statusCode: 404,
+    107|       message: `Product with id "${MISSING_ID}" was not found.`,
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/12]⎯
+
+ FAIL  src/modules/products/controllers/products.update.controller.spec.ts > PUT /products/:productId (UC15), com serviço real e repositório em memória > should return 404 for a removed product and leave it unchanged (CA06)
+AssertionError: expected 'Not Found' to be 'ProductNotFoundException' // Object.is equality
+
+Expected: "ProductNotFoundException"
+Received: "Not Found"
+
+ ❯ src/modules/products/controllers/products.update.controller.spec.ts:121:33
+    119|       .expect(404);
+    120|
+    121|     expect(response.body.error).toBe('ProductNotFoundException');
+       |                                 ^
+    122|     const stored = (repository as unknown as { products: Product[] }).…
+    123|     expect(stored).toEqual([new Product(PRODUCT_ID, 'Removido', remove…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/12]⎯
+
+ FAIL  src/modules/products/controllers/products.update.controller.spec.ts > PUT /products/:productId (UC15), com serviço real e repositório em memória > should return 400 in the ValidationPipe format for a name that is missing and keep the old name (CA08)
+ FAIL  src/modules/products/controllers/products.update.controller.spec.ts > PUT /products/:productId (UC15), com serviço real e repositório em memória > should return 400 in the ValidationPipe format for a name that is not a string and keep the old name (CA08)
+ FAIL  src/modules/products/controllers/products.update.controller.spec.ts > PUT /products/:productId (UC15), com serviço real e repositório em memória > should return 400 in the ValidationPipe format for a name that is empty and keep the old name (CA08)
+ FAIL  src/modules/products/controllers/products.update.controller.spec.ts > PUT /products/:productId (UC15), com serviço real e repositório em memória > should return 400 in the ValidationPipe format for a name that is only spaces and keep the old name (CA08)
+ FAIL  src/modules/products/controllers/products.update.controller.spec.ts > PUT /products/:productId (UC15), com serviço real e repositório em memória > should return 400 in the ValidationPipe format for a name that is 121 characters and keep the old name (CA08)
+Error: expected 400 "Bad Request", got 404 "Not Found"
+ ❯ src/modules/products/controllers/products.update.controller.spec.ts:140:10
+    138|         .put(`/products/${PRODUCT_ID}`)
+    139|         .send(body)
+    140|         .expect(400);
+       |          ^
+    141|
+    142|       expect(response.body.statusCode).toBe(400);
+ ❯ Test._assertStatus node_modules/.pnpm/supertest@7.3.0_supports-color@7.2.0/node_modules/supertest/lib/test.js:376:14
+ ❯ node_modules/.pnpm/supertest@7.3.0_supports-color@7.2.0/node_modules/supertest/lib/test.js:432:13
+ ❯ Test._assertFunction node_modules/.pnpm/supertest@7.3.0_supports-color@7.2.0/node_modules/supertest/lib/test.js:409:13
+ ❯ Test.assert node_modules/.pnpm/supertest@7.3.0_supports-color@7.2.0/node_modules/supertest/lib/test.js:274:23
+ ❯ localAssert node_modules/.pnpm/supertest@7.3.0_supports-color@7.2.0/node_modules/supertest/lib/test.js:196:38
+ ❯ Server.<anonymous> node_modules/.pnpm/supertest@7.3.0_supports-color@7.2.0/node_modules/supertest/lib/test.js:203:13
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/12]⎯
+
+ FAIL  src/modules/products/controllers/products.update.controller.spec.ts > PUT /products/:productId (UC15), com serviço simulado > should return 400 in the ValidationPipe format for a non-UUID id, without calling the service (CA07)
+Error: expected 400 "Bad Request", got 404 "Not Found"
+ ❯ src/modules/products/controllers/products.update.controller.spec.ts:172:8
+    170|       .put('/products/abc')
+    171|       .send({ name: 'Novo nome' })
+    172|       .expect(400);
+       |        ^
+    173|
+    174|     expect(response.body).toEqual({
+ ❯ Test._assertStatus node_modules/.pnpm/supertest@7.3.0_supports-color@7.2.0/node_modules/supertest/lib/test.js:376:14
+ ❯ node_modules/.pnpm/supertest@7.3.0_supports-color@7.2.0/node_modules/supertest/lib/test.js:432:13
+ ❯ Test._assertFunction node_modules/.pnpm/supertest@7.3.0_supports-color@7.2.0/node_modules/supertest/lib/test.js:409:13
+ ❯ Test.assert node_modules/.pnpm/supertest@7.3.0_supports-color@7.2.0/node_modules/supertest/lib/test.js:274:23
+ ❯ localAssert node_modules/.pnpm/supertest@7.3.0_supports-color@7.2.0/node_modules/supertest/lib/test.js:196:38
+ ❯ Server.<anonymous> node_modules/.pnpm/supertest@7.3.0_supports-color@7.2.0/node_modules/supertest/lib/test.js:203:13
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/12]⎯
+
+ FAIL  src/modules/products/controllers/products.update.controller.spec.ts > PUT /products/:productId (UC15), com serviço simulado > should return 500 with a generic message and no cause details (CA10)
+Error: expected 500 "Internal Server Error", got 404 "Not Found"
+ ❯ src/modules/products/controllers/products.update.controller.spec.ts:193:8
+    191|       .put(`/products/${PRODUCT_ID}`)
+    192|       .send({ name: 'Novo nome' })
+    193|       .expect(500);
+       |        ^
+    194|
+    195|     expect(response.body).toEqual({
+ ❯ Test._assertStatus node_modules/.pnpm/supertest@7.3.0_supports-color@7.2.0/node_modules/supertest/lib/test.js:376:14
+ ❯ node_modules/.pnpm/supertest@7.3.0_supports-color@7.2.0/node_modules/supertest/lib/test.js:432:13
+ ❯ Test._assertFunction node_modules/.pnpm/supertest@7.3.0_supports-color@7.2.0/node_modules/supertest/lib/test.js:409:13
+ ❯ Test.assert node_modules/.pnpm/supertest@7.3.0_supports-color@7.2.0/node_modules/supertest/lib/test.js:274:23
+ ❯ localAssert node_modules/.pnpm/supertest@7.3.0_supports-color@7.2.0/node_modules/supertest/lib/test.js:196:38
+ ❯ Server.<anonymous> node_modules/.pnpm/supertest@7.3.0_supports-color@7.2.0/node_modules/supertest/lib/test.js:203:13
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[8/12]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  12 failed (12)
+   Start at  11:38:58
+   Duration  498ms (transform 53ms, setup 0ms, import 314ms, tests 96ms, environment 0ms)
+

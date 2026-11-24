@@ -373,4 +373,86 @@ describe('TypeOrmProductsRepository — persistência real no PostgreSQL', () =>
     );
     expect(after).toEqual(before);
   });
+
+  it('should change only the name of the active product in the real database and keep the other rows (UC15, CA01, CA03, CA04)', async () => {
+    const productId = randomUUID();
+    const otherId = randomUUID();
+    await repository.save(new Product(productId, 'Leite sem lactose'));
+    await repository.save(new Product(otherId, 'Outro produto'));
+
+    const updated = await new ProductsService(repository).updateProductName(
+      productId,
+      'Leite integral',
+    );
+
+    expect(updated.productId).toBe(productId);
+    expect(updated.name).toBe('Leite integral');
+    expect(updated.deletedAt).toBeNull();
+    const rows = await dataSource.query<ProductRow[]>(
+      'SELECT "productId", "name", "deletedAt" FROM "products"."products" ORDER BY "name"',
+    );
+    expect(rows).toEqual([
+      { productId, name: 'Leite integral', deletedAt: null },
+      { productId: otherId, name: 'Outro produto', deletedAt: null },
+    ]);
+  });
+
+  it('should not alter a removed product in the real database and report it as not found (UC15, CA06)', async () => {
+    const productId = randomUUID();
+    await dataSource.query(
+      'INSERT INTO "products"."products" ("productId", "name", "deletedAt") VALUES ($1, $2, now())',
+      [productId, 'Removido'],
+    );
+
+    const result = new ProductsService(repository).updateProductName(
+      productId,
+      'Novo nome',
+    );
+
+    await expect(result).rejects.toMatchObject({
+      name: 'ProductNotFoundException',
+    });
+    const rows = await dataSource.query<ProductRow[]>(
+      'SELECT "name" FROM "products"."products" WHERE "productId" = $1',
+      [productId],
+    );
+    expect(rows).toEqual([{ name: 'Removido' }]);
+  });
+
+  it('should report an incomplete update when the real database rejects it, leaving the name unchanged (UC15, CA10)', async () => {
+    const productId = randomUUID();
+    await repository.save(new Product(productId, 'Leite sem lactose'));
+    // O PostgreSQL rejeita o caractere NUL em texto (22021): falha real de banco que o núcleo ainda não barra.
+    const result = new ProductsService(repository).updateProductName(
+      productId,
+      'Produto\u0000com NUL',
+    );
+
+    await expect(result).rejects.toMatchObject({
+      name: 'ProductPersistenceFailedException',
+    });
+    await expect(result).rejects.not.toThrow(
+      /invalid byte sequence|0x00|encoding|utf8/i,
+    );
+    const rows = await dataSource.query<ProductRow[]>(
+      'SELECT "name" FROM "products"."products" WHERE "productId" = $1',
+      [productId],
+    );
+    expect(rows).toEqual([{ name: 'Leite sem lactose' }]);
+  });
+
+  it('should keep the last name after two sequential updates in the real database (UC15, CA11)', async () => {
+    const productId = randomUUID();
+    await repository.save(new Product(productId, 'Leite sem lactose'));
+    const service = new ProductsService(repository);
+
+    await service.updateProductName(productId, 'Primeiro');
+    await service.updateProductName(productId, 'Segundo');
+
+    const rows = await dataSource.query<ProductRow[]>(
+      'SELECT "name" FROM "products"."products" WHERE "productId" = $1',
+      [productId],
+    );
+    expect(rows).toEqual([{ name: 'Segundo' }]);
+  });
 });

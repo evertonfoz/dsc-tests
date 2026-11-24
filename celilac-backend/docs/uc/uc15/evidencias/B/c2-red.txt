@@ -1,0 +1,82 @@
+# Comando: pnpm test:integration
+# Data/hora (UTC): 2026-11-24T14:39:29Z
+# Commit base: 4bf1ac98deeb234eb5ec3cf30357fe33719acb55
+# Diretório: /Users/evertoncoimbradearaujo/Documents/GitHub/dsc-tests/celilac-backend
+# Código de saída: 1
+# Leitura: RED esperado: TypeOrmProductsRepository ainda não implementa updateActiveName (TypeError: updateActiveName is not a function); banco de testes celilac_test, porta 5435
+
+$ vitest run --config ./vitest.integration.config.ts
+The plugin "vite-tsconfig-paths" is detected. Vite now supports tsconfig paths resolution natively via the resolve.tsconfigPaths option. You can remove the plugin and set resolve.tsconfigPaths: true in your Vite config instead.
+
+ RUN  v4.1.11 /Users/evertoncoimbradearaujo/Documents/GitHub/dsc-tests/celilac-backend
+
+ ❯ src/infrastructure/persistence/products/typeorm-products.repository.postgres.spec.ts (19 tests | 3 failed) 218ms
+     × should change only the name of the active product in the real database and keep the other rows (UC15, CA01, CA03, CA04) 5ms
+     × should not alter a removed product in the real database and report it as not found (UC15, CA06) 4ms
+     × should keep the last name after two sequential updates in the real database (UC15, CA11) 2ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 3 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/infrastructure/persistence/products/typeorm-products.repository.postgres.spec.ts > TypeOrmProductsRepository — persistência real no PostgreSQL > should change only the name of the active product in the real database and keep the other rows (UC15, CA01, CA03, CA04)
+ProductPersistenceFailedException: Product update could not be completed.
+ ❯ ProductsService.updateProductName src/modules/products/services/products.service.ts:99:13
+     97|       product = await this.productsRepository.updateActiveName(product…
+     98|     } catch (error) {
+     99|       throw new ProductPersistenceFailedException(
+       |             ^
+    100|         error,
+    101|         'Product update could not be completed.',
+ ❯ src/infrastructure/persistence/products/typeorm-products.repository.postgres.spec.ts:383:59
+
+Caused by: TypeError: this.productsRepository.updateActiveName is not a function
+ ❯ ProductsService.updateProductName src/modules/products/services/products.service.ts:97:47
+ ❯ src/infrastructure/persistence/products/typeorm-products.repository.postgres.spec.ts:383:59
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/3]⎯
+
+ FAIL  src/infrastructure/persistence/products/typeorm-products.repository.postgres.spec.ts > TypeOrmProductsRepository — persistência real no PostgreSQL > should not alter a removed product in the real database and report it as not found (UC15, CA06)
+AssertionError: expected ProductPersistenceFailedException: Produc… to match object { name: 'ProductNotFoundException' }
+
+- Expected
++ Received
+
+- {
+-   "name": "ProductNotFoundException",
++ ProductPersistenceFailedException {
++   "name": "ProductPersistenceFailedException",
+  }
+
+ ❯ src/infrastructure/persistence/products/typeorm-products.repository.postgres.spec.ts:412:25
+    410|     );
+    411|
+    412|     await expect(result).rejects.toMatchObject({
+       |                         ^
+    413|       name: 'ProductNotFoundException',
+    414|     });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/3]⎯
+
+ FAIL  src/infrastructure/persistence/products/typeorm-products.repository.postgres.spec.ts > TypeOrmProductsRepository — persistência real no PostgreSQL > should keep the last name after two sequential updates in the real database (UC15, CA11)
+ProductPersistenceFailedException: Product update could not be completed.
+ ❯ ProductsService.updateProductName src/modules/products/services/products.service.ts:99:13
+     97|       product = await this.productsRepository.updateActiveName(product…
+     98|     } catch (error) {
+     99|       throw new ProductPersistenceFailedException(
+       |             ^
+    100|         error,
+    101|         'Product update could not be completed.',
+ ❯ src/infrastructure/persistence/products/typeorm-products.repository.postgres.spec.ts:449:19
+
+Caused by: TypeError: this.productsRepository.updateActiveName is not a function
+ ❯ ProductsService.updateProductName src/modules/products/services/products.service.ts:97:47
+ ❯ src/infrastructure/persistence/products/typeorm-products.repository.postgres.spec.ts:449:19
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/3]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  3 failed | 16 passed (19)
+   Start at  11:39:30
+   Duration  595ms (transform 51ms, setup 0ms, import 303ms, tests 218ms, environment 0ms)
+
+[ELIFECYCLE] Command failed with exit code 1.

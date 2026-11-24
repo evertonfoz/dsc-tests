@@ -1,0 +1,18 @@
+# Comando: pnpm test:integration
+# Data/hora (UTC): 2026-11-24T14:39:41Z
+# Commit base: 4bf1ac98deeb234eb5ec3cf30357fe33719acb55
+# Diretório: /Users/evertoncoimbradearaujo/Documents/GitHub/dsc-tests/celilac-backend
+# Código de saída: 0
+# Leitura: GREEN: updateActiveName no TypeORM (UPDATE único com deletedAt IS NULL e RETURNING), contra o banco de testes celilac_test (porta 5435)
+
+$ vitest run --config ./vitest.integration.config.ts
+The plugin "vite-tsconfig-paths" is detected. Vite now supports tsconfig paths resolution natively via the resolve.tsconfigPaths option. You can remove the plugin and set resolve.tsconfigPaths: true in your Vite config instead.
+
+ RUN  v4.1.11 /Users/evertoncoimbradearaujo/Documents/GitHub/dsc-tests/celilac-backend
+
+
+ Test Files  1 passed (1)
+      Tests  19 passed (19)
+   Start at  11:39:41
+   Duration  509ms (transform 52ms, setup 0ms, import 308ms, tests 129ms, environment 0ms)
+

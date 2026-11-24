@@ -46,4 +46,21 @@ export class TypeOrmProductsRepository implements ProductsRepository {
 
     return entity === null ? null : ProductMapper.toDomain(entity);
   }
+
+  async updateActiveName(
+    productId: string,
+    name: string,
+  ): Promise<Product | null> {
+    // Uma única instrução UPDATE, condicionada a produto ativo: ou altera a linha ou não altera nada.
+    const result = await this.ormRepository
+      .createQueryBuilder()
+      .update(ProductOrmEntity)
+      .set({ name })
+      .where('"productId" = :productId AND "deletedAt" IS NULL', { productId })
+      .returning(['productId', 'name', 'deletedAt'])
+      .execute();
+
+    const rows = result.raw as ProductOrmEntity[];
+    return rows.length === 0 ? null : ProductMapper.toDomain(rows[0]);
+  }
 }
