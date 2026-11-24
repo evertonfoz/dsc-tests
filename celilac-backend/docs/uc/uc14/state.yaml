@@ -1,7 +1,7 @@
 # Estado do UC14 (Buscar Produto por Identificador). UC concluído em 2026-11-23: PR #138 integrado em 6963f1f; Epic #126 fechado. Gates aprovados por delegação expressa do estudante (evertonfoz: "Pode fazer tudo") ou por CI.
 uc: UC14
 nome: Buscar Produto por Identificador
-documento: ../../../prompts/uc-14-buscar-produto.md
+documento: ../../../prompts/uc-14/uc-14-buscar-produto.md
 arquetipo: consultar
 epic: { issue: 126, estado: closed }
 fase_atual: concluido

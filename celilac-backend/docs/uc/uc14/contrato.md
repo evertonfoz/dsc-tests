@@ -1,6 +1,6 @@
 # Contrato — GET /products/:productId (UC14)
 
-> Fatos vêm dos testes `products.get.controller.spec.ts` (HTTP), `products.service.get.spec.ts` (núcleo), `product-id.pipe.spec.ts`, do spec PostgreSQL de persistência e de `test/products/buscar-produto.e2e-spec.ts`, executados em 2026-11-23 (`docs/uc/uc14/evidencias/B/`). Decisões: `prompts/uc-14-buscar-produto.md`, ADR-003, ADR-004 e ADR-005. Verificação no ambiente containerizado: ver Fase E.
+> Fatos vêm dos testes `products.get.controller.spec.ts` (HTTP), `products.service.get.spec.ts` (núcleo), `product-id.pipe.spec.ts`, do spec PostgreSQL de persistência e de `test/products/buscar-produto.e2e-spec.ts`, executados em 2026-11-23 (`docs/uc/uc14/evidencias/B/`). Decisões: `prompts/uc-14/uc-14-buscar-produto.md`, ADR-003, ADR-004 e ADR-005. Verificação no ambiente containerizado: ver Fase E.
 
 ## Requisição
 `GET /products/:productId`. `productId` é um UUID de qualquer versão. A rota é pública por enquanto (sem autenticação). Não há corpo nem parâmetros de consulta.

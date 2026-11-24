@@ -1,7 +1,7 @@
 # UC14 — Buscar Produto por Identificador
 
 > **Situação:** especificação com as pendências P1 a P6 respondidas pelo estudante, gerada pela Etapa 1 de [`uc-buscar.md`](./uc-buscar.md) (Decisão A: o UC não existia). Aprovada pelo estudante para iniciar a Etapa 2.
-> **Moldado em:** [`uc-12.md`](../docs/planejamento/uc12-cadastrar-produto/uc-12.md) (mesmas 13 seções).
+> **Moldado em:** [`uc-12.md`](../../docs/planejamento/uc12-cadastrar-produto/uc-12.md) (mesmas 13 seções).
 > **Legenda:** **[confirmado]** = decidido pelo estudante nesta execução; **[candidato]** = proposta do assistente, precisa ser confirmada; **[existente]** = já consta no código ou em ADR do repositório.
 
 ## Valores desta execução
