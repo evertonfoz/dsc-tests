@@ -55,7 +55,7 @@ Conferida por `grep` dos nomes nos arquivos de teste e por execução registrada
 | RN08 — duas alterações em sequência, vale a última (CA11) | S "should keep the name of the last of two sequential updates (CA11, RN08)"; P "should keep the last name after two sequential updates in the real database (UC15, CA11)"; E "should keep the last name after two sequential updates (CA11)" | Coberto |
 | Repositório em memória não duplica nem altera removido | S (CA04 e CA06 acima) | Coberto |
 | RF08 — UC12, UC13 e UC14 sem regressão (CA12) | `pnpm exec vitest run src/modules/products` (76 passam; specs do UC12 a UC14 sem diff); e2e dos UC12 a UC14 passam | Coberto (`../evidencias/F/regressao.txt`, `../evidencias/B/c1-c2-e2e.txt`) |
-| CA13 — cada CA com teste e cenário `.http` | testes: acima; cenários em `http-rest-client/products/uc15-alterar-produto/` e `containerizado/05-…` | Parcial: os `.http` existem, mas **não foram executados** (gravam dados) |
-| Verificação no contêiner (`run-checks.sh`) | checagens "Contrato UC15" acrescentadas ao script | Aguardando evidência (não executado: grava no banco de desenvolvimento; o CI roda o script no smoke do Compose) |
+| CA13 — cada CA com teste e cenário `.http` | testes: acima; cenários em `http-rest-client/products/uc15-alterar-produto/` e `containerizado/05-…` | Parcial: os arquivos `.http` existem, mas **não foram executados um a um**; o contrato foi provado pelo `run-checks.sh` |
+| Verificação no contêiner (`run-checks.sh`) | 9 checagens "Contrato UC15" no script, executadas com `--durability`: 47 ok, 0 falha | Coberto (`../evidencias/E/run-checks.txt`) |
 | Concorrência real (alterações simultâneas) | nenhum | Não implementado (ADR-006) |
 | Autenticação e permissões | nenhum | Não implementado (ADR-007) |

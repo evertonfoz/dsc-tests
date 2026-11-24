@@ -1,6 +1,6 @@
 # Resumo da execução do UC15 — Alterar Produto
 
-> Escrito para o estudante. Só fatos obtidos nesta execução (2026-11-24). **Situação:** Etapa 2 implementada localmente na branch `feature/uc15-alterar-produto`; nada foi publicado (sem push, PR ou merge) e nenhum gate foi aprovado.
+> Escrito para o estudante. Só fatos obtidos nesta execução (2026-11-24). **Situação:** Etapa 2 implementada na branch `feature/uc15-alterar-produto`, publicada com push e PR após autorização expressa; sem merge e sem gate aprovado.
 
 ## 1. Ponto de partida
 O prompt `uc-alterar.md` pede um UC de alteração de uma entidade, reaproveitando o processo do UC12 e o padrão dos UC13 e UC14. A execução começou só com perguntas, como o prompt exige.
@@ -22,7 +22,7 @@ Epic **#141**; fatias **#142 a #146** (F01 a F05); fases **#147 a #152** (A, C1,
 - **Contrato:** `docs/uc/uc15/contrato.md`. **Auditoria:** `docs/uc/uc15/evidencias/F/auditoria.txt` (pureza arquitetural conferida).
 
 ## 6. Cobertura e decisões
-Tabela em `docs/uc/uc15/relatorios/A.md` (seção 7): 13 itens *Coberto*, 1 *Parcial* (cenários `.http` não executados), 1 *Aguardando evidência* (`run-checks.sh`) e 2 *Não implementado* (ADR-006 concorrência, ADR-007 autenticação). Itens e nomes de teste conferidos por `grep`.
+Tabela em `docs/uc/uc15/relatorios/A.md` (seção 7): 13 itens *Coberto*, 1 *Parcial* (cenários `.http` não executados um a um), 1 *Coberto* pelo `run-checks.sh` (47 ok, 0 falha) e 2 *Não implementado* (ADR-006 concorrência, ADR-007 autenticação). Itens e nomes de teste conferidos por `grep`.
 
 ## 7. O que deu errado ou ficou diferente
 - RED que não falhou em F02, F03 e F05: eu escrevi, no GREEN de F01, a tradução de "não encontrado" e de falha de persistência. Só F04 teve RED real.
@@ -33,19 +33,19 @@ Tabela em `docs/uc/uc15/relatorios/A.md` (seção 7): 13 itens *Coberto*, 1 *Par
 - Um comando de limpeza inofensivo (`cp` de `/dev/null`) foi executado por engano durante a auditoria; não alterou nada.
 
 ## 8. Autorizações que afetaram o ambiente
-Criação de 12 Issues e de um rótulo (`uc15`) no GitHub, inclusão no Project #6. Banco de **desenvolvimento**: não tocado. Banco de **testes** (`celilac_test`): usado e truncado pelos testes de integração e e2e. Nenhum merge, push, fechamento de Issue ou aprovação de gate.
+Criação de 12 Issues e de um rótulo (`uc15`) no GitHub, inclusão no Project #6. Banco de **desenvolvimento**: a API foi reconstruída (`docker compose up -d --build api`) e o `run-checks.sh` criou 2 produtos de teste e renomeou 1 (autorizado). Banco de **testes** (`celilac_test`): usado e truncado pelos testes de integração e e2e. Push e PR autorizados. Nenhum merge, fechamento de Issue ou aprovação de gate.
 
 ## 9. Resultados verificados
-`pnpm build` e `pnpm lint`: sem erros (avisos). `pnpm test`: 81 passam e 4 falham (`orders`, ADR-001; linha de base: 59 passam e 4 falham). `pnpm test:integration`: 19 passam. `pnpm test:e2e`: 21 passam e 1 falha (`orders`, ADR-001). Regressão dos testes de products: 76 passam, specs do UC12 a UC14 sem diff. Evidências em `docs/uc/uc15/evidencias/`.
+`pnpm build` e `pnpm lint`: sem erros (avisos). `pnpm test`: 81 passam e 4 falham (`orders`, ADR-001; linha de base: 59 passam e 4 falham). `pnpm test:integration`: 19 passam. `pnpm test:e2e`: 21 passam e 1 falha (`orders`, ADR-001). `run-checks.sh --durability` (API reconstruída): 47 ok, 0 falha. Regressão dos testes de products: 76 passam, specs do UC12 a UC14 sem diff. Evidências em `docs/uc/uc15/evidencias/`.
 
 ## 10. Sem prova ainda (Aguardando evidência)
-`run-checks.sh` com as checagens "Contrato UC15" e os cenários `.http` (gravam no banco de desenvolvimento; exigem reconstruir a API); CI no GitHub (nada foi enviado).
+CI no GitHub (resultado do PR) e execução individual dos arquivos `.http`.
 
 ## 11. Além do prompt
 Nada além do pedido.
 
 ## 12. Onde está tudo
-Só **localmente**, na branch `feature/uc15-alterar-produto` (commits do UC15 sobre `docs/uc15-etapa1-especificacao`). No GitHub existem apenas as Issues #141 a #152 e o rótulo `uc15`. Pasta: `celilac-backend/`.
+Branch `feature/uc15-alterar-produto` (commits do UC15 sobre `docs/uc15-etapa1-especificacao`), enviada ao remoto; Issues #141 a #152, rótulo `uc15` e o PR do UC15. Pasta: `celilac-backend/`.
 
 ## 13. Pendente
-Gates, `run-checks.sh`, push, PR, merge, fechamento de Issues e do Epic (roteiro em `prompts/uc-15/artefatos/roteiro-conclusao-uc15.md`); Fases E e F; promoção do arquétipo `atualizar` (esboço) a validado; outras entidades ou operações (remover, restaurar, alterar em lote) em novas execuções.
+Gates, revisão do PR, merge, fechamento de Issues e do Epic (roteiro em `prompts/uc-15/artefatos/roteiro-conclusao-uc15.md`); Fases E e F; promoção do arquétipo `atualizar` (esboço) a validado; outras entidades ou operações (remover, restaurar, alterar em lote) em novas execuções.

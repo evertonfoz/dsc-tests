@@ -1,6 +1,6 @@
 # Contrato — PUT /products/:productId (UC15)
 
-> Fatos vêm dos testes `products.update.controller.spec.ts` (HTTP), `products.service.update.spec.ts` (núcleo), do spec PostgreSQL de persistência (casos "UC15") e de `test/products/alterar-produto.e2e-spec.ts`, executados em 2026-11-24 (`docs/uc/uc15/evidencias/B/`). Decisões: `prompts/uc-15/artefatos/03-uc-15-alterar-produto.md`, ADR-003 a ADR-007. A verificação no ambiente containerizado (Fase E) está **Aguardando evidência**.
+> Fatos vêm dos testes `products.update.controller.spec.ts` (HTTP), `products.service.update.spec.ts` (núcleo), do spec PostgreSQL de persistência (casos "UC15") e de `test/products/alterar-produto.e2e-spec.ts`, executados em 2026-11-24 (`docs/uc/uc15/evidencias/B/`). Decisões: `prompts/uc-15/artefatos/03-uc-15-alterar-produto.md`, ADR-003 a ADR-007. Verificação no contêiner (Fase E): `run-checks.sh --durability`, 47 ok e 0 falha, em 2026-11-24 (`evidencias/E/run-checks.txt`).
 
 ## Requisição
 `PUT /products/:productId` com corpo `{ "name": "<novo nome>" }`. `productId` é um UUID de qualquer versão. A rota é pública por enquanto (ADR-007). O nome segue a regra do cadastro (ADR-004): obrigatório, texto, não vazio, não só espaços, até 120 caracteres. Campos extras do corpo (`productId`, `deletedAt`, outros) são ignorados (`whitelist`).

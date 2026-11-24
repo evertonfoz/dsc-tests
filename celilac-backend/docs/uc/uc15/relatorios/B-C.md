@@ -37,9 +37,11 @@
 - **Testes de contrato (e2e)** foram escritos depois da implementação, sem RED, por serem provas de contrato da Fase D.
 - **Branch única** `feature/uc15-alterar-produto` e fatias commitadas juntas (como no UC14); nenhuma fatia foi integrada nem tem PR.
 
+| 13 | `run-checks.sh --durability` no contêiner reconstruído: 47 ok, 0 falha, com as 9 checagens do UC15 (autorizado pelo estudante; gravou no banco de desenvolvimento: 2 produtos de teste criados e 1 renomeado, como descrito no README) | Executado | `../evidencias/E/run-checks.txt` |
+
 ## 4. Gate de saída
 Pendente: nenhum gate foi marcado como aprovado. Decisão do estudante.
 
 ## 5. Pendências e riscos
-- `run-checks.sh` e os cenários `.http` **não foram executados** (gravam no banco de desenvolvimento): Aguardando evidência.
-- Sem push, sem PR, sem merge, sem fechamento de issues.
+- Os arquivos `.http` não foram executados um a um; o contrato foi provado pelo `run-checks.sh`. O CI ainda não rodou.
+- Sem merge e sem fechamento de issues. Nenhum gate foi aprovado.
