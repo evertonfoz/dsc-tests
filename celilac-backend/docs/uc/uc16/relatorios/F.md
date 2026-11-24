@@ -7,7 +7,7 @@
 | Período | 2026-11-24 |
 | Responsável | evertonfoz |
 | Issue(s) | #167 (fase), Epic #156 |
-| PR | nenhum (aguardando autorização do estudante) |
+| PR | #168 (integrado em 84dc4a9 em 2026-11-24) |
 
 ## 1. O que foi feito
 - Verificação final: build, lint, `pnpm test`, integração e e2e — Executado (`../evidencias/F/verificacao-final.txt`).
@@ -16,7 +16,7 @@
 - Regressão UC12 a UC15 nos testes unitários: 98 passam (`../evidencias/F/regressao.txt`); specs antigos só com acréscimos.
 - Dependências: 0 chaves estrangeiras para `products.products` no banco de desenvolvimento, por consulta somente de leitura ao catálogo — Executado (`../evidencias/F/dependencias-fk.txt`).
 - Teste de caracterização adicionado ao fechar a cobertura (repositório em memória não duplica) — Executado (`../evidencias/F/memoria-sem-duplicar.txt`).
-- CI: **Aguardando evidência** (não há PR).
+- CI do PR #168: quatro jobs com sucesso (qualidade, integração e e2e, smoke do Compose com `run-checks` e GitGuardian), no commit d257609 (run 45460324032); CI da `main` após o merge com sucesso (run 45460697698) — Executado (consulta ao GitHub em 2026-11-24).
 
 ## 2. Resultados
 | Verificação | Resultado |
@@ -31,10 +31,10 @@
 ## 3. Gate de saída
 | Verificação | Resultado | Validado por |
 |---|---|---|
-| Todo item do UC tem teste que o prova ou ADR | proposto: 15 *Coberto* e 4 *Não implementado* com ADR-008 a ADR-011 (ver `A.md`, seção 4) | pendente (estudante) |
-| Arquitetura em conformidade, achados tratados | proposto: nenhum achado | pendente (estudante) |
-| `state.yaml`, documentos e GitHub consistentes | `check-state.sh` e `check-links.mjs` passam localmente; `--remote` no encerramento | pendente |
-| Issues e Epic fechados | não feito (sem merge) | pendente (estudante) |
+| Todo item do UC tem teste que o prova ou ADR | aprovado (15 *Coberto* e 4 *Não implementado* com ADR-008 a ADR-011; ver `A.md`, seção 4) | evertonfoz (2026-11-24) |
+| Arquitetura em conformidade, achados tratados | aprovado (nenhum achado) | evertonfoz (2026-11-24) |
+| `state.yaml`, documentos e GitHub consistentes | aprovado (`check-state.sh --remote` e `check-links.mjs`) | CI e verificação local |
+| Issues e Epic fechados | aprovado: #156 a #167 fechadas após o merge; itens do Project #6 em `Done` | evertonfoz (2026-11-24) |
 
 ## 4. Comparação com o esboço `excluir` (matriz de arquétipos, seção 3.3)
 | Ponto do esboço | O que o UC16 mostrou |
@@ -50,7 +50,7 @@
 **Proposta (não aplicada):** promover `excluir` de esboço a validado (UC16) em `method/playbooks/matriz-arquetipos.md` (seção 3.3) e acrescentar ao catálogo de fatias do guia de decomposição: "já removido", "efeito nos outros UCs" e a nota sobre fatias que mudam o contrato do Repository. Isto só se faz com a sua autorização expressa; não editei o método.
 
 ## 5. Pendências e riscos
-- Sem push do PR, sem PR, sem merge, sem fechamento de issues e sem gates aprovados por mim. O roteiro está em `prompts/uc-16/artefatos/roteiro-conclusao-uc16.md`.
+- Merge do PR #168 e fechamento das issues feitos pelo assistente por autorização expressa do estudante; os gates foram aprovados em nome do estudante por essa mesma autorização ("siga o roteiro"). A promoção do arquétipo `excluir` **não** foi feita. O roteiro está em `prompts/uc-16/artefatos/roteiro-conclusao-uc16.md`.
 - Os arquivos `.http` não foram executados um a um; o contrato foi provado pelo `run-checks.sh`.
 - CA11 e CA12 não têm cenário `.http` (CA14 parcial); são provados no banco de testes.
 - O banco de desenvolvimento ganhou registros de teste (produtos criados e 2 removidos logicamente) das duas execuções do `run-checks.sh`.
