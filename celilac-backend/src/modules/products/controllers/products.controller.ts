@@ -1,4 +1,15 @@
-import { Body, Controller, Get, Param, Post, Put, Query } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  HttpCode,
+  HttpStatus,
+  Param,
+  Post,
+  Put,
+  Query,
+} from '@nestjs/common';
 import { createProductIdPipe } from '../../../common/pipes/product-id.pipe.js';
 import { CreateProductDto } from '../dtos/create-product.dto.js';
 import { UpdateProductDto } from '../dtos/update-product.dto.js';
@@ -58,5 +69,13 @@ export class ProductsController {
     );
 
     return toProductResponse(product);
+  }
+
+  @Delete(':productId')
+  @HttpCode(HttpStatus.NO_CONTENT)
+  async removeProduct(
+    @Param('productId', createProductIdPipe()) productId: string,
+  ): Promise<void> {
+    await this.productsService.removeProduct(productId);
   }
 }
