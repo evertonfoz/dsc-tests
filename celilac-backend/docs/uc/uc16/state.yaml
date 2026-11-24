@@ -33,7 +33,11 @@ fases:
     relatorio: null
     gate: []
     evidencias: []
-  E: { status: pendente, relatorio: null, gate: [], evidencias: [] }
+  E:
+    status: em_andamento
+    relatorio: relatorios/E.md
+    gate: []
+    evidencias: [evidencias/E/antes-rota-inexistente.txt, evidencias/E/run-checks-1-erro-no-script.txt, evidencias/E/run-checks.txt]
   F: { status: pendente, relatorio: null, gate: [], evidencias: [] }
 
 # Issues de fase: A #162, C1 #163, C2 #164, D #165, E #166, F #167. Um PR por fatia (padrão do método), salvo decisão em contrário.

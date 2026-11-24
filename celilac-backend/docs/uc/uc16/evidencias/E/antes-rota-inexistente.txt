@@ -1,0 +1,18 @@
+**O que foi executado:** curl -s -i -X DELETE http://localhost:3200/products/99999999-9999-4999-8999-999999999999
+**Data e hora UTC:** 2026-11-24T18:22:35Z
+**Commit de base:** 7e8c21233d21561ad332e1b3023907fa2a9b9c43
+**Diretório/ambiente:** celilac-backend/, testes unitários (repositório em memória); sem banco
+**Código de saída:** 0
+
+HTTP/1.1 404 Not Found
+X-Powered-By: Express
+Content-Type: application/json; charset=utf-8
+Content-Length: 111
+ETag: W/"6f-87uKlv4gBV1fIpbqTWOqSRdIsMg"
+Date: Tue, 24 Nov 2026 18:22:35 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
+{"message":"Cannot DELETE /products/99999999-9999-4999-8999-999999999999","error":"Not Found","statusCode":404}
+
+**Leitura do resultado:** ANTES da reconstrução: a API em contêiner (imagem de 3 horas atrás, sem o UC16) responde 404 do framework (Cannot DELETE ...) a DELETE /products/:productId. Não grava nada (UUID inexistente). Confirma o contrato anterior que o UC16 substitui.

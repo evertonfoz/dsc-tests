@@ -1,0 +1,51 @@
+@baseUrl = http://localhost:3200
+
+# ==============================================================================
+# Casos de Teste do UC16 — Remover Produto
+# DELETE /products/:productId: remoção lógica (deletedAt); só produto ativo; resposta 204 sem corpo.
+# ATENÇÃO: estes cenários GRAVAM dados. Não execute sem autorização. Veja docs/uc/uc16/contrato.md.
+# ==============================================================================
+
+### Cenário 1: Cadastrar produto para remover (UC12) → esperado: 201 Created
+# @name produtoParaRemover
+POST {{baseUrl}}/products
+Content-Type: application/json
+
+{
+  "name": "Produto para Remover UC16"
+}
+
+###
+@produtoId = {{produtoParaRemover.response.body.productId}}
+
+### Cenário 2: Remover (CA01) → esperado: 204 No Content, sem corpo
+DELETE {{baseUrl}}/products/{{produtoId}}
+
+### Cenário 3: Buscar o removido (CA02) → esperado: 404 Not Found
+GET {{baseUrl}}/products/{{produtoId}}
+
+### Cenário 4: Remover de novo (CA08) → esperado: 404 Not Found
+DELETE {{baseUrl}}/products/{{produtoId}}
+
+### Cenário 5: Alterar o removido (CA04) → esperado: 404 Not Found
+PUT {{baseUrl}}/products/{{produtoId}}
+Content-Type: application/json
+
+{
+  "name": "Novo nome"
+}
+
+### Cenário 6: UUID sem produto (CA07) → esperado: 404 Not Found
+DELETE {{baseUrl}}/products/99999999-9999-4999-8999-999999999999
+
+### Cenário 7: Identificador inválido (CA09) → esperado: 400 Bad Request
+DELETE {{baseUrl}}/products/abc
+
+### Cenário 8: Corpo ignorado (CA10) → esperado: 204 (use um produto ativo novo; repita o Cenário 1)
+# DELETE {{baseUrl}}/products/{{produtoId}}
+# Content-Type: application/json
+#
+# { "name": "ignorado", "deletedAt": null }
+#
+# Falha de gravação (CA11), remoções simultâneas (CA12) e o registro no banco (CA06) não têm cenário HTTP:
+# são provados pelos testes do PostgreSQL de testes e pelo e2e (ver docs/uc/uc16/contrato.md).

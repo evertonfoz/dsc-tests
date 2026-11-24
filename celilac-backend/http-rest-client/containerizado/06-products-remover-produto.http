@@ -1,0 +1,51 @@
+@baseUrl = http://localhost:3200
+
+# ==============================================================================
+# UC16 — Remover Produto (Ambiente Containerizado)
+# ATENÇÃO: GRAVA dados no banco de desenvolvimento. Execute só com autorização.
+# A remoção é LÓGICA (deletedAt): o registro removido continua no banco e não há
+# como apagá-lo por esta API (ADR-009 e ADR-010). Remova apenas o produto criado aqui (Cenário 0).
+# ==============================================================================
+
+### Cenário 0: cadastrar produto de teste → esperado: 201 { productId, name }
+# @name produtoParaRemover
+POST {{baseUrl}}/products
+Content-Type: application/json
+
+{
+  "name": "Produto para Remover UC16 (containerizado)"
+}
+
+###
+@produtoId = {{produtoParaRemover.response.body.productId}}
+
+### Cenário 1: remover o produto (corpo é ignorado) → esperado: 204 sem corpo
+DELETE {{baseUrl}}/products/{{produtoId}}
+Content-Type: application/json
+
+{
+  "name": "ignorado"
+}
+
+### Cenário 2: buscar o produto removido → esperado: 404 (ProductNotFoundException)
+GET {{baseUrl}}/products/{{produtoId}}
+
+### Cenário 3: remover de novo → esperado: 404 (ProductNotFoundException); deletedAt original preservado
+DELETE {{baseUrl}}/products/{{produtoId}}
+
+### Cenário 4: alterar o produto removido → esperado: 404 (ProductNotFoundException)
+PUT {{baseUrl}}/products/{{produtoId}}
+Content-Type: application/json
+
+{
+  "name": "Qualquer"
+}
+
+### Cenário 5: UUID sem produto → esperado: 404 (ProductNotFoundException)
+DELETE {{baseUrl}}/products/99999999-9999-4999-8999-999999999999
+
+### Cenário 6: identificador que não é UUID → esperado: 400 Bad Request
+DELETE {{baseUrl}}/products/abc
+
+### Cenário 7: sub-rota inexistente → esperado: 404 do framework
+DELETE {{baseUrl}}/products/99999999-9999-4999-8999-999999999999/extra

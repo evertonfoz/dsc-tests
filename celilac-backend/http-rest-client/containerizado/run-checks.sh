@@ -199,6 +199,40 @@ check "Contrato UC15: o 404 traz error ProductNotFoundException" "ProductNotFoun
 code_put_bad_id=$(status -X PUT "$BASE/products/abc" -H "Content-Type: application/json" -d '{"name":"x"}')
 check "Contrato UC15: PUT com identificador que não é UUID retorna 400" "400" "$code_put_bad_id"
 
+# UC16: DELETE /products/:productId (GRAVA: cria UM produto próprio e remove apenas esse; remoção lógica, o registro fica no banco).
+uc16_name="UC16 removido $timestamp"
+uc16_response=$(curl -s -X POST "$BASE/products" -H "Content-Type: application/json" -d "{\"name\":\"$uc16_name\"}")
+uc16_id=$(extract_json_field "$uc16_response" "productId")
+if [ -n "$uc16_id" ]; then
+  uc16_total_before=$(curl -s "$BASE/products?limit=1" | node -e "let d='';process.stdin.on('data',c=>d+=c).on('end',()=>{try{console.log(JSON.parse(d).total)}catch{console.log('')}})")
+  code_del=$(curl -s -o /tmp/uc16-del-body.$$ -w '%{http_code}' -X DELETE "$BASE/products/$uc16_id" -H "Content-Type: application/json" -d '{"name":"ignorado","deletedAt":null}')
+  check "Contrato UC16: DELETE /products/:productId retorna 204 (corpo ignorado)" "204" "$code_del"
+  check "Contrato UC16: o 204 vem sem corpo" "0" "$(wc -c < /tmp/uc16-del-body.$$ | tr -d ' ')"
+  rm -f /tmp/uc16-del-body.$$
+  uc16_row=$(echo "SELECT name || '|' || (\"deletedAt\" IS NOT NULL) FROM products.products WHERE \"productId\" = '$uc16_id';" | sql | tr -d '\r')
+  check "Contrato UC16: o registro continua no banco com o mesmo nome e deletedAt preenchido" "$uc16_name|true" "$uc16_row"
+  uc16_deleted_at=$(echo "SELECT \"deletedAt\" FROM products.products WHERE \"productId\" = '$uc16_id';" | sql | tr -d '\r')
+  check "Contrato UC16: buscar o removido retorna 404" "404" "$(status "$BASE/products/$uc16_id")"
+  check "Contrato UC16: alterar o removido retorna 404" "404" "$(status -X PUT "$BASE/products/$uc16_id" -H "Content-Type: application/json" -d '{"name":"x"}')"
+  del_again_body=$(curl -s -X DELETE "$BASE/products/$uc16_id")
+  check "Contrato UC16: remover de novo retorna 404 ProductNotFoundException" "ProductNotFoundException" "$(extract_json_field "$del_again_body" "error")"
+  uc16_deleted_at_after=$(echo "SELECT \"deletedAt\" FROM products.products WHERE \"productId\" = '$uc16_id';" | sql | tr -d '\r')
+  check "Contrato UC16: a segunda remoção preserva o deletedAt original" "$uc16_deleted_at" "$uc16_deleted_at_after"
+  uc16_total_after=$(curl -s "$BASE/products?limit=1" | node -e "let d='';process.stdin.on('data',c=>d+=c).on('end',()=>{try{console.log(JSON.parse(d).total)}catch{console.log('')}})")
+  check "Contrato UC16: o total da listagem diminuiu em 1" "$((uc16_total_before - 1))" "$uc16_total_after"
+  if [ -n "$created_id" ]; then
+    check "Contrato UC16: outro produto ativo não foi afetado (GET retorna 200)" "200" "$(status "$BASE/products/$created_id")"
+  fi
+else
+  check "Contrato UC16: remoção requer produto cadastrado" "id_valido" "id_vazio"
+fi
+code_del_missing=$(status -X DELETE "$BASE/products/99999999-9999-4999-8999-999999999999")
+check "Contrato UC16: DELETE em UUID sem produto retorna 404" "404" "$code_del_missing"
+code_del_bad_id=$(status -X DELETE "$BASE/products/abc")
+check "Contrato UC16: DELETE com identificador que não é UUID retorna 400" "400" "$code_del_bad_id"
+code_del_subroute=$(status -X DELETE "$BASE/products/99999999-9999-4999-8999-999999999999/extra")
+check "Contrato UC16: DELETE em sub-rota inexistente retorna 404" "404" "$code_del_subroute"
+
 code_wrong_route=$(status -X POST "$BASE/produtos" -H "Content-Type: application/json" -d '{"name":"x"}')
 check "Contrato: POST em rota inexistente retorna 404" "404" "$code_wrong_route"
 
