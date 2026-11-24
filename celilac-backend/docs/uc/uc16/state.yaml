@@ -1,22 +1,23 @@
-# Estado do UC16 (Remover Produto). Etapa 1 aprovada pelo estudante em 2026-11-24; planejamento publicado (Epic #156, fatias #157 a #161, fases #162 a #167). Nenhuma fatia começou.
-# Nenhum gate está aprovado: aprovar é decisão do estudante (ou do CI, nos gates objetivos).
+# Estado do UC16 (Remover Produto). Etapa 1 aprovada pelo estudante em 2026-11-24; planejamento publicado (Epic #156, fatias #157 a #161, fases #162 a #167). Fase A aprovada pelo estudante (evertonfoz) em 2026-11-24.
+# PR único para as fatias, com pr_compartilhado (opção B escolhida pelo estudante); cada commit deve manter o build verde. Branch única: feature/uc16-remover-produto.
+# Gates: aprovar é decisão do estudante (ou do CI, nos gates objetivos).
 uc: UC16
 nome: Remover Produto
 documento: ../../../prompts/uc-16/artefatos/03-uc-16-remover-produto.md
 arquetipo: excluir
 epic: { issue: 156, estado: open }
-fase_atual: A
+fase_atual: B
 
 fases:
   A:
-    status: em_andamento
+    status: concluida
     relatorio: relatorios/A.md
     gate:
-      - { item: "Epic e Sub-Issues criadas e reconciliadas com este arquivo", resultado: pendente }
-      - { item: "GitHub Project configurado com os 5 estados", resultado: pendente }
+      - { item: "Epic e Sub-Issues criadas e reconciliadas com este arquivo", resultado: aprovado, por: evertonfoz }
+      - { item: "GitHub Project configurado com os 5 estados", resultado: aprovado, por: evertonfoz }
     evidencias: [evidencias/A/linha-de-base.txt, evidencias/A/publicacao.txt]
   B:
-    status: pendente
+    status: em_andamento
     relatorio: null
     gate:
       - { item: "Todas as fatias integradas na branch principal", resultado: pendente }

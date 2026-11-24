@@ -4,10 +4,10 @@
 |---|---|
 | Caso de uso | UC16 — Remover Produto |
 | Fase | A — Planejar e publicar |
-| Período | 2026-11-24 (em andamento) |
+| Período | 2026-11-24 |
 | Responsável | evertonfoz |
 | Issue(s) | #162 (fase), Epic #156 |
-| Branch | `docs/uc16-etapa1` (documentação); branch de implementação **a confirmar** | <!-- links:ignore -->
+| Branch | `feature/uc16-remover-produto` (única, para documentação e implementação; antes chamada `docs/uc16-etapa1`, renomeada antes do push) | <!-- links:ignore -->
 
 ## 1. Objetivo da fase
 Publicar Epic, fatias e Project do UC16 e reconciliá-los com `docs/uc/uc16/state.yaml`.
@@ -19,7 +19,8 @@ Publicar Epic, fatias e Project do UC16 e reconciliá-los com `docs/uc/uc16/stat
 - Linha de base antes de alterar código: `pnpm build` e `pnpm lint` passam (só avisos); `pnpm test` com 81 passando e 4 falhando, todas em `orders.services.spec.ts` (falhas conhecidas, ADR-001) — Executado nesta fase.
 - Epic #156, 5 fatias (#157 a #161) e 6 issues de fase (#162 a #167) criadas, vinculadas ao Epic e adicionadas ao Project #6 (11 em `Backlog`, F01 em `Ready`) — Executado nesta fase.
 - `check-state.sh --remote`: `OK (local + GitHub)` — Executado nesta fase.
-- **Ainda não feito:** push da branch de documentação e PR da Fase A (aguardando autorização) — Aguardando evidência.
+- Opção B escolhida pelo estudante: **um PR único** para as fatias, com `pr_compartilhado`, mantendo cada commit com o build verde — Confirmado pelo estudante.
+- **Ainda não feito:** PR (aguardando autorização) — Aguardando evidência.
 
 ## 3. Evidências
 | # | Afirmação | Etiqueta | Evidência |
@@ -57,5 +58,5 @@ Publicar Epic, fatias e Project do UC16 e reconciliá-los com `docs/uc/uc16/stat
 ## 5. Gate de saída
 | Verificação | Como verificar | Resultado | Validado por |
 |---|---|---|---|
-| Epic e Sub-Issues conferem com o state.yaml | `check-state.sh --remote` (OK, executado) | pendente (aguarda aprovação do estudante) | — |
-| GitHub Project configurado com os 5 estados | listagem do Project | pendente | — |
+| Epic e Sub-Issues conferem com o state.yaml | `check-state.sh --remote` (OK, executado) | aprovado | evertonfoz (2026-11-24) |
+| GitHub Project configurado com os 5 estados | listagem do Project (`docs/uc/uc16/evidencias/A/publicacao.txt`) | aprovado | evertonfoz (2026-11-24) |
