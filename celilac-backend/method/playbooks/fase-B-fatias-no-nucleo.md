@@ -6,7 +6,7 @@
 |---|---|
 | Camada | 1 (Ciclo do UC) |
 | Fase | B — Fatias no núcleo |
-| Arquétipos | criar *(validado)* · atualizar *(validado, UC15)* · consultar, excluir, autenticar *(esboços, ver `matriz-arquetipos.md`)* |
+| Arquétipos | criar *(validado)* · consultar *(validado, UC13 e UC14)* · atualizar *(validado, UC15)* · excluir, autenticar *(esboços, ver `matriz-arquetipos.md`)* |
 | Depende de | Fase A aprovada; Fundação (CI verde) |
 | Valida-se com | testes unitários (`pnpm test` ou o comando do perfil) · CI · revisão humana de cada PR |
 
@@ -74,7 +74,7 @@ O agente **não** marca `aprovado` nem faz merge (regras 9 e 21).
 | Arquétipo | O que muda nesta fase | Validação |
 |---|---|---|
 | criar | fatias do catálogo do guia (seção 5); porta de repositório com `save` | validado (UC12) |
-| consultar | fatias de leitura, sem efeito colateral | esboço |
+| consultar | fatias de leitura, sem efeito colateral | validado (UC13, UC14) |
 | atualizar | acrescenta estado anterior e conflitos | validado (UC15) |
 | excluir | acrescenta integridade e política de remoção | esboço |
 | autenticar | acrescenta hash e política de credenciais | esboço |

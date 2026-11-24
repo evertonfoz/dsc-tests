@@ -6,7 +6,7 @@
 |---|---|
 | Camada | 1 (Ciclo do UC) |
 | Fase | D — Contrato de resposta |
-| Arquétipos | criar *(validado)* · demais *(esboços, ver `matriz-arquetipos.md`; peso maior em consultar e autenticar)* |
+| Arquétipos | criar *(validado)* · consultar *(validado, UC13 e UC14)* · atualizar *(validado, UC15)* · demais *(esboços, ver `matriz-arquetipos.md`; peso maior em autenticar)* |
 | Depende de | Fase C aprovada (C1 e C2 integradas) |
 | Valida-se com | testes de contrato (HTTP) · CI · revisão humana |
 
@@ -68,7 +68,7 @@ O agente **não** marca `aprovado` nem faz merge (regras 9 e 21).
 | Arquétipo | O que muda nesta fase | Validação |
 |---|---|---|
 | criar | DTO público no `201`; formato do `400` (e `409`) | validado (UC12) |
-| consultar | **peso maior:** formato de lista, paginação, campos e ordenação | esboço |
+| consultar | **peso maior:** formato de lista, paginação, campos e ordenação | validado (UC13, UC14) |
 | atualizar | resposta do sucesso e de conflito (`409`) | validado (UC15) |
 | excluir | corpo costuma ser vazio (`204`); fase simplificada | esboço |
 | autenticar | **peso maior:** o que nunca sai (hash, segredos); erro de login sem detalhe | esboço |

@@ -1,11 +1,11 @@
 # Matriz de aplicabilidade por arquétipo de caso de uso
 
-> **Grau de validação.** Os arquétipos **criar** (UC12 / CeliLac) e **atualizar** (UC15 / CeliLac, 2026-11-24) foram exercitados em prática. Os demais são **esboços**: hipóteses fundamentadas no que cada tipo costuma exigir, **ainda não executadas**. (O UC13 e o UC14 exercitaram consultas no CeliLac, mas esta matriz ainda não foi atualizada para `consultar`.) Cada esboço deve ser validado no primeiro caso de uso real daquele tipo e então promovido (ou corrigido) com evidências.
+> **Grau de validação.** Os arquétipos **criar** (UC12), **consultar** (UC13 e UC14) e **atualizar** (UC15), todos no CeliLac, foram exercitados em prática. Os demais são **esboços**: hipóteses fundamentadas no que cada tipo costuma exigir, **ainda não executadas**. Cada esboço deve ser validado no primeiro caso de uso real daquele tipo e então promovido (ou corrigido) com evidências.
 > Legenda: `=` igual ao `criar` · `±` muda parcialmente (ver nota) · `+` fase ganha passos · `−` fase simplificada.
 
 ## 1. Visão geral por fase
 
-| Fase | criar *(validado)* | consultar *(esboço)* | atualizar *(validado, UC15)* | excluir *(esboço)* | autenticar *(esboço)* |
+| Fase | criar *(validado)* | consultar *(validado, UC13 e UC14)* | atualizar *(validado, UC15)* | excluir *(esboço)* | autenticar *(esboço)* |
 |---|---|---|---|---|---|
 | **A** Planejar e publicar | referência | = | = | = | + segurança como item de planejamento |
 | **B** Fatias (núcleo) | ver seção 2 | ± fatias de leitura (sem efeito colateral) | + estado anterior e conflitos | + integridade e política de remoção | + hash, política de credenciais |
@@ -27,11 +27,16 @@
 
 ## 3. Esboços dos demais arquétipos
 
-### 3.1. `consultar` *(esboço)*
-- **Fatias típicas:** consulta de item existente (200); item inexistente (404); identificador malformado (400); listagem vazia; listagem com dados; filtro; paginação/ordenação (se o UC definir).
-- **Muda:** não há escrita, então "inválido não é persistido" não se aplica; a fase E não precisa de prova de durabilidade, mas precisa de **dado conhecido** (semente de teste) para as asserções.
-- **Riscos:** consulta sem limite; vazar campos internos (Fase D).
-- **A validar:** como semear dados de forma isolada (banco de testes).
+### 3.1. `consultar` *(validado, UC13 e UC14)*
+- **Fatias típicas (confirmadas):**
+  - *Listagem (UC13):* listar só itens ativos com os campos aprovados; removidos fora da lista e do total; lista vazia é sucesso com total 0; paginação com limite padrão e navegação entre páginas; ordenação estável (campo e, em empate, o identificador); paginação inválida rejeitada no núcleo sem consultar o Repository; falha ao consultar informada sem vazar detalhes.
+  - *Busca por identificador (UC14):* item ativo (200); inexistente (404); removido tratado como inexistente (404, sem revelar que existiu); falha de persistência (500 genérico); identificador malformado rejeitado por pipe com exceção específica (400), antes do Service.
+- **Muda:** não há escrita, então "inválido não é persistido" não se aplica e a Fase E não precisa de prova de durabilidade. A prova de que a consulta não grava vira teste (a busca compara o estado antes e depois, no PostgreSQL de testes).
+- **Riscos observados:** (1) **vazar campo interno** (`deletedAt`): a Fase D prova que a resposta traz exatamente os campos aprovados; (2) a **ordenação pode divergir** entre o Repository em memória e o banco (collation): o UC13 fixou a collation no banco e escreveu teste de paridade, que passou sem RED e só vale para os 23 nomes testados e a imagem `postgres:17`; (3) consulta sem limite: o UC13 definiu padrão e máximo (limite 101 responde 400); (4) o **soft delete** ("removido não aparece") exige atributo novo e decisão própria (ADR-005 do projeto, migration reversível e testada); (5) RED que não falha: F03 do UC13 e F03 e C2 do UC14 nasceram sem RED e foram validadas por mutação.
+- **Como resolveu "dado conhecido" na Fase E:** sem script de seed, o `run-checks.sh` cria o próprio dado pela rota do UC12 (`POST`) e consulta esse item; a listagem compara o total da API com a contagem SQL de ativos. Isso grava no banco de desenvolvimento (1 a 2 `POST` por execução).
+- **Ajuste ao método:** um PR para várias fatias exigiu o campo opcional `pr_compartilhado` (`method/decisoes/ADR-005-pr-compartilhado-entre-fatias.md`).
+- **Decisões que o UC precisa tomar:** formato da lista (`items`, `page`, `limit`, `total`) e campos; removido como inexistente; erro de identificador malformado (`400`) distinto de inexistente (`404`).
+- **Ainda não exercitado:** filtros por atributo, consulta por atributo que não é chave (vários resultados), índices, ordenação escolhida pelo cliente e consulta sobre outra entidade.
 
 ### 3.2. `atualizar` *(validado, UC15)*
 - **Fatias típicas (confirmadas no UC15):** atualização válida com a resposta contendo o item atualizado; recurso inexistente (404); removido logicamente tratado como inexistente e **não alterado**; entrada inválida (400) sem gravar; falha de persistência (500) sem alteração parcial. Identificador malformado (400) é da fase C1 (pipe), não do núcleo.

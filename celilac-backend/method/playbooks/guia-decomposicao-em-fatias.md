@@ -46,7 +46,23 @@ Se a Fase D, E ou F revelar um comportamento sem fatia, ele **não** vira exceç
 | 5 | Regra de unicidade ou de negócio específica | RN própria do UC (se o UC a define) |
 | 6 | Falha de persistência tratada | FE de falha de infraestrutura |
 
-*Os demais arquétipos têm catálogos em `matriz-arquetipos.md` (esboços).*
+*`consultar` (seção 5.0) e `atualizar` (seção 5.1) têm catálogos próprios; os demais têm catálogos em `matriz-arquetipos.md` (esboços).*
+
+## 5.0. Catálogo de fatias típicas — arquétipo `consultar` (validado nos UC13 e UC14)
+
+| Fatia | Comportamento | Prova |
+|---|---|---|
+| Consulta de item ativo | Devolve exatamente os campos aprovados | Teste do Service e do controller |
+| Item inexistente | Exceção de "não encontrado" (404) | Teste do Service |
+| Item removido logicamente | Tratado como inexistente (404) | Teste do Service e do PostgreSQL de testes |
+| Identificador malformado | Rejeitado por pipe, com exceção específica (400), sem chamar o Service | Teste do controller |
+| Listagem com paginação e ordenação | Padrão de itens por página, navegação, ordem estável e total só de ativos | Teste do Service e do PostgreSQL de testes (paridade da ordenação) |
+| Lista vazia | Sucesso com total 0 | Teste do Service |
+| Paginação inválida | Rejeitada no núcleo, sem consultar o Repository | Teste do Service |
+| Falha de persistência | Informada sem vazar a causa (500) | Teste do Service e falha real do banco |
+| Consulta não grava | Estado igual antes e depois | Teste no PostgreSQL de testes |
+
+**Cuidado com o RED:** fatias de leitura costumam passar sem RED quando a anterior já implementa a consulta (UC13 F03; UC14 F03 e C2). Quando acontecer, valide por mutação e registre o desvio.
 
 ## 5.1. Catálogo de fatias típicas — arquétipo `atualizar` (validado no UC15)
 

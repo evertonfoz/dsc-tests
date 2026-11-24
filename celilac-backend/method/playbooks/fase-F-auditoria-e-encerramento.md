@@ -71,7 +71,7 @@ O agente **não** marca `aprovado`, **não** fecha issues nem o Epic (regras 9, 
 | Arquétipo | O que muda nesta fase | Validação |
 |---|---|---|
 | criar | cobertura de RN/FA/FE (lição do UC12: preço, falha de persistência) | validado (UC12) |
-| consultar | cobertura de filtros, paginação e não encontrado | esboço |
+| consultar | cobertura de filtros, paginação e não encontrado | validado (UC13, UC14) |
 | atualizar | cobertura de conflito e de estado anterior | validado (UC15) |
 | excluir | cobertura de integridade e de ausência após remoção | esboço |
 | autenticar | **revisão de segurança dedicada** (credenciais, vazamento em resposta e log) | esboço |
