@@ -67,7 +67,7 @@ O agente **não** marca `aprovado` nem faz merge (regras 9 e 21).
 |---|---|---|
 | criar | cadastro + durabilidade (reiniciar a API e reler) | validado (UC12) |
 | consultar | leitura de dado conhecido (semear por rota do UC); sem durabilidade a provar | esboço |
-| atualizar | alteração + releitura | esboço |
+| atualizar | alteração + releitura | validado (UC15) |
 | excluir | remoção + confirmação de ausência | esboço |
 | autenticar | login válido e inválido; sem registrar segredos | esboço |
 

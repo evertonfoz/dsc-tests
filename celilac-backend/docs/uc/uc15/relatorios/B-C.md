@@ -40,7 +40,7 @@
 | 13 | `run-checks.sh --durability` no contêiner reconstruído: 47 ok, 0 falha, com as 9 checagens do UC15 (autorizado pelo estudante; gravou no banco de desenvolvimento: 2 produtos de teste criados e 1 renomeado, como descrito no README) | Executado | `../evidencias/E/run-checks.txt` |
 
 ## 4. Gate de saída
-Gates das fases C, D e E aprovados em 2026-11-24 (ver `state.yaml`; CI do PR #153 com sucesso nos quatro jobs). O gate da Fase B (fatias integradas e CI verde na branch principal) segue **pendente**: depende do merge do PR #153.
+Gates das fases C, D e E aprovados em 2026-11-24 (ver `state.yaml`; CI do PR #153 com sucesso nos quatro jobs). O gate da Fase B foi aprovado após o merge do PR #153 (e138874) e o CI verde na `main` (run 45438561157: três jobs com sucesso).
 
 ## 5. Pendências e riscos
 - Os arquivos `.http` não foram executados um a um; o contrato foi provado pelo `run-checks.sh`. O CI ainda não rodou.

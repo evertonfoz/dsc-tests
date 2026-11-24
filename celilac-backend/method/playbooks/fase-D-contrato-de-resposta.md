@@ -69,7 +69,7 @@ O agente **não** marca `aprovado` nem faz merge (regras 9 e 21).
 |---|---|---|
 | criar | DTO público no `201`; formato do `400` (e `409`) | validado (UC12) |
 | consultar | **peso maior:** formato de lista, paginação, campos e ordenação | esboço |
-| atualizar | resposta do sucesso e de conflito (`409`) | esboço |
+| atualizar | resposta do sucesso e de conflito (`409`) | validado (UC15) |
 | excluir | corpo costuma ser vazio (`204`); fase simplificada | esboço |
 | autenticar | **peso maior:** o que nunca sai (hash, segredos); erro de login sem detalhe | esboço |
 
