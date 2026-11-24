@@ -30,6 +30,7 @@ As checagens do UC13 leem a coluna `deletedAt`: a migration `AddDeletedAtToProdu
 | `01-products-cadastrar-produto.http` | Cenários do caso de uso principal `UC12 — Cadastrar Produto`, com encadeamento de identificador via `# @name`. |
 | `03-products-listar-produtos.http` | Cenários do caso de uso `UC13 — Listar Produtos` (`GET /products`): listagem padrão, `page` e `limit`, página além do fim, parâmetros inválidos (`400`) e rota inexistente (`404`). Somente leitura. |
 | `04-products-buscar-produto.http` | Cenários do caso de uso `UC14 — Buscar Produto por Identificador` (`GET /products/:productId`): produto existente, UUID sem produto (`404`), identificador inválido (`400`) e rota inexistente. Somente leitura. |
+| `05-products-alterar-produto.http` | Cenários do caso de uso `UC15 — Alterar Produto` (`PUT /products/:productId`): alteração com sucesso, UUID sem produto (`404`), identificador inválido (`400`), nome vazio (`400`) e rota inexistente. **Grava dados** (cria e altera um produto de teste). |
 | `02-orders-fronteira.http` | Cenários de fronteira HTTP do recurso de apoio `orders` sem dependência de dados (Grupo A). |
 | `run-checks.sh` | Script bash automatizado com asserções, contadores `pass`/`fail` e código de saída semântico. |
 | `README.md` | Este guia de referência operacional e segurança. |
@@ -64,9 +65,10 @@ BASE_URL="http://localhost:3200" ./http-rest-client/containerizado/run-checks.sh
 4. **Contrato do Caso de Uso (`POST /products`):** Rejeição com `400` para nome vazio, ausente e tipo inválido; sucesso com `201` retornando `productId` e `name`; e descarte de campos extras (`whitelist`).
 5. **Contrato do UC13 (`GET /products`):** `200` com `items`, `page`, `limit` e `total`; itens só com `productId` e `name`; limite padrão `20`; `400` para `limit=101`, `page=0` e `limit` não numérico; e `total` igual à contagem de produtos ativos (`deletedAt IS NULL`) no banco.
 6. **Contrato do UC14 (`GET /products/:productId`):** `200` com somente `productId` e `name` para o produto cadastrado na própria execução; `404` com `ProductNotFoundException` para UUID sem produto; `400` com `message` em lista para identificador que não é UUID; e `404` para sub-rota inexistente. Somente leitura (reaproveita o produto criado pelo `POST`).
-7. **Recurso de Apoio (`POST /orders/:id/confirm`):** Rejeição com `400` para ID malformado e `404` para UUID inexistente.
-8. **Persistência no PostgreSQL:** Confere via `psql` no contêiner se o produto cadastrado foi gravado na tabela `products.products`.
-9. **Durabilidade (flag `--durability`):** Reinicia **apenas** o contêiner da API (`docker compose restart api`), aguarda a reconexão (health check em polling de até 30s) e comprova que o registro continua intacto no banco de dados.
+7. **Contrato do UC15 (`PUT /products/:productId`):** `200` com somente `productId` e `name` (nome novo) para o produto criado pelo teste de limite; `productId` do corpo ignorado; nome novo gravado no banco; `400` para nome vazio sem alterar o nome gravado; `404` com `ProductNotFoundException` para UUID sem produto; `400` para identificador que não é UUID. **Grava dados.**
+8. **Recurso de Apoio (`POST /orders/:id/confirm`):** Rejeição com `400` para ID malformado e `404` para UUID inexistente.
+9. **Persistência no PostgreSQL:** Confere via `psql` no contêiner se o produto cadastrado foi gravado na tabela `products.products`.
+10. **Durabilidade (flag `--durability`):** Reinicia **apenas** o contêiner da API (`docker compose restart api`), aguarda a reconexão (health check em polling de até 30s) e comprova que o registro continua intacto no banco de dados.
 
 ### Código de Saída
 * `0`: Todas as asserções foram aprovadas (`0 falha(s)`).
@@ -75,7 +77,7 @@ BASE_URL="http://localhost:3200" ./http-rest-client/containerizado/run-checks.sh
 ---
 
 ## 6. O Que o Script Grava e Políticas de Segurança
-* **Volume de Escrita:** Cada execução do script realiza no máximo **dois `POST /products` bem-sucedidos** na base de dados de desenvolvimento (`celilac_db`).
+* **Volume de Escrita:** Cada execução do script realiza no máximo **dois `POST /products` bem-sucedidos** e **um `PUT /products/:productId`** (UC15, que renomeia o produto do teste de limite) na base de dados de desenvolvimento (`celilac_db`).
 * **Operações Proibidas e Não Realizadas:**
   * **NÃO** remove contêineres, redes ou volumes (`docker compose down` e `down -v` são estritamente proibidos).
   * **NÃO** executa `docker volume rm` ou comandos de `prune`.

@@ -1,4 +1,4 @@
-# Estado do UC15 (Alterar Produto). Fase A em andamento: Epic #141 e issues #142 a #152 criadas em 2026-11-24 com autorização expressa do estudante ("Aprovo, pode criar tudo e iniciar a Etapa 2"). Os gates só serão marcados "aprovado" quando o estudante os validar.
+# Estado do UC15 (Alterar Produto). Epic #141 e issues #142 a #152 criadas em 2026-11-24 com autorização expressa do estudante ("Aprovo, pode criar tudo e iniciar a Etapa 2"). Núcleo, HTTP e persistência implementados na branch feature/uc15-alterar-produto (sem PR, sem push). Os gates só serão marcados "aprovado" quando o estudante os validar.
 uc: UC15
 nome: Alterar Produto
 documento: ../../../prompts/uc-15/artefatos/03-uc-15-alterar-produto.md
@@ -15,14 +15,22 @@ fases:
       - { item: "GitHub Project configurado com os 5 estados", resultado: pendente }
     evidencias: [evidencias/A/publicacao.txt]
   B:
-    status: pendente
-    relatorio: null
+    status: em_andamento
+    relatorio: relatorios/B-C.md
     gate:
       - { item: "Todas as fatias integradas na branch principal", resultado: pendente }
       - { item: "CI verde na branch principal", resultado: pendente }
-    evidencias: []
-  C: { status: pendente, relatorio: null, gate: [], evidencias: [] }
-  D: { status: pendente, relatorio: null, gate: [], evidencias: [] }
+    evidencias: [evidencias/B/f01-red.txt, evidencias/B/f01-green.txt, evidencias/B/f02-f05-red.txt, evidencias/B/f02-f05-green.txt]
+  C:
+    status: em_andamento
+    relatorio: relatorios/B-C.md
+    gate: []
+    evidencias: [evidencias/B/c1-red.txt, evidencias/B/c1-green.txt, evidencias/B/c2-red.txt, evidencias/B/c2-integration.txt, evidencias/B/c1-c2-e2e.txt]
+  D:
+    status: em_andamento
+    relatorio: relatorios/B-C.md
+    gate: []
+    evidencias: [evidencias/B/c1-green.txt, evidencias/B/c2-integration.txt, evidencias/B/c1-c2-e2e.txt]
   E: { status: pendente, relatorio: null, gate: [], evidencias: [] }
   F: { status: pendente, relatorio: null, gate: [], evidencias: [] }
 
@@ -33,49 +41,49 @@ fatias:
     comportamento: "Alterar nome de produto ativo e retornar o produto atualizado"
     criterios: [CA01, CA03, CA04, CA09, CA11, RN01, RN06, RN07, RN08, RF01, RF05, RF06]
     issue: 142
-    branch: null
+    branch: feature/uc15-alterar-produto
     pr: null
-    status: planejada
+    status: em_andamento
     responsavel: evertonfoz
     revisor: evertonfoz
-    evidencias: []
+    evidencias: [evidencias/B/f01-red.txt, evidencias/B/f01-green.txt]
   - id: F02
     comportamento: "Produto inexistente lança ProductNotFoundException na alteração"
     criterios: [CA05, FA01, RF03]
     issue: 143
-    branch: null
+    branch: feature/uc15-alterar-produto
     pr: null
-    status: planejada
+    status: em_andamento
     responsavel: evertonfoz
     revisor: evertonfoz
-    evidencias: []
+    evidencias: [evidencias/B/f02-f05-red.txt, evidencias/B/f02-f05-green.txt]
   - id: F03
     comportamento: "Produto removido (soft delete) é tratado como inexistente e não é alterado"
     criterios: [CA06, FA02, RN02]
     issue: 144
-    branch: null
+    branch: feature/uc15-alterar-produto
     pr: null
-    status: planejada
+    status: em_andamento
     responsavel: evertonfoz
     revisor: evertonfoz
-    evidencias: []
+    evidencias: [evidencias/B/f02-f05-red.txt, evidencias/B/f02-f05-green.txt]
   - id: F04
     comportamento: "Nome inválido lança InvalidProductNameException sem gravar"
     criterios: [CA08, FA04, RN03, RN05, RF04]
     issue: 145
-    branch: null
+    branch: feature/uc15-alterar-produto
     pr: null
-    status: planejada
+    status: em_andamento
     responsavel: evertonfoz
     revisor: evertonfoz
-    evidencias: []
+    evidencias: [evidencias/B/f02-f05-red.txt, evidencias/B/f02-f05-green.txt]
   - id: F05
     comportamento: "Falha de persistência na alteração lança ProductPersistenceFailedException sem alteração parcial"
     criterios: [CA10, FE01, RN05, RF07]
     issue: 146
-    branch: null
+    branch: feature/uc15-alterar-produto
     pr: null
-    status: planejada
+    status: em_andamento
     responsavel: evertonfoz
     revisor: evertonfoz
-    evidencias: []
+    evidencias: [evidencias/B/f02-f05-red.txt, evidencias/B/f02-f05-green.txt]

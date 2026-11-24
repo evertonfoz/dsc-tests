@@ -1,0 +1,111 @@
+@baseUrl = http://localhost:3200
+
+# ==============================================================================
+# Casos de Teste do UC15 — Alterar Produto
+# PUT /products/:productId: só produto ativo (deletedAt nulo); só `name` é alterável; resposta = { productId, name }.
+# ATENÇÃO: diferente da busca, estes cenários GRAVAM dados. Não execute sem autorização.
+# ==============================================================================
+
+### Cenário 1: Cadastrar produto para alterar (UC12) → esperado: 201 Created
+# @name produtoParaAlterar
+POST {{baseUrl}}/products
+Content-Type: application/json
+
+{
+  "name": "Produto para Alterar UC15"
+}
+
+###
+@produtoId = {{produtoParaAlterar.response.body.productId}}
+
+### Cenário 2: Alterar o nome (CA01, CA02) → esperado: 200 OK com somente productId e name (nome novo)
+PUT {{baseUrl}}/products/{{produtoId}}
+Content-Type: application/json
+
+{
+  "name": "Produto Alterado UC15"
+}
+
+### Cenário 3: Reler o produto (CA03) → esperado: 200 OK com o nome novo
+GET {{baseUrl}}/products/{{produtoId}}
+
+### Cenário 4: Campo não alterável no corpo (CA04, FA05) → esperado: 200 OK; productId da resposta continua o da rota
+PUT {{baseUrl}}/products/{{produtoId}}
+Content-Type: application/json
+
+{
+  "name": "Produto Alterado de Novo UC15",
+  "productId": "99999999-9999-4999-8999-999999999999",
+  "deletedAt": "2026-11-01T00:00:00Z"
+}
+
+### Cenário 5: Mesmo nome que o atual (CA09, FA06) → esperado: 200 OK
+PUT {{baseUrl}}/products/{{produtoId}}
+Content-Type: application/json
+
+{
+  "name": "Produto Alterado de Novo UC15"
+}
+
+### Cenário 6: UUID válido sem produto (CA05, FA01) → esperado: 404 Not Found, error "ProductNotFoundException"
+PUT {{baseUrl}}/products/99999999-9999-4999-8999-999999999999
+Content-Type: application/json
+
+{
+  "name": "Qualquer"
+}
+
+### Cenário 7: Identificador que não é UUID (CA07, FA03) → esperado: 400 Bad Request, message ["productId must be a valid UUID."]
+PUT {{baseUrl}}/products/abc
+Content-Type: application/json
+
+{
+  "name": "Qualquer"
+}
+
+### Cenário 8: Nome vazio (CA08, FA04) → esperado: 400 Bad Request; nome anterior preservado
+PUT {{baseUrl}}/products/{{produtoId}}
+Content-Type: application/json
+
+{
+  "name": ""
+}
+
+### Cenário 9: Nome só com espaços (CA08, FA04) → esperado: 400 Bad Request
+PUT {{baseUrl}}/products/{{produtoId}}
+Content-Type: application/json
+
+{
+  "name": "     "
+}
+
+### Cenário 10: Nome ausente (CA08, FA04) → esperado: 400 Bad Request
+PUT {{baseUrl}}/products/{{produtoId}}
+Content-Type: application/json
+
+{}
+
+### Cenário 11: Nome com 121 caracteres (CA08, FA04) → esperado: 400 Bad Request
+PUT {{baseUrl}}/products/{{produtoId}}
+Content-Type: application/json
+
+{
+  "name": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+}
+
+### Cenário 12: Reler após os 400 (CA08) → esperado: 200 OK com o nome do Cenário 5 (nada foi gravado pelos 400)
+GET {{baseUrl}}/products/{{produtoId}}
+
+### Cenário 13: Rota inexistente (sub-rota) → esperado: 404 Not Found padrão do Nest
+PUT {{baseUrl}}/products/{{produtoId}}/extra
+Content-Type: application/json
+
+{
+  "name": "Qualquer"
+}
+
+### Cenário 14 (não executável por .http): produto removido (CA06, FA02) → esperado: 404, igual ao inexistente, sem alterar
+# Exige marcar deletedAt no banco; provado pelos testes do PostgreSQL de testes e pelo e2e (ver docs/uc/uc15/contrato.md).
+
+### Cenário 15 (não executável por .http): falha de persistência (CA10, FE01) → esperado: 500 genérico, sem alteração parcial
+# Exige derrubar o banco; provado pelo teste do PostgreSQL de testes e pelo teste do controller (ver docs/uc/uc15/contrato.md).

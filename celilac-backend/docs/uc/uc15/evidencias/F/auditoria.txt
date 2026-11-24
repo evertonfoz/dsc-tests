@@ -1,0 +1,17 @@
+# Auditoria de pureza arquitetural (Material 12) — UC15
+# Data (UTC): 2026-11-24T14:43:58Z
+# Commit base: ec51e89cd1ac82a7dc89686777243eeafc7f20e1
+
+## entidade: imports externos (esperado: nenhum)
+(nenhum import)
+## Service: typeorm / dtos / express (esperado: nenhum)
+(nenhum)
+## Controller: typeorm (esperado: nenhum)
+(nenhum)
+## contrato do Repository: typeorm (esperado: nenhum)
+(nenhum)
+## contrato do Repository: assinaturas anteriores preservadas
+16:  save(product: Product): Promise<Product>;
+18:  findActivePage(query: ProductsPageQuery): Promise<ProductsPageResult>;
+20:  findActiveById(productId: string): Promise<Product | null>;
+25:  updateActiveName(productId: string, name: string): Promise<Product | null>;

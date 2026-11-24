@@ -176,6 +176,29 @@ check "Contrato UC14: o 400 traz message (lista) e error Bad Request" "true" "$(
 code_subroute=$(status "$BASE/products/99999999-9999-4999-8999-999999999999/extra")
 check "Contrato UC14: sub-rota inexistente retorna 404" "404" "$code_subroute"
 
+# UC15: PUT /products/:productId (GRAVA: altera apenas o produto criado pelo teste de limite acima).
+if [ -n "$limit_id" ]; then
+  uc15_name="UC15 alterado $timestamp"
+  put_body=$(curl -s -X PUT "$BASE/products/$limit_id" -H "Content-Type: application/json" -d "{\"name\":\"$uc15_name\",\"productId\":\"99999999-9999-4999-8999-999999999999\"}")
+  check "Contrato UC15: PUT /products/:productId traz somente productId e name" "true" "$(node -e "try{const b=JSON.parse(process.argv[1]);console.log(Object.keys(b).sort().join()==='name,productId')}catch{console.log(false)}" "$put_body")"
+  check "Contrato UC15: o PUT devolve o nome novo" "$uc15_name" "$(extract_json_field "$put_body" "name")"
+  check "Contrato UC15: o productId do corpo é ignorado (vale o da rota)" "$limit_id" "$(extract_json_field "$put_body" "productId")"
+  uc15_db_name=$(echo "SELECT name FROM products.products WHERE \"productId\" = '$limit_id';" | sql | tr -d '\r')
+  check "Contrato UC15: o nome novo foi gravado no banco" "$uc15_name" "$uc15_db_name"
+  code_put_empty=$(status -X PUT "$BASE/products/$limit_id" -H "Content-Type: application/json" -d '{"name":""}')
+  check "Contrato UC15: PUT com nome vazio retorna 400" "400" "$code_put_empty"
+  uc15_db_after=$(echo "SELECT name FROM products.products WHERE \"productId\" = '$limit_id';" | sql | tr -d '\r')
+  check "Contrato UC15: o 400 não altera o nome gravado" "$uc15_name" "$uc15_db_after"
+else
+  check "Contrato UC15: alteração requer produto cadastrado" "id_valido" "id_vazio"
+fi
+put_missing_body=$(curl -s -X PUT "$BASE/products/99999999-9999-4999-8999-999999999999" -H "Content-Type: application/json" -d '{"name":"x"}')
+code_put_missing=$(status -X PUT "$BASE/products/99999999-9999-4999-8999-999999999999" -H "Content-Type: application/json" -d '{"name":"x"}')
+check "Contrato UC15: PUT em UUID sem produto retorna 404" "404" "$code_put_missing"
+check "Contrato UC15: o 404 traz error ProductNotFoundException" "ProductNotFoundException" "$(extract_json_field "$put_missing_body" "error")"
+code_put_bad_id=$(status -X PUT "$BASE/products/abc" -H "Content-Type: application/json" -d '{"name":"x"}')
+check "Contrato UC15: PUT com identificador que não é UUID retorna 400" "400" "$code_put_bad_id"
+
 code_wrong_route=$(status -X POST "$BASE/produtos" -H "Content-Type: application/json" -d '{"name":"x"}')
 check "Contrato: POST em rota inexistente retorna 404" "404" "$code_wrong_route"
 
