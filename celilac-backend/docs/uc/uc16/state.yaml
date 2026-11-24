@@ -28,7 +28,11 @@ fases:
     relatorio: relatorios/C.md
     gate: []
     evidencias: []
-  D: { status: pendente, relatorio: null, gate: [], evidencias: [] }
+  D:
+    status: em_andamento
+    relatorio: null
+    gate: []
+    evidencias: []
   E: { status: pendente, relatorio: null, gate: [], evidencias: [] }
   F: { status: pendente, relatorio: null, gate: [], evidencias: [] }
 
