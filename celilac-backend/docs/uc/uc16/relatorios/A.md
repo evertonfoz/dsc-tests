@@ -6,7 +6,7 @@
 | Fase | A — Planejar e publicar |
 | Período | 2026-11-24 (em andamento) |
 | Responsável | evertonfoz |
-| Issue(s) | **a confirmar** (Epic e issues ainda não foram criadas) |
+| Issue(s) | #162 (fase), Epic #156 |
 | Branch | `docs/uc16-etapa1` (documentação); branch de implementação **a confirmar** | <!-- links:ignore -->
 
 ## 1. Objetivo da fase
@@ -17,12 +17,15 @@ Publicar Epic, fatias e Project do UC16 e reconciliá-los com `docs/uc/uc16/stat
 - Fontes, existência, descrição prévia, cobertura inicial e planejamento: `prompts/uc-16/artefatos/` (arquivos 00 a 05) — Executado nesta fase.
 - Estrutura de documentação, `state.yaml` e ADR-008 a ADR-011 — Executado nesta fase.
 - Linha de base antes de alterar código: `pnpm build` e `pnpm lint` passam (só avisos); `pnpm test` com 81 passando e 4 falhando, todas em `orders.services.spec.ts` (falhas conhecidas, ADR-001) — Executado nesta fase.
-- **Não feito:** Epic, Sub-Issues e Project no GitHub (aguardando autorização) — Aguardando evidência.
+- Epic #156, 5 fatias (#157 a #161) e 6 issues de fase (#162 a #167) criadas, vinculadas ao Epic e adicionadas ao Project #6 (11 em `Backlog`, F01 em `Ready`) — Executado nesta fase.
+- `check-state.sh --remote`: `OK (local + GitHub)` — Executado nesta fase.
+- **Ainda não feito:** push da branch de documentação e PR da Fase A (aguardando autorização) — Aguardando evidência.
 
 ## 3. Evidências
 | # | Afirmação | Etiqueta | Evidência |
 |---|---|---|---|
 | 1 | Linha de base do ambiente | Executado nesta fase | `../evidencias/A/linha-de-base.txt` |
+| 2 | Issues e vínculos criados | Executado nesta fase | `../evidencias/A/publicacao.txt` |
 
 ## 4. Tabela de cobertura
 
@@ -54,5 +57,5 @@ Publicar Epic, fatias e Project do UC16 e reconciliá-los com `docs/uc/uc16/stat
 ## 5. Gate de saída
 | Verificação | Como verificar | Resultado | Validado por |
 |---|---|---|---|
-| Epic e Sub-Issues conferem com o state.yaml | `check-state.sh --remote` | pendente | — |
+| Epic e Sub-Issues conferem com o state.yaml | `check-state.sh --remote` (OK, executado) | pendente (aguarda aprovação do estudante) | — |
 | GitHub Project configurado com os 5 estados | listagem do Project | pendente | — |

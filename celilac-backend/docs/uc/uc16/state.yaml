@@ -1,10 +1,10 @@
-# Estado do UC16 (Remover Produto). Etapa 1 aprovada pelo estudante em 2026-11-24; Etapa 2 ainda não começou: nenhuma Issue, branch de fatia ou PR existe.
+# Estado do UC16 (Remover Produto). Etapa 1 aprovada pelo estudante em 2026-11-24; planejamento publicado (Epic #156, fatias #157 a #161, fases #162 a #167). Nenhuma fatia começou.
 # Nenhum gate está aprovado: aprovar é decisão do estudante (ou do CI, nos gates objetivos).
 uc: UC16
 nome: Remover Produto
 documento: ../../../prompts/uc-16/artefatos/03-uc-16-remover-produto.md
 arquetipo: excluir
-epic: { issue: null, estado: open }   # a Epic é criada na publicação do planejamento (aguardando autorização)
+epic: { issue: 156, estado: open }
 fase_atual: A
 
 fases:
@@ -14,7 +14,7 @@ fases:
     gate:
       - { item: "Epic e Sub-Issues criadas e reconciliadas com este arquivo", resultado: pendente }
       - { item: "GitHub Project configurado com os 5 estados", resultado: pendente }
-    evidencias: [evidencias/A/linha-de-base.txt]
+    evidencias: [evidencias/A/linha-de-base.txt, evidencias/A/publicacao.txt]
   B:
     status: pendente
     relatorio: null
@@ -27,12 +27,13 @@ fases:
   E: { status: pendente, relatorio: null, gate: [], evidencias: [] }
   F: { status: pendente, relatorio: null, gate: [], evidencias: [] }
 
+# Issues de fase: A #162, C1 #163, C2 #164, D #165, E #166, F #167. Um PR por fatia (padrão do método), salvo decisão em contrário.
 # Fatias do núcleo (Fase B). Os critérios CA09, CA10, CA12 e CA13 são das Fases C a E (HTTP, persistência real e verificação).
 fatias:
   - id: F01
     comportamento: "Remover produto ativo no núcleo: grava a marca de remoção e informa o sucesso, sem mudar productId e name"
     criterios: [CA01, CA06, RN01, RN09, RF01, RF04]
-    issue: null
+    issue: 157
     branch: null
     pr: null
     status: planejada
@@ -42,7 +43,7 @@ fatias:
   - id: F02
     comportamento: "Produto inexistente lança ProductNotFoundException na remoção e nada é gravado"
     criterios: [CA07, FA01, RN02, RF03]
-    issue: null
+    issue: 158
     branch: null
     pr: null
     status: planejada
@@ -52,7 +53,7 @@ fatias:
   - id: F03
     comportamento: "Produto já removido é tratado como inexistente na remoção e o deletedAt original é preservado"
     criterios: [CA08, FA02, RN07, RF03]
-    issue: null
+    issue: 159
     branch: null
     pr: null
     status: planejada
@@ -62,7 +63,7 @@ fatias:
   - id: F04
     comportamento: "Falha de persistência na remoção lança ProductPersistenceFailedException sem remoção parcial"
     criterios: [CA11, FE01, RN05, RF06]
-    issue: null
+    issue: 160
     branch: null
     pr: null
     status: planejada
@@ -72,7 +73,7 @@ fatias:
   - id: F05
     comportamento: "Produto removido some da listagem, da busca e da alteração, e os outros produtos seguem ativos"
     criterios: [CA02, CA03, CA04, CA05, RN03, RN06, RF05, RF07]
-    issue: null
+    issue: 161
     branch: null
     pr: null
     status: planejada
