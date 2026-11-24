@@ -1,0 +1,111 @@
+**O que foi executado:** pnpm test:integration
+**Data e hora UTC:** 2026-11-24T18:18:32Z
+**Commit de base:** a686ae02484784360e71431ea7d9303dd009398d
+**Diretório/ambiente:** celilac-backend/, testes unitários (repositório em memória); sem banco
+**Código de saída:** 1
+
+
+ RUN  v4.1.11 /Users/evertoncoimbradearaujo/Documents/GitHub/dsc-tests/celilac-backend
+
+ ❯ src/infrastructure/persistence/products/typeorm-products.repository.postgres.spec.ts (24 tests | 4 failed) 208ms
+       × should mark only the target row with deletedAt and keep productId, name and the other rows (UC16, CA05, CA06, RN01) 5ms
+       × should report not found and change nothing when the productId does not exist (UC16, CA07) 6ms
+       × should report not found and keep the original deletedAt when the product was already removed (UC16, CA08, RN07) 2ms
+       × should let exactly one of two simultaneous removals succeed and keep a single deletedAt (UC16, CA12, RN08) 2ms
+
+ Test Files  1 failed (1)
+      Tests  4 failed | 20 passed (24)
+   Start at  15:18:32
+   Duration  603ms (transform 51ms, setup 0ms, import 324ms, tests 208ms, environment 0ms)
+
+$ vitest run --config ./vitest.integration.config.ts
+The plugin "vite-tsconfig-paths" is detected. Vite now supports tsconfig paths resolution natively via the resolve.tsconfigPaths option. You can remove the plugin and set resolve.tsconfigPaths: true in your Vite config instead.
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 4 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/infrastructure/persistence/products/typeorm-products.repository.postgres.spec.ts > TypeOrmProductsRepository — persistência real no PostgreSQL > remoção lógica no PostgreSQL (UC16) > should mark only the target row with deletedAt and keep productId, name and the other rows (UC16, CA05, CA06, RN01)
+AssertionError: promise rejected "ProductPersistenceFailedException: Produc…" instead of resolving
+ ❯ src/infrastructure/persistence/products/typeorm-products.repository.postgres.spec.ts:480:8
+    478|       await expect(
+    479|         new ProductsService(repository).removeProduct(productId),
+    480|       ).resolves.toBeUndefined();
+       |        ^
+    481|
+    482|       const rows = await allRows();
+
+Caused by: ProductPersistenceFailedException: Product removal could not be completed.
+ ❯ ProductsService.removeProduct src/modules/products/services/products.service.ts:117:13
+
+Caused by: Error: removeActive ainda não implementado no TypeORM (UC16, Fase C2).
+ ❯ TypeOrmProductsRepository.removeActive src/infrastructure/persistence/products/typeorm-products.repository.ts:70:7
+ ❯ ProductsService.removeProduct src/modules/products/services/products.service.ts:115:47
+ ❯ src/infrastructure/persistence/products/typeorm-products.repository.postgres.spec.ts:479:41
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/4]⎯
+
+ FAIL  src/infrastructure/persistence/products/typeorm-products.repository.postgres.spec.ts > TypeOrmProductsRepository — persistência real no PostgreSQL > remoção lógica no PostgreSQL (UC16) > should report not found and change nothing when the productId does not exist (UC16, CA07)
+AssertionError: expected ProductPersistenceFailedException: Produc… to match object { name: 'ProductNotFoundException' }
+
+- Expected
++ Received
+
+- {
+-   "name": "ProductNotFoundException",
++ ProductPersistenceFailedException {
++   "name": "ProductPersistenceFailedException",
+  }
+
+ ❯ src/infrastructure/persistence/products/typeorm-products.repository.postgres.spec.ts:502:27
+    500|       );
+    501|
+    502|       await expect(result).rejects.toMatchObject({
+       |                           ^
+    503|         name: 'ProductNotFoundException',
+    504|       });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/4]⎯
+
+ FAIL  src/infrastructure/persistence/products/typeorm-products.repository.postgres.spec.ts > TypeOrmProductsRepository — persistência real no PostgreSQL > remoção lógica no PostgreSQL (UC16) > should report not found and keep the original deletedAt when the product was already removed (UC16, CA08, RN07)
+AssertionError: expected ProductPersistenceFailedException: Produc… to match object { name: 'ProductNotFoundException' }
+
+- Expected
++ Received
+
+- {
+-   "name": "ProductNotFoundException",
++ ProductPersistenceFailedException {
++   "name": "ProductPersistenceFailedException",
+  }
+
+ ❯ src/infrastructure/persistence/products/typeorm-products.repository.postgres.spec.ts:518:27
+    516|       const result = new ProductsService(repository).removeProduct(pro…
+    517|
+    518|       await expect(result).rejects.toMatchObject({
+       |                           ^
+    519|         name: 'ProductNotFoundException',
+    520|       });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/4]⎯
+
+ FAIL  src/infrastructure/persistence/products/typeorm-products.repository.postgres.spec.ts > TypeOrmProductsRepository — persistência real no PostgreSQL > remoção lógica no PostgreSQL (UC16) > should let exactly one of two simultaneous removals succeed and keep a single deletedAt (UC16, CA12, RN08)
+AssertionError: expected [] to have a length of 1 but got +0
+
+- Expected
++ Received
+
+- 1
++ 0
+
+ ❯ src/infrastructure/persistence/products/typeorm-products.repository.postgres.spec.ts:541:25
+    539|         (r): r is PromiseRejectedResult => r.status === 'rejected',
+    540|       );
+    541|       expect(fulfilled).toHaveLength(1);
+       |                         ^
+    542|       expect(rejected).toHaveLength(1);
+    543|       expect(rejected[0].reason).toMatchObject({
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/4]⎯
+
+[ELIFECYCLE] Command failed with exit code 1.
+
+**Leitura do resultado:** RED real no banco de testes (celilac_test, porta 5435): 4 dos 5 testes novos de remoção falham (CA05/CA06, CA07, CA08 e CA12), porque TypeOrmProductsRepository.removeActive ainda é o método provisório que rejeita. O 5º (CA11, falha real de banco) passa sem código novo: o provisório já rejeita e o serviço traduz; ele é caracterização e só passa a provar o banco real depois do GREEN. Os 20 testes anteriores seguem passando.
