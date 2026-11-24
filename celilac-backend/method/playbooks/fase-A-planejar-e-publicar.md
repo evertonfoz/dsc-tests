@@ -6,7 +6,7 @@
 |---|---|
 | Camada | 1 (Ciclo do UC) |
 | Fase | A — Planejar e publicar |
-| Arquétipos | criar *(validado)* · atualizar *(validado, UC15)* · consultar, excluir, autenticar *(esboços, ver `matriz-arquetipos.md`)* |
+| Arquétipos | criar *(validado)* · consultar *(validado, UC13 e UC14)* · atualizar *(validado, UC15)* · excluir, autenticar *(esboços, ver `matriz-arquetipos.md`)* |
 | Depende de | Fundação concluída (Camada 0) |
 | Valida-se com | `method/scripts/check-state.sh` (com `--remote`) · `node method/scripts/check-links.mjs` · revisão humana |
 
@@ -73,7 +73,7 @@ O agente **não** marca `aprovado` (regras 9 e 21).
 | Arquétipo | O que muda nesta fase | Validação |
 |---|---|---|
 | criar | catálogo típico no guia de fatias (seção 5) | validado (UC12) |
-| consultar | fatias de leitura, sem efeito colateral; atenção a filtros e paginação | esboço |
+| consultar | fatias de leitura, sem efeito colateral; atenção a filtros e paginação | validado (UC13, UC14) |
 | atualizar | acrescenta fatias de estado anterior e conflito | validado (UC15) |
 | excluir | acrescenta política de remoção e integridade | esboço |
 | autenticar | segurança entra como item de planejamento | esboço |
