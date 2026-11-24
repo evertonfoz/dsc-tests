@@ -79,7 +79,7 @@ BASE_URL="http://localhost:3200" ./http-rest-client/containerizado/run-checks.sh
 ---
 
 ## 6. O Que o Script Grava e Políticas de Segurança
-* **Volume de Escrita:** Cada execução do script realiza no máximo **três `POST /products` bem-sucedidos**, **um `PUT /products/:productId`** (UC15, que renomeia o produto do teste de limite) e **um `DELETE /products/:productId`** (UC16, que remove logicamente apenas o produto que o próprio script criou) na base de dados de desenvolvimento (`celilac_db`).
+* **Volume de Escrita:** Cada execução do script realiza no máximo **quatro `POST /products` bem-sucedidos** (produto principal, limite de 120 caracteres, produto do UC16 e teste de propriedade extra), **um `PUT /products/:productId`** (UC15, que renomeia o produto do teste de limite) e **um `DELETE /products/:productId`** (UC16, que remove logicamente apenas o produto que o próprio script criou) na base de dados de desenvolvimento (`celilac_db`).
 * **Remoção é lógica:** o produto removido pelo UC16 continua na tabela com `deletedAt` preenchido; nenhum comando desta pasta apaga linhas (ADR-010). Cada execução acrescenta um registro removido ao banco de desenvolvimento.
 * **Operações Proibidas e Não Realizadas:**
   * **NÃO** remove contêineres, redes ou volumes (`docker compose down` e `down -v` são estritamente proibidos).

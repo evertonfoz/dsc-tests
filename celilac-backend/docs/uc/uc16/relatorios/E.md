@@ -24,7 +24,7 @@
 
 ## 3. Desvios do método (registrados)
 - **Erro do script** corrigido e a execução refeita; a saída da primeira ficou preservada.
-- **Gravações no banco de desenvolvimento:** duas execuções gravaram, cada uma, 3 produtos criados, 1 renomeado e 1 removido logicamente. Como a remoção é lógica (ADR-010), os 2 registros removidos e os produtos de teste continuam na tabela. O script só remove o produto que ele mesmo criou.
+- **Gravações no banco de desenvolvimento:** duas execuções gravaram, cada uma, 4 produtos criados (3 que o script já criava e 1 do UC16), 1 renomeado e 1 removido logicamente. Como a remoção é lógica (ADR-010), os 2 registros removidos e os produtos de teste continuam na tabela. O script só remove o produto que ele mesmo criou.
 - **CA14 (cada CA com teste e cenário `.http`):** CA11 (falha de gravação) e CA12 (remoções simultâneas) não têm cenário `.http` nem checagem no `run-checks.sh`; são provados no PostgreSQL de testes. CA06 (registro no banco) é conferido pelo `run-checks.sh` por consulta SQL, sem cenário `.http`. Isso fica declarado, não escondido.
 
 ## 4. Tabela de cobertura

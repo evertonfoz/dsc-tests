@@ -87,4 +87,4 @@ Aguardando API retornar à disponibilidade (até 30 tentativas)...
 Resultado: 59 ok, 0 falha(s)
 ================================================================================
 
-**Leitura do resultado:** Segunda execução, depois de corrigir o erro de comparação do script (t por true). Grava dados de novo: mais 3 produtos criados, 1 renomeado e 1 removido logicamente (criado pelo próprio script). A primeira execução está em run-checks-1-erro-no-script.txt.
+**Leitura do resultado:** Segunda execução, depois de corrigir o erro de comparação do script (t por true). Grava dados de novo: mais 4 produtos criados, 1 renomeado e 1 removido logicamente (criado pelo próprio script). A primeira execução está em run-checks-1-erro-no-script.txt.

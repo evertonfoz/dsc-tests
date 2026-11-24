@@ -31,6 +31,18 @@ describe('ProductsService.removeProduct (UC16)', () => {
     expect(await repository.findActiveById(PRODUCT_ID)).toBeNull();
   });
 
+  it('should keep a single record with the same productId and name and a deletedAt, without duplicating (CA06, RN01)', async () => {
+    await repository.save(new Product(PRODUCT_ID, 'Leite sem lactose'));
+
+    await service.removeProduct(PRODUCT_ID);
+
+    const stored = (repository as unknown as { products: Product[] }).products;
+    expect(stored).toHaveLength(1);
+    expect(stored[0].productId).toBe(PRODUCT_ID);
+    expect(stored[0].name).toBe('Leite sem lactose');
+    expect(stored[0].deletedAt).toBeInstanceOf(Date);
+  });
+
   it('should throw ProductNotFoundException when there is no product with the identifier (CA07, FA01)', async () => {
     await expect(service.removeProduct(OTHER_ID)).rejects.toBeInstanceOf(
       ProductNotFoundException,

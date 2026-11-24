@@ -1,0 +1,18 @@
+**O que foi executado:** pnpm exec vitest run src/modules/products src/common
+**Data e hora UTC:** 2026-11-24T18:26:07Z
+**Commit de base:** 20bc436402cef728e4cfdaedf3363504d6f69b84
+**Diretório/ambiente:** celilac-backend/, testes unitários (repositório em memória); sem banco
+**Código de saída:** 0
+
+
+ RUN  v4.1.11 /Users/evertoncoimbradearaujo/Documents/GitHub/dsc-tests/celilac-backend
+
+
+ Test Files  13 passed (13)
+      Tests  98 passed (98)
+   Start at  15:26:07
+   Duration  968ms (transform 376ms, setup 0ms, import 4.59s, tests 1.26s, environment 1ms)
+
+The plugin "vite-tsconfig-paths" is detected. Vite now supports tsconfig paths resolution natively via the resolve.tsconfigPaths option. You can remove the plugin and set resolve.tsconfigPaths: true in your Vite config instead.
+
+**Leitura do resultado:** Regressão do UC12 ao UC15 nos testes unitários de products e common; os specs antigos só receberam acréscimos (ver auditoria.txt, item 7).
