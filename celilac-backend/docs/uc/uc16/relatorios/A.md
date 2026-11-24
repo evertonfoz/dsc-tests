@@ -45,7 +45,7 @@ Publicar Epic, fatias e Project do UC16 e reconciliá-los com `docs/uc/uc16/stat
 | FA02 — produto já removido, `404` e `deletedAt` preservado (RF03, RN07, CA08) | `should throw ProductNotFoundException when the product was already removed (CA08, FA02)` e `should throw ProductNotFoundException when removing the same product twice (CA08, RN07)` (`products.service.remove.spec.ts`; teste de caracterização, sem RED real) | **Parcial:** o `404` no núcleo está coberto; a preservação do `deletedAt` original só se prova no banco (Fase C2) |
 | FA03 — identificador inválido, `400` (RF02, RN04, CA09) | — | A implementar |
 | FA04 — corpo ignorado (CA10) | — | A implementar |
-| FE01 — falha ao gravar, `500` e produto continua ativo (RF06, RN05, CA11) | — | A implementar |
+| FE01 — falha ao gravar, `500` e produto continua ativo (RF06, RN05, CA11) | `should throw ProductPersistenceFailedException without leaking the cause when the repository fails (CA11, FE01)` e `should keep the product active when the repository fails (CA11, RN05)` (`products.service.remove.spec.ts`) | **Parcial:** a tradução da falha no núcleo está coberta; o `500` HTTP é da Fase C1 e a ausência de remoção parcial no banco, da C2 |
 | RN08 — remoções simultâneas: um `204` e um `404` (CA12) | — | A implementar |
 | Repositório em memória reproduz o banco (removido ou inexistente: nada removido; não duplica) | — | A implementar |
 | RF08 — UC12 a UC15 sem regressão, exceto o efeito de RF05 (CA13) | — | A implementar |

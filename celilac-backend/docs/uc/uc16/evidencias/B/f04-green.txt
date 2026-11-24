@@ -1,0 +1,18 @@
+**O que foi executado:** pnpm exec vitest run src/modules/products/services/products.service.remove.spec.ts
+**Data e hora UTC:** 2026-11-24T18:15:25Z
+**Commit de base:** c66b33ef2691b36f9fe66e455f3a909a0ced47f0
+**Diretório/ambiente:** celilac-backend/, testes unitários (repositório em memória); sem banco
+**Código de saída:** 0
+
+
+ RUN  v4.1.11 /Users/evertoncoimbradearaujo/Documents/GitHub/dsc-tests/celilac-backend
+
+
+ Test Files  1 passed (1)
+      Tests  8 passed (8)
+   Start at  15:15:26
+   Duration  273ms (transform 51ms, setup 0ms, import 183ms, tests 4ms, environment 0ms)
+
+The plugin "vite-tsconfig-paths" is detected. Vite now supports tsconfig paths resolution natively via the resolve.tsconfigPaths option. You can remove the plugin and set resolve.tsconfigPaths: true in your Vite config instead.
+
+**Leitura do resultado:** GREEN: os 8 testes do núcleo da remoção passam, inclusive os 2 da F04.

@@ -110,7 +110,16 @@ export class ProductsService {
   }
 
   async removeProduct(productId: string): Promise<void> {
-    const removed = await this.productsRepository.removeActive(productId);
+    let removed: boolean;
+    try {
+      removed = await this.productsRepository.removeActive(productId);
+    } catch (error) {
+      throw new ProductPersistenceFailedException(
+        error,
+        'Product removal could not be completed.',
+      );
+    }
+
     if (!removed) {
       throw new ProductNotFoundException(productId);
     }
