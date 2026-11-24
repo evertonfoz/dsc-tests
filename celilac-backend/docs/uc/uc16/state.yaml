@@ -1,0 +1,104 @@
+# Estado do UC16 (Remover Produto). Etapa 1 aprovada pelo estudante em 2026-11-24; planejamento publicado (Epic #156, fatias #157 a #161, fases #162 a #167). Fase A aprovada pelo estudante (evertonfoz) em 2026-11-24.
+# PR único para as fatias, com pr_compartilhado (opção B escolhida pelo estudante); cada commit deve manter o build verde. Branch única: feature/uc16-remover-produto.
+# Gates: aprovar é decisão do estudante (ou do CI, nos gates objetivos).
+uc: UC16
+nome: Remover Produto
+documento: ../../../prompts/uc-16/artefatos/03-uc-16-remover-produto.md
+arquetipo: excluir
+epic: { issue: 156, estado: open }
+fase_atual: B
+
+fases:
+  A:
+    status: concluida
+    relatorio: relatorios/A.md
+    gate:
+      - { item: "Epic e Sub-Issues criadas e reconciliadas com este arquivo", resultado: aprovado, por: evertonfoz }
+      - { item: "GitHub Project configurado com os 5 estados", resultado: aprovado, por: evertonfoz }
+    evidencias: [evidencias/A/linha-de-base.txt, evidencias/A/publicacao.txt]
+  B:
+    status: em_andamento
+    relatorio: null
+    gate:
+      - { item: "Todas as fatias integradas na branch principal", resultado: pendente }
+      - { item: "CI verde na branch principal", resultado: pendente }
+    evidencias: []
+  C:
+    status: em_andamento
+    relatorio: relatorios/C.md
+    gate: []
+    evidencias: []
+  D:
+    status: em_andamento
+    relatorio: null
+    gate: []
+    evidencias: []
+  E:
+    status: em_andamento
+    relatorio: relatorios/E.md
+    gate: []
+    evidencias: [evidencias/E/antes-rota-inexistente.txt, evidencias/E/run-checks-1-erro-no-script.txt, evidencias/E/run-checks.txt]
+  F:
+    status: em_andamento
+    relatorio: relatorios/F.md
+    gate: []
+    evidencias: [evidencias/F/verificacao-final.txt, evidencias/F/auditoria.txt, evidencias/F/cobertura.md, evidencias/F/regressao.txt, evidencias/F/dependencias-fk.txt]
+
+# Issues de fase: A #162, C1 #163, C2 #164, D #165, E #166, F #167. Um PR por fatia (padrão do método), salvo decisão em contrário.
+# Fatias do núcleo (Fase B). Os critérios CA09, CA10, CA12 e CA13 são das Fases C a E (HTTP, persistência real e verificação).
+fatias:
+  - id: F01
+    comportamento: "Remover produto ativo no núcleo: grava a marca de remoção e informa o sucesso, sem mudar productId e name"
+    criterios: [CA01, CA06, RN01, RN09, RF01, RF04]
+    issue: 157
+    branch: feature/uc16-remover-produto
+    pr: 168
+    pr_compartilhado: true
+    status: em_revisao
+    responsavel: evertonfoz
+    revisor: null
+    evidencias: []
+  - id: F02
+    comportamento: "Produto inexistente lança ProductNotFoundException na remoção e nada é gravado"
+    criterios: [CA07, FA01, RN02, RF03]
+    issue: 158
+    branch: feature/uc16-remover-produto
+    pr: 168
+    pr_compartilhado: true
+    status: em_revisao
+    responsavel: evertonfoz
+    revisor: null
+    evidencias: []
+  - id: F03
+    comportamento: "Produto já removido é tratado como inexistente na remoção e o deletedAt original é preservado"
+    criterios: [CA08, FA02, RN07, RF03]
+    issue: 159
+    branch: feature/uc16-remover-produto
+    pr: 168
+    pr_compartilhado: true
+    status: em_revisao
+    responsavel: evertonfoz
+    revisor: null
+    evidencias: []
+  - id: F04
+    comportamento: "Falha de persistência na remoção lança ProductPersistenceFailedException sem remoção parcial"
+    criterios: [CA11, FE01, RN05, RF06]
+    issue: 160
+    branch: feature/uc16-remover-produto
+    pr: 168
+    pr_compartilhado: true
+    status: em_revisao
+    responsavel: evertonfoz
+    revisor: null
+    evidencias: []
+  - id: F05
+    comportamento: "Produto removido some da listagem, da busca e da alteração, e os outros produtos seguem ativos"
+    criterios: [CA02, CA03, CA04, CA05, RN03, RN06, RF05, RF07]
+    issue: 161
+    branch: feature/uc16-remover-produto
+    pr: 168
+    pr_compartilhado: true
+    status: em_revisao
+    responsavel: evertonfoz
+    revisor: null
+    evidencias: []

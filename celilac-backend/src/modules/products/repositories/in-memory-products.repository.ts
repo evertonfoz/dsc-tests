@@ -63,4 +63,20 @@ export class InMemoryProductsRepository implements ProductsRepository {
     this.products[index] = updated;
     return updated;
   }
+
+  async removeActive(productId: string): Promise<boolean> {
+    const index = this.products.findIndex(
+      (product) =>
+        product.productId === productId && product.deletedAt === null,
+    );
+    if (index === -1) {
+      return false;
+    }
+    this.products[index] = new Product(
+      productId,
+      this.products[index].name,
+      new Date(),
+    );
+    return true;
+  }
 }

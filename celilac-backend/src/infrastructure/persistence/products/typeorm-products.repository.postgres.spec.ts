@@ -455,4 +455,114 @@ describe('TypeOrmProductsRepository — persistência real no PostgreSQL', () =>
     );
     expect(rows).toEqual([{ name: 'Segundo' }]);
   });
+
+  describe('remoção lógica no PostgreSQL (UC16)', () => {
+    interface RemovalRow {
+      productId: string;
+      name: string;
+      deletedAt: Date | null;
+    }
+
+    async function allRows(): Promise<RemovalRow[]> {
+      return dataSource.query<RemovalRow[]>(
+        'SELECT "productId", "name", "deletedAt" FROM "products"."products" ORDER BY "name"',
+      );
+    }
+
+    it('should mark only the target row with deletedAt and keep productId, name and the other rows (UC16, CA05, CA06, RN01)', async () => {
+      const productId = randomUUID();
+      const otherId = randomUUID();
+      await repository.save(new Product(productId, 'Leite sem lactose'));
+      await repository.save(new Product(otherId, 'Outro produto'));
+
+      await expect(
+        new ProductsService(repository).removeProduct(productId),
+      ).resolves.toBeUndefined();
+
+      const rows = await allRows();
+      expect(rows).toHaveLength(2);
+      const removed = rows.find((row) => row.productId === productId);
+      expect(removed?.name).toBe('Leite sem lactose');
+      expect(removed?.deletedAt).toBeInstanceOf(Date);
+      expect(rows.find((row) => row.productId === otherId)).toEqual({
+        productId: otherId,
+        name: 'Outro produto',
+        deletedAt: null,
+      });
+    });
+
+    it('should report not found and change nothing when the productId does not exist (UC16, CA07)', async () => {
+      await repository.save(new Product(randomUUID(), 'Existente'));
+      const before = await allRows();
+
+      const result = new ProductsService(repository).removeProduct(
+        randomUUID(),
+      );
+
+      await expect(result).rejects.toMatchObject({
+        name: 'ProductNotFoundException',
+      });
+      expect(await allRows()).toEqual(before);
+    });
+
+    it('should report not found and keep the original deletedAt when the product was already removed (UC16, CA08, RN07)', async () => {
+      const productId = randomUUID();
+      await dataSource.query(
+        'INSERT INTO "products"."products" ("productId", "name", "deletedAt") VALUES ($1, $2, $3)',
+        [productId, 'Já removido', '2026-01-01T00:00:00Z'],
+      );
+      const before = await allRows();
+
+      const result = new ProductsService(repository).removeProduct(productId);
+
+      await expect(result).rejects.toMatchObject({
+        name: 'ProductNotFoundException',
+      });
+      expect(await allRows()).toEqual(before);
+      expect(before[0].deletedAt?.toISOString()).toBe(
+        '2026-01-01T00:00:00.000Z',
+      );
+    });
+
+    it('should let exactly one of two simultaneous removals succeed and keep a single deletedAt (UC16, CA12, RN08)', async () => {
+      const productId = randomUUID();
+      await repository.save(new Product(productId, 'Disputado'));
+      const service = new ProductsService(repository);
+
+      const results = await Promise.allSettled([
+        service.removeProduct(productId),
+        service.removeProduct(productId),
+      ]);
+
+      const fulfilled = results.filter((r) => r.status === 'fulfilled');
+      const rejected = results.filter(
+        (r): r is PromiseRejectedResult => r.status === 'rejected',
+      );
+      expect(fulfilled).toHaveLength(1);
+      expect(rejected).toHaveLength(1);
+      expect(rejected[0].reason).toMatchObject({
+        name: 'ProductNotFoundException',
+      });
+      const rows = await allRows();
+      expect(rows).toHaveLength(1);
+      expect(rows[0].deletedAt).toBeInstanceOf(Date);
+    });
+
+    it('should report an incomplete removal when the real database rejects it, without leaking details (UC16, CA11, FE01)', async () => {
+      const productId = randomUUID();
+      await repository.save(new Product(productId, 'Intacto'));
+      // Texto que não é UUID em coluna uuid (22P02): falha real de banco, não "não encontrado".
+      const result = new ProductsService(repository).removeProduct(
+        'not-a-uuid',
+      );
+
+      await expect(result).rejects.toMatchObject({
+        name: 'ProductPersistenceFailedException',
+      });
+      await expect(result).rejects.not.toThrow(/invalid input syntax|uuid/i);
+      expect(await allRows()).toEqual([
+        { productId, name: 'Intacto', deletedAt: null },
+      ]);
+    });
+  });
 });

@@ -1,0 +1,18 @@
+**O que foi executado:** pnpm exec vitest run src/modules/products/services/products.service.remove.spec.ts
+**Data e hora UTC:** 2026-11-24T18:15:59Z
+**Commit de base:** 39ddeff5ecc110b247fe36ff1e070ea8b8f293a5
+**Diretório/ambiente:** celilac-backend/, testes unitários (repositório em memória); sem banco
+**Código de saída:** 0
+
+
+ RUN  v4.1.11 /Users/evertoncoimbradearaujo/Documents/GitHub/dsc-tests/celilac-backend
+
+
+ Test Files  1 passed (1)
+      Tests  12 passed (12)
+   Start at  15:15:59
+   Duration  212ms (transform 30ms, setup 0ms, import 128ms, tests 4ms, environment 0ms)
+
+The plugin "vite-tsconfig-paths" is detected. Vite now supports tsconfig paths resolution natively via the resolve.tsconfigPaths option. You can remove the plugin and set resolve.tsconfigPaths: true in your Vite config instead.
+
+**Leitura do resultado:** Teste de caracterização: os 4 testes novos da F05 passam sem código novo, porque os UC13, UC14 e UC15 já filtram por deletedAt IS NULL (ADR-005). Não há RED real; os testes travam esse efeito contra regressão.

@@ -1,0 +1,18 @@
+**O que foi executado:** pnpm exec vitest run src/modules/products/services/products.service.remove.spec.ts
+**Data e hora UTC:** 2026-11-24T18:25:58Z
+**Commit de base:** 20bc436402cef728e4cfdaedf3363504d6f69b84
+**Diretório/ambiente:** celilac-backend/, testes unitários (repositório em memória); sem banco
+**Código de saída:** 0
+
+
+ RUN  v4.1.11 /Users/evertoncoimbradearaujo/Documents/GitHub/dsc-tests/celilac-backend
+
+
+ Test Files  1 passed (1)
+      Tests  13 passed (13)
+   Start at  15:25:59
+   Duration  218ms (transform 32ms, setup 0ms, import 139ms, tests 10ms, environment 0ms)
+
+The plugin "vite-tsconfig-paths" is detected. Vite now supports tsconfig paths resolution natively via the resolve.tsconfigPaths option. You can remove the plugin and set resolve.tsconfigPaths: true in your Vite config instead.
+
+**Leitura do resultado:** Teste de caracterização (sem RED real: a F01 já substitui o registro no lugar): o repositório em memória guarda um único registro, com o mesmo productId e name e deletedAt preenchido, como o banco.

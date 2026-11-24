@@ -1,0 +1,22 @@
+**O que foi executado:** pnpm exec vitest run src/modules/products/services/products.service.remove.spec.ts; pnpm build; pnpm exec vitest run src/modules/products
+**Data e hora UTC:** 2026-11-24T18:09:13Z
+**Commit de base:** 84a65ac72e3f52d1aef4c3c5550441a8c87f9336 (alterações da F01 ainda não commitadas)
+**Diretório/ambiente:** celilac-backend/, testes unitários (repositório em memória); sem banco
+**Código de saída:** teste da F01 0 · build 0 · suíte de products 0
+
+--- teste da F01 ---
+ Test Files  1 passed (1)
+      Tests  2 passed (2)
+exit=0
+
+--- pnpm build ---
+$ nest build
+
+--- suíte src/modules/products ---
+ Test Files  11 passed (11)
+      Tests  78 passed (78)
+
+--- pnpm lint ---
+exit=0; 16 linhas com 'warning', igual à linha de base (16). O único aviso em arquivo alterado pela F01 (typeorm-products.repository.ts:39, `unbound-method`) já constava na linha de base.
+
+**Leitura do resultado:** os dois testes da F01 passam, o build continua verde (o `TypeOrmProductsRepository` recebeu um `removeActive` provisório que rejeita explicitamente, só para compilar) e os 78 testes de produtos passam (76 anteriores + 2 novos). Não prova a remoção no PostgreSQL (Fase C2), o `204` (C1), nem os fluxos de produto inexistente, já removido e falha (F02 a F04).

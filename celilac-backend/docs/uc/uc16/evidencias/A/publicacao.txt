@@ -1,0 +1,16 @@
+# Publicação em 2026-11-24; Sub-Issues vinculadas ao Epic #156 e itens no Project #6 (Backlog; F01 em Ready)
+#156 [UC16] Remover Produto
+#157 [UC16][F01] Remover produto ativo no núcleo
+#158 [UC16][F02] Produto inexistente lança ProductNotFoundException na remoção e nada é gravado
+#159 [UC16][F03] Produto já removido é tratado como inexistente e o deletedAt original é preservado
+#160 [UC16][F04] Falha de persistência na remoção lança ProductPersistenceFailedException sem remoção parcial
+#161 [UC16][F05] Produto removido some da listagem, da busca e da alteração; os outros seguem ativos
+#162 [UC16][Fase A] Planejamento e publicação do UC16
+#163 [UC16][Fase C1] Adaptador HTTP de DELETE /products/:productId
+#164 [UC16][Fase C2] Persistência real: remoção lógica de produto ativo por productId
+#165 [UC16][Fase D] Contrato de DELETE /products/:productId
+#166 [UC16][Fase E] Verificação reprodutível da remoção de produto
+#167 [UC16][Fase F] Auditoria e encerramento do UC16
+sub_issues_summary: {"completed":0,"percent_completed":0,"total":11}
+project #6: Backlog: 11, Ready: 1
+# Observação: #160 e #163 já estavam no Project quando o item-add rodou (automação do GitHub); ficaram sem status e foram colocadas em Backlog.

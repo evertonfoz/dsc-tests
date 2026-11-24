@@ -1,0 +1,45 @@
+## 1. Entidade Product sem imports externos
+(nenhum import)
+
+## 2. ProductsService sem TypeORM, express ou DTO HTTP
+(nenhum)
+
+## 3. ProductsController sem TypeORM
+(nenhum)
+
+## 4. Contrato ProductsRepository sem TypeORM
+(nenhum)
+
+## 5. Arquivos de produção alterados contra main
+M	celilac-backend/src/infrastructure/persistence/products/typeorm-products.repository.ts
+M	celilac-backend/src/modules/products/controllers/products.controller.ts
+M	celilac-backend/src/modules/products/repositories/in-memory-products.repository.ts
+M	celilac-backend/src/modules/products/repositories/products.repository.interface.ts
+M	celilac-backend/src/modules/products/services/products.service.ts
+
+## 6. Entidade, mappers, ORM entity, DTOs e src/database intactos (diff vazio esperado)
+(fim do diff)
+
+## 7. Specs e e2e antigos: só acréscimos (numstat contra main; removidas = 0)
+110	0	celilac-backend/src/infrastructure/persistence/products/typeorm-products.repository.postgres.spec.ts
+153	0	celilac-backend/src/modules/products/controllers/products.remove.controller.spec.ts
+128	0	celilac-backend/src/modules/products/services/products.service.remove.spec.ts
+114	0	celilac-backend/test/products/remover-produto.e2e-spec.ts
+
+## 8. Removida a marca provisória
+(nenhuma ocorrência)
+
+## 9. removeActive no TypeORM é um único UPDATE condicionado
+67:  async removeActive(productId: string): Promise<boolean> {
+68-    // Uma única instrução UPDATE, condicionada a produto ativo: duas remoções simultâneas
+69-    // disputam a mesma linha e só uma a altera; a outra afeta 0 linhas e preserva o deletedAt original.
+70-    const result = await this.ormRepository
+71-      .createQueryBuilder()
+72-      .update(ProductOrmEntity)
+73-      .set({ deletedAt: () => 'now()' })
+74-      .where('"productId" = :productId AND "deletedAt" IS NULL', { productId })
+75-      .execute();
+76-
+77-    return (result.affected ?? 0) > 0;
+78-  }
+79-}

@@ -1,0 +1,70 @@
+**O que foi executado:** pnpm exec vitest run src/modules/products/controllers/products.remove.controller.spec.ts src/modules/products/services/products.service.remove.spec.ts && pnpm test:integration && pnpm test:e2e -- test/products/remover-produto.e2e-spec.ts
+**Data e hora UTC:** 2026-11-24T18:21:06Z
+**Commit de base:** 16973747aaad34ca894af916e4840a80489ee552
+**Diretório/ambiente:** celilac-backend/, testes unitários (repositório em memória); sem banco
+**Código de saída:** 1
+
+
+ RUN  v4.1.11 /Users/evertoncoimbradearaujo/Documents/GitHub/dsc-tests/celilac-backend
+
+
+ Test Files  2 passed (2)
+      Tests  19 passed (19)
+   Start at  15:21:06
+   Duration  593ms (transform 89ms, setup 0ms, import 583ms, tests 107ms, environment 0ms)
+
+
+ RUN  v4.1.11 /Users/evertoncoimbradearaujo/Documents/GitHub/dsc-tests/celilac-backend
+
+
+ Test Files  1 passed (1)
+      Tests  24 passed (24)
+   Start at  15:21:07
+   Duration  698ms (transform 63ms, setup 0ms, import 316ms, tests 209ms, environment 0ms)
+
+
+ RUN  v4.1.11 /Users/evertoncoimbradearaujo/Documents/GitHub/dsc-tests/celilac-backend
+
+ ❯ test/orders/confirm-order.e2e-spec.ts (1 test | 1 failed) 195ms
+     × confirma um pedido pendente com pagamento aprovado (200) 38ms
+
+ Test Files  1 failed | 7 passed (8)
+      Tests  1 failed | 25 passed (26)
+   Start at  15:21:08
+   Duration  1.21s (transform 559ms, setup 0ms, import 5.71s, tests 1.60s, environment 1ms)
+
+The plugin "vite-tsconfig-paths" is detected. Vite now supports tsconfig paths resolution natively via the resolve.tsconfigPaths option. You can remove the plugin and set resolve.tsconfigPaths: true in your Vite config instead.
+$ vitest run --config ./vitest.integration.config.ts
+The plugin "vite-tsconfig-paths" is detected. Vite now supports tsconfig paths resolution natively via the resolve.tsconfigPaths option. You can remove the plugin and set resolve.tsconfigPaths: true in your Vite config instead.
+$ vitest run --config ./vitest.config.e2e.ts -- test/products/remover-produto.e2e-spec.ts
+The plugin "vite-tsconfig-paths" is detected. Vite now supports tsconfig paths resolution natively via the resolve.tsconfigPaths option. You can remove the plugin and set resolve.tsconfigPaths: true in your Vite config instead.
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  test/orders/confirm-order.e2e-spec.ts > POST /orders/:id/confirm (e2e) > confirma um pedido pendente com pagamento aprovado (200)
+AssertionError: expected { …(4) } to deeply equal { …(4) }
+
+- Expected
++ Received
+
+  {
+    "message": "Order confirmed successfully.",
+    "orderId": "1dc707b6-ceaa-4fea-849a-241d2b3c7f01",
+-   "status": "CONFIRMED",
++   "status": "PENDING",
+    "updatedAt": "2026-11-24T18:21:09.886Z",
+  }
+
+ ❯ test/orders/confirm-order.e2e-spec.ts:58:27
+     56|
+     57|     // 6. Verificar o corpo da resposta
+     58|     expect(response.body).toEqual({
+       |                           ^
+     59|       orderId: order.orderId,
+     60|       status: OrderStatus.CONFIRMED,
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+[ELIFECYCLE] Command failed with exit code 1.
+
+**Leitura do resultado:** Reexecução dos testes que protegem cada linha do contrato.  Controller (7) e núcleo (12) passam (19); integração no banco de testes passa (24); o e2e rodou a suíte inteira (o filtro de arquivo não foi aplicado): 25 passam e 1 falha, em orders ("confirma um pedido pendente com pagamento aprovado"), falha que já existia sem o UC16 (ver evidencias/C/c2-e2e.txt). Por isso o exit code é 1. Que os 4 testes de remover-produto.e2e-spec.ts passam não aparece por arquivo nesta saída; vem da diferença 25 contra 21 passando, registrada em evidencias/C/c2-e2e.txt.

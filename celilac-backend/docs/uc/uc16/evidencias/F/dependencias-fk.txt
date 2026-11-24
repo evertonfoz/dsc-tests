@@ -1,0 +1,11 @@
+**O que foi executado:** docker compose exec -T postgres sh -c 'psql -U "$POSTGRES_USER" -d "$POSTGRES_DB" -c "SELECT conrelid::regclass AS tabela_que_referencia, conname FROM pg_constraint WHERE contype='\''f'\'' AND confrelid='\''products.products'\''::regclass;"'
+**Data e hora UTC:** 2026-11-24T18:25:15Z
+**Commit de base:** 20bc436402cef728e4cfdaedf3363504d6f69b84
+**Diretório/ambiente:** celilac-backend/, banco de desenvolvimento no contêiner postgres (consulta somente de leitura ao catálogo)
+**Código de saída:** 0
+
+ tabela_que_referencia | conname 
+-----------------------+---------
+(0 rows)
+
+**Leitura do resultado:** Consulta somente de leitura ao catálogo do banco de desenvolvimento: lista chaves estrangeiras que apontam para products.products. Zero linhas = nenhuma tabela depende de produtos (ADR-010, RF de dependências).

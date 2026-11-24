@@ -1,0 +1,18 @@
+**O que foi executado:** pnpm exec vitest run src/modules/products/controllers/products.remove.controller.spec.ts
+**Data e hora UTC:** 2026-11-24T18:17:40Z
+**Commit de base:** 0e61248a96c41f6df2c613b0a24d1680421e0732
+**Diretório/ambiente:** celilac-backend/, testes unitários (repositório em memória); sem banco
+**Código de saída:** 0
+
+
+ RUN  v4.1.11 /Users/evertoncoimbradearaujo/Documents/GitHub/dsc-tests/celilac-backend
+
+
+ Test Files  1 passed (1)
+      Tests  7 passed (7)
+   Start at  15:17:41
+   Duration  463ms (transform 43ms, setup 0ms, import 313ms, tests 81ms, environment 0ms)
+
+The plugin "vite-tsconfig-paths" is detected. Vite now supports tsconfig paths resolution natively via the resolve.tsconfigPaths option. You can remove the plugin and set resolve.tsconfigPaths: true in your Vite config instead.
+
+**Leitura do resultado:** GREEN: os 7 testes do adaptador HTTP passam (204 sem corpo, corpo ignorado, 404 de domínio, 404 já removido, 400 de UUID e 500 genérico).

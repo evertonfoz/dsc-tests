@@ -63,4 +63,17 @@ export class TypeOrmProductsRepository implements ProductsRepository {
     const rows = result.raw as ProductOrmEntity[];
     return rows.length === 0 ? null : ProductMapper.toDomain(rows[0]);
   }
+
+  async removeActive(productId: string): Promise<boolean> {
+    // Uma única instrução UPDATE, condicionada a produto ativo: duas remoções simultâneas
+    // disputam a mesma linha e só uma a altera; a outra afeta 0 linhas e preserva o deletedAt original.
+    const result = await this.ormRepository
+      .createQueryBuilder()
+      .update(ProductOrmEntity)
+      .set({ deletedAt: () => 'now()' })
+      .where('"productId" = :productId AND "deletedAt" IS NULL', { productId })
+      .execute();
+
+    return (result.affected ?? 0) > 0;
+  }
 }

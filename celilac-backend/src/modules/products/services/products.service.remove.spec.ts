@@ -1,0 +1,140 @@
+import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { ProductNotFoundException } from '../../../common/exceptions/product-not-found.exception.js';
+import { ProductPersistenceFailedException } from '../../../common/exceptions/product-persistence-failed.exception.js';
+import { Product } from '../entities/product.entity.js';
+import { InMemoryProductsRepository } from '../repositories/in-memory-products.repository.js';
+import { ProductsService } from './products.service.js';
+
+const PRODUCT_ID = '11111111-1111-4111-8111-111111111111';
+const OTHER_ID = '22222222-2222-4222-8222-222222222222';
+
+describe('ProductsService.removeProduct (UC16)', () => {
+  let repository: InMemoryProductsRepository;
+  let service: ProductsService;
+
+  beforeEach(() => {
+    repository = new InMemoryProductsRepository();
+    service = new ProductsService(repository);
+  });
+
+  it('should remove the active product and resolve without a body (CA01, RN09)', async () => {
+    await repository.save(new Product(PRODUCT_ID, 'Leite sem lactose'));
+
+    await expect(service.removeProduct(PRODUCT_ID)).resolves.toBeUndefined();
+  });
+
+  it('should leave the removed product out of the active products of the repository (CA01, RN01)', async () => {
+    await repository.save(new Product(PRODUCT_ID, 'Leite sem lactose'));
+
+    await service.removeProduct(PRODUCT_ID);
+
+    expect(await repository.findActiveById(PRODUCT_ID)).toBeNull();
+  });
+
+  it('should keep a single record with the same productId and name and a deletedAt, without duplicating (CA06, RN01)', async () => {
+    await repository.save(new Product(PRODUCT_ID, 'Leite sem lactose'));
+
+    await service.removeProduct(PRODUCT_ID);
+
+    const stored = (repository as unknown as { products: Product[] }).products;
+    expect(stored).toHaveLength(1);
+    expect(stored[0].productId).toBe(PRODUCT_ID);
+    expect(stored[0].name).toBe('Leite sem lactose');
+    expect(stored[0].deletedAt).toBeInstanceOf(Date);
+  });
+
+  it('should throw ProductNotFoundException when there is no product with the identifier (CA07, FA01)', async () => {
+    await expect(service.removeProduct(OTHER_ID)).rejects.toBeInstanceOf(
+      ProductNotFoundException,
+    );
+  });
+
+  it('should not remove any other product when the identifier does not exist (CA07, RN05)', async () => {
+    await repository.save(new Product(PRODUCT_ID, 'Leite sem lactose'));
+
+    await expect(service.removeProduct(OTHER_ID)).rejects.toBeInstanceOf(
+      ProductNotFoundException,
+    );
+
+    expect(await repository.findActiveById(PRODUCT_ID)).not.toBeNull();
+  });
+
+  it('should throw ProductNotFoundException when the product was already removed (CA08, FA02)', async () => {
+    await repository.save(
+      new Product(PRODUCT_ID, 'Leite sem lactose', new Date('2026-01-01')),
+    );
+
+    await expect(service.removeProduct(PRODUCT_ID)).rejects.toBeInstanceOf(
+      ProductNotFoundException,
+    );
+  });
+
+  it('should throw ProductNotFoundException when removing the same product twice (CA08, RN07)', async () => {
+    await repository.save(new Product(PRODUCT_ID, 'Leite sem lactose'));
+    await service.removeProduct(PRODUCT_ID);
+
+    await expect(service.removeProduct(PRODUCT_ID)).rejects.toBeInstanceOf(
+      ProductNotFoundException,
+    );
+  });
+
+  it('should throw ProductPersistenceFailedException without leaking the cause when the repository fails (CA11, FE01)', async () => {
+    vi.spyOn(repository, 'removeActive').mockRejectedValue(
+      new Error('connection refused at 10.0.0.5:5432'),
+    );
+
+    const result = service.removeProduct(PRODUCT_ID);
+
+    await expect(result).rejects.toBeInstanceOf(
+      ProductPersistenceFailedException,
+    );
+    await expect(result).rejects.not.toThrow(/10\.0\.0\.5|5432/);
+  });
+
+  it('should keep the product active when the repository fails (CA11, RN05)', async () => {
+    await repository.save(new Product(PRODUCT_ID, 'Leite sem lactose'));
+    vi.spyOn(repository, 'removeActive').mockRejectedValue(
+      new Error('connection lost'),
+    );
+
+    await expect(service.removeProduct(PRODUCT_ID)).rejects.toBeInstanceOf(
+      ProductPersistenceFailedException,
+    );
+
+    expect(await repository.findActiveById(PRODUCT_ID)).not.toBeNull();
+  });
+
+  describe('efeito da remoção nos outros casos de uso (RF05, RF07)', () => {
+    beforeEach(async () => {
+      await repository.save(new Product(PRODUCT_ID, 'Leite sem lactose'));
+      await repository.save(new Product(OTHER_ID, 'Pão sem glúten'));
+      await service.removeProduct(PRODUCT_ID);
+    });
+
+    it('should throw ProductNotFoundException when getting the removed product (CA02, RN03)', async () => {
+      await expect(service.getProductById(PRODUCT_ID)).rejects.toBeInstanceOf(
+        ProductNotFoundException,
+      );
+    });
+
+    it('should leave the removed product out of the listing and decrease the total by one (CA03, RN03)', async () => {
+      const page = await service.listProducts({ page: 1, limit: 10 });
+
+      expect(page.total).toBe(1);
+      expect(page.items.map((item) => item.productId)).toEqual([OTHER_ID]);
+    });
+
+    it('should throw ProductNotFoundException when updating the removed product (CA04, RN03)', async () => {
+      await expect(
+        service.updateProductName(PRODUCT_ID, 'Novo nome'),
+      ).rejects.toBeInstanceOf(ProductNotFoundException);
+    });
+
+    it('should keep the other products active and unchanged (CA05, RN06)', async () => {
+      const other = await service.getProductById(OTHER_ID);
+
+      expect(other.name).toBe('Pão sem glúten');
+      expect(other.deletedAt).toBeNull();
+    });
+  });
+});

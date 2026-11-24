@@ -1,0 +1,19 @@
+**O que foi executado:** pnpm test:integration
+**Data e hora UTC:** 2026-11-24T18:18:45Z
+**Commit de base:** 0b48c8998d49f5e8bb396f1790b0f971ccd202eb
+**Diretório/ambiente:** celilac-backend/, testes unitários (repositório em memória); sem banco
+**Código de saída:** 0
+
+
+ RUN  v4.1.11 /Users/evertoncoimbradearaujo/Documents/GitHub/dsc-tests/celilac-backend
+
+
+ Test Files  1 passed (1)
+      Tests  24 passed (24)
+   Start at  15:18:45
+   Duration  545ms (transform 54ms, setup 0ms, import 317ms, tests 161ms, environment 0ms)
+
+$ vitest run --config ./vitest.integration.config.ts
+The plugin "vite-tsconfig-paths" is detected. Vite now supports tsconfig paths resolution natively via the resolve.tsconfigPaths option. You can remove the plugin and set resolve.tsconfigPaths: true in your Vite config instead.
+
+**Leitura do resultado:** GREEN no banco de testes (celilac_test, 5435): os 5 testes de remoção passam, inclusive as remoções simultâneas (um sucesso e um ProductNotFoundException) e a preservação do deletedAt original.

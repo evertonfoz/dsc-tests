@@ -23,4 +23,9 @@ export interface ProductsRepository {
    * produto ativo com o identificador (UC15). Operação única: não deixa alteração pela metade.
    */
   updateActiveName(productId: string, name: string): Promise<Product | null>;
+  /**
+   * Remove logicamente o produto ativo (grava `deletedAt`) e informa se algum produto foi removido:
+   * `false` se não houver produto ativo com o identificador (UC16). Operação única.
+   */
+  removeActive(productId: string): Promise<boolean>;
 }
