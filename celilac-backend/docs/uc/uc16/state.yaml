@@ -35,9 +35,9 @@ fatias:
     comportamento: "Remover produto ativo no núcleo: grava a marca de remoção e informa o sucesso, sem mudar productId e name"
     criterios: [CA01, CA06, RN01, RN09, RF01, RF04]
     issue: 157
-    branch: null
+    branch: feature/uc16-remover-produto
     pr: null
-    status: planejada
+    status: em_andamento
     responsavel: evertonfoz
     revisor: null
     evidencias: []
