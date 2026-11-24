@@ -13,8 +13,8 @@
 Publicar Epic, fatias e Project do UC14 e reconciliá-los com `docs/uc/uc14/state.yaml`.
 
 ## 2. O que foi feito
-- UC14 especificado e aprovado pelo estudante: `prompts/uc-14-buscar-produto.md` — Executado nesta fase.
-- Fontes, existência e planejamento: `prompts/00-uc-referencia.md`, `01-existencia-do-uc.md`, `03-planejamento-github.md` — Executado nesta fase.
+- UC14 especificado e aprovado pelo estudante: `prompts/uc-14/uc-14-buscar-produto.md` — Executado nesta fase.
+- Fontes, existência e planejamento: `prompts/uc-14/00-uc-referencia.md`, `01-existencia-do-uc.md`, `03-planejamento-github.md` — Executado nesta fase.
 - Epic #126, 5 fatias (#127 a #131) e 6 issues de fase (#132 a #137) criadas, vinculadas e adicionadas ao Project #6 — Executado nesta fase.
 - Linha de base do ambiente (antes de qualquer alteração de código): `pnpm build` e `pnpm lint` passam (17 avisos `unbound-method`); `pnpm test` com 47 passando e 4 falhando, todas em `orders.services.spec.ts` (falhas conhecidas do ADR-001) — Executado nesta fase.
 
@@ -30,7 +30,7 @@ Publicar Epic, fatias e Project do UC14 e reconciliá-los com `docs/uc/uc14/stat
 | Project com os 5 estados e itens posicionados | listagem do Project #6 | aprovado | evertonfoz (2026-11-23) |
 
 ## 5. Decisões e hipóteses
-Hipótese: corte em 5 fatias (ver `prompts/03-planejamento-github.md`), a validar pelo estudante.
+Hipótese: corte em 5 fatias (ver `prompts/uc-14/03-planejamento-github.md`), a validar pelo estudante.
 
 ## 6. Pendências e riscos
 O gate foi aprovado pelo estudante, não pelo agente. Falhas de `orders` são anteriores ao UC14.

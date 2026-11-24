@@ -11,6 +11,9 @@
 ## Decisão
 <O que foi decidido, de forma direta.>
 
+## Condição para retomar
+<O que precisa acontecer para o item voltar ao escopo? Em uma decisão que não adia nem exclui nada, escreva "não se aplica".>
+
 ## Consequências
 - (+) <benefício>
 - (−) <custo ou risco>

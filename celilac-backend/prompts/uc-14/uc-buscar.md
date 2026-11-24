@@ -41,7 +41,7 @@ Antes de agir, **leia** estes materiais. Eles definem o padrão de processo; os 
 | `prompts/11` | Contrato HTTP estável: DTO de resposta, semântica de status e erros, testes de contrato. |
 | `prompts/12` | Auditoria arquitetural; **não alterar código sem evidência**; encerramento de governança (roteiro de conclusão). |
 | `prompts/13` | Coleção REST Client (`.http`) e verificação automatizada (`run-checks.sh`) com **Esperado × Obtido**. |
-| `prompts/uc-buscar-por-que-este-metodo.md`, `method/didatico/curso/m00-o-caso-pronto.md` e `m00-pratica.md` (se existirem) | O problema que motiva o método e a **descrição prévia** do UC que o estudante traz (ator, caso normal, duas regras, uma falha e "como eu mostraria"). Entrada da Etapa 1, não requisito aprovado. |
+| `prompts/uc-14/uc-buscar-por-que-este-metodo.md`, `method/didatico/curso/m00-o-caso-pronto.md` e `m00-pratica.md` (se existirem) | O problema que motiva o método e a **descrição prévia** do UC que o estudante traz (ator, caso normal, duas regras, uma falha e "como eu mostraria"). Entrada da Etapa 1, não requisito aprovado. |
 | `prompts/uc-listar.md` e o resumo da execução do UC de listagem (se existirem) | Padrão já aplicado a uma operação de **consulta**: organização dos cenários `.http` por UC, atualização do `run-checks.sh`, substituição de contrato anterior. Use como exemplo de processo, não de requisito. |
 | `docs/uc/`, `docs/adr/`, `project-profile.md`, `method/` (se existirem) | Estado real dos UCs existentes, decisões já tomadas (ADRs) e playbooks por fase. |
 
