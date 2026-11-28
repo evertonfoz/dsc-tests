@@ -28,7 +28,7 @@ Entregar F01 e F02 pelo ciclo do apoio B: teste falhando, código mínimo, melho
 - *Executado nesta fase:* REFACTOR **no código de teste** (uma função para abrir a aplicação em um endereço). No código da aplicação não houve refatoração.
 - *Executado nesta fase:* mutação (a raiz levando ao dashboard), acusada pelo teste de CA01, e desfeita.
 - Diferença para o material: os `import` vêm de `react-router` (ADR-002).
-- Aguardando validação de `evertonfoz`.
+- Parte 3.2 **validada por `evertonfoz` em 2026-11-28**.
 
 | Critério | Teste | Situação |
 |---|---|---|

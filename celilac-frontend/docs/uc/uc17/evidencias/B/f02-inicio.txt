@@ -1,0 +1,15 @@
+**O que foi executado:** `gh project item-list 7 --owner evertonfoz --format json -q ".items[]|[(.content.number|tostring),.status]|@tsv"; method/scripts/check-state.sh docs/uc/uc17/state.yaml --remote`<br>
+**Data e hora UTC:** 2026-11-28T17:15:44Z<br>
+**Commit de base:** 5c58cce6f49a796da4dff85cf90830d0f1e42676<br>
+**Diretório/ambiente:** `celilac-frontend/`<br>
+**Código de saída:** 0<br>
+
+```text
+171	Backlog
+172	In Progress
+173	In Progress
+
+OK: docs/uc/uc17/state.yaml válido (local + GitHub).
+```
+
+**Leitura do resultado:** F02 em In Progress no Project e em_andamento no estado, conferido com o GitHub.

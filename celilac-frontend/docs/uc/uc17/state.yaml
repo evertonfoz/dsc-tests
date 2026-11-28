@@ -43,9 +43,9 @@ fatias:
     comportamento: "Formulário de login preparado, sem autenticar nem enviar dados à API"
     criterios: [CA02, CA07, RF02, RN02]
     issue: 173
-    branch: null
+    branch: feature/uc17-telas-iniciais
     pr: null
-    status: planejada
+    status: em_andamento
     responsavel: evertonfoz
     revisor: null
-    evidencias: []
+    evidencias: [evidencias/B/f02-inicio.txt]
