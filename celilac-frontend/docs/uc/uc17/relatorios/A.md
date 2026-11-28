@@ -1,6 +1,6 @@
 # Relatório da Fase A — UC17 Autenticar usuário
 
-> Siglas: UC (caso de uso), API (*Application Programming Interface*, a interface pela qual outros programas usam o sistema), RF (requisito funcional), RN (regra de negócio), FA (fluxo alternativo), CA (critério de aceite), ADR (*Architecture Decision Record*, registro de decisão arquitetural), DoR (*Definition of Ready*, critério de prontidão), RED (o teste que falha antes do código), CI (*Continuous Integration*, integração contínua), PR (*Pull Request*, proposta de mudança no GitHub), TDD (*Test-Driven Development*, desenvolvimento guiado por testes).
+> Siglas: UC (caso de uso), API (*Application Programming Interface*, a interface pela qual outros programas usam o sistema), RF (requisito funcional), RN (regra de negócio), FA (fluxo alternativo), CA (critério de aceite), ADR (*Architecture Decision Record*, registro de decisão arquitetural), DoR (*Definition of Ready*, critério de prontidão), RED (o teste que falha antes do código), CI (*Continuous Integration*, integração contínua), PR (*Pull Request*, proposta de mudança no GitHub), TDD (*Test-Driven Development*, desenvolvimento guiado por testes), HTML (*HyperText Markup Language*, a linguagem das páginas da web).
 
 | Campo | Valor |
 |---|---|
@@ -35,6 +35,7 @@ No gate da fase A não havia testes: os itens com teste previsto estavam em *A i
 | RN02, CA07 (envio não gera requisição) | F02 | `should not send any request when the login form is submitted (CA07)` | Coberto (teste de caracterização, sem RED) |
 | RF05, CA05 (endereço da API) | base do projeto (etapa 2), teste na etapa 3 | `should expose the API base URL from VITE_API_BASE_URL (CA05)` | Coberto (sem RED válido; validado por mutação) |
 | RN01, CA06 (`.env` fora do repositório) | base do projeto (etapa 2) | comando do Git (`docs/uc/uc17/evidencias/A/base-env-versionado.txt`) | Coberto por comando |
+| RF09, CA08 (idioma e título; acrescentados depois do gate, além do material) | base do projeto, depois da etapa 4 | `should declare the page language as Brazilian Portuguese (CA08)` e `should use CeliLac as the page title (CA08)` | Coberto |
 | RF06 (autenticar na API) | — | nenhum | Não implementado (ADR-001 aceita) |
 | RF07 (proteger o dashboard) | — | nenhum | Não implementado (ADR-001 aceita) |
 | RF08 (controle por perfil) | — | nenhum | Não implementado (ADR-001 aceita) |

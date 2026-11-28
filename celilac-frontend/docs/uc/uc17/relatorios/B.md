@@ -1,6 +1,6 @@
 # Relatório da Fase B — UC17 Autenticar usuário
 
-> Fase **em andamento**. Siglas: UC (caso de uso), CA (critério de aceite), RED (o teste que falha antes do código), TDD (*Test-Driven Development*, desenvolvimento guiado por testes), CI (*Continuous Integration*, integração contínua), PR (*Pull Request*, proposta de mudança no GitHub).
+> Fase **em andamento**. Siglas: UC (caso de uso), CA (critério de aceite), RED (o teste que falha antes do código), TDD (*Test-Driven Development*, desenvolvimento guiado por testes), CI (*Continuous Integration*, integração contínua), PR (*Pull Request*, proposta de mudança no GitHub), HTML (*HyperText Markup Language*, a linguagem das páginas da web).
 
 | Campo | Valor |
 |---|---|
@@ -8,9 +8,9 @@
 | Fase | B — Fatias (neste projeto: comportamento visível da tela) |
 | Período | 2026-11-28 → em andamento |
 | Responsável | `evertonfoz` |
-| Issue(s) | #172 (F01), #173 (F02); #171 para o CA05 |
+| Issue(s) | #172 (F01), #173 (F02); #171 para o CA05, a conferência e o CA08 |
 | Branch / PR | `feature/uc17-telas-iniciais` / nenhum |
-| Commits de referência | preparo `59f8a74`; F01: início `2e0b458`, RED `24ce794`, GREEN `f4d4e6e`, REFACTOR `f220388`; F02: início `9cd1d97`, RED `f302821`, GREEN `dc4effd`, caracterização `f4cb4bc`; CA05: teste `f7ea182`, GREEN `3b6e3b5`; conferência: `83a92ec`, `e298df6` |
+| Commits de referência | preparo `59f8a74`; F01: início `2e0b458`, RED `24ce794`, GREEN `f4d4e6e`, REFACTOR `f220388`; F02: início `9cd1d97`, RED `f302821`, GREEN `dc4effd`, caracterização `f4cb4bc`; CA05: teste `f7ea182`, GREEN `3b6e3b5`; conferência: `83a92ec`, `e298df6`; CA08: RED `5c49149`, GREEN `87ed4a5` |
 
 ## 1. Objetivo da fase
 Entregar F01 e F02 pelo ciclo do apoio B: teste falhando, código mínimo, melhoria e mutação revertida.
@@ -72,9 +72,25 @@ CA05 pertence à base do projeto, não à F01 nem à F02; os commits citam a iss
 - *Executado nesta fase:* checklist do material conferido item por item (relatório da fase A, `docs/uc/uc17/relatorios/A.md`, seção 3.1).
 - **Observado (P3, em aberto):** ao clicar em "Entrar", a página recarrega, o endereço vira `/login?` e os campos esvaziam. Os dados digitados não aparecem no endereço, e nenhuma requisição vai à API.
 - **Observado (P1, em aberto):** um endereço inexistente mostra tela em branco, com o aviso `No routes matched location` no console.
-- **Achado, sem correção:** `index.html` vem do modelo com `lang="en"`, embora o conteúdo esteja em português, e com o título `celilac-frontend`. O material não trata dos dois.
+- **Achado, corrigido depois (seção 2.6):** `index.html` vem do modelo com `lang="en"`, embora o conteúdo esteja em português, e com o título `celilac-frontend`. O material não trata dos dois.
 - **Limites:** conferência em um só navegador, sem janela, em 1280×800, no servidor de desenvolvimento; telas estreitas e o resultado do build não foram abertos no navegador.
 - Etapa 4 **validada por `evertonfoz` em 2026-11-28**, com a correção do registro do CA05 (seção 2.4).
+
+### 2.6. Idioma e título da página, CA08 (ajuste depois da etapa 4)
+Por decisão de `evertonfoz` em 2026-11-28, o achado da conferência foi corrigido. O ajuste vai **além do material**: RF09 e CA08 foram acrescentados à especificação antes do teste. Pertence à base do projeto; os commits citam a issue principal #171.
+
+- *Executado nesta fase:* RED **válido**, com os dois testes rodando e falhando na comparação (`en` no lugar de `pt-BR`; `celilac-frontend` no lugar de `CeliLac`).
+- *Executado nesta fase:* GREEN com a mudança das duas linhas em `index.html`.
+- *Executado nesta fase:* verificação completa e conferência no navegador passando; o HTML servido e o gerado pelo build trazem os valores novos.
+- **Sem REFACTOR e sem mutação:** o RED já mostrou cada teste acusando o valor errado.
+- **Limite:** não foi testado com leitor de tela nem com a oferta de tradução do navegador.
+- A issue #171 ainda cita "CA01 a CA07"; atualizar no GitHub depende de autorização.
+- Aguardando validação de `evertonfoz`.
+
+| Critério | Teste | Situação |
+|---|---|---|
+| CA08, RF09 | `should declare the page language as Brazilian Portuguese (CA08)` | passa; teve RED |
+| CA08, RF09 | `should use CeliLac as the page title (CA08)` | passa; teve RED |
 
 ## 3. Evidências
 | # | Afirmação | Etiqueta | Evidência (arquivo em `evidencias/`) |
@@ -116,6 +132,9 @@ CA05 pertence à base do projeto, não à F01 nem à F02; os commits citam a iss
 | 35 | Captura do dashboard | Executado nesta fase | `docs/uc/uc17/evidencias/B/conf-navegador-dashboard.png` |
 | 36 | Captura do acesso negado | Executado nesta fase | `docs/uc/uc17/evidencias/B/conf-navegador-unauthorized.png` |
 | 37 | Arquivos e nomes dos testes comparados com o material | Executado nesta fase | `docs/uc/uc17/evidencias/B/conf-material.txt` |
+| 38 | CA08: RED | Executado nesta fase | `docs/uc/uc17/evidencias/B/ca08-red.txt` |
+| 39 | CA08: GREEN | Executado nesta fase | `docs/uc/uc17/evidencias/B/ca08-green.txt` |
+| 40 | CA08: verificação, navegador e build | Executado nesta fase | `docs/uc/uc17/evidencias/B/ca08-conferencia.txt` |
 
 ## 4. Gate de saída
 | Verificação | Como verificar | Resultado | Validado por |
@@ -131,5 +150,4 @@ CA05 pertence à base do projeto, não à F01 nem à F02; os commits citam a iss
 ## 6. Pendências e riscos
 - F01 e F02 só passam a `em_revisao` quando houver PR.
 - P1 e P3 foram observadas no navegador e continuam em aberto; P2 não foi exercitada.
-- `index.html` com `lang="en"` e título do modelo: decidir se corrige.
 - Os testes automatizados rodam em navegador simulado; a conferência no Chrome é um passo à parte, fora do `scripts/verify.sh`.
