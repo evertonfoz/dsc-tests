@@ -48,4 +48,4 @@ fatias:
     status: em_andamento
     responsavel: evertonfoz
     revisor: null
-    evidencias: [evidencias/B/f02-inicio.txt]
+    evidencias: [evidencias/B/f02-inicio.txt, evidencias/B/f02-red.txt, evidencias/B/f02-green.txt, evidencias/B/f02-caracterizacao-ca07.txt, evidencias/B/f02-mutacao-ca02.txt, evidencias/B/f02-mutacao-ca07-fetch.txt, evidencias/B/f02-mutacao-ca07-action.txt, evidencias/B/f02-mutacao-revertida.txt, evidencias/B/f02-build-lint.txt]

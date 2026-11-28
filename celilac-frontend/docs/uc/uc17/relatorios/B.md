@@ -10,7 +10,7 @@
 | Responsável | `evertonfoz` |
 | Issue(s) | #172 (F01), #173 (F02) |
 | Branch / PR | `feature/uc17-telas-iniciais` / nenhum |
-| Commits de referência | preparo `59f8a74`; F01: início `2e0b458`, RED `24ce794`, GREEN `f4d4e6e`, REFACTOR `f220388` |
+| Commits de referência | preparo `59f8a74`; F01: início `2e0b458`, RED `24ce794`, GREEN `f4d4e6e`, REFACTOR `f220388`; F02: início `9cd1d97`, RED `f302821`, GREEN `dc4effd`, caracterização `f4cb4bc` |
 
 ## 1. Objetivo da fase
 Entregar F01 e F02 pelo ciclo do apoio B: teste falhando, código mínimo, melhoria e mutação revertida.
@@ -36,6 +36,20 @@ Entregar F01 e F02 pelo ciclo do apoio B: teste falhando, código mínimo, melho
 | CA03, RF03, FA01, RN03 | `should show the dashboard page at /dashboard (CA03)` | passa; teve RED |
 | CA04, RF04, FA01, RN03 | `should show the access denied page at /unauthorized (CA04)` | passa; teve RED |
 
+### 2.3. F02 — formulário de login sem autenticação (parte 3.3)
+- *Executado nesta fase:* RED de CA02, com o teste falhando porque a tela só tinha o título (o campo "E-mail" não existia); os três testes da F01 continuaram passando.
+- *Executado nesta fase:* GREEN com o formulário do material. A única adição em relação ao código do material é o comentário que registra que o formulário não autentica.
+- *Executado nesta fase:* o teste de CA07 **passou na primeira execução**. É um teste de **caracterização** (descreve o que o código já faz), não um RED: o formulário da GREEN já não enviava nada.
+- *Executado nesta fase:* três mutações, cada uma acusada por um teste e desfeita em seguida: senha visível (CA02), chamada à API no envio (CA07) e destino de envio no formulário (CA07).
+- **Sem REFACTOR:** não foi identificada melhoria que justificasse mudar o código do material ou os testes.
+- **Limite do teste de CA07:** observa `fetch`, `XMLHttpRequest` e os atributos `action` e `formaction`. Outros meios de requisição não são observados.
+- Aguardando validação de `evertonfoz`.
+
+| Critério | Teste | Situação |
+|---|---|---|
+| CA02, RF02 | `should show the e-mail and password fields and the submit button (CA02)` | passa; teve RED; validado por mutação |
+| CA07, RN02 | `should not send any request when the login form is submitted (CA07)` | passa; **sem RED** (caracterização); validado por duas mutações |
+
 ## 3. Evidências
 | # | Afirmação | Etiqueta | Evidência (arquivo em `evidencias/`) |
 |---|---|---|---|
@@ -51,12 +65,21 @@ Entregar F01 e F02 pelo ciclo do apoio B: teste falhando, código mínimo, melho
 | 10 | F01: REFACTOR nos testes | Executado nesta fase | `docs/uc/uc17/evidencias/B/f01-refactor.txt` |
 | 11 | F01: mutação acusada | Executado nesta fase | `docs/uc/uc17/evidencias/B/f01-mutacao.txt` |
 | 12 | F01: mutação desfeita | Executado nesta fase | `docs/uc/uc17/evidencias/B/f01-mutacao-revertida.txt` |
+| 13 | F02 em andamento no Project e no estado | Executado nesta fase | `docs/uc/uc17/evidencias/B/f02-inicio.txt` |
+| 14 | F02: RED de CA02 | Executado nesta fase | `docs/uc/uc17/evidencias/B/f02-red.txt` |
+| 15 | F02: GREEN de CA02 | Executado nesta fase | `docs/uc/uc17/evidencias/B/f02-green.txt` |
+| 16 | F02: teste de caracterização de CA07 | Executado nesta fase | `docs/uc/uc17/evidencias/B/f02-caracterizacao-ca07.txt` |
+| 17 | F02: mutação acusada por CA02 | Executado nesta fase | `docs/uc/uc17/evidencias/B/f02-mutacao-ca02.txt` |
+| 18 | F02: mutação com chamada à API acusada por CA07 | Executado nesta fase | `docs/uc/uc17/evidencias/B/f02-mutacao-ca07-fetch.txt` |
+| 19 | F02: mutação com destino de envio acusada por CA07 | Executado nesta fase | `docs/uc/uc17/evidencias/B/f02-mutacao-ca07-action.txt` |
+| 20 | F02: mutações desfeitas | Executado nesta fase | `docs/uc/uc17/evidencias/B/f02-mutacao-revertida.txt` |
+| 21 | F02: build e lint | Executado nesta fase | `docs/uc/uc17/evidencias/B/f02-build-lint.txt` |
 
 ## 4. Gate de saída
 | Verificação | Como verificar | Resultado | Validado por |
 |---|---|---|---|
 | Todas as fatias integradas, com PR, revisor e evidências | `check-state.sh --remote` | pendente | — |
-| Cada fatia com teste RED e GREEN em commits separados | histórico e evidências | pendente | — |
+| Cada fatia com teste RED e GREEN em commits separados | histórico e evidências | pendente de validação; CA07 não tem RED (seção 2.3) | — |
 | CI verde na branch principal | resultado do CI | não poderá ser aprovado (ADR-003) | — |
 | Tabela fatia → teste confere com o código | este relatório | pendente | — |
 
@@ -64,6 +87,7 @@ Entregar F01 e F02 pelo ciclo do apoio B: teste falhando, código mínimo, melho
 - Sem decisões novas.
 
 ## 6. Pendências e riscos
-- F02 e o teste de CA05 ainda não começaram.
-- A F01 só passa a `em_revisao` quando houver PR.
+- O teste de CA05 (parte 3.4) ainda não começou.
+- F01 e F02 só passam a `em_revisao` quando houver PR.
+- No navegador real, o envio sem tratamento deve recarregar a página (pendência P3, em aberto); conferir na etapa 4.
 - Os testes rodam em navegador simulado; as rotas ainda não foram conferidas no navegador real (etapa 4).

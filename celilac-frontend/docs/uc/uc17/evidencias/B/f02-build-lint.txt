@@ -1,0 +1,22 @@
+**O que foi executado:** `npx -y pnpm@latest build && npx -y pnpm@latest lint`<br>
+**Data e hora UTC:** 2026-11-28T17:18:10Z<br>
+**Commit de base:** f4cb4bc021baa0199bab230e3fc59ef95315e0a5<br>
+**Diretório/ambiente:** `celilac-frontend/`<br>
+**Código de saída:** 0<br>
+
+```text
+$ tsc -b && vite build
+vite v8.4.0 building client environment for production...
+transforming...
+✓ 97 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                   0.46 kB │ gzip:  0.30 kB
+dist/assets/index-CzZER6Nc.css    0.59 kB │ gzip:  0.36 kB
+dist/assets/index-DcSgx4LP.js   258.43 kB │ gzip: 82.18 kB
+
+✓ built in 69ms
+$ oxlint
+```
+
+**Leitura do resultado:** Build e lint passam com o formulário e os testes da F02.

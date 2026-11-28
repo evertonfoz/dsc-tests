@@ -1,0 +1,73 @@
+**O que foi executado:** `git diff -- src/pages/LoginPage.tsx; npx -y pnpm@latest test`<br>
+**Data e hora UTC:** 2026-11-28T17:18:07Z<br>
+**Commit de base:** f4cb4bc021baa0199bab230e3fc59ef95315e0a5<br>
+**Diretório/ambiente:** `celilac-frontend/`<br>
+**Código de saída:** 1<br>
+
+```text
+diff --git a/celilac-frontend/src/pages/LoginPage.tsx b/celilac-frontend/src/pages/LoginPage.tsx
+index 0d9d660..cfc05e5 100644
+--- a/celilac-frontend/src/pages/LoginPage.tsx
++++ b/celilac-frontend/src/pages/LoginPage.tsx
+@@ -9,7 +9,13 @@ export function LoginPage() {
+           Informe suas credenciais para acessar o dashboard.
+         </p>
+ 
+-        <form className="form">
++        <form
++          className="form"
++          onSubmit={(event) => {
++            event.preventDefault();
++            void fetch('http://localhost:3200/login', { method: 'POST' });
++          }}
++        >
+           <label>
+             E-mail
+             <input
+$ vitest run
+
+ RUN  v5.1.2 <caminho-local>/celilac-frontend
+
+ ❯ src/pages/LoginPage.test.tsx (2 tests | 1 failed) 113ms
+   ❯ Formulário de login (F02) (2)
+     × should not send any request when the login form is submitted (CA07) 79ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/pages/LoginPage.test.tsx > Formulário de login (F02) > should not send any request when the login form is submitted (CA07)
+AssertionError: expected "vi.fn()" to not be called at all, but actually been called 1 times
+
+Received:
+
+  1st vi.fn() call:
+
+    Array [
+      "http://localhost:3200/login",
+      Object {
+        "method": "POST",
+      },
+    ]
+
+
+Number of calls: 1
+
+ ❯ src/pages/LoginPage.test.tsx:39:26
+     37|     await user.click(botao);
+     38|
+     39|     expect(fetchSpy).not.toHaveBeenCalled();
+       |                          ^
+     40|     expect(xhrSpy).not.toHaveBeenCalled();
+     41|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 1 passed (2)
+      Tests  1 failed | 4 passed (5)
+   Start at  14:18:08
+   Duration  554ms (environment 54%, setup 19%, tests 17%, transform 5%, import 5%)
+
+[ELIFECYCLE] Test failed. See above for more details.
+```
+
+**Leitura do resultado:** Mutação: o envio passa a chamar a API por código. O teste de CA07 acusa. A função fetch é substituída no teste, então nenhuma requisição saiu.
