@@ -122,7 +122,7 @@ O teste de CA07 tende a passar sem falhar antes: se isso ocorrer, será registra
 - **Hipóteses:** código `UC17`; especificação e descrição prévia redigidas pelo assistente; acréscimo de um mínimo de CSS para o formulário, que o material não traz.
 
 ## 8. Pendências e riscos
-- A especificação citada na issue #171 está na branch do PR #174, ainda fora da `main`. A issue ainda a descreve como não publicada.
+- A especificação citada na issue #171 está na `main` desde o merge do PR #174. A issue ainda a descreve como não publicada.
 - Resolvido na etapa 4: as duas citações ao script `scripts/verify.sh`, feitas pelo método copiado, faziam o `check-links.mjs` e um teste do validador falharem. O script foi criado (`docs/uc/uc17/evidencias/B/conf-validador.txt`).
 - O validador diz se o arquivo é coerente, não se o trabalho foi feito.
 - Revisão em modo solo não é revisão independente.
