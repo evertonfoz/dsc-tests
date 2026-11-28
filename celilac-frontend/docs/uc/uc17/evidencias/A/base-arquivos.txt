@@ -1,0 +1,28 @@
+**O que foi executado:** `git status --short -uall -- . ":(exclude)docs"`<br>
+**Data e hora UTC:** 2026-11-28T17:02:42Z<br>
+**Commit de base:** 0d960b2ebb4455bf43e94179824d79a82719c4ba (com a base do projeto ainda não commitada)<br>
+**Diretório/ambiente:** `celilac-frontend/`<br>
+**Código de saída:** 0<br>
+
+```text
+?? .env.example
+?? .gitignore
+?? .oxlintrc.json
+?? README.md
+?? index.html
+?? package.json
+?? pnpm-lock.yaml
+?? public/favicon.svg
+?? src/App.tsx
+?? src/api/.gitkeep
+?? src/main.tsx
+?? src/pages/.gitkeep
+?? src/routes/.gitkeep
+?? src/styles/global.css
+?? tsconfig.app.json
+?? tsconfig.json
+?? tsconfig.node.json
+?? vite.config.ts
+```
+
+**Leitura do resultado:** Arquivos do projeto, sem os de exemplo do modelo; node_modules e dist ficam fora do Git.

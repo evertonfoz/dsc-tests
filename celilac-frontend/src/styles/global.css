@@ -1,0 +1,56 @@
+/* Regras do material de origem. */
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #f3f4f6;
+  color: #111827;
+}
+
+.page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.card {
+  width: 100%;
+  max-width: 420px;
+  padding: 32px;
+  border-radius: 12px;
+  background: #ffffff;
+  box-shadow: 0 10px 30px
+    rgba(15, 23, 42, 0.12);
+}
+
+.form button {
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  background: #2563eb;
+  color: #ffffff;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* Acréscimo deste projeto: alinhamento mínimo do formulário, que o material não traz. */
+.form,
+.form label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form {
+  gap: 16px;
+}
+
+.form input {
+  padding: 10px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font: inherit;
+}

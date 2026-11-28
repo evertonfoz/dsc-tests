@@ -1,0 +1,13 @@
+**O que foi executado:** `npx -y pnpm@latest install --frozen-lockfile`<br>
+**Data e hora UTC:** 2026-11-28T17:02:38Z<br>
+**Commit de base:** 0d960b2ebb4455bf43e94179824d79a82719c4ba (com a base do projeto ainda não commitada)<br>
+**Diretório/ambiente:** `celilac-frontend/`<br>
+**Código de saída:** 0<br>
+
+```text
+✓ Lockfile passes supply-chain policies (verified 25s ago)
+Lockfile is up to date, resolution step is skipped
+Done in 31ms using pnpm v12.23.0
+```
+
+**Leitura do resultado:** A instalação a partir do arquivo de travamento funciona.

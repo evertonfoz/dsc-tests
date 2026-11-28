@@ -18,39 +18,37 @@ Política de versões: `docs/adr/ADR-002-versoes-atuais-e-react-router.md` (inst
 
 | Item | Valor | Origem |
 |---|---|---|
-| Runtime | Node 24.21.0 | máquina local, observado em 2026-11-28 |
-| Gerenciador de pacotes | pnpm (versão a registrar na instalação) | a confirmar na etapa 2 |
-| Framework | React, com Vite e TypeScript (versões a registrar na instalação) | a confirmar na etapa 2 |
-| Rotas | React Router, pacote `react-router` | ADR-002 |
+| Runtime | Node 24.21.0 | `docs/uc/uc17/evidencias/A/base-versoes.txt` |
+| Gerenciador de pacotes | pnpm 12.23.0, usado na instalação | idem |
+| Framework | React 19.3.1, Vite 8.4.0, TypeScript 7.0.2 | idem |
+| Rotas | `react-router` 8.5.3 | idem; ADR-002 |
 | ORM e banco | não se aplica | frontend |
 | Testes | Vitest, Testing Library e `jsdom` (versões a registrar na instalação) | a confirmar na etapa 3 |
-| Lint / formatação | o que o modelo do Vite trouxer | a confirmar na etapa 2 |
+| Lint | oxlint 1.95.0 | `docs/uc/uc17/evidencias/A/base-versoes.txt` |
 
 ## 3. Comandos
-Nenhum foi executado ainda: o projeto será criado na etapa 2.
-
 | Finalidade | Comando |
 |---|---|
-| Instalar dependências | a confirmar na etapa 2 |
-| Build | a confirmar na etapa 2 |
-| Lint | a confirmar na etapa 2 |
+| Instalar dependências | `pnpm install --frozen-lockfile` |
+| Build | `pnpm build` |
+| Lint | `pnpm lint` |
 | Testes rápidos | a confirmar na etapa 3 |
 | Testes de integração / E2E | não se aplica nesta entrega |
-| Subir ambiente (desenvolvimento) | a confirmar na etapa 2 |
+| Subir ambiente (desenvolvimento) | `pnpm dev` |
 | Validar estado do UC | `method/scripts/check-state.sh docs/uc/uc17/state.yaml` |
-| Validar links dos documentos | `node method/scripts/check-links.mjs method docs project-profile.md prompts` |
+| Validar links dos documentos | `node method/scripts/check-links.mjs method docs project-profile.md prompts README.md` |
 | Verificação local rápida | a criar na etapa 4 |
 
 ## 4. Infraestrutura
 | Serviço | Porta | Observação |
 |---|---|---|
-| Servidor de desenvolvimento do Vite | 5173 (padrão citado no material) | a confirmar na etapa 2 |
+| Servidor de desenvolvimento do Vite | 5173 (padrão) | na etapa 2 a porta estava ocupada nesta máquina; a verificação usou a 5273. Com a 5173 ocupada, `pnpm dev` escolhe a seguinte livre |
 | API do CeliLac (`celilac-backend`) | 3200 | o material cita 3000; vale a porta real do projeto (regra 6 do `AGENTS.md`) |
 
 Sem contêiner, banco ou volume nesta entrega.
 
 ## 5. Variáveis de ambiente (somente nomes)
-`VITE_API_BASE_URL`. Arquivo versionado de exemplo: `.env.example` (a criar na etapa 2).
+`VITE_API_BASE_URL`. Arquivo versionado de exemplo: `.env.example`.
 
 ## 6. Proteções
 - Proibidos sem autorização explícita: `git push --force`, `git reset --hard`, apagar branches, merge.

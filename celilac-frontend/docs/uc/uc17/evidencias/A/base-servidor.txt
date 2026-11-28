@@ -1,0 +1,17 @@
+**O que foi executado:** `vite --port 5273 --strictPort`, consultado com `curl` e encerrado em seguida<br>
+**Data e hora UTC:** 2026-11-28T17:03:26Z<br>
+**Commit de base:** 0d960b2ebb4455bf43e94179824d79a82719c4ba (com a base do projeto ainda não commitada)<br>
+**Diretório/ambiente:** `celilac-frontend/`; a porta padrão 5173 estava ocupada por um contêiner de outro trabalho, que não foi alterado<br>
+**Código de saída:** 0<br>
+
+```text
+/ -> 200
+/src/main.tsx -> 200
+/src/App.tsx -> 200
+/src/styles/global.css -> 200
+    <title>celilac-frontend</title>
+    <div id="root"></div>
+servidor encerrado
+```
+
+**Leitura do resultado:** o servidor de desenvolvimento responde e entrega os arquivos. Não prova a aparência da tela no navegador, nem o uso da porta 5173.

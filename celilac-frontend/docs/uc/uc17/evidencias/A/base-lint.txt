@@ -1,0 +1,11 @@
+**O que foi executado:** `npx -y pnpm@latest lint`<br>
+**Data e hora UTC:** 2026-11-28T17:03:29Z<br>
+**Commit de base:** 0d960b2ebb4455bf43e94179824d79a82719c4ba (com a base do projeto ainda não commitada)<br>
+**Diretório/ambiente:** `celilac-frontend/`<br>
+**Código de saída:** 0<br>
+
+```text
+$ oxlint
+```
+
+**Leitura do resultado:** Resultado do lint (análise estática do código).

@@ -15,7 +15,7 @@ fases:
     gate:
       - { item: "Epic e Sub-Issues criadas e reconciliadas com este arquivo", resultado: aprovado, por: evertonfoz }
       - { item: "GitHub Project configurado com os 5 estados", resultado: aprovado, por: evertonfoz }
-    evidencias: [evidencias/A/busca-existencia.txt, evidencias/A/api-sem-autenticacao.txt, evidencias/A/versoes-publicadas.txt, evidencias/A/testes-do-validador.txt, evidencias/A/estado-valido.txt, evidencias/A/estado-quebrado-de-proposito.txt, evidencias/A/estado-restaurado.txt, evidencias/A/links.txt, evidencias/A/publicacao.txt, evidencias/A/estado-remoto.txt, evidencias/A/fatias-prontas.txt, evidencias/A/gate-aprovado.txt]
+    evidencias: [evidencias/A/busca-existencia.txt, evidencias/A/api-sem-autenticacao.txt, evidencias/A/versoes-publicadas.txt, evidencias/A/testes-do-validador.txt, evidencias/A/estado-valido.txt, evidencias/A/estado-quebrado-de-proposito.txt, evidencias/A/estado-restaurado.txt, evidencias/A/links.txt, evidencias/A/publicacao.txt, evidencias/A/estado-remoto.txt, evidencias/A/fatias-prontas.txt, evidencias/A/gate-aprovado.txt, evidencias/A/base-versoes.txt, evidencias/A/base-instalacao.txt, evidencias/A/base-build.txt, evidencias/A/base-lint.txt, evidencias/A/base-env.txt, evidencias/A/base-arquivos.txt, evidencias/A/base-servidor.txt]
   B:
     status: em_andamento
     relatorio: null
