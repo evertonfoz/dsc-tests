@@ -1,0 +1,18 @@
+**O que foi executado:** `node -v; npx -y pnpm@latest list --depth 0 | grep -E "vitest|jsdom|testing-library"; npx -y pnpm@latest peers check`<br>
+**Data e hora UTC:** 2026-11-28T17:09:37Z<br>
+**Commit de base:** fa92d756a564a4e3f26da2b3b63307a2ba210233 (com as alterações da parte 3.1 ainda não commitadas)<br>
+**Diretório/ambiente:** `celilac-frontend/`; caminho local substituído por `<caminho-local>`<br>
+**Código de saída:** 0<br>
+
+```text
+v24.21.0
+├── @testing-library/dom@10.4.2
+├── @testing-library/jest-dom@8.0.0
+├── @testing-library/react@16.3.3
+├── @testing-library/user-event@14.6.13
+├── jsdom@31.0.1
+└── vitest@5.1.2
+No peer dependency issues found
+```
+
+**Leitura do resultado:** Ferramentas de teste instaladas nas versões atuais, sem conflito entre pares.

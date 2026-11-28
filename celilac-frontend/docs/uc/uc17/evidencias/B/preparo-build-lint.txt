@@ -1,0 +1,22 @@
+**O que foi executado:** `npx -y pnpm@latest build && npx -y pnpm@latest lint`<br>
+**Data e hora UTC:** 2026-11-28T17:09:41Z<br>
+**Commit de base:** fa92d756a564a4e3f26da2b3b63307a2ba210233 (com as alterações da parte 3.1 ainda não commitadas)<br>
+**Diretório/ambiente:** `celilac-frontend/`; caminho local substituído por `<caminho-local>`<br>
+**Código de saída:** 0<br>
+
+```text
+$ tsc -b && vite build
+vite v8.4.0 building client environment for production...
+transforming...
+✓ 16 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                   0.46 kB │ gzip:  0.30 kB
+dist/assets/index-CzZER6Nc.css    0.59 kB │ gzip:  0.36 kB
+dist/assets/index-TKqTTAIq.js   219.18 kB │ gzip: 68.54 kB
+
+✓ built in 122ms
+$ oxlint
+```
+
+**Leitura do resultado:** A configuração de testes não quebra a construção nem o lint.

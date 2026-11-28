@@ -1,0 +1,48 @@
+**O que foi executado:** `bash <pasta-temporária>/sem-chrome.sh`<br>
+**Data e hora UTC:** 2026-11-28T19:01:51Z<br>
+**Commit de base:** 50b704aaf1bd582b80a5c6a73bebba9f46371ed1<br>
+**Diretório/ambiente:** `celilac-frontend/`<br>
+**Código de saída:** 0<br>
+
+```text
+--- CHROME_PATH=/caminho/inexistente
+node:events:505
+    throw er; // Unhandled 'error' event
+    ^
+
+Error: spawn /caminho/inexistente ENOENT
+    at ChildProcess._handle.onexit (node:internal/child_process:287:19)
+    at onErrorNT (node:internal/child_process:525:16)
+    at process.processTicksAndRejections (node:internal/process/task_queues:90:21)
+código de saída: 1
+--- CHROME_PATH=./package.json
+node:events:505
+    throw er; // Unhandled 'error' event
+    ^
+
+Error: spawn ./package.json EACCES
+    at ChildProcess._handle.onexit (node:internal/child_process:287:19)
+    at onErrorNT (node:internal/child_process:525:16)
+    at process.processTicksAndRejections (node:internal/process/task_queues:90:21)
+código de saída: 1
+pastas temporárias deixadas: 2
+```
+
+**Leitura do resultado:** Defeito reproduzido antes da correção: erro técnico do Node, sem explicar a causa, e pasta temporária deixada. O programa auxiliar roda a conferência com um caminho inexistente e com um arquivo que não é executável.
+
+**Programa auxiliar usado** (temporário, fora do repositório):
+
+```bash
+#!/usr/bin/env bash
+# Roda a conferência com caminhos de Chrome inválidos e conta as pastas temporárias deixadas.
+t="${TMPDIR%/}"
+conta() { find "$t" -maxdepth 1 -name 'chrome-verificacao-*' | wc -l | tr -d ' '; }
+antes=$(conta)
+for c in /caminho/inexistente ./package.json; do
+  echo "--- CHROME_PATH=$c"
+  saida=$(CHROME_PATH="$c" node scripts/verificar-navegador.mjs http://localhost:1 2>&1); rc=$?
+  echo "$saida" | sed "s|$t|<tmp>|g; s|$PWD|<projeto>|g" | head -8
+  echo "código de saída: $rc"
+done
+echo "pastas temporárias deixadas: $(( $(conta) - antes ))"
+```

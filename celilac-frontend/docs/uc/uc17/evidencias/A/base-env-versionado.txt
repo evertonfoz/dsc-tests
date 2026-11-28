@@ -1,0 +1,13 @@
+**O que foi executado:** `git ls-files .env .env.example; git check-ignore -v .env; git show HEAD:celilac-frontend/.env.example`<br>
+**Data e hora UTC:** 2026-11-28T17:10:00Z<br>
+**Commit de base:** fa92d756a564a4e3f26da2b3b63307a2ba210233<br>
+**Diretório/ambiente:** `celilac-frontend/`<br>
+**Código de saída:** 0<br>
+
+```text
+.env.example
+celilac-frontend/.gitignore:27:.env	.env
+VITE_API_BASE_URL=http://localhost:3200
+```
+
+**Leitura do resultado:** Somente o .env.example está versionado, com a variável; o .env é ignorado (CA06).

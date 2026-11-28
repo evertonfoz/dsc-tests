@@ -1,0 +1,46 @@
+**O que foi executado:** `npx -y pnpm@latest test`<br>
+**Data e hora UTC:** 2026-11-28T18:28:56Z<br>
+**Commit de base:** 72fc6a4928fffa9f440b46c8d19f73c64b590dbf<br>
+**Diretório/ambiente:** `celilac-frontend/`<br>
+**Código de saída:** 1<br>
+
+```text
+$ vitest run
+
+ RUN  v5.1.2 <caminho-local>/celilac-frontend
+
+ ❯ src/api/apiClient.test.ts (0 test)
+Not implemented: HTMLFormElement's requestSubmit() method
+
+⎯⎯⎯⎯⎯⎯ Failed Suites 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/api/apiClient.test.ts [ src/api/apiClient.test.ts ]
+Error: Failed to resolve import "./apiClient" from "src/api/apiClient.test.ts". Does the file exist?
+  Plugin: vite:import-analysis
+  File: <caminho-local>/celilac-frontend/src/api/apiClient.test.ts:15:42
+  10 |  		vi.resetModules();
+  11 |  		// Importa depois de definir a variável, que é lida na carga do módulo.
+  12 |  		const { API_BASE_URL } = await import("./apiClient");
+     |                                          ^
+  13 |  		expect(API_BASE_URL).toBe("http://api.exemplo.test:4000");
+  14 |  	});
+ ❯ TransformPluginContext._formatLog node_modules/.pnpm/vite@8.4.0_@types+node@26.6.11/node_modules/vite/dist/node/chunks/node.js:8993:39
+ ❯ TransformPluginContext.error node_modules/.pnpm/vite@8.4.0_@types+node@26.6.11/node_modules/vite/dist/node/chunks/node.js:8990:14
+ ❯ resolveId node_modules/.pnpm/vite@8.4.0_@types+node@26.6.11/node_modules/vite/dist/node/chunks/node.js:27938:18
+ ❯ node_modules/.pnpm/vite@8.4.0_@types+node@26.6.11/node_modules/vite/dist/node/chunks/node.js:28037:23
+ ❯ TransformPluginContext.transform node_modules/.pnpm/vite@8.4.0_@types+node@26.6.11/node_modules/vite/dist/node/chunks/node.js:28010:4
+ ❯ EnvironmentPluginContainer.transform node_modules/.pnpm/vite@8.4.0_@types+node@26.6.11/node_modules/vite/dist/node/chunks/node.js:8764:14
+ ❯ loadAndTransform node_modules/.pnpm/vite@8.4.0_@types+node@26.6.11/node_modules/vite/dist/node/chunks/node.js:19302:26
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 2 passed (3)
+      Tests  5 passed (5)
+   Start at  15:28:58
+   Duration  789ms (environment 61%, setup 24%, tests 9%, import 4%, transform 2%)
+
+[ELIFECYCLE] Test failed. See above for more details.
+```
+
+**Leitura do resultado:** RED: o teste de CA05 falha porque o módulo apiClient ainda não existe; a comparação do valor não chega a ser executada. Os demais testes passam.

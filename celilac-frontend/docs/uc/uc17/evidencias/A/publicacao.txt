@@ -1,0 +1,26 @@
+**O que foi executado:** `for n in 171 172 173; do gh issue view $n --json number,title,state,labels -q "[(.number|tostring),.state,.title,([.labels[].name]|join(\",\"))]|@tsv"; done; echo "sub-issues da 171:"; gh api repos/evertonfoz/dsc-tests/issues/171/sub_issues -q ".[].number"; echo "estados do Project 7:"; gh project field-list 7 --owner evertonfoz --format json -q ".fields[]|select(.name==\"Status\")|.options[].name"; echo "itens:"; gh project item-list 7 --owner evertonfoz --format json -q ".items[]|[(.content.number|tostring),.status]|@tsv"`<br>
+**Data e hora UTC:** 2026-11-28T16:59:21Z<br>
+**Commit de base:** 96509d4d6d00b99f9767f23543efb27f1c9f7f50<br>
+**Diretório/ambiente:** `celilac-frontend/`<br>
+**Código de saída:** 0<br>
+
+```text
+171	OPEN	[UC17] Autenticar usuário	type:epic,uc17,module:frontend
+172	OPEN	[UC17][F01] Navegar pelas telas iniciais	type:feature,layer:tests,uc17,module:frontend
+173	OPEN	[UC17][F02] Formulário de login sem autenticação	type:feature,layer:tests,uc17,module:frontend
+sub-issues da 171:
+172
+173
+estados do Project 7:
+Backlog
+Ready
+In Progress
+In Review
+Done
+itens:
+171	Backlog
+172	Backlog
+173	Backlog
+```
+
+**Leitura do resultado:** As três issues existem, as fatias estão vinculadas à principal e o Project tem os cinco estados e os três itens em Backlog. Consulta feita depois da criação.

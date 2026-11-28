@@ -1,0 +1,20 @@
+**O que foi executado:** `npx -y pnpm@latest test`<br>
+**Data e hora UTC:** 2026-11-28T18:28:59Z<br>
+**Commit de base:** f7ea1824073b7b2d3ca9d51e6f050ad2705c662e<br>
+**Diretório/ambiente:** `celilac-frontend/`<br>
+**Código de saída:** 0<br>
+
+```text
+$ vitest run
+
+ RUN  v5.1.2 <caminho-local>/celilac-frontend
+
+Not implemented: HTMLFormElement's requestSubmit() method
+
+ Test Files  3 passed (3)
+      Tests  6 passed (6)
+   Start at  15:28:59
+   Duration  1.09s (environment 76%, setup 13%, tests 7%, import 2%, transform 2%)
+```
+
+**Leitura do resultado:** GREEN: o teste de CA05 passa, junto com os demais.

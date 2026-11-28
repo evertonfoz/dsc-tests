@@ -1,0 +1,13 @@
+**O que foi executado:** `echo "issues UC17:"; gh issue list --state all --search "UC17 in:title,body"; echo "issues de autenticação:"; gh issue list --state all --search "autenticar OR autenticação in:title"; echo "arquivos com UC17 fora de celilac-frontend:"; grep -rIl UC17 --exclude-dir=node_modules --exclude-dir=.git --exclude-dir=dist --exclude-dir=celilac-frontend .. || true`<br>
+**Data e hora UTC:** 2026-11-28T16:44:42Z<br>
+**Commit de base:** 96509d4d6d00b99f9767f23543efb27f1c9f7f50<br>
+**Diretório/ambiente:** `celilac-frontend/`<br>
+**Código de saída:** 0<br>
+
+```text
+issues UC17:
+issues de autenticação:
+arquivos com UC17 fora de celilac-frontend:
+```
+
+**Leitura do resultado:** Nenhuma issue com UC17 ou sobre autenticação no título apareceu (blocos vazios). No repositório, as ocorrências de UC17 são as criadas por esta etapa, fora desta busca, que exclui a pasta nova. A busca anterior à criação não retornou arquivos.

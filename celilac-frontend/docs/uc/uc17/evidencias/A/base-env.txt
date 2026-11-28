@@ -1,0 +1,15 @@
+**O que foi executado:** `git check-ignore -v .env; echo "rc .env=$?"; git check-ignore -q .env.example; echo "rc .env.example=$? (1 = não ignorado)"; git status --short -uall -- .env .env.example; cat .env.example`<br>
+**Data e hora UTC:** 2026-11-28T17:02:42Z<br>
+**Commit de base:** 0d960b2ebb4455bf43e94179824d79a82719c4ba (com a base do projeto ainda não commitada)<br>
+**Diretório/ambiente:** `celilac-frontend/`<br>
+**Código de saída:** 0<br>
+
+```text
+celilac-frontend/.gitignore:27:.env	.env
+rc .env=0
+rc .env.example=1 (1 = não ignorado)
+?? .env.example
+VITE_API_BASE_URL=http://localhost:3200
+```
+
+**Leitura do resultado:** O Git ignora o .env e não ignora o .env.example (CA06). O .env.example só entra no repositório no commit.

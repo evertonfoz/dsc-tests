@@ -1,0 +1,37 @@
+**O que foi executado:** `git diff -- index.html; npx -y pnpm@latest test`<br>
+**Data e hora UTC:** 2026-11-28T18:53:44Z<br>
+**Commit de base:** 5c49149a746b0ec5c5a4e60e2eef6ad53220090b<br>
+**Diretório/ambiente:** `celilac-frontend/`<br>
+**Código de saída:** 0<br>
+
+```text
+diff --git a/celilac-frontend/index.html b/celilac-frontend/index.html
+index 94358a3..0515eca 100644
+--- a/celilac-frontend/index.html
++++ b/celilac-frontend/index.html
+@@ -1,10 +1,10 @@
+ <!doctype html>
+-<html lang="en">
++<html lang="pt-BR">
+   <head>
+     <meta charset="UTF-8" />
+     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+-    <title>celilac-frontend</title>
++    <title>CeliLac</title>
+   </head>
+   <body>
+     <div id="root"></div>
+$ vitest run
+
+ RUN  v5.1.2 <caminho-local>/celilac-frontend
+
+Not implemented: HTMLFormElement's requestSubmit() method
+
+ Test Files  4 passed (4)
+      Tests  8 passed (8)
+   Start at  15:53:45
+   Duration  799ms (environment 56%, setup 28%, tests 10%, transform 3%, import 3%)
+```
+
+**Leitura do resultado:** GREEN: os dois testes de CA08 passam, junto com os demais.

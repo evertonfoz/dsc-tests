@@ -1,0 +1,13 @@
+**O que foi executado:** `cmp /tmp/uc17-state.bak docs/uc/uc17/state.yaml && echo "idêntico à cópia anterior ao exercício"; method/scripts/check-state.sh docs/uc/uc17/state.yaml`<br>
+**Data e hora UTC:** 2026-11-28T16:44:51Z<br>
+**Commit de base:** 96509d4d6d00b99f9767f23543efb27f1c9f7f50<br>
+**Diretório/ambiente:** `celilac-frontend/`<br>
+**Código de saída:** 0<br>
+
+```text
+idêntico à cópia anterior ao exercício
+
+OK: docs/uc/uc17/state.yaml válido (local).
+```
+
+**Leitura do resultado:** A alteração do exercício foi desfeita: nenhuma diferença para a cópia anterior e o validador volta a aceitar.

@@ -1,0 +1,57 @@
+**O que foi executado:** `git diff -- src/pages/LoginPage.tsx; npx -y pnpm@latest test`<br>
+**Data e hora UTC:** 2026-11-28T17:18:08Z<br>
+**Commit de base:** f4cb4bc021baa0199bab230e3fc59ef95315e0a5<br>
+**Diretório/ambiente:** `celilac-frontend/`<br>
+**Código de saída:** 1<br>
+
+```text
+diff --git a/celilac-frontend/src/pages/LoginPage.tsx b/celilac-frontend/src/pages/LoginPage.tsx
+index 0d9d660..5881bd1 100644
+--- a/celilac-frontend/src/pages/LoginPage.tsx
++++ b/celilac-frontend/src/pages/LoginPage.tsx
+@@ -9,7 +9,7 @@ export function LoginPage() {
+           Informe suas credenciais para acessar o dashboard.
+         </p>
+ 
+-        <form className="form">
++        <form className="form" action="http://localhost:3200/login">
+           <label>
+             E-mail
+             <input
+$ vitest run
+
+ RUN  v5.1.2 <caminho-local>/celilac-frontend
+
+ ❯ src/pages/LoginPage.test.tsx (2 tests | 1 failed) 37ms
+   ❯ Formulário de login (F02) (2)
+     × should not send any request when the login form is submitted (CA07) 5ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/pages/LoginPage.test.tsx > Formulário de login (F02) > should not send any request when the login form is submitted (CA07)
+Error: expect(element).not.toHaveAttribute("action") // element.hasAttribute("action")
+
+Expected the element not to have attribute:
+  action
+Received:
+  action="http://localhost:3200/login"
+ ❯ src/pages/LoginPage.test.tsx:32:39
+     30|     // Sem "action", o envio nativo do HTML não aponta para a API.
+     31|     const botao = screen.getByRole('button', { name: 'Entrar' });
+     32|     expect(botao.closest('form')).not.toHaveAttribute('action');
+       |                                       ^
+     33|     expect(botao).not.toHaveAttribute('formaction');
+     34|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 1 passed (2)
+      Tests  1 failed | 4 passed (5)
+   Start at  14:18:09
+   Duration  401ms (environment 59%, setup 21%, tests 11%, import 5%, transform 4%)
+
+[ELIFECYCLE] Test failed. See above for more details.
+```
+
+**Leitura do resultado:** Mutação: o formulário passa a apontar o envio nativo para a API. O teste de CA07 acusa.

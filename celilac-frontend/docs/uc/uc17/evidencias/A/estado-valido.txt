@@ -1,0 +1,12 @@
+**O que foi executado:** `method/scripts/check-state.sh docs/uc/uc17/state.yaml`<br>
+**Data e hora UTC:** 2026-11-28T16:48:17Z<br>
+**Commit de base:** 96509d4d6d00b99f9767f23543efb27f1c9f7f50<br>
+**Diretório/ambiente:** `celilac-frontend/`<br>
+**Código de saída:** 0<br>
+
+```text
+
+OK: docs/uc/uc17/state.yaml válido (local).
+```
+
+**Leitura do resultado:** O arquivo, já com as evidências registradas, é coerente segundo o validador local. Não confere o GitHub, pois não há issues.

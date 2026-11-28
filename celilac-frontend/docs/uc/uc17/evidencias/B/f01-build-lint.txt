@@ -1,0 +1,22 @@
+**O que foi executado:** `npx -y pnpm@latest build && npx -y pnpm@latest lint`<br>
+**Data e hora UTC:** 2026-11-28T17:13:48Z<br>
+**Commit de base:** 24ce794c18f7d8cf142885687bc60d08ad458b69<br>
+**Diretório/ambiente:** `celilac-frontend/`<br>
+**Código de saída:** 0<br>
+
+```text
+$ tsc -b && vite build
+vite v8.4.0 building client environment for production...
+transforming...
+✓ 97 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                   0.46 kB │ gzip:  0.30 kB
+dist/assets/index-CzZER6Nc.css    0.59 kB │ gzip:  0.36 kB
+dist/assets/index-5qDBFMk6.js   258.03 kB │ gzip: 82.05 kB
+
+✓ built in 109ms
+$ oxlint
+```
+
+**Leitura do resultado:** Construção e lint com as rotas e as telas.

@@ -1,0 +1,60 @@
+**O que foi executado:** `npx -y pnpm@latest test`<br>
+**Data e hora UTC:** 2026-11-28T17:15:46Z<br>
+**Commit de base:** 9cd1d975686612745455206326e2f35dbdeec925<br>
+**Diretório/ambiente:** `celilac-frontend/`<br>
+**Código de saída:** 1<br>
+
+```text
+$ vitest run
+
+ RUN  v5.1.2 <caminho-local>/celilac-frontend
+
+ ❯ src/pages/LoginPage.test.tsx (1 test | 1 failed) 32ms
+   ❯ Formulário de login (F02) (1)
+     × should show the e-mail and password fields and the submit button (CA02) 32ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/pages/LoginPage.test.tsx > Formulário de login (F02) > should show the e-mail and password fields and the submit button (CA02)
+TestingLibraryElementError: Unable to find a label with the text of: E-mail
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <main
+      class="page"
+    >
+      <section
+        class="card"
+      >
+        <h1>
+          Login
+        </h1>
+      </section>
+    </main>
+  </div>
+</body>
+ ❯ Object.getElementError node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/config.js:37:19
+ ❯ getAllByLabelText node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/queries/label-text.js:111:38
+ ❯ node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:52:17
+ ❯ node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+ ❯ src/pages/LoginPage.test.tsx:11:19
+      9|
+     10|     expect(screen.getByRole('heading', { name: 'Login' })).toBeInTheDo…
+     11|     expect(screen.getByLabelText('E-mail')).toHaveAttribute('type', 'e…
+       |                   ^
+     12|     expect(screen.getByLabelText('Senha')).toHaveAttribute('type', 'pa…
+     13|     expect(screen.getByRole('button', { name: 'Entrar' })).toHaveAttri…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 1 passed (2)
+      Tests  1 failed | 3 passed (4)
+   Start at  14:15:47
+   Duration  760ms (environment 69%, setup 19%, tests 5%, transform 3%, import 3%)
+
+[ELIFECYCLE] Test failed. See above for more details.
+```
+
+**Leitura do resultado:** RED: o teste de CA02 falha porque a tela de login só tem o título; os três testes da F01 passam.

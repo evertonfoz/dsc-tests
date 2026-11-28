@@ -1,0 +1,81 @@
+**O que foi executado:** `git diff -- src README.md; scripts/verify.sh`<br>
+**Data e hora UTC:** 2026-11-28T18:44:27Z<br>
+**Commit de base:** 83a92ec9e16d0088451acdfdce777027602144bc<br>
+**Diretório/ambiente:** `celilac-frontend/`<br>
+**Código de saída:** 1<br>
+
+```text
+diff --git a/celilac-frontend/README.md b/celilac-frontend/README.md
+index 68c75d6..e34173d 100644
+--- a/celilac-frontend/README.md
++++ b/celilac-frontend/README.md
+@@ -38,3 +38,5 @@ node method/scripts/check-links.mjs method docs project-profile.md prompts READM
+ | `docs/` | especificação, decisões, estado e evidências |
+ | `method/` | método de trabalho |
+ | `prompts/` | materiais da execução |
++
++Veja `docs/nao-existe.md`.
+diff --git a/celilac-frontend/src/pages/DashboardPage.tsx b/celilac-frontend/src/pages/DashboardPage.tsx
+index 8317b39..633bb93 100644
+--- a/celilac-frontend/src/pages/DashboardPage.tsx
++++ b/celilac-frontend/src/pages/DashboardPage.tsx
+@@ -2,7 +2,7 @@ export function DashboardPage() {
+   return (
+     <main className="page">
+       <section className="card">
+-        <h1>Dashboard</h1>
++        <h1>Painel</h1>
+ 
+         <p>
+           Esta página representará
+Verificação de celilac-frontend — Node v24.21.0, pnpm 12.8.1
+----------------------------------------------------------------------
+[1] OK      Instalar dependências (arquivo de travamento)
+[2] OK      Lint
+[3] FALHOU  Testes
+     --- últimas linhas de saída ---
+     |           Esta página representará uma área autenticada.
+     |         </p>
+     |         <p>
+     |           Nos próximos materiais, o acesso será permitido apenas para usuários autenticados.
+     |         </p>
+     |       </section>
+     |     </main>
+     |   </div>
+     | </body>
+     |  ❯ Object.getElementError node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/config.js:37:19
+     |  ❯ node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:76:38
+     |  ❯ node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:52:17
+     |  ❯ node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+     |  ❯ src/routes/AppRoutes.test.tsx:23:19
+     |      21|     abrirEm('/dashboard');
+     |      22|
+     |      23|     expect(screen.getByRole('heading', { name: 'Dashboard' })).toBeInT…
+     |        |                   ^
+     |      24|     expect(screen.getByText(/representará uma área autenticada/)).toBe…
+     |      25|   });
+     | 
+     | ⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+     | 
+     | 
+     |  Test Files  1 failed | 2 passed (3)
+     |       Tests  1 failed | 5 passed (6)
+     |    Start at  15:44:27
+     |    Duration  528ms (environment 62%, setup 20%, tests 12%, import 4%, transform 2%)
+     | 
+     | [ELIFECYCLE] Test failed. See above for more details.
+[4] OK      Build
+[5] OK      Testes dos validadores do método
+[6] FALHOU  Documentos: links e caminhos citados existem
+     --- últimas linhas de saída ---
+     | README.md:42: caminho inexistente: docs/nao-existe.md
+     | 
+     | FALHOU: 1 referência(s) quebrada(s) em 47 documento(s).
+[7] OK      Estado dos casos de uso (state.yaml)
+----------------------------------------------------------------------
+RESULTADO: 2 de 7 passos falharam:
+  FALHOU Testes
+  FALHOU Documentos: links e caminhos citados existem
+```
+
+**Leitura do resultado:** Quebra proposital: título do dashboard trocado e um caminho inexistente citado no README. A verificação acusa os testes e os links e termina com código 1.

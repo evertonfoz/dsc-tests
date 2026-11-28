@@ -1,0 +1,58 @@
+**O que foi executado:** `git diff -- src/pages/LoginPage.tsx; npx -y pnpm@latest test`<br>
+**Data e hora UTC:** 2026-11-28T17:18:05Z<br>
+**Commit de base:** f4cb4bc021baa0199bab230e3fc59ef95315e0a5<br>
+**Diretório/ambiente:** `celilac-frontend/`<br>
+**Código de saída:** 1<br>
+
+```text
+diff --git a/celilac-frontend/src/pages/LoginPage.tsx b/celilac-frontend/src/pages/LoginPage.tsx
+index 0d9d660..15f2c36 100644
+--- a/celilac-frontend/src/pages/LoginPage.tsx
++++ b/celilac-frontend/src/pages/LoginPage.tsx
+@@ -21,7 +21,7 @@ export function LoginPage() {
+           <label>
+             Senha
+             <input
+-              type="password"
++              type="text"
+               placeholder="Sua senha"
+             />
+           </label>
+$ vitest run
+
+ RUN  v5.1.2 <caminho-local>/celilac-frontend
+
+Not implemented: HTMLFormElement's requestSubmit() method
+ ❯ src/pages/LoginPage.test.tsx (2 tests | 1 failed) 116ms
+   ❯ Formulário de login (F02) (2)
+     × should show the e-mail and password fields and the submit button (CA02) 40ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/pages/LoginPage.test.tsx > Formulário de login (F02) > should show the e-mail and password fields and the submit button (CA02)
+Error: expect(element).toHaveAttribute("type", "password") // element.getAttribute("type") === "password"
+
+Expected the element to have attribute:
+  type="password"
+Received:
+  type="text"
+ ❯ src/pages/LoginPage.test.tsx:18:44
+     16|     expect(screen.getByRole('heading', { name: 'Login' })).toBeInTheDo…
+     17|     expect(screen.getByLabelText('E-mail')).toHaveAttribute('type', 'e…
+     18|     expect(screen.getByLabelText('Senha')).toHaveAttribute('type', 'pa…
+       |                                            ^
+     19|     expect(screen.getByRole('button', { name: 'Entrar' })).toHaveAttri…
+     20|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 1 passed (2)
+      Tests  1 failed | 4 passed (5)
+   Start at  14:18:06
+   Duration  745ms (environment 58%, setup 19%, tests 13%, import 6%, transform 4%)
+
+[ELIFECYCLE] Test failed. See above for more details.
+```
+
+**Leitura do resultado:** Mutação: o campo de senha passa a mostrar o texto. O teste de CA02 acusa.
