@@ -43,7 +43,7 @@ Entregar F01 e F02 pelo ciclo do apoio B: teste falhando, código mínimo, melho
 - *Executado nesta fase:* três mutações, cada uma acusada por um teste e desfeita em seguida: senha visível (CA02), chamada à API no envio (CA07) e destino de envio no formulário (CA07).
 - **Sem REFACTOR:** não foi identificada melhoria que justificasse mudar o código do material ou os testes.
 - **Limite do teste de CA07:** observa `fetch`, `XMLHttpRequest` e os atributos `action` e `formaction`. Outros meios de requisição não são observados.
-- Aguardando validação de `evertonfoz`.
+- Parte 3.3 **validada por `evertonfoz` em 2026-11-28**.
 
 | Critério | Teste | Situação |
 |---|---|---|
