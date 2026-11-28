@@ -9,7 +9,7 @@
 | Período | 2026-11-28 → em andamento |
 | Responsável | `evertonfoz` |
 | Issue(s) | #172 (F01), #173 (F02); #171 para o CA05, a conferência e o CA08 |
-| Branch / PR | `feature/uc17-telas-iniciais` / #174 (aberto, compartilhado por F01 e F02) |
+| Branch / PR | `feature/uc17-telas-iniciais` / #174 (integrado à `main` em `0aba6fe`, compartilhado por F01 e F02) |
 | Commits de referência | preparo `59f8a74`; F01: início `2e0b458`, RED `24ce794`, GREEN `f4d4e6e`, REFACTOR `f220388`; F02: início `9cd1d97`, RED `f302821`, GREEN `dc4effd`, caracterização `f4cb4bc`; CA05: teste `f7ea182`, GREEN `3b6e3b5`; conferência: `83a92ec`, `e298df6`; CA08: RED `5c49149`, GREEN `87ed4a5` |
 
 ## 1. Objetivo da fase
@@ -105,6 +105,12 @@ Revisão feita antes do merge por quem escreveu o código: **não é independent
 - **Achado 2, corrigido:** `prompts/uc-17/artefatos/00-uc-referencia.md` ainda chamava as ADR-001 a ADR-003 de propostas.
 - **Observação, sem mudança:** o Git ignora `.env` e `*.local`, mas não `.env.development` nem `.env.production`. O critério aprovado pede o `.env`; rever junto com o login.
 
+### 2.9. Integração
+- *Executado nesta fase:* com autorização de `evertonfoz`, o PR #174 foi integrado à `main` por commit de merge (`0aba6fe`), em 2026-11-28. A branch `feature/uc17-telas-iniciais` foi mantida.
+- *Executado nesta fase:* logo depois do merge, `check-state.sh --remote` acusou F01 e F02 ainda em revisão. O estado foi corrigido para `integrada` e a conferência passou, com avisos.
+- **Revisão:** `evertonfoz` declarou em 2026-11-28 que revisou o PR #174. O GitHub não tem revisão formal registrada. Revisor e responsável são a mesma pessoa (modo solo): **não é revisão independente**, e o validador avisa disso.
+- A fase B **continua aberta**: o gate não foi validado e o item de CI não pode ser aprovado (ADR-003).
+
 ## 3. Evidências
 | # | Afirmação | Etiqueta | Evidência (arquivo em `evidencias/`) |
 |---|---|---|---|
@@ -152,11 +158,13 @@ Revisão feita antes do merge por quem escreveu o código: **não é independent
 | 42 | Revisão: defeito reproduzido sem o Chrome | Executado nesta fase | `docs/uc/uc17/evidencias/B/rev-sem-chrome-antes.txt` |
 | 43 | Revisão: defeito corrigido | Executado nesta fase | `docs/uc/uc17/evidencias/B/rev-sem-chrome-depois.txt` |
 | 44 | Revisão: conferência no navegador depois da correção | Executado nesta fase | `docs/uc/uc17/evidencias/B/rev-navegador.txt` |
+| 45 | Divergência do estado logo depois do merge | Executado nesta fase | `docs/uc/uc17/evidencias/B/integracao-estado-antes.txt` |
+| 46 | Merge do PR #174 e ausência de revisão formal no GitHub | Executado nesta fase | `docs/uc/uc17/evidencias/B/integracao.txt` |
 
 ## 4. Gate de saída
 | Verificação | Como verificar | Resultado | Validado por |
 |---|---|---|---|
-| Todas as fatias integradas, com PR, revisor e evidências | `check-state.sh --remote` | pendente: PR #174 aberto, sem revisor nem merge | — |
+| Todas as fatias integradas, com PR, revisor e evidências | `check-state.sh --remote` | pendente de validação; PR #174 integrado, F01 e F02 `integrada` com revisor em modo solo (seção 2.9) | — |
 | Cada fatia com teste RED e GREEN em commits separados | histórico e evidências | pendente de validação; CA07 não tem RED (seção 2.3); CA05, da base, também não tem RED válido (seção 2.4) | — |
 | CI verde na branch principal | resultado do CI | não poderá ser aprovado (ADR-003) | — |
 | Tabela fatia → teste confere com o código | este relatório | pendente | — |
@@ -165,6 +173,6 @@ Revisão feita antes do merge por quem escreveu o código: **não é independent
 - Sem decisões novas.
 
 ## 6. Pendências e riscos
-- A revisão do PR #174 e o merge são humanos; em modo solo, a revisão não é independente.
+- O gate de saída da fase B aguarda decisão de `evertonfoz`; a CI do frontend depende do apoio C.
 - P1 e P3 foram observadas no navegador e continuam em aberto; P2 não foi exercitada.
 - Os testes automatizados rodam em navegador simulado; a conferência no Chrome é um passo à parte, fora do `scripts/verify.sh`.

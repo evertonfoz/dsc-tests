@@ -1,0 +1,14 @@
+**O que foi executado:** `gh pr view 174 --json number,state,mergedAt,mergedBy,mergeCommit,headRefOid,baseRefName,reviews -q "{number,state,mergedAt,mergedBy:.mergedBy.login,mergeCommit:.mergeCommit.oid,headRefOid,baseRefName,revisoesNoGitHub:(.reviews|length)}"; git log -1 --format="%H%n%P%n%s" origin/main`<br>
+**Data e hora UTC:** 2026-11-28T19:07:39Z<br>
+**Commit de base:** 0aba6fe2be9d8ca0f6a8d4c38179fbfa6f8ebfa9<br>
+**Diretório/ambiente:** `celilac-frontend/`<br>
+**Código de saída:** 0<br>
+
+```text
+{"baseRefName":"main","headRefOid":"782891f389fda0168c87726b9784855088047d7f","mergeCommit":"0aba6fe2be9d8ca0f6a8d4c38179fbfa6f8ebfa9","mergedAt":"2026-11-28T19:05:46Z","mergedBy":"evertonfoz","number":174,"revisoesNoGitHub":0,"state":"MERGED"}
+0aba6fe2be9d8ca0f6a8d4c38179fbfa6f8ebfa9
+96509d4d6d00b99f9767f23543efb27f1c9f7f50 782891f389fda0168c87726b9784855088047d7f
+Merge pull request #174 from evertonfoz/feature/uc17-telas-iniciais
+```
+
+**Leitura do resultado:** O PR #174 foi integrado à main por commit de merge, com autorização de evertonfoz. O GitHub não tem revisão formal registrada no PR: a revisão consta pela declaração de evertonfoz em 2026-11-28, em modo solo.

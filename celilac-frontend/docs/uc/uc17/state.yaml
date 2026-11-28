@@ -22,12 +22,14 @@ fases:
     gate:
       - { item: "Todas as fatias integradas na branch principal", resultado: pendente }
       - { item: "CI verde na branch principal", resultado: pendente }
-    evidencias: [evidencias/B/preparo-versoes.txt, evidencias/B/preparo-fumaca-verde.txt, evidencias/B/preparo-fumaca-quebrado.txt, evidencias/B/preparo-fumaca-restaurado.txt, evidencias/B/preparo-build-lint.txt, evidencias/B/ca05-red.txt, evidencias/B/ca05-green.txt, evidencias/B/ca05-mutacao.txt, evidencias/B/ca05-mutacao-revertida.txt, evidencias/B/ca05-build-lint.txt, evidencias/B/conf-verificacao.txt, evidencias/B/conf-verificacao-quebrada.txt, evidencias/B/conf-verificacao-restaurada.txt, evidencias/B/conf-validador.txt, evidencias/B/conf-navegador.txt, evidencias/B/conf-navegador-quebrado.txt, evidencias/B/conf-navegador-restaurado.txt, evidencias/B/conf-navegador-login.png, evidencias/B/conf-navegador-dashboard.png, evidencias/B/conf-navegador-unauthorized.png, evidencias/B/conf-material.txt, evidencias/B/ca08-red.txt, evidencias/B/ca08-green.txt, evidencias/B/ca08-conferencia.txt, evidencias/B/pr-publicacao.txt, evidencias/B/rev-sem-chrome-antes.txt, evidencias/B/rev-sem-chrome-depois.txt, evidencias/B/rev-navegador.txt]
+    evidencias: [evidencias/B/preparo-versoes.txt, evidencias/B/preparo-fumaca-verde.txt, evidencias/B/preparo-fumaca-quebrado.txt, evidencias/B/preparo-fumaca-restaurado.txt, evidencias/B/preparo-build-lint.txt, evidencias/B/ca05-red.txt, evidencias/B/ca05-green.txt, evidencias/B/ca05-mutacao.txt, evidencias/B/ca05-mutacao-revertida.txt, evidencias/B/ca05-build-lint.txt, evidencias/B/conf-verificacao.txt, evidencias/B/conf-verificacao-quebrada.txt, evidencias/B/conf-verificacao-restaurada.txt, evidencias/B/conf-validador.txt, evidencias/B/conf-navegador.txt, evidencias/B/conf-navegador-quebrado.txt, evidencias/B/conf-navegador-restaurado.txt, evidencias/B/conf-navegador-login.png, evidencias/B/conf-navegador-dashboard.png, evidencias/B/conf-navegador-unauthorized.png, evidencias/B/conf-material.txt, evidencias/B/ca08-red.txt, evidencias/B/ca08-green.txt, evidencias/B/ca08-conferencia.txt, evidencias/B/pr-publicacao.txt, evidencias/B/rev-sem-chrome-antes.txt, evidencias/B/rev-sem-chrome-depois.txt, evidencias/B/rev-navegador.txt, evidencias/B/integracao-estado-antes.txt, evidencias/B/integracao.txt]
   C: { status: pendente, relatorio: null, gate: [], evidencias: [] }
   D: { status: pendente, relatorio: null, gate: [], evidencias: [] }
   E: { status: pendente, relatorio: null, gate: [], evidencias: [] }
   F: { status: pendente, relatorio: null, gate: [], evidencias: [] }
 
+# F01 e F02 integradas pelo PR #174. Revisor e responsável são a mesma pessoa (modo solo):
+# o registro não é uma revisão independente.
 fatias:
   - id: F01
     comportamento: "Navegar pelas telas iniciais: raiz redireciona ao login; dashboard e acesso negado abrem"
@@ -36,10 +38,10 @@ fatias:
     branch: feature/uc17-telas-iniciais
     pr: 174
     pr_compartilhado: true
-    status: em_revisao
+    status: integrada
     responsavel: evertonfoz
-    revisor: null
-    evidencias: [evidencias/B/f01-inicio.txt, evidencias/B/f01-red.txt, evidencias/B/f01-green.txt, evidencias/B/f01-build-lint.txt, evidencias/B/f01-refactor.txt, evidencias/B/f01-mutacao.txt, evidencias/B/f01-mutacao-revertida.txt]
+    revisor: evertonfoz
+    evidencias: [evidencias/B/f01-inicio.txt, evidencias/B/f01-red.txt, evidencias/B/f01-green.txt, evidencias/B/f01-build-lint.txt, evidencias/B/f01-refactor.txt, evidencias/B/f01-mutacao.txt, evidencias/B/f01-mutacao-revertida.txt, evidencias/B/integracao.txt]
   - id: F02
     comportamento: "Formulário de login preparado, sem autenticar nem enviar dados à API"
     criterios: [CA02, CA07, RF02, RN02]
@@ -47,7 +49,7 @@ fatias:
     branch: feature/uc17-telas-iniciais
     pr: 174
     pr_compartilhado: true
-    status: em_revisao
+    status: integrada
     responsavel: evertonfoz
-    revisor: null
-    evidencias: [evidencias/B/f02-inicio.txt, evidencias/B/f02-red.txt, evidencias/B/f02-green.txt, evidencias/B/f02-caracterizacao-ca07.txt, evidencias/B/f02-mutacao-ca02.txt, evidencias/B/f02-mutacao-ca07-fetch.txt, evidencias/B/f02-mutacao-ca07-action.txt, evidencias/B/f02-mutacao-revertida.txt, evidencias/B/f02-build-lint.txt]
+    revisor: evertonfoz
+    evidencias: [evidencias/B/f02-inicio.txt, evidencias/B/f02-red.txt, evidencias/B/f02-green.txt, evidencias/B/f02-caracterizacao-ca07.txt, evidencias/B/f02-mutacao-ca02.txt, evidencias/B/f02-mutacao-ca07-fetch.txt, evidencias/B/f02-mutacao-ca07-action.txt, evidencias/B/f02-mutacao-revertida.txt, evidencias/B/f02-build-lint.txt, evidencias/B/integracao.txt]

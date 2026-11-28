@@ -1,0 +1,14 @@
+**O que foi executado:** `method/scripts/check-state.sh docs/uc/uc17/state.yaml --remote`<br>
+**Data e hora UTC:** 2026-11-28T19:07:36Z<br>
+**Commit de base:** 0aba6fe2be9d8ca0f6a8d4c38179fbfa6f8ebfa9<br>
+**Diretório/ambiente:** `celilac-frontend/`<br>
+**Código de saída:** 1<br>
+
+```text
+ERRO   fatias[0] (F01): em_revisao, mas PR #174 está MERGED
+ERRO   fatias[1] (F02): em_revisao, mas PR #174 está MERGED
+
+FALHOU: 2 erro(s).
+```
+
+**Leitura do resultado:** Divergência acusada logo depois do merge: F01 e F02 constam em revisão, mas o PR #174 já foi integrado.

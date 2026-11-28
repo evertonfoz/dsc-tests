@@ -1,10 +1,14 @@
 **O que foi executado:** `method/scripts/check-state.sh docs/uc/uc17/state.yaml --remote`<br>
-**Data e hora UTC:** 2026-11-28T19:03:48Z<br>
-**Commit de base:** a0f20599fef40c153afa2de4686e43e2d73dadff<br>
+**Data e hora UTC:** 2026-11-28T19:07:56Z<br>
+**Commit de base:** 0aba6fe2be9d8ca0f6a8d4c38179fbfa6f8ebfa9<br>
 **Diretório/ambiente:** `celilac-frontend/`<br>
 **Código de saída:** 0<br>
 
 ```text
+AVISO  fatias[0]: revisor igual ao responsável (modo solo?). Registre como papel, não como aprovação independente
+AVISO  fatias[1]: revisor igual ao responsável (modo solo?). Registre como papel, não como aprovação independente
+AVISO  fatias[0] (F01): integrada, mas issue #172 ainda aberta (fechamento é decisão humana)
+AVISO  fatias[1] (F02): integrada, mas issue #173 ainda aberta (fechamento é decisão humana)
 
 OK: docs/uc/uc17/state.yaml válido (local + GitHub).
 ```
