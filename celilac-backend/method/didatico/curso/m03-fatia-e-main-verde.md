@@ -91,4 +91,4 @@ Faça a atividade passo a passo em [`m03-pratica.md`](./m03-pratica.md). Produza
 ## 9. Como lidar com a IA (inteligência artificial) neste módulo
 Peça à IA, **uma fatia por vez**: "escreva apenas o teste RED desta fatia e a saída da falha; não implemente nada". Confira a mensagem de falha **antes** de pedir o GREEN. Quando ela sugerir "aproveitar para ajustar outras coisas", recuse: isso quebra a regra de **um comportamento por PR** e dificulta a revisão.
 
-Próximo: apoio C (integração contínua) e módulo 4.
+Próximo: apoios C (integração contínua) e D (contêineres) e, depois, o módulo 4.

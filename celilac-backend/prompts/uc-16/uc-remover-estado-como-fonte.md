@@ -429,7 +429,8 @@ Se a IA devolver o arquivo sem rodar o validador, ou disser que rodou sem mostra
 | RN, RF, FA, FE, CA | Regra de Negócio, Requisito Funcional, Fluxo Alternativo, Fluxo de Exceção, Critério de Aceite | Rótulos dos itens de um caso de uso (RN01, RF01, FA01, FE01, CA03) |
 | HTTP | *HyperText Transfer Protocol* | O protocolo pelo qual um cliente pede algo a uma API (*Application Programming Interface*, a interface pela qual outros programas usam o seu sistema) |
 | CLI | *Command-Line Interface*, interface de linha de comando | Programa usado pelo terminal, como o `gh` do GitHub |
+| TDD | *Test-Driven Development*, desenvolvimento guiado por testes | Escrever o teste antes do código |
 
 ---
 
-Próximo passo: o módulo 3 do curso ("Por que a `main` ficou vermelha?"). Prompt de execução: [`uc-remover.md`](./uc-remover.md).
+Próximo passo: o apoio B do curso (testes automatizados e TDD, *Test-Driven Development*, desenvolvimento guiado por testes) e, depois, o módulo 3 ("Por que a `main` ficou vermelha?"). Prompt de execução: [`uc-remover.md`](./uc-remover.md).
