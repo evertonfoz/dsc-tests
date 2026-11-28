@@ -1,0 +1,21 @@
+**O que foi executado:** `git diff --exit-code -- src && echo "src sem alterações"; npx -y pnpm@latest test`<br>
+**Data e hora UTC:** 2026-11-28T18:29:02Z<br>
+**Commit de base:** 3b6e3b50fa850097ba9d2148827540d997fb4477<br>
+**Diretório/ambiente:** `celilac-frontend/`<br>
+**Código de saída:** 0<br>
+
+```text
+src sem alterações
+$ vitest run
+
+ RUN  v5.1.2 <caminho-local>/celilac-frontend
+
+Not implemented: HTMLFormElement's requestSubmit() method
+
+ Test Files  3 passed (3)
+      Tests  6 passed (6)
+   Start at  15:29:02
+   Duration  472ms (environment 61%, setup 20%, tests 13%, import 3%, transform 2%)
+```
+
+**Leitura do resultado:** Mutação desfeita: src sem diferença em relação ao commit e todos os testes passando.

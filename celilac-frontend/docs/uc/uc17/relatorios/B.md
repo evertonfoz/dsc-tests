@@ -8,9 +8,9 @@
 | Fase | B — Fatias (neste projeto: comportamento visível da tela) |
 | Período | 2026-11-28 → em andamento |
 | Responsável | `evertonfoz` |
-| Issue(s) | #172 (F01), #173 (F02) |
+| Issue(s) | #172 (F01), #173 (F02); #171 para o CA05 |
 | Branch / PR | `feature/uc17-telas-iniciais` / nenhum |
-| Commits de referência | preparo `59f8a74`; F01: início `2e0b458`, RED `24ce794`, GREEN `f4d4e6e`, REFACTOR `f220388`; F02: início `9cd1d97`, RED `f302821`, GREEN `dc4effd`, caracterização `f4cb4bc` |
+| Commits de referência | preparo `59f8a74`; F01: início `2e0b458`, RED `24ce794`, GREEN `f4d4e6e`, REFACTOR `f220388`; F02: início `9cd1d97`, RED `f302821`, GREEN `dc4effd`, caracterização `f4cb4bc`; CA05: RED `f7ea182`, GREEN `3b6e3b5` |
 
 ## 1. Objetivo da fase
 Entregar F01 e F02 pelo ciclo do apoio B: teste falhando, código mínimo, melhoria e mutação revertida.
@@ -50,6 +50,20 @@ Entregar F01 e F02 pelo ciclo do apoio B: teste falhando, código mínimo, melho
 | CA02, RF02 | `should show the e-mail and password fields and the submit button (CA02)` | passa; teve RED; validado por mutação |
 | CA07, RN02 | `should not send any request when the login form is submitted (CA07)` | passa; **sem RED** (caracterização); validado por duas mutações |
 
+### 2.4. Endereço base da API, CA05 (parte 3.4)
+CA05 pertence à base do projeto, não à F01 nem à F02; os commits citam a issue principal #171.
+
+- *Executado nesta fase:* RED com o arquivo de teste falhando porque o módulo `apiClient` não existia. A comparação do valor **não chegou a ser executada** nesse momento.
+- *Executado nesta fase:* GREEN com `src/api/apiClient.ts`, com o código do material, e remoção do `.gitkeep` da pasta.
+- *Executado nesta fase:* mutação (endereço fixo no código), acusada pela comparação do valor, e desfeita.
+- **Sem REFACTOR:** o módulo tem uma linha.
+- **Limite:** o teste prova que o valor vem da variável. Ele não cobre a variável ausente (P2, em aberto), e nenhuma tela usa o endereço ainda (RN02).
+- Aguardando validação de `evertonfoz`.
+
+| Critério | Teste | Situação |
+|---|---|---|
+| CA05, RF05 | `should expose the API base URL from VITE_API_BASE_URL (CA05)` | passa; teve RED (módulo ausente); validado por mutação |
+
 ## 3. Evidências
 | # | Afirmação | Etiqueta | Evidência (arquivo em `evidencias/`) |
 |---|---|---|---|
@@ -74,6 +88,11 @@ Entregar F01 e F02 pelo ciclo do apoio B: teste falhando, código mínimo, melho
 | 19 | F02: mutação com destino de envio acusada por CA07 | Executado nesta fase | `docs/uc/uc17/evidencias/B/f02-mutacao-ca07-action.txt` |
 | 20 | F02: mutações desfeitas | Executado nesta fase | `docs/uc/uc17/evidencias/B/f02-mutacao-revertida.txt` |
 | 21 | F02: build e lint | Executado nesta fase | `docs/uc/uc17/evidencias/B/f02-build-lint.txt` |
+| 22 | CA05: RED | Executado nesta fase | `docs/uc/uc17/evidencias/B/ca05-red.txt` |
+| 23 | CA05: GREEN | Executado nesta fase | `docs/uc/uc17/evidencias/B/ca05-green.txt` |
+| 24 | CA05: mutação acusada | Executado nesta fase | `docs/uc/uc17/evidencias/B/ca05-mutacao.txt` |
+| 25 | CA05: mutação desfeita | Executado nesta fase | `docs/uc/uc17/evidencias/B/ca05-mutacao-revertida.txt` |
+| 26 | CA05: build e lint | Executado nesta fase | `docs/uc/uc17/evidencias/B/ca05-build-lint.txt` |
 
 ## 4. Gate de saída
 | Verificação | Como verificar | Resultado | Validado por |
@@ -87,7 +106,6 @@ Entregar F01 e F02 pelo ciclo do apoio B: teste falhando, código mínimo, melho
 - Sem decisões novas.
 
 ## 6. Pendências e riscos
-- O teste de CA05 (parte 3.4) ainda não começou.
 - F01 e F02 só passam a `em_revisao` quando houver PR.
 - No navegador real, o envio sem tratamento deve recarregar a página (pendência P3, em aberto); conferir na etapa 4.
 - Os testes rodam em navegador simulado; as rotas ainda não foram conferidas no navegador real (etapa 4).

@@ -23,17 +23,17 @@ Especificar a base da interface do UC17, dizer como cada item será provado ou p
 - *Executado nesta fase:* com autorização de `evertonfoz`, criação dos rótulos `uc17` e `module:frontend`, das issues #171 a #173 (#172 e #173 vinculadas à #171) e do GitHub Project #7, com os cinco estados e os três itens em `Backlog`.
 
 ## 3. Cobertura inicial (módulo 1)
-Nenhum teste existe ainda; por isso nenhuma linha está *Coberto*.
+No gate da fase A não havia testes: os itens com teste previsto estavam em *A implementar*. A coluna "Situação" foi atualizada em 2026-11-28, depois da parte 3.4. *Coberto* significa que o teste existe e passa na execução local; a prova está no relatório da fase B (`docs/uc/uc17/relatorios/B.md`).
 
 | Item | Fatia ou destino | Teste que prova (nome previsto) | Situação |
 |---|---|---|---|
-| RF01, CA01, fluxo principal (raiz leva ao login) | F01 | `should redirect the root path to the login page (CA01)` | A implementar |
-| RF03, CA03 (dashboard) | F01 | `should show the dashboard page at /dashboard (CA03)` | A implementar |
-| RF04, CA04 (acesso negado) | F01 | `should show the access denied page at /unauthorized (CA04)` | A implementar |
-| FA01, RN03 (rotas abertas, temporário) | F01 | os testes de CA03 e CA04 | A implementar |
-| RF02, CA02 (formulário de login) | F02 | `should show the e-mail and password fields and the submit button (CA02)` | A implementar |
-| RN02, CA07 (envio não gera requisição) | F02 | `should not send any request when the login form is submitted (CA07)` | A implementar |
-| RF05, CA05 (endereço da API) | base do projeto (etapa 2), teste na etapa 3 | `should expose the API base URL from VITE_API_BASE_URL (CA05)` | A implementar |
+| RF01, CA01, fluxo principal (raiz leva ao login) | F01 | `should redirect the root path to the login page (CA01)` | Coberto |
+| RF03, CA03 (dashboard) | F01 | `should show the dashboard page at /dashboard (CA03)` | Coberto |
+| RF04, CA04 (acesso negado) | F01 | `should show the access denied page at /unauthorized (CA04)` | Coberto |
+| FA01, RN03 (rotas abertas, temporário) | F01 | os testes de CA03 e CA04 | Coberto |
+| RF02, CA02 (formulário de login) | F02 | `should show the e-mail and password fields and the submit button (CA02)` | Coberto |
+| RN02, CA07 (envio não gera requisição) | F02 | `should not send any request when the login form is submitted (CA07)` | Coberto (teste de caracterização, sem RED) |
+| RF05, CA05 (endereço da API) | base do projeto (etapa 2), teste na etapa 3 | `should expose the API base URL from VITE_API_BASE_URL (CA05)` | Coberto |
 | RN01, CA06 (`.env` fora do repositório) | base do projeto (etapa 2) | comando do Git (`docs/uc/uc17/evidencias/A/base-env-versionado.txt`) | Coberto por comando |
 | RF06 (autenticar na API) | — | nenhum | Não implementado (ADR-001 aceita) |
 | RF07 (proteger o dashboard) | — | nenhum | Não implementado (ADR-001 aceita) |
@@ -50,9 +50,9 @@ O material traz um checklist **já marcado**. Marcação não é prova: os itens
 |---|---|---|
 | Projeto criado; dependências instaladas; React Router instalado | `docs/uc/uc17/evidencias/A/base-versoes.txt` e `docs/uc/uc17/evidencias/A/base-instalacao.txt` | Executado na etapa 2 |
 | Estrutura de pastas; arquivos desnecessários removidos | `docs/uc/uc17/evidencias/A/base-arquivos.txt` | Executado na etapa 2 (pastas `api`, `pages` e `routes` ainda vazias) |
-| `VITE_API_BASE_URL`, `.env.example`, `.gitignore` | teste (CA05) e comando do Git (CA06) | Parcial: CA06 executado (`docs/uc/uc17/evidencias/A/base-env-versionado.txt`); CA05 na etapa 3 |
-| Três páginas e `AppRoutes.tsx` | testes de F01 e F02 | A implementar |
-| `apiClient.ts` criado | teste de CA05 | A implementar |
+| `VITE_API_BASE_URL`, `.env.example`, `.gitignore` | teste (CA05) e comando do Git (CA06) | CA06 executado (`docs/uc/uc17/evidencias/A/base-env-versionado.txt`); CA05 coberto por teste na etapa 3 |
+| Três páginas e `AppRoutes.tsx` | testes de F01 e F02 | Coberto por testes na etapa 3; navegador na etapa 4 |
+| `apiClient.ts` criado | teste de CA05 | Coberto por teste na etapa 3 |
 | CSS global aplicado; rotas testadas no navegador | conferência no navegador | A implementar (CSS criado; aparência ainda não conferida) |
 
 ## 4. Fatias e prontidão (DoR)
@@ -112,7 +112,7 @@ O teste de CA07 tende a passar sem falhar antes: se isso ocorrer, será registra
 - **Hipóteses:** código `UC17`; especificação e descrição prévia redigidas pelo assistente; acréscimo de um mínimo de CSS para o formulário, que o material não traz.
 
 ## 8. Pendências e riscos
-- A especificação citada na issue #171 ainda não está publicada no repositório (sem commit).
+- A especificação citada na issue #171 ainda não está no repositório remoto (commits locais, sem envio).
 - `check-links.mjs` acusa duas citações ao script `verify.sh`, feitas pelo método copiado, que ainda não existe aqui; a criação está prevista para a etapa 4. Pelo mesmo motivo, **um teste do validador falha** (o do escopo padrão).
 - O validador diz se o arquivo é coerente, não se o trabalho foi feito.
 - Revisão em modo solo não é revisão independente.

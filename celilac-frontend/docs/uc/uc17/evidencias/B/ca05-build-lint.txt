@@ -1,0 +1,22 @@
+**O que foi executado:** `npx -y pnpm@latest build && npx -y pnpm@latest lint`<br>
+**Data e hora UTC:** 2026-11-28T18:29:03Z<br>
+**Commit de base:** 3b6e3b50fa850097ba9d2148827540d997fb4477<br>
+**Diretório/ambiente:** `celilac-frontend/`<br>
+**Código de saída:** 0<br>
+
+```text
+$ tsc -b && vite build
+vite v8.4.0 building client environment for production...
+transforming...
+✓ 97 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                   0.46 kB │ gzip:  0.30 kB
+dist/assets/index-CzZER6Nc.css    0.59 kB │ gzip:  0.36 kB
+dist/assets/index-DcSgx4LP.js   258.43 kB │ gzip: 82.18 kB
+
+✓ built in 75ms
+$ oxlint
+```
+
+**Leitura do resultado:** Build e lint passam. Nenhuma tela usa o endereço ainda, porque a entrega não faz requisições (RN02).
