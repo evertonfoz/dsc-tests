@@ -38,7 +38,7 @@ fatias:
     status: em_andamento
     responsavel: evertonfoz
     revisor: null
-    evidencias: [evidencias/B/f01-inicio.txt]
+    evidencias: [evidencias/B/f01-inicio.txt, evidencias/B/f01-red.txt, evidencias/B/f01-green.txt, evidencias/B/f01-build-lint.txt, evidencias/B/f01-refactor.txt, evidencias/B/f01-mutacao.txt, evidencias/B/f01-mutacao-revertida.txt]
   - id: F02
     comportamento: "Formulário de login preparado, sem autenticar nem enviar dados à API"
     criterios: [CA02, CA07, RF02, RN02]

@@ -1,0 +1,50 @@
+**O que foi executado:** `git diff --unified=0 -- src/routes/AppRoutes.tsx; npx -y pnpm@latest test`<br>
+**Data e hora UTC:** 2026-11-28T17:13:54Z<br>
+**Commit de base:** f220388c8b15de8b8e9f097d0cfdefe8772d0e19<br>
+**Diretório/ambiente:** `celilac-frontend/`<br>
+**Código de saída:** 1<br>
+
+```text
+diff --git a/celilac-frontend/src/routes/AppRoutes.tsx b/celilac-frontend/src/routes/AppRoutes.tsx
+index 1958fa2..31c190c 100644
+--- a/celilac-frontend/src/routes/AppRoutes.tsx
++++ b/celilac-frontend/src/routes/AppRoutes.tsx
+@@ -19 +19 @@ export function AppRoutes() {
+-          element={<Navigate to="/login" replace />}
++          element={<Navigate to="/dashboard" replace />}
+$ vitest run
+
+ RUN  v5.1.2 <caminho-local>/celilac-frontend
+
+ ❯ src/routes/AppRoutes.test.tsx (3 tests | 1 failed) 43ms
+   ❯ Telas iniciais (F01) (3)
+     × should redirect the root path to the login page (CA01) 18ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/routes/AppRoutes.test.tsx > Telas iniciais (F01) > should redirect the root path to the login page (CA01)
+AssertionError: expected '/dashboard' to be '/login' // Object.is equality
+
+Expected: "/login"
+Received: "/dashboard"
+
+ ❯ src/routes/AppRoutes.test.tsx:16:38
+     14|     abrirEm('/');
+     15|
+     16|     expect(window.location.pathname).toBe('/login');
+       |                                      ^
+     17|     expect(screen.getByRole('heading', { name: 'Login' })).toBeInTheDo…
+     18|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 2 passed (3)
+   Start at  14:13:55
+   Duration  648ms (environment 61%, setup 19%, tests 8%, transform 6%, import 5%)
+
+[ELIFECYCLE] Test failed. See above for more details.
+```
+
+**Leitura do resultado:** Mutação: a raiz passou a levar ao dashboard. O teste de CA01 acusa o erro e os outros dois continuam passando. A falha é o resultado esperado.
