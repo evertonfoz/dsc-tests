@@ -34,7 +34,7 @@
 |---|---|
 | `docs/planejamento/uc17-autenticar-usuario/uc-17.md` | criado na etapa 1 |
 | `docs/uc/uc17/` (estado, relatório da fase A e evidências) | criado na etapa 1 |
-| `docs/adr/` | ADR-001 a ADR-003 propostas |
+| `docs/adr/` | ADR-001 a ADR-003 aceitas por `evertonfoz` em 2026-11-28 |
 | `prompts/uc-17/` (apoio, prompt, resumo, roteiro) | a escrever depois, com base no que for executado |
 
 A especificação e a tabela de cobertura **não são repetidas** nesta pasta (no UC16 havia os artefatos 03 e 04): ficam só em `docs/`, para não existirem duas versões.

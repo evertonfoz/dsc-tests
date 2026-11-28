@@ -97,6 +97,14 @@ Por decisão de `evertonfoz` em 2026-11-28, o achado da conferência foi corrigi
 - O PR cita as issues sem fechá-las. **Não houve merge.**
 - Os fluxos de CI do repositório não alcançam `celilac-frontend/`: nenhum build ou teste roda no PR (ADR-003). A única verificação automática listada foi a de segredos (GitGuardian), com sucesso.
 
+### 2.8. Revisão de apoio do PR #174 e correções
+Revisão feita antes do merge por quem escreveu o código: **não é independente** e não substitui a revisão de `evertonfoz`, que decidiu corrigir os dois achados antes do merge.
+
+- *Executado nesta fase:* em um clone limpo da branch, sem `.env`, o `scripts/verify.sh --remote` passou nos sete passos. A saída não foi guardada como arquivo.
+- **Achado 1, corrigido (`a0f2059`):** com o caminho do Chrome inválido, `scripts/verificar-navegador.mjs` quebrava com erro não tratado do Node e deixava uma pasta temporária. Agora explica a causa, termina com código diferente de zero e não deixa a pasta. O defeito foi reproduzido antes e conferido depois; a conferência no navegador continua passando. Não foi criado teste automatizado para esse script.
+- **Achado 2, corrigido:** `prompts/uc-17/artefatos/00-uc-referencia.md` ainda chamava as ADR-001 a ADR-003 de propostas.
+- **Observação, sem mudança:** o Git ignora `.env` e `*.local`, mas não `.env.development` nem `.env.production`. O critério aprovado pede o `.env`; rever junto com o login.
+
 ## 3. Evidências
 | # | Afirmação | Etiqueta | Evidência (arquivo em `evidencias/`) |
 |---|---|---|---|
@@ -141,6 +149,9 @@ Por decisão de `evertonfoz` em 2026-11-28, o achado da conferência foi corrigi
 | 39 | CA08: GREEN | Executado nesta fase | `docs/uc/uc17/evidencias/B/ca08-green.txt` |
 | 40 | CA08: verificação, navegador e build | Executado nesta fase | `docs/uc/uc17/evidencias/B/ca08-conferencia.txt` |
 | 41 | PR, estados do Project e texto da issue principal | Executado nesta fase | `docs/uc/uc17/evidencias/B/pr-publicacao.txt` |
+| 42 | Revisão: defeito reproduzido sem o Chrome | Executado nesta fase | `docs/uc/uc17/evidencias/B/rev-sem-chrome-antes.txt` |
+| 43 | Revisão: defeito corrigido | Executado nesta fase | `docs/uc/uc17/evidencias/B/rev-sem-chrome-depois.txt` |
+| 44 | Revisão: conferência no navegador depois da correção | Executado nesta fase | `docs/uc/uc17/evidencias/B/rev-navegador.txt` |
 
 ## 4. Gate de saída
 | Verificação | Como verificar | Resultado | Validado por |
