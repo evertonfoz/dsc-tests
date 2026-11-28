@@ -34,7 +34,7 @@ Nenhum teste existe ainda; por isso nenhuma linha está *Coberto*.
 | RF02, CA02 (formulário de login) | F02 | `should show the e-mail and password fields and the submit button (CA02)` | A implementar |
 | RN02, CA07 (envio não gera requisição) | F02 | `should not send any request when the login form is submitted (CA07)` | A implementar |
 | RF05, CA05 (endereço da API) | base do projeto (etapa 2), teste na etapa 3 | `should expose the API base URL from VITE_API_BASE_URL (CA05)` | A implementar |
-| RN01, CA06 (`.env` fora do repositório) | base do projeto (etapa 2) | comando do Git (`docs/uc/uc17/evidencias/A/base-env.txt`) | Parcial: `.env` ignorado; `.env.example` ainda não commitado |
+| RN01, CA06 (`.env` fora do repositório) | base do projeto (etapa 2) | comando do Git (`docs/uc/uc17/evidencias/A/base-env-versionado.txt`) | Coberto por comando |
 | RF06 (autenticar na API) | — | nenhum | Não implementado (ADR-001 aceita) |
 | RF07 (proteger o dashboard) | — | nenhum | Não implementado (ADR-001 aceita) |
 | RF08 (controle por perfil) | — | nenhum | Não implementado (ADR-001 aceita) |
@@ -50,7 +50,7 @@ O material traz um checklist **já marcado**. Marcação não é prova: os itens
 |---|---|---|
 | Projeto criado; dependências instaladas; React Router instalado | `docs/uc/uc17/evidencias/A/base-versoes.txt` e `docs/uc/uc17/evidencias/A/base-instalacao.txt` | Executado na etapa 2 |
 | Estrutura de pastas; arquivos desnecessários removidos | `docs/uc/uc17/evidencias/A/base-arquivos.txt` | Executado na etapa 2 (pastas `api`, `pages` e `routes` ainda vazias) |
-| `VITE_API_BASE_URL`, `.env.example`, `.gitignore` | teste (CA05) e comando do Git (CA06) | Parcial: CA06 executado (`docs/uc/uc17/evidencias/A/base-env.txt`); CA05 na etapa 3 |
+| `VITE_API_BASE_URL`, `.env.example`, `.gitignore` | teste (CA05) e comando do Git (CA06) | Parcial: CA06 executado (`docs/uc/uc17/evidencias/A/base-env-versionado.txt`); CA05 na etapa 3 |
 | Três páginas e `AppRoutes.tsx` | testes de F01 e F02 | A implementar |
 | `apiClient.ts` criado | teste de CA05 | A implementar |
 | CSS global aplicado; rotas testadas no navegador | conferência no navegador | A implementar (CSS criado; aparência ainda não conferida) |
@@ -92,8 +92,9 @@ O teste de CA07 tende a passar sem falhar antes: se isso ocorrer, será registra
 | 17 | Base: `.env` ignorado | Executado nesta fase | `docs/uc/uc17/evidencias/A/base-env.txt` |
 | 18 | Base: arquivos do projeto | Executado nesta fase | `docs/uc/uc17/evidencias/A/base-arquivos.txt` |
 | 19 | Base: servidor de desenvolvimento | Executado nesta fase | `docs/uc/uc17/evidencias/A/base-servidor.txt` |
+| 20 | Base: `.env.example` versionado e `.env` fora do repositório, após o commit | Executado nesta fase | `docs/uc/uc17/evidencias/A/base-env-versionado.txt` |
 
-> As linhas 13 a 19 são da base do projeto (etapa 2), guardadas em `evidencias/A/` como no módulo 4 do curso, e registradas depois da validação do gate.
+> As linhas 13 a 20 são da base do projeto (etapa 2), guardadas em `evidencias/A/` como no módulo 4 do curso, e registradas depois da validação do gate.
 
 ## 6. Gate de saída
 | Verificação | Como verificar | Resultado | Validado por |

@@ -1,6 +1,6 @@
 **O que foi executado:** `method/scripts/check-state.sh docs/uc/uc17/state.yaml --remote`<br>
-**Data e hora UTC:** 2026-11-28T17:05:09Z<br>
-**Commit de base:** 0d960b2ebb4455bf43e94179824d79a82719c4ba (com a base do projeto ainda não commitada)<br>
+**Data e hora UTC:** 2026-11-28T17:12:15Z<br>
+**Commit de base:** fa92d756a564a4e3f26da2b3b63307a2ba210233<br>
 **Diretório/ambiente:** `celilac-frontend/`<br>
 **Código de saída:** 0<br>
 

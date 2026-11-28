@@ -15,14 +15,14 @@ fases:
     gate:
       - { item: "Epic e Sub-Issues criadas e reconciliadas com este arquivo", resultado: aprovado, por: evertonfoz }
       - { item: "GitHub Project configurado com os 5 estados", resultado: aprovado, por: evertonfoz }
-    evidencias: [evidencias/A/busca-existencia.txt, evidencias/A/api-sem-autenticacao.txt, evidencias/A/versoes-publicadas.txt, evidencias/A/testes-do-validador.txt, evidencias/A/estado-valido.txt, evidencias/A/estado-quebrado-de-proposito.txt, evidencias/A/estado-restaurado.txt, evidencias/A/links.txt, evidencias/A/publicacao.txt, evidencias/A/estado-remoto.txt, evidencias/A/fatias-prontas.txt, evidencias/A/gate-aprovado.txt, evidencias/A/base-versoes.txt, evidencias/A/base-instalacao.txt, evidencias/A/base-build.txt, evidencias/A/base-lint.txt, evidencias/A/base-env.txt, evidencias/A/base-arquivos.txt, evidencias/A/base-servidor.txt]
+    evidencias: [evidencias/A/busca-existencia.txt, evidencias/A/api-sem-autenticacao.txt, evidencias/A/versoes-publicadas.txt, evidencias/A/testes-do-validador.txt, evidencias/A/estado-valido.txt, evidencias/A/estado-quebrado-de-proposito.txt, evidencias/A/estado-restaurado.txt, evidencias/A/links.txt, evidencias/A/publicacao.txt, evidencias/A/estado-remoto.txt, evidencias/A/fatias-prontas.txt, evidencias/A/gate-aprovado.txt, evidencias/A/base-versoes.txt, evidencias/A/base-instalacao.txt, evidencias/A/base-build.txt, evidencias/A/base-lint.txt, evidencias/A/base-env.txt, evidencias/A/base-arquivos.txt, evidencias/A/base-servidor.txt, evidencias/A/base-env-versionado.txt]
   B:
     status: em_andamento
-    relatorio: null
+    relatorio: relatorios/B.md
     gate:
       - { item: "Todas as fatias integradas na branch principal", resultado: pendente }
       - { item: "CI verde na branch principal", resultado: pendente }
-    evidencias: []
+    evidencias: [evidencias/B/preparo-versoes.txt, evidencias/B/preparo-fumaca-verde.txt, evidencias/B/preparo-fumaca-quebrado.txt, evidencias/B/preparo-fumaca-restaurado.txt, evidencias/B/preparo-build-lint.txt]
   C: { status: pendente, relatorio: null, gate: [], evidencias: [] }
   D: { status: pendente, relatorio: null, gate: [], evidencias: [] }
   E: { status: pendente, relatorio: null, gate: [], evidencias: [] }

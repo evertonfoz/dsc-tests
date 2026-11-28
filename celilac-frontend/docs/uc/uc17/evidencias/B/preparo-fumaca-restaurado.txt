@@ -1,0 +1,20 @@
+**O que foi executado:** `git diff --exit-code -- src/App.tsx && echo "src/App.tsx igual ao commit" && npx -y pnpm@latest test`<br>
+**Data e hora UTC:** 2026-11-28T17:09:40Z<br>
+**Commit de base:** fa92d756a564a4e3f26da2b3b63307a2ba210233 (com as alterações da parte 3.1 ainda não commitadas)<br>
+**Diretório/ambiente:** `celilac-frontend/`; caminho local substituído por `<caminho-local>`<br>
+**Código de saída:** 0<br>
+
+```text
+src/App.tsx igual ao commit
+$ vitest run
+
+ RUN  v5.1.2 <caminho-local>/celilac-frontend
+
+
+ Test Files  1 passed (1)
+      Tests  1 passed (1)
+   Start at  14:09:40
+   Duration  403ms (environment 66%, setup 22%, tests 9%, transform 2%, import 1%, worker 1%)
+```
+
+**Leitura do resultado:** A mutação foi desfeita: App.tsx está igual ao commit e o teste volta a passar.

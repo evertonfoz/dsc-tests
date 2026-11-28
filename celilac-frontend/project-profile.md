@@ -23,7 +23,7 @@ Política de versões: `docs/adr/ADR-002-versoes-atuais-e-react-router.md` (inst
 | Framework | React 19.3.1, Vite 8.4.0, TypeScript 7.0.2 | idem |
 | Rotas | `react-router` 8.5.3 | idem; ADR-002 |
 | ORM e banco | não se aplica | frontend |
-| Testes | Vitest, Testing Library e `jsdom` (versões a registrar na instalação) | a confirmar na etapa 3 |
+| Testes | Vitest 5.1.2, `jsdom` 31.0.1; Testing Library: `react` 16.3.3, `dom` 10.4.2, `user-event` 14.6.13, `jest-dom` 8.0.0 | `docs/uc/uc17/evidencias/B/preparo-versoes.txt` |
 | Lint | oxlint 1.95.0 | `docs/uc/uc17/evidencias/A/base-versoes.txt` |
 
 ## 3. Comandos
@@ -32,7 +32,7 @@ Política de versões: `docs/adr/ADR-002-versoes-atuais-e-react-router.md` (inst
 | Instalar dependências | `pnpm install --frozen-lockfile` |
 | Build | `pnpm build` |
 | Lint | `pnpm lint` |
-| Testes rápidos | a confirmar na etapa 3 |
+| Testes rápidos | `pnpm test` |
 | Testes de integração / E2E | não se aplica nesta entrega |
 | Subir ambiente (desenvolvimento) | `pnpm dev` |
 | Validar estado do UC | `method/scripts/check-state.sh docs/uc/uc17/state.yaml` |

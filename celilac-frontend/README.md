@@ -24,6 +24,7 @@ Variáveis com prefixo `VITE_` ficam visíveis no navegador: não guarde segredo
 
 ## Verificações
 ```bash
+pnpm test
 pnpm build
 pnpm lint
 method/scripts/check-state.sh docs/uc/uc17/state.yaml
