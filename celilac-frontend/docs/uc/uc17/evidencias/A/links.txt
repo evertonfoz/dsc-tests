@@ -1,0 +1,14 @@
+**O que foi executado:** `node method/scripts/check-links.mjs method docs project-profile.md prompts`<br>
+**Data e hora UTC:** 2026-11-28T17:00:53Z<br>
+**Commit de base:** 96509d4d6d00b99f9767f23543efb27f1c9f7f50<br>
+**Diretório/ambiente:** `celilac-frontend/`<br>
+**Código de saída:** 1<br>
+
+```text
+method/orquestrador/prompt-do-estudante.md:66: caminho inexistente: scripts/verify.sh
+method/perfis/celilac-nest.md:35: caminho inexistente: scripts/verify.sh
+
+FALHOU: 2 referência(s) quebrada(s) em 45 documento(s).
+```
+
+**Leitura do resultado:** Restam duas citações, feitas pelo método copiado, a um script que será criado na etapa 4. A conferência não está limpa.

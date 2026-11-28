@@ -1,0 +1,12 @@
+**O que foi executado:** `echo "--- inicio"; grep -rniIE "jwt|passport|bcrypt|@UseGuards|enableCors" ../celilac-backend/src ../celilac-backend/test ../celilac-backend/package.json ../celillac-backend-prepare/src ../celillac-backend-prepare/test ../celillac-backend-prepare/package.json || true; echo "--- fim"`<br>
+**Data e hora UTC:** 2026-11-28T16:44:44Z<br>
+**Commit de base:** 96509d4d6d00b99f9767f23543efb27f1c9f7f50<br>
+**Diretório/ambiente:** `celilac-frontend/`<br>
+**Código de saída:** 0<br>
+
+```text
+--- inicio
+--- fim
+```
+
+**Leitura do resultado:** Sem linhas entre os marcadores: a busca textual não encontrou mecanismo de autenticação nem liberação de origem (CORS) nesses caminhos. É busca, não prova de ausência em outros lugares.

@@ -1,0 +1,21 @@
+**O que foi executado:** `for p in create-vite pnpm vite react react-router react-router-dom typescript vitest @testing-library/react @testing-library/jest-dom jsdom; do printf "%s: " "$p"; npm view "$p" version; done`<br>
+**Data e hora UTC:** 2026-11-28T16:44:44Z<br>
+**Commit de base:** 96509d4d6d00b99f9767f23543efb27f1c9f7f50<br>
+**Diretório/ambiente:** `celilac-frontend/`<br>
+**Código de saída:** 0<br>
+
+```text
+create-vite: 9.4.0
+pnpm: 12.23.0
+vite: 8.4.0
+react: 19.3.1
+react-router: 8.5.3
+react-router-dom: 7.18.7
+typescript: 7.0.2
+vitest: 5.1.2
+@testing-library/react: 16.3.3
+@testing-library/jest-dom: 8.0.0
+jsdom: 31.0.1
+```
+
+**Leitura do resultado:** Versões atuais no registro de pacotes na data. Servem de referência; a instalação consultará de novo (ADR-002).

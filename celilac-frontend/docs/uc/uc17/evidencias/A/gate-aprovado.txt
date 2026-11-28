@@ -1,0 +1,12 @@
+**O que foi executado:** `method/scripts/check-state.sh docs/uc/uc17/state.yaml --remote`<br>
+**Data e hora UTC:** 2026-11-28T17:00:51Z<br>
+**Commit de base:** 96509d4d6d00b99f9767f23543efb27f1c9f7f50<br>
+**Diretório/ambiente:** `celilac-frontend/`<br>
+**Código de saída:** 0<br>
+
+```text
+
+OK: docs/uc/uc17/state.yaml válido (local + GitHub).
+```
+
+**Leitura do resultado:** Estado com a fase A concluída e a fase B em andamento, conferido localmente e com o GitHub. A aprovação do gate é de evertonfoz, com a ressalva dos links.

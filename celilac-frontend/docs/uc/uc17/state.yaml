@@ -1,0 +1,51 @@
+# state.yaml — fonte da verdade do caso de uso UC17.
+# Valide com:  method/scripts/check-state.sh docs/uc/uc17/state.yaml [--remote]
+
+uc: UC17
+nome: Autenticar usuário
+documento: ../../planejamento/uc17-autenticar-usuario/uc-17.md
+arquetipo: autenticar
+epic: { issue: 171, estado: open }
+fase_atual: B
+
+fases:
+  A:
+    status: concluida
+    relatorio: relatorios/A.md
+    gate:
+      - { item: "Epic e Sub-Issues criadas e reconciliadas com este arquivo", resultado: aprovado, por: evertonfoz }
+      - { item: "GitHub Project configurado com os 5 estados", resultado: aprovado, por: evertonfoz }
+    evidencias: [evidencias/A/busca-existencia.txt, evidencias/A/api-sem-autenticacao.txt, evidencias/A/versoes-publicadas.txt, evidencias/A/testes-do-validador.txt, evidencias/A/estado-valido.txt, evidencias/A/estado-quebrado-de-proposito.txt, evidencias/A/estado-restaurado.txt, evidencias/A/links.txt, evidencias/A/publicacao.txt, evidencias/A/estado-remoto.txt, evidencias/A/fatias-prontas.txt, evidencias/A/gate-aprovado.txt]
+  B:
+    status: em_andamento
+    relatorio: null
+    gate:
+      - { item: "Todas as fatias integradas na branch principal", resultado: pendente }
+      - { item: "CI verde na branch principal", resultado: pendente }
+    evidencias: []
+  C: { status: pendente, relatorio: null, gate: [], evidencias: [] }
+  D: { status: pendente, relatorio: null, gate: [], evidencias: [] }
+  E: { status: pendente, relatorio: null, gate: [], evidencias: [] }
+  F: { status: pendente, relatorio: null, gate: [], evidencias: [] }
+
+fatias:
+  - id: F01
+    comportamento: "Navegar pelas telas iniciais: raiz redireciona ao login; dashboard e acesso negado abrem"
+    criterios: [CA01, CA03, CA04, RF01, RF03, RF04, FA01, RN03]
+    issue: 172
+    branch: null
+    pr: null
+    status: planejada
+    responsavel: evertonfoz
+    revisor: null
+    evidencias: []
+  - id: F02
+    comportamento: "Formulário de login preparado, sem autenticar nem enviar dados à API"
+    criterios: [CA02, CA07, RF02, RN02]
+    issue: 173
+    branch: null
+    pr: null
+    status: planejada
+    responsavel: evertonfoz
+    revisor: null
+    evidencias: []

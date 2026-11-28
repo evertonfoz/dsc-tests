@@ -1,0 +1,41 @@
+**O que foi executado:** `bash method/scripts/testes/rodar-testes.sh`<br>
+**Data e hora UTC:** 2026-11-28T16:45:06Z<br>
+**Commit de base:** 96509d4d6d00b99f9767f23543efb27f1c9f7f50<br>
+**Diretório/ambiente:** `celilac-frontend/`<br>
+**Código de saída:** 1<br>
+
+```text
+  PASSOU  templates/state.yaml é aceito
+  PASSOU  valido.yaml é aceito
+  PASSOU  reaberta-valida.yaml é aceito (retorno a fase anterior)
+  PASSOU  pr-compartilhado-valido.yaml é aceito
+  PASSOU  inv-arquetipo rejeitado com "arquetipo inválido"
+  PASSOU  inv-criterio-formato rejeitado com "identificador inválido"
+  PASSOU  inv-documento-inexistente rejeitado com "documento: arquivo não encontrado"
+  PASSOU  inv-pr-faltando rejeitado com "exige pr"
+  PASSOU  inv-issue-duplicada rejeitado com "já usada pela fatia"
+  PASSOU  inv-pr-compartilhado-nao-declarado rejeitado com "declare pr_compartilhado: true"
+  PASSOU  inv-evidencia-inexistente rejeitado com "arquivo não encontrado"
+  PASSOU  inv-fase-salto rejeitado com "não está concluída"
+  PASSOU  inv-gate-sem-por rejeitado com "exige "por""
+  PASSOU  inv-epic-fechada rejeitado com "Epic fechada"
+  PASSOU  inv-epic-sem-issue rejeitado com "epic.issue é obrigatório"
+  PASSOU  inv-sintaxe rejeitado com "ERRO de leitura"
+  PASSOU  check-state-core.mjs sem módulos do Node
+  PASSOU  núcleo sem "existe": não confere arquivos e lista os caminhos
+  PASSOU  núcleo com "existe" falso: acusa arquivo não encontrado
+  PASSOU  núcleo sem "existe": continua rejeitando estrutura inválida
+  PASSOU  check-links aceita documento sem referências quebradas
+  PASSOU  check-links rejeita quebrado-link.md: "link inexistente: guia-que-nao-existe.md"
+  PASSOU  check-links rejeita quebrado-caminho.md: "caminho inexistente: prompts/uc-12.md"
+  PASSOU  check-links rejeita quebrado-caminho.md: "caminho inexistente: src/nao/existe.ts"
+  FALHOU  escopo padrão com referências quebradas
+      method/orquestrador/prompt-do-estudante.md:66: caminho inexistente: scripts/verify.sh
+      method/perfis/celilac-nest.md:35: caminho inexistente: scripts/verify.sh
+      
+      FALHOU: 2 referência(s) quebrada(s) em 40 documento(s).
+
+1 teste(s) falharam.
+```
+
+**Leitura do resultado:** Falha o teste do escopo padrão, por causa das mesmas citações ao script ainda inexistente; os demais passam. Substitui uma primeira execução, feita antes de todas as evidências existirem.

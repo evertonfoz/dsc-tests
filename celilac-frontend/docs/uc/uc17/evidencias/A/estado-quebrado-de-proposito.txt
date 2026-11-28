@@ -1,0 +1,17 @@
+**O que foi executado:** `method/scripts/check-state.sh docs/uc/uc17/state.yaml`<br>
+**Data e hora UTC:** 2026-11-28T16:44:51Z<br>
+**Commit de base:** 96509d4d6d00b99f9767f23543efb27f1c9f7f50<br>
+**Diretório/ambiente:** `celilac-frontend/`<br>
+**Código de saída:** 1<br>
+
+```text
+ERRO   fatias[0] (integrada) exige issue
+ERRO   fatias[0] (integrada) exige branch
+ERRO   fatias[0] (integrada) exige pr
+ERRO   fatias[0] (integrada) exige evidencias
+ERRO   fatias[0] (integrada) exige revisor
+
+FALHOU: 5 erro(s).
+```
+
+**Leitura do resultado:** Exercício do módulo 2: a fatia F01 foi marcada como integrada sem provas. A recusa é o resultado esperado do exercício.
