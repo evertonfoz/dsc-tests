@@ -1,0 +1,19 @@
+**O que foi executado:** `npx -y pnpm@latest test`<br>
+**Data e hora UTC:** 2026-11-28T17:13:46Z<br>
+**Commit de base:** 24ce794c18f7d8cf142885687bc60d08ad458b69<br>
+**Diretório/ambiente:** `celilac-frontend/`<br>
+**Código de saída:** 0<br>
+
+```text
+$ vitest run
+
+ RUN  v5.1.2 <caminho-local>/celilac-frontend
+
+
+ Test Files  1 passed (1)
+      Tests  3 passed (3)
+   Start at  14:13:47
+   Duration  990ms (environment 63%, setup 16%, tests 9%, import 6%, transform 6%)
+```
+
+**Leitura do resultado:** GREEN: os três testes da F01 passam. O teste de fumaça foi removido junto com a tela mínima que ele conferia.
