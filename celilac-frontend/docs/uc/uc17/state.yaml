@@ -22,7 +22,7 @@ fases:
     gate:
       - { item: "Todas as fatias integradas na branch principal", resultado: pendente }
       - { item: "CI verde na branch principal", resultado: pendente }
-    evidencias: [evidencias/B/preparo-versoes.txt, evidencias/B/preparo-fumaca-verde.txt, evidencias/B/preparo-fumaca-quebrado.txt, evidencias/B/preparo-fumaca-restaurado.txt, evidencias/B/preparo-build-lint.txt, evidencias/B/ca05-red.txt, evidencias/B/ca05-green.txt, evidencias/B/ca05-mutacao.txt, evidencias/B/ca05-mutacao-revertida.txt, evidencias/B/ca05-build-lint.txt, evidencias/B/conf-verificacao.txt, evidencias/B/conf-verificacao-quebrada.txt, evidencias/B/conf-verificacao-restaurada.txt, evidencias/B/conf-validador.txt, evidencias/B/conf-navegador.txt, evidencias/B/conf-navegador-quebrado.txt, evidencias/B/conf-navegador-restaurado.txt, evidencias/B/conf-navegador-login.png, evidencias/B/conf-navegador-dashboard.png, evidencias/B/conf-navegador-unauthorized.png, evidencias/B/conf-material.txt, evidencias/B/ca08-red.txt, evidencias/B/ca08-green.txt, evidencias/B/ca08-conferencia.txt]
+    evidencias: [evidencias/B/preparo-versoes.txt, evidencias/B/preparo-fumaca-verde.txt, evidencias/B/preparo-fumaca-quebrado.txt, evidencias/B/preparo-fumaca-restaurado.txt, evidencias/B/preparo-build-lint.txt, evidencias/B/ca05-red.txt, evidencias/B/ca05-green.txt, evidencias/B/ca05-mutacao.txt, evidencias/B/ca05-mutacao-revertida.txt, evidencias/B/ca05-build-lint.txt, evidencias/B/conf-verificacao.txt, evidencias/B/conf-verificacao-quebrada.txt, evidencias/B/conf-verificacao-restaurada.txt, evidencias/B/conf-validador.txt, evidencias/B/conf-navegador.txt, evidencias/B/conf-navegador-quebrado.txt, evidencias/B/conf-navegador-restaurado.txt, evidencias/B/conf-navegador-login.png, evidencias/B/conf-navegador-dashboard.png, evidencias/B/conf-navegador-unauthorized.png, evidencias/B/conf-material.txt, evidencias/B/ca08-red.txt, evidencias/B/ca08-green.txt, evidencias/B/ca08-conferencia.txt, evidencias/B/pr-publicacao.txt]
   C: { status: pendente, relatorio: null, gate: [], evidencias: [] }
   D: { status: pendente, relatorio: null, gate: [], evidencias: [] }
   E: { status: pendente, relatorio: null, gate: [], evidencias: [] }
@@ -34,8 +34,9 @@ fatias:
     criterios: [CA01, CA03, CA04, RF01, RF03, RF04, FA01, RN03]
     issue: 172
     branch: feature/uc17-telas-iniciais
-    pr: null
-    status: em_andamento
+    pr: 174
+    pr_compartilhado: true
+    status: em_revisao
     responsavel: evertonfoz
     revisor: null
     evidencias: [evidencias/B/f01-inicio.txt, evidencias/B/f01-red.txt, evidencias/B/f01-green.txt, evidencias/B/f01-build-lint.txt, evidencias/B/f01-refactor.txt, evidencias/B/f01-mutacao.txt, evidencias/B/f01-mutacao-revertida.txt]
@@ -44,8 +45,9 @@ fatias:
     criterios: [CA02, CA07, RF02, RN02]
     issue: 173
     branch: feature/uc17-telas-iniciais
-    pr: null
-    status: em_andamento
+    pr: 174
+    pr_compartilhado: true
+    status: em_revisao
     responsavel: evertonfoz
     revisor: null
     evidencias: [evidencias/B/f02-inicio.txt, evidencias/B/f02-red.txt, evidencias/B/f02-green.txt, evidencias/B/f02-caracterizacao-ca07.txt, evidencias/B/f02-mutacao-ca02.txt, evidencias/B/f02-mutacao-ca07-fetch.txt, evidencias/B/f02-mutacao-ca07-action.txt, evidencias/B/f02-mutacao-revertida.txt, evidencias/B/f02-build-lint.txt]

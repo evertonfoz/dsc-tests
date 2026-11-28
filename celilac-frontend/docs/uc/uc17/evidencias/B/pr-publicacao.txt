@@ -1,0 +1,17 @@
+**O que foi executado:** `gh pr view 174 --json number,title,state,isDraft,baseRefName,headRefName,changedFiles,closingIssuesReferences,statusCheckRollup,url; gh project item-list 7 --owner evertonfoz --format json -q ".items[]|[(.content.number|tostring),.status]|@tsv"; gh issue view 171 --json state,body -q ".state, .body" | grep -E "^OPEN|CA0[78]"`<br>
+**Data e hora UTC:** 2026-11-28T18:58:38Z<br>
+**Commit de base:** 67ba2b06418ed9b38e3cb4f2231f99d985edbc09<br>
+**Diretório/ambiente:** `celilac-frontend/`<br>
+**Código de saída:** 0<br>
+
+```text
+{"baseRefName":"main","changedFiles":162,"closingIssuesReferences":[],"headRefName":"feature/uc17-telas-iniciais","isDraft":false,"number":174,"state":"OPEN","statusCheckRollup":[{"__typename":"CheckRun","completedAt":"2026-11-28T18:58:10Z","conclusion":"SUCCESS","detailsUrl":"https://dashboard.gitguardian.com","name":"GitGuardian Security Checks","startedAt":"2026-11-28T18:58:09Z","status":"COMPLETED","workflowName":""}],"title":"[UC17][F01][F02] Base da interface: rotas, telas e formulário de login","url":"https://github.com/evertonfoz/dsc-tests/pull/174"}
+171	Backlog
+172	In Review
+173	In Review
+OPEN
+- CA07: enviar o formulário de login não faz requisição à API.
+- CA08: a página declara o idioma `pt-BR` e o título "CeliLac" (acrescentado depois, além do material; pertence à base do projeto).
+```
+
+**Leitura do resultado:** PR #174 aberto, sem issues a fechar automaticamente; a única verificação automática listada é a de segredos (GitGuardian), com sucesso, sem build nem testes; F01 e F02 em In Review; a issue #171 cita o CA08.

@@ -1,6 +1,6 @@
 # 05 — Planejamento no GitHub
 
-> **Situação:** publicado em 2026-11-28, com autorização de `evertonfoz`: issue principal #171, F01 #172, F02 #173 e GitHub Project #7. Branch e PR ainda não existem. O texto abaixo é a proposta que originou a publicação; o conteúdo vigente é o das issues.
+> **Situação:** publicado em 2026-11-28, com autorização de `evertonfoz`: issue principal #171, F01 #172, F02 #173 e GitHub Project #7. Branch `feature/uc17-telas-iniciais` e PR #174 criados depois, na mesma data. O texto abaixo é a proposta que originou a publicação; o conteúdo vigente é o das issues.
 > Siglas: UC (caso de uso), PR (*Pull Request*, proposta de mudança no GitHub), CA (critério de aceite), RF (requisito funcional), ADR (*Architecture Decision Record*, registro de decisão arquitetural), CI (*Continuous Integration*, integração contínua).
 
 ## Inspeção prévia

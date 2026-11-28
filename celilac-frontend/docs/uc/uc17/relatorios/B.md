@@ -9,7 +9,7 @@
 | Período | 2026-11-28 → em andamento |
 | Responsável | `evertonfoz` |
 | Issue(s) | #172 (F01), #173 (F02); #171 para o CA05, a conferência e o CA08 |
-| Branch / PR | `feature/uc17-telas-iniciais` / nenhum |
+| Branch / PR | `feature/uc17-telas-iniciais` / #174 (aberto, compartilhado por F01 e F02) |
 | Commits de referência | preparo `59f8a74`; F01: início `2e0b458`, RED `24ce794`, GREEN `f4d4e6e`, REFACTOR `f220388`; F02: início `9cd1d97`, RED `f302821`, GREEN `dc4effd`, caracterização `f4cb4bc`; CA05: teste `f7ea182`, GREEN `3b6e3b5`; conferência: `83a92ec`, `e298df6`; CA08: RED `5c49149`, GREEN `87ed4a5` |
 
 ## 1. Objetivo da fase
@@ -84,13 +84,18 @@ Por decisão de `evertonfoz` em 2026-11-28, o achado da conferência foi corrigi
 - *Executado nesta fase:* verificação completa e conferência no navegador passando; o HTML servido e o gerado pelo build trazem os valores novos.
 - **Sem REFACTOR e sem mutação:** o RED já mostrou cada teste acusando o valor errado.
 - **Limite:** não foi testado com leitor de tela nem com a oferta de tradução do navegador.
-- A issue #171 ainda cita "CA01 a CA07"; atualizar no GitHub depende de autorização.
+- O CA08 foi acrescentado à issue #171 no GitHub, com autorização de `evertonfoz`.
 - Ajuste **validado por `evertonfoz` em 2026-11-28**, incluindo o acréscimo de RF09 e CA08 à especificação.
 
 | Critério | Teste | Situação |
 |---|---|---|
 | CA08, RF09 | `should declare the page language as Brazilian Portuguese (CA08)` | passa; teve RED |
 | CA08, RF09 | `should use CeliLac as the page title (CA08)` | passa; teve RED |
+
+### 2.7. Envio e pull request
+- *Executado nesta fase:* com autorização de `evertonfoz`, envio da branch, abertura do PR #174 para a `main` (compartilhado por F01 e F02), F01 e F02 movidas para `In Review` no Project e `em_revisao` no estado, e CA08 acrescentado à issue #171.
+- O PR cita as issues sem fechá-las. **Não houve merge.**
+- Os fluxos de CI do repositório não alcançam `celilac-frontend/`: nenhum build ou teste roda no PR (ADR-003). A única verificação automática listada foi a de segredos (GitGuardian), com sucesso.
 
 ## 3. Evidências
 | # | Afirmação | Etiqueta | Evidência (arquivo em `evidencias/`) |
@@ -135,11 +140,12 @@ Por decisão de `evertonfoz` em 2026-11-28, o achado da conferência foi corrigi
 | 38 | CA08: RED | Executado nesta fase | `docs/uc/uc17/evidencias/B/ca08-red.txt` |
 | 39 | CA08: GREEN | Executado nesta fase | `docs/uc/uc17/evidencias/B/ca08-green.txt` |
 | 40 | CA08: verificação, navegador e build | Executado nesta fase | `docs/uc/uc17/evidencias/B/ca08-conferencia.txt` |
+| 41 | PR, estados do Project e texto da issue principal | Executado nesta fase | `docs/uc/uc17/evidencias/B/pr-publicacao.txt` |
 
 ## 4. Gate de saída
 | Verificação | Como verificar | Resultado | Validado por |
 |---|---|---|---|
-| Todas as fatias integradas, com PR, revisor e evidências | `check-state.sh --remote` | pendente | — |
+| Todas as fatias integradas, com PR, revisor e evidências | `check-state.sh --remote` | pendente: PR #174 aberto, sem revisor nem merge | — |
 | Cada fatia com teste RED e GREEN em commits separados | histórico e evidências | pendente de validação; CA07 não tem RED (seção 2.3); CA05, da base, também não tem RED válido (seção 2.4) | — |
 | CI verde na branch principal | resultado do CI | não poderá ser aprovado (ADR-003) | — |
 | Tabela fatia → teste confere com o código | este relatório | pendente | — |
@@ -148,6 +154,6 @@ Por decisão de `evertonfoz` em 2026-11-28, o achado da conferência foi corrigi
 - Sem decisões novas.
 
 ## 6. Pendências e riscos
-- F01 e F02 só passam a `em_revisao` quando houver PR.
+- A revisão do PR #174 e o merge são humanos; em modo solo, a revisão não é independente.
 - P1 e P3 foram observadas no navegador e continuam em aberto; P2 não foi exercitada.
 - Os testes automatizados rodam em navegador simulado; a conferência no Chrome é um passo à parte, fora do `scripts/verify.sh`.
