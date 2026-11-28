@@ -5,7 +5,7 @@
 // Uso (com o servidor de desenvolvimento já no ar):
 //   node scripts/verificar-navegador.mjs http://localhost:5173 [pasta-das-capturas]
 // Variável opcional: CHROME_PATH, quando o Chrome está em outro lugar.
-// Saída: 0 se as conferências passaram; 1 se alguma falhou; 2 uso incorreto.
+// Saída: 0 se as conferências passaram; 1 se alguma falhou; 2 uso incorreto ou Chrome não encontrado.
 import { spawn } from 'node:child_process';
 import { existsSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
@@ -20,6 +20,11 @@ if (!base) {
 }
 const chrome =
   process.env.CHROME_PATH ?? '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
+if (!existsSync(chrome)) {
+  console.error(`Google Chrome não encontrado em: ${chrome}`);
+  console.error('Informe o caminho do executável na variável CHROME_PATH.');
+  process.exit(2);
+}
 const perfil = mkdtempSync(join(tmpdir(), 'chrome-verificacao-'));
 const processo = spawn(
   chrome,
@@ -35,6 +40,11 @@ const processo = spawn(
   ],
   { stdio: 'ignore' },
 );
+// O caminho pode existir e ainda assim não abrir (por exemplo, sem permissão de execução).
+let erroAoAbrir = null;
+processo.on('error', (erro) => {
+  erroAoAbrir = erro;
+});
 
 let falhas = 0;
 function conferir(descricao, passou, obtido) {
@@ -45,6 +55,7 @@ function conferir(descricao, passou, obtido) {
 async function portaDeDepuracao() {
   const arquivo = join(perfil, 'DevToolsActivePort');
   for (let i = 0; i < 100; i += 1) {
+    if (erroAoAbrir) throw new Error(`não foi possível abrir o Chrome: ${erroAoAbrir.message}`);
     if (existsSync(arquivo)) {
       const porta = readFileSync(arquivo, 'utf8').split('\n')[0];
       if (porta) return porta;
@@ -215,9 +226,12 @@ try {
   falhas += 1;
   console.error(`ERRO: ${erro.message}`);
 } finally {
-  const encerrado = new Promise((resolver) => processo.once('exit', resolver));
-  processo.kill();
-  await Promise.race([encerrado, esperar(5000)]);
+  // Sem processo aberto não há o que encerrar nem esperar.
+  if (!erroAoAbrir) {
+    const encerrado = new Promise((resolver) => processo.once('exit', resolver));
+    processo.kill();
+    await Promise.race([encerrado, esperar(5000)]);
+  }
   rmSync(perfil, { recursive: true, force: true, maxRetries: 10, retryDelay: 200 });
 }
 

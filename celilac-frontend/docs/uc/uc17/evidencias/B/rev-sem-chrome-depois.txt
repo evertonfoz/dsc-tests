@@ -1,0 +1,37 @@
+**O que foi executado:** `bash <pasta-temporária>/sem-chrome.sh`<br>
+**Data e hora UTC:** 2026-11-28T19:01:52Z<br>
+**Commit de base:** 50b704aaf1bd582b80a5c6a73bebba9f46371ed1<br>
+**Diretório/ambiente:** `celilac-frontend/`<br>
+**Código de saída:** 0<br>
+
+```text
+--- CHROME_PATH=/caminho/inexistente
+Google Chrome não encontrado em: /caminho/inexistente
+Informe o caminho do executável na variável CHROME_PATH.
+código de saída: 2
+--- CHROME_PATH=./package.json
+ERRO: não foi possível abrir o Chrome: spawn ./package.json EACCES
+
+RESULTADO: 1 conferência(s) falharam.
+código de saída: 1
+pastas temporárias deixadas: 0
+```
+
+**Leitura do resultado:** Depois da correção: mensagem com a causa, código de saída diferente de zero e nenhuma pasta temporária deixada.
+
+**Programa auxiliar usado** (temporário, fora do repositório):
+
+```bash
+#!/usr/bin/env bash
+# Roda a conferência com caminhos de Chrome inválidos e conta as pastas temporárias deixadas.
+t="${TMPDIR%/}"
+conta() { find "$t" -maxdepth 1 -name 'chrome-verificacao-*' | wc -l | tr -d ' '; }
+antes=$(conta)
+for c in /caminho/inexistente ./package.json; do
+  echo "--- CHROME_PATH=$c"
+  saida=$(CHROME_PATH="$c" node scripts/verificar-navegador.mjs http://localhost:1 2>&1); rc=$?
+  echo "$saida" | sed "s|$t|<tmp>|g; s|$PWD|<projeto>|g" | head -8
+  echo "código de saída: $rc"
+done
+echo "pastas temporárias deixadas: $(( $(conta) - antes ))"
+```
