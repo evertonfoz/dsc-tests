@@ -74,7 +74,7 @@ CA05 pertence à base do projeto, não à F01 nem à F02; os commits citam a iss
 - **Observado (P1, em aberto):** um endereço inexistente mostra tela em branco, com o aviso `No routes matched location` no console.
 - **Achado, sem correção:** `index.html` vem do modelo com `lang="en"`, embora o conteúdo esteja em português, e com o título `celilac-frontend`. O material não trata dos dois.
 - **Limites:** conferência em um só navegador, sem janela, em 1280×800, no servidor de desenvolvimento; telas estreitas e o resultado do build não foram abertos no navegador.
-- Aguardando validação de `evertonfoz`.
+- Etapa 4 **validada por `evertonfoz` em 2026-11-28**, com a correção do registro do CA05 (seção 2.4).
 
 ## 3. Evidências
 | # | Afirmação | Etiqueta | Evidência (arquivo em `evidencias/`) |

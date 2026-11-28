@@ -112,7 +112,7 @@ O teste de CA07 tende a passar sem falhar antes: se isso ocorrer, será registra
 | Issue principal e sub-issues conferem com o `state.yaml` | `check-state.sh --remote` | aprovado | `evertonfoz`, 2026-11-28 |
 | Cada fatia tem teste RED nomeado e DoR avaliada | seções 3 e 4 | aprovado | `evertonfoz`, 2026-11-28 |
 | GitHub Project com os cinco estados | listagem em `evidencias/A/` | aprovado | `evertonfoz`, 2026-11-28 |
-| Links e caminhos dos documentos existem | `check-links.mjs` | **não atendido** no gate; passou a conferir na etapa 4, aguardando validação | gate validado com esta ressalva por `evertonfoz`, 2026-11-28 |
+| Links e caminhos dos documentos existem | `check-links.mjs` | **não atendido** no gate; passou a conferir na etapa 4, validada por `evertonfoz` em 2026-11-28 | gate validado com esta ressalva por `evertonfoz`, 2026-11-28 |
 
 ## 7. Decisões e hipóteses
 - **Aceitas por `evertonfoz` em 2026-11-28:** ADR-001, ADR-002 e ADR-003.
