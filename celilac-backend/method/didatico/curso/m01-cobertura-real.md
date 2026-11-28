@@ -130,4 +130,4 @@ Depois **rode** pelo menos três dos comandos que ela citar. Se algum não exist
 - Item sem teste termina em teste ou em ADR.
 - O erro do UC12 não foi a ausência do preço, e sim declarar cobertura sem prova.
 
-Próximo: módulo 2 (por que o plano e a realidade divergem).
+Próximo: apoio A (GitHub além do básico) e, depois, o módulo 2 (por que o plano e a realidade divergem).
