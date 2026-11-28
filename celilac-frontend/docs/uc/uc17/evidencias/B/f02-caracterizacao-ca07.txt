@@ -1,0 +1,20 @@
+**O que foi executado:** `npx -y pnpm@latest test`<br>
+**Data e hora UTC:** 2026-11-28T17:15:49Z<br>
+**Commit de base:** dc4effd2cfd5893a4ee3e5b55382341cdb0f8946<br>
+**Diretório/ambiente:** `celilac-frontend/`<br>
+**Código de saída:** 0<br>
+
+```text
+$ vitest run
+
+ RUN  v5.1.2 <caminho-local>/celilac-frontend
+
+Not implemented: HTMLFormElement's requestSubmit() method
+
+ Test Files  2 passed (2)
+      Tests  5 passed (5)
+   Start at  14:15:50
+   Duration  634ms (environment 55%, tests 19%, setup 16%, import 5%, transform 5%)
+```
+
+**Leitura do resultado:** Teste de caracterização: o de CA07 passou na primeira execução, porque o formulário já não envia nada. Não é um RED; a prova de que ele consegue falhar está nas mutações. A mensagem `Not implemented: HTMLFormElement's requestSubmit() method` vem do navegador simulado (`jsdom`): o clique pediu o envio nativo do formulário, que o `jsdom` não executa. O que o navegador real faz nesse envio fica para a etapa 4.
