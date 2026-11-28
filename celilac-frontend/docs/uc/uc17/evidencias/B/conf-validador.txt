@@ -1,0 +1,37 @@
+**O que foi executado:** `bash method/scripts/testes/rodar-testes.sh`<br>
+**Data e hora UTC:** 2026-11-28T18:44:26Z<br>
+**Commit de base:** 83a92ec9e16d0088451acdfdce777027602144bc<br>
+**Diretório/ambiente:** `celilac-frontend/`<br>
+**Código de saída:** 0<br>
+
+```text
+  PASSOU  templates/state.yaml é aceito
+  PASSOU  valido.yaml é aceito
+  PASSOU  reaberta-valida.yaml é aceito (retorno a fase anterior)
+  PASSOU  pr-compartilhado-valido.yaml é aceito
+  PASSOU  inv-arquetipo rejeitado com "arquetipo inválido"
+  PASSOU  inv-criterio-formato rejeitado com "identificador inválido"
+  PASSOU  inv-documento-inexistente rejeitado com "documento: arquivo não encontrado"
+  PASSOU  inv-pr-faltando rejeitado com "exige pr"
+  PASSOU  inv-issue-duplicada rejeitado com "já usada pela fatia"
+  PASSOU  inv-pr-compartilhado-nao-declarado rejeitado com "declare pr_compartilhado: true"
+  PASSOU  inv-evidencia-inexistente rejeitado com "arquivo não encontrado"
+  PASSOU  inv-fase-salto rejeitado com "não está concluída"
+  PASSOU  inv-gate-sem-por rejeitado com "exige "por""
+  PASSOU  inv-epic-fechada rejeitado com "Epic fechada"
+  PASSOU  inv-epic-sem-issue rejeitado com "epic.issue é obrigatório"
+  PASSOU  inv-sintaxe rejeitado com "ERRO de leitura"
+  PASSOU  check-state-core.mjs sem módulos do Node
+  PASSOU  núcleo sem "existe": não confere arquivos e lista os caminhos
+  PASSOU  núcleo com "existe" falso: acusa arquivo não encontrado
+  PASSOU  núcleo sem "existe": continua rejeitando estrutura inválida
+  PASSOU  check-links aceita documento sem referências quebradas
+  PASSOU  check-links rejeita quebrado-link.md: "link inexistente: guia-que-nao-existe.md"
+  PASSOU  check-links rejeita quebrado-caminho.md: "caminho inexistente: prompts/uc-12.md"
+  PASSOU  check-links rejeita quebrado-caminho.md: "caminho inexistente: src/nao/existe.ts"
+  PASSOU  check-links: escopo padrão do projeto sem referências quebradas
+
+Todos os testes do validador passaram.
+```
+
+**Leitura do resultado:** Todos os testes do validador passam, inclusive o do escopo padrão, que falhava na fase A por citar um script inexistente.

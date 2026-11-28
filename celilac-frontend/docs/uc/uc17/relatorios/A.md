@@ -33,7 +33,7 @@ No gate da fase A não havia testes: os itens com teste previsto estavam em *A i
 | FA01, RN03 (rotas abertas, temporário) | F01 | os testes de CA03 e CA04 | Coberto |
 | RF02, CA02 (formulário de login) | F02 | `should show the e-mail and password fields and the submit button (CA02)` | Coberto |
 | RN02, CA07 (envio não gera requisição) | F02 | `should not send any request when the login form is submitted (CA07)` | Coberto (teste de caracterização, sem RED) |
-| RF05, CA05 (endereço da API) | base do projeto (etapa 2), teste na etapa 3 | `should expose the API base URL from VITE_API_BASE_URL (CA05)` | Coberto |
+| RF05, CA05 (endereço da API) | base do projeto (etapa 2), teste na etapa 3 | `should expose the API base URL from VITE_API_BASE_URL (CA05)` | Coberto (sem RED válido; validado por mutação) |
 | RN01, CA06 (`.env` fora do repositório) | base do projeto (etapa 2) | comando do Git (`docs/uc/uc17/evidencias/A/base-env-versionado.txt`) | Coberto por comando |
 | RF06 (autenticar na API) | — | nenhum | Não implementado (ADR-001 aceita) |
 | RF07 (proteger o dashboard) | — | nenhum | Não implementado (ADR-001 aceita) |
@@ -44,16 +44,25 @@ No gate da fase A não havia testes: os itens com teste previsto estavam em *A i
 | P4 (regras de credenciais e token) | — | nenhum | Aguardando decisão |
 
 ### 3.1. Checklist do material
-O material traz um checklist **já marcado**. Marcação não é prova: os itens serão conferidos nas etapas 2 a 4.
+O material traz um checklist **já marcado**. Marcação não é prova: os 15 itens foram conferidos até a etapa 4, em 2026-11-28.
 
-| Item do material | Como será provado | Situação |
+| Item do material | Como foi provado | Situação |
 |---|---|---|
-| Projeto criado; dependências instaladas; React Router instalado | `docs/uc/uc17/evidencias/A/base-versoes.txt` e `docs/uc/uc17/evidencias/A/base-instalacao.txt` | Executado na etapa 2 |
-| Estrutura de pastas; arquivos desnecessários removidos | `docs/uc/uc17/evidencias/A/base-arquivos.txt` | Executado na etapa 2 (pastas `api`, `pages` e `routes` ainda vazias) |
-| `VITE_API_BASE_URL`, `.env.example`, `.gitignore` | teste (CA05) e comando do Git (CA06) | CA06 executado (`docs/uc/uc17/evidencias/A/base-env-versionado.txt`); CA05 coberto por teste na etapa 3 |
-| Três páginas e `AppRoutes.tsx` | testes de F01 e F02 | Coberto por testes na etapa 3; navegador na etapa 4 |
-| `apiClient.ts` criado | teste de CA05 | Coberto por teste na etapa 3 |
-| CSS global aplicado; rotas testadas no navegador | conferência no navegador | A implementar (CSS criado; aparência ainda não conferida) |
+| Projeto criado com Vite e React TypeScript | `docs/uc/uc17/evidencias/A/base-versoes.txt` e `docs/uc/uc17/evidencias/B/conf-verificacao.txt` | Conferido |
+| Dependências instaladas com `npm install` | `docs/uc/uc17/evidencias/A/base-instalacao.txt` e `docs/uc/uc17/evidencias/B/conf-verificacao.txt` | Conferido, com diferença: foi usado o `pnpm` |
+| React Router DOM instalado | `docs/uc/uc17/evidencias/B/conf-material.txt` | Conferido, com diferença: pacote `react-router` (ADR-002) |
+| Estrutura de pastas organizada | `docs/uc/uc17/evidencias/B/conf-material.txt` | Conferido; há a mais `src/test/` e os arquivos de teste |
+| Arquivos desnecessários removidos | `docs/uc/uc17/evidencias/B/conf-material.txt` | Conferido; os quatro citados estão ausentes; `public/favicon.svg` foi mantido |
+| Variável `VITE_API_BASE_URL` configurada | teste de CA05 e `docs/uc/uc17/evidencias/B/conf-material.txt` | Conferido, com diferença: porta 3200, e não 3000 |
+| Arquivo `.env.example` criado | `docs/uc/uc17/evidencias/B/conf-material.txt` | Conferido |
+| `.env` adicionado ao `.gitignore` | `docs/uc/uc17/evidencias/B/conf-material.txt` | Conferido |
+| Página de Login criada | teste de CA02 e `docs/uc/uc17/evidencias/B/conf-navegador.txt` | Conferido |
+| Página de Dashboard criada | teste de CA03 e `docs/uc/uc17/evidencias/B/conf-navegador.txt` | Conferido |
+| Página de Acesso Negado criada | teste de CA04 e `docs/uc/uc17/evidencias/B/conf-navegador.txt` | Conferido |
+| Arquivo de rotas `AppRoutes.tsx` funcionando | testes de CA01, CA03 e CA04 e `docs/uc/uc17/evidencias/B/conf-navegador.txt` | Conferido |
+| `apiClient.ts` criado | teste de CA05 | Conferido; nenhuma tela o usa ainda |
+| CSS global aplicado | `docs/uc/uc17/evidencias/B/conf-navegador.txt` | Conferido, com acréscimo declarado de estilo mínimo para o formulário |
+| Rotas testadas no navegador | `docs/uc/uc17/evidencias/B/conf-navegador.txt` | Conferido no Chrome sem janela, na porta 5273 |
 
 ## 4. Fatias e prontidão (DoR)
 
@@ -80,7 +89,7 @@ O teste de CA07 tende a passar sem falhar antes: se isso ocorrer, será registra
 | 5 | `state.yaml` válido | Executado nesta fase | `docs/uc/uc17/evidencias/A/estado-valido.txt` |
 | 6 | O validador recusa fatia `integrada` sem provas | Executado nesta fase | `docs/uc/uc17/evidencias/A/estado-quebrado-de-proposito.txt` |
 | 7 | `state.yaml` restaurado | Executado nesta fase | `docs/uc/uc17/evidencias/A/estado-restaurado.txt` |
-| 8 | Conferência de links e caminhos (duas referências quebradas, ver seção 8) | Executado nesta fase | `docs/uc/uc17/evidencias/A/links.txt` |
+| 8 | Conferência de links e caminhos (limpa desde a etapa 4; no gate havia duas referências quebradas) | Executado nesta fase | `docs/uc/uc17/evidencias/A/links.txt` |
 | 9 | Issues, vínculos, Project, estados e itens | Executado nesta fase | `docs/uc/uc17/evidencias/A/publicacao.txt` |
 | 10 | `state.yaml` conferido com o GitHub | Executado nesta fase | `docs/uc/uc17/evidencias/A/estado-remoto.txt` |
 | 11 | F01 e F02 movidas para `Ready` após a revisão | Executado nesta fase | `docs/uc/uc17/evidencias/A/fatias-prontas.txt` |
@@ -103,7 +112,7 @@ O teste de CA07 tende a passar sem falhar antes: se isso ocorrer, será registra
 | Issue principal e sub-issues conferem com o `state.yaml` | `check-state.sh --remote` | aprovado | `evertonfoz`, 2026-11-28 |
 | Cada fatia tem teste RED nomeado e DoR avaliada | seções 3 e 4 | aprovado | `evertonfoz`, 2026-11-28 |
 | GitHub Project com os cinco estados | listagem em `evidencias/A/` | aprovado | `evertonfoz`, 2026-11-28 |
-| Links e caminhos dos documentos existem | `check-links.mjs` | **não atendido**; pendente até a etapa 4 | gate validado com esta ressalva por `evertonfoz`, 2026-11-28 |
+| Links e caminhos dos documentos existem | `check-links.mjs` | **não atendido** no gate; passou a conferir na etapa 4, aguardando validação | gate validado com esta ressalva por `evertonfoz`, 2026-11-28 |
 
 ## 7. Decisões e hipóteses
 - **Aceitas por `evertonfoz` em 2026-11-28:** ADR-001, ADR-002 e ADR-003.
@@ -113,6 +122,6 @@ O teste de CA07 tende a passar sem falhar antes: se isso ocorrer, será registra
 
 ## 8. Pendências e riscos
 - A especificação citada na issue #171 ainda não está no repositório remoto (commits locais, sem envio).
-- `check-links.mjs` acusa duas citações ao script `verify.sh`, feitas pelo método copiado, que ainda não existe aqui; a criação está prevista para a etapa 4. Pelo mesmo motivo, **um teste do validador falha** (o do escopo padrão).
+- Resolvido na etapa 4: as duas citações ao script `scripts/verify.sh`, feitas pelo método copiado, faziam o `check-links.mjs` e um teste do validador falharem. O script foi criado (`docs/uc/uc17/evidencias/B/conf-validador.txt`).
 - O validador diz se o arquivo é coerente, não se o trabalho foi feito.
 - Revisão em modo solo não é revisão independente.

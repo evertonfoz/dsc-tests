@@ -1,0 +1,21 @@
+**O que foi executado:** `scripts/verify.sh --remote`<br>
+**Data e hora UTC:** 2026-11-28T18:44:22Z<br>
+**Commit de base:** 83a92ec9e16d0088451acdfdce777027602144bc<br>
+**Diretório/ambiente:** `celilac-frontend/`<br>
+**Código de saída:** 0<br>
+
+```text
+Verificação de celilac-frontend — Node v24.21.0, pnpm 12.8.1
+----------------------------------------------------------------------
+[1] OK      Instalar dependências (arquivo de travamento)
+[2] OK      Lint
+[3] OK      Testes
+[4] OK      Build
+[5] OK      Testes dos validadores do método
+[6] OK      Documentos: links e caminhos citados existem
+[7] OK      Estado dos casos de uso (state.yaml)
+----------------------------------------------------------------------
+RESULTADO: 7 passos, todos OK.
+```
+
+**Leitura do resultado:** Todos os passos da verificação local passam, com o estado conferido no GitHub.

@@ -1,0 +1,37 @@
+**O que foi executado:** `git ls-files src public .env.example; for f in src/App.css src/index.css src/assets/react.svg public/vite.svg; do if [ -e "$f" ]; then echo "presente: $f"; else echo "ausente: $f"; fi; done; git check-ignore .env; grep -n "react-router\|VITE_API" package.json .env.example; grep -rhoE "should [^']+" src`<br>
+**Data e hora UTC:** 2026-11-28T18:50:12Z<br>
+**Commit de base:** e298df6cdffc19ccd1896522920b8c41d7ef04d4<br>
+**Diretório/ambiente:** `celilac-frontend/`<br>
+**Código de saída:** 0<br>
+
+```text
+.env.example
+public/favicon.svg
+src/App.tsx
+src/api/apiClient.test.ts
+src/api/apiClient.ts
+src/main.tsx
+src/pages/DashboardPage.tsx
+src/pages/LoginPage.test.tsx
+src/pages/LoginPage.tsx
+src/pages/UnauthorizedPage.tsx
+src/routes/AppRoutes.test.tsx
+src/routes/AppRoutes.tsx
+src/styles/global.css
+src/test/setup.ts
+ausente: src/App.css
+ausente: src/index.css
+ausente: src/assets/react.svg
+ausente: public/vite.svg
+.env
+package.json:16:    "react-router": "^8.5.3"
+.env.example:1:VITE_API_BASE_URL=http://localhost:3200
+should expose the API base URL from VITE_API_BASE_URL (CA05)
+should show the e-mail and password fields and the submit button (CA02)
+should not send any request when the login form is submitted (CA07)
+should redirect the root path to the login page (CA01)
+should show the dashboard page at /dashboard (CA03)
+should show the access denied page at /unauthorized (CA04)
+```
+
+**Leitura do resultado:** Arquivos do projeto comparados com o checklist do material: estrutura de src, arquivos removidos ausentes, .env ignorado, .env.example versionado, pacote de rotas e nomes dos testes.

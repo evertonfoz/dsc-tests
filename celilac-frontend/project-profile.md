@@ -19,7 +19,7 @@ Política de versões: `docs/adr/ADR-002-versoes-atuais-e-react-router.md` (inst
 | Item | Valor | Origem |
 |---|---|---|
 | Runtime | Node 24.21.0 | `docs/uc/uc17/evidencias/A/base-versoes.txt` |
-| Gerenciador de pacotes | pnpm 12.23.0, usado na instalação | idem |
+| Gerenciador de pacotes | pnpm 12.23.0, usado na instalação; o `scripts/verify.sh` usa o `pnpm` do sistema (12.8.1 nesta máquina) | idem; `docs/uc/uc17/evidencias/B/conf-verificacao.txt` |
 | Framework | React 19.3.1, Vite 8.4.0, TypeScript 7.0.2 | idem |
 | Rotas | `react-router` 8.5.3 | idem; ADR-002 |
 | ORM e banco | não se aplica | frontend |
@@ -37,7 +37,8 @@ Política de versões: `docs/adr/ADR-002-versoes-atuais-e-react-router.md` (inst
 | Subir ambiente (desenvolvimento) | `pnpm dev` |
 | Validar estado do UC | `method/scripts/check-state.sh docs/uc/uc17/state.yaml` |
 | Validar links dos documentos | `node method/scripts/check-links.mjs method docs project-profile.md prompts README.md` |
-| Verificação local rápida | a criar na etapa 4 |
+| Verificação local | `scripts/verify.sh` (com `--remote`, confere o estado no GitHub) |
+| Rotas no navegador | com `pnpm dev` no ar: `node scripts/verificar-navegador.mjs http://localhost:5173` (exige o Google Chrome; caminho padrão do macOS ou variável `CHROME_PATH`; use a porta que o `pnpm dev` mostrar) |
 
 ## 4. Infraestrutura
 | Serviço | Porta | Observação |

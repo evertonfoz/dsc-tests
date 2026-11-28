@@ -10,7 +10,7 @@
 | Responsável | `evertonfoz` |
 | Issue(s) | #172 (F01), #173 (F02); #171 para o CA05 |
 | Branch / PR | `feature/uc17-telas-iniciais` / nenhum |
-| Commits de referência | preparo `59f8a74`; F01: início `2e0b458`, RED `24ce794`, GREEN `f4d4e6e`, REFACTOR `f220388`; F02: início `9cd1d97`, RED `f302821`, GREEN `dc4effd`, caracterização `f4cb4bc`; CA05: RED `f7ea182`, GREEN `3b6e3b5` |
+| Commits de referência | preparo `59f8a74`; F01: início `2e0b458`, RED `24ce794`, GREEN `f4d4e6e`, REFACTOR `f220388`; F02: início `9cd1d97`, RED `f302821`, GREEN `dc4effd`, caracterização `f4cb4bc`; CA05: teste `f7ea182`, GREEN `3b6e3b5`; conferência: `83a92ec`, `e298df6` |
 
 ## 1. Objetivo da fase
 Entregar F01 e F02 pelo ciclo do apoio B: teste falhando, código mínimo, melhoria e mutação revertida.
@@ -53,7 +53,7 @@ Entregar F01 e F02 pelo ciclo do apoio B: teste falhando, código mínimo, melho
 ### 2.4. Endereço base da API, CA05 (parte 3.4)
 CA05 pertence à base do projeto, não à F01 nem à F02; os commits citam a issue principal #171.
 
-- *Executado nesta fase:* RED com o arquivo de teste falhando porque o módulo `apiClient` não existia. A comparação do valor **não chegou a ser executada** nesse momento.
+- *Executado nesta fase:* o arquivo de teste falhou porque o módulo `apiClient` não existia. A comparação do valor **não chegou a ser executada**. **Isso não é um RED válido:** o playbook da fase B e o perfil `method/perfis/react-vite.md` não aceitam erro de importação, e pedem criar o mínimo para o teste rodar e repetir o RED. O passo não foi feito antes da GREEN. O commit `f7ea182` traz "RED" na mensagem. Correção deste registro feita na etapa 4.
 - *Executado nesta fase:* GREEN com `src/api/apiClient.ts`, com o código do material, e remoção do `.gitkeep` da pasta.
 - *Executado nesta fase:* mutação (endereço fixo no código), acusada pela comparação do valor, e desfeita.
 - **Sem REFACTOR:** o módulo tem uma linha.
@@ -62,7 +62,19 @@ CA05 pertence à base do projeto, não à F01 nem à F02; os commits citam a iss
 
 | Critério | Teste | Situação |
 |---|---|---|
-| CA05, RF05 | `should expose the API base URL from VITE_API_BASE_URL (CA05)` | passa; teve RED (módulo ausente); validado por mutação |
+| CA05, RF05 | `should expose the API base URL from VITE_API_BASE_URL (CA05)` | passa; **sem RED válido** (falha de importação); validado por mutação |
+
+### 2.5. Conferência (etapa 4)
+- *Executado nesta fase:* `scripts/verify.sh` reúne instalação pelo arquivo de travamento, lint, testes, build, testes dos validadores, links e estado. Os sete passos passaram, com o estado conferido no GitHub.
+- *Executado nesta fase:* quebra proposital (título trocado e caminho inexistente no README), acusada nos passos de testes e de links, e desfeita.
+- *Executado nesta fase:* os testes do validador passam todos; as duas referências quebradas da fase A foram resolvidas com a criação do script.
+- *Executado nesta fase:* `scripts/verificar-navegador.mjs` abriu `/`, `/login`, `/dashboard` e `/unauthorized` em um Google Chrome sem janela (*headless*), com o servidor de desenvolvimento: endereços, títulos, textos, estilos e ausência de erros no console conferem, e a raiz não fica no histórico. A cor do botão foi trocada de propósito, a conferência acusou e a alteração foi desfeita.
+- *Executado nesta fase:* checklist do material conferido item por item (relatório da fase A, `docs/uc/uc17/relatorios/A.md`, seção 3.1).
+- **Observado (P3, em aberto):** ao clicar em "Entrar", a página recarrega, o endereço vira `/login?` e os campos esvaziam. Os dados digitados não aparecem no endereço, e nenhuma requisição vai à API.
+- **Observado (P1, em aberto):** um endereço inexistente mostra tela em branco, com o aviso `No routes matched location` no console.
+- **Achado, sem correção:** `index.html` vem do modelo com `lang="en"`, embora o conteúdo esteja em português, e com o título `celilac-frontend`. O material não trata dos dois.
+- **Limites:** conferência em um só navegador, sem janela, em 1280×800, no servidor de desenvolvimento; telas estreitas e o resultado do build não foram abertos no navegador.
+- Aguardando validação de `evertonfoz`.
 
 ## 3. Evidências
 | # | Afirmação | Etiqueta | Evidência (arquivo em `evidencias/`) |
@@ -88,17 +100,28 @@ CA05 pertence à base do projeto, não à F01 nem à F02; os commits citam a iss
 | 19 | F02: mutação com destino de envio acusada por CA07 | Executado nesta fase | `docs/uc/uc17/evidencias/B/f02-mutacao-ca07-action.txt` |
 | 20 | F02: mutações desfeitas | Executado nesta fase | `docs/uc/uc17/evidencias/B/f02-mutacao-revertida.txt` |
 | 21 | F02: build e lint | Executado nesta fase | `docs/uc/uc17/evidencias/B/f02-build-lint.txt` |
-| 22 | CA05: RED | Executado nesta fase | `docs/uc/uc17/evidencias/B/ca05-red.txt` |
+| 22 | CA05: falha por módulo ausente (não é RED válido) | Executado nesta fase | `docs/uc/uc17/evidencias/B/ca05-red.txt` |
 | 23 | CA05: GREEN | Executado nesta fase | `docs/uc/uc17/evidencias/B/ca05-green.txt` |
 | 24 | CA05: mutação acusada | Executado nesta fase | `docs/uc/uc17/evidencias/B/ca05-mutacao.txt` |
 | 25 | CA05: mutação desfeita | Executado nesta fase | `docs/uc/uc17/evidencias/B/ca05-mutacao-revertida.txt` |
 | 26 | CA05: build e lint | Executado nesta fase | `docs/uc/uc17/evidencias/B/ca05-build-lint.txt` |
+| 27 | Verificação local completa | Executado nesta fase | `docs/uc/uc17/evidencias/B/conf-verificacao.txt` |
+| 28 | A verificação acusa a quebra proposital | Executado nesta fase | `docs/uc/uc17/evidencias/B/conf-verificacao-quebrada.txt` |
+| 29 | Quebra desfeita | Executado nesta fase | `docs/uc/uc17/evidencias/B/conf-verificacao-restaurada.txt` |
+| 30 | Testes dos validadores | Executado nesta fase | `docs/uc/uc17/evidencias/B/conf-validador.txt` |
+| 31 | Rotas, estilos e envio no navegador | Executado nesta fase | `docs/uc/uc17/evidencias/B/conf-navegador.txt` |
+| 32 | A conferência no navegador acusa a quebra proposital | Executado nesta fase | `docs/uc/uc17/evidencias/B/conf-navegador-quebrado.txt` |
+| 33 | Quebra no navegador desfeita | Executado nesta fase | `docs/uc/uc17/evidencias/B/conf-navegador-restaurado.txt` |
+| 34 | Captura da tela de login | Executado nesta fase | `docs/uc/uc17/evidencias/B/conf-navegador-login.png` |
+| 35 | Captura do dashboard | Executado nesta fase | `docs/uc/uc17/evidencias/B/conf-navegador-dashboard.png` |
+| 36 | Captura do acesso negado | Executado nesta fase | `docs/uc/uc17/evidencias/B/conf-navegador-unauthorized.png` |
+| 37 | Arquivos e nomes dos testes comparados com o material | Executado nesta fase | `docs/uc/uc17/evidencias/B/conf-material.txt` |
 
 ## 4. Gate de saída
 | Verificação | Como verificar | Resultado | Validado por |
 |---|---|---|---|
 | Todas as fatias integradas, com PR, revisor e evidências | `check-state.sh --remote` | pendente | — |
-| Cada fatia com teste RED e GREEN em commits separados | histórico e evidências | pendente de validação; CA07 não tem RED (seção 2.3) | — |
+| Cada fatia com teste RED e GREEN em commits separados | histórico e evidências | pendente de validação; CA07 não tem RED (seção 2.3); CA05, da base, também não tem RED válido (seção 2.4) | — |
 | CI verde na branch principal | resultado do CI | não poderá ser aprovado (ADR-003) | — |
 | Tabela fatia → teste confere com o código | este relatório | pendente | — |
 
@@ -107,5 +130,6 @@ CA05 pertence à base do projeto, não à F01 nem à F02; os commits citam a iss
 
 ## 6. Pendências e riscos
 - F01 e F02 só passam a `em_revisao` quando houver PR.
-- No navegador real, o envio sem tratamento deve recarregar a página (pendência P3, em aberto); conferir na etapa 4.
-- Os testes rodam em navegador simulado; as rotas ainda não foram conferidas no navegador real (etapa 4).
+- P1 e P3 foram observadas no navegador e continuam em aberto; P2 não foi exercitada.
+- `index.html` com `lang="en"` e título do modelo: decidir se corrige.
+- Os testes automatizados rodam em navegador simulado; a conferência no Chrome é um passo à parte, fora do `scripts/verify.sh`.

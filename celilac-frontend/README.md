@@ -23,18 +23,25 @@ A aplicação abre em `http://localhost:5173`.
 Variáveis com prefixo `VITE_` ficam visíveis no navegador: não guarde segredos nelas.
 
 ## Verificações
+Verificação completa (instalação, lint, testes, build, validadores, links e estado):
+
 ```bash
-pnpm test
-pnpm build
-pnpm lint
-method/scripts/check-state.sh docs/uc/uc17/state.yaml
-node method/scripts/check-links.mjs method docs project-profile.md prompts README.md
+scripts/verify.sh
+```
+
+Com `--remote`, o estado também é conferido no GitHub (exige o `gh` autenticado).
+
+Rotas no navegador, com `pnpm dev` no ar em outro terminal (exige o Google Chrome; use a porta que o `pnpm dev` mostrar):
+
+```bash
+node scripts/verificar-navegador.mjs http://localhost:5173
 ```
 
 ## Onde está cada coisa
 | Pasta | Conteúdo |
 |---|---|
 | `src/` | código da aplicação |
+| `scripts/` | verificação local e conferência no navegador |
 | `docs/` | especificação, decisões, estado e evidências |
 | `method/` | método de trabalho |
 | `prompts/` | materiais da execução |

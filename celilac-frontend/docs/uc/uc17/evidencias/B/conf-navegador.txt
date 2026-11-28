@@ -1,0 +1,71 @@
+**O que foi executado:** `node scripts/verificar-navegador.mjs http://localhost:5273 docs/uc/uc17/evidencias/B`<br>
+**Data e hora UTC:** 2026-11-28T18:50:00Z<br>
+**Commit de base:** e298df6cdffc19ccd1896522920b8c41d7ef04d4<br>
+**Diretório/ambiente:** `celilac-frontend/`<br>
+**Código de saída:** 0<br>
+
+```text
+Navegador: Chrome/158.0.8127.37, sem janela, 1280x800
+
+Rota /
+  OK     endereço final /login
+  OK     título "Login"
+  OK     texto contém "E-mail"
+  OK     CSS: fundo da página #f3f4f6
+  OK     CSS: fonte Arial
+  OK     CSS: cartão branco com largura máxima de 420px
+  OK     CSS: botão azul #2563eb
+  OK     sem erros no console
+  OK     a raiz não fica no histórico (replace)
+
+Rota /login
+  OK     endereço final /login
+  OK     título "Login"
+  OK     texto contém "Senha"
+  OK     CSS: fundo da página #f3f4f6
+  OK     CSS: fonte Arial
+  OK     CSS: cartão branco com largura máxima de 420px
+  OK     CSS: botão azul #2563eb
+  OK     sem erros no console
+  captura: conf-navegador-login.png
+
+Rota /dashboard
+  OK     endereço final /dashboard
+  OK     título "Dashboard"
+  OK     texto contém "área autenticada"
+  OK     CSS: fundo da página #f3f4f6
+  OK     CSS: fonte Arial
+  OK     CSS: cartão branco com largura máxima de 420px
+  OK     sem erros no console
+  captura: conf-navegador-dashboard.png
+
+Rota /unauthorized
+  OK     endereço final /unauthorized
+  OK     título "Acesso negado"
+  OK     texto contém "não possui permissão"
+  OK     CSS: fundo da página #f3f4f6
+  OK     CSS: fonte Arial
+  OK     CSS: cartão branco com largura máxima de 420px
+  OK     sem erros no console
+  captura: conf-navegador-unauthorized.png
+
+Envio do formulário (RN02, CA07 e observação da pendência P3)
+  OK     campos preenchidos antes do envio
+  OK     nenhuma requisição fora do servidor da própria interface (a API não é chamada)
+  OK     nenhuma requisição por fetch ou XMLHttpRequest
+  OK     os dados digitados não aparecem em nenhum endereço pedido
+  Observado depois do clique em "Entrar":
+    pedido de página: GET /login?
+    total de pedidos ao servidor da interface: 17
+    endereço: /login?
+    página recarregada: sim
+    campos: vazios
+
+Observação da pendência P1 (endereço inexistente), sem critério de aceite
+    endereço: /endereco-inexistente; conteúdo exibido: nenhum (tela em branco)
+    aviso no console: No routes matched location "/endereco-inexistente" 
+
+RESULTADO: todas as conferências passaram.
+```
+
+**Leitura do resultado:** Conferência no Chrome sem janela, com o servidor de desenvolvimento na porta 5273 (a 5173 estava ocupada nesta máquina). As linhas OK são conferências; o que aparece como observação das pendências P3 e P1 é só registro do comportamento.
