@@ -85,7 +85,7 @@ Por decisão de `evertonfoz` em 2026-11-28, o achado da conferência foi corrigi
 - **Sem REFACTOR e sem mutação:** o RED já mostrou cada teste acusando o valor errado.
 - **Limite:** não foi testado com leitor de tela nem com a oferta de tradução do navegador.
 - A issue #171 ainda cita "CA01 a CA07"; atualizar no GitHub depende de autorização.
-- Aguardando validação de `evertonfoz`.
+- Ajuste **validado por `evertonfoz` em 2026-11-28**, incluindo o acréscimo de RF09 e CA08 à especificação.
 
 | Critério | Teste | Situação |
 |---|---|---|
