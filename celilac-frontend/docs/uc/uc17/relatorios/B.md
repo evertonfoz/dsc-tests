@@ -58,7 +58,7 @@ CA05 pertence à base do projeto, não à F01 nem à F02; os commits citam a iss
 - *Executado nesta fase:* mutação (endereço fixo no código), acusada pela comparação do valor, e desfeita.
 - **Sem REFACTOR:** o módulo tem uma linha.
 - **Limite:** o teste prova que o valor vem da variável. Ele não cobre a variável ausente (P2, em aberto), e nenhuma tela usa o endereço ainda (RN02).
-- Aguardando validação de `evertonfoz`.
+- Parte 3.4 **validada por `evertonfoz` em 2026-11-28**.
 
 | Critério | Teste | Situação |
 |---|---|---|
