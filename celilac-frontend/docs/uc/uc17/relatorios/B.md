@@ -109,6 +109,7 @@ Revisão feita antes do merge por quem escreveu o código: **não é independent
 - *Executado nesta fase:* com autorização de `evertonfoz`, o PR #174 foi integrado à `main` por commit de merge (`0aba6fe`), em 2026-11-28. A branch `feature/uc17-telas-iniciais` foi mantida.
 - *Executado nesta fase:* logo depois do merge, `check-state.sh --remote` acusou F01 e F02 ainda em revisão. O estado foi corrigido para `integrada` e a conferência passou, com avisos.
 - **Revisão:** `evertonfoz` declarou em 2026-11-28 que revisou o PR #174. O GitHub não tem revisão formal registrada. Revisor e responsável são a mesma pessoa (modo solo): **não é revisão independente**, e o validador avisa disso.
+- *Executado nesta fase:* com autorização de `evertonfoz`, as issues #172 e #173 foram fechadas, com o PR e as evidências no comentário, e movidas para `Done`. A issue #171 continua aberta.
 - A fase B **continua aberta**: o gate não foi validado e o item de CI não pode ser aprovado (ADR-003).
 
 ## 3. Evidências
@@ -160,6 +161,7 @@ Revisão feita antes do merge por quem escreveu o código: **não é independent
 | 44 | Revisão: conferência no navegador depois da correção | Executado nesta fase | `docs/uc/uc17/evidencias/B/rev-navegador.txt` |
 | 45 | Divergência do estado logo depois do merge | Executado nesta fase | `docs/uc/uc17/evidencias/B/integracao-estado-antes.txt` |
 | 46 | Merge do PR #174 e ausência de revisão formal no GitHub | Executado nesta fase | `docs/uc/uc17/evidencias/B/integracao.txt` |
+| 47 | Issues #172 e #173 fechadas, Project e estado conferidos | Executado nesta fase | `docs/uc/uc17/evidencias/B/integracao-fechamento.txt` |
 
 ## 4. Gate de saída
 | Verificação | Como verificar | Resultado | Validado por |

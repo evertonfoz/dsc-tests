@@ -1,12 +1,12 @@
 **O que foi executado:** `node method/scripts/check-links.mjs method docs project-profile.md prompts README.md`<br>
-**Data e hora UTC:** 2026-11-28T19:07:59Z<br>
-**Commit de base:** 0aba6fe2be9d8ca0f6a8d4c38179fbfa6f8ebfa9<br>
+**Data e hora UTC:** 2026-11-28T19:09:00Z<br>
+**Commit de base:** 6bab0c9b5dd141caf59eb0b3444ffbbaa025f948<br>
 **Diretório/ambiente:** `celilac-frontend/`<br>
 **Código de saída:** 0<br>
 
 ```text
 
-OK: 47 documento(s), 221 referência(s) verificada(s), nenhuma quebrada.
+OK: 47 documento(s), 222 referência(s) verificada(s), nenhuma quebrada.
 ```
 
 **Leitura do resultado:** Conferência limpa desde a criação do scripts/verify.sh, na etapa 4.

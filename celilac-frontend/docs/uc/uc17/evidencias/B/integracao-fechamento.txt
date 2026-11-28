@@ -1,0 +1,20 @@
+**O que foi executado:** `for n in 171 172 173; do gh issue view $n --json number,state,stateReason -q "[(.number|tostring),.state,(.stateReason//\"\")]|@tsv"; done; gh project item-list 7 --owner evertonfoz --format json -q ".items[]|[(.content.number|tostring),.status]|@tsv"; method/scripts/check-state.sh docs/uc/uc17/state.yaml --remote`<br>
+**Data e hora UTC:** 2026-11-28T19:08:33Z<br>
+**Commit de base:** 6bab0c9b5dd141caf59eb0b3444ffbbaa025f948<br>
+**Diretório/ambiente:** `celilac-frontend/`<br>
+**Código de saída:** 0<br>
+
+```text
+171	OPEN	
+172	CLOSED	COMPLETED
+173	CLOSED	COMPLETED
+171	Backlog
+172	Done
+173	Done
+AVISO  fatias[0]: revisor igual ao responsável (modo solo?). Registre como papel, não como aprovação independente
+AVISO  fatias[1]: revisor igual ao responsável (modo solo?). Registre como papel, não como aprovação independente
+
+OK: docs/uc/uc17/state.yaml válido (local + GitHub).
+```
+
+**Leitura do resultado:** Issues #172 e #173 fechadas com comentário que liga o PR e as evidências, e em Done no Project; a issue #171 continua aberta. O estado é válido; os avisos restantes são os do modo solo.
